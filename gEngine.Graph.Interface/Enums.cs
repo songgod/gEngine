@@ -37,5 +37,11 @@ namespace gEngine.Graph.Interface
             WellCg1 = 1
         }
 
+        public enum MathType
+        {
+            LINER,
+            ARITHM
+        }
+
     }
 }

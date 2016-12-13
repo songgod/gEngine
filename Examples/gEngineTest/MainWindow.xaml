@@ -8,7 +8,7 @@
         Title="MainWindow" Height="350" Width="525">
     <StackPanel Margin="5" Button.Click="StackPanel_Click">
         <Button>RectWindow</Button>
-        <Button>WellWindow</Button>
+        <Button>WellColumnWindow</Button>
         <Button>WellLocationShow</Button>
     </StackPanel>
 </Window>

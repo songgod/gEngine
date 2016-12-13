@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static gEngine.Graph.Interface.Enums;
 
 namespace gEngine.Graph.Interface
 {
@@ -11,6 +12,13 @@ namespace gEngine.Graph.Interface
     {
         IWell Owner { get; set; }
         ObsDoubles Values { get; set; }
+        MathType MathTyp { get; set; }
+
+        double XOffset { get; set; }
+
+        double YOffset { get; set; }
+
+        double ScaleX { get; set; }
     }
 
     public class IWellColumns : ObservedCollection<IWellColumn> { }

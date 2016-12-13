@@ -57,14 +57,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converter\DepthToPathConverter.cs" />
+    <Compile Include="Converter\DepthToScaleConverter.cs" />
+    <Compile Include="Converter\LogsToPathConverter.cs" />
     <Compile Include="RectWindow.xaml.cs">
       <DependentUpon>RectWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WellColumnWindow.xaml.cs">
+      <DependentUpon>WellColumnWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WellLocationShow.xaml.cs">
       <DependentUpon>WellLocationShow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="WellWindow.xaml.cs">
-      <DependentUpon>WellWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -82,13 +85,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="WellLocationShow.xaml">
+    <Page Include="WellColumnWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="WellWindow.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="WellLocationShow.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
