@@ -1,0 +1,72 @@
+﻿<Window x:Class="gEngineTest.WellWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:local="clr-namespace:gEngineTest"
+        xmlns:gi="clr-namespace:gEngine.Graph.Interface;assembly=gEngine.Graph.Interface"
+        xmlns:gv="clr-namespace:gEngine.View;assembly=gEngine.View"
+        xmlns:gm="clr-namespace:gEngine.Manipulator;assembly=gEngine.Manipulator"
+        xmlns:ge="clr-namespace:gEngine.Graph.Ge;assembly=gEngine.Graph"
+        mc:Ignorable="d"
+        Title="WellWindow" Height="300" Width="300">
+    <Window.Resources>
+        <local:DepthToPathConveter x:Key="d2p"/>
+        <local:LogsToPathConveter x:Key="l2p"/>
+        <DataTemplate x:Key="giIWellColumn" DataType="{x:Type gi:IWellColumn}">
+            <Grid x:Name="GridColumn">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="{Binding Name}" Grid.Row="0"/>
+                <Canvas Background="Yellow" Grid.Row="1">
+                    <Path x:Name="PathDepth" Stroke="Green" StrokeThickness="0.1" >
+                        <Path.Data>
+                            <MultiBinding Converter="{StaticResource l2p}">
+                                <Binding Path="Values"/>
+                                <Binding Path="Owner"/>
+                            </MultiBinding>
+                        </Path.Data>
+                    </Path>
+                </Canvas>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type gi:IWell}">
+            <Grid x:Name="GridWell">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid x:Name="GridDepth" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="Auto" Width="Auto">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Depth" Grid.Row="0"/>
+                    <Canvas Background="Gray" Grid.Row="1">
+                        <Path x:Name="PathDepth"  Stroke="Blue" StrokeThickness="1" Data="{Binding Depths, Converter={StaticResource d2p}}"/>
+                    </Canvas>
+                </Grid>
+                <ItemsControl ItemsSource="{Binding Columns}" Grid.Column="1" ItemTemplate="{StaticResource giIWellColumn}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel x:Name="ColumnPanel" Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+                
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid Background="GreenYellow">
+        <gv:ObjectControl x:Name="obj" Content="{Binding well}">
+            <i:Interaction.Behaviors>
+                <gm:ZoomPan/>
+                <!--<ei:TranslateZoomRotateBehavior/>-->
+            </i:Interaction.Behaviors>
+        </gv:ObjectControl>
+    </Grid>
+</Window>

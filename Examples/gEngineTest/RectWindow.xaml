@@ -1,0 +1,38 @@
+﻿<Window x:Class="gEngineTest.RectWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:gEngineTest"
+        xmlns:gv="clr-namespace:gEngine.View;assembly=gEngine.View"
+        xmlns:gg="clr-namespace:gEngine.Graph.Ge;assembly=gEngine.Graph.Ge"
+        xmlns:gi ="clr-namespace:gEngine.Graph.Interface;assembly=gEngine.Graph.Interface"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:em="clr-namespace:gEngine.Manipulator;assembly=gEngine.Manipulator"
+        mc:Ignorable="d"
+        Title="RectWindow" Height="300" Width="300">
+    <Window.Resources>
+        <gg:Map x:Key="vmmap">
+            <gg:Map.Layers>
+                <gg:Layer>
+                    <gg:Layer.Objects>
+                        <gg:Rect Top="200" Left="100" Width="100" Height="100"/>
+                        <gg:Rect Top="200" Left="200" Width="100" Height="100"/>
+                    </gg:Layer.Objects>
+                </gg:Layer>
+            </gg:Map.Layers>
+        </gg:Map>
+        <DataTemplate DataType="{x:Type gi:IRect}">
+            <Rectangle Width="{Binding Width}" Height="{Binding Height}" Fill="Green">
+                <Rectangle.RenderTransform>
+                    <TranslateTransform Y="{Binding Top}" X="{Binding Left}"/>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+        </DataTemplate>
+    </Window.Resources>
+    <gv:MapControl x:Name="mc" ItemsSource="{Binding Path=Layers, Source ={StaticResource vmmap}}">
+        <i:Interaction.Behaviors>
+            <em:ZoomPan/>
+        </i:Interaction.Behaviors>
+    </gv:MapControl>
+</Window>
