@@ -1,4 +1,6 @@
-﻿using gEngine.Graph.Ge;
+﻿using gEngine.Data.Ge.Txt;
+using gEngine.Graph.Ge;
+using gEngine.Graph.Ge.Business;
 using gEngine.Graph.Interface;
 using gEngine.Utility;
 using gEngine.View;
@@ -25,8 +27,6 @@ namespace gEngineTest
     /// </summary>
     public partial class WellColumnWindow : Window
     {
-        public Well well { get; set; }
-
         public WellColumnWindow()
         {
             InitializeComponent();
@@ -36,81 +36,17 @@ namespace gEngineTest
         private void InitWell()
         {
             Layer layer = new Layer();
-            well = new Well();
-            int curveCount = 0;//定义曲线的条数
-            bool colFlag = true;//曲线标题的标识
-            string path = AppDomain.CurrentDomain.BaseDirectory;
-            //string filePath = path + "Data\\MulWellColumnData.txt";
-            //string filePath = path + "Data\\AC.txt";
-            string filePath = "D:\\Data\\MulWellColumnData.txt";
-            var file = File.Open(filePath, FileMode.Open);
 
-            using (var stream = new StreamReader(file, Encoding.GetEncoding("gb2312")))
-            {
-                while (!stream.EndOfStream)
-                {
-                    string strLine = System.Text.RegularExpressions.Regex.Replace(stream.ReadLine().Trim().ToString(), @"\s+", " ");
-                    if (!string.IsNullOrEmpty(strLine))
-                    {
-                        string[] strColumns = strLine.Split(' ');
-                        curveCount = strColumns.Length;
-                        if (colFlag)
-                        {
-                            colFlag = false;
-                            for (int i = 0; i < curveCount; i++)
-                            {
-                                if (i.Equals(0))
-                                {
-                                    well.Name = strColumns[i];
-                                }
-                                else
-                                {
-                                    WellColumn wellColumn = new WellColumn();
-                                    wellColumn.Name = strColumns[i];
-                                    wellColumn.MathTyp = Enums.MathType.LINER;
-                                    wellColumn.Owner = well;
-                                    well.Columns.Add(wellColumn);
-                                }
-                            }
-                        }
-                        else
-                        {
-                            for (int i = 0; i < curveCount; i++)
-                            {
-                                if (i.Equals(0))
-                                {
-                                    well.Depths.Add(double.Parse(strColumns[i]));
-                                }
-                                else
-                                {
-                                    double xValue = double.Parse(strColumns[i]);
-                                    well.Columns[i - 1].Values.Add(xValue);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            layer.Objects.Add(well);
-            CoordTrans();
-            this.lyControl.SetBinding(LayerControl.ItemsSourceProperty, new Binding("Objects") { Source = layer });
+            TxtWell tw = new TxtWell() { TxtFile = "D:\\Data\\MulWellColumnData.txt" };
+            layer.Objects = GraphGeFactory.Single().Create(tw);
+
+            Binding bd = new Binding("Objects") { Source = layer };
+            lyControl.SetBinding(ItemsControl.ItemsSourceProperty, bd);
         }
 
-        public double wellColumnWidth = 100;
-        private void CoordTrans()
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            int i = 0;
-            foreach (WellColumn wc in well.Columns)
-            {
-                double[] xMinList = wc.Values.Select(s => s).Where(s => (s != -9999)).ToArray();
-                double[] xMaxList = wc.Values.Select(s => s).Where(s => (s != -9999)).ToArray();
-                double xMin = xMinList.Min();
-                double xMax = xMaxList.Max();
-                well.Columns[i].XOffset = Math.Floor(xMin) * -1;
-                well.Columns[i].YOffset = well.Depths[0] * -1;
-                well.Columns[i].ScaleX = 100 / (xMax - xMin);
-                i++;
-            }
+            ViewUtil.FullView(lyControl);
         }
     }
 }

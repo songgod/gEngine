@@ -40,7 +40,8 @@ namespace gEngine.Graph.Interface
         public enum MathType
         {
             LINER,
-            ARITHM
+            ARITHM,
+            DEFAULT
         }
 
     }

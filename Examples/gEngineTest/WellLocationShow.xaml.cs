@@ -63,7 +63,7 @@ namespace gEngineTest
             //1.创建Layer
             Layer layer = new Layer();
             TXTWellLocations twl = new TXTWellLocations() { TxtFile = "d:/welllocations.txt" };
-            layer.Objects = GeFactory.Single().Create(twl);
+            layer.Objects = GraphGeFactory.Single().Create(twl);
             //2.绑定lc数据源
             Binding bd = new Binding("Objects") { Source = layer };
             lc.SetBinding(ItemsControl.ItemsSourceProperty, bd);

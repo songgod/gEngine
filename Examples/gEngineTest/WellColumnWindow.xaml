@@ -11,7 +11,8 @@
         xmlns:ge="clr-namespace:gEngine.Graph.Ge;assembly=gEngine.Graph.Ge"
         xmlns:converter="clr-namespace:gEngineTest.Converter"
         mc:Ignorable="d"
-        Title="WellColumnWindow" Height="300" Width="300">
+        Title="WellColumnWindow" Height="600" Width="800"
+        Loaded="Window_Loaded">
     <Window.Resources>
         <converter:DepthToPathConverter x:Key="d2p"/>
         <converter:LogsToPathConverter x:Key="l2p"/>
@@ -29,20 +30,20 @@
                     <TextBlock Text="{Binding Path= Name}" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0"  />
                 </Border>
                 <Border BorderBrush="Black" BorderThickness="1" Grid.Row="1">
-                <Canvas Grid.Row="1"  Background="Black" Grid.Column="0">
+                <Canvas Grid.Row="1"  Background="White" Grid.Column="0">
                     <Path x:Name="PathDepth" Stroke="Red" StrokeThickness="0.1">
-                        <Path.RenderTransform>
+                        <!--<Path.RenderTransform>
                             <TransformGroup>
                                 <TranslateTransform X="{Binding XOffset}" Y="{Binding YOffset}"></TranslateTransform>
                                 <ScaleTransform ScaleX="{Binding ScaleX}"></ScaleTransform>
                             </TransformGroup>
-                        </Path.RenderTransform>
+                        </Path.RenderTransform>-->
                         <Path.Data>
                             <MultiBinding Converter="{StaticResource l2p}">
                                 <Binding Path="Values"/>
                                 <Binding Path="Owner"/>
-                                <Binding Path="MathType"/>
-                            </MultiBinding>
+                                <Binding Path="MathTyp"/>
+                             </MultiBinding>
                         </Path.Data>
                     </Path>
                 </Canvas>
@@ -86,7 +87,7 @@
             </Grid>
         </DataTemplate>
     </Window.Resources>
-    <Grid Background="GreenYellow">
+    <Grid Background="White">
         <gv:LayerControl x:Name="lyControl">
             <i:Interaction.Behaviors>
                 <gm:ZoomPan></gm:ZoomPan>

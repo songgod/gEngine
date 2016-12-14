@@ -16,7 +16,7 @@ namespace gEngine.Graph.Ge.Business.Creator
             if (db == null)
                 return null;
 
-            DBWellLocations dbwl = db as DBWellLocations;
+            IDBWellLocations dbwl = db as IDBWellLocations;
             if (dbwl == null)
                 return null;
 
@@ -46,7 +46,7 @@ namespace gEngine.Graph.Ge.Business.Creator
 
         public Type ProcessType()
         {
-            return typeof(DBWellLocations);
+            return typeof(IDBWellLocations);
         }
     }
 }

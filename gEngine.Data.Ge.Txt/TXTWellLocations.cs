@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace gEngine.Data.Ge.Txt
 {
-    [TypeConverterAttribute(typeof(TextDBWellLocationConverter))]
-    public class TXTWellLocations : WellLocationGes
+    [TypeConverterAttribute(typeof(TextDBWellLocationsConverter))]
+    public class TXTWellLocations : DBWellLocations
     {
         private string txtfile;
         public string TxtFile

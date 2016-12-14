@@ -8,5 +8,6 @@ namespace gEngine.Data.Interface
 {
     public interface IDBBase
     {
+        string Name { get; set; }
     }
 }

@@ -6,10 +6,11 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Globalization;
 
 namespace gEngine.Data.Ge.Txt.Converter
 {
-    public class TextDBWellLocationConverter : TypeConverter
+    public class TextDBWellLocationsConverter : TypeConverter
     {
         /// <summary>
         /// 功能：将txt文件路径转化为实体类存储
@@ -24,8 +25,8 @@ namespace gEngine.Data.Ge.Txt.Converter
             if (value is string)
             {
                 string filePath = value.ToString();//文件路径
-                WellLocationGes welllocations = new WellLocationGes();
-
+                TXTWellLocations welllocations = new TXTWellLocations();
+                welllocations.ReadFromTxt(filePath);
                
                 return welllocations;
             }
@@ -38,6 +39,23 @@ namespace gEngine.Data.Ge.Txt.Converter
             if (sourceType == typeof(string))
                 return true;
             return base.CanConvertFrom(context, sourceType);
+        }
+
+        public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
+        {
+            if (destinationType == typeof(TXTWellLocations))
+                return true;
+            return base.CanConvertTo(context, destinationType);
+        }
+
+        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        {
+            if (value is TXTWellLocations)
+            {
+                TXTWellLocations wls = value as TXTWellLocations;
+                wls.SaveToTxt(wls.TxtFile);
+            }
+            return base.ConvertTo(context, culture, value, destinationType);
         }
     }
 }

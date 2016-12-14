@@ -6,25 +6,12 @@ using System.Threading.Tasks;
 using gEngine.Data.Interface;
 using System.Windows;
 using System.ComponentModel;
+using gEngine.Utility;
 
 namespace gEngine.Data.Ge
 {
-    public class DBWellLocation : DependencyObject, IDBWellLocation
+    public class DBWellLocation : DBBase, IDBWellLocation
     {
-
-
-        public string Name
-        {
-            get { return (string)GetValue(NameProperty); }
-            set { SetValue(NameProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for Name.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty NameProperty =
-            DependencyProperty.Register("Name", typeof(string), typeof(DBWellLocation));
-
-
-
         public int WellCategory
         {
             get { return (int)GetValue(WellCategoryProperty); }
@@ -71,5 +58,20 @@ namespace gEngine.Data.Ge
             DependencyProperty.Register("y", typeof(double), typeof(DBWellLocation));
     }
 
-    public class WellLocationGes : DBWellLocations { }
+    public class DBWellLocations : ObservedCollection<IDBWellLocation>, IDBWellLocations
+    {
+        private string name;
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+
+            set
+            {
+                name = value;
+            }
+        }
+    }
 }

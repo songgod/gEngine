@@ -15,11 +15,19 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static gEngine.Graph.Interface.Enums;
 
 namespace gEngineTest.Converter
 {
     public class LogsToPathConverter : IMultiValueConverter
     {
+        public LogsToPathConverter()
+        {
+            InvalidValue = -9999;
+        }
+
+        public double InvalidValue { get; set; }
+
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             ObsDoubles vls = values[0] as ObsDoubles;
@@ -34,34 +42,48 @@ namespace gEngineTest.Converter
             if (vls.Count <= 1)
                 return null;
 
-            string mathType = values[2].ToString();
+            double mindpeth = owner.Depths[0];
+            double[] xMinList = vls.Select(s => s).Where(s => (s != InvalidValue)).ToArray();
+            double[] xMaxList = vls.Select(s => s).Where(s => (s != InvalidValue)).ToArray();
+            double xMin = xMinList.Min();
+            double xMax = xMaxList.Max();
+
+            MathType mathType = (MathType)values[2];
+            if (mathType == MathType.DEFAULT)
+            {
+                if (xMax-xMin>100)
+                    mathType = MathType.ARITHM;
+                else
+                    mathType = MathType.LINER;
+            }
             
             PathGeometry geom = new PathGeometry();
             PathFigure fg = null;
             PolyLineSegment pls = null;
             for (int i = 0; i < vls.Count; ++i)
             {
-                double x = vls[i];
-                if (x == -9999)
+                if (vls[i] == InvalidValue)
                 {
                     fg = null;
                     pls = null;
                 }
                 else
                 {
-                    if (mathType.Equals(Enums.MathType.ARITHM.ToString()))
+                    double x = vls[i] - xMin;
+                    if (mathType.Equals(Enums.MathType.ARITHM))
                     {
-                        x = Math.Log10(x);
+                        x = Math.Log10(vls[i])-Math.Log10(xMin);
                     }
+
                     if (fg == null)
                     {
                         fg = new PathFigure();
-                        fg.StartPoint = new Point() { X = x, Y = owner.Depths[i] };
+                        fg.StartPoint = new Point() { X = x, Y = owner.Depths[i] - mindpeth };
                         pls = new PolyLineSegment();
                         fg.Segments.Add(pls);
                         geom.Figures.Add(fg);
                     }
-                    pls.Points.Add(new Point() { X = x, Y = owner.Depths[i] });
+                    pls.Points.Add(new Point() { X = x, Y = owner.Depths[i] - mindpeth });
                 }
             }
 

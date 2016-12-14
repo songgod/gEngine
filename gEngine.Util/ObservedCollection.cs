@@ -1,10 +1,21 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace gEngine.Utility
 {
     public class ObservedCollection<T> : ObservableCollection<T>
     {
         public ObservedCollection()
+        {
+            this.CollectionChanged += ObservedCollection_CollectionChanged;
+        }
+
+        public ObservedCollection(List<T> list) : base(list)
+        {
+            this.CollectionChanged += ObservedCollection_CollectionChanged;
+        }
+
+        public ObservedCollection(IEnumerable<T> collection) : base(collection)
         {
             this.CollectionChanged += ObservedCollection_CollectionChanged;
         }
@@ -48,5 +59,11 @@ namespace gEngine.Utility
             }
         }
     }
-    public class ObsDoubles :  ObservedCollection<double> { }
+    public class ObsDoubles :  ObservedCollection<double>
+    {
+        public ObsDoubles() { }
+        public ObsDoubles(List<double> list) : base(list) { }
+
+        public ObsDoubles(IEnumerable<double> collection) : base(collection) { }
+    }
 }

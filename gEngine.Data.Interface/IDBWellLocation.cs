@@ -9,12 +9,14 @@ namespace gEngine.Data.Interface
 {
     public interface IDBWellLocation : IDBBase
     {
-        string Name { get; set; }
         string WellType { get; set; }
         int WellCategory { get; set; }
         double x { get; set; }
         double y { get; set; }
     }
 
-    public class DBWellLocations : ObservedCollection<IDBWellLocation>, IDBBase { }
+    public interface IDBWellLocations : IList<IDBWellLocation>, IDBBase
+    {
+
+    }
 }

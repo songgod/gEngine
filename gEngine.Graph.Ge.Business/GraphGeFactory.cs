@@ -9,22 +9,23 @@ using System.Threading.Tasks;
 
 namespace gEngine.Graph.Ge.Business
 {
-    public class GeFactory
+    public class GraphGeFactory
     {
-        private static GeFactory s_factory = null;
+        private static GraphGeFactory s_factory = null;
         private Dictionary<Type, ICreator> _creators;
 
-        private GeFactory()
+        private GraphGeFactory()
         {
             _creators = new Dictionary<Type, ICreator>();
         }
 
-        public static GeFactory Single()
+        public static GraphGeFactory Single()
         {
             if (s_factory == null)
             {
-                s_factory = new GeFactory();
+                s_factory = new GraphGeFactory();
                 s_factory.Register(new WellLocationsCreator());
+                s_factory.Register(new WellCreator());
             }
 
             return s_factory;
@@ -47,15 +48,15 @@ namespace gEngine.Graph.Ge.Business
                 return null;
 
             Type type = db.GetType();
-            do
+            Type[] interfaces = type.GetInterfaces();
+            foreach (Type item in interfaces.Reverse())
             {
-                if (_creators.ContainsKey(type))
+                if (_creators.ContainsKey(item))
                 {
-                    ICreator creator = _creators[type];
+                    ICreator creator = _creators[item];
                     return creator.Create(db);
                 }
-                type = type.BaseType;
-            } while (type!=null);
+            }
 
             return null;
         }
