@@ -42,7 +42,7 @@
                             <MultiBinding Converter="{StaticResource l2p}">
                                 <Binding Path="Values"/>
                                 <Binding Path="Owner"/>
-                                <Binding Path="MathTyp"/>
+                                <Binding Path="MathType"/>
                              </MultiBinding>
                         </Path.Data>
                     </Path>

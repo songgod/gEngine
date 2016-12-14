@@ -27,7 +27,7 @@ namespace gEngine.Graph.Ge.Business.Creator
             for (int i = 0; i < dbwl.Columns.Count; i++)
             {
                 string name = dbwl.Columns[i].Item1;
-                WellColumn c = new WellColumn() { Name = dbwl.Columns[i].Item1, Owner = well, MathTyp=Enums.MathType.DEFAULT };
+                WellColumn c = new WellColumn() { Name = dbwl.Columns[i].Item1, Owner = well, MathType=Enums.MathType.DEFAULT };
                 c.Values = new Utility.ObsDoubles(dbwl.Columns[i].Item2);
                 well.Columns.Add(c);
             }

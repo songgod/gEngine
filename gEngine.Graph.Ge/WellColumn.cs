@@ -1,5 +1,6 @@
 ﻿using gEngine.Graph.Interface;
 using gEngine.Utility;
+using System.Windows;
 using static gEngine.Graph.Interface.Enums;
 
 namespace gEngine.Graph.Ge
@@ -11,83 +12,41 @@ namespace gEngine.Graph.Ge
             Values = new ObsDoubles();
         }
 
-        private IWell owner;
+
+
         public IWell Owner
         {
-            get
-            {
-                return owner;
-            }
-
-            set
-            {
-                owner = value;
-            }
+            get { return (IWell)GetValue(OwnerProperty); }
+            set { SetValue(OwnerProperty, value); }
         }
 
-        private ObsDoubles values;
+        // Using a DependencyProperty as the backing store for Owner.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty OwnerProperty =
+            DependencyProperty.Register("Owner", typeof(IWell), typeof(WellColumn));
+
+
+
         public ObsDoubles Values
         {
-            get
-            {
-                return values;
-            }
-
-            set
-            {
-                values = value;
-            }
-        }
-        private MathType mathType;
-        public MathType MathTyp
-        {
-            get
-            {
-                return mathType;
-            }
-            set
-            {
-                mathType = value;
-            }
+            get { return (ObsDoubles)GetValue(ValuesProperty); }
+            set { SetValue(ValuesProperty, value); }
         }
 
-        private double xOffset;
-        public double XOffset
+        // Using a DependencyProperty as the backing store for Values.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ValuesProperty =
+            DependencyProperty.Register("Values", typeof(ObsDoubles), typeof(WellColumn));
+
+
+
+
+        public MathType MathType
         {
-            get
-            {
-                return xOffset;
-            }
-            set
-            {
-                xOffset = value;
-            }
+            get { return (MathType)GetValue(MathTypProperty); }
+            set { SetValue(MathTypProperty, value); }
         }
 
-        private double yOffset;
-        public double YOffset
-        {
-            get
-            {
-                return yOffset;
-            }
-            set
-            {
-                yOffset = value;
-            }
-        }
-
-        private double scaleX;
-        public double ScaleX
-        {
-            get
-            {
-                return scaleX;
-            }
-            set
-            {
-                scaleX = value;
-            }
-        }
+        // Using a DependencyProperty as the backing store for MathTyp.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MathTypProperty =
+            DependencyProperty.Register("MathTyp", typeof(MathType), typeof(WellColumn));
     }
 }

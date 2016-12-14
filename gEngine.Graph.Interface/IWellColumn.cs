@@ -12,13 +12,7 @@ namespace gEngine.Graph.Interface
     {
         IWell Owner { get; set; }
         ObsDoubles Values { get; set; }
-        MathType MathTyp { get; set; }
-
-        double XOffset { get; set; }
-
-        double YOffset { get; set; }
-
-        double ScaleX { get; set; }
+        MathType MathType { get; set; }
     }
 
     public class IWellColumns : ObservedCollection<IWellColumn> { }

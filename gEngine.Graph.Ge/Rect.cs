@@ -4,66 +4,58 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace gEngine.Graph.Ge
 {
     public class Rect : Object, IRect
     {
-        private double top;
         public double Top
         {
-            get
-            {
-                return top;
-            }
-            set
-            {
-                top = value;
-                RaiseProertyChanged("Top");
-            }
+            get { return (double)GetValue(TopProperty); }
+            set { SetValue(TopProperty, value); }
         }
 
-        private double left;
+        // Using a DependencyProperty as the backing store for Top.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TopProperty =
+            DependencyProperty.Register("Top", typeof(double), typeof(Rect));
+
+
+
         public double Left
         {
-            get
-            {
-                return left;
-            }
-            set
-            {
-                left = value;
-                RaiseProertyChanged("Left");
-            }
+            get { return (double)GetValue(LeftProperty); }
+            set { SetValue(LeftProperty, value); }
         }
 
-        private double width;
+        // Using a DependencyProperty as the backing store for Left.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty LeftProperty =
+            DependencyProperty.Register("Left", typeof(double), typeof(Rect));
+
+
+
         public double Width
         {
-            get
-            {
-                return width;
-            }
-            set
-            {
-                width = value;
-                RaiseProertyChanged("Width");
-            }
+            get { return (double)GetValue(WidthProperty); }
+            set { SetValue(WidthProperty, value); }
         }
 
-        private double height;
+        // Using a DependencyProperty as the backing store for Width.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty WidthProperty =
+            DependencyProperty.Register("Width", typeof(double), typeof(Rect));
+
+
+
+
         public double Height
         {
-            get
-            {
-                return height;
-            }
-            set
-            {
-                height = value;
-                RaiseProertyChanged("Height");
-            }
+            get { return (double)GetValue(HeightProperty); }
+            set { SetValue(HeightProperty, value); }
         }
+
+        // Using a DependencyProperty as the backing store for Height.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty HeightProperty =
+            DependencyProperty.Register("Height", typeof(double), typeof(Rect));
 
     }
 }

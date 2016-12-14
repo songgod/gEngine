@@ -13,109 +13,66 @@ namespace gEngine.Graph.Ge
     
     public class WellLocation : Object, IWellLocation
     {
-        private string wellNum;
+
+
         public string WellNum
         {
-            get
-            {
-                return wellNum;
-            }
-
-            set
-            {
-                wellNum = value;
-                RaiseProertyChanged("WellNum");
-            }
+            get { return (string)GetValue(WellNumProperty); }
+            set { SetValue(WellNumProperty, value); }
         }
 
-        private WellCategory wellCategory;
+        // Using a DependencyProperty as the backing store for WellNum.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty WellNumProperty =
+            DependencyProperty.Register("WellNum", typeof(string), typeof(WellLocation));
+
+
+
         public WellCategory WellCategory
         {
-            get
-            {
-                return wellCategory;
-            }
-
-            set
-            {
-                wellCategory = value;
-                RaiseProertyChanged("WellCategory");
-            }
+            get { return (WellCategory)GetValue(WellCategoryProperty); }
+            set { SetValue(WellCategoryProperty, value); }
         }
 
-        private WellType wellType;
+        // Using a DependencyProperty as the backing store for WellCategory.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty WellCategoryProperty =
+            DependencyProperty.Register("WellCategory", typeof(WellCategory), typeof(WellLocation));
+
+
+
+
         public WellType WellType
         {
-            get
-            {
-                return wellType;
-            }
-
-            set
-            {
-                wellType = value;
-                RaiseProertyChanged("WellType");
-            }
+            get { return (WellType)GetValue(WellTypeProperty); }
+            set { SetValue(WellTypeProperty, value); }
         }
 
-        private double wellXaxis;
-        public double WellXaxis
-        {
-            get
-            {
-                return wellXaxis;
-            }
+        // Using a DependencyProperty as the backing store for WellType.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty WellTypeProperty =
+            DependencyProperty.Register("WellType", typeof(WellType), typeof(WellLocation));
 
-            set
-            {
-                wellXaxis = value;
-                RaiseProertyChanged("WellXaxis");
-            }
-        }
 
-        private double wellYaxis;
-        public double WellYaxis
-        {
-            get
-            {
-                return wellYaxis;
-            }
 
-            set
-            {
-                wellYaxis = value;
-                RaiseProertyChanged("WellYaxis");
-            }
-        }
-        private double x;
+
         public double X
         {
-            get
-            {
-                return x;
-            }
-
-            set
-            {
-                x = value;
-                RaiseProertyChanged("X");
-            }
+            get { return (double)GetValue(XProperty); }
+            set { SetValue(XProperty, value); }
         }
 
-        private double y;
+        // Using a DependencyProperty as the backing store for X.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty XProperty =
+            DependencyProperty.Register("X", typeof(double), typeof(WellLocation));
+
+
+
         public double Y
         {
-            get
-            {
-                return y;
-            }
-
-            set
-            {
-                y = value;
-                RaiseProertyChanged("Y");
-            }
+            get { return (double)GetValue(YProperty); }
+            set { SetValue(YProperty, value); }
         }
 
+        // Using a DependencyProperty as the backing store for Y.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty YProperty =
+            DependencyProperty.Register("Y", typeof(double), typeof(WellLocation));
     }
 }

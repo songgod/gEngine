@@ -32,14 +32,14 @@
                     </ToolTipService.ToolTip>
                     <Ellipse.RenderTransform>
                         <TransformGroup>
-                            <TranslateTransform Y="{Binding WellYaxis}" X="{Binding WellXaxis}" />
+                            <TranslateTransform Y="{Binding X}" X="{Binding Y}" />
                         </TransformGroup>
                     </Ellipse.RenderTransform>
                 </Ellipse>
                 <TextBlock Text="{Binding WellNum}" >
                     <TextBlock.RenderTransform>
                         <TransformGroup>
-                            <TranslateTransform Y="{Binding WellYaxis}" X="{Binding WellXaxis}" />
+                            <TranslateTransform Y="{Binding X}" X="{Binding Y}" />
                         </TransformGroup>
                     </TextBlock.RenderTransform>
                 </TextBlock>

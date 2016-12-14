@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace gEngine.Graph.Ge
 {
@@ -13,33 +14,16 @@ namespace gEngine.Graph.Ge
         {
             Objects = new IObjects();
         }
-        private string name;
-        public string Name
-        {
-            get
-            {
-                return name;
-            }
-            set
-            {
-                name = value;
-                RaiseProertyChanged("Name");
-            }
-        }
 
-        private IObjects objects;
+
         public IObjects Objects
         {
-            get
-            {
-                return objects;
-            }
-
-            set
-            {
-                objects = value;
-                RaiseProertyChanged("Objects");
-            }
+            get { return (IObjects)GetValue(ObjectsProperty); }
+            set { SetValue(ObjectsProperty, value); }
         }
+
+        // Using a DependencyProperty as the backing store for Objects.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ObjectsProperty =
+            DependencyProperty.Register("Objects", typeof(IObjects), typeof(Layer));
     }
 }

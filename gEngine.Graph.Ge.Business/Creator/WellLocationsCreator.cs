@@ -27,8 +27,8 @@ namespace gEngine.Graph.Ge.Business.Creator
                 WellLocation wl = new WellLocation();
                 wl.Name = item.Name;
                 wl.WellNum = item.Name;
-                wl.WellXaxis = item.x;
-                wl.WellYaxis = item.y;
+                wl.X = item.x;
+                wl.Y = item.y;
                 wl.WellCategory = (WellCategory)(item.WellCategory);
                 if(item.WellType=="W")
                 {

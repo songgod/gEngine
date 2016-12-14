@@ -12,10 +12,6 @@ namespace gEngine.Graph.Interface
         
         //井号
         string WellNum { get; set; }
-        //井横坐标
-        double WellXaxis { get; set; }
-        //井纵坐标
-        double WellYaxis { get; set; }
         //井别（水井、油井）
         WellType WellType { get; set; }
         //井类 

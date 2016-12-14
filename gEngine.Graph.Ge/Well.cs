@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using gEngine.Graph.Interface;
 using gEngine.Utility;
+using System.Windows;
 
 namespace gEngine.Graph.Ge
 {
@@ -16,32 +17,29 @@ namespace gEngine.Graph.Ge
             Depths = new ObsDoubles();
         }
 
-        private IWellColumns columns;
+
+
         public IWellColumns Columns
         {
-            get
-            {
-                return columns;
-            }
-
-            set
-            {
-                columns = value;
-            }
+            get { return (IWellColumns)GetValue(ColumnsProperty); }
+            set { SetValue(ColumnsProperty, value); }
         }
 
-        private ObsDoubles depths;
+        // Using a DependencyProperty as the backing store for Columns.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ColumnsProperty =
+            DependencyProperty.Register("Columns", typeof(IWellColumns), typeof(Well));
+
+
+
+
         public ObsDoubles Depths
         {
-            get
-            {
-                return depths;
-            }
-
-            set
-            {
-                depths = value;
-            }
+            get { return (ObsDoubles)GetValue(DepthsProperty); }
+            set { SetValue(DepthsProperty, value); }
         }
+
+        // Using a DependencyProperty as the backing store for Depths.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DepthsProperty =
+            DependencyProperty.Register("Depths", typeof(ObsDoubles), typeof(Well));
     }
 }
