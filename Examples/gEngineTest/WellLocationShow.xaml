@@ -10,7 +10,7 @@
         xmlns:gi ="clr-namespace:gEngine.Graph.Interface;assembly=gEngine.Graph.Interface"
         xmlns:gg="clr-namespace:gEngine.Graph.Ge;assembly=gEngine.Graph.Ge"
         mc:Ignorable="d"
-        Title="WellLocationShow" Height="600" Width="800"  WindowState="Maximized"
+        Title="井位图显示" Height="600" Width="800"  WindowState="Maximized"
         Loaded="Window_Loaded"
         >
     <Window.Resources>
@@ -32,14 +32,14 @@
                     </ToolTipService.ToolTip>
                     <Ellipse.RenderTransform>
                         <TransformGroup>
-                            <TranslateTransform Y="{Binding X}" X="{Binding Y}" />
+                            <TranslateTransform X="{Binding X}" Y="{Binding Y}" />
                         </TransformGroup>
                     </Ellipse.RenderTransform>
                 </Ellipse>
                 <TextBlock Text="{Binding WellNum}" >
                     <TextBlock.RenderTransform>
                         <TransformGroup>
-                            <TranslateTransform Y="{Binding X}" X="{Binding Y}" />
+                            <TranslateTransform X="{Binding X}" Y="{Binding Y}" />
                         </TransformGroup>
                     </TextBlock.RenderTransform>
                 </TextBlock>
