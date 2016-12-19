@@ -11,7 +11,7 @@
         xmlns:ge="clr-namespace:gEngine.Graph.Ge;assembly=gEngine.Graph.Ge"
         xmlns:converter="clr-namespace:gEngineTest.Converter"
         mc:Ignorable="d"
-        Title="WellColumnWindow" Height="600" Width="800"
+        Title="WellColumnWindow1" Height="600" Width="800"
         Loaded="Window_Loaded">
     <Window.Resources>
         <converter:DepthToPathConverter x:Key="d2p"/>
