@@ -10,43 +10,11 @@ using System.Globalization;
 using static gEngine.Graph.Interface.Enums;
 using gEngine.Data.Ge.Txt;
 using gEngine.Graph.Ge.Business;
+using gEngine.View.Datatemplate;
+using gEngine.Graph.Interface;
 
 namespace gEngineTest
 {
-    public class WellTypeToColorConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            WellType wt = (WellType)value;
-            switch (wt)
-            {
-                case WellType.W:
-                    return Colors.Blue.ToString();
-                case WellType.Y:
-                    return Colors.Red.ToString();
-                default:
-                    return null;
-            }
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    public class ActualSizeConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return System.Convert.ToDouble(value) - System.Convert.ToDouble(parameter);
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
     /// <summary>
     /// WellLocationShow.xaml 的交互逻辑
     /// </summary>
@@ -55,9 +23,22 @@ namespace gEngineTest
         public WellLocationShow()
         {
             InitializeComponent();
+            BuildDataTemplate();
             PreCreateWellLocation();
         }
 
+        /// <summary>
+        /// 概要：引入数据模板
+        /// </summary>
+        private void BuildDataTemplate()
+        {
+            var manager = new DataTemplateManager();
+            manager.RegisterDataTemplate<IWellLocation, WellLocationDataTemplate>();
+        }
+
+        /// <summary>
+        /// 概要：创建井位图
+        /// </summary>
         private void PreCreateWellLocation()
         {
             //1.创建Layer
@@ -71,6 +52,7 @@ namespace gEngineTest
 
         /// <summary>
         /// 在InitializeComponent后执行
+        /// 满屏显示
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

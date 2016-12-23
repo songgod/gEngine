@@ -154,6 +154,10 @@
       <Project>{84acb6c4-cf62-4f4b-a7e5-5c642edc041a}</Project>
       <Name>gEngine.Util</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\gEngine.View.Datatemplate\gEngine.View.Datatemplate.csproj">
+      <Project>{C52AFAA2-0F70-4CA5-B3EE-7763EDD1EE18}</Project>
+      <Name>gEngine.View.Datatemplate</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\gEngine.View\gEngine.View.csproj">
       <Project>{932485ea-2f95-4caa-8bcd-df68c496854e}</Project>
       <Name>gEngine.View</Name>

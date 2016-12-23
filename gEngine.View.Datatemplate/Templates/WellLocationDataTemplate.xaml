@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="gEngine.View.Datatemplate.WellLocationDataTemplate"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:gEngine.View.Datatemplate"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <local:WellTypeToColorConverter x:Key="wellTypeConverter"/>
+    </UserControl.Resources>
+    <StackPanel>
+        <Ellipse Width="20" Height="20" Fill="{Binding WellType,Converter={ StaticResource wellTypeConverter}}" >
+            <ToolTipService.ToolTip>
+                <TextBlock>
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}井号:{0}&#x0a;坐标:{1},{2}">
+                            <Binding Path="WellNum" />
+                            <Binding Path="WellXaxis" />
+                            <Binding Path="WellYaxis" />
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+            </ToolTipService.ToolTip>
+            <Ellipse.RenderTransform>
+                <TransformGroup>
+                    <TranslateTransform X="{Binding X}" Y="{Binding Y}" />
+                </TransformGroup>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+        <TextBlock Text="{Binding WellNum}" >
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <TranslateTransform X="{Binding X}" Y="{Binding Y}" />
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+    </StackPanel>
+</UserControl>
