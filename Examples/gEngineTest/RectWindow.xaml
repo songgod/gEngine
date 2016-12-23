@@ -10,7 +10,7 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:em="clr-namespace:gEngine.Manipulator;assembly=gEngine.Manipulator"
         mc:Ignorable="d"
-        Title="RectWindow1" Height="300" Width="300">
+        Title="RectWindow" Height="386.91" Width="424.249">
     <Window.Resources>
         <gg:Map x:Key="vmmap">
             <gg:Map.Layers>
