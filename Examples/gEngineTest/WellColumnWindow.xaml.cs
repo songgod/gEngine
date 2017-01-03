@@ -46,6 +46,11 @@ namespace gEngineTest
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            //ViewUtil.FullView(lyControl);
+        }
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
             ViewUtil.FullView(lyControl);
         }
     }

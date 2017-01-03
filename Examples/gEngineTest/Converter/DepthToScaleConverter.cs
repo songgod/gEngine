@@ -17,13 +17,16 @@ namespace gEngineTest.Converter
             if (dbs == null || dbs.Count <= 1)
                 return null;
 
-            double top = Math.Floor(dbs[0] / 10) * 10;
-            double bottom = Math.Ceiling(dbs[dbs.Count - 1] / 10) * 10;
+            double mindepth = dbs[0];//顶深
+            double maxdepth = dbs[dbs.Count - 1];//底深
+            double depth = Math.Ceiling((maxdepth - mindepth) / 10) * 10;//取底深减顶深差值，向上取整
+            double top = Math.Ceiling(dbs[0] / 10) * 10;//顶深向上取整
+            double firstScale = top - mindepth == 0 ? 10 : top - mindepth;//第一个刻度点
 
             StringBuilder scaleSb = new StringBuilder();
-            for (double i = top; i <= bottom; i = i + 20)
+            for (double i = firstScale; i <= depth; i = i + 20)
             {
-                scaleSb.Append(i);
+                scaleSb.Append(i + mindepth);
                 scaleSb.Append("\n");
             }
             return scaleSb;
