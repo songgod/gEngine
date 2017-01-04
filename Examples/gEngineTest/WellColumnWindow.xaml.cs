@@ -30,6 +30,7 @@ namespace gEngineTest
         public WellColumnWindow()
         {
             InitializeComponent();
+            InitDataTemplate();
             InitWell();
         }
 
@@ -42,6 +43,19 @@ namespace gEngineTest
 
             Binding bd = new Binding("Objects") { Source = layer };
             lyControl.SetBinding(ItemsControl.ItemsSourceProperty, bd);
+        }
+
+        private void InitDataTemplate()
+        {
+            System.Windows.Application.Current.Resources.MergedDictionaries.Add(
+                    System.Windows.Application.LoadComponent(
+                        new Uri("gEngineTest;component/WellColumnDictionary.xaml",
+                        UriKind.Relative)) as System.Windows.ResourceDictionary);
+
+            //System.Windows.Application.Current.Resources.MergedDictionaries.Add(
+            //        System.Windows.Application.LoadComponent(
+            //            new Uri("gEngine.View.Datatemplate;component/Resources/WellColumnDictionary.xaml",
+            //            UriKind.Relative)) as System.Windows.ResourceDictionary);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
