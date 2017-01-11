@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:gEngineTest"
         xmlns:gv="clr-namespace:gEngine.View;assembly=gEngine.View"
         xmlns:gg="clr-namespace:gEngine.Graph.Ge;assembly=gEngine.Graph.Ge"
-        xmlns:gi ="clr-namespace:gEngine.Graph.Interface;assembly=gEngine.Graph.Interface"
+        xmlns:ge ="clr-namespace:gEngine.Graph.Ge;assembly=gEngine.Graph.Ge"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:em="clr-namespace:gEngine.Manipulator;assembly=gEngine.Manipulator"
         mc:Ignorable="d"
@@ -22,7 +22,7 @@
                 </gg:Layer>
             </gg:Map.Layers>
         </gg:Map>
-        <DataTemplate DataType="{x:Type gi:IRect}">
+        <DataTemplate DataType="{x:Type ge:Rect}">
             <Rectangle Width="{Binding Width}" Height="{Binding Height}" Fill="Green">
                 <Rectangle.RenderTransform>
                     <TranslateTransform Y="{Binding Top}" X="{Binding Left}"/>

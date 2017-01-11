@@ -7,7 +7,6 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using System;
 using System.Globalization;
-using static gEngine.Graph.Interface.Enums;
 using gEngine.Data.Ge.Txt;
 using gEngine.Graph.Ge.Business;
 using gEngine.View.Datatemplate;
@@ -33,7 +32,7 @@ namespace gEngineTest
         private void BuildDataTemplate()
         {
             var manager = new DataTemplateManager();
-            manager.RegisterDataTemplate<IWellLocation, WellLocationDataTemplate>();
+            manager.RegisterDataTemplate<WellLocation, WellLocationDataTemplate>();
         }
 
         /// <summary>

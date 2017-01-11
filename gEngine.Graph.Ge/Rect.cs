@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace gEngine.Graph.Ge
 {
-    public class Rect : Object, IRect
+    public class Rect : Object
     {
         public double Top
         {

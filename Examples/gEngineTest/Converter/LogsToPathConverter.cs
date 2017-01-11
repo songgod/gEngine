@@ -1,4 +1,5 @@
-﻿using gEngine.Graph.Interface;
+﻿using gEngine.Graph.Ge;
+using gEngine.Graph.Interface;
 using gEngine.Utility;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using static gEngine.Graph.Interface.Enums;
+using static gEngine.Graph.Ge.Enums;
 
 namespace gEngineTest.Converter
 {
@@ -31,7 +32,7 @@ namespace gEngineTest.Converter
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             ObsDoubles vls = values[0] as ObsDoubles;
-            IWell owner = values[1] as IWell;
+            Well owner = values[1] as Well;
             if (vls == null || owner == null)
                 return null;
 

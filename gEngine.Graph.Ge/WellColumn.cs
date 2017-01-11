@@ -1,11 +1,11 @@
 ﻿using gEngine.Graph.Interface;
 using gEngine.Utility;
 using System.Windows;
-using static gEngine.Graph.Interface.Enums;
+using static gEngine.Graph.Ge.Enums;
 
 namespace gEngine.Graph.Ge
 {
-    public class WellColumn : Object, IWellColumn
+    public class WellColumn : Object
     {
         public WellColumn()
         {
@@ -14,15 +14,15 @@ namespace gEngine.Graph.Ge
 
 
 
-        public IWell Owner
+        public Well Owner
         {
-            get { return (IWell)GetValue(OwnerProperty); }
+            get { return (Well)GetValue(OwnerProperty); }
             set { SetValue(OwnerProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Owner.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty OwnerProperty =
-            DependencyProperty.Register("Owner", typeof(IWell), typeof(WellColumn));
+            DependencyProperty.Register("Owner", typeof(Well), typeof(WellColumn));
 
 
 
@@ -49,4 +49,6 @@ namespace gEngine.Graph.Ge
         public static readonly DependencyProperty MathTypProperty =
             DependencyProperty.Register("MathTyp", typeof(MathType), typeof(WellColumn));
     }
+
+    public class WellColumns : ObservedCollection<WellColumn> { }
 }
