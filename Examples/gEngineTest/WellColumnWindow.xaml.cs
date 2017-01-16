@@ -114,7 +114,7 @@ namespace gEngineTest
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             //ViewUtil.FullView(lyControl);
-            //GetGeometryPath();
+            GetGeometryPath();
         }
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
