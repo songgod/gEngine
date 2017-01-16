@@ -9,25 +9,25 @@ using System.Windows;
 
 namespace gEngine.Graph.Ge
 {
-    public class Well : Object, IWell
+    public class Well : Object
     {
         public Well()
         {
-            Columns = new IWellColumns();
+            Columns = new WellColumns();
             Depths = new ObsDoubles();
         }
 
 
 
-        public IWellColumns Columns
+        public WellColumns Columns
         {
-            get { return (IWellColumns)GetValue(ColumnsProperty); }
+            get { return (WellColumns)GetValue(ColumnsProperty); }
             set { SetValue(ColumnsProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Columns.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ColumnsProperty =
-            DependencyProperty.Register("Columns", typeof(IWellColumns), typeof(Well));
+            DependencyProperty.Register("Columns", typeof(WellColumns), typeof(Well));
 
 
 

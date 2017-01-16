@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using static gEngine.Graph.Interface.Enums;
+using static gEngine.Graph.Ge.Enums;
 
 namespace gEngine.View.Datatemplate
 {

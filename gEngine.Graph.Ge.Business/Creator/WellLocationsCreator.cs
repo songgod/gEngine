@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static gEngine.Graph.Interface.Enums;
+using static gEngine.Graph.Ge.Enums;
 
 namespace gEngine.Graph.Ge.Business.Creator
 {

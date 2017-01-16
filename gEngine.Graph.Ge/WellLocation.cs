@@ -6,12 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using static gEngine.Graph.Interface.Enums;
+using static gEngine.Graph.Ge.Enums;
 
 namespace gEngine.Graph.Ge
 {
     
-    public class WellLocation : Object, IWellLocation
+    public class WellLocation : Object
     {
 
 
