@@ -60,6 +60,7 @@
     <Compile Include="Converter\DepthToPathConverter.cs" />
     <Compile Include="Converter\DepthToScaleConverter.cs" />
     <Compile Include="Converter\LogsToPathConverter.cs" />
+    <Compile Include="ItemsControlStyleSelector.cs" />
     <Compile Include="RectWindow.xaml.cs">
       <DependentUpon>RectWindow.xaml</DependentUpon>
     </Compile>

@@ -4,7 +4,6 @@
         xmlns:gi="clr-namespace:gEngine.Graph.Interface;assembly=gEngine.Graph.Interface"
                     xmlns:converter="clr-namespace:gEngineTest.Converter"
                     xmlns:local="clr-namespace:gEngineTest">
-
     <converter:DepthToPathConverter x:Key="d2p"/>
     <converter:LogsToPathConverter x:Key="l2p"/>
     <converter:DepthToScaleConverter x:Key="d2c"/>
@@ -22,7 +21,10 @@
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" Grid.Row="1">
                 <Canvas Grid.Row="1"  Background="White" Grid.Column="0">
-                    <Path x:Name="PathDepth" Stroke="Red" StrokeThickness="0.1">
+                    <Path x:Name="PathDepth"  StrokeThickness="0.1"><!--Stroke="{Binding Color}"-->
+                        <Path.Stroke>
+                            <SolidColorBrush Color="{Binding Color}"></SolidColorBrush>
+                        </Path.Stroke>
                         <!--<Path.RenderTransform>
                             <TransformGroup>
                                 <TranslateTransform X="{Binding XOffset}" Y="{Binding YOffset}"></TranslateTransform>
@@ -74,8 +76,10 @@
                         <StackPanel x:Name="ColumnPanel" Orientation="Horizontal"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemContainerStyleSelector>
+                    <local:ItemsControlStyleSelector></local:ItemsControlStyleSelector>
+                </ItemsControl.ItemContainerStyleSelector>
             </ItemsControl>
         </Grid>
     </DataTemplate>
-
 </ResourceDictionary>

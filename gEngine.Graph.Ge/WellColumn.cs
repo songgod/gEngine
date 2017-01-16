@@ -1,6 +1,7 @@
 ﻿using gEngine.Graph.Interface;
 using gEngine.Utility;
 using System.Windows;
+using System.Windows.Media;
 using static gEngine.Graph.Interface.Enums;
 
 namespace gEngine.Graph.Ge
@@ -48,5 +49,15 @@ namespace gEngine.Graph.Ge
         // Using a DependencyProperty as the backing store for MathTyp.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MathTypProperty =
             DependencyProperty.Register("MathTyp", typeof(MathType), typeof(WellColumn));
+
+        public Color Color
+        {
+            get { return (Color)GetValue(ColorProperty); }
+            set { SetValue(ColorProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Depths.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ColorProperty =
+            DependencyProperty.Register("Color", typeof(Color), typeof(WellColumn));
     }
 }
