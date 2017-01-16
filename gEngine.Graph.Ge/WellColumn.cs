@@ -2,7 +2,6 @@
 using gEngine.Utility;
 using System.Windows;
 using System.Windows.Media;
-using static gEngine.Graph.Interface.Enums;
 using static gEngine.Graph.Ge.Enums;
 
 namespace gEngine.Graph.Ge
