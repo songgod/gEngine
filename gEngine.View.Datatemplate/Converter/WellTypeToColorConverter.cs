@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Media;
-using static gEngine.Graph.Interface.Enums;
+using static gEngine.Graph.Ge.Enums;
 
 namespace gEngine.View.Datatemplate.Converter
 {

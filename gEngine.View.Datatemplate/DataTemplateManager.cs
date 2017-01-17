@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
-using static gEngine.Graph.Interface.Enums;
+using static gEngine.Graph.Ge.Enums;
 
 namespace gEngine.View.Datatemplate
 {
@@ -107,6 +107,10 @@ namespace gEngine.View.Datatemplate
         {
             List<string> result = new List<string>();
             string templateFolder = AppDomain.CurrentDomain.BaseDirectory + "DataTemplates\\";
+            if (!Directory.Exists(templateFolder))
+            {
+                Directory.CreateDirectory(templateFolder);
+            }
             DirectoryInfo TheFolder = new DirectoryInfo(templateFolder);
             foreach (FileInfo file in TheFolder.GetFiles())
             {
@@ -123,7 +127,12 @@ namespace gEngine.View.Datatemplate
         {
             List<string> result = new List<string>();
             string templateFolder = AppDomain.CurrentDomain.BaseDirectory + "DataTemplates\\" + type + "\\";
+            if (!Directory.Exists(templateFolder))
+            {
+                Directory.CreateDirectory(templateFolder);
+            }
             DirectoryInfo TheFolder = new DirectoryInfo(templateFolder);
+            
             foreach (FileInfo file in TheFolder.GetFiles())
             {
                 if (file.Extension.Equals(".xaml"))
