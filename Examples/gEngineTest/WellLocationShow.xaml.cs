@@ -20,32 +20,45 @@ namespace gEngineTest
     /// </summary>
     public partial class WellLocationShow : Window
     {
+        string type = DataTemplateType.井位图.ToString();
         public WellLocationShow()
         {
             InitializeComponent();
-            BuildDataTemplate();
-            PreCreateWellLocation();
+            if (InitComboSource())
+            {
+                CreateWellLocation();
+            }
+            
         }
-
         /// <summary>
-        /// 概要：引入数据模板
+        /// 初始化模板选择下拉框数据源
         /// </summary>
-        private void BuildDataTemplate()
+        private bool InitComboSource()
         {
+            bool b = false;
             var manager = new DataTemplateManager();
-            manager.RegisterDataTemplate<IWellLocation, WellLocationDataTemplate>();
+            cbTemplate.ItemsSource = manager.GetAllDataTemplatesByType(type);
+            if(cbTemplate.Items.Count>0)
+            {
+                cbTemplate.SelectedIndex = 0;
+                b = true;
+            }
+            return b;
         }
 
         /// <summary>
         /// 概要：创建井位图
         /// </summary>
-        private void PreCreateWellLocation()
+        private void CreateWellLocation()
         {
-            //1.创建Layer
+            //1.引入数据模板
+            var manager = new DataTemplateManager();
+            manager.RegDataTemplateByFile<WellLocation>(type,cbTemplate.SelectedValue.ToString());
+            //2.创建Layer
             Layer layer = new Layer();
             TXTWellLocations twl = new TXTWellLocations() { TxtFile = "d:/welllocations.txt" };
             layer.Objects = GraphGeFactory.Single().Create(twl);
-            //2.绑定lc数据源
+            //3.绑定lc数据源
             Binding bd = new Binding("Objects") { Source = layer };
             lc.SetBinding(ItemsControl.ItemsSourceProperty, bd);
         }
@@ -64,7 +77,12 @@ namespace gEngineTest
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             ViewUtil.FullView(lc);
-        } 
+        }
+
+        private void cbTemplate_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CreateWellLocation();
+        }
     }
 }
 

@@ -63,12 +63,19 @@
     <Compile Include="RectWindow.xaml.cs">
       <DependentUpon>RectWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UploadDataTemplate.xaml.cs">
+      <DependentUpon>UploadDataTemplate.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WellColumnWindow.xaml.cs">
       <DependentUpon>WellColumnWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="WellLocationShow.xaml.cs">
       <DependentUpon>WellLocationShow.xaml</DependentUpon>
     </Compile>
+    <None Include="DataTemplates\DictWellLocation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </None>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -82,6 +89,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="RectWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UploadDataTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -167,6 +178,7 @@
       <Name>gEngine.View</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -44,5 +44,11 @@ namespace gEngine.Graph.Interface
             DEFAULT
         }
 
+        public enum DataTemplateType
+        {
+            井位图,
+            井柱曲线
+        }
+
     }
 }

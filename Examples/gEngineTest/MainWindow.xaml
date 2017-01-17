@@ -10,5 +10,6 @@
         <Button>RectWindow</Button>
         <Button>WellColumnWindow</Button>
         <Button>WellLocationShow</Button>
+        <Button>UploadDataTemplate</Button>
     </StackPanel>
 </Window>
