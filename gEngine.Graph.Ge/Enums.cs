@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace gEngine.Graph.Interface
+namespace gEngine.Graph.Ge
 {
     public class Enums
     {
