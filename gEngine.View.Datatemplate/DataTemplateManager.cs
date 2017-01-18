@@ -69,7 +69,12 @@ namespace gEngine.View.Datatemplate
         /// <param name="fileName">文件全路径</param>
         public void RegDataTemplateByFile<TViewModel>(string type, string fileName)
         {
-            string filePath = AppDomain.CurrentDomain.BaseDirectory + "DataTemplates\\" + type + "\\" + fileName;
+            string templateFolder = AppDomain.CurrentDomain.BaseDirectory + "DataTemplates\\" + type + "\\";
+            if (!Directory.Exists(templateFolder))
+            {
+                Directory.CreateDirectory(templateFolder);
+            }
+            string filePath = templateFolder + fileName;
             StreamReader reader = new StreamReader(filePath, Encoding.Default);
 
             string fileContent = reader.ReadToEnd();

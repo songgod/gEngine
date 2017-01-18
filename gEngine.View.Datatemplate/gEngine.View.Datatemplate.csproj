@@ -81,6 +81,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Converter\DepthToPathConverter.cs" />
+    <Compile Include="Converter\DepthToScaleConverter.cs" />
+    <Compile Include="Converter\LogsToPathConverter.cs" />
     <Compile Include="Converter\WellTypeToColorConverter.cs" />
     <Compile Include="DataTemplateManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -117,6 +120,10 @@
     <ProjectReference Include="..\gEngine.Graph.Interface\gEngine.Graph.Interface.csproj">
       <Project>{1C98A821-B030-4FF2-83AE-D49B1B3B8C67}</Project>
       <Name>gEngine.Graph.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.Util\gEngine.Util.csproj">
+      <Project>{84ACB6C4-CF62-4F4B-A7E5-5C642EDC041A}</Project>
+      <Name>gEngine.Util</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
