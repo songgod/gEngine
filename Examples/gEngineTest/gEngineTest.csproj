@@ -15,25 +15,6 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x64\Debug\</OutputPath>
@@ -198,10 +179,6 @@
       <Project>{b1c2609b-a3ed-43e0-9da2-df27029d44fc}</Project>
       <Name>gEngine.Data.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\gEngine.Graph.Ge.Business\gEngine.Graph.Ge.Business.csproj">
-      <Project>{7e6f9ff8-3418-4e59-bbbd-7b4b42c1c641}</Project>
-      <Name>gEngine.Graph.Ge.Business</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\gEngine.Graph.Ge\gEngine.Graph.Ge.csproj">
       <Project>{3bd77e4f-a348-4edb-b60c-68b749249b91}</Project>
       <Name>gEngine.Graph.Ge</Name>
@@ -217,10 +194,6 @@
     <ProjectReference Include="..\..\gEngine.Util\gEngine.Util.csproj">
       <Project>{84acb6c4-cf62-4f4b-a7e5-5c642edc041a}</Project>
       <Name>gEngine.Util</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\gEngine.View.Datatemplate\gEngine.View.Datatemplate.csproj">
-      <Project>{C52AFAA2-0F70-4CA5-B3EE-7763EDD1EE18}</Project>
-      <Name>gEngine.View.Datatemplate</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\gEngine.View\gEngine.View.csproj">
       <Project>{932485ea-2f95-4caa-8bcd-df68c496854e}</Project>

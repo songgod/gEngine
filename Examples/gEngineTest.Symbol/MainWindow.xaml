@@ -1,0 +1,21 @@
+﻿<Window x:Class="gEngineTest.Symbol.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:gEngineTest.Symbol"
+        xmlns:sym="clr-namespace:gEngine.View.Symbol;assembly=gEngine.View.Symbol"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Window.Resources>
+        <sym:PointSymbolConverter x:Key="pc"/>
+        <sym:FillSymbolConverter x:Key="fc"/>
+        <local:LineSymbolConverter x:Key="sc"/>
+    </Window.Resources>
+    <Grid>
+        <Polyline Points= "{Binding Path=Polygon.Points}" Fill="{Binding Path=Polygon.Symbol, Converter={StaticResource fc}}"/>
+        <Path Data="{Binding Path=Point.Symbol, Converter={StaticResource pc}}" Width="20" Height="20" Fill="Gold"/>
+        <Path Data="{Binding Path=Line.Points, Converter={StaticResource sc}, ConverterParameter=Line.Symbol}" Stroke="Black"/>
+    </Grid>
+</Window>
