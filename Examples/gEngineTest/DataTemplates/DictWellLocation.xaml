@@ -21,6 +21,9 @@
                 <TranslateTransform X="{Binding X}" Y="{Binding Y}" />
             </TransformGroup>
         </Ellipse.RenderTransform>
+        <Ellipse.Stroke>
+            <ImageBrush ImageSource="e:\tmppic\1.gif" Viewport="0,0,0.5,0.5" TileMode="Tile"/>
+        </Ellipse.Stroke>
     </Ellipse>
     <TextBlock Text="{Binding WellNum}" >
         <TextBlock.RenderTransform>
