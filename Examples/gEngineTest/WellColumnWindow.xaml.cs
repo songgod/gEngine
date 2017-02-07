@@ -33,7 +33,7 @@ namespace gEngineTest
             InitDataTemplate();
             InitWell();
 
-           
+
         }
 
         private void InitWell()
@@ -46,7 +46,7 @@ namespace gEngineTest
             Binding bd = new Binding("Objects") { Source = layer };
             lyControl.SetBinding(ItemsControl.ItemsSourceProperty, bd);
 
-           
+
         }
 
         private void InitDataTemplate()
@@ -54,6 +54,11 @@ namespace gEngineTest
             System.Windows.Application.Current.Resources.MergedDictionaries.Add(
                     System.Windows.Application.LoadComponent(
                         new Uri("gEngineTest;component/WellColumnDictionary.xaml",
+                        UriKind.Relative)) as System.Windows.ResourceDictionary);
+
+            System.Windows.Application.Current.Resources.MergedDictionaries.Add(
+                    System.Windows.Application.LoadComponent(
+                        new Uri("gEngineTest;component/StyleDictionary.xaml",
                         UriKind.Relative)) as System.Windows.ResourceDictionary);
 
             //System.Windows.Application.Current.Resources.MergedDictionaries.Add(
@@ -114,12 +119,37 @@ namespace gEngineTest
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             //ViewUtil.FullView(lyControl);
-            GetGeometryPath();
+            //GetGeometryPath();
         }
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             ViewUtil.FullView(lyControl);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //Style CellStyle = Application.Current.Resources["StyleDictionary"] as Style;
+            //SetterBaseCollection sbCollection = CellStyle.Setters;
+            //Setter setter = sbCollection[0] as Setter;
+            //DependencyProperty dProperty = DependencyProperty.Register("pathStyle", typeof(HorizontalAlignment), typeof(JP_DataGrid), null);
+            //setter.SetValue(dProperty, HorizontalAlignment.Center);
+
+            ResourceDictionary dic = new ResourceDictionary { Source = new Uri("StyleDictionary.xaml", UriKind.Relative) };
+            Style style = (Style)dic["pathStyle"];
+
+            SetterBaseCollection sbCollection = style.Setters;
+            Setter setter = sbCollection[0] as Setter;
+            setter.Value = Colors.Red;
+
+            //DependencyProperty dProperty = DependencyProperty.Register("Path.Stroke", typeof(SolidColorBrush), typeof(WellColumnWindow));
+            //SolidColorBrush sBrush = new SolidColorBrush();
+
+            //sBrush.Color = Colors.Red;
+            //SetValue(dProperty, sBrush.Color);
+
+
+
         }
     }
 }

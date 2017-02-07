@@ -7,6 +7,7 @@
     <converter:DepthToPathConverter x:Key="d2p"/>
     <converter:LogsToPathConverter x:Key="l2p"/>
     <converter:DepthToScaleConverter x:Key="d2c"/>
+    <!--<Path x:Key="dds" Data="M10,10" Style="{StaticResource s}"></Path>-->
     <DataTemplate x:Key="giIWellColumn" DataType="{x:Type ge:WellColumn}">
         <Grid x:Name="GridColumn">
             <Grid.RowDefinitions>
@@ -21,10 +22,10 @@
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" Grid.Row="1">
                 <Canvas Grid.Row="1"  Background="White" Grid.Column="0">
-                    <Path x:Name="PathDepth"  StrokeThickness="0.1"><!--Stroke="{Binding Color}"-->
-                        <Path.Stroke>
+                    <Path x:Name="PathDepth"  StrokeThickness="0.1" Style="{DynamicResource pathStyle}"><!--Stroke="{Binding Color}"-->
+                        <!--<Path.Stroke>
                             <SolidColorBrush Color="{Binding Color}"></SolidColorBrush>
-                        </Path.Stroke>
+                        </Path.Stroke>-->
                         <!--<Path.RenderTransform>
                             <TransformGroup>
                                 <TranslateTransform X="{Binding XOffset}" Y="{Binding YOffset}"></TranslateTransform>
