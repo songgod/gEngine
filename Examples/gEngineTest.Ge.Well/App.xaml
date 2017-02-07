@@ -1,0 +1,14 @@
+﻿<Application x:Class="gEngineTest.Ge.Well.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:gEngineTest.Ge.Well"
+             xmlns:vc="clr-namespace:gEngine.View.Ge.Column;assembly=gEngine.View.Ge.Column"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <vc:Dictionary/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

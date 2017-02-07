@@ -12,23 +12,6 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x64\Debug\</OutputPath>
@@ -80,24 +63,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base.cs" />
-    <Compile Include="Enums.cs" />
     <Compile Include="Layer.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Object.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rect.cs" />
-    <Compile Include="Well.cs" />
-    <Compile Include="WellColumn.cs" />
-    <Compile Include="WellLocation.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\gEngine.Graph.Interface\gEngine.Graph.Interface.csproj">
       <Project>{1c98a821-b030-4ff2-83ae-d49b1b3b8c67}</Project>
       <Name>gEngine.Graph.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\gEngine.Util\gEngine.Util.csproj">
-      <Project>{84acb6c4-cf62-4f4b-a7e5-5c642edc041a}</Project>
-      <Name>gEngine.Util</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

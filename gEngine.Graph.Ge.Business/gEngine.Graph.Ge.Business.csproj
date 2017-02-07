@@ -80,8 +80,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Creator\ICreator.cs" />
-    <Compile Include="Creator\WellCreator.cs" />
-    <Compile Include="Creator\WellLocationsCreator.cs" />
     <Compile Include="GraphGeFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
