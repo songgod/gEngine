@@ -15,6 +15,25 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x64\Debug\</OutputPath>
@@ -78,12 +97,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converter\DepthToPathConverter.cs" />
+    <Compile Include="Converter\DepthToScaleConverter.cs" />
+    <Compile Include="Converter\LogsToPathConverter.cs" />
     <Compile Include="ItemsControlStyleSelector.cs" />
     <Compile Include="RectWindow.xaml.cs">
       <DependentUpon>RectWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UploadDataTemplate.xaml.cs">
-      <DependentUpon>UploadDataTemplate.xaml</DependentUpon>
     </Compile>
     <Compile Include="WellColumnWindow.xaml.cs">
       <DependentUpon>WellColumnWindow.xaml</DependentUpon>
@@ -91,18 +110,6 @@
     <Compile Include="WellLocationShow.xaml.cs">
       <DependentUpon>WellLocationShow.xaml</DependentUpon>
     </Compile>
-    <None Include="DataTemplates\DictWellLocation.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <Page Include="DataTemplates\WellColumnInner.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DataTemplates\WellColumnOuter.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -119,7 +126,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UploadDataTemplate.xaml">
+    <Page Include="StyleDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -176,17 +183,9 @@
       <Project>{b1c2609b-a3ed-43e0-9da2-df27029d44fc}</Project>
       <Name>gEngine.Data.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\gEngine.Graph.Ge.Basic\gEngine.Graph.Ge.Basic.csproj">
-      <Project>{db606377-aaa0-45bd-a6be-4f4c4cd111af}</Project>
-      <Name>gEngine.Graph.Ge.Basic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\gEngine.Graph.Ge.Column\gEngine.Graph.Ge.Column.csproj">
-      <Project>{95227940-90f7-40b4-9027-3eeecd8ed6de}</Project>
-      <Name>gEngine.Graph.Ge.Column</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\gEngine.Graph.Ge.Plane\gEngine.Graph.Ge.Plane.csproj">
-      <Project>{82739b38-8706-493d-a571-c743afcead12}</Project>
-      <Name>gEngine.Graph.Ge.Plane</Name>
+    <ProjectReference Include="..\..\gEngine.Graph.Ge.Business\gEngine.Graph.Ge.Business.csproj">
+      <Project>{7e6f9ff8-3418-4e59-bbbd-7b4b42c1c641}</Project>
+      <Name>gEngine.Graph.Ge.Business</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\gEngine.Graph.Ge\gEngine.Graph.Ge.csproj">
       <Project>{3bd77e4f-a348-4edb-b60c-68b749249b91}</Project>
@@ -204,24 +203,15 @@
       <Project>{84acb6c4-cf62-4f4b-a7e5-5c642edc041a}</Project>
       <Name>gEngine.Util</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\gEngine.View.Ge.Basic\gEngine.View.Ge.Basic.csproj">
-      <Project>{68766b32-0e50-4b96-987b-a8cb20535573}</Project>
-      <Name>gEngine.View.Ge.Basic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\gEngine.View.Ge.Column\gEngine.View.Ge.Column.csproj">
-      <Project>{763b3662-8a27-45be-90a6-b2bd51c2ca47}</Project>
-      <Name>gEngine.View.Ge.Column</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\gEngine.View.Ge.Plane\gEngine.View.Ge.Plane.csproj">
-      <Project>{57f49817-a06c-4b8b-bc19-b6cd36800969}</Project>
-      <Name>gEngine.View.Ge.Plane</Name>
+    <ProjectReference Include="..\..\gEngine.View.Datatemplate\gEngine.View.Datatemplate.csproj">
+      <Project>{C52AFAA2-0F70-4CA5-B3EE-7763EDD1EE18}</Project>
+      <Name>gEngine.View.Datatemplate</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\gEngine.View\gEngine.View.csproj">
       <Project>{932485ea-2f95-4caa-8bcd-df68c496854e}</Project>
       <Name>gEngine.View</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

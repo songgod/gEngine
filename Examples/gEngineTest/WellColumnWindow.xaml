@@ -79,7 +79,12 @@
         </DataTemplate>
     </Window.Resources>-->
     <Grid Background="White">
-        <gv:LayerControl x:Name="lyControl">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Button Content="更改样式" Click="Button_Click"></Button>
+        <gv:LayerControl x:Name="lyControl" Grid.Row="1">
             <i:Interaction.Behaviors>
                 <gm:ZoomPan></gm:ZoomPan>
             </i:Interaction.Behaviors>
