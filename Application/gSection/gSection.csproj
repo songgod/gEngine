@@ -1,0 +1,621 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BE9284FF-F1AD-4B95-9233-130CA4F20C77}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GPTDxWPFRibbonApplication1</RootNamespace>
+    <AssemblyName>GPTDxWPFRibbonApplication1</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <ExpressionBlendVersion>12.0.41002.1</ExpressionBlendVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Xpf.Core.v16.1" />
+    <Reference Include="DevExpress.Data.v16.1" />
+    <Reference Include="DevExpress.Xpf.Ribbon.v16.1" />
+    <Reference Include="DevExpress.Printing.v16.1.Core" />
+    <Reference Include="DevExpress.Images.v16.1">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Mvvm.v16.1" />
+    <Reference Include="DevExpress.Xpf.Themes.Office2016Colorful.v16.1, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\DevExpress 16.1\Components\Bin\Framework\DevExpress.Xpf.Themes.Office2016Colorful.v16.1.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.Office2016White.v16.1" />
+    <Reference Include="Microsoft.Expression.Controls, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Expression.Drawing, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Expression.Effects, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="New section set.xaml.cs">
+      <DependentUpon>New section set.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="New Section window.xaml.cs">
+      <DependentUpon>New Section window.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OptionPanel.xaml.cs">
+      <DependentUpon>OptionPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddTrendLine.xaml.cs">
+      <DependentUpon>AddTrendLine.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FluidUI.xaml.cs">
+      <DependentUpon>FluidUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="QuickPanel.xaml.cs">
+      <DependentUpon>QuickPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StratumPick.xaml.cs">
+      <DependentUpon>StratumPick.xaml</DependentUpon>
+    </Compile>
+    <Page Include="en-us.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Converters\ObjectsEqualityConverter.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="New section set.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="New Section window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="OptionPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddTrendLine.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="FluidUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="QuickPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Simple Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="StratumPick.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="zh-cn.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\RibbonStyle\Office2007.png" />
+    <Resource Include="Images\RibbonStyle\Office2010.png" />
+    <Resource Include="Images\RibbonStyle\OfficeSlim.png" />
+    <Resource Include="Images\RibbonStyle\TabletOffice.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Clipart\caCompClient.png" />
+    <Resource Include="Images\Clipart\caCompClientEnabled.png" />
+    <Resource Include="Images\Clipart\caDatabaseBlue.png" />
+    <Resource Include="Images\Clipart\caDataBaseDisabled.png" />
+    <Resource Include="Images\Clipart\caDatabaseGreen.png" />
+    <Resource Include="Images\Clipart\caDataBaseViolet.png" />
+    <Resource Include="Images\Clipart\caInet.png" />
+    <Resource Include="Images\Clipart\caInetSearch.png" />
+    <Resource Include="Images\Clipart\caModem.png" />
+    <Resource Include="Images\Clipart\caModemEnabled.png" />
+    <Resource Include="Images\Clipart\caNetCard.png" />
+    <Resource Include="Images\Clipart\caNetwork.png" />
+    <Resource Include="Images\Clipart\caNetworkEnabled.png" />
+    <Resource Include="Images\Clipart\caServer.png" />
+    <Resource Include="Images\Clipart\caServerEnabled.png" />
+    <Resource Include="Images\Clipart\caWebCam.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\GDS\歼灭形态.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\GDS\20150305093215591_easyicon_net_24.ico" />
+    <Resource Include="Images\GDS\20150309100937359_easyicon_net_32.ico" />
+    <Resource Include="Images\GDS\20150309101130918_easyicon_net_32.ico" />
+    <Resource Include="Images\GDS\20150309101138426_easyicon_net_32.ico" />
+    <Resource Include="Images\GDS\20150309101312906_easyicon_net_32.ico" />
+    <Resource Include="Images\GDS\20150309101526504_easyicon_net_32.ico" />
+    <Resource Include="Images\GDS\2015030910154119_easyicon_net_32.ico" />
+    <Resource Include="Images\GDS\20150309101828713_easyicon_net_32.ico" />
+    <Resource Include="Images\GDS\20150309101834988_easyicon_net_24.ico" />
+    <Resource Include="Images\GDS\20150309101901325_easyicon_net_32.ico" />
+    <Resource Include="Images\GDS\20150309102436800_easyicon_net_32.ico" />
+    <Resource Include="Images\GDS\20150309102446248_easyicon_net_32.ico" />
+    <Resource Include="Images\GDS\20150309102449502_easyicon_net_32.ico" />
+    <Resource Include="Images\GDS\20150309112648529_easyicon_net_32.ico" />
+    <Resource Include="Images\GDS\20150309112826212_easyicon_net_32.ico" />
+    <Resource Include="Images\GDS\20150309112830180_easyicon_net_32.ico" />
+    <Resource Include="Images\GDS\20150309113559662_easyicon_net_32.ico" />
+    <Resource Include="Images\GDS\20150310044612965_easyicon_net_32.ico" />
+    <Resource Include="Images\GDS\20150310095009909_easyicon_net_32.ico" />
+    <Resource Include="Images\GDS\20150310095209477_easyicon_net_32.ico" />
+    <Resource Include="Images\GDS\20150310095213962_easyicon_net_32.ico" />
+    <Resource Include="Images\GDS\20150310095216501_easyicon_net_32.ico" />
+    <Resource Include="Images\GDS\20150310095222501_easyicon_net_32.ico" />
+    <Resource Include="Images\GDS\20150310095226222_easyicon_net_32.ico" />
+    <Resource Include="Images\GDS\20150310095307390_easyicon_net_32.ico" />
+    <Resource Include="Images\GDS\20150310101550463_easyicon_net_64.ico" />
+    <Resource Include="Images\GDS\2015031010155421_easyicon_net_64.ico" />
+    <Resource Include="Images\GDS\20150310101558191_easyicon_net_64.ico" />
+    <Resource Include="Images\GDS\20150310101601621_easyicon_net_64.ico" />
+    <Resource Include="Images\GDS\2015031010160998_easyicon_net_64.ico" />
+    <Resource Include="Images\GDS\20150310101631963_easyicon_net_64.ico" />
+    <Resource Include="Images\GDS\20150310105041609_easyicon_net_64.ico" />
+    <Resource Include="Images\GDS\201503101050451_easyicon_net_64.ico" />
+    <Resource Include="Images\GDS\20150310105047925_easyicon_net_64.ico" />
+    <Resource Include="Images\GDS\20150310105050982_easyicon_net_64.ico" />
+    <Resource Include="Images\GDS\20150310105053968_easyicon_net_64.ico" />
+    <Resource Include="Images\GDS\20150310105057868_easyicon_net_64.ico" />
+    <Resource Include="Images\GDS\20150310105100115_easyicon_net_64.ico" />
+    <Resource Include="Images\GDS\20150311085206711_easyicon_net_32.ico" />
+    <Resource Include="Images\GDS\20150311091034380_easyicon_net_64.ico" />
+    <Resource Include="Images\GDS\20150311091034490_easyicon_net_64.ico" />
+    <Resource Include="Images\GDS\2015031109104126_easyicon_net_64.ico" />
+    <Resource Include="Images\GDS\20150311091048750_easyicon_net_64.ico" />
+    <Resource Include="Images\GDS\20150311091405818_easyicon_net_64.ico" />
+    <Resource Include="Images\GDS\20150318012219887_easyicon_net_24.png" />
+    <Resource Include="Images\GDS\20150323015210751_easyicon_net_64.ico" />
+    <Resource Include="Images\GDS\20150323020342330_easyicon_net_32.ico" />
+    <Resource Include="Images\GDS\20150602092026395_easyicon_net_64.ico" />
+    <Resource Include="Images\GDS\20150602092058349_easyicon_net_32.ico" />
+    <Resource Include="Images\GDS\20150602092236134_easyicon_net_64.ico" />
+    <Resource Include="Images\GDS\20150707095111584_easyicon_net_48.ico" />
+    <Resource Include="Images\GDS\201507070951141_easyicon_net_48.ico" />
+    <Resource Include="Images\GDS\20150707095118975_easyicon_net_48.ico" />
+    <Resource Include="Images\GDS\20150707095122246_easyicon_net_48.ico" />
+    <Resource Include="Images\GDS\20150707101209365_easyicon_net_64.ico" />
+    <Resource Include="Images\GDS\20150707101212101_easyicon_net_64.ico" />
+    <Resource Include="Images\GDS\20150707101216214_easyicon_net_64.ico" />
+    <Resource Include="Images\GDS\20150707101219940_easyicon_net_64.ico" />
+    <Resource Include="Images\GDS\20150707101222971_easyicon_net_64.ico" />
+    <Resource Include="Images\GDS\20150707101225541_easyicon_net_64.ico" />
+    <Resource Include="Images\GDS\20150707101228702_easyicon_net_64.ico" />
+    <Resource Include="Images\GDS\20150707101232268_easyicon_net_64.ico" />
+    <Resource Include="Images\GDS\20150707101236441_easyicon_net_64.ico" />
+    <Resource Include="Images\GDS\20150707101239592_easyicon_net_64.ico" />
+    <Resource Include="Images\GDS\20150707101244900_easyicon_net_64.ico" />
+    <Resource Include="Images\GDS\20150707101248177_easyicon_net_64.ico" />
+    <Resource Include="Images\GDS\20150707101252119_easyicon_net_64.ico" />
+    <Resource Include="Images\GDS\20150707101256981_easyicon_net_64.ico" />
+    <Resource Include="Images\GDS\20150707101300781_easyicon_net_64.ico" />
+    <Resource Include="Images\GDS\20150707101304643_easyicon_net_64.ico" />
+    <Resource Include="Images\GDS\20150707101321529_easyicon_net_64.ico" />
+    <Resource Include="Images\GDS\20150715081909979_easyicon_net_48.ico" />
+    <Resource Include="Images\GDS\20150715082038767_easyicon_net_48.ico" />
+    <Resource Include="Images\GDS\20150715082043852_easyicon_net_48.ico" />
+    <Resource Include="Images\GDS\20150715082050854_easyicon_net_48.ico" />
+    <Resource Include="Images\GDS\copy2.ico" />
+    <Resource Include="Images\GDS\delete3.ico" />
+    <Resource Include="Images\GDS\edit2-del.ico" />
+    <Resource Include="Images\GDS\edit2.ico" />
+    <Resource Include="Images\GDS\eyes-del.ico" />
+    <Resource Include="Images\GDS\eyes.ico" />
+    <Resource Include="Images\GDS\GData-断开服务器32.png" />
+    <Resource Include="Images\GDS\GData-登录服务器32.png" />
+    <Resource Include="Images\GDS\gData_logo_32.ico" />
+    <Resource Include="Images\GDS\gData_logo_32.png" />
+    <Resource Include="Images\GDS\gData_logo_48.ico" />
+    <Resource Include="Images\GDS\gFacies_logo_32.ico" />
+    <Resource Include="Images\GDS\gFacies_logo_32.png" />
+    <Resource Include="Images\GDS\gFacies_logo_48.ico" />
+    <Resource Include="Images\GDS\gFacies_logo_48.png" />
+    <Resource Include="Images\GDS\new.ico" />
+    <Resource Include="Images\GDS\new.png" />
+    <Resource Include="Images\GDS\new2.ico" />
+    <Resource Include="Images\GDS\paste3.ico" />
+    <Resource Include="Images\GDS\select.ico" />
+    <Resource Include="Images\GDS\set.ico" />
+    <Resource Include="Images\GDS\tianchong.ico" />
+    <Resource Include="Images\GDS\xiantiao.ico" />
+    <Resource Include="Images\GDS\ziti.ico" />
+    <Resource Include="Images\GDS\上一条32.png" />
+    <Resource Include="Images\GDS\下一条32.png" />
+    <Resource Include="Images\GDS\井名符号.png" />
+    <Resource Include="Images\GDS\井名符号32.ico" />
+    <Resource Include="Images\GDS\井名符号32.png" />
+    <Resource Include="Images\GDS\井排线.png" />
+    <Resource Include="Images\GDS\井排线32.ico" />
+    <Resource Include="Images\GDS\井排线32.png" />
+    <Resource Include="Images\GDS\保存图版32.png" />
+    <Resource Include="Images\GDS\保存工区32.png" />
+    <Resource Include="Images\GDS\储层参数计算32.png" />
+    <Resource Include="Images\GDS\全部关闭.png" />
+    <Resource Include="Images\GDS\全部关闭32.ico" />
+    <Resource Include="Images\GDS\全部关闭32.png" />
+    <Resource Include="Images\GDS\关闭工区32.png" />
+    <Resource Include="Images\GDS\其他数据类型计算32.png" />
+    <Resource Include="Images\GDS\切换.png" />
+    <Resource Include="Images\GDS\切换32.ico" />
+    <Resource Include="Images\GDS\切换32.png" />
+    <Resource Include="Images\GDS\创建井组.png" />
+    <Resource Include="Images\GDS\创建井组32.ico" />
+    <Resource Include="Images\GDS\创建井组32.png" />
+    <Resource Include="Images\GDS\删除.png" />
+    <Resource Include="Images\GDS\删除井连通.png" />
+    <Resource Include="Images\GDS\删除井连通32.ico" />
+    <Resource Include="Images\GDS\删除井连通32.png" />
+    <Resource Include="Images\GDS\删除填充.png" />
+    <Resource Include="Images\GDS\删除填充32.ico" />
+    <Resource Include="Images\GDS\删除填充32.png" />
+    <Resource Include="Images\GDS\删除多边形内点.ico" />
+    <Resource Include="Images\GDS\删除标签.ico" />
+    <Resource Include="Images\GDS\删除段.png" />
+    <Resource Include="Images\GDS\删除段32.ico" />
+    <Resource Include="Images\GDS\删除段32.png" />
+    <Resource Include="Images\GDS\删除点.png" />
+    <Resource Include="Images\GDS\删除点32.ico" />
+    <Resource Include="Images\GDS\删除点32.png" />
+    <Resource Include="Images\GDS\删除矩形内点.ico" />
+    <Resource Include="Images\GDS\删除等值线填充.ico" />
+    <Resource Include="Images\GDS\删除线.png" />
+    <Resource Include="Images\GDS\删除线32.ico" />
+    <Resource Include="Images\GDS\删除线32.png" />
+    <Resource Include="Images\GDS\加密点.png" />
+    <Resource Include="Images\GDS\加密点32.ico" />
+    <Resource Include="Images\GDS\加密点32.png" />
+    <Resource Include="Images\GDS\加密线.png" />
+    <Resource Include="Images\GDS\加密线32.ico" />
+    <Resource Include="Images\GDS\加密线32.png" />
+    <Resource Include="Images\GDS\单井柱状.png" />
+    <Resource Include="Images\GDS\单井柱状32.ico" />
+    <Resource Include="Images\GDS\单井柱状32.png" />
+    <Resource Include="Images\GDS\卸载工区32.png" />
+    <Resource Include="Images\GDS\厚度类型数据计算32.png" />
+    <Resource Include="Images\GDS\同向平滑点.png" />
+    <Resource Include="Images\GDS\同向平滑点32.ico" />
+    <Resource Include="Images\GDS\同向平滑点32.png" />
+    <Resource Include="Images\GDS\图例.ico" />
+    <Resource Include="Images\GDS\填充1.ico" />
+    <Resource Include="Images\GDS\填充2.ico" />
+    <Resource Include="Images\GDS\填充3.ico" />
+    <Resource Include="Images\GDS\填充等值线.ico" />
+    <Resource Include="Images\GDS\处理未封闭.ico" />
+    <Resource Include="Images\GDS\复制.png" />
+    <Resource Include="Images\GDS\复制2.png" />
+    <Resource Include="Images\GDS\复制3.png" />
+    <Resource Include="Images\GDS\复制4.png" />
+    <Resource Include="Images\GDS\多井刨面.png" />
+    <Resource Include="Images\GDS\多井刨面32.ico" />
+    <Resource Include="Images\GDS\多井刨面32.png" />
+    <Resource Include="Images\GDS\多边形.ico" />
+    <Resource Include="Images\GDS\字段计算32.png" />
+    <Resource Include="Images\GDS\定义分层体系32.png" />
+    <Resource Include="Images\GDS\定义数据表32.png" />
+    <Resource Include="Images\GDS\实时井柱.png" />
+    <Resource Include="Images\GDS\实时井柱32.ico" />
+    <Resource Include="Images\GDS\实时井柱32.png" />
+    <Resource Include="Images\GDS\实时刨面.png" />
+    <Resource Include="Images\GDS\实时剖面32.ico" />
+    <Resource Include="Images\GDS\实时剖面32.png" />
+    <Resource Include="Images\GDS\对称平滑点.png" />
+    <Resource Include="Images\GDS\对称平滑点32.ico" />
+    <Resource Include="Images\GDS\对称平滑点32.png" />
+    <Resource Include="Images\GDS\导入井数据32.png" />
+    <Resource Include="Images\GDS\导入图形文件32.png" />
+    <Resource Include="Images\GDS\导入模型数据32.png" />
+    <Resource Include="Images\GDS\导入相图层.png" />
+    <Resource Include="Images\GDS\导入相图层32.ico" />
+    <Resource Include="Images\GDS\导入相图层32.png" />
+    <Resource Include="Images\GDS\导入等值线.ico" />
+    <Resource Include="Images\GDS\导入边界2.ico" />
+    <Resource Include="Images\GDS\导入通用数据32.png" />
+    <Resource Include="Images\GDS\导出井点相.png" />
+    <Resource Include="Images\GDS\导出井点相32.ico" />
+    <Resource Include="Images\GDS\导出井点相32.png" />
+    <Resource Include="Images\GDS\导出数据表32.png" />
+    <Resource Include="Images\GDS\导出等值线.ico" />
+    <Resource Include="Images\GDS\小层剖面.png" />
+    <Resource Include="Images\GDS\小层剖面32.ico" />
+    <Resource Include="Images\GDS\小层剖面32.png" />
+    <Resource Include="Images\GDS\层叠.png" />
+    <Resource Include="Images\GDS\层叠32.ico" />
+    <Resource Include="Images\GDS\层叠32.png" />
+    <Resource Include="Images\GDS\层段.png" />
+    <Resource Include="Images\GDS\层段32.ico" />
+    <Resource Include="Images\GDS\层段32.png" />
+    <Resource Include="Images\GDS\层间性质计算32.png" />
+    <Resource Include="Images\GDS\工区信息32.png" />
+    <Resource Include="Images\GDS\工区导航32.png" />
+    <Resource Include="Images\GDS\已打开工区.png" />
+    <Resource Include="Images\GDS\平滑矩形区2.ico" />
+    <Resource Include="Images\GDS\平滑线.png" />
+    <Resource Include="Images\GDS\平滑线32.ico" />
+    <Resource Include="Images\GDS\平滑线32.png" />
+    <Resource Include="Images\GDS\平铺.png" />
+    <Resource Include="Images\GDS\平铺32.ico" />
+    <Resource Include="Images\GDS\平铺32.png" />
+    <Resource Include="Images\GDS\手绘直线32-2.png" />
+    <Resource Include="Images\GDS\手绘直线32.png" />
+    <Resource Include="Images\GDS\手绘相带线.png" />
+    <Resource Include="Images\GDS\手绘相带线32.ico" />
+    <Resource Include="Images\GDS\手绘相带线32.png" />
+    <Resource Include="Images\GDS\打开.png" />
+    <Resource Include="Images\GDS\打开工区图件.png" />
+    <Resource Include="Images\GDS\打开电脑.png" />
+    <Resource Include="Images\GDS\打开网络工区3.ico" />
+    <Resource Include="Images\GDS\批量添加2.ico" />
+    <Resource Include="Images\GDS\批量添加3.ico" />
+    <Resource Include="Images\GDS\数据更正32.png" />
+    <Resource Include="Images\GDS\数据质量检查32.png" />
+    <Resource Include="Images\GDS\数量检查32.png" />
+    <Resource Include="Images\GDS\文字3.ico" />
+    <Resource Include="Images\GDS\断开服务器32.png" />
+    <Resource Include="Images\GDS\新增1.32.ico" />
+    <Resource Include="Images\GDS\新增1.32.png" />
+    <Resource Include="Images\GDS\新增1.32_看图王.png" />
+    <Resource Include="Images\GDS\新增2.32.ico" />
+    <Resource Include="Images\GDS\新增2.32.png" />
+    <Resource Include="Images\GDS\新增2.32_看图王.png" />
+    <Resource Include="Images\GDS\新增3.32.ico" />
+    <Resource Include="Images\GDS\新增3.32.png" />
+    <Resource Include="Images\GDS\新增3.32_看图王.png" />
+    <Resource Include="Images\GDS\新增4.32.ico" />
+    <Resource Include="Images\GDS\新增4.32.png" />
+    <Resource Include="Images\GDS\新增4.32_看图王.png" />
+    <Resource Include="Images\GDS\新增5.32.ico" />
+    <Resource Include="Images\GDS\新增5.32.png" />
+    <Resource Include="Images\GDS\新增5.32_看图王.png" />
+    <Resource Include="Images\GDS\新增6.32.ico" />
+    <Resource Include="Images\GDS\新增6.32.png" />
+    <Resource Include="Images\GDS\新增6.32_看图王.png" />
+    <Resource Include="Images\GDS\新增7.32.ico" />
+    <Resource Include="Images\GDS\新增7.32.png" />
+    <Resource Include="Images\GDS\新增7.32_看图王.png" />
+    <Resource Include="Images\GDS\新建图件.png" />
+    <Resource Include="Images\GDS\新建地震切片.ico" />
+    <Resource Include="Images\GDS\新建工区32.png" />
+    <Resource Include="Images\GDS\新建平面图.png" />
+    <Resource Include="Images\GDS\新建相图层.png" />
+    <Resource Include="Images\GDS\新建相图层32.ico" />
+    <Resource Include="Images\GDS\新建相图层32.png" />
+    <Resource Include="Images\GDS\新建网络工区3.ico" />
+    <Resource Include="Images\GDS\曲线边界2.ico" />
+    <Resource Include="Images\GDS\替换线.png" />
+    <Resource Include="Images\GDS\替换线32.ico" />
+    <Resource Include="Images\GDS\替换线32.png" />
+    <Resource Include="Images\GDS\有效厚度图.png" />
+    <Resource Include="Images\GDS\有效厚度图32.ico" />
+    <Resource Include="Images\GDS\有效厚度图32.png" />
+    <Resource Include="Images\GDS\查找工区32.png" />
+    <Resource Include="Images\GDS\标注32.png" />
+    <Resource Include="Images\GDS\检查井点相.png" />
+    <Resource Include="Images\GDS\检查井点相32.ico" />
+    <Resource Include="Images\GDS\检查井点相32.png" />
+    <Resource Include="Images\GDS\检测相区域.ico" />
+    <Resource Include="Images\GDS\沉积相设置.png" />
+    <Resource Include="Images\GDS\沉积相设置32.ico" />
+    <Resource Include="Images\GDS\沉积相设置32.png" />
+    <Resource Include="Images\GDS\沙厚图.png" />
+    <Resource Include="Images\GDS\沙厚图32.ico" />
+    <Resource Include="Images\GDS\沙厚图32.png" />
+    <Resource Include="Images\GDS\沙地图.png" />
+    <Resource Include="Images\GDS\沙地图32.ico" />
+    <Resource Include="Images\GDS\沙地图32.png" />
+    <Resource Include="Images\GDS\注册工区32.png" />
+    <Resource Include="Images\GDS\测井曲线异常值处理32.png" />
+    <Resource Include="Images\GDS\测井曲线数据过滤32.png" />
+    <Resource Include="Images\GDS\测井曲线设置32.png" />
+    <Resource Include="Images\GDS\测量距离.ico" />
+    <Resource Include="Images\GDS\添加井连通.png" />
+    <Resource Include="Images\GDS\添加井连通32.ico" />
+    <Resource Include="Images\GDS\添加井连通32.png" />
+    <Resource Include="Images\GDS\添加新井.png" />
+    <Resource Include="Images\GDS\添加新井32.ico" />
+    <Resource Include="Images\GDS\添加新井32.png" />
+    <Resource Include="Images\GDS\添加标签.ico" />
+    <Resource Include="Images\GDS\添加虚拟井.ico" />
+    <Resource Include="Images\GDS\添加虚拟线.ico" />
+    <Resource Include="Images\GDS\清理内存.png" />
+    <Resource Include="Images\GDS\点曲线化连接.ico" />
+    <Resource Include="Images\GDS\点直线化连接.ico" />
+    <Resource Include="Images\GDS\生成底图.png" />
+    <Resource Include="Images\GDS\生成底图32.ico" />
+    <Resource Include="Images\GDS\生成底图32.png" />
+    <Resource Include="Images\GDS\画闭合线.png" />
+    <Resource Include="Images\GDS\画闭合线32%281%29.png" />
+    <Resource Include="Images\GDS\画闭合线32.ico" />
+    <Resource Include="Images\GDS\画闭合线32.png" />
+    <Resource Include="Images\GDS\登录服务器32.png" />
+    <Resource Include="Images\GDS\矩形.ico" />
+    <Resource Include="Images\GDS\移动标签2.ico" />
+    <Resource Include="Images\GDS\移动标签3.ico" />
+    <Resource Include="Images\GDS\等值线图.png" />
+    <Resource Include="Images\GDS\等值线图32.ico" />
+    <Resource Include="Images\GDS\等值线图32.png" />
+    <Resource Include="Images\GDS\简化线.png" />
+    <Resource Include="Images\GDS\简化线32.ico" />
+    <Resource Include="Images\GDS\简化线32.png" />
+    <Resource Include="Images\GDS\箭头32.png" />
+    <Resource Include="Images\GDS\粘贴.png" />
+    <Resource Include="Images\GDS\线型批量设置2.ico" />
+    <Resource Include="Images\GDS\线条3.ico" />
+    <Resource Include="Images\GDS\线条4.ico" />
+    <Resource Include="Images\GDS\线闭合32.ico" />
+    <Resource Include="Images\GDS\统计相面积.png" />
+    <Resource Include="Images\GDS\统计相面积32.ico" />
+    <Resource Include="Images\GDS\统计相面积32.png" />
+    <Resource Include="Images\GDS\编辑井排.png" />
+    <Resource Include="Images\GDS\编辑井排32.ico" />
+    <Resource Include="Images\GDS\编辑井排32.png" />
+    <Resource Include="Images\GDS\编辑相带线.png" />
+    <Resource Include="Images\GDS\编辑相带线32.ico" />
+    <Resource Include="Images\GDS\编辑相带线32.png" />
+    <Resource Include="Images\GDS\缺失标志.png" />
+    <Resource Include="Images\GDS\缺失标志32.ico" />
+    <Resource Include="Images\GDS\缺失标志32.png" />
+    <Resource Include="Images\GDS\自动填充.png" />
+    <Resource Include="Images\GDS\自动填充32.ico" />
+    <Resource Include="Images\GDS\自动填充32.png" />
+    <Resource Include="Images\GDS\自动处理延伸截断4.ico" />
+    <Resource Include="Images\GDS\自动平滑点.png" />
+    <Resource Include="Images\GDS\自动平滑点32.ico" />
+    <Resource Include="Images\GDS\自动平滑点32.png" />
+    <Resource Include="Images\GDS\自动成图.png" />
+    <Resource Include="Images\GDS\自动成图32.ico" />
+    <Resource Include="Images\GDS\自动成图32.png" />
+    <Resource Include="Images\GDS\自动边界5.ico" />
+    <Resource Include="Images\GDS\自定义创建工区32.png" />
+    <Resource Include="Images\GDS\色标设置2.ico" />
+    <Resource Include="Images\GDS\设置.ico" />
+    <Resource Include="Images\GDS\连通.png" />
+    <Resource Include="Images\GDS\连通32.ico" />
+    <Resource Include="Images\GDS\连通32.png" />
+    <Resource Include="Images\GDS\重命名.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\GDS\油水边界线1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\GDS\油水边界线2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\GDS\通用线型128x32.png" />
+    <Resource Include="Images\GDS\通用线型64x16.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="油水边界线1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="油水边界线2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="气油边界线.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="气水边界线.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="添加按钮.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\GDS\视图上移一层.ico" />
+    <Resource Include="Images\GDS\视图上移置顶.ico" />
+    <Resource Include="Images\GDS\视图下移一层.ico" />
+    <Resource Include="Images\GDS\视图下移置底.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

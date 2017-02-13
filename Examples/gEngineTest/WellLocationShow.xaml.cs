@@ -3,15 +3,7 @@ using gEngine.View;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Media;
-using System.Windows.Shapes;
-using System;
-using System.Globalization;
-using static gEngine.Graph.Ge.Enums;
 using gEngine.Data.Ge.Txt;
-using gEngine.Graph.Ge.Business;
-using gEngine.View.Datatemplate;
-using gEngine.Graph.Interface;
 
 namespace gEngineTest
 {

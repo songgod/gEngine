@@ -5,24 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:gEngineTest"
         xmlns:gv="clr-namespace:gEngine.View;assembly=gEngine.View"
-        xmlns:gg="clr-namespace:gEngine.Graph.Ge;assembly=gEngine.Graph.Ge"
-        xmlns:ge ="clr-namespace:gEngine.Graph.Ge;assembly=gEngine.Graph.Ge"
+        xmlns:gg="clr-namespace:gEngine.Graph.Ge.Basic;assembly=gEngine.Graph.Ge.Basic"
+        xmlns:ge="clr-namespace:gEngine.Graph.Ge;assembly=gEngine.Graph.Ge"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:em="clr-namespace:gEngine.Manipulator;assembly=gEngine.Manipulator"
         mc:Ignorable="d"
         Title="RectWindow" Height="386.91" Width="424.249">
     <Window.Resources>
-        <gg:Map x:Key="vmmap">
-            <gg:Map.Layers>
-                <gg:Layer>
-                    <gg:Layer.Objects>
+        <ge:Map x:Key="vmmap">
+            <ge:Map.Layers>
+                <ge:Layer>
+                    <ge:Layer.Objects>
                         <gg:Rect Top="200" Left="100" Width="100" Height="100"/>
                         <gg:Rect Top="200" Left="200" Width="100" Height="100"/>
-                    </gg:Layer.Objects>
-                </gg:Layer>
-            </gg:Map.Layers>
-        </gg:Map>
-        <DataTemplate DataType="{x:Type ge:Rect}">
+                    </ge:Layer.Objects>
+                </ge:Layer>
+            </ge:Map.Layers>
+        </ge:Map>
+        <DataTemplate DataType="{x:Type gg:Rect}">
             <Rectangle Width="{Binding Width}" Height="{Binding Height}" Fill="Green">
                 <Rectangle.RenderTransform>
                     <TranslateTransform Y="{Binding Top}" X="{Binding Left}"/>

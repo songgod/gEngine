@@ -2,12 +2,13 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:gv="clr-namespace:gEngine.View;assembly=gEngine.View"
         xmlns:ge="clr-namespace:gEngine.Graph.Ge;assembly=gEngine.Graph.Ge"
+                    xmlns:gc="clr-namespace:gEngine.Graph.Ge.Column;assembly=gEngine.Graph.Ge.Column"
                     xmlns:converter="clr-namespace:gEngineTest.Converter"
                     xmlns:local="clr-namespace:gEngineTest">
     <converter:DepthToPathConverter x:Key="d2p"/>
     <converter:LogsToPathConverter x:Key="l2p"/>
     <converter:DepthToScaleConverter x:Key="d2c"/>
-    <DataTemplate x:Key="giIWellColumn" DataType="{x:Type ge:WellColumn}">
+    <DataTemplate x:Key="giIWellColumn" DataType="{x:Type gc:WellColumn}">
         <Grid x:Name="GridColumn">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
@@ -43,7 +44,7 @@
             </Border>
         </Grid>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type ge:Well}">
+    <DataTemplate DataType="{x:Type gc:Well}">
         <Grid x:Name="GridWell">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"/>

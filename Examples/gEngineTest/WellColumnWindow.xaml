@@ -9,7 +9,7 @@
         xmlns:gi="clr-namespace:gEngine.Graph.Interface;assembly=gEngine.Graph.Interface"
         xmlns:gm="clr-namespace:gEngine.Manipulator;assembly=gEngine.Manipulator"
         xmlns:ge="clr-namespace:gEngine.Graph.Ge;assembly=gEngine.Graph.Ge"
-        xmlns:converter="clr-namespace:gEngineTest.Converter"
+        xmlns:converter="clr-namespace:gEngine.View.Ge.Column;assembly=gEngine.View.Ge.Column"
         mc:Ignorable="d"
         Title="WellColumnWindow" Height="700" Width="900"
         Loaded="Window_Loaded" SizeChanged="Window_SizeChanged">
