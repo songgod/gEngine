@@ -10,7 +10,13 @@
         xmlns:local="clr-namespace:GPTDxWPFRibbonApplication1"
         xmlns:cvt="clr-namespace:GPTDxWPFRibbonApplication1.Converters"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="GPTDxWPFRibbonApplication1.MainWindow"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:uc="clr-namespace:GPTDxWPFRibbonApplication1.Controls"
+        mc:Ignorable="d" 
+        x:Class="GPTDxWPFRibbonApplication1.MainWindow" 
+        x:Name="window"
+        xmlns:models="clr-namespace:GPTDxWPFRibbonApplication1.ViewModels" 
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         Title="MainWindow" Height="725" Width="1452">
     <dxr:DXRibbonWindow.Resources>
         <ResourceDictionary>
@@ -40,6 +46,9 @@
             </dx:IEnumerableDataSource>
         </ResourceDictionary>
     </dxr:DXRibbonWindow.Resources>
+    <dxr:DXRibbonWindow.DataContext>
+        <models:RibbonViewModel/>
+    </dxr:DXRibbonWindow.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -84,7 +93,17 @@
                         <dxb:BarButtonItem Content="打印" LargeGlyph="{dx:DXImage Image=Printer_32x32.png}" Glyph="{dx:DXImage Image=Printer_16x16.png}"/>
                         <dxb:BarButtonItem Content="设置范围" LargeGlyph="{dx:DXImage Image=RangeArea_32x32.png}" Glyph="{dx:DXImage Image=RangeArea_16x16.png}"/>
                     </dxr:RibbonPageGroup>
-                    <dxr:RibbonPageGroup Caption="常用功能"/>
+                    <dxr:RibbonPageGroup Caption="常用功能">
+                        <dxb:BarButtonItem Content="井位图" x:Name="btnShowJWT" 
+                                           Tag="GPTDxWPFRibbonApplication1.Controls.WellLocationControl"
+                                           LargeGlyph="{dx:DXImage Image=SelectAll_32x32.png}" Glyph="{dx:DXImage Image=SelectAll_16x16.png}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="ItemClick">
+                                    <i:InvokeCommandAction Command="{Binding TabOpenCommand}" CommandParameter="{Binding ElementName=btnShowJWT}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </dxb:BarButtonItem>
+                    </dxr:RibbonPageGroup>
                 </dxr:RibbonPage>
                 <dxr:RibbonPage x:Name="pageRef" Caption="参考">
                     <dxr:RibbonPageGroup Caption="平面信息">
@@ -251,7 +270,10 @@
                 <dxr:RibbonPage Caption="修饰"/>
                 <dxr:RibbonPage Caption="视图">
                     <dxr:RibbonPageGroup Caption="">
-                        <dxb:BarButtonItem Content="全图显示" LargeGlyph="pack://application:,,,/GPTDxWPFRibbonApplication1;component/Images/GDS/20150310095307390_easyicon_net_32.ico" Glyph="pack://application:,,,/GPTDxWPFRibbonApplication1;component/Images/GDS/20150310095307390_easyicon_net_32.ico"/>
+                        <dxb:BarButtonItem Content="全图显示" Command="{Binding FullViewCommand}" CommandParameter="{Binding FullViewObject}" x:Name="bbiFullShow"
+                                           LargeGlyph="pack://application:,,,/GPTDxWPFRibbonApplication1;component/Images/GDS/20150310095307390_easyicon_net_32.ico"
+                                           Glyph="pack://application:,,,/GPTDxWPFRibbonApplication1;component/Images/GDS/20150310095307390_easyicon_net_32.ico">
+                        </dxb:BarButtonItem>
                     </dxr:RibbonPageGroup>
                     <dxr:RibbonPageGroup Caption="视图缩放">
                         <dxb:BarButtonItem Content="视图放大" LargeGlyph="pack://application:,,,/GPTDxWPFRibbonApplication1;component/Images/GDS/20150707101248177_easyicon_net_64.ico"/>
@@ -432,5 +454,17 @@
                 <dxb:BarButtonItem x:Name="printItem" Content="Print" Glyph="{dx:DXImage Image=Print_16x16.png}"/>
             </dxr:RibbonStatusBarControl.RightItems>
         </dxr:RibbonStatusBarControl>
+        <dx:DXTabControl x:Name="tabControl" Grid.Row="1" ItemsSource="{Binding TabItems}"  >
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Loaded">
+                    <i:InvokeCommandAction Command="{Binding TabLoadedCommand}" CommandParameter="{Binding ElementName=tabControl}" />
+                </i:EventTrigger>
+
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding TabChangedCommand}" CommandParameter="{Binding ElementName=tabControl}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </dx:DXTabControl>
     </Grid>
+
 </dxr:DXRibbonWindow>
