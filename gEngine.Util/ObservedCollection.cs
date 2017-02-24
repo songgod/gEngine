@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace gEngine.Utility
 {
@@ -65,5 +66,12 @@ namespace gEngine.Utility
         public ObsDoubles(List<double> list) : base(list) { }
 
         public ObsDoubles(IEnumerable<double> collection) : base(collection) { }
+    }
+
+    public class ObsPoints : ObservedCollection<Point>
+    {
+        public ObsPoints() { }
+        public ObsPoints(List<Point> points) : base(points) { }
+        public ObsPoints(IEnumerable<Point> points) : base(points) { }
     }
 }
