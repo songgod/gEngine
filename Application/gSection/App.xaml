@@ -1,13 +1,15 @@
 ﻿<Application x:Class="GPTDxWPFRibbonApplication1.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="MainWindow.xaml" Startup="OnAppStartup_UpdateThemeName">
+             StartupUri="MainWindow.xaml" Startup="OnAppStartup_UpdateThemeName"
+             xmlns:gp="clr-namespace:gEngine.View.Ge.Plane;assembly=gEngine.View.Ge.Plane">
     <Application.Resources>
          
     	<ResourceDictionary>
     		<ResourceDictionary.MergedDictionaries>
     			<ResourceDictionary Source="zh-cn.xaml"/>
                 <ResourceDictionary Source="Simple Styles.xaml"/>
+                <gp:Dictionary/>
             </ResourceDictionary.MergedDictionaries>
     	</ResourceDictionary>
          
