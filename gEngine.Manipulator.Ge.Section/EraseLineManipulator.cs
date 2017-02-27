@@ -21,7 +21,7 @@ namespace gEngine.Manipulator.Ge.Section
         {
             if(UseErasePart)
             {
-                Graph graph = Graph;
+                gTopology.Graph graph = Graph;
                 if (graph == null)
                     return;
 
@@ -71,7 +71,7 @@ namespace gEngine.Manipulator.Ge.Section
             }
             else
             {
-                Graph graph = Graph;
+                gTopology.Graph graph = Graph;
                 if (graph == null)
                     return;
                 Topology editor = new Topology(graph);

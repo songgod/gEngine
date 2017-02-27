@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataTemplateChooser.cs" />
+    <Compile Include="FindChild.cs" />
     <Compile Include="LayerControl.xaml.cs">
       <DependentUpon>LayerControl.xaml</DependentUpon>
     </Compile>

@@ -1,4 +1,5 @@
-﻿using gTopology;
+﻿using gEngine.Graph.Ge.Section;
+using gTopology;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -12,15 +13,17 @@ namespace gEngine.Manipulator.Ge.Section
         {
             FaceType = -1;
         }
-        public Graph Graph
+        public gTopology.Graph Graph
         {
             get
             {
                 ContentPresenter p = VisualTreeHelper.GetParent(this.AssociatedObject) as ContentPresenter;
                 if (p == null)
                     return null;
-                Graph graph = p.DataContext as Graph;
-                return graph;
+                SectionObject so = p.DataContext as SectionObject;
+                if (so == null)
+                    return null;
+                return so.TopGraph;
             }
         }
 
@@ -42,7 +45,7 @@ namespace gEngine.Manipulator.Ge.Section
 
         public override void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Graph graph = Graph;
+            gTopology.Graph graph = Graph;
             if (graph == null)
                 return;
 

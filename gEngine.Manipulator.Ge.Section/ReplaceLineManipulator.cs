@@ -10,7 +10,7 @@ namespace gEngine.Manipulator.Ge.Section
         private gTopology.Line SelectLine { get; set; }
         public override void MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Graph graph = Graph;
+            gTopology.Graph graph = Graph;
             if (graph == null)
                 return;
 

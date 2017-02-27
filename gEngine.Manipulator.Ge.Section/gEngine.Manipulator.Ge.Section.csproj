@@ -77,14 +77,27 @@
     <Compile Include="EraseLineManipulator.cs" />
     <Compile Include="GraphCurveManipulator.cs" />
     <Compile Include="GraphLineManipulator.cs" />
+    <Compile Include="ManipulatorSetter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReplaceLineManipulator.cs" />
     <Compile Include="SetFaceTypeManipulator.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\gEngine.Graph.Ge.Section\gEngine.Graph.Ge.Section.csproj">
+      <Project>{53D7A20D-84B5-499F-B183-D440854B7C8C}</Project>
+      <Name>gEngine.Graph.Ge.Section</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.Graph.Ge\gEngine.Graph.Ge.csproj">
+      <Project>{3BD77E4F-A348-4EDB-B60C-68B749249B91}</Project>
+      <Name>gEngine.Graph.Ge</Name>
+    </ProjectReference>
     <ProjectReference Include="..\gEngine.Manipulator\gEngine.Manipulator.csproj">
       <Project>{b4eedb17-eb3d-4e22-ab7c-d8e366564b8f}</Project>
       <Name>gEngine.Manipulator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.View\gEngine.View.csproj">
+      <Project>{932485EA-2F95-4CAA-8BCD-DF68C496854E}</Project>
+      <Name>gEngine.View</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

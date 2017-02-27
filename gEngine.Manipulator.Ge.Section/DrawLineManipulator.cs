@@ -7,7 +7,7 @@ namespace gEngine.Manipulator.Ge.Section
     {
         public override void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Graph graph = Graph;
+            gTopology.Graph graph = Graph;
             if (graph == null)
                 return;
 

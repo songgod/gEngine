@@ -15,7 +15,7 @@ namespace gEngine.Manipulator.Ge.Section
             if (TrackAdorner.Track.Points.Count == 0)
                 return;
 
-            Graph graph = Graph;
+            gTopology.Graph graph = Graph;
             if (graph == null)
                 return;
 
