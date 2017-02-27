@@ -24,7 +24,7 @@ namespace GPTDxWPFRibbonApplication1.Controls
     /// <summary>
     /// WellControl.xaml 的交互逻辑
     /// </summary>
-    public partial class WellControl : UserControl,gEngine.Util.IView
+    public partial class WellControl : UserControl,IView
     {
         #region IView接口实现
         FrameworkElement IView.FullScreenObject
