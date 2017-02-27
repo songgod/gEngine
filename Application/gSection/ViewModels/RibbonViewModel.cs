@@ -54,6 +54,7 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
                     DXTabItem tabItem = new DXTabItem();
                     tabItem.Header = barBtnItem.Content;
                     tabItem.AllowHide = DefaultBoolean.True;
+                    tabItem.IsSelected = true;
                     string ucName = barBtnItem.Tag.ToString();
                     UserControl uc = (UserControl)Activator.CreateInstance(Assembly.GetExecutingAssembly().FullName, ucName).Unwrap();
                     tabItem.Content = uc;
@@ -75,8 +76,10 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
         {
             get
             {
-                return new RelayCommand<DXTabControl>(tabControl => {
-                    tabControl.TabHiding += (sender, e) => {
+                return new RelayCommand<DXTabControl>(tabControl =>
+                {
+                    tabControl.TabHiding += (sender, e) =>
+                    {
                         TabItems.Remove((DXTabItem)e.Item);
                     };
                 });

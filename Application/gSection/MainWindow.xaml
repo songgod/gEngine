@@ -116,7 +116,7 @@
                 </dxr:RibbonPage>
                 <dxr:RibbonPage Caption="剖面管理">
                     <dxr:RibbonPageGroup Caption="">
-                        <dxb:BarButtonItem Content="打开平面图" LargeGlyph="{dx:DXImage Image=BOFolder_32x32.png}" Glyph="{dx:DXImage Image=BOFolder_16x16.png}"/>
+                        <dxb:BarButtonItem Content="打开平面图" x:Name="ShowWell" Tag="GPTDxWPFRibbonApplication1.Controls.WellControl" LargeGlyph="{dx:DXImage Image=BOFolder_32x32.png}" Glyph="{dx:DXImage Image=BOFolder_16x16.png}" Command="{Binding TabOpenCommand}" CommandParameter="{Binding ElementName=ShowWell}"/>
                     </dxr:RibbonPageGroup>
                     <dxr:RibbonPageGroup Caption="新建">
                         <dxb:BarButtonItem Content="新建 连井剖面" LargeGlyph="{dx:DXImage Image=Stepline_32x32.png}" Glyph="{dx:DXImage Image=Stepline_16x16.png}"/>
