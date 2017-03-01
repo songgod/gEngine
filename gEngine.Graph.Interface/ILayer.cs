@@ -1,5 +1,6 @@
 ﻿
 
+using System;
 using gEngine.Utility;
 
 namespace gEngine.Graph.Interface
@@ -11,5 +12,8 @@ namespace gEngine.Graph.Interface
         IObjects Objects { get; set; }
     }
 
-    public class ILayers : ObservedCollection<ILayer> { }
+    public class ILayers : ObservedCollection<ILayer>
+    {
+
+    }
 }

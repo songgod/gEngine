@@ -22,23 +22,25 @@ namespace gEngineTest.Ge.WellLocation
 
         private void CreateWellLocation()
         {
+            Map map = new Map();
             Layer layer = new Layer();
             TXTWellLocations twl = new TXTWellLocations() { TxtFile = "d:/welllocations.txt" };
             WellLocationsCreator c = new WellLocationsCreator();
             layer.Objects = c.Create(twl);
+            map.Layers.Add(layer);
             //3.绑定lc数据源
-            Binding bd = new Binding("Objects") { Source = layer };
-            lc.SetBinding(ItemsControl.ItemsSourceProperty, bd);
+            Binding bd = new Binding("Layers") { Source = map };
+            mc.SetBinding(ItemsControl.ItemsSourceProperty, bd);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            ViewUtil.FullView(lc);
+            mc.FullView();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            ViewUtil.FullView(lc);
+            mc.FullView();
         }
     }
 }

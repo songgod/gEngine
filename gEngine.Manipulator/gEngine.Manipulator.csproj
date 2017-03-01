@@ -70,8 +70,15 @@
     <Compile Include="LineManipulator.cs" />
     <Compile Include="LineTrackAdorner.cs" />
     <Compile Include="ManipulatorBase.cs" />
+    <Compile Include="MapControlZoomPan.cs" />
     <Compile Include="ZoomPan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\gEngine.View\gEngine.View.csproj">
+      <Project>{932485ea-2f95-4caa-8bcd-df68c496854e}</Project>
+      <Name>gEngine.View</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -11,5 +11,14 @@ namespace gEngine.View
         {
             InitializeComponent();
         }
+
+        public Canvas Root
+        {
+            get
+            {
+                return FindChild.FindVisualChild<Canvas>(this, "layerpanel");
+            }
+        }
+        
     }
 }

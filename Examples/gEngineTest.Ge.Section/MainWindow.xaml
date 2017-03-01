@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:gEngineTest.Ge.Section"
         xmlns:gv="clr-namespace:gEngine.View;assembly=gEngine.View"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:em="clr-namespace:gEngine.Manipulator;assembly=gEngine.Manipulator"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
@@ -12,7 +14,11 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="24"/>
         </Grid.RowDefinitions>
-        <gv:LayerControl x:Name="lc" ItemsSource="{Binding Objects}" Grid.Row="0"/>
+        <gv:MapControl x:Name="mc">
+            <i:Interaction.Behaviors>
+                <em:MapControlZoomPan/>
+            </i:Interaction.Behaviors>
+        </gv:MapControl>
         <StackPanel Orientation="Horizontal" Grid.Row="1">
             <Button x:Name="AddCurve" Content="AddCurve" Click="AddCurve_Click"/>
             <Button x:Name="AddLine" Content="AddLine" Click="AddLine_Click"/>
