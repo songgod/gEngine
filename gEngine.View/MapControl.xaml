@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:gEngine.View"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
-             Background="White">
+             Background="White"
+              ClipToBounds="True">
     <ItemsControl.ItemsPanel>
         <ItemsPanelTemplate>
             <Grid x:Name="mappanel"/>
@@ -14,7 +15,7 @@
     </ItemsControl.ItemsPanel>
     <ItemsControl.ItemTemplate>
         <DataTemplate>
-            <local:LayerControl x:Name="layercontrol" ItemsSource="{Binding Objects}"/>
+            <local:LayerControl x:Name="layercontrol" ItemsSource="{Binding Objects}" Background="LightGray"/>
         </DataTemplate>
     </ItemsControl.ItemTemplate>
 </ItemsControl>

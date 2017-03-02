@@ -7,7 +7,7 @@
              xmlns:gs="clr-namespace:gEngine.Graph.Ge.Section;assembly=gEngine.Graph.Ge.Section"
              mc:Ignorable="d">
     <DataTemplate DataType="{x:Type gs:SectionObject}">
-        <Canvas x:Name="canvas" Background="Yellow">
+        <Canvas x:Name="SectionObjectCanvas" Background="Yellow">
             <ItemsControl ItemsSource="{Binding TopGraph.Regions}">
                 <ItemsControl.Resources>
                     <local:Region2PathDataConverter x:Key="f2p"/>

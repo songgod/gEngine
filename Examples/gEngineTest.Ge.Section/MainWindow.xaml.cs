@@ -26,45 +26,46 @@ namespace gEngineTest.Ge.Section
         public MainWindow()
         {
             InitializeComponent();
-            SectionLayer = SectionLayerCreator.CreateSectionLayer();
-            this.DataContext = SectionLayer;
+            Map map = new Map();
+            Layer SectionLayer = SectionLayerCreator.CreateSectionLayer();
+            map.Layers.Add(SectionLayer);
+            Binding bd = new Binding("Layers") { Source = map };
+            mc.SetBinding(ItemsControl.ItemsSourceProperty, bd);
         }
-
-        public Layer SectionLayer { get; set; }
 
         private void AddLine_Click(object sender, RoutedEventArgs e)
         {
-            ManipulatorSetter.SetManipulator(new DrawLineManipulator(), lc);
+            ManipulatorSetter.SetManipulator(new DrawLineManipulator(), mc.GetLayerControl(0));
         }
 
         private void EraseLine_Click(object sender, RoutedEventArgs e)
         {
-            ManipulatorSetter.SetManipulator(new EraseLineManipulator(), lc);
+            ManipulatorSetter.SetManipulator(new EraseLineManipulator(), mc.GetLayerControl(0));
         }
 
         private void AddCurve_Click(object sender, RoutedEventArgs e)
         {
-            ManipulatorSetter.SetManipulator(new DrawCurveManipulator(), lc);
+            ManipulatorSetter.SetManipulator(new DrawCurveManipulator(), mc.GetLayerControl(0));
         }
 
         private void AddCloseCurve_Click(object sender, RoutedEventArgs e)
         {
-            ManipulatorSetter.SetManipulator(new DrawCloseCurveManipulator(), lc);
+            ManipulatorSetter.SetManipulator(new DrawCloseCurveManipulator(), mc.GetLayerControl(0));
         }
 
         private void ReplaceLine_Click(object sender, RoutedEventArgs e)
         {
-            ManipulatorSetter.SetManipulator(new ReplaceLineManipulator(), lc);
+            ManipulatorSetter.SetManipulator(new ReplaceLineManipulator(), mc.GetLayerControl(0));
         }
 
         private void RemoveFace_Click(object sender, RoutedEventArgs e)
         {
-            ManipulatorSetter.SetManipulator(new SetFaceTypeManipulator() { InvalidFace = true }, lc);
+            ManipulatorSetter.SetManipulator(new SetFaceTypeManipulator() { InvalidFace = true }, mc.GetLayerControl(0));
         }
 
         private void EditLine_Click(object sender, RoutedEventArgs e)
         {
-            ManipulatorSetter.SetManipulator(new EditCurveManipulator(), lc);
+            ManipulatorSetter.SetManipulator(new EditCurveManipulator(), mc.GetLayerControl(0));
         }
     }
 }

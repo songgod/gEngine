@@ -17,11 +17,11 @@
         </Grid.RowDefinitions>
         <Button Grid.Row="0" Click="Button_Click" Content="满屏显示"/>
         <Border Background="White" BorderBrush="Black" BorderThickness="2" Grid.Row="1">
-            <gv:LayerControl x:Name="lc">
+            <gv:MapControl x:Name="mc">
                 <i:Interaction.Behaviors>
-                    <em:ZoomPan/>
+                    <em:MapControlZoomPan/>
                 </i:Interaction.Behaviors>
-            </gv:LayerControl>
+            </gv:MapControl>
         </Border>
     </Grid>
 </Window>
