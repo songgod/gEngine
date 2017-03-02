@@ -40,7 +40,7 @@
                                 </TextBlock.Text>
                             </TextBlock>
                         </Border>
-                        <Canvas Background="Gray" Grid.Row="1" MinWidth="1">
+                        <Canvas Background="White" Grid.Row="1" MinWidth="1">
                             <Path x:Name="PathDepth"  Stroke="Blue" StrokeThickness="1" Data="{Binding Depths, Converter={StaticResource d2p}}">
                             </Path>
                             <TextBlock LineHeight="20" Text="{Binding Depths,Converter={StaticResource d2c}}" Canvas.Left="20" HorizontalAlignment="Center">
