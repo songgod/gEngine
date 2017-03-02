@@ -33,7 +33,7 @@ namespace gEngineTest.Ge.Well
         {
             Layer layer = new Layer();
 
-            TxtWell tw = new TxtWell() { TxtFile = "D:\\Data\\MulWellColumnData.txt" };
+            TxtWell tw = new TxtWell() { TxtFile = "D:\\Data\\MulWellColumnDataNew.txt" };
             WellCreator wc = new WellCreator();
             layer.Objects = wc.Create(tw);
 
