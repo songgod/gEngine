@@ -36,9 +36,6 @@ namespace gEngine.Graph.Ge.Column
         public static readonly DependencyProperty ValuesProperty =
             DependencyProperty.Register("Values", typeof(ObsDoubles), typeof(WellColumn));
 
-
-
-
         public MathType MathType
         {
             get { return (MathType)GetValue(MathTypProperty); }

@@ -22,6 +22,7 @@ namespace gEngine.Util.Ge.Column
             {
                 Well well = new Well() { Name = db.Name };
                 well.Depths = new Utility.ObsDoubles(db.Depths);
+                well.LongitudinalProportion = 1500;//纵向比例
                 int depthsWidth = 60;// 深度道宽度
                 int colsOffset = 0; // 曲线偏移
                 int wellColumnWidth = (db.Columns.Count * 60 + depthsWidth) * j;//单井剖面图宽度

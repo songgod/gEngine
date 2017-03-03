@@ -49,7 +49,7 @@ namespace gEngine.Graph.Ge.Column
             DependencyProperty.Register("Offset", typeof(int), typeof(Well));
 
         /// <summary>
-        /// 井深度域位置
+        /// 井深度道位置
         /// </summary>
         public int DepthsOffset
         {
@@ -60,5 +60,15 @@ namespace gEngine.Graph.Ge.Column
         // Using a DependencyProperty as the backing store for Depths.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty DepthsOffsetProperty =
             DependencyProperty.Register("DepthsOffset", typeof(int), typeof(Well));
+
+        public int LongitudinalProportion
+        {
+            get { return (int)GetValue(LongitudinalProportionProperty); }
+            set { SetValue(LongitudinalProportionProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Depths.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty LongitudinalProportionProperty =
+            DependencyProperty.Register("LongitudinalProportion", typeof(int), typeof(Well));
     }
 }

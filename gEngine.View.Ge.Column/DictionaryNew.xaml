@@ -23,6 +23,8 @@
                 <Canvas.Resources>
                     <local:DepthToPathConverter x:Key="d2p"/>
                     <local:DepthToScaleConverter x:Key="d2c"/>
+                    <local:DepthDistanceConverter x:Key="d2d"/>
+                    <local:DepthFirstScaleTopOffset x:Key="d2top"/>
                 </Canvas.Resources>
                 <StackPanel x:Name="spDepths" Canvas.Left="{Binding DepthsOffset}">
                     <Grid>
@@ -34,16 +36,22 @@
                             <ColumnDefinition Width="60"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Border BorderThickness="0,0,0,1" BorderBrush="Black">
-                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left">
                                 <TextBlock.Text>
                                     <Binding Path="Name"></Binding>
                                 </TextBlock.Text>
                             </TextBlock>
                         </Border>
                         <Canvas Background="White" Grid.Row="1" MinWidth="1">
-                            <Path x:Name="PathDepth"  Stroke="Blue" StrokeThickness="1" Data="{Binding Depths, Converter={StaticResource d2p}}">
+                            <Path x:Name="PathDepth"  Stroke="Blue" StrokeThickness="1">
+                                <Path.Data>
+                                    <MultiBinding Converter="{StaticResource d2p}">
+                                        <Binding Path="Depths"/>
+                                        <Binding Path="LongitudinalProportion"/>
+                                    </MultiBinding>
+                                </Path.Data>
                             </Path>
-                            <TextBlock LineHeight="20" Text="{Binding Depths,Converter={StaticResource d2c}}" Canvas.Left="20" HorizontalAlignment="Center">
+                            <TextBlock LineHeight="{Binding LongitudinalProportion,Converter={StaticResource d2d}}" Text="{Binding Depths,Converter={StaticResource d2c}}" Canvas.Left="20" Canvas.Top="{Binding LongitudinalProportion,Converter={StaticResource d2top}}"  HorizontalAlignment="Center">
                             </TextBlock>
                         </Canvas>
                     </Grid>
@@ -68,7 +76,7 @@
                 </Grid.Resources>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50"/>
-                    <RowDefinition Height="500"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="60"></ColumnDefinition>
@@ -77,7 +85,7 @@
                     <TextBlock Text="{Binding Path= Name}" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0" >
                     </TextBlock>
                 </Border>
-                <StackPanel Grid.Row="1"  Background="White" Grid.Column="0">
+                <StackPanel Grid.Row="1" Grid.Column="0">
                     <Path x:Name="PathDepth"  StrokeThickness="1">
                         <Path.Stroke>
                             <SolidColorBrush Color="{Binding Color}"></SolidColorBrush>
