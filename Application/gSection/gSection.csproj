@@ -114,6 +114,7 @@
     <Compile Include="New Section window.xaml.cs">
       <DependentUpon>New Section window.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NewSectionSetVM.cs" />
     <Compile Include="OptionPanel.xaml.cs">
       <DependentUpon>OptionPanel.xaml</DependentUpon>
     </Compile>

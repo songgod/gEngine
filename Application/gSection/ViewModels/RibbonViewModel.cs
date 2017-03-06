@@ -70,6 +70,28 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
         }
 
         /// <summary>
+        /// 弹出页命令
+        /// 2017-03-05
+        /// </summary>
+        public System.Windows.Input.ICommand ShowDialogCommand
+        {
+            get
+            {
+                return new RelayCommand<BarButtonItem>((barBtnItem) =>
+                {
+                    string winName = barBtnItem.Tag.ToString();
+                    Assembly curAssembly = Assembly.GetExecutingAssembly();
+                    Window win = (Window)curAssembly.CreateInstance(winName);
+                    if (win != null)
+                    {
+                        win.WindowState = WindowState.Normal;
+                        win.ShowDialog();
+                    }
+                });
+            }
+        }
+
+        /// <summary>
         /// 加载页签命令
         /// </summary>
         public System.Windows.Input.ICommand TabLoadedCommand
@@ -106,6 +128,29 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
 
         #endregion  Commands
 
+        #region Method
+
+        public void OpenTab(string url)
+        {
+            DXTabItem tabItem = new DXTabItem();
+
+            tabItem.AllowHide = DefaultBoolean.True;
+            tabItem.IsSelected = true;
+
+            UserControl uc = (UserControl)Activator.CreateInstance(Assembly.GetExecutingAssembly().FullName, url).Unwrap();
+            tabItem.Content = uc;
+
+            foreach (DXTabItem item in TabItems)
+            {
+                if (item.Header == tabItem.Header)
+                    return;
+            }
+            TabItems.Add(tabItem);
+
+
+        }
+
+        #endregion
     }
 }
 
