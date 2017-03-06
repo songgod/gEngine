@@ -15,7 +15,7 @@ namespace gEngine.Manipulator.Ge.Section
                 return;
 
             Topology editor = new Topology(graph);
-            Point pos = e.GetPosition(this.AssociatedObject);
+            Point pos = e.GetPosition(GraphContainer);
             gTopology.Line line = editor.LinHit(pos, Tolerance);
             if (line != null)
             {
@@ -28,7 +28,7 @@ namespace gEngine.Manipulator.Ge.Section
             if(SelectLine!=null)
             {
                 Topology editor = new Topology(Graph);
-                editor.LinReplaceSubLine(SelectLine, new PointList(this.TrackAdorner.Track.Points.ToList()), Tolerance);
+                editor.LinReplaceSubLine(SelectLine, TrackPoints, Tolerance);
             }
             base.MouseLeftButtonUp(sender, e);
         }

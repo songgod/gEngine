@@ -26,13 +26,15 @@ namespace gEngine.Manipulator.Ge.Section
                     return;
 
                 Topology editor = new Topology(graph);
-                Point pos = e.GetPosition(this.AssociatedObject);
+                Point pos = e.GetPosition(GraphContainer);
                 gTopology.Line line = editor.LinHit(pos, Tolerance);
                 if(line!=null)
                 {
                     SelectLine = line;
                     this.TrackAdorner.ClearPoint();
                     Point np = editor.LinNearestPoint(line, pos);
+                    TrackPoints.Add(np);
+                    np = GraphContainer.TranslatePoint(np, this.AssociatedObject);
                     TrackAdorner.Track.Points.Add(np);
                     OldTrackStyle = TrackAdorner.Track.Style;
                     Style newstyle = new Style();
@@ -49,8 +51,10 @@ namespace gEngine.Manipulator.Ge.Section
             if (UseErasePart && SelectLine!=null && e.LeftButton == System.Windows.Input.MouseButtonState.Pressed)
             {
                 Topology editor = new Topology(Graph);
-                Point pos = e.GetPosition(this.AssociatedObject);
+                Point pos = e.GetPosition(GraphContainer);
                 Point np = editor.LinNearestPoint(SelectLine, pos);
+                TrackPoints.Add(np);
+                np = GraphContainer.TranslatePoint(np, this.AssociatedObject);
                 TrackAdorner.Track.Points.Add(np);
             }
             else
@@ -58,14 +62,14 @@ namespace gEngine.Manipulator.Ge.Section
         }
         public override void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if (TrackAdorner.Track.Points.Count == 0)
+            if (TrackPoints.Count == 0)
                 return;
 
             if (UseErasePart && SelectLine!= null)
             {
                 Topology editor = new Topology(Graph);
-                Point pos = e.GetPosition(this.AssociatedObject);
-                editor.LinEraseSubLine(SelectLine, new PointList(this.TrackAdorner.Track.Points.ToList()),Tolerance);
+                Point pos = e.GetPosition(GraphContainer);
+                editor.LinEraseSubLine(SelectLine, TrackPoints,Tolerance);
                 TrackAdorner.Track.Style = OldTrackStyle;
                 SelectLine = null;
             }
@@ -75,7 +79,7 @@ namespace gEngine.Manipulator.Ge.Section
                 if (graph == null)
                     return;
                 Topology editor = new Topology(graph);
-                editor.LinRemoveLine(new PointList(this.TrackAdorner.Track.Points.ToList()));
+                editor.LinRemoveLine(TrackPoints);
             }
             base.MouseLeftButtonUp(sender, e);
         }

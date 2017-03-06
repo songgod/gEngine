@@ -20,7 +20,7 @@ namespace gEngine.Manipulator.Ge.Section
                 return;
 
             Topology editor = new Topology(graph);
-            editor.LinAddCurve(new PointList(this.TrackAdorner.Track.Points.ToList()), Tolerance, true);
+            editor.LinAddCurve(TrackPoints, Tolerance, true);
             this.TrackAdorner.ClearPoint();
         }
     }

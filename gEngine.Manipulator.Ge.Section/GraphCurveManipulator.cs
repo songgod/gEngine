@@ -3,40 +3,62 @@ using gEngine.View;
 using gTopology;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Input;
+using System;
+using System.Windows.Documents;
+using System.Windows;
 
 namespace gEngine.Manipulator.Ge.Section
 {
-    public class GraphCurveManipulator : CurveManipulator
+    public class GraphCurveManipulator : GraphManipulatorBase
     {
-        public gTopology.Graph Graph
+        protected CurveTrackAdorner TrackAdorner { get; private set; }
+        public PointList TrackPoints { get; set; }
+
+        protected override void OnAttached()
         {
-            get
-            {
-                Canvas canvas = FindChild.FindVisualChild<Canvas>(this.AssociatedObject, "SectionObjectCanvas");
-                if (canvas == null)
-                    return null;
-                ContentPresenter p = VisualTreeHelper.GetParent(canvas) as ContentPresenter;
-                if (p == null)
-                    return null;
-                SectionObject so = p.DataContext as SectionObject;
-                if (so == null)
-                    return null;
-                return so.TopGraph;
-            }
+            base.OnAttached();
+            if (this.AssociatedObject == null)
+                return;
+
+            TrackPoints = new PointList();
+            TrackAdorner = new CurveTrackAdorner(this.AssociatedObject);
+            AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(this.AssociatedObject);
+            adornerLayer.Add(TrackAdorner);
         }
 
-        public double Tolerance
+        protected override void OnDetaching()
         {
-            get
-            {
-                Canvas canvas = FindChild.FindVisualChild<Canvas>(this.AssociatedObject, "SectionObjectCanvas");
-                if (canvas == null)
-                    return 0;
-                ContentPresenter p = VisualTreeHelper.GetParent(canvas) as ContentPresenter;
-                if (p == null)
-                    return 0;
+            base.OnDetaching();
+            AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(this.AssociatedObject);
+            adornerLayer.Remove(this.TrackAdorner);
+        }
 
-                return CalcTolerance.GetTolerance(p);
+        public override void MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            base.MouseLeftButtonDown(sender, e);
+            this.TrackAdorner.ClearPoint();
+            Point p = e.GetPosition(this.AssociatedObject);
+            this.TrackAdorner.AddPoint(p);
+            TrackPoints.Clear();
+            TrackPoints.Add(e.GetPosition(GraphContainer)); 
+        }
+
+        public override void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            this.TrackAdorner.ClearPoint();
+            TrackPoints.Clear();
+            base.MouseLeftButtonUp(sender, e);
+        }
+
+        public override void MouseMove(object sender, MouseEventArgs e)
+        {
+            base.MouseMove(sender, e);
+            if (e.LeftButton == System.Windows.Input.MouseButtonState.Pressed)
+            {
+                TrackPoints.Add(e.GetPosition(GraphContainer));
+                Point p = e.GetPosition(this.AssociatedObject);
+                this.TrackAdorner.AddPoint(p);
             }
         }
     }
