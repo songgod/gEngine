@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace gEngine.View
 {
@@ -19,6 +21,11 @@ namespace gEngine.View
                 return FindChild.FindVisualChild<Canvas>(this, "layerpanel");
             }
         }
-        
+
+        public Rect GetRect()
+        {
+            return ViewUtil.GetTypeRect<ObjectControl>(Root);
+        }
+
     }
 }

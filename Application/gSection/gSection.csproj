@@ -100,6 +100,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\DWellControl.xaml.cs">
+      <DependentUpon>DWellControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\WellControl.xaml.cs">
       <DependentUpon>WellControl.xaml</DependentUpon>
     </Compile>
@@ -129,6 +132,10 @@
       <DependentUpon>StratumPick.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\RibbonViewModel.cs" />
+    <Page Include="Controls\DWellControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\WellControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

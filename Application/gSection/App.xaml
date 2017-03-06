@@ -11,7 +11,9 @@
     			<ResourceDictionary Source="zh-cn.xaml"/>
                 <ResourceDictionary Source="Simple Styles.xaml"/>
                 <gp:Dictionary/>
-                <gwell:Dictionary></gwell:Dictionary>
+                <!--<gwell:DictionaryNew></gwell:DictionaryNew>
+                <gwell:Dictionary></gwell:Dictionary>-->
+                
             </ResourceDictionary.MergedDictionaries>
     	</ResourceDictionary>
          

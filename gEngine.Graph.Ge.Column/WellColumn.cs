@@ -36,9 +36,6 @@ namespace gEngine.Graph.Ge.Column
         public static readonly DependencyProperty ValuesProperty =
             DependencyProperty.Register("Values", typeof(ObsDoubles), typeof(WellColumn));
 
-
-
-
         public MathType MathType
         {
             get { return (MathType)GetValue(MathTypProperty); }
@@ -58,6 +55,16 @@ namespace gEngine.Graph.Ge.Column
         // Using a DependencyProperty as the backing store for Depths.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ColorProperty =
             DependencyProperty.Register("Color", typeof(Color), typeof(WellColumn));
+
+        public int Offset
+        {
+            get { return (int)GetValue(OffsetProperty); }
+            set { SetValue(OffsetProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Depths.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty OffsetProperty =
+            DependencyProperty.Register("Offset", typeof(int), typeof(WellColumn));
     }
 
     public class WellColumns : ObservedCollection<WellColumn> { }

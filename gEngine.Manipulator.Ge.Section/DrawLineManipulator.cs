@@ -12,7 +12,7 @@ namespace gEngine.Manipulator.Ge.Section
                 return;
 
             Topology editor = new Topology(graph);
-            editor.LinAddLine(TrackAdorner.Start, TrackAdorner.End, Tolerance);
+            editor.LinAddLine(Start, End, Tolerance);
             base.MouseLeftButtonUp(sender, e);
         }
     }

@@ -68,11 +68,18 @@
     <Compile Include="Dictionary.xaml.cs">
       <DependentUpon>Dictionary.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DictionaryNew.xaml.cs">
+      <DependentUpon>DictionaryNew.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LogsToPathConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Dictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DictionaryNew.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

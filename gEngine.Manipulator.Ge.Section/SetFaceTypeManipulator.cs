@@ -1,6 +1,7 @@
 ﻿using gEngine.Graph.Ge.Section;
 using gEngine.View;
 using gTopology;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -8,42 +9,11 @@ using System.Windows.Media;
 
 namespace gEngine.Manipulator.Ge.Section
 {
-    public class SetFaceTypeManipulator : ManipulatorBase
+    public class SetFaceTypeManipulator : GraphManipulatorBase
     {
         public SetFaceTypeManipulator()
         {
             FaceType = -1;
-        }
-        public gTopology.Graph Graph
-        {
-            get
-            {
-                Canvas canvas = FindChild.FindVisualChild<Canvas>(this.AssociatedObject, "SectionObjectCanvas");
-                if (canvas == null)
-                    return null;
-                ContentPresenter p = VisualTreeHelper.GetParent(canvas) as ContentPresenter;
-                if (p == null)
-                    return null;
-                SectionObject so = p.DataContext as SectionObject;
-                if (so == null)
-                    return null;
-                return so.TopGraph;
-            }
-        }
-
-        public double Tolerance
-        {
-            get
-            {
-                Canvas canvas = FindChild.FindVisualChild<Canvas>(this.AssociatedObject, "SectionObjectCanvas");
-                if (canvas == null)
-                    return 0;
-                ContentPresenter p = VisualTreeHelper.GetParent(canvas) as ContentPresenter;
-                if (p == null)
-                    return 0;
-
-                return CalcTolerance.GetTolerance(p);
-            }
         }
 
         public int FaceType { get; set; }
@@ -57,7 +27,7 @@ namespace gEngine.Manipulator.Ge.Section
                 return;
 
             Topology editer = new Topology(graph);
-            Point pos = e.GetPosition(this.AssociatedObject);
+            Point pos = e.GetPosition(GraphContainer);
             Face face = editer.FacHit(pos, Tolerance);
             if (face != null)
             {

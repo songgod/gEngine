@@ -14,5 +14,10 @@ namespace gEngine.Graph.Ge.Column
             ARITHM,
             DEFAULT
         }
+
+        /// <summary>
+        /// 每米屏幕像素数
+        /// </summary>
+        public static double PerMilePx = 3800;
     }
 }

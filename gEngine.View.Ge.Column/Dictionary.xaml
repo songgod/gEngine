@@ -29,7 +29,13 @@
                     </TextBlock>
                 </Border>
                 <Canvas Background="Gray" Grid.Row="1" MinWidth="1">
-                    <Path x:Name="PathDepth"  Stroke="Blue" StrokeThickness="1" Data="{Binding Depths, Converter={StaticResource d2p}}">
+                    <Path x:Name="PathDepth"  Stroke="Blue" StrokeThickness="1">
+                        <Path.Data>
+                            <MultiBinding Converter="{StaticResource d2p}">
+                                <Binding Path="Depths"/>
+                                <Binding Path="LongitudinalProportion"/>
+                            </MultiBinding>
+                        </Path.Data>
                     </Path>
                     <TextBlock LineHeight="20" Text="{Binding Depths,Converter={StaticResource d2c}}" Canvas.Left="40" HorizontalAlignment="Center"></TextBlock>
                 </Canvas>
@@ -53,7 +59,7 @@
                 <RowDefinition Height="500"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100"></ColumnDefinition>
+                <ColumnDefinition Width="60"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Border BorderBrush="Black" BorderThickness="1">
                 <TextBlock Text="{Binding Path= Name}" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0"  />

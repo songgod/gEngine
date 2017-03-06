@@ -1,4 +1,5 @@
-﻿using gEngine.Data.Ge.Txt;
+﻿using System;
+using gEngine.Data.Ge.Txt;
 using gEngine.Graph.Ge;
 using gEngine.Util.Ge.Column;
 using System;
@@ -15,15 +16,25 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using gEngine.Util;
+using gEngine.View;
 
-namespace gEngineTest.Ge.Well
+namespace GPTDxWPFRibbonApplication1.Controls
 {
     /// <summary>
-    /// MainWindow.xaml 的交互逻辑
+    /// DWellControl.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class DWellControl : UserControl, IView
     {
-        public MainWindow()
+        #region IView接口实现
+        FrameworkElement IView.FullScreenObject
+        {
+            get { return lyControl; }
+            set { lyControl = (LayerControl)value; }
+        }
+        #endregion
+
+        public DWellControl()
         {
             InitializeComponent();
             InitWell();

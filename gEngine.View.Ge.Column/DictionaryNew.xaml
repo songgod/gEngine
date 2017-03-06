@@ -1,0 +1,105 @@
+﻿<ResourceDictionary x:Class="gEngine.View.Ge.Column.DictionaryNew"
+              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:gc="clr-namespace:gEngine.Graph.Ge.Column;assembly=gEngine.Graph.Ge.Column"
+             xmlns:local="clr-namespace:gEngine.View.Ge.Column"
+             mc:Ignorable="d">
+    <DataTemplate DataType="{x:Type gc:Well}">
+        <Grid x:Name="gridWell" Margin="30,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Canvas Background="Red">
+                <TextBlock Text="井号：S1-5-2" Canvas.Top="15" Canvas.Left="{Binding Offset}">
+                </TextBlock>
+            </Canvas>
+            <Canvas Grid.Row="1">
+                <Canvas.Resources>
+                    <local:DepthToPathConverter x:Key="d2p"/>
+                    <local:DepthToScaleConverter x:Key="d2c"/>
+                    <local:DepthDistanceConverter x:Key="d2d"/>
+                    <local:DepthFirstScaleTopOffset x:Key="d2top"/>
+                </Canvas.Resources>
+                <StackPanel x:Name="spDepths" Canvas.Left="{Binding DepthsOffset}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left">
+                                <TextBlock.Text>
+                                    <Binding Path="Name"></Binding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </Border>
+                        <Canvas Background="White" Grid.Row="1" MinWidth="1">
+                            <Path x:Name="PathDepth"  Stroke="Blue" StrokeThickness="1">
+                                <Path.Data>
+                                    <MultiBinding Converter="{StaticResource d2p}">
+                                        <Binding Path="Depths"/>
+                                        <Binding Path="LongitudinalProportion"/>
+                                    </MultiBinding>
+                                </Path.Data>
+                            </Path>
+                            <TextBlock LineHeight="{Binding LongitudinalProportion,Converter={StaticResource d2d}}" Text="{Binding Depths,Converter={StaticResource d2c}}" Canvas.Left="20" Canvas.Top="{Binding LongitudinalProportion,Converter={StaticResource d2top}}"  HorizontalAlignment="Center">
+                            </TextBlock>
+                        </Canvas>
+                    </Grid>
+                </StackPanel>
+                <StackPanel x:Name="spColumn">
+                    <ItemsControl ItemsSource="{Binding Columns}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <Canvas x:Name="cvsColumnPanel"></Canvas>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </StackPanel>
+            </Canvas>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type gc:WellColumn}">
+        <Canvas>
+            <Grid Canvas.Left="{Binding Offset}">
+                <Grid.Resources>
+                    <local:LogsToPathConverter x:Key="l2p"/>
+                </Grid.Resources>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                    <TextBlock Text="{Binding Path= Name}" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0" >
+                    </TextBlock>
+                </Border>
+                <StackPanel Grid.Row="1" Grid.Column="0">
+                    <Path x:Name="PathDepth"  StrokeThickness="1">
+                        <Path.Stroke>
+                            <SolidColorBrush Color="{Binding Color}"></SolidColorBrush>
+                        </Path.Stroke>
+                        <Path.Data>
+                            <MultiBinding Converter="{StaticResource l2p}">
+                                <Binding Path="Values"/>
+                                <Binding Path="Owner"/>
+                                <Binding Path="MathType"/>
+                            </MultiBinding>
+                        </Path.Data>
+                    </Path>
+                </StackPanel>
+            </Grid>
+        </Canvas>
+    </DataTemplate>
+</ResourceDictionary>
