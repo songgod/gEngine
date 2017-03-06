@@ -17,7 +17,7 @@ using System.Windows.Controls;
 
 namespace GPTDxWPFRibbonApplication1.ViewModels
 {
-    public class RibbonViewModel
+    public class RibbonViewModel: DependencyObject
     {
         public RibbonViewModel()
         {
@@ -27,6 +27,16 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
         #region Property
         public FrameworkElement FullViewObject { get; set; }
         public ObservableCollection<DXTabItem> TabItems { get; set; }
+
+        //鼠标位置
+        public static readonly DependencyProperty MousePositionProperty =
+            DependencyProperty.Register("MousePosition", typeof(Point), typeof(RibbonViewModel), new PropertyMetadata(new Point(-1, -1)));
+
+        public Point MousePosition
+        {
+            get { return (Point)GetValue(MousePositionProperty); }
+            set { SetValue(MousePositionProperty, value); }
+        }
         #endregion
 
         #region Commands
@@ -38,7 +48,10 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
         {
             get
             {
-                return new RelayCommand(() => ViewUtil.FullView(FullViewObject));
+                return new RelayCommand(() => {
+                    MapControl mc = FullViewObject as MapControl;
+                    mc.FullView();
+                });
             }
         }
 
@@ -82,6 +95,10 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
                     {
                         TabItems.Remove((DXTabItem)e.Item);
                     };
+                    tabControl.MouseMove += (sender, e) =>
+                    {
+                        MousePosition = e.GetPosition(tabControl);
+                    };
                 });
             }
         }
@@ -103,6 +120,7 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
                 });
             }
         }
+
 
         #endregion  Commands
 

@@ -19,8 +19,10 @@
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         Title="MainWindow" Height="725" Width="1452">
     <dxr:DXRibbonWindow.Resources>
+        
         <ResourceDictionary>
             <cvt:ObjectsEqualityConverter x:Key="objectsEqualityConverter"/>
+            <cvt:PointToStringConverter x:Key="pointToStringConverter" FormatString="横坐标: {0}，纵坐标: {1}"/>
             <x:Array x:Key="gallerypic" Type="{x:Type sys:String}">
                 <sys:String>/Images/Clipart/caCompClient.png</sys:String>
                 <sys:String>/Images/Clipart/caCompClientEnabled.png</sys:String>
@@ -449,7 +451,10 @@
                 </dxr:RibbonPage>
             </dxr:RibbonPageCategory>
         </dxr:RibbonControl>
-        <dxr:RibbonStatusBarControl Grid.Row="2">
+        <dxr:RibbonStatusBarControl Grid.Row="2" IsSizeGripVisible="False">
+            <dxr:RibbonStatusBarControl.LeftItems>
+                <dxb:BarStaticItem Content="{Binding MousePosition,  Converter={StaticResource pointToStringConverter}}"/>
+            </dxr:RibbonStatusBarControl.LeftItems>
             <dxr:RibbonStatusBarControl.RightItems>
                 <dxb:BarButtonItem x:Name="printItem" Content="Print" Glyph="{dx:DXImage Image=Print_16x16.png}"/>
             </dxr:RibbonStatusBarControl.RightItems>
@@ -459,7 +464,6 @@
                 <i:EventTrigger EventName="Loaded">
                     <i:InvokeCommandAction Command="{Binding TabLoadedCommand}" CommandParameter="{Binding ElementName=tabControl}" />
                 </i:EventTrigger>
-
                 <i:EventTrigger EventName="SelectionChanged">
                     <i:InvokeCommandAction Command="{Binding TabChangedCommand}" CommandParameter="{Binding ElementName=tabControl}" />
                 </i:EventTrigger>
