@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace gEngine.View
@@ -30,16 +31,16 @@ namespace gEngine.View
 
         public void FullView()
         {
-            System.Windows.Rect r = new System.Windows.Rect();
+            Rect r = Rect.Empty;
             for (int i = 0; i < Items.Count; i++)
             {
                 LayerControl lc = GetLayerControl(i);
-                System.Windows.Rect rect = VisualTreeHelper.GetDescendantBounds(lc.Root);
-                if (i == 0)
-                    r = rect;
-                else
-                    r.Union(rect);
+                Rect rect = lc.GetRect();
+                r.Union(rect);
             }
+            if (r.IsEmpty)
+                return;
+
             for (int i = 0; i < Items.Count; i++)
             {
                 LayerControl lc = GetLayerControl(i);

@@ -57,5 +57,62 @@ namespace gEngine.View
 
 
         }
+
+        public static Rect GetBoundsWithoutInvalid(Visual elm)
+        {
+            Rect res = Rect.Empty;
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(elm); i++)
+            {
+                Visual child = VisualTreeHelper.GetChild(elm, i) as Visual;
+                if (child!=null)
+                {
+                    Rect rect = GetBoundsWithoutInvalid(child);
+                    if(rect.IsEmpty==false)
+                    {
+                        res.Union(rect);
+                    }
+                    
+                }
+            }
+            Rect rect2 = VisualTreeHelper.GetDescendantBounds(elm);
+            if(rect2.Width <= 0.0 || rect2.Height <= 0.0)
+            {
+                rect2 = Rect.Empty;
+            }
+            res.Union(rect2);
+            return res;
+        }
+
+        public static Rect GetTypeRect<Type>(DependencyObject obj, bool bRender=true)
+            where Type : Visual
+        {
+            Rect res = Rect.Empty;
+
+            Type t = obj as Type;
+            if (t != null)
+            {
+                Rect rect2 = VisualTreeHelper.GetDescendantBounds(t);
+                if (rect2.Width <= 0.0 || rect2.Height <= 0.0)
+                {
+                    rect2 = Rect.Empty;
+                }
+                res.Union(rect2);
+            }
+
+            
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
+            {
+                Visual child = VisualTreeHelper.GetChild(obj, i) as Visual;
+                if (child != null)
+                {
+                    Rect rect = GetTypeRect<Type>(child, bRender);
+                    if (rect.IsEmpty == false)
+                    {
+                        res.Union(rect);
+                    }
+                }
+            }
+            return res;
+        }
     }
 }

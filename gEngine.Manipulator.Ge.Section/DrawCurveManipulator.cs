@@ -1,5 +1,7 @@
 ﻿using gTopology;
+using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 
 namespace gEngine.Manipulator.Ge.Section
@@ -16,7 +18,7 @@ namespace gEngine.Manipulator.Ge.Section
                 return;
             
             Topology editor = new Topology(graph);
-            editor.LinAddCurve(new PointList(this.TrackAdorner.Track.Points.ToList()), Tolerance, false);
+            editor.LinAddCurve(TrackPoints, Tolerance, false);
             base.MouseLeftButtonUp(sender, e);
         }
     }

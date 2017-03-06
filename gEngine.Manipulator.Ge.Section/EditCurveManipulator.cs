@@ -1,6 +1,7 @@
 ﻿using gEngine.Graph.Ge.Section;
 using gEngine.View;
 using gTopology;
+using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,8 +19,11 @@ namespace gEngine.Manipulator.Ge.Section
         
         private int NodeCount { get; set; }
 
-        public EditCurveAdorner(UIElement adornedElement) : base(adornedElement)
+        private UIElement RaiseElement { get; set; }
+
+        public EditCurveAdorner(UIElement adornedElement, UIElement re) : base(adornedElement)
         {
+            RaiseElement = re;
             Container = new Canvas();
             this.AddVisualChild(Container);
         }
@@ -30,13 +34,13 @@ namespace gEngine.Manipulator.Ge.Section
             NodeCount = 0;
         }
 
-        private Path CreateTrack(gTopology.Line line)
+        private Path CreateTrack(PointCollection ps)
         {
             Path Track = new Path() { Stroke = new SolidColorBrush() { Color = Colors.LightGray }, StrokeThickness = 1.0, StrokeDashArray = new DoubleCollection() { 2, 3 } };
             Track.MouseLeftButtonDown += Track_MouseLeftButtonDown;
             PathGeometry pgTrack = new PathGeometry();
-            PathFigure pfTrack = new PathFigure() { StartPoint = line.StartPoint };
-            PolyBezierSegment psTrack = new PolyBezierSegment() { Points = new PointCollection(line.PointsWithoutFirst.ToArray()) };
+            PathFigure pfTrack = new PathFigure() { StartPoint = ps[0] };
+            PolyBezierSegment psTrack = new PolyBezierSegment() { Points = new PointCollection(ps.Skip(1).Take(ps.Count-1)) };
             pfTrack.Segments.Add(psTrack);
             pgTrack.Figures.Add(pfTrack);
             Track.Data = pgTrack;
@@ -46,7 +50,7 @@ namespace gEngine.Manipulator.Ge.Section
 
         private void Track_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            this.AdornedElement.RaiseEvent(e);
+            this.RaiseElement.RaiseEvent(e);
         }
 
         private void CreateConnects(Path track)
@@ -159,32 +163,32 @@ namespace gEngine.Manipulator.Ge.Section
 
         private void Ear_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            this.AdornedElement.RaiseEvent(e);
+            this.RaiseElement.RaiseEvent(e);
         }
 
         private void Control_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            this.AdornedElement.RaiseEvent(e);
+            this.RaiseElement.RaiseEvent(e);
         }
 
         private void Ear_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
-            this.AdornedElement.RaiseEvent(e);
+            this.RaiseElement.RaiseEvent(e);
         }
 
         private void Control_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
-            this.AdornedElement.RaiseEvent(e);
+            this.RaiseElement.RaiseEvent(e);
         }
 
         private void Ear_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            this.AdornedElement.RaiseEvent(e);
+            this.RaiseElement.RaiseEvent(e);
         }
 
         private void Control_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            this.AdornedElement.RaiseEvent(e);
+            this.RaiseElement.RaiseEvent(e);
         }
 
         private Path GetNode(int index)
@@ -278,15 +282,15 @@ namespace gEngine.Manipulator.Ge.Section
             return false;
         }
 
-        public void Select(gTopology.Line line)
+        public void Select(PointCollection ps)
         {
             Clear();
 
-            if (line == null || line.Points.Count==0)
+            if (ps==null || ps.Count == 0)
                 return;
 
-            NodeCount = line.Points.Count;
-            Path Track = CreateTrack(line);
+            NodeCount = ps.Count;
+            Path Track = CreateTrack(ps);
             CreateConnects(Track);
             CreateNodes(Track);
         }
@@ -368,42 +372,10 @@ namespace gEngine.Manipulator.Ge.Section
         }
     }
 
-    public class EditCurveManipulator : ManipulatorBase
+    public class EditCurveManipulator : GraphManipulatorBase
     {
         private gTopology.Line SelectLine { get; set; }
         protected EditCurveAdorner EditAdorner { get; private set; }
-
-        public gTopology.Graph Graph
-        {
-            get
-            {
-                Canvas canvas = FindChild.FindVisualChild<Canvas>(this.AssociatedObject, "SectionObjectCanvas");
-                if (canvas == null)
-                    return null;
-                ContentPresenter p = VisualTreeHelper.GetParent(canvas) as ContentPresenter;
-                if (p == null)
-                    return null;
-                SectionObject so = p.DataContext as SectionObject;
-                if (so == null)
-                    return null;
-                return so.TopGraph;
-            }
-        }
-
-        public double Tolerance
-        {
-            get
-            {
-                Canvas canvas = FindChild.FindVisualChild<Canvas>(this.AssociatedObject, "SectionObjectCanvas");
-                if (canvas == null)
-                    return 0;
-                ContentPresenter p = VisualTreeHelper.GetParent(canvas) as ContentPresenter;
-                if (p == null)
-                    return 0;
-
-                return CalcTolerance.GetTolerance(p);
-            }
-        }
 
         protected override void OnAttached()
         {
@@ -411,16 +383,27 @@ namespace gEngine.Manipulator.Ge.Section
             if (this.AssociatedObject == null)
                 return;
 
-            EditAdorner = new EditCurveAdorner(this.AssociatedObject);
-            AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(this.AssociatedObject);
+            EditAdorner = new EditCurveAdorner(GraphContainer,this.AssociatedObject);
+            AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(GraphContainer);
             adornerLayer.Add(EditAdorner);
         }
 
         protected override void OnDetaching()
         {
             base.OnDetaching();
-            AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(this.AssociatedObject);
+            AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(GraphContainer);
             adornerLayer.Remove(this.EditAdorner);
+        }
+
+        private PointCollection TransPoints(gTopology.Line line)
+        {
+            return new PointCollection(line.Points);
+            //PointCollection ps = new PointCollection();
+            //foreach (Point p in line.Points)
+            //{
+            //    ps.Add(GraphContainer.TranslatePoint(p, this.AssociatedObject));
+            //}
+            //return ps;
         }
 
         public override void MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -434,7 +417,7 @@ namespace gEngine.Manipulator.Ge.Section
                 return;
 
             Topology editor = new Topology(graph);
-            Point pos = e.GetPosition(this.AssociatedObject);
+            Point pos = e.GetPosition(GraphContainer);
             gTopology.Line line = editor.LinHit(pos, Tolerance);
             
             if (line != null)
@@ -442,12 +425,12 @@ namespace gEngine.Manipulator.Ge.Section
                 if(SelectLine==line)
                 {
                     SelectLine = editor.LinAddPoint(SelectLine, pos,Tolerance);
-                    EditAdorner.Select(SelectLine);
+                    EditAdorner.Select(TransPoints(SelectLine));
                 }
                 else
                 {
                     SelectLine = line;
-                    EditAdorner.Select(line);
+                    EditAdorner.Select(TransPoints(SelectLine));
                 }
             }
             else
@@ -481,7 +464,7 @@ namespace gEngine.Manipulator.Ge.Section
                 if (EditAdorner.IsControl(id))
                 {
                     SelectLine = editer.LinRemovePoint(SelectLine, id);
-                    EditAdorner.Select(SelectLine);
+                    EditAdorner.Select(TransPoints(SelectLine));
                 }
             }
             base.MouseRightButtonUp(sender, e);
@@ -505,19 +488,19 @@ namespace gEngine.Manipulator.Ge.Section
                 if(EditAdorner.IsControl(id))
                 {
                     SelectLine = editer.LinMoveControlPoint(SelectLine, id, EditAdorner.GetNodePos(node));
-                    EditAdorner.Select(SelectLine);
+                    EditAdorner.Select(TransPoints(SelectLine));
                 }
                 else
                 {
                     if ((Keyboard.Modifiers & ModifierKeys.Control) != ModifierKeys.Control)
                     {
                         SelectLine = editer.LinMoveEarPoint(SelectLine, id, EditAdorner.GetNodePos(node),true);
-                        EditAdorner.Select(SelectLine);
+                        EditAdorner.Select(TransPoints(SelectLine));
                     }
                     else
                     {
                         SelectLine = editer.LinMoveEarPoint(SelectLine, id, EditAdorner.GetNodePos(node), false);
-                        EditAdorner.Select(SelectLine);
+                        EditAdorner.Select(TransPoints(SelectLine));
                     }
                 }
             }
