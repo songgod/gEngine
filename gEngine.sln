@@ -106,6 +106,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gSection", "Application\gSe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gEngineTest.Ge.Section", "Examples\gEngineTest.Ge.Section\gEngineTest.Ge.Section.csproj", "{0BE5E6DA-3063-4E00-AA63-4AD3AC413BAF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gEngineTest.MapDxTab", "Examples\gEngineTest.MapDxTab\gEngineTest.MapDxTab.csproj", "{DDA66E69-0D5D-419E-A760-05D2303E43F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -438,6 +440,16 @@ Global
 		{0BE5E6DA-3063-4E00-AA63-4AD3AC413BAF}.Release|x64.Build.0 = Release|x64
 		{0BE5E6DA-3063-4E00-AA63-4AD3AC413BAF}.Release|x86.ActiveCfg = Release|x86
 		{0BE5E6DA-3063-4E00-AA63-4AD3AC413BAF}.Release|x86.Build.0 = Release|x86
+		{DDA66E69-0D5D-419E-A760-05D2303E43F1}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{DDA66E69-0D5D-419E-A760-05D2303E43F1}.Debug|x64.ActiveCfg = Debug|x64
+		{DDA66E69-0D5D-419E-A760-05D2303E43F1}.Debug|x64.Build.0 = Debug|x64
+		{DDA66E69-0D5D-419E-A760-05D2303E43F1}.Debug|x86.ActiveCfg = Debug|x86
+		{DDA66E69-0D5D-419E-A760-05D2303E43F1}.Debug|x86.Build.0 = Debug|x86
+		{DDA66E69-0D5D-419E-A760-05D2303E43F1}.Release|Any CPU.ActiveCfg = Release|x86
+		{DDA66E69-0D5D-419E-A760-05D2303E43F1}.Release|x64.ActiveCfg = Release|x64
+		{DDA66E69-0D5D-419E-A760-05D2303E43F1}.Release|x64.Build.0 = Release|x64
+		{DDA66E69-0D5D-419E-A760-05D2303E43F1}.Release|x86.ActiveCfg = Release|x86
+		{DDA66E69-0D5D-419E-A760-05D2303E43F1}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -479,5 +491,6 @@ Global
 		{037D8DD3-B14B-437E-B573-AD54F6CB77AE} = {84B78181-2142-4B58-9FDC-0C21C5733A58}
 		{BE9284FF-F1AD-4B95-9233-130CA4F20C77} = {72884909-54E3-4256-901A-2B2B8B0B31FD}
 		{0BE5E6DA-3063-4E00-AA63-4AD3AC413BAF} = {84B78181-2142-4B58-9FDC-0C21C5733A58}
+		{DDA66E69-0D5D-419E-A760-05D2303E43F1} = {84B78181-2142-4B58-9FDC-0C21C5733A58}
 	EndGlobalSection
 EndGlobal

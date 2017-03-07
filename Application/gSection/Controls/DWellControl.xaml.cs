@@ -1,22 +1,9 @@
-﻿using System;
-using gEngine.Data.Ge.Txt;
+﻿using gEngine.Data.Ge.Txt;
 using gEngine.Graph.Ge;
 using gEngine.Util.Ge.Column;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using gEngine.Util;
 using gEngine.View;
 using System.Windows.Interactivity;
 
