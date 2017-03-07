@@ -25,7 +25,7 @@ namespace GPTDxWPFRibbonApplication1
 
         #region Method
 
-        public static event Action<string, string> RibbonViewModelAddTab;
+        public static event Action<string, string> RibbonViewModelOpenPageToTab;
 
         /// <summary>
         /// 确定执行函数
@@ -38,9 +38,9 @@ namespace GPTDxWPFRibbonApplication1
                 Button ok = w.FindName("button") as Button;
                 string url = (string)ok.Tag;
                 string title = (string)ok.ToolTip;
-                if (RibbonViewModelAddTab != null)
+                if (RibbonViewModelOpenPageToTab != null)
                 {
-                    RibbonViewModelAddTab(url,title);
+                    RibbonViewModelOpenPageToTab(url,title);
                     w.Close();
                 }
             }

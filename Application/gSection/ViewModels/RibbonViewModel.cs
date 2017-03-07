@@ -23,7 +23,7 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
         public RibbonViewModel()
         {
             TabItems = new ObservableCollection<DXTabItem>();
-            NewSectionSetVM.RibbonViewModelAddTab += new Action<string,string>(OpenTab);
+            NewSectionSetVM.RibbonViewModelOpenPageToTab += new Action<string,string>(OpenPageToTab);
         }
 
         #region Property
@@ -135,7 +135,12 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
 
         #region Method
 
-        public void OpenTab(string url,string title)
+        /// <summary>
+        /// 打开功能页添加到Tab选项卡
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="title"></param>
+        public void OpenPageToTab(string url,string title)
         {
             DXTabItem tabItem = new DXTabItem();
             tabItem.AllowHide = DefaultBoolean.True;
