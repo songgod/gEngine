@@ -58,7 +58,10 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
                 return new RelayCommand(() =>
                 {
                     MapControl mc = FullViewObject as MapControl;
-                    mc.FullView();
+                    if(mc!=null)
+                    {
+                        mc.FullView();
+                    }
                 });
             }
         }

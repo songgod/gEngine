@@ -36,15 +36,7 @@ namespace GPTDxWPFRibbonApplication1.Controls
 
         Behavior<UIElement> IView.ManipulatorBehavior
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get; set;
         }
         #endregion
 
