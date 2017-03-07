@@ -20,14 +20,16 @@ using System.Windows.Interactivity;
 
 namespace GPTDxWPFRibbonApplication1.ViewModels
 {
-    public class RibbonViewModel: DependencyObject
+    public class RibbonViewModel : DependencyObject
     {
         public RibbonViewModel()
         {
             TabItems = new ObservableCollection<DXTabItem>();
+            NewSectionSetVM.RibbonViewModelOpenPageToTab += new Action<string, string>(OpenPageToTab);
         }
 
         #region Property
+
         public FrameworkElement FullViewObject { get; set; }
         Behavior<UIElement> ManipulatorBehavior { get; set; }
         public ObservableCollection<DXTabItem> TabItems { get; set; }
@@ -41,6 +43,7 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
             get { return (Point)GetValue(MousePositionProperty); }
             set { SetValue(MousePositionProperty, value); }
         }
+
         #endregion
 
         #region Commands
@@ -52,7 +55,8 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
         {
             get
             {
-                return new RelayCommand(() => {
+                return new RelayCommand(() =>
+                {
                     MapControl mc = FullViewObject as MapControl;
                     mc.FullView();
                 });
@@ -169,24 +173,25 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
 
         #region Method
 
-        public void OpenTab(string url)
+        /// <summary>
+        /// 打开功能页添加到Tab选项卡
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="title"></param>
+        public void OpenPageToTab(string url, string title)
         {
             DXTabItem tabItem = new DXTabItem();
-
             tabItem.AllowHide = DefaultBoolean.True;
             tabItem.IsSelected = true;
-
+            tabItem.Header = title;
             UserControl uc = (UserControl)Activator.CreateInstance(Assembly.GetExecutingAssembly().FullName, url).Unwrap();
             tabItem.Content = uc;
-
             foreach (DXTabItem item in TabItems)
             {
-                if (item.Header == tabItem.Header)
+                if (item.Header.ToString().Equals(tabItem.Header.ToString()))
                     return;
             }
             TabItems.Add(tabItem);
-
-
         }
 
         #endregion
