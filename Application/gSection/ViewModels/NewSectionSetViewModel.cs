@@ -20,7 +20,7 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
     {
         public NewSectionSetViewModel()
         {
-            MessageBox.Show("sjm");
+            
         }
 
         #region Method

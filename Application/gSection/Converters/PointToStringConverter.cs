@@ -13,7 +13,6 @@ namespace GPTDxWPFRibbonApplication1.Converters
         public string FormatString { get; set; }
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            MessageBox.Show("sjm");
             if (!(value is Point))
                 return null;
             Point p = (Point)value;
