@@ -13,7 +13,7 @@
                 <local:WellTypeToColorConverter x:Key="wellTypeConverter"/>
                 <sym:PointSymbolConverter x:Key="pointsymbolconverter"/>
             </StackPanel.Resources>
-            <Path Width="20" Height="20" Data="{Binding Symbol, Converter={StaticResource pointsymbolconverter}}" Fill="{Binding WellType,Converter={ StaticResource wellTypeConverter}}">
+            <Path Data="{Binding Symbol, Converter={StaticResource pointsymbolconverter}}" Fill="{Binding WellType,Converter={ StaticResource wellTypeConverter}}">
                 <ToolTipService.ToolTip>
                     <TextBlock>
                         <TextBlock.Text>

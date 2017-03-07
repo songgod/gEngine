@@ -1,6 +1,8 @@
 ﻿using DevExpress.Utils;
 using DevExpress.Xpf.Bars;
 using DevExpress.Xpf.Core;
+using gEngine.Manipulator;
+using gEngine.Manipulator.Ge.Section;
 using gEngine.Util;
 using gEngine.View;
 using GPTDxWPFRibbonApplication1.Controls;
@@ -14,6 +16,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Interactivity;
 
 namespace GPTDxWPFRibbonApplication1.ViewModels
 {
@@ -26,6 +29,7 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
 
         #region Property
         public FrameworkElement FullViewObject { get; set; }
+        Behavior<UIElement> ManipulatorBehavior { get; set; }
         public ObservableCollection<DXTabItem> TabItems { get; set; }
 
         //鼠标位置
@@ -137,8 +141,25 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
                     if (newItem != null)
                     {
                         FullViewObject = ((IView)(newItem).Content).FullScreenObject;
+                        ManipulatorBehavior= ((IView)(newItem).Content).ManipulatorBehavior;
                     }
 
+                });
+            }
+        }
+
+        /// <summary>
+        /// 设置操作
+        /// </summary>
+        public System.Windows.Input.ICommand SetManipulatorCommand
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    MapControl mc = FullViewObject as MapControl;
+                    GraphManipulatorBase gm = (GraphManipulatorBase)ManipulatorBehavior;
+                    ManipulatorSetter.SetManipulator(gm, mc.GetLayerControl(0));
                 });
             }
         }

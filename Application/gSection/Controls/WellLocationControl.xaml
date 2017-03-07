@@ -12,7 +12,8 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <Border Background="White" BorderBrush="Black" BorderThickness="2">
-            <gv:MapControl x:Name="mc" MouseLeftButtonDown="mc_MouseLeftButtonDown" MouseMove="mc_MouseMove" MouseLeftButtonUp="mc_MouseLeftButtonUp">
+            <gv:MapControl x:Name="mc" MouseLeftButtonDown="mc_MouseLeftButtonDown" MouseMove="mc_MouseMove"
+                           MouseLeftButtonUp="mc_MouseLeftButtonUp" MouseRightButtonDown="mc_MouseRightButtonDown">
                 <i:Interaction.Behaviors>
                     <em:MapControlZoomPan/>
                 </i:Interaction.Behaviors>

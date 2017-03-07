@@ -17,6 +17,13 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using gEngine.Util;
+using gEngine.Manipulator.Ge.Section;
+using gEngine.Util.Ge.Section;
+using gEngine.Graph.Ge.Section;
+using gEngine.Manipulator;
+using System.Windows.Interactivity;
+using gEngine.Graph.Interface;
+using System.Reflection;
 
 namespace GPTDxWPFRibbonApplication1.Controls
 {
@@ -31,27 +38,43 @@ namespace GPTDxWPFRibbonApplication1.Controls
             get { return mc; }
             set { mc = (MapControl)value; }
         }
-        Canvas layerCanvas;
-        Canvas lineCanvas;
-        Point currentPoint;
-        Point lastPoint;
-        bool isLeftButtonPressed;
+        ManipulatorBase mb = null;
+        Behavior<UIElement> IView.ManipulatorBehavior
+        {
+            get
+            {
+                return mb;
+            }
+
+            set
+            {
+                mb = (GraphManipulatorBase)value;
+            }
+        }
+
+        
         #endregion
 
         public WellLocationControl()
         {
             InitializeComponent();
             CreateWellLocation();
-            
+            mb = new DrawLineManipulator();
         }
 
         private void CreateWellLocation()
         {
             Map map = new Map();
             Layer layer = new Layer();
+            layer.Objects.Add(new SectionObject());
             TXTWellLocations twl = new TXTWellLocations() { TxtFile = "d:/welllocations.txt" };
             WellLocationsCreator c = new WellLocationsCreator();
-            layer.Objects = c.Create(twl);
+            //layer.Objects = c.Create(twl);
+            IObjects objs = c.Create(twl);
+            foreach (var o in objs)
+            {
+                layer.Objects.Add(o);
+            }
             map.Layers.Add(layer);
             //3.绑定lc数据源
             Binding bd = new Binding("Layers") { Source = map };
@@ -60,62 +83,51 @@ namespace GPTDxWPFRibbonApplication1.Controls
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //ViewUtil.FullView(mc);
             mc.FullView();
-            layerCanvas = mc.GetLayerControl(0).Root;
-            //MessageBox.Show(layerCanvas.Children.Count.ToString()); 
         }
 
         private void mc_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            isLeftButtonPressed = true;
             Type clickSourceType = e.OriginalSource.GetType();
+            
             if (clickSourceType.Equals(typeof(Path)))
             {
-                double x = ((Path)e.OriginalSource).RenderTransform.Value.OffsetX;
-                double y = ((Path)e.OriginalSource).RenderTransform.Value.OffsetY;
+                Path path = (Path)e.OriginalSource;
+                double x = path.RenderTransform.Value.OffsetX;
+                double y = path.RenderTransform.Value.OffsetY;
                 Point p = new Point(x, y);
-                MessageBox.Show(p.ToString());
-
-                lineCanvas = new Canvas()
-                {
-                    Height = layerCanvas.ActualHeight,
-                    Width = layerCanvas.ActualWidth,
-                    FlowDirection = FlowDirection.LeftToRight,
-                    Visibility = Visibility.Visible
-                };
-                //layerCanvas.Children.Add(lineCanvas);
-                currentPoint = new Point(x, y);
-                DrawLine(currentPoint, currentPoint);
-                lastPoint = currentPoint;
-                layerCanvas.CaptureMouse();
+                ((DrawLineManipulator)mb).Start = p;
+                path.StrokeThickness = 3;
+                path.Stroke = Brushes.Black;
             }
-
-        }
-
-        void DrawLine(Point fromPoint, Point toPoint)
-        {
-            Line line = new Line()
+            else
             {
-                StrokeStartLineCap = PenLineCap.Round,
-                StrokeEndLineCap = PenLineCap.Round,
-                StrokeThickness = 3,
-                Stroke = new SolidColorBrush(Colors.Red)
-            };
-            line.X1 = toPoint.X;
-            line.Y1 = toPoint.Y;
-            line.X2 = fromPoint.X;
-            line.Y2 = fromPoint.Y;
-            lineCanvas.Children.Add(line);
+                ((DrawLineManipulator)mb).Start = new Point(-1, -1);
+            }
         }
+
+
 
         private void mc_MouseMove(object sender, MouseEventArgs e)
         {
-            if (isLeftButtonPressed)
+            if (e.LeftButton == System.Windows.Input.MouseButtonState.Pressed)
             {
-                currentPoint = e.GetPosition(lineCanvas);
-                DrawLine(currentPoint, lastPoint);
-                lastPoint = currentPoint;
+                Type clickSourceType = e.OriginalSource.GetType();
+                
+                if (clickSourceType.Equals(typeof(Path)))
+                {
+                    Path path = (Path)e.OriginalSource;
+                    double x = path.RenderTransform.Value.OffsetX;
+                    double y = path.RenderTransform.Value.OffsetY;
+                    Point p = new Point(x, y);
+                    path.StrokeThickness = 3;
+                    path.Stroke = Brushes.Black;
+                    ((DrawLineManipulator)mb).End = p;
+                }
+                else
+                {
+                    ((DrawLineManipulator)mb).End = new Point(-1, -1);
+                }
             }
 
         }
@@ -124,33 +136,24 @@ namespace GPTDxWPFRibbonApplication1.Controls
 
         private void mc_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            isLeftButtonPressed = false;
-            layerCanvas.ReleaseMouseCapture();
-            System.Windows.Shapes.Path path = new System.Windows.Shapes.Path();
-            path.StrokeThickness = 3;
-            path.Stroke = new SolidColorBrush(Colors.Red);
-            path.StrokeStartLineCap = PenLineCap.Round;
-            path.StrokeEndLineCap = PenLineCap.Round;
-            //path.Opacity = BrushOpacity;
-            PathGeometry g = new PathGeometry();
-            if (lineCanvas != null)
-                foreach (Line l in lineCanvas.Children)
-                {
-                    if (l == lineCanvas.Children[0])
-                    {
-                        g.Figures.Add(new PathFigure() { StartPoint = new Point(l.X1, l.Y1) });
-                        g.Figures[0].Segments.Add(new LineSegment() { Point = new Point(l.X2, l.Y2) });
-                    }
-                    else
-                    {
-                        g.Figures[0].Segments.Add(new LineSegment() { Point = new Point(l.X1, l.Y1) });
-                        g.Figures[0].Segments.Add(new LineSegment() { Point = new Point(l.X2, l.Y2) });
-                    }
-                }
-            path.StrokeLineJoin = PenLineJoin.Round;
-            path.Data = g;
-            layerCanvas.Children.Remove(lineCanvas);
-            layerCanvas.Children.Add(path);
+            
+        }
+        /// <summary>
+        /// 按下右键：打开剖面设计页
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void mc_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            string winName = "GPTDxWPFRibbonApplication1.New_section_set";
+            Assembly curAssembly = Assembly.GetExecutingAssembly();
+            Window win = (Window)curAssembly.CreateInstance(winName);
+            if (win != null)
+            {
+                win.WindowState = WindowState.Normal;
+                win.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                win.ShowDialog();
+            }
         }
     }
 }
