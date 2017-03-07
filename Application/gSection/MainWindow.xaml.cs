@@ -18,6 +18,7 @@ using GPTDxWPFRibbonApplication1.Controls;
 using GPTDxWPFRibbonApplication1.ViewModels;
 using DevExpress.Mvvm.UI.Interactivity;
 using gEngine.Util;
+using gEngine.View;
 
 namespace GPTDxWPFRibbonApplication1
 {
@@ -52,7 +53,6 @@ namespace GPTDxWPFRibbonApplication1
                  "/RibbonDemo;component/Images/Clipart/caWebCam.png"
              };
         }
-
 
         private void btnShowJWT_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
         {

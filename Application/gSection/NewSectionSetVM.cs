@@ -1,7 +1,12 @@
-﻿using gEngine.Util;
+﻿using DevExpress.Utils;
+using DevExpress.Xpf.Core;
+using gEngine.Util;
+using gEngine.View;
+using GPTDxWPFRibbonApplication1.Controls;
 using GPTDxWPFRibbonApplication1.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +16,7 @@ using System.Windows.Media;
 
 namespace GPTDxWPFRibbonApplication1
 {
-    public class NewSectionSetVM
+    public class NewSectionSetVM : MainWindow
     {
         public NewSectionSetVM()
         {
@@ -20,20 +25,29 @@ namespace GPTDxWPFRibbonApplication1
 
         #region Method
 
+        public static event Action<string, string> RibbonViewModelAddTab;
+
         /// <summary>
         /// 确定执行函数
         /// </summary>
         /// <param name="w"></param>
         private void Confirm(Window w)
         {
-            Button ok = w.FindName("button") as Button;
-            //MessageBox.Show(ok.Name);
-
-            w.Close();
-
-            RibbonViewModel s = new RibbonViewModel();
-
-            s.OpenTab("GPTDxWPFRibbonApplication1.Controls.DWellControl");
+            try
+            {
+                Button ok = w.FindName("button") as Button;
+                string url = (string)ok.Tag;
+                string title = (string)ok.ToolTip;
+                if (RibbonViewModelAddTab != null)
+                {
+                    RibbonViewModelAddTab(url,title);
+                    w.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         /// <summary>

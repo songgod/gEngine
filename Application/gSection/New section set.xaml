@@ -52,7 +52,7 @@
         <CheckBox x:Name="checkBox" Content="斜井校直" Grid.Column="2" Margin="22.75,3.01,0,4.036" Grid.Row="6" FontSize="8" HorizontalAlignment="Left" VerticalAlignment="Center" IsChecked="True"/>
         <TextBlock x:Name="textBlock_Copy9" Grid.Column="2" Margin="5,10,0,10" TextWrapping="Wrap" HorizontalAlignment="Left" Width="19.333" Grid.Row="9" Text="图名" FontSize="8"/>
         <TextBox x:Name="textBox_Copy1" Grid.Column="2" Margin="29.333,10,6,8.871" Grid.Row="9" TextWrapping="Wrap" Text="A-G井剖面图" FontSize="6" TextChanged="textBox_TextChanged" TextAlignment="Right"/>
-        <Button x:Name="button" Content="确定" Grid.Column="2" Margin="-27.5,0,0,-40.5" Grid.Row="9" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="75">
+        <Button x:Name="button" Content="确定" Tag="GPTDxWPFRibbonApplication1.Controls.DWellControl" ToolTip="打开剖面图" Grid.Column="2" Margin="-27.5,0,0,-40.5" Grid.Row="9" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="75">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Click">
                     <i:InvokeCommandAction Command="{Binding ConfirmCommand}" CommandParameter="{Binding ElementName=NewSectionSetWindow}"></i:InvokeCommandAction>

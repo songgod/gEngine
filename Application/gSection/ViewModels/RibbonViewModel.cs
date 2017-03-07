@@ -17,16 +17,21 @@ using System.Windows.Controls;
 
 namespace GPTDxWPFRibbonApplication1.ViewModels
 {
-    public class RibbonViewModel
+    public delegate void ChangedProperty();
+    public class RibbonViewModel : DependencyObject
     {
         public RibbonViewModel()
         {
             TabItems = new ObservableCollection<DXTabItem>();
+            NewSectionSetVM.RibbonViewModelAddTab += new Action<string,string>(OpenTab);
         }
 
         #region Property
+
         public FrameworkElement FullViewObject { get; set; }
+
         public ObservableCollection<DXTabItem> TabItems { get; set; }
+
         #endregion
 
         #region Commands
@@ -130,24 +135,20 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
 
         #region Method
 
-        public void OpenTab(string url)
+        public void OpenTab(string url,string title)
         {
             DXTabItem tabItem = new DXTabItem();
-
             tabItem.AllowHide = DefaultBoolean.True;
             tabItem.IsSelected = true;
-
+            tabItem.Header = title;
             UserControl uc = (UserControl)Activator.CreateInstance(Assembly.GetExecutingAssembly().FullName, url).Unwrap();
             tabItem.Content = uc;
-
             foreach (DXTabItem item in TabItems)
             {
-                if (item.Header == tabItem.Header)
+                if (item.Header.ToString().Equals(tabItem.Header.ToString()))
                     return;
             }
             TabItems.Add(tabItem);
-
-
         }
 
         #endregion

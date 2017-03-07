@@ -334,7 +334,7 @@
                             </dxb:BarEditItem.EditSettings>
                         </dxb:BarEditItem>
                     </dxr:RibbonPageGroup>
-                    <dxr:RibbonPageGroup Caption="显示范围">                        
+                    <dxr:RibbonPageGroup Caption="显示范围">
                         <dxb:BarEditItem Content="顶部层位" EditWidth="60" EditValue="S1">
                             <dxb:BarEditItem.EditSettings>
                                 <dxe:ComboBoxEditSettings/>
@@ -454,7 +454,7 @@
                 <dxb:BarButtonItem x:Name="printItem" Content="Print" Glyph="{dx:DXImage Image=Print_16x16.png}"/>
             </dxr:RibbonStatusBarControl.RightItems>
         </dxr:RibbonStatusBarControl>
-        <dx:DXTabControl x:Name="tabControl" Grid.Row="1" ItemsSource="{Binding TabItems}"  >
+        <dx:DXTabControl x:Name="tabControl" Grid.Row="1" ItemsSource="{Binding TabItems,Mode=TwoWay}"  >
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Loaded">
                     <i:InvokeCommandAction Command="{Binding TabLoadedCommand}" CommandParameter="{Binding ElementName=tabControl}" />
