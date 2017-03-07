@@ -18,7 +18,6 @@ using GPTDxWPFRibbonApplication1.Controls;
 using GPTDxWPFRibbonApplication1.ViewModels;
 using DevExpress.Mvvm.UI.Interactivity;
 using gEngine.Util;
-using gEngine.View;
 
 namespace GPTDxWPFRibbonApplication1
 {
@@ -52,23 +51,6 @@ namespace GPTDxWPFRibbonApplication1
                  "/RibbonDemo;component/Images/Clipart/caServerEnabled.png",
                  "/RibbonDemo;component/Images/Clipart/caWebCam.png"
              };
-        }
-
-        private void btnShowJWT_ItemClick(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
-        {
-            DXTabItem tabItem = new DXTabItem();
-            tabItem.Header = e.Item.Content;
-            tabItem.AllowHide = DefaultBoolean.True;
-            WellLocationControl uc = new WellLocationControl();
-            tabItem.Content = uc;
-
-            ItemCollection items = tabControl.Items;
-            foreach (DXTabItem item in items)
-            {
-                if (item.Header == tabItem.Header)
-                    return;
-            }
-            tabControl.Items.Add(tabItem);
         }
 
     }
