@@ -8,6 +8,7 @@
              xmlns:gm="clr-namespace:gEngine.Manipulator;assembly=gEngine.Manipulator"
              xmlns:gwell="clr-namespace:gEngine.View.Ge.Column;assembly=gEngine.View.Ge.Column"
              mc:Ignorable="d" 
+             Loaded="UserControl_Loaded"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Background="White">
         <Grid.Resources>
@@ -17,10 +18,11 @@
                 </ResourceDictionary.MergedDictionaries>
             </ResourceDictionary>
         </Grid.Resources>
-        <gv:LayerControl x:Name="lyControl">
+        
+        <gv:MapControl x:Name="mc">
             <i:Interaction.Behaviors>
-                <gm:ZoomPan></gm:ZoomPan>
+                <gm:MapControlZoomPan></gm:MapControlZoomPan>
             </i:Interaction.Behaviors>
-        </gv:LayerControl>
+        </gv:MapControl>
     </Grid>
 </UserControl>

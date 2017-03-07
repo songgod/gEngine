@@ -104,6 +104,17 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
             }
         }
 
+        public System.Windows.Input.ICommand SetSectionManipulatorCommand
+        {
+            get
+            {
+                return new RelayCommand<BarButtonItem>((barBtnItem)=>
+                {
+
+                });
+            }
+        }
+
         #endregion  Commands
 
     }

@@ -1,23 +1,13 @@
-﻿using System;
-using gEngine.Data.Ge.Txt;
+﻿using gEngine.Data.Ge.Txt;
 using gEngine.Graph.Ge;
 using gEngine.Util.Ge.Column;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using gEngine.Util;
 using gEngine.View;
+using gEngine.Util.Ge.Section;
+using gEngine.Manipulator.Ge.Section;
+using gEngine.Graph.Interface;
 
 namespace GPTDxWPFRibbonApplication1.Controls
 {
@@ -29,8 +19,8 @@ namespace GPTDxWPFRibbonApplication1.Controls
         #region IView接口实现
         FrameworkElement IView.FullScreenObject
         {
-            get { return lyControl; }
-            set { lyControl = (LayerControl)value; }
+            get { return mc; }
+            set { mc = (MapControl)value; }
         }
         #endregion
 
@@ -42,14 +32,29 @@ namespace GPTDxWPFRibbonApplication1.Controls
 
         private void InitWell()
         {
-            Layer layer = new Layer();
+            Map map = new Map();
+            Layer layer = SectionLayerCreator.CreateSectionLayer();
+
+            
 
             TxtWell tw = new TxtWell() { TxtFile = "D:\\Data\\MulWellColumnDataNew.txt" };
             WellCreator wc = new WellCreator();
-            layer.Objects = wc.Create(tw);
 
-            Binding bd = new Binding("Objects") { Source = layer };
-            lyControl.SetBinding(ItemsControl.ItemsSourceProperty, bd);
+            IObjects objs = wc.Create(tw);
+            foreach (IObject obj in objs)
+            {
+                layer.Objects.Add(obj);
+            }
+            map.Layers.Add(layer);
+
+            Binding bd = new Binding("Layers") { Source = map };
+            mc.SetBinding(ItemsControl.ItemsSourceProperty, bd);
+            
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            ManipulatorSetter.SetManipulator(new DrawCurveManipulator(), mc.GetLayerControl(0));
         }
     }
 }
