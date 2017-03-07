@@ -17,12 +17,12 @@ using System.Windows.Controls;
 
 namespace GPTDxWPFRibbonApplication1.ViewModels
 {
-    public class RibbonViewModel
+    public class RibbonViewModel : DependencyObject
     {
         public RibbonViewModel()
         {
             TabItems = new ObservableCollection<DXTabItem>();
-            NewSectionSetVM.RibbonViewModelOpenPageToTab += new Action<string,string>(OpenPageToTab);
+            NewSectionSetVM.RibbonViewModelOpenPageToTab += new Action<string, string>(OpenPageToTab);
         }
 
         #region Property
@@ -30,6 +30,17 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
         public FrameworkElement FullViewObject { get; set; }
 
         public ObservableCollection<DXTabItem> TabItems { get; set; }
+
+        //鼠标位置
+        public static readonly DependencyProperty MousePositionProperty =
+            DependencyProperty.Register("MousePosition", typeof(Point), typeof(RibbonViewModel), new PropertyMetadata(new Point(-1, -1)));
+
+        public Point MousePosition
+        {
+            get { return (Point)GetValue(MousePositionProperty); }
+            set { SetValue(MousePositionProperty, value); }
+        }
+
         #endregion
 
         #region Commands
@@ -41,7 +52,8 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
         {
             get
             {
-                return new RelayCommand(() => {
+                return new RelayCommand(() =>
+                {
                     MapControl mc = FullViewObject as MapControl;
                     mc.FullView();
                 });
@@ -146,7 +158,7 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
         /// </summary>
         /// <param name="url"></param>
         /// <param name="title"></param>
-        public void OpenPageToTab(string url,string title)
+        public void OpenPageToTab(string url, string title)
         {
             DXTabItem tabItem = new DXTabItem();
             tabItem.AllowHide = DefaultBoolean.True;
