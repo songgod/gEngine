@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using gEngine.View;
+using System.Windows.Interactivity;
 
 namespace GPTDxWPFRibbonApplication1.Controls
 {
@@ -18,6 +19,19 @@ namespace GPTDxWPFRibbonApplication1.Controls
         {
             get { return lyControl; }
             set { lyControl = (LayerControl)value; }
+        }
+
+        Behavior<UIElement> IView.ManipulatorBehavior
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
         }
         #endregion
 

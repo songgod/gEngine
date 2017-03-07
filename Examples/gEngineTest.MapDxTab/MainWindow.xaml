@@ -1,0 +1,20 @@
+﻿<Window x:Class="gEngineTest.MapDxTab.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:gEngineTest.MapDxTab"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="24"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="2">
+            <Button x:Name="AddColumnMap" Content="AddColumnMap" Click="AddColumnMap_Click"/>
+            <Button x:Name="AddPalneMap" Content="AddPalneMap" Click="AddPalneMap_Click"/>
+        </StackPanel>
+        <local:TabControl Grid.Row="1" x:Name="tc"/>
+    </Grid>
+</Window>

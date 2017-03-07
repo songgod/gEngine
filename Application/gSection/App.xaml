@@ -4,8 +4,7 @@
              StartupUri="MainWindow.xaml" Startup="OnAppStartup_UpdateThemeName"
              xmlns:gp="clr-namespace:gEngine.View.Ge.Plane;assembly=gEngine.View.Ge.Plane"
              xmlns:gwell="clr-namespace:gEngine.View.Ge.Column;assembly=gEngine.View.Ge.Column"
-             xmlns:gs="clr-namespace:gEngine.View.Ge.Section;assembly=gEngine.View.Ge.Section">
-             
+             xmlns:vs="clr-namespace:gEngine.View.Ge.Section;assembly=gEngine.View.Ge.Section">
     <Application.Resources>
          
     	<ResourceDictionary>
@@ -13,7 +12,7 @@
     			<ResourceDictionary Source="zh-cn.xaml"/>
                 <ResourceDictionary Source="Simple Styles.xaml"/>
                 <gp:Dictionary/>
-                <gs:Dictionary/>
+                <vs:Dictionary/>
                 <!--<gwell:DictionaryNew></gwell:DictionaryNew>
                 <gwell:Dictionary></gwell:Dictionary>-->
                 

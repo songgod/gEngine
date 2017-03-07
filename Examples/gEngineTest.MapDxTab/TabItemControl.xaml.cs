@@ -1,6 +1,7 @@
-﻿
+﻿using gEngine.View;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,23 +12,29 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GPTDxWPFRibbonApplication1
+namespace gEngineTest.MapDxTab
 {
     /// <summary>
-    /// New_section_set.xaml 的交互逻辑
+    /// MapControl.xaml 的交互逻辑
     /// </summary>
-    public partial class New_section_set : Window
+    public partial class TabItemControl : UserControl
     {
-        public New_section_set()
+        public TabItemControl()
         {
             InitializeComponent();
         }
 
-        private void textBox_TextChanged(object sender, TextChangedEventArgs e)
+        public MapControl GetMapControl()
         {
+            return mc;
+        }
 
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            mc.FullView();
         }
     }
 }

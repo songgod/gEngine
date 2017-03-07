@@ -19,8 +19,10 @@
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         Title="MainWindow" Height="725" Width="1452">
     <dxr:DXRibbonWindow.Resources>
+        
         <ResourceDictionary>
             <cvt:ObjectsEqualityConverter x:Key="objectsEqualityConverter"/>
+            <cvt:PointToStringConverter x:Key="pointToStringConverter" FormatString="横坐标: {0}，纵坐标: {1}"/>
             <x:Array x:Key="gallerypic" Type="{x:Type sys:String}">
                 <sys:String>/Images/Clipart/caCompClient.png</sys:String>
                 <sys:String>/Images/Clipart/caCompClientEnabled.png</sys:String>
@@ -116,11 +118,19 @@
                 </dxr:RibbonPage>
                 <dxr:RibbonPage Caption="剖面管理">
                     <dxr:RibbonPageGroup Caption="">
-                        <dxb:BarButtonItem Content="打开平面图" x:Name="ShowWell"  LargeGlyph="{dx:DXImage Image=BOFolder_32x32.png}" Glyph="{dx:DXImage Image=BOFolder_16x16.png}"/>
-                    </dxr:RibbonPageGroup>
+                        <dxb:BarButtonItem Content="打开平面图" x:Name="bbiOpenPlane" 
+                                           Tag="GPTDxWPFRibbonApplication1.Controls.WellLocationControl"
+                                           LargeGlyph="{dx:DXImage Image=BOFolder_32x32.png}" Glyph="{dx:DXImage Image=BOFolder_16x16.png}" >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="ItemClick">
+                                    <i:InvokeCommandAction Command="{Binding TabOpenCommand}" CommandParameter="{Binding ElementName=btnShowJWT}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </dxb:BarButtonItem>
+                    </dxr:RibbonPageGroup> 
                     <dxr:RibbonPageGroup Caption="新建">
-                        <dxb:BarButtonItem Content="新建 连井剖面" x:Name="ShowDWell" Tag="GPTDxWPFRibbonApplication1.Controls.DWellControl" LargeGlyph="{dx:DXImage Image=Stepline_32x32.png}" Glyph="{dx:DXImage Image=Stepline_16x16.png}" Command="{Binding TabOpenCommand}" CommandParameter="{Binding ElementName=ShowDWell}"/>
-                        <dxb:BarButtonItem Content="BarButtonItem"/>
+                        <dxb:BarButtonItem Content="新建 连井剖面" x:Name="bbiCreateEvenSection"  LargeGlyph="{dx:DXImage Image=Stepline_32x32.png}" Glyph="{dx:DXImage Image=Stepline_16x16.png}" Command="{Binding SetManipulatorCommand}" />
+                        <dxb:BarButtonItem Content="BarButtonItem"/> 
                         <dxb:BarButtonItem Content="BarButtonItem"/>
                         <dxb:BarButtonItem Content="BarButtonItem"/>
                         <dxb:BarButtonItem Content="BarButtonItem"/>
@@ -334,7 +344,7 @@
                             </dxb:BarEditItem.EditSettings>
                         </dxb:BarEditItem>
                     </dxr:RibbonPageGroup>
-                    <dxr:RibbonPageGroup Caption="显示范围">                        
+                    <dxr:RibbonPageGroup Caption="显示范围">
                         <dxb:BarEditItem Content="顶部层位" EditWidth="60" EditValue="S1">
                             <dxb:BarEditItem.EditSettings>
                                 <dxe:ComboBoxEditSettings/>
@@ -449,17 +459,19 @@
                 </dxr:RibbonPage>
             </dxr:RibbonPageCategory>
         </dxr:RibbonControl>
-        <dxr:RibbonStatusBarControl Grid.Row="2">
+        <dxr:RibbonStatusBarControl Grid.Row="2" IsSizeGripVisible="False">
+            <dxr:RibbonStatusBarControl.LeftItems>
+                <dxb:BarStaticItem Content="{Binding MousePosition,  Converter={StaticResource pointToStringConverter}}"/>
+            </dxr:RibbonStatusBarControl.LeftItems>
             <dxr:RibbonStatusBarControl.RightItems>
                 <dxb:BarButtonItem x:Name="printItem" Content="Print" Glyph="{dx:DXImage Image=Print_16x16.png}"/>
             </dxr:RibbonStatusBarControl.RightItems>
         </dxr:RibbonStatusBarControl>
-        <dx:DXTabControl x:Name="tabControl" Grid.Row="1" ItemsSource="{Binding TabItems}"  >
+        <dx:DXTabControl x:Name="tabControl" Grid.Row="1" ItemsSource="{Binding TabItems,Mode=TwoWay}"  >
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Loaded">
                     <i:InvokeCommandAction Command="{Binding TabLoadedCommand}" CommandParameter="{Binding ElementName=tabControl}" />
                 </i:EventTrigger>
-
                 <i:EventTrigger EventName="SelectionChanged">
                     <i:InvokeCommandAction Command="{Binding TabChangedCommand}" CommandParameter="{Binding ElementName=tabControl}" />
                 </i:EventTrigger>

@@ -1,6 +1,8 @@
 ﻿using DevExpress.Utils;
 using DevExpress.Xpf.Bars;
 using DevExpress.Xpf.Core;
+using gEngine.Manipulator;
+using gEngine.Manipulator.Ge.Section;
 using gEngine.Util;
 using gEngine.View;
 using GPTDxWPFRibbonApplication1.Controls;
@@ -14,19 +16,34 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Interactivity;
 
 namespace GPTDxWPFRibbonApplication1.ViewModels
 {
-    public class RibbonViewModel
+    public class RibbonViewModel : DependencyObject
     {
         public RibbonViewModel()
         {
             TabItems = new ObservableCollection<DXTabItem>();
+            NewSectionSetVM.RibbonViewModelOpenPageToTab += new Action<string, string>(OpenPageToTab);
         }
 
         #region Property
+
         public FrameworkElement FullViewObject { get; set; }
+        Behavior<UIElement> ManipulatorBehavior { get; set; }
         public ObservableCollection<DXTabItem> TabItems { get; set; }
+
+        //鼠标位置
+        public static readonly DependencyProperty MousePositionProperty =
+            DependencyProperty.Register("MousePosition", typeof(Point), typeof(RibbonViewModel), new PropertyMetadata(new Point(-1, -1)));
+
+        public Point MousePosition
+        {
+            get { return (Point)GetValue(MousePositionProperty); }
+            set { SetValue(MousePositionProperty, value); }
+        }
+
         #endregion
 
         #region Commands
@@ -38,7 +55,11 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
         {
             get
             {
-                return new RelayCommand(() => ViewUtil.FullView(FullViewObject));
+                return new RelayCommand(() =>
+                {
+                    MapControl mc = FullViewObject as MapControl;
+                    mc.FullView();
+                });
             }
         }
 
@@ -70,6 +91,28 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
         }
 
         /// <summary>
+        /// 弹出页命令
+        /// 2017-03-05
+        /// </summary>
+        public System.Windows.Input.ICommand ShowDialogCommand
+        {
+            get
+            {
+                return new RelayCommand<BarButtonItem>((barBtnItem) =>
+                {
+                    string winName = barBtnItem.Tag.ToString();
+                    Assembly curAssembly = Assembly.GetExecutingAssembly();
+                    Window win = (Window)curAssembly.CreateInstance(winName);
+                    if (win != null)
+                    {
+                        win.WindowState = WindowState.Normal;
+                        win.ShowDialog();
+                    }
+                });
+            }
+        }
+
+        /// <summary>
         /// 加载页签命令
         /// </summary>
         public System.Windows.Input.ICommand TabLoadedCommand
@@ -81,6 +124,10 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
                     tabControl.TabHiding += (sender, e) =>
                     {
                         TabItems.Remove((DXTabItem)e.Item);
+                    };
+                    tabControl.MouseMove += (sender, e) =>
+                    {
+                        MousePosition = e.GetPosition(tabControl);
                     };
                 });
             }
@@ -98,25 +145,56 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
                     if (newItem != null)
                     {
                         FullViewObject = ((IView)(newItem).Content).FullScreenObject;
+                        ManipulatorBehavior= ((IView)(newItem).Content).ManipulatorBehavior;
                     }
 
                 });
             }
         }
 
-        public System.Windows.Input.ICommand SetSectionManipulatorCommand
+        /// <summary>
+        /// 设置操作
+        /// </summary>
+        public System.Windows.Input.ICommand SetManipulatorCommand
         {
             get
             {
-                return new RelayCommand<BarButtonItem>((barBtnItem)=>
+                return new RelayCommand(() =>
                 {
-
+                    MapControl mc = FullViewObject as MapControl;
+                    GraphManipulatorBase gm = (GraphManipulatorBase)ManipulatorBehavior;
+                    ManipulatorSetter.SetManipulator(gm, mc.GetLayerControl(0));
                 });
             }
         }
 
+
         #endregion  Commands
 
+        #region Method
+
+        /// <summary>
+        /// 打开功能页添加到Tab选项卡
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="title"></param>
+        public void OpenPageToTab(string url, string title)
+        {
+            DXTabItem tabItem = new DXTabItem();
+            tabItem.AllowHide = DefaultBoolean.True;
+            tabItem.IsSelected = true;
+            tabItem.Header = title;
+            UserControl uc = (UserControl)Activator.CreateInstance(Assembly.GetExecutingAssembly().FullName, url).Unwrap();
+            tabItem.Content = uc;
+            foreach (DXTabItem item in TabItems)
+            {
+                if (item.Header.ToString().Equals(tabItem.Header.ToString()))
+                    return;
+            }
+            TabItems.Add(tabItem);
+        }
+
+        #endregion
     }
 }
 

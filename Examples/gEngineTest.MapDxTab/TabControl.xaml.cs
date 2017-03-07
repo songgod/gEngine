@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,23 +10,28 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Globalization;
+using DevExpress.Xpf.Core;
 
-namespace GPTDxWPFRibbonApplication1
+namespace gEngineTest.MapDxTab
 {
-    /// <summary>
-    /// New_section_set.xaml 的交互逻辑
-    /// </summary>
-    public partial class New_section_set : Window
+/// <summary>
+/// TabControl.xaml 的交互逻辑
+/// </summary>
+public partial class TabControl : DXTabControl
     {
-        public New_section_set()
+        public TabControl()
         {
             InitializeComponent();
+            
         }
 
-        private void textBox_TextChanged(object sender, TextChangedEventArgs e)
+        public TabItemControl GetItemControl(int i)
         {
-
+            return (TabItemControl)Items[i];
         }
+        
     }
 }

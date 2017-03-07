@@ -12,11 +12,12 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <Border Background="White" BorderBrush="Black" BorderThickness="2">
-            <gv:LayerControl x:Name="lc">
+            <gv:MapControl x:Name="mc" MouseLeftButtonDown="mc_MouseLeftButtonDown" MouseMove="mc_MouseMove"
+                           MouseLeftButtonUp="mc_MouseLeftButtonUp" MouseRightButtonDown="mc_MouseRightButtonDown">
                 <i:Interaction.Behaviors>
-                    <em:ZoomPan/>
+                    <em:MapControlZoomPan/>
                 </i:Interaction.Behaviors>
-            </gv:LayerControl>
+            </gv:MapControl>
         </Border>
     </Grid>
 </UserControl>
