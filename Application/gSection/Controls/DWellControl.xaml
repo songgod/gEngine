@@ -17,10 +17,10 @@
                 </ResourceDictionary.MergedDictionaries>
             </ResourceDictionary>
         </Grid.Resources>
-        <gv:LayerControl x:Name="lyControl">
+        <gv:MapControl x:Name="mc">
             <i:Interaction.Behaviors>
-                <gm:ZoomPan></gm:ZoomPan>
+                <gm:MapControlZoomPan></gm:MapControlZoomPan>
             </i:Interaction.Behaviors>
-        </gv:LayerControl>
+        </gv:MapControl>
     </Grid>
 </UserControl>

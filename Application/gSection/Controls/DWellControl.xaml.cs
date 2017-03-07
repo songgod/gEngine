@@ -30,8 +30,8 @@ namespace GPTDxWPFRibbonApplication1.Controls
         #region IView接口实现
         FrameworkElement IView.FullScreenObject
         {
-            get { return lyControl; }
-            set { lyControl = (LayerControl)value; }
+            get { return mc; }
+            set { mc = (MapControl)value; }
         }
 
         Behavior<UIElement> IView.ManipulatorBehavior
@@ -48,14 +48,14 @@ namespace GPTDxWPFRibbonApplication1.Controls
 
         private void InitWell()
         {
+            Map map = new Map();
             Layer layer = new Layer();
-
             TxtWell tw = new TxtWell() { TxtFile = "D:\\Data\\MulWellColumnDataNew.txt" };
             WellCreator wc = new WellCreator();
             layer.Objects = wc.Create(tw);
-
-            Binding bd = new Binding("Objects") { Source = layer };
-            lyControl.SetBinding(ItemsControl.ItemsSourceProperty, bd);
+            map.Layers.Add(layer);
+            Binding bd = new Binding("Layers") { Source = map };
+            mc.SetBinding(ItemsControl.ItemsSourceProperty, bd);
         }
     }
 }
