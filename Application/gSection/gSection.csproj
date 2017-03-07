@@ -116,7 +116,6 @@
     <Compile Include="New Section window.xaml.cs">
       <DependentUpon>New Section window.xaml</DependentUpon>
     </Compile>
-    <Compile Include="NewSectionSetVM.cs" />
     <Compile Include="OptionPanel.xaml.cs">
       <DependentUpon>OptionPanel.xaml</DependentUpon>
     </Compile>
@@ -132,6 +131,7 @@
     <Compile Include="StratumPick.xaml.cs">
       <DependentUpon>StratumPick.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\NewSectionSetViewModel.cs" />
     <Compile Include="ViewModels\RibbonViewModel.cs" />
     <Page Include="Controls\DWellControl.xaml">
       <SubType>Designer</SubType>

@@ -25,7 +25,7 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
         public RibbonViewModel()
         {
             TabItems = new ObservableCollection<DXTabItem>();
-            NewSectionSetVM.RibbonViewModelOpenPageToTab += new Action<string, string>(OpenPageToTab);
+            NewSectionSetViewModel.RibbonViewModelOpenPageToTab += new Action<string, string>(OpenPageToTab);
         }
 
         #region Property

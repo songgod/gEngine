@@ -4,12 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GPTDxWPFRibbonApplication1"
+        xmlns:models="clr-namespace:GPTDxWPFRibbonApplication1.ViewModels" 
         xmlns:ec="http://schemas.microsoft.com/expression/2010/controls" x:Class="GPTDxWPFRibbonApplication1.New_section_set"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         mc:Ignorable="d" x:Name="NewSectionSetWindow"
         Title="New_section_set" Height="300" Width="300">
     <Window.DataContext>
-        <local:NewSectionSetVM></local:NewSectionSetVM>
+        <models:NewSectionSetViewModel></models:NewSectionSetViewModel>
     </Window.DataContext>
     <Grid Margin="0,0,0,66.5">
         <Grid.ColumnDefinitions>
