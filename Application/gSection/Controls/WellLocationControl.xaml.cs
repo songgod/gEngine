@@ -24,6 +24,9 @@ using gEngine.Manipulator;
 using System.Windows.Interactivity;
 using gEngine.Graph.Interface;
 using System.Reflection;
+using gEngine.Graph.Ge.Plane;
+using gTopology;
+using GPTDxWPFRibbonApplication1.ViewModels;
 
 namespace GPTDxWPFRibbonApplication1.Controls
 {
@@ -52,14 +55,17 @@ namespace GPTDxWPFRibbonApplication1.Controls
             }
         }
 
-        
+
         #endregion
+
+        HashSet<string> listWell = null;
 
         public WellLocationControl()
         {
             InitializeComponent();
             CreateWellLocation();
-            mb = new DrawLineManipulator();
+            mb = new DrawWellTieSection();
+            listWell = new HashSet<String>();
         }
 
         private void CreateWellLocation()
@@ -86,74 +92,32 @@ namespace GPTDxWPFRibbonApplication1.Controls
             mc.FullView();
         }
 
-        private void mc_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            Type clickSourceType = e.OriginalSource.GetType();
-            
-            if (clickSourceType.Equals(typeof(Path)))
-            {
-                Path path = (Path)e.OriginalSource;
-                double x = path.RenderTransform.Value.OffsetX;
-                double y = path.RenderTransform.Value.OffsetY;
-                Point p = new Point(x, y);
-                ((DrawLineManipulator)mb).Start = p;
-                path.StrokeThickness = 3;
-                path.Stroke = Brushes.Black;
-            }
-            else
-            {
-                ((DrawLineManipulator)mb).Start = new Point(-1, -1);
-            }
-        }
-
-
-
-        private void mc_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (e.LeftButton == System.Windows.Input.MouseButtonState.Pressed)
-            {
-                Type clickSourceType = e.OriginalSource.GetType();
-                
-                if (clickSourceType.Equals(typeof(Path)))
-                {
-                    Path path = (Path)e.OriginalSource;
-                    double x = path.RenderTransform.Value.OffsetX;
-                    double y = path.RenderTransform.Value.OffsetY;
-                    Point p = new Point(x, y);
-                    path.StrokeThickness = 3;
-                    path.Stroke = Brushes.Black;
-                    ((DrawLineManipulator)mb).End = p;
-                }
-                else
-                {
-                    ((DrawLineManipulator)mb).End = new Point(-1, -1);
-                }
-            }
-
-        }
-
-
-
-        private void mc_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            
-        }
         /// <summary>
-        /// 按下右键：打开剖面设计页
+        /// 按下右键：结束画线，打开剖面设计页
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void mc_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
+            ManipulatorSetter.ClearManipulator(mc.GetLayerControl(0));
             string winName = "GPTDxWPFRibbonApplication1.New_section_set";
+            OpenWindow(winName);
+        }
+
+        private void OpenWindow(string winName)
+        {
             Assembly curAssembly = Assembly.GetExecutingAssembly();
-            Window win = (Window)curAssembly.CreateInstance(winName);
+            string wellNums = string.Join(",", ((DrawWellTieSection)mb).WellNumList);
+            object[] parameters = new object[] { wellNums };
+            Window win = (Window)curAssembly.CreateInstance(winName, true, System.Reflection.BindingFlags.Default, null, parameters, null, null);
+
             if (win != null)
             {
                 win.WindowState = WindowState.Normal;
                 win.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-                win.ShowDialog();
+                win.Show();
             }
         }
+
     }
 }

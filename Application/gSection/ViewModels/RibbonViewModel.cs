@@ -58,7 +58,7 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
                 return new RelayCommand(() =>
                 {
                     MapControl mc = FullViewObject as MapControl;
-                    if(mc!=null)
+                    if (mc != null)
                     {
                         mc.FullView();
                     }
@@ -148,7 +148,7 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
                     if (newItem != null)
                     {
                         FullViewObject = ((IView)(newItem).Content).FullScreenObject;
-                        ManipulatorBehavior= ((IView)(newItem).Content).ManipulatorBehavior;
+                        ManipulatorBehavior = ((IView)(newItem).Content).ManipulatorBehavior;
                     }
 
                 });
@@ -166,7 +166,8 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
                 {
                     MapControl mc = FullViewObject as MapControl;
                     GraphManipulatorBase gm = (GraphManipulatorBase)ManipulatorBehavior;
-                    ManipulatorSetter.SetManipulator(gm, mc.GetLayerControl(0));
+                    if (mc != null && gm != null)
+                        ManipulatorSetter.SetManipulator(gm, mc.GetLayerControl(0));
                 });
             }
         }
