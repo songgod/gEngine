@@ -72,6 +72,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="DevExpress.Xpf.Themes.Office2016White.v16.1" />
+    <Reference Include="gTopology, Version=1.0.6199.29938, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="Microsoft.Expression.Controls, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Expression.Drawing, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Expression.Effects, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />

@@ -25,6 +25,11 @@ namespace GPTDxWPFRibbonApplication1
             InitializeComponent();
         }
 
+        public New_section_set(string wellNums)
+        {
+            InitializeComponent();
+        }
+
         private void textBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 

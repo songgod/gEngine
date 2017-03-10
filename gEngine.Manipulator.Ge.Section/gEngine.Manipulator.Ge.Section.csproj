@@ -74,6 +74,7 @@
     <Compile Include="DrawCloseCurveManipulator.cs" />
     <Compile Include="DrawCurveManipulator.cs" />
     <Compile Include="DrawLineManipulator.cs" />
+    <Compile Include="DrawSections\DrawWellTieSection.cs" />
     <Compile Include="EditCurveManipulator.cs" />
     <Compile Include="EraseLineManipulator.cs" />
     <Compile Include="GraphCurveManipulator.cs" />
@@ -85,6 +86,10 @@
     <Compile Include="SetFaceTypeManipulator.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\gEngine.Graph.Ge.Plane\gEngine.Graph.Ge.Plane.csproj">
+      <Project>{82739B38-8706-493D-A571-C743AFCEAD12}</Project>
+      <Name>gEngine.Graph.Ge.Plane</Name>
+    </ProjectReference>
     <ProjectReference Include="..\gEngine.Graph.Ge.Section\gEngine.Graph.Ge.Section.csproj">
       <Project>{53D7A20D-84B5-499F-B183-D440854B7C8C}</Project>
       <Name>gEngine.Graph.Ge.Section</Name>
@@ -102,6 +107,7 @@
       <Name>gEngine.View</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

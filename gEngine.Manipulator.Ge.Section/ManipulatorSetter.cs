@@ -24,5 +24,25 @@ namespace gEngine.Manipulator.Ge.Section
             bc.Add(mp);
             return true;
         }
+
+        public static bool ClearManipulator(LayerControl SectionLayer)
+        {
+            if (SectionLayer == null)
+                return false;
+
+            BehaviorCollection bc = Interaction.GetBehaviors(SectionLayer);
+            bc.Clear();
+            return true;
+        }
+
+        public static bool IsContainManipulator(this LayerControl SectionLayer)
+        {
+            if (SectionLayer == null)
+                return false;
+            BehaviorCollection bc = Interaction.GetBehaviors(SectionLayer);
+            if (bc.Count > 0)
+                return true;
+            return false;
+        }
     }
 }
