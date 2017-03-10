@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using gEngine.View;
 using System.Windows.Interactivity;
+using GPTDxWPFRibbonApplication1.ViewModels;
 
 namespace GPTDxWPFRibbonApplication1.Controls
 {
@@ -26,6 +27,12 @@ namespace GPTDxWPFRibbonApplication1.Controls
             get;set;
         }
         #endregion
+
+        public NewSectionSetViewModel Vm
+        {
+            get;
+            set;
+        }
 
         public DWellControl()
         {
