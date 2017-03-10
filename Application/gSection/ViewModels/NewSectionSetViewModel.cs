@@ -20,12 +20,26 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
     {
         public NewSectionSetViewModel()
         {
-            
+
         }
 
-        #region Method
+        #region Property
+
+        public string WellNums
+        {
+            get { return WellNums; }
+            set { WellNums = "1"; }
+        }
+
+        #endregion
+
+        #region Delegate
 
         public static event Action<string, string> RibbonViewModelOpenPageToTab;
+
+        #endregion
+
+        #region Method
 
         /// <summary>
         /// 确定执行函数

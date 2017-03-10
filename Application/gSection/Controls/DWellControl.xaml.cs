@@ -6,6 +6,9 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using gEngine.View;
 using System.Windows.Interactivity;
+using GPTDxWPFRibbonApplication1.ViewModels;
+using gEngine.Util.Ge.Section;
+using gEngine.Graph.Interface;
 
 namespace GPTDxWPFRibbonApplication1.Controls
 {
@@ -27,6 +30,12 @@ namespace GPTDxWPFRibbonApplication1.Controls
         }
         #endregion
 
+        public NewSectionSetViewModel Vm
+        {
+            get;
+            set;
+        }
+
         public DWellControl()
         {
             InitializeComponent();
@@ -36,10 +45,14 @@ namespace GPTDxWPFRibbonApplication1.Controls
         private void InitWell()
         {
             Map map = new Map();
-            Layer layer = new Layer();
+            Layer layer = SectionLayerCreator.CreateSectionLayer();
             TxtWell tw = new TxtWell() { TxtFile = "D:\\Data\\MulWellColumnDataNew.txt" };
             WellCreator wc = new WellCreator();
-            layer.Objects = wc.Create(tw);
+            IObjects objs= wc.Create(tw);
+            foreach (var obj in objs)
+            {
+                layer.Objects.Add(obj);
+            }
             map.Layers.Add(layer);
             Binding bd = new Binding("Layers") { Source = map };
             mc.SetBinding(ItemsControl.ItemsSourceProperty, bd);

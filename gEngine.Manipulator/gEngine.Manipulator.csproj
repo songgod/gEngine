@@ -71,6 +71,8 @@
     <Compile Include="LineTrackAdorner.cs" />
     <Compile Include="ManipulatorBase.cs" />
     <Compile Include="MapControlZoomPan.cs" />
+    <Compile Include="PolyLineManipulator.cs" />
+    <Compile Include="PolyTrackAdorner.cs" />
     <Compile Include="ZoomPan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
