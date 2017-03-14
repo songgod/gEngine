@@ -15,7 +15,7 @@ namespace gEngine.View.Ge.Column
     {
         public LogsToPathConverter()
         {
-            InvalidValue = -9999;
+            InvalidValue = -99999;
         }
 
         public double InvalidValue { get; set; }

@@ -1,4 +1,6 @@
 ﻿
+using GPTDxWPFRibbonApplication1.Controls;
+using GPTDxWPFRibbonApplication1.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +30,23 @@ namespace GPTDxWPFRibbonApplication1
         public New_section_set(string wellNums)
         {
             InitializeComponent();
+            //Vm = new DWellControl();
+            //Vm.WellNums = wellNums;
+
+            WellNums = wellNums;
         }
+
+        #region Property
+
+        public static string WellNums;
+
+        //public DWellControl Vm
+        //{
+        //    get;
+        //    set;
+        //}
+
+        #endregion
 
         private void textBox_TextChanged(object sender, TextChangedEventArgs e)
         {

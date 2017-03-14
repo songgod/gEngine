@@ -24,6 +24,21 @@ namespace gEngine.Data.Ge.Txt
                 ReadFromTxt(value);
             }
         }
+
+        private bool IsDecimal(string numstr)
+        {
+            try
+            {
+                Decimal dt;
+                dt = Convert.ToDecimal(numstr);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public bool ReadFromTxt(string txtfilepath)
         {
             if (txtfilepath == TxtFile)
@@ -63,14 +78,17 @@ namespace gEngine.Data.Ge.Txt
                         {
                             for (int i = 0; i < curveCount; i++)
                             {
-                                if (i.Equals(0))
+                                if (!string.IsNullOrEmpty(strColumns[i]) && IsDecimal(strColumns[i]))
                                 {
-                                    Depths.Add(double.Parse(strColumns[i]));
-                                }
-                                else
-                                {
-                                    double xValue = double.Parse(strColumns[i]);
-                                    Columns[i - 1].Item2.Add(xValue);
+                                    if (i.Equals(0))
+                                    {
+                                        Depths.Add(double.Parse(strColumns[i]));
+                                    }
+                                    else
+                                    {
+                                        double xValue = double.Parse(strColumns[i]);
+                                        Columns[i - 1].Item2.Add(xValue);
+                                    }
                                 }
                             }
                         }
