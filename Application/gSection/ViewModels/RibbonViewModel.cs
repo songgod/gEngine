@@ -172,6 +172,32 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
             }
         }
 
+        public System.Windows.Input.ICommand SetFaultManipulatorCommand
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    MapControl mc = FullViewObject as MapControl;
+                    DrawLineManipulator dm = new DrawLineManipulator();
+                    ManipulatorSetter.SetManipulator(dm, mc.GetLayerControl(0));
+                });
+            }
+        }
+
+        public System.Windows.Input.ICommand SetCurveManipulatorCommand
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    MapControl mc = FullViewObject as MapControl;
+                    DrawCurveManipulator dm = new DrawCurveManipulator();
+                    ManipulatorSetter.SetManipulator(dm, mc.GetLayerControl(0));
+                });
+            }
+        }
+
 
         #endregion  Commands
 

@@ -95,6 +95,16 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\gEngine.Graph.Ge.Plane\gEngine.Graph.Ge.Plane.csproj">
+      <Project>{82739B38-8706-493D-A571-C743AFCEAD12}</Project>
+      <Name>gEngine.Graph.Ge.Plane</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.Graph.Ge\gEngine.Graph.Ge.csproj">
+      <Project>{3BD77E4F-A348-4EDB-B60C-68B749249B91}</Project>
+      <Name>gEngine.Graph.Ge</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

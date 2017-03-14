@@ -92,8 +92,7 @@ namespace gEngine.Manipulator.Ge.Section
 
                     if (well != null)
                     {
-                        path.StrokeThickness = 3;
-                        path.Stroke = Brushes.Black;
+                        SelectPath(path);
                         WellNumList.Add(well.WellNum);
                     }
                 }
@@ -107,8 +106,7 @@ namespace gEngine.Manipulator.Ge.Section
                         {
                             if (well.X == End.X && well.Y == End.Y)
                             {
-                                path.StrokeThickness = 3;
-                                path.Stroke = Brushes.Black;
+                                SelectPath(path);
                                 WellNumList.Add(well.WellNum);
                             }
                         }

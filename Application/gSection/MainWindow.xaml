@@ -158,7 +158,7 @@
                         </dxb:BarEditItem>
                     </dxr:RibbonPageGroup>
                     <dxr:RibbonPageGroup Caption="断层">
-                        <dxb:BarButtonItem Content="添加断层线" LargeGlyph="{dx:DXImage Image=ScatterWithStraightLines_32x32.png}" Glyph="{dx:DXImage Image=ScatterWithStraightLines_16x16.png}"/>
+                        <dxb:BarButtonItem Content="添加断层线" LargeGlyph="{dx:DXImage Image=ScatterWithStraightLines_32x32.png}" Glyph="{dx:DXImage Image=ScatterWithStraightLines_16x16.png}" Command="{Binding SetFaultManipulatorCommand}"/>
                         <dxb:BarSplitCheckItem Content="线型" LargeGlyph="{dx:DXImage Image=HorizontalGridlinesMajor_32x32.png}" RibbonStyle="SmallWithText" Glyph="{dx:DXImage Image=HorizontalGridlinesMajor_16x16.png}"/>
                         <dxb:BarEditItem Content="粗细" EditWidth="44" EditValue="1.0">
                             <dxb:BarEditItem.EditSettings>
@@ -188,8 +188,8 @@
                         <dxb:BarSplitCheckItem Content="默认形态" LargeGlyph="pack://application:,,,/GPTDxWPFRibbonApplication1;component/Images/GDS/歼灭形态.png" Glyph="pack://application:,,,/GPTDxWPFRibbonApplication1;component/Images/GDS/歼灭形态.png"/>
                         <dxb:BarButtonItem Content="半自动" LargeGlyph="{dx:DXImage Image=FullStackedArea_32x32.png}" Glyph="{dx:DXImage Image=Spline_16x16.png}" RibbonStyle="Large"/>
                         <dxb:BarItemSeparator/>
-                        <dxb:BarButtonItem Content="添加直线" LargeGlyph="{dx:DXImage Image=ScatterWithStraightLinesAndMarkersX23_32x32.png}" Glyph="{dx:DXImage Image=ScatterWithStraightLinesAndMarkersX23_32x32.png}"/>
-                        <dxb:BarButtonItem Content="添加曲线" LargeGlyph="{dx:DXImage Image=Spline_32x32.png}" Glyph="{dx:DXImage Image=Spline_16x16.png}" RibbonStyle="Large"/>
+                        <dxb:BarButtonItem Content="添加直线" LargeGlyph="{dx:DXImage Image=ScatterWithStraightLinesAndMarkersX23_32x32.png}" Glyph="{dx:DXImage Image=ScatterWithStraightLinesAndMarkersX23_32x32.png}" Command="{Binding SetFaultManipulatorCommand}"/>
+                        <dxb:BarButtonItem Content="添加曲线" LargeGlyph="{dx:DXImage Image=Spline_32x32.png}" Glyph="{dx:DXImage Image=Spline_16x16.png}" RibbonStyle="Large" Command="{Binding SetCurveManipulatorCommand}"/>
                         <dxb:BarItemSeparator/>
                         <dxb:BarSplitCheckItem Content="线型" LargeGlyph="{dx:DXImage Image=HorizontalGridlinesMajor_32x32.png}" RibbonStyle="SmallWithText" Glyph="{dx:DXImage Image=HorizontalGridlinesMajor_16x16.png}"/>
                         <dxb:BarEditItem Content="粗细" EditWidth="44" EditValue="1.0">
