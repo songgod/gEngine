@@ -1,16 +1,21 @@
-﻿using System;
+﻿using gEngine.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interactivity;
 
 namespace gEngine.Manipulator
 {
     public class PolyLineManipulator : ManipulatorBase
     {
         protected PolyTrackAdorner TrackAdorner { get; set; }
+
+        public Point WellPosition { get; set; }
         protected override void OnAttached()
         {
             base.OnAttached();

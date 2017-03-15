@@ -20,7 +20,13 @@ namespace gEngine.Manipulator
             style.Setters.Add(new Setter() { Property = Polyline.StrokeDashArrayProperty, Value = new DoubleCollection() { 2, 3 } });
             this.Track = new Polyline() { Style = style};
             this.Track.MouseLeftButtonUp += Track_MouseLeftButtonUp;
+            this.Track.MouseRightButtonUp += Track_MouseRightButtonUp;
             this.AddVisualChild(this.Track);
+        }
+
+        private void Track_MouseRightButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            this.AdornedElement.RaiseEvent(e);
         }
 
         private void Track_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)

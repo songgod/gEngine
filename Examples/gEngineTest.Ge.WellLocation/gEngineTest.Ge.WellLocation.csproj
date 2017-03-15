@@ -143,6 +143,10 @@
       <Project>{1C98A821-B030-4FF2-83AE-D49B1B3B8C67}</Project>
       <Name>gEngine.Graph.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\gEngine.Manipulator.Ge.Plane\gEngine.Manipulator.Ge.Plane.csproj">
+      <Project>{70026887-FD51-4A98-8E50-4B55F750013B}</Project>
+      <Name>gEngine.Manipulator.Ge.Plane</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\gEngine.Manipulator.Ge.Section\gEngine.Manipulator.Ge.Section.csproj">
       <Project>{036A5D25-0AF4-4259-B83A-E04026F1749C}</Project>
       <Name>gEngine.Manipulator.Ge.Section</Name>
