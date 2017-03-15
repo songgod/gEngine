@@ -16,14 +16,26 @@ using System.Windows.Media;
 
 namespace GPTDxWPFRibbonApplication1.ViewModels
 {
-    public class NewSectionSetViewModel
+    public class NewSectionSetViewModel : DependencyObject
     {
         public NewSectionSetViewModel()
         {
-           
+            LongitudinalProportion = new List<double>();
+            LongitudinalProportion.Add(100);
+            LongitudinalProportion.Add(200);
         }
 
         #region Property
+
+        // 纵向比例
+        public static readonly DependencyProperty LongitudinalProportionProperty =
+            DependencyProperty.Register("LongitudinalProportion", typeof(List<double>), typeof(NewSectionSetViewModel));
+
+        public List<double> LongitudinalProportion
+        {
+            get { return (List<double>)GetValue(LongitudinalProportionProperty); }
+            set { SetValue(LongitudinalProportionProperty, value); }
+        }
 
         #endregion
 

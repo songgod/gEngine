@@ -30,21 +30,12 @@ namespace GPTDxWPFRibbonApplication1
         public New_section_set(string wellNums)
         {
             InitializeComponent();
-            //Vm = new DWellControl();
-            //Vm.WellNums = wellNums;
-
             WellNums = wellNums;
         }
 
         #region Property
 
         public static string WellNums;
-
-        //public DWellControl Vm
-        //{
-        //    get;
-        //    set;
-        //}
 
         #endregion
 

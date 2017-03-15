@@ -60,6 +60,8 @@
   <ItemGroup>
     <Reference Include="DevExpress.Xpf.Core.v16.1" />
     <Reference Include="DevExpress.Data.v16.1" />
+    <Reference Include="DevExpress.Xpf.Docking.v16.1, Version=16.1.2.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Layout.v16.1.Core, Version=16.1.2.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.Ribbon.v16.1" />
     <Reference Include="DevExpress.Printing.v16.1.Core" />
     <Reference Include="DevExpress.Images.v16.1">
@@ -92,6 +94,8 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -111,6 +115,9 @@
       <DependentUpon>WellLocationControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\PointToStringConverter.cs" />
+    <Compile Include="DXNewSectionSet.xaml.cs">
+      <DependentUpon>DXNewSectionSet.xaml</DependentUpon>
+    </Compile>
     <Compile Include="New section set.xaml.cs">
       <DependentUpon>New section set.xaml</DependentUpon>
     </Compile>
@@ -134,6 +141,7 @@
     </Compile>
     <Compile Include="ViewModels\NewSectionSetViewModel.cs" />
     <Compile Include="ViewModels\RibbonViewModel.cs" />
+    <Compile Include="ViewModels\WellViewModel.cs" />
     <Page Include="Controls\DWellControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -143,6 +151,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\WellLocationControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DXNewSectionSet.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

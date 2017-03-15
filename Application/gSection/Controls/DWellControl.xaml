@@ -7,8 +7,12 @@
              xmlns:gv="clr-namespace:gEngine.View;assembly=gEngine.View"
              xmlns:gm="clr-namespace:gEngine.Manipulator;assembly=gEngine.Manipulator"
              xmlns:gwell="clr-namespace:gEngine.View.Ge.Column;assembly=gEngine.View.Ge.Column"
+             xmlns:vm="clr-namespace:GPTDxWPFRibbonApplication1.ViewModels" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.DataContext>
+        <vm:WellViewModel></vm:WellViewModel>
+    </UserControl.DataContext>
     <Grid Background="White">
         <Grid.Resources>
             <ResourceDictionary>
@@ -21,6 +25,11 @@
             <i:Interaction.Behaviors>
                 <gm:MapControlZoomPan></gm:MapControlZoomPan>
             </i:Interaction.Behaviors>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Loaded">
+                    <i:InvokeCommandAction Command="{Binding LoadCommand}" CommandParameter="{Binding ElementName=mc}"></i:InvokeCommandAction>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
         </gv:MapControl>
     </Grid>
 </UserControl>
