@@ -20,16 +20,10 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
     {
         public NewSectionSetViewModel()
         {
-
+           
         }
 
         #region Property
-
-        public string WellNums
-        {
-            get { return WellNums; }
-            set { WellNums = "1"; }
-        }
 
         #endregion
 

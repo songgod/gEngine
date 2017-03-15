@@ -12,8 +12,6 @@ namespace gEngine.Graph.Ge.Column
             Depths = new ObsDoubles();
         }
 
-
-
         public WellColumns Columns
         {
             get { return (WellColumns)GetValue(ColumnsProperty); }
@@ -38,15 +36,15 @@ namespace gEngine.Graph.Ge.Column
         /// <summary>
         /// 每口井位置
         /// </summary>
-        public int Offset
+        public int Location
         {
-            get { return (int)GetValue(OffsetProperty); }
-            set { SetValue(OffsetProperty, value); }
+            get { return (int)GetValue(LocationProperty); }
+            set { SetValue(LocationProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Depths.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty OffsetProperty =
-            DependencyProperty.Register("Offset", typeof(int), typeof(Well));
+        public static readonly DependencyProperty LocationProperty =
+            DependencyProperty.Register("Location", typeof(int), typeof(Well));
 
         /// <summary>
         /// 井深度道位置

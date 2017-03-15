@@ -654,6 +654,10 @@
       <Project>{b1c2609b-a3ed-43e0-9da2-df27029d44fc}</Project>
       <Name>gEngine.Data.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\gEngine.Graph.Ge.Column\gEngine.Graph.Ge.Column.csproj">
+      <Project>{95227940-90F7-40B4-9027-3EEECD8ED6DE}</Project>
+      <Name>gEngine.Graph.Ge.Column</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\gEngine.Graph.Ge.Plane\gEngine.Graph.Ge.Plane.csproj">
       <Project>{82739b38-8706-493d-a571-c743afcead12}</Project>
       <Name>gEngine.Graph.Ge.Plane</Name>
