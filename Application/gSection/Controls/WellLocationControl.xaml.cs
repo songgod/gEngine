@@ -115,7 +115,7 @@ namespace GPTDxWPFRibbonApplication1.Controls
             {
                 win.WindowState = WindowState.Normal;
                 win.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-                win.Show();
+                win.ShowDialog();
             }
         }
 

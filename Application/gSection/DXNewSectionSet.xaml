@@ -18,10 +18,10 @@
         <dxdo:DockLayoutManager Background="Transparent">
             <dxdo:LayoutGroup Orientation="Vertical">
                 <dxdo:LayoutGroup>
-                    <dxdo:LayoutControlItem Caption="数据选择" ItemHeight="Auto" ItemWidth="Auto" FontSize="16"/>
+                    <dxdo:LayoutControlItem Caption="数据选择" CaptionFormat="{}{0}" ItemHeight="Auto" ItemWidth="Auto" FontSize="16"/>
                 </dxdo:LayoutGroup>
                 <dxdo:LayoutGroup >
-                    <dxdo:LayoutControlItem Caption="分层级别" ItemHeight="Auto">
+                    <dxdo:LayoutControlItem Caption="分层级别"  ItemHeight="Auto">
                         <dxe:ComboBoxEdit x:Name="cbFcjb"></dxe:ComboBoxEdit>
                     </dxdo:LayoutControlItem>
                     <dxdo:EmptySpaceItem></dxdo:EmptySpaceItem>
@@ -43,7 +43,7 @@
                     </dxdo:LayoutControlItem>
                 </dxdo:LayoutGroup>
                 <dxdo:LayoutGroup>
-                    <dxdo:LayoutControlItem Caption="显示设置" ItemHeight="Auto" ItemWidth="Auto" FontSize="16" VerticalAlignment="Center">
+                    <dxdo:LayoutControlItem Caption="显示设置" CaptionFormat="{}{0}" ItemHeight="Auto" ItemWidth="Auto" FontSize="16" VerticalAlignment="Center">
                     </dxdo:LayoutControlItem>
                     <dxdo:EmptySpaceItem></dxdo:EmptySpaceItem>
                 </dxdo:LayoutGroup>
@@ -60,7 +60,7 @@
                         <dxe:ComboBoxEdit x:Name="cbHScale"></dxe:ComboBoxEdit>
                     </dxdo:LayoutControlItem>
                     <dxdo:LayoutControlItem Caption="纵向比例">
-                        <dxe:ComboBoxEdit x:Name="cbVScale" ItemsSource="{Binding LongitudinalProportion}"></dxe:ComboBoxEdit>
+                        <dxe:ComboBoxEdit x:Name="cbVScale" SelectedIndex="0" ItemsSource="{Binding LongitudinalProportion}"></dxe:ComboBoxEdit>
                     </dxdo:LayoutControlItem>
                 </dxdo:LayoutGroup>
                 <dxdo:LayoutGroup >
