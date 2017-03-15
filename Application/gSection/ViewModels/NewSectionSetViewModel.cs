@@ -55,7 +55,7 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
         {
             try
             {
-                Button ok = w.FindName("button") as Button;
+                Button ok = w.FindName("btnOK") as Button;
                 string url = (string)ok.Tag;
                 string title = (string)ok.ToolTip;
                 if (RibbonViewModelOpenPageToTab != null)

@@ -100,7 +100,7 @@ namespace GPTDxWPFRibbonApplication1.Controls
         private void mc_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             ManipulatorSetter.ClearManipulator(mc.GetLayerControl(0));
-            string winName = "GPTDxWPFRibbonApplication1.New_section_set";
+            string winName = "GPTDxWPFRibbonApplication1.DXNewSectionSet";
             OpenWindow(winName);
         }
 

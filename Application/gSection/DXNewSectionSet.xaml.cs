@@ -24,5 +24,17 @@ namespace GPTDxWPFRibbonApplication1
         {
             InitializeComponent();
         }
+
+        public DXNewSectionSet(string wellNums)
+        {
+            InitializeComponent();
+            WellNums = wellNums;
+        }
+
+        #region Property
+
+        public static string WellNums;
+
+        #endregion
     }
 }

@@ -44,7 +44,7 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
             Map map = new Map();
             Layer layer = new Layer();
 
-            string wellNums = New_section_set.WellNums;
+            string wellNums = DXNewSectionSet.WellNums;
             int wellCount = 0;
             int WellWidthSum = 0;
 
