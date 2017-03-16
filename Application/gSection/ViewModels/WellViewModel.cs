@@ -4,6 +4,7 @@ using gEngine.Graph.Ge.Column;
 using gEngine.Graph.Interface;
 using gEngine.Util;
 using gEngine.Util.Ge.Column;
+using gEngine.Util.Ge.Section;
 using gEngine.View;
 using GPTDxWPFRibbonApplication1.Controls;
 using System;
@@ -42,7 +43,7 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
         {
             Random rdm = new Random();
             Map map = new Map();
-            Layer layer = new Layer();
+            Layer layer = SectionLayerCreator.CreateSectionLayer();
 
             string wellNums = DXNewSectionSet.WellNums;
             int wellCount = 0;

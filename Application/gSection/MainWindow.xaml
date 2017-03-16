@@ -467,7 +467,7 @@
                 <dxb:BarButtonItem x:Name="printItem" Content="Print" Glyph="{dx:DXImage Image=Print_16x16.png}"/>
             </dxr:RibbonStatusBarControl.RightItems>
         </dxr:RibbonStatusBarControl>
-        <dx:DXTabControl x:Name="tabControl" Grid.Row="1" ItemsSource="{Binding TabItems,Mode=TwoWay}"  >
+        <dx:DXTabControl x:Name="tabControl" DestroyContentOnTabSwitching="False" TabContentCacheMode="CacheAllTabs" Grid.Row="1" ItemsSource="{Binding TabItems,Mode=TwoWay}"  >
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Loaded">
                     <i:InvokeCommandAction Command="{Binding TabLoadedCommand}" CommandParameter="{Binding ElementName=tabControl}" />
