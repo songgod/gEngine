@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:gEngine.View"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
-             Background="White"
+             Background="LightGray"
               ClipToBounds="True">
     <ItemsControl.ItemsPanel>
         <ItemsPanelTemplate>
@@ -15,7 +15,9 @@
     </ItemsControl.ItemsPanel>
     <ItemsControl.ItemTemplate>
         <DataTemplate>
-            <local:LayerControl x:Name="layercontrol" ItemsSource="{Binding Objects}" Background="LightGray"/>
+            <AdornerDecorator>
+                <local:LayerControl x:Name="layercontrol" ItemsSource="{Binding Objects}" Background="LightGray" />
+            </AdornerDecorator>
         </DataTemplate>
     </ItemsControl.ItemTemplate>
 </ItemsControl>
