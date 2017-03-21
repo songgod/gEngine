@@ -198,6 +198,58 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
             }
         }
 
+        public System.Windows.Input.ICommand SetEditManipulatorCommand
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    MapControl mc = FullViewObject as MapControl;
+                    EditCurveManipulator dm = new EditCurveManipulator();
+                    ManipulatorSetter.SetManipulator(dm, mc.GetLayerControl(0));
+                });
+            }
+        }
+
+        public System.Windows.Input.ICommand SetReplaceManipulatorCommand
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    MapControl mc = FullViewObject as MapControl;
+                    ReplaceLineManipulator dm = new ReplaceLineManipulator();
+                    ManipulatorSetter.SetManipulator(dm, mc.GetLayerControl(0));
+                });
+            }
+        }
+
+        public System.Windows.Input.ICommand SetEraseManipulatorCommand
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    MapControl mc = FullViewObject as MapControl;
+                    EraseLineManipulator dm = new EraseLineManipulator();
+                    ManipulatorSetter.SetManipulator(dm, mc.GetLayerControl(0));
+                });
+            }
+        }
+
+        public System.Windows.Input.ICommand SetRemoveFaceManipulatorCommand
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    MapControl mc = FullViewObject as MapControl;
+                    SetFaceTypeManipulator dm = new SetFaceTypeManipulator() { FaceType = -1 };
+                    ManipulatorSetter.SetManipulator(dm, mc.GetLayerControl(0));
+                });
+            }
+        }
+
 
         #endregion  Commands
 
