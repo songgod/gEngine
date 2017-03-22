@@ -60,13 +60,20 @@
                         <dxe:ComboBoxEdit x:Name="cbHScale"></dxe:ComboBoxEdit>
                     </dxdo:LayoutControlItem>
                     <dxdo:LayoutControlItem Caption="纵向比例">
-                        <dxe:ComboBoxEdit x:Name="cbVScale" SelectedIndex="0" ItemsSource="{Binding LongitudinalProportion}"></dxe:ComboBoxEdit>
+                        <dxe:ComboBoxEdit x:Name="cbVScale"  ItemsSource="{Binding LongitudinalProportion , Mode=TwoWay}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectedIndexChanged">
+                                    <i:InvokeCommandAction Command="{Binding CbVScaleCommand}" CommandParameter="{Binding ElementName=cbVScale,Path=SelectedItem}">
+                                    </i:InvokeCommandAction>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </dxe:ComboBoxEdit>
                     </dxdo:LayoutControlItem>
                 </dxdo:LayoutGroup>
                 <dxdo:LayoutGroup >
                     <dxdo:EmptySpaceItem></dxdo:EmptySpaceItem>
                     <dxdo:LayoutControlItem Caption="图名" ItemHeight="Auto">
-                        <dxe:TextEdit x:Name="txtMapName"></dxe:TextEdit>
+                        <dxe:TextEdit x:Name="txtMapName" Text="{Binding MapName,Mode=TwoWay}"></dxe:TextEdit>
                     </dxdo:LayoutControlItem>
                 </dxdo:LayoutGroup>
                 <dxdo:LayoutGroup>
@@ -74,7 +81,7 @@
                         <Button x:Name="btnOK" Content="确定" Tag="GPTDxWPFRibbonApplication1.Controls.DWellControl" ToolTip="打开剖面图">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Click">
-                                    <i:InvokeCommandAction Command="{Binding ConfirmCommand}" CommandParameter="{Binding ElementName=DxNewSectionSet}"></i:InvokeCommandAction>
+                                    <i:InvokeCommandAction Command="{Binding ConfirmCommand}" CommandParameter="{Binding ElementName=btnOK}"></i:InvokeCommandAction>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
@@ -83,7 +90,7 @@
                         <Button x:Name="btnCancel" Content="取消">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Click">
-                                    <i:InvokeCommandAction Command="{Binding CancelCommand}" CommandParameter="{Binding ElementName=DxNewSectionSet}"></i:InvokeCommandAction>
+                                    <i:InvokeCommandAction Command="{Binding CancelCommand}" CommandParameter="{Binding ElementName=btnCancel}"></i:InvokeCommandAction>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
