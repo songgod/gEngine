@@ -12,6 +12,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Interactivity;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -47,17 +48,17 @@ namespace gEngineTest.Ge.WellLocation
         private void CreateWellLocation()
         {
             Map map = new Map();
-            //Layer sectionLayer = new Layer();
-            Layer sectionLayer = SectionLayerCreator.CreateSectionLayer();
+            Layer layer = new Layer();
+            //Layer sectionLayer = SectionLayerCreator.CreateSectionLayer();
             TXTWellLocations twl = new TXTWellLocations() { TxtFile = "d:/welllocations.txt" };
             WellLocationsCreator c = new WellLocationsCreator();
-            //sectionLayer.Objects = c.Create(twl);
-            IObjects objs = c.Create(twl);
-            foreach (var o in objs)
-            {
-                sectionLayer.Objects.Add(o);
-            }
-            map.Layers.Add(sectionLayer);
+            layer.Objects = c.Create(twl);
+            //IObjects objs = c.Create(twl);
+            //foreach (var o in objs)
+            //{
+            //    sectionLayer.Objects.Add(o);
+            //}
+            map.Layers.Add(layer);
             //3.绑定lc数据源
             Binding bd = new Binding("Layers") { Source = map };
             mc.SetBinding(ItemsControl.ItemsSourceProperty, bd);
@@ -75,12 +76,8 @@ namespace gEngineTest.Ge.WellLocation
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+
             ManipulatorSetter.SetManipulator(dm, mc.GetLayerControl(0));
-
-            //LayerControlZoomPan lczp = new LayerControlZoomPan();
-            //BehaviorCollection bc = Interaction.GetBehaviors(mc.GetLayerControl(0));
-            //bc.Add(lczp);
-
             dm.IsStopMove = false;
             dm.SelectWellLocations.Clear();
         }

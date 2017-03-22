@@ -70,6 +70,7 @@
     <Compile Include="LineManipulator.cs" />
     <Compile Include="LineTrackAdorner.cs" />
     <Compile Include="ManipulatorBase.cs" />
+    <Compile Include="MapControlAdonDectZoomPan.cs" />
     <Compile Include="MapControlZoomPan.cs" />
     <Compile Include="PolyLineManipulator.cs" />
     <Compile Include="PolyTrackAdorner.cs" />

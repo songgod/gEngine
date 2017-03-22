@@ -219,6 +219,12 @@
                             </dxb:BarEditItem.EditSettings>
                         </dxb:BarEditItem>
                     </dxr:RibbonPageGroup>
+                    <dxr:RibbonPageGroup Caption="编辑">
+                        <dxb:BarButtonItem Content="编辑线" LargeGlyph="{dx:DXImage Image=Spline_32x32.png}" Glyph="{dx:DXImage Image=Spline_16x16.png}" RibbonStyle="Large" Command="{Binding SetEditManipulatorCommand}"/>
+                        <dxb:BarButtonItem Content="替换线" LargeGlyph="{dx:DXImage Image=Spline_32x32.png}" Glyph="{dx:DXImage Image=Spline_16x16.png}" RibbonStyle="Large" Command="{Binding SetReplaceManipulatorCommand}"/>
+                        <dxb:BarButtonItem Content="擦除线" LargeGlyph="{dx:DXImage Image=Spline_32x32.png}" Glyph="{dx:DXImage Image=Spline_16x16.png}" RibbonStyle="Large" Command="{Binding SetEraseManipulatorCommand}"/>
+                        <dxb:BarButtonItem Content="删除面" LargeGlyph="{dx:DXImage Image=Spline_32x32.png}" Glyph="{dx:DXImage Image=Spline_16x16.png}" RibbonStyle="Large" Command="{Binding SetRemoveFaceManipulatorCommand}"/>
+                    </dxr:RibbonPageGroup>
                 </dxr:RibbonPage>
                 <dxr:RibbonPage Caption="填充剖面">
                     <dxr:RibbonPageGroup Caption="填充">
