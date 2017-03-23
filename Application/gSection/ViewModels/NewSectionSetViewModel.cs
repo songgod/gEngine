@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media;
 
 namespace GPTDxWPFRibbonApplication1.ViewModels
@@ -20,21 +21,57 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
     {
         public NewSectionSetViewModel()
         {
-            LongitudinalProportion = new List<double>();
-            LongitudinalProportion.Add(100);
-            LongitudinalProportion.Add(200);
+            _instance = this;
         }
+
+        #region CreateInstance
+
+        private volatile static NewSectionSetViewModel _instance = null;
+        private static readonly object lockHelper = new object();
+        public static NewSectionSetViewModel CreateInstance()
+        {
+            if (_instance == null)
+            {
+                lock (lockHelper)
+                {
+                    if (_instance == null)
+                        _instance = new NewSectionSetViewModel();
+                }
+            }
+            return _instance;
+        }
+
+        #endregion
 
         #region Property
 
         // 纵向比例
         public static readonly DependencyProperty LongitudinalProportionProperty =
-            DependencyProperty.Register("LongitudinalProportion", typeof(List<double>), typeof(NewSectionSetViewModel));
+            DependencyProperty.Register("LongitudinalProportion", typeof(List<int>), typeof(NewSectionSetViewModel), new PropertyMetadata(InitLongitudinalProportion()));
 
-        public List<double> LongitudinalProportion
+        private List<int> LongitudinalProportion
         {
-            get { return (List<double>)GetValue(LongitudinalProportionProperty); }
+            get { return (List<int>)GetValue(LongitudinalProportionProperty); }
             set { SetValue(LongitudinalProportionProperty, value); }
+        }
+
+        /// <summary>
+        /// 选择的纵向比例
+        /// </summary>
+        public int SLongitudinalProportion
+        {
+            get;
+            private set;
+        }
+
+        // 图名
+        public static readonly DependencyProperty MapNameProperty =
+            DependencyProperty.Register("MapName", typeof(string), typeof(NewSectionSetViewModel), new PropertyMetadata("剖面图"));
+
+        private string MapName
+        {
+            get { return (string)GetValue(MapNameProperty); }
+            set { SetValue(MapNameProperty, value); }
         }
 
         #endregion
@@ -48,18 +85,33 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
         #region Method
 
         /// <summary>
+        /// 初始化纵向比例
+        /// </summary>
+        static List<int> InitLongitudinalProportion()
+        {
+            List<int> yScale = new List<int>();
+            yScale.Add(100);
+            yScale.Add(200);
+            yScale.Add(500);
+            yScale.Add(1000);
+            yScale.Add(1500);
+            yScale.Add(2000);
+            return yScale;
+        }
+
+        /// <summary>
         /// 确定执行函数
         /// </summary>
-        /// <param name="w"></param>
-        private void Confirm(Window w)
+        /// <param name="el"></param>
+        private void Confirm(FrameworkElement el)
         {
             try
             {
-                Button ok = w.FindName("btnOK") as Button;
-                string url = (string)ok.Tag;
-                string title = (string)ok.ToolTip;
+                string url = (string)el.Tag;
+                string title = this.MapName;
                 if (RibbonViewModelOpenPageToTab != null)
                 {
+                    Window w = Window.GetWindow(el);
                     RibbonViewModelOpenPageToTab(url, title);
                     w.Close();
                 }
@@ -73,11 +125,12 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
         /// <summary>
         /// 取消执行按钮
         /// </summary>
-        /// <param name="w"></param>
-        private void Cancel(Window w)
+        /// <param name="el"></param>
+        private void Cancel(FrameworkElement el)
         {
-            if (w != null)
+            if (el != null)
             {
+                Window w = Window.GetWindow(el);
                 w.Close();
             }
         }
@@ -91,12 +144,23 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
         /// </summary>
         public System.Windows.Input.ICommand ConfirmCommand
         {
-            get { return new RelayCommand<Window>(Confirm); }
+            get { return new RelayCommand<FrameworkElement>(Confirm); }
         }
 
         public System.Windows.Input.ICommand CancelCommand
         {
-            get { return new RelayCommand<Window>(Cancel); }
+            get { return new RelayCommand<FrameworkElement>(Cancel); }
+        }
+
+        public System.Windows.Input.ICommand CbVScaleCommand
+        {
+            get
+            {
+                return new RelayCommand<int>((selectItem) =>
+                {
+                    SLongitudinalProportion =selectItem;
+                });
+            }
         }
 
         #endregion

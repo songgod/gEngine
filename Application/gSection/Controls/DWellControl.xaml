@@ -25,11 +25,11 @@
             <i:Interaction.Behaviors>
                 <gm:MapControlZoomPan></gm:MapControlZoomPan>
             </i:Interaction.Behaviors>
-            <i:Interaction.Triggers>
+            <!--<i:Interaction.Triggers>
                 <i:EventTrigger EventName="Loaded">
                     <i:InvokeCommandAction Command="{Binding LoadCommand}" CommandParameter="{Binding ElementName=mc}"></i:InvokeCommandAction>
                 </i:EventTrigger>
-            </i:Interaction.Triggers>
+            </i:Interaction.Triggers>-->
         </gv:MapControl>
     </Grid>
 </UserControl>

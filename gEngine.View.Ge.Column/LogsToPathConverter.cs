@@ -94,9 +94,7 @@ namespace gEngine.View.Ge.Column
                     pls.Points.Add(new Point() { X = x, Y = yValue });
                 }
             }
-
             return geom;
-
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)

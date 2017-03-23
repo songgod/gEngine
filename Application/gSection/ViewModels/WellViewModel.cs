@@ -18,10 +18,39 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
 
+
 namespace GPTDxWPFRibbonApplication1.ViewModels
 {
     public class WellViewModel
     {
+        public WellViewModel()
+        {
+            _instance = this;
+        }
+
+        #region CreateInstance
+
+        private volatile static WellViewModel _instance = null;
+        private static readonly object lockHelper = new object();
+        public static WellViewModel CreateInstance()
+        {
+            if (_instance == null)
+            {
+                lock (lockHelper)
+                {
+                    if (_instance == null)
+                        _instance = new WellViewModel();
+                }
+            }
+            return _instance;
+        }
+
+        NewSectionSetViewModel vm = NewSectionSetViewModel.CreateInstance();
+
+        #endregion
+
+        #region Property
+
         private FrameworkElement _mc;
         public FrameworkElement mc
         {
@@ -29,13 +58,11 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
             set
             {
                 _mc = value;
-                //InitWell(_mc);
+                InitWell(_mc);
             }
         }
 
-        public WellViewModel()
-        {
-        }
+        #endregion
 
         #region Method
 
@@ -64,7 +91,7 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
                         foreach (Well well in res)
                         {
                             well.Name = wellNum.ToString();
-                            well.LongitudinalProportion = 1500;//纵向比例
+                            well.LongitudinalProportion = vm.SLongitudinalProportion==0 ? 1500 : vm.SLongitudinalProportion;//纵向比例
                             int depthsWidth = 60;// 深度道宽度
                             int colsOffset = 0; // 曲线偏移
                             well.Location = wellCount == 0 ? 0 : WellWidthSum;
@@ -92,15 +119,15 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
             Binding bd = new Binding("Layers") { Source = map };
             mc.SetBinding(ItemsControl.ItemsSourceProperty, bd);
         }
-                
+
+        #endregion
+
         #region ICommand
 
         public System.Windows.Input.ICommand LoadCommand
         {
             get { return new RelayCommand<FrameworkElement>(InitWell); }
         }
-
-        #endregion
 
         #endregion
     }
