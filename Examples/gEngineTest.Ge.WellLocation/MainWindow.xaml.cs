@@ -62,6 +62,8 @@ namespace gEngineTest.Ge.WellLocation
             //3.绑定lc数据源
             Binding bd = new Binding("Layers") { Source = map };
             mc.SetBinding(ItemsControl.ItemsSourceProperty, bd);
+
+            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -76,8 +78,8 @@ namespace gEngineTest.Ge.WellLocation
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-
             ManipulatorSetter.SetManipulator(dm, mc.GetLayerControl(0));
+
             dm.IsStopMove = false;
             dm.SelectWellLocations.Clear();
         }
