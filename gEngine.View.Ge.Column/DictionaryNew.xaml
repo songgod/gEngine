@@ -79,6 +79,7 @@
             <Grid Canvas.Left="{Binding Offset}">
                 <Grid.Resources>
                     <local:LogsToPathConverter x:Key="l2p"/>
+                    <local:LogsToFillConverter x:Key="l2f"/>
                 </Grid.Resources>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50"/>
@@ -96,6 +97,14 @@
                         <Path.Stroke>
                             <SolidColorBrush Color="{Binding Color}"></SolidColorBrush>
                         </Path.Stroke>
+                        <Path.Fill>
+                            <MultiBinding Converter="{StaticResource l2f}">
+                                <!--绑定参数只是占位用，待设置功能开发完更换-->
+                                <Binding Path="Values"/>
+                                <Binding Path="Owner"/>
+                                <Binding Path="MathType"/>
+                            </MultiBinding>
+                        </Path.Fill>
                         <Path.Data>
                             <MultiBinding Converter="{StaticResource l2p}">
                                 <Binding Path="Values"/>

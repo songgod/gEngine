@@ -82,7 +82,8 @@ namespace gEngine.Data.Ge.Txt
                                 {
                                     if (i.Equals(0))
                                     {
-                                        Depths.Add(double.Parse(strColumns[i]));
+                                        if (double.Parse(strColumns[i]) > 0)
+                                            Depths.Add(double.Parse(strColumns[i]));
                                     }
                                     else
                                     {
