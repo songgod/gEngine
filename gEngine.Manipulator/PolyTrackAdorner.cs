@@ -12,6 +12,12 @@ namespace gEngine.Manipulator
 
         }
 
+        protected override Size ArrangeOverride(Size finalSize)
+        {
+            Size size = new Size { Width = double.MaxValue, Height = double.MaxValue };
+            return base.ArrangeOverride(size);
+        }
+
         public void MoveLastPoint(Point p)
         {
             if (this.Track.Points.Count == 0)

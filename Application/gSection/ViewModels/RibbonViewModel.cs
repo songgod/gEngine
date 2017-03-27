@@ -2,6 +2,7 @@
 using DevExpress.Xpf.Bars;
 using DevExpress.Xpf.Core;
 using gEngine.Manipulator;
+using gEngine.Manipulator.Ge.Plane;
 using gEngine.Manipulator.Ge.Section;
 using gEngine.Util;
 using gEngine.View;
@@ -165,9 +166,18 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
                 return new RelayCommand(() =>
                 {
                     MapControl mc = FullViewObject as MapControl;
-                    GraphManipulatorBase gm = (GraphManipulatorBase)ManipulatorBehavior;
-                    if (mc != null && gm != null)
-                        ManipulatorSetter.SetManipulator(gm, mc.GetLayerControl(0));
+                    ManipulatorBase mb = (ManipulatorBase)ManipulatorBehavior;
+                    if (mc != null && mb != null)
+                    {
+                        ManipulatorSetter.SetManipulator(mb, mc.GetLayerControl(0));
+                        WellLocationsConnectManipulator wcm = mb as WellLocationsConnectManipulator;
+                        if (wcm != null)
+                        {
+                            wcm.IsStopMove = false;
+                            wcm.SelectWellLocations.Clear();
+                        }
+                    }
+
                 });
             }
         }
