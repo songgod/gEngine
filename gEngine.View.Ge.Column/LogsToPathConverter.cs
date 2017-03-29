@@ -134,7 +134,7 @@ namespace gEngine.View.Ge.Column
             {
                 double xRange = xMin + (interval * skip);
                 double xNextRange = xMin + (interval * (skip + 1));
-                colorDic.Add(string.Format(@"{0}_{1}", xRange, xNextRange), string.Format(@"{0}_{1}", colors[skip].ToString(), colors[skip + 1].ToString()));
+                colorDic.Add(string.Format(@"{0}_{1}", xRange, xNextRange), string.Format(@"{0}_{1}", skip, skip + 1));
                 if (xNextRange >= xMax)
                     break;
             }
@@ -163,11 +163,10 @@ namespace gEngine.View.Ge.Column
                 string[] colorStrs = colorDicValue.Split(split);
                 string[] keyStrs = colorDicKey.Split(split);
 
-                // 字符串颜色转换成Drawing.Color
-                System.Drawing.Color s_color = System.Drawing.ColorTranslator.FromHtml(colorStrs[0]);
-                System.Drawing.Color d_color = System.Drawing.ColorTranslator.FromHtml(colorStrs[1]);
+                Color s_color = colors[int.Parse(colorStrs[0])];
+                Color d_color = colors[int.Parse(colorStrs[1])];
 
-                Color vColor = GetGradientColor(Color.FromRgb((byte)s_color.R, (byte)s_color.G, (byte)s_color.B), Color.FromRgb((byte)d_color.R, (byte)d_color.G, (byte)d_color.B), xPoint, double.Parse(keyStrs[0]), double.Parse(keyStrs[1]));
+                Color vColor = GetGradientColor(s_color,d_color, xPoint, double.Parse(keyStrs[0]), double.Parse(keyStrs[1]));
                 lineGradientBrush.GradientStops.Add(new GradientStop(vColor, (double)i / validValueList.Length));
             }
 
