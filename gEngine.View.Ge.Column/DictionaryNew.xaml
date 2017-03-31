@@ -93,7 +93,14 @@
                     </TextBlock>
                 </Border>
                 <StackPanel Grid.Row="1" Grid.Column="0">
-                    <Path x:Name="PathDepth"  StrokeThickness="1">
+                    <Path x:Name="PathLogs"  StrokeThickness="1">
+                        <Path.Data>
+                            <MultiBinding Converter="{StaticResource l2p}">
+                                <Binding Path="Values"/>
+                                <Binding Path="Owner"/>
+                                <Binding Path="MathType"/>
+                            </MultiBinding>
+                        </Path.Data>
                         <Path.Stroke>
                             <SolidColorBrush Color="{Binding Color}"></SolidColorBrush>
                         </Path.Stroke>
@@ -103,15 +110,9 @@
                                 <Binding Path="Values"/>
                                 <Binding Path="Owner"/>
                                 <Binding Path="MathType"/>
+                                <Binding ElementName="PathLogs" Path="Data"></Binding>
                             </MultiBinding>
                         </Path.Fill>
-                        <Path.Data>
-                            <MultiBinding Converter="{StaticResource l2p}">
-                                <Binding Path="Values"/>
-                                <Binding Path="Owner"/>
-                                <Binding Path="MathType"/>
-                            </MultiBinding>
-                        </Path.Data>
                     </Path>
                 </StackPanel>
             </Grid>
