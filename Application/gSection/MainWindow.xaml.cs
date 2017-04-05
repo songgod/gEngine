@@ -51,6 +51,7 @@ namespace GPTDxWPFRibbonApplication1
                  "/RibbonDemo;component/Images/Clipart/caServerEnabled.png",
                  "/RibbonDemo;component/Images/Clipart/caWebCam.png"
              };
+
         }
 
     }

@@ -12,7 +12,7 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <Border Background="White" BorderBrush="Black" BorderThickness="2">
-            <gv:MapControl x:Name="mc"  MouseRightButtonDown="mc_MouseRightButtonDown"><!--MouseMove="mc_MouseMove" -->
+            <gv:MapControl x:Name="mc">
                 <i:Interaction.Behaviors>
                     <em:MapControlAdonDectZoomPan/>
                 </i:Interaction.Behaviors>
