@@ -25,16 +25,18 @@ namespace gEngine.Data.Ge.Txt
             }
         }
 
-        private bool IsDecimal(string numstr)
+        private bool IsDecimal(string numstr, out double result)
         {
             try
             {
-                Decimal dt;
-                dt = Convert.ToDecimal(numstr);
+                double dt;
+                dt = Convert.ToDouble(numstr);
+                result = dt;
                 return true;
             }
             catch
             {
+                result = 0;
                 return false;
             }
         }
@@ -48,13 +50,16 @@ namespace gEngine.Data.Ge.Txt
 
             var file = File.Open(txtfilepath, FileMode.Open);
 
+            System.Text.RegularExpressions.Regex whitespace = new System.Text.RegularExpressions.Regex(@"\s+", System.Text.RegularExpressions.RegexOptions.Compiled);
+
             using (var stream = new StreamReader(file, Encoding.GetEncoding("gb2312")))
             {
                 Columns = new List<Tuple<string, List<double>>>();
                 Depths = new List<double>();
                 while (!stream.EndOfStream)
                 {
-                    string strLine = System.Text.RegularExpressions.Regex.Replace(stream.ReadLine().Trim().ToString(), @"\s+", " ");
+                    //string strLine = System.Text.RegularExpressions.Regex.Replace(stream.ReadLine().Trim().ToString(), @"\s+", " ");
+                    string strLine = whitespace.Replace(stream.ReadLine().Trim(), " ");
                     if (!string.IsNullOrEmpty(strLine))
                     {
                         string[] strColumns = strLine.Split(' ');
@@ -78,16 +83,17 @@ namespace gEngine.Data.Ge.Txt
                         {
                             for (int i = 0; i < curveCount; i++)
                             {
-                                if (!string.IsNullOrEmpty(strColumns[i]) && IsDecimal(strColumns[i]))
+                                double value;
+                                if (IsDecimal(strColumns[i], out value))
                                 {
                                     if (i.Equals(0))
                                     {
-                                        Depths.Add(double.Parse(strColumns[i]));
+                                        if (value > 0)
+                                            Depths.Add(value);
                                     }
                                     else
                                     {
-                                        double xValue = double.Parse(strColumns[i]);
-                                        Columns[i - 1].Item2.Add(xValue);
+                                        Columns[i - 1].Item2.Add(value);
                                     }
                                 }
                             }
