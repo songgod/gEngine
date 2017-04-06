@@ -5,7 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Windows;
 
-namespace GPTDxWPFRibbonApplication1
+namespace gSection
 {
     /// <summary>
     /// Interaction logic for App.xaml

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -8,99 +8,54 @@
     <ProjectGuid>{BE9284FF-F1AD-4B95-9233-130CA4F20C77}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GPTDxWPFRibbonApplication1</RootNamespace>
-    <AssemblyName>GPTDxWPFRibbonApplication1</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <RootNamespace>gSection</RootNamespace>
+    <AssemblyName>gSection</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <ExpressionBlendVersion>12.0.41002.1</ExpressionBlendVersion>
-    <TargetFrameworkProfile />
-    <PublishUrl>publish\</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x64\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>true</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <OutputPath>bin\x64\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>true</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x86\Debug\</OutputPath>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>true</Prefer32Bit>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <OutputPath>bin\x86\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>true</Prefer32Bit>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.Xpf.Core.v16.1" />
-    <Reference Include="DevExpress.Data.v16.1" />
-    <Reference Include="DevExpress.Xpf.Docking.v16.1, Version=16.1.2.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Xpf.Layout.v16.1.Core, Version=16.1.2.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Data.v16.1">
+      <Private>False</Private>
+    </Reference>
     <Reference Include="DevExpress.Xpf.Ribbon.v16.1" />
     <Reference Include="DevExpress.Printing.v16.1.Core" />
     <Reference Include="DevExpress.Images.v16.1">
       <Private>True</Private>
     </Reference>
-    <Reference Include="DevExpress.Mvvm.v16.1" />
+    <Reference Include="DevExpress.Mvvm.v16.1">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="DevExpress.Xpf.Themes.Office2016Colorful.v16.1, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files (x86)\DevExpress 16.1\Components\Bin\Framework\DevExpress.Xpf.Themes.Office2016Colorful.v16.1.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="DevExpress.Xpf.Themes.Office2016White.v16.1" />
-    <Reference Include="gTopology, Version=1.0.6199.29938, Culture=neutral, PublicKeyToken=null" />
-    <Reference Include="Microsoft.Expression.Controls, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Expression.Drawing, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.Expression.Effects, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -109,8 +64,6 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="UIAutomationProvider" />
-    <Reference Include="UIAutomationTypes" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -120,65 +73,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Controls\DWellControl.xaml.cs">
-      <DependentUpon>DWellControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\IView.cs" />
-    <Compile Include="Controls\WellControl.xaml.cs">
-      <DependentUpon>WellControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\WellLocationControl.xaml.cs">
-      <DependentUpon>WellLocationControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Converters\PointToStringConverter.cs" />
-    <Compile Include="DXNewSectionSet.xaml.cs">
-      <DependentUpon>DXNewSectionSet.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="New section set.xaml.cs">
-      <DependentUpon>New section set.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="New Section window.xaml.cs">
-      <DependentUpon>New Section window.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="OptionPanel.xaml.cs">
+    <Compile Include="View\OptionPanel.xaml.cs">
       <DependentUpon>OptionPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AddTrendLine.xaml.cs">
-      <DependentUpon>AddTrendLine.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="FluidUI.xaml.cs">
-      <DependentUpon>FluidUI.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="QuickPanel.xaml.cs">
-      <DependentUpon>QuickPanel.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="StratumPick.xaml.cs">
-      <DependentUpon>StratumPick.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModels\NewSectionSetViewModel.cs" />
-    <Compile Include="ViewModels\RibbonViewModel.cs" />
-    <Compile Include="ViewModels\WellViewModel.cs" />
-    <Page Include="Controls\DWellControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\WellControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\WellLocationControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DXNewSectionSet.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="en-us.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -187,39 +89,11 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Converters\ObjectsEqualityConverter.cs" />
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="New section set.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="New Section window.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="OptionPanel.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AddTrendLine.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="FluidUI.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="QuickPanel.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Simple Styles.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="StratumPick.xaml">
+    <Page Include="View\OptionPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -247,7 +121,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Fakes Include="Fakes\gEngine.Data.Ge.fakes" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -649,120 +522,12 @@
     <Resource Include="Images\GDS\通用线型64x16.PNG" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="油水边界线1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="油水边界线2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="气油边界线.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="气水边界线.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="添加按钮.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\GDS\视图上移一层.ico" />
     <Resource Include="Images\GDS\视图上移置顶.ico" />
     <Resource Include="Images\GDS\视图下移一层.ico" />
     <Resource Include="Images\GDS\视图下移置底.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\gEngine.Data.Ge.Txt\gEngine.Data.Ge.Txt.csproj">
-      <Project>{48a388bf-1160-46e5-a68c-e5a819026c6e}</Project>
-      <Name>gEngine.Data.Ge.Txt</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\gEngine.Data.Ge\gEngine.Data.Ge.csproj">
-      <Project>{94c3209d-a3a9-4d3c-b851-c14d390cc23a}</Project>
-      <Name>gEngine.Data.Ge</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\gEngine.Data.Interface\gEngine.Data.Interface.csproj">
-      <Project>{b1c2609b-a3ed-43e0-9da2-df27029d44fc}</Project>
-      <Name>gEngine.Data.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\gEngine.Graph.Ge.Column\gEngine.Graph.Ge.Column.csproj">
-      <Project>{95227940-90F7-40B4-9027-3EEECD8ED6DE}</Project>
-      <Name>gEngine.Graph.Ge.Column</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\gEngine.Graph.Ge.Plane\gEngine.Graph.Ge.Plane.csproj">
-      <Project>{82739b38-8706-493d-a571-c743afcead12}</Project>
-      <Name>gEngine.Graph.Ge.Plane</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\gEngine.Graph.Ge.Section\gEngine.Graph.Ge.Section.csproj">
-      <Project>{53D7A20D-84B5-499F-B183-D440854B7C8C}</Project>
-      <Name>gEngine.Graph.Ge.Section</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\gEngine.Graph.Ge\gEngine.Graph.Ge.csproj">
-      <Project>{3bd77e4f-a348-4edb-b60c-68b749249b91}</Project>
-      <Name>gEngine.Graph.Ge</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\gEngine.Graph.Interface\gEngine.Graph.Interface.csproj">
-      <Project>{1c98a821-b030-4ff2-83ae-d49b1b3b8c67}</Project>
-      <Name>gEngine.Graph.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\gEngine.Manipulator.Ge.Plane\gEngine.Manipulator.Ge.Plane.csproj">
-      <Project>{70026887-fd51-4a98-8e50-4b55f750013b}</Project>
-      <Name>gEngine.Manipulator.Ge.Plane</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\gEngine.Manipulator.Ge.Section\gEngine.Manipulator.Ge.Section.csproj">
-      <Project>{036A5D25-0AF4-4259-B83A-E04026F1749C}</Project>
-      <Name>gEngine.Manipulator.Ge.Section</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\gEngine.Manipulator\gEngine.Manipulator.csproj">
-      <Project>{b4eedb17-eb3d-4e22-ab7c-d8e366564b8f}</Project>
-      <Name>gEngine.Manipulator</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\gEngine.Util.Ge.Column\gEngine.Util.Ge.Column.csproj">
-      <Project>{6209A699-8823-4A0B-8A0C-BDAE9CE52305}</Project>
-      <Name>gEngine.Util.Ge.Column</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\gEngine.Util.Ge.Plane\gEngine.Util.Ge.Plane.csproj">
-      <Project>{73F67444-D0E8-4EAC-8951-8B5C8D8F42CD}</Project>
-      <Name>gEngine.Util.Ge.Plane</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\gEngine.Util.Ge.Section\gEngine.Util.Ge.Section.csproj">
-      <Project>{B3D6B10A-4C31-4981-97FA-3437CB583729}</Project>
-      <Name>gEngine.Util.Ge.Section</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\gEngine.Util\gEngine.Util.csproj">
-      <Project>{84acb6c4-cf62-4f4b-a7e5-5c642edc041a}</Project>
-      <Name>gEngine.Util</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\gEngine.View.Ge.Column\gEngine.View.Ge.Column.csproj">
-      <Project>{763b3662-8a27-45be-90a6-b2bd51c2ca47}</Project>
-      <Name>gEngine.View.Ge.Column</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\gEngine.View.Ge.Plane\gEngine.View.Ge.Plane.csproj">
-      <Project>{57f49817-a06c-4b8b-bc19-b6cd36800969}</Project>
-      <Name>gEngine.View.Ge.Plane</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\gEngine.View.Ge.Section\gEngine.View.Ge.Section.csproj">
-      <Project>{94fb234d-24ad-4fd9-bc79-0257073bc3eb}</Project>
-      <Name>gEngine.View.Ge.Section</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\gEngine.View.Symbol\gEngine.View.Symbol.csproj">
-      <Project>{1600379b-c8b5-4375-a1d5-3b81bd7fccf7}</Project>
-      <Name>gEngine.View.Symbol</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\gEngine.View\gEngine.View.csproj">
-      <Project>{932485ea-2f95-4caa-8bcd-df68c496854e}</Project>
-      <Name>gEngine.View</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
-      <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 和 x64%29</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

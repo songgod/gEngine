@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace GPTDxWPFRibbonApplication1.Converters
+namespace gSection.Converters
 {
     public class ObjectsEqualityConverter : IValueConverter
     {
