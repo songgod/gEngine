@@ -62,7 +62,7 @@
                     <dxr:BackstageTabItem dxb:MergingProperties.AllowMerging="True" Content="Recent" dxb:MergingProperties.ElementMergingBehavior="InternalWithInternal" dxb:BarNameScope.IsScopeOwner="True">
                     </dxr:BackstageTabItem>
                     <dxr:BackstageTabItem dxb:MergingProperties.AllowMerging="True" Content="Options" dxb:MergingProperties.ElementMergingBehavior="InternalWithInternal" dxb:BarNameScope.IsScopeOwner="True">
-                        <view:OptionPanel/>
+                        <!--<view:OptionPanel/>-->
                     </dxr:BackstageTabItem>
                     <dxr:BackstageTabItem dxb:MergingProperties.AllowMerging="True" Content="Help" dxb:MergingProperties.ElementMergingBehavior="InternalWithInternal" dxb:BarNameScope.IsScopeOwner="True"/>
                     <dxr:BackstageButtonItem Content="Close" Glyph="{dx:DXImage Image=Close_16x16.png}"/>
