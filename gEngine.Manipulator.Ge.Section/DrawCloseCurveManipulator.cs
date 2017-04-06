@@ -8,20 +8,27 @@ using System.Windows.Input;
 
 namespace gEngine.Manipulator.Ge.Section
 {
-    public class DrawCloseCurveManipulator : GraphCurveManipulator
+    public class DrawCloseCurveManipulator : CurveManipulator
     {
-        public override void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        protected GraphUtil graphutil = null;
+        protected override void OnAttached()
         {
-            if (TrackAdorner.Track.Points.Count == 0)
+            base.OnAttached();
+            graphutil = new GraphUtil(this.AssociatedObject);
+        }
+
+        protected override void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (TrackAdorner.Points.Count == 0)
                 return;
 
-            gTopology.Graph graph = Graph;
+            gTopology.Graph graph = graphutil.Graph;
             if (graph == null)
                 return;
 
             Topology editor = new Topology(graph);
-            editor.LinAddCurve(TrackPoints, Tolerance, true);
-            this.TrackAdorner.ClearPoint();
+            editor.LinAddCurve(new PointList(TrackAdorner.Points.ToList()), graphutil.Tolerance, true);
+            base.MouseLeftButtonUp(sender, e);
         }
     }
 }

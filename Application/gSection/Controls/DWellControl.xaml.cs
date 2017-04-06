@@ -13,6 +13,7 @@ using gEngine.Graph.Interface;
 using gEngine.Graph.Ge.Column;
 using System;
 using System.Windows.Media;
+using gEngine.Manipulator;
 
 namespace GPTDxWPFRibbonApplication1.Controls
 {
@@ -29,10 +30,7 @@ namespace GPTDxWPFRibbonApplication1.Controls
             set { mc = (MapControl)value; }
         }
 
-        Behavior<UIElement> IView.ManipulatorBehavior
-        {
-            get; set;
-        }
+        public Behavior ManipulatorBehavior { get; set; }
 
         #endregion
 

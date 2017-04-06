@@ -6,6 +6,8 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using gEngine.View;
 using System.Windows.Interactivity;
+using gEngine.Manipulator;
+using System;
 
 namespace GPTDxWPFRibbonApplication1.Controls
 {
@@ -21,10 +23,7 @@ namespace GPTDxWPFRibbonApplication1.Controls
             set { lyControl = (LayerControl)value; }
         }
 
-        Behavior<UIElement> IView.ManipulatorBehavior
-        {
-            get; set;
-        }
+        Behavior IView.ManipulatorBehavior { get; set; }
         #endregion
 
         public WellControl()

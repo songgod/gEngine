@@ -42,19 +42,8 @@ namespace GPTDxWPFRibbonApplication1.Controls
             get { return mc; }
             set { mc = (MapControl)value; }
         }
-        ManipulatorBase mb = null;
-        Behavior<UIElement> IView.ManipulatorBehavior
-        {
-            get
-            {
-                return mb;
-            }
-            set
-            {
-                mb = (ManipulatorBase)value;
-            }
-        }
 
+        public Behavior ManipulatorBehavior { get; set; }
 
         #endregion
 
@@ -63,8 +52,8 @@ namespace GPTDxWPFRibbonApplication1.Controls
         {
             InitializeComponent();
             CreateWellLocation();
-            mb = new WellLocationsConnectManipulator();
-            ((WellLocationsConnectManipulator)mb).OnFinishSelect += Dm_OnFinishSelect;
+            ManipulatorBehavior = new WellLocationsConnectManipulator();
+            ((WellLocationsConnectManipulator)ManipulatorBehavior).OnFinishSelect += Dm_OnFinishSelect;
         }
 
         private void Dm_OnFinishSelect(System.Collections.Generic.HashSet<string> names)
@@ -83,9 +72,7 @@ namespace GPTDxWPFRibbonApplication1.Controls
             WellLocationsCreator c = new WellLocationsCreator();
             layer.Objects = c.Create(twl);
             map.Layers.Add(layer);
-            //3.绑定lc数据源
-            Binding bd = new Binding("Layers") { Source = map };
-            mc.SetBinding(ItemsControl.ItemsSourceProperty, bd);
+            mc.DataContext = map;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

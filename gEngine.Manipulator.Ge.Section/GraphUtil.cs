@@ -10,12 +10,24 @@ using System.Windows.Media;
 
 namespace gEngine.Manipulator.Ge.Section
 {
-    public class GraphManipulatorBase : ManipulatorBase
+    public class GraphUtil
     {
+        private gTopology.Graph graph = null;
+        private Canvas graphcontainer = null;
+        private LayerControl lyrctrl = null;
+
+        public GraphUtil(LayerControl lc)
+        {
+            lyrctrl = lc;
+        }
+
         public gTopology.Graph Graph
         {
             get
             {
+                if (graph != null)
+                    return graph;
+
                 Canvas canvas = GraphContainer;
                 if (canvas == null)
                     return null;
@@ -25,7 +37,8 @@ namespace gEngine.Manipulator.Ge.Section
                 SectionObject so = p.DataContext as SectionObject;
                 if (so == null)
                     return null;
-                return so.TopGraph;
+                graph = so.TopGraph;
+                return graph;
             }
         }
 
@@ -33,12 +46,20 @@ namespace gEngine.Manipulator.Ge.Section
         {
             get
             {
-                Canvas canvas = FindChild.FindVisualChild<Canvas>(this.AssociatedObject, "SectionObjectCanvas");
+                if (graphcontainer != null)
+                    return graphcontainer;
+                if (lyrctrl == null)
+                {
+                    throw new Exception("LayerControl should not be null");
+                }
+
+                Canvas canvas = FindChild.FindVisualChild<Canvas>(lyrctrl, "SectionObjectCanvas");
                 if (canvas == null)
                 {
                     throw new Exception("GraphContainer should not be null");
                 }
-                return canvas;
+                graphcontainer = canvas;
+                return graphcontainer;
             }
         }
 

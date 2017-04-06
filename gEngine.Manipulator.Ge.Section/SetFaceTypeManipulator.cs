@@ -9,35 +9,63 @@ using System.Windows.Media;
 
 namespace gEngine.Manipulator.Ge.Section
 {
-    public class SetFaceTypeManipulator : GraphManipulatorBase
+    public class SetFaceTypeManipulator : LayerManipulator
     {
+        
         public SetFaceTypeManipulator()
         {
             FaceType = -1;
         }
 
+        protected GraphUtil graphutil = null;
+
         public int FaceType { get; set; }
 
         public bool InvalidFace { get; set; }
 
-        public override void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        protected override void OnAttached()
         {
-            gTopology.Graph graph = Graph;
+            base.OnAttached();
+            if (this.AssociatedObject == null)
+                return;
+
+            MapControl mc = this.AssociatedObject.Owner;
+            if (mc == null)
+                return;
+
+            mc.MouseLeftButtonUp += Mc_MouseLeftButtonUp;
+            graphutil = new GraphUtil(this.AssociatedObject);
+        }
+
+        protected override void OnDetaching()
+        {
+            base.OnDetaching();
+            if (this.AssociatedObject == null)
+                return;
+
+            MapControl mc = this.AssociatedObject.Owner;
+            if (mc == null)
+                return;
+
+            mc.MouseLeftButtonUp -= Mc_MouseLeftButtonUp;
+        }
+
+        private void Mc_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            gTopology.Graph graph = graphutil.Graph;
             if (graph == null)
                 return;
 
             Topology editer = new Topology(graph);
-            Point pos = e.GetPosition(GraphContainer);
-            Face face = editer.FacHit(pos, Tolerance);
+            Point pos = e.GetPosition(graphutil.GraphContainer);
+            Face face = editer.FacHit(pos, graphutil.Tolerance);
             if (face != null)
             {
-                if(InvalidFace)
+                if (InvalidFace)
                     editer.FacSetInvalid(face);
                 else
                     editer.FacSetType(face, FaceType);
             }
-                
-            base.MouseLeftButtonUp(sender, e);
         }
     }
 }

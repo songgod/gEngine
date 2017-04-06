@@ -1,18 +1,27 @@
 ﻿using gTopology;
+using System.Windows;
 using System.Windows.Input;
 
 namespace gEngine.Manipulator.Ge.Section
 {
-    public class DrawLineManipulator : GraphLineManipulator
+    public class DrawLineManipulator : LineManipulator
     {
-        public override void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        protected GraphUtil graphutil = null;
+        protected override void OnAttached()
         {
-            gTopology.Graph graph = Graph;
+            base.OnAttached();
+            graphutil = new GraphUtil(this.AssociatedObject);
+        }
+        protected override void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            gTopology.Graph graph = graphutil.Graph;
             if (graph == null)
                 return;
 
             Topology editor = new Topology(graph);
-            editor.LinAddLine(Start, End, Tolerance);
+            Point start = new Point() { X = this.TrackAdorner.X1, Y = this.TrackAdorner.Y1 };
+            Point end = new Point() { X = this.TrackAdorner.X2, Y = this.TrackAdorner.Y2 };
+            editor.LinAddLine(start, end, graphutil.Tolerance);
 
             base.MouseLeftButtonUp(sender, e);
         }

@@ -372,10 +372,11 @@ namespace gEngine.Manipulator.Ge.Section
         }
     }
 
-    public class EditCurveManipulator : GraphManipulatorBase
+    public class EditCurveManipulator : LayerManipulator
     {
         private gTopology.Line SelectLine { get; set; }
         protected EditCurveAdorner EditAdorner { get; private set; }
+        private GraphUtil graphutil = null;
 
         protected override void OnAttached()
         {
@@ -383,72 +384,62 @@ namespace gEngine.Manipulator.Ge.Section
             if (this.AssociatedObject == null)
                 return;
 
-            EditAdorner = new EditCurveAdorner(GraphContainer,this.AssociatedObject);
-            AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(GraphContainer);
+            MapControl mc = this.AssociatedObject.Owner;
+            if (mc == null)
+                return;
+
+            graphutil = new GraphUtil(this.AssociatedObject);
+
+            EditAdorner = new EditCurveAdorner(graphutil.GraphContainer, mc);
+            AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(graphutil.GraphContainer);
             adornerLayer.Add(EditAdorner);
+
+            mc.MouseLeftButtonDown += Mc_MouseLeftButtonDown;
+            mc.MouseRightButtonUp += Mc_MouseRightButtonUp;
+            mc.MouseLeftButtonUp += Mc_MouseLeftButtonUp;
+
+            
         }
 
-        protected override void OnDetaching()
+        private void Mc_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            base.OnDetaching();
-            AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(GraphContainer);
-            adornerLayer.Remove(this.EditAdorner);
-        }
-
-        private PointCollection TransPoints(gTopology.Line line)
-        {
-            return new PointCollection(line.Points);
-            //PointCollection ps = new PointCollection();
-            //foreach (Point p in line.Points)
-            //{
-            //    ps.Add(GraphContainer.TranslatePoint(p, this.AssociatedObject));
-            //}
-            //return ps;
-        }
-
-        public override void MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            gTopology.Graph graph = Graph;
+            gTopology.Graph graph = graphutil.Graph;
             if (graph == null)
                 return;
 
-            Path node = e.OriginalSource as Path;
-            if (node != null && EditAdorner.IsNode(node))
+            if (SelectLine == null)
                 return;
 
-            Topology editor = new Topology(graph);
-            Point pos = e.GetPosition(GraphContainer);
-            gTopology.Line line = editor.LinHit(pos, Tolerance);
-            
-            if (line != null)
+            Topology editer = new Topology(graph);
+
+            Path node = e.OriginalSource as Path;
+            if (node != null && EditAdorner.IsNode(node))
             {
-                if(SelectLine==line)
+                int id = EditAdorner.GetNodeID(node);
+                if (EditAdorner.IsControl(id))
                 {
-                    SelectLine = editor.LinAddPoint(SelectLine, pos,Tolerance);
+                    SelectLine = editer.LinMoveControlPoint(SelectLine, id, EditAdorner.GetNodePos(node));
                     EditAdorner.Select(TransPoints(SelectLine));
                 }
                 else
                 {
-                    SelectLine = line;
-                    EditAdorner.Select(TransPoints(SelectLine));
+                    if ((Keyboard.Modifiers & ModifierKeys.Control) != ModifierKeys.Control)
+                    {
+                        SelectLine = editer.LinMoveEarPoint(SelectLine, id, EditAdorner.GetNodePos(node), true);
+                        EditAdorner.Select(TransPoints(SelectLine));
+                    }
+                    else
+                    {
+                        SelectLine = editer.LinMoveEarPoint(SelectLine, id, EditAdorner.GetNodePos(node), false);
+                        EditAdorner.Select(TransPoints(SelectLine));
+                    }
                 }
             }
-            else
-            {
-                SelectLine = null;
-                EditAdorner.Select(null);
-            }
-            base.MouseLeftButtonDown(sender, e);
         }
 
-        public override void MouseMove(object sender, MouseEventArgs e)
+        private void Mc_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
-            base.MouseMove(sender, e);
-        }
-
-        public override void MouseRightButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            gTopology.Graph graph = Graph;
+            gTopology.Graph graph = graphutil.Graph;
             if (graph == null)
                 return;
 
@@ -467,45 +458,56 @@ namespace gEngine.Manipulator.Ge.Section
                     EditAdorner.Select(TransPoints(SelectLine));
                 }
             }
-            base.MouseRightButtonUp(sender, e);
         }
 
-        public override void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void Mc_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            gTopology.Graph graph = Graph;
+            gTopology.Graph graph = graphutil.Graph;
             if (graph == null)
                 return;
 
-            if (SelectLine == null)
+            Path node = e.OriginalSource as Path;
+            if (node != null && EditAdorner.IsNode(node))
                 return;
 
-            Topology editer = new Topology(graph);
+            Topology editor = new Topology(graph);
+            Point pos = e.GetPosition(graphutil.GraphContainer);
+            gTopology.Line line = editor.LinHit(pos, graphutil.Tolerance);
 
-            Path node = e.OriginalSource as Path;
-            if(node!=null && EditAdorner.IsNode(node))
+            if (line != null)
             {
-                int id = EditAdorner.GetNodeID(node);
-                if(EditAdorner.IsControl(id))
+                if (SelectLine == line)
                 {
-                    SelectLine = editer.LinMoveControlPoint(SelectLine, id, EditAdorner.GetNodePos(node));
+                    SelectLine = editor.LinAddPoint(SelectLine, pos, graphutil.Tolerance);
                     EditAdorner.Select(TransPoints(SelectLine));
                 }
                 else
                 {
-                    if ((Keyboard.Modifiers & ModifierKeys.Control) != ModifierKeys.Control)
-                    {
-                        SelectLine = editer.LinMoveEarPoint(SelectLine, id, EditAdorner.GetNodePos(node),true);
-                        EditAdorner.Select(TransPoints(SelectLine));
-                    }
-                    else
-                    {
-                        SelectLine = editer.LinMoveEarPoint(SelectLine, id, EditAdorner.GetNodePos(node), false);
-                        EditAdorner.Select(TransPoints(SelectLine));
-                    }
+                    SelectLine = line;
+                    EditAdorner.Select(TransPoints(SelectLine));
                 }
             }
+            else
+            {
+                SelectLine = null;
+                EditAdorner.Select(null);
+            }
+        }
 
-            base.MouseLeftButtonUp(sender, e);
+        protected override void OnDetaching()
+        {
+            base.OnDetaching();
+            AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(graphutil.GraphContainer);
+            adornerLayer.Remove(this.EditAdorner);
+            MapControl mc = this.AssociatedObject.Owner;
+            mc.MouseLeftButtonDown -= Mc_MouseLeftButtonDown;
+            mc.MouseRightButtonUp -= Mc_MouseRightButtonUp;
+            mc.MouseLeftButtonUp -= Mc_MouseLeftButtonUp;
+        }
+
+        private PointCollection TransPoints(gTopology.Line line)
+        {
+            return new PointCollection(line.Points);
         }
     }
 }

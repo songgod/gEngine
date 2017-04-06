@@ -5,30 +5,36 @@ using System.Windows.Input;
 
 namespace gEngine.Manipulator.Ge.Section
 {
-    public class ReplaceLineManipulator : GraphCurveManipulator
+    public class ReplaceLineManipulator : CurveManipulator
     {
-        private gTopology.Line SelectLine { get; set; }
-        public override void MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        protected GraphUtil graphutil = null;
+        protected override void OnAttached()
         {
-            gTopology.Graph graph = Graph;
+            base.OnAttached();
+            graphutil = new GraphUtil(this.AssociatedObject);
+        }
+        private gTopology.Line SelectLine { get; set; }
+        protected override void MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            gTopology.Graph graph = graphutil.Graph;
             if (graph == null)
                 return;
 
             Topology editor = new Topology(graph);
-            Point pos = e.GetPosition(GraphContainer);
-            gTopology.Line line = editor.LinHit(pos, Tolerance);
+            Point pos = e.GetPosition(graphutil.GraphContainer);
+            gTopology.Line line = editor.LinHit(pos, graphutil.Tolerance);
             if (line != null)
             {
                 SelectLine = line;
             }
             base.MouseLeftButtonDown(sender, e);
         }
-        public override void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        protected override void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if(SelectLine!=null)
             {
-                Topology editor = new Topology(Graph);
-                editor.LinReplaceSubLine(SelectLine, TrackPoints, Tolerance);
+                Topology editor = new Topology(graphutil.Graph);
+                editor.LinReplaceSubLine(SelectLine, new PointList(this.TrackAdorner.Points.ToList()), graphutil.Tolerance);
             }
             base.MouseLeftButtonUp(sender, e);
         }

@@ -116,8 +116,7 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
             }
 
             map.Layers.Add(layer);
-            Binding bd = new Binding("Layers") { Source = map };
-            mc.SetBinding(ItemsControl.ItemsSourceProperty, bd);
+            mc.DataContext = map;
         }
 
         #endregion

@@ -1,4 +1,4 @@
-﻿using gEngine.Graph.Ge.Section;
+﻿using gEngine.Manipulator;
 using gEngine.View;
 using System;
 using System.Collections.Generic;
@@ -10,18 +10,37 @@ using System.Windows.Controls;
 using System.Windows.Interactivity;
 using System.Windows.Media;
 
-namespace gEngine.Manipulator.Ge.Section
+namespace gEngine.Manipulator
 {
     public static class ManipulatorSetter
     {
-        public static bool SetManipulator(ManipulatorBase mp, LayerControl SectionLayer)
+        public static bool SetManipulator(Behavior mp, UIElement elm)
         {
-            if (mp == null || SectionLayer == null)
+            if (mp == null || elm == null)
                 return false;
 
-            BehaviorCollection bc = Interaction.GetBehaviors(SectionLayer);
+            BehaviorCollection bc = Interaction.GetBehaviors(elm);
             bc.Clear();
             bc.Add(mp);
+            return true;
+        }
+
+        public static bool AddManipulator(Behavior mp, UIElement elm)
+        {
+            if (mp == null || elm == null)
+                return false;
+
+            BehaviorCollection bc = Interaction.GetBehaviors(elm);
+            bc.Add(mp);
+            return true;
+        }
+
+        public static bool RemoveManipulator(Behavior mp, UIElement elm)
+        {
+            if (mp == null || elm == null)
+                return false;
+            BehaviorCollection bc = Interaction.GetBehaviors(elm);
+            bc.Remove(mp);
             return true;
         }
 

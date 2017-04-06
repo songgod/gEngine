@@ -14,7 +14,7 @@
         <Border Background="White" BorderBrush="Black" BorderThickness="2">
             <gv:MapControl x:Name="mc"  MouseRightButtonDown="mc_MouseRightButtonDown"><!--MouseMove="mc_MouseMove" -->
                 <i:Interaction.Behaviors>
-                    <em:MapControlAdonDectZoomPan/>
+                    <em:MapControlZoomPan/>
                 </i:Interaction.Behaviors>
             </gv:MapControl>
         </Border>

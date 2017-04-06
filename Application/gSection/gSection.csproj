@@ -123,6 +123,7 @@
     <Compile Include="Controls\DWellControl.xaml.cs">
       <DependentUpon>DWellControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\IView.cs" />
     <Compile Include="Controls\WellControl.xaml.cs">
       <DependentUpon>WellControl.xaml</DependentUpon>
     </Compile>

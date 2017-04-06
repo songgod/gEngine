@@ -32,7 +32,7 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
         #region Property
 
         public FrameworkElement FullViewObject { get; set; }
-        Behavior<UIElement> ManipulatorBehavior { get; set; }
+        Behavior ManipulatorBehavior { get; set; }
         public ObservableCollection<DXTabItem> TabItems { get; set; }
 
         //鼠标位置
@@ -166,18 +166,11 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
                 return new RelayCommand(() =>
                 {
                     MapControl mc = FullViewObject as MapControl;
-                    ManipulatorBase mb = (ManipulatorBase)ManipulatorBehavior;
+                    Behavior mb = ManipulatorBehavior;
                     if (mc != null && mb != null)
                     {
                         ManipulatorSetter.SetManipulator(mb, mc.GetLayerControl(0));
-                        WellLocationsConnectManipulator wcm = mb as WellLocationsConnectManipulator;
-                        if (wcm != null)
-                        {
-                            wcm.IsStopMove = false;
-                            wcm.SelectWellLocations.Clear();
-                        }
                     }
-
                 });
             }
         }
@@ -254,7 +247,7 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
                 return new RelayCommand(() =>
                 {
                     MapControl mc = FullViewObject as MapControl;
-                    SetFaceTypeManipulator dm = new SetFaceTypeManipulator() { FaceType = -1 };
+                    SetFaceTypeManipulator dm = new SetFaceTypeManipulator() { FaceType = -1, InvalidFace = true };
                     ManipulatorSetter.SetManipulator(dm, mc.GetLayerControl(0));
                 });
             }

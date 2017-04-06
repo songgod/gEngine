@@ -74,13 +74,9 @@
     <Compile Include="DrawCloseCurveManipulator.cs" />
     <Compile Include="DrawCurveManipulator.cs" />
     <Compile Include="DrawLineManipulator.cs" />
-    <Compile Include="DrawSections\DrawWellTieSection.cs" />
     <Compile Include="EditCurveManipulator.cs" />
     <Compile Include="EraseLineManipulator.cs" />
-    <Compile Include="GraphCurveManipulator.cs" />
-    <Compile Include="GraphLineManipulator.cs" />
-    <Compile Include="GraphManipulatorBase.cs" />
-    <Compile Include="ManipulatorSetter.cs" />
+    <Compile Include="GraphUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReplaceLineManipulator.cs" />
     <Compile Include="SetFaceTypeManipulator.cs" />

@@ -10,7 +10,7 @@ using System.Windows.Media;
 
 namespace gEngine.Manipulator
 {
-    public class MapControlZoomPan : Behavior<MapControl>
+    public class MapControlZoomPan : MapManipulator
     {
         private Point mousedown;
 
@@ -19,135 +19,66 @@ namespace gEngine.Manipulator
             base.OnAttached();
             if (this.AssociatedObject == null)
                 return;
-            MapControl mc = this.AssociatedObject as MapControl;
-            if (mc == null)
-                throw new Exception("AssociatedObject is not MapControl");
 
-            mc.MouseDown += Mc_MouseDown;
-            mc.MouseUp += Mc_MouseUp;
-            mc.MouseMove += AssociatedObject_MouseMove;
-            mc.MouseWheel += AssociatedObject_MouseWheel;
+            this.AssociatedObject.MouseRightButtonDown += AssociatedObject_MouseRightButtonDown;
+            this.AssociatedObject.MouseMove += AssociatedObject_MouseMove;
+            this.AssociatedObject.MouseWheel += AssociatedObject_MouseWheel;
+            this.AssociatedObject.ManipulationStarting += AssociatedObject_ManipulationStarting;
+            this.AssociatedObject.ManipulationDelta += AssociatedObject_ManipulationDelta;
+
             mousedown = new Point(0, 0);
         }
 
-        private void Mc_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void AssociatedObject_ManipulationDelta(object sender, System.Windows.Input.ManipulationDeltaEventArgs e)
         {
-            if (e.MiddleButton == System.Windows.Input.MouseButtonState.Pressed)
-            {
-                MapControl mc = this.AssociatedObject as MapControl;
-                if (mc == null)
-                    return;
-            }
+            throw new NotImplementedException();
         }
 
-        private void Mc_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void AssociatedObject_ManipulationStarting(object sender, System.Windows.Input.ManipulationStartingEventArgs e)
         {
-            if (e.MiddleButton == System.Windows.Input.MouseButtonState.Pressed)
-            {
-                MapControl mc = this.AssociatedObject as MapControl;
-                if (mc == null || mc.Items.IsEmpty)
-                    return;
-
-                LayerControl lc = mc.GetLayerControl(0);
-                if (lc == null)
-                    return;
-
-                mousedown = e.GetPosition(lc.Root);
-            }
-        }
-
-        private void Zoom(MapControl elm, Point center, double delta)
-        {
-            for (int i = 0; i < elm.Items.Count; i++)
-            {
-                LayerControl lc = elm.GetLayerControl(0);
-                if (lc != null)
-                {
-                    Transform t = lc.Root.RenderTransform;
-                    Point cp = center;
-                    double sx = 1;
-                    double sy = 1;
-                    if (delta > 0)
-                    {
-                        sx = 1.1;
-                        sy = 1.1;
-                    }
-                    else
-                    {
-                        sx = 0.9;
-                        sy = 0.9;
-                    }
-
-                    ScaleTransform st = new ScaleTransform() { CenterX = cp.X, CenterY = cp.Y, ScaleX = sx, ScaleY = sy };
-                    Matrix mt = t.Value;
-                    Matrix mst = st.Value;
-                    Matrix m = mst * mt;
-                    MatrixTransform ft = new MatrixTransform(m);
-                    lc.Root.RenderTransform = ft;
-                }
-            }
+            throw new NotImplementedException();
         }
 
         private void AssociatedObject_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
         {
-            MapControl mc = this.AssociatedObject as MapControl;
-            if (mc == null || mc.Items.IsEmpty)
-                return;
-
-            LayerControl lc = mc.GetLayerControl(0);
-            if (lc == null)
-                return;
-
-            Point cp = e.GetPosition(lc.Root);
-            Zoom(mc, cp, e.Delta);
-        }
-
-        private void Pan(MapControl elm, Point cp)
-        {
-            for (int i = 0; i < elm.Items.Count; i++)
+            double sx = 1;
+            double sy = 1;
+            if (e.Delta > 0)
             {
-                LayerControl lc = elm.GetLayerControl(i);
-                if(lc!=null)
-                {
-                    Transform t = lc.Root.RenderTransform;
-
-                    TranslateTransform tt = new TranslateTransform() { X = cp.X - mousedown.X, Y = cp.Y - mousedown.Y };
-                    Matrix mt = t.Value;
-                    Matrix mtt = tt.Value;
-                    Matrix m = mtt * mt;
-                    MatrixTransform ft = new MatrixTransform(m);
-                    lc.Root.RenderTransform = ft;
-                }
+                sx = 1.1;
+                sy = 1.1;
             }
+            else
+            {
+                sx = 0.9;
+                sy = 0.9;
+            }
+            Point center = this.AssociatedObject.Dp2LP(e.GetPosition(this.AssociatedObject));
+            this.AssociatedObject.Zoom(center, new Vector(sx, sy));
         }
 
         private void AssociatedObject_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            if (e.MiddleButton == System.Windows.Input.MouseButtonState.Pressed)
+            if (e.RightButton == System.Windows.Input.MouseButtonState.Pressed)
             {
-                MapControl mc = this.AssociatedObject as MapControl;
-                if (mc == null || mc.Items.IsEmpty)
-                    return;
-
-                LayerControl lc = mc.GetLayerControl(0);
-                if (lc == null)
-                    return;
-
-                Point cp = e.GetPosition(lc.Root);
-                Pan(mc, cp);
+                Point cp = this.AssociatedObject.Dp2LP(e.GetPosition(this.AssociatedObject));
+                this.AssociatedObject.Move(cp - mousedown);
             }
+        }
+
+        private void AssociatedObject_MouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            mousedown = this.AssociatedObject.Dp2LP(e.GetPosition(this.AssociatedObject));
         }
 
         protected override void OnDetaching()
         {
             base.OnDetaching();
-            MapControl mc = this.AssociatedObject as MapControl;
-            if (mc == null)
-                return;
-            mc.MouseDown += Mc_MouseDown;
-            mc.MouseUp += Mc_MouseUp;
-            mc.MouseMove -= AssociatedObject_MouseMove;
-            mc.MouseWheel -= AssociatedObject_MouseWheel;
+            this.AssociatedObject.MouseRightButtonDown -= AssociatedObject_MouseRightButtonDown;
+            this.AssociatedObject.MouseMove -= AssociatedObject_MouseMove;
+            this.AssociatedObject.MouseWheel -= AssociatedObject_MouseWheel;
+            this.AssociatedObject.ManipulationStarting -= AssociatedObject_ManipulationStarting;
+            this.AssociatedObject.ManipulationDelta -= AssociatedObject_ManipulationDelta;
         }
     }
 }

@@ -1,52 +1,34 @@
-﻿using System.IO;
+﻿using gEngine.View;
+using System.IO;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Shapes;
 
 namespace gEngine.Manipulator
 {
-    public class CurveManipulator : ManipulatorBase
+    public class CurveManipulator : PolyLineManipulator
     {
-        protected CurveTrackAdorner TrackAdorner{ get; private set; }
-
-        protected override void OnAttached()
+        protected override void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            base.OnAttached();
-            if (this.AssociatedObject == null)
-                return;
-
-            TrackAdorner = new CurveTrackAdorner(this.AssociatedObject);
-            AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(this.AssociatedObject);
-            adornerLayer.Add(TrackAdorner);
+            this.TrackAdorner.Points.Clear();
+        }
+        protected override void MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.TrackAdorner.Points.Clear();
+            MapControl mc = this.AssociatedObject.Owner;
+            Point p = mc.Dp2LP(e.GetPosition(mc));
+            this.TrackAdorner.Points.Add(p);
         }
 
-        protected override void OnDetaching()
-        {
-            base.OnDetaching();
-            AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(this.AssociatedObject);
-            adornerLayer.Remove(this.TrackAdorner);
-        }
-
-        public override void MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            this.TrackAdorner.ClearPoint();
-            Point p = e.GetPosition(this.AssociatedObject);
-            this.TrackAdorner.AddPoint(p);
-        }
-
-        public override void MouseMove(object sender, MouseEventArgs e)
+        protected override void MouseMove(object sender, MouseEventArgs e)
         {
             if (e.LeftButton == System.Windows.Input.MouseButtonState.Pressed)
             {
-                Point p = e.GetPosition(this.AssociatedObject);
-                this.TrackAdorner.AddPoint(p);
+                MapControl mc = this.AssociatedObject.Owner;
+                Point p = mc.Dp2LP(e.GetPosition(mc));
+                this.TrackAdorner.Points.Add(p);
             }
-        }
-
-        public override void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            this.TrackAdorner.ClearPoint();
-            base.MouseLeftButtonUp(sender, e);
         }
     }
 }

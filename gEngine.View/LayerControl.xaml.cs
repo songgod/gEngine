@@ -22,6 +22,14 @@ namespace gEngine.View
             }
         }
 
+        public MapControl Owner
+        {
+            get
+            {
+                return FindParent.FindVisualParent<MapControl>(this);
+            }
+        }
+
         public Rect GetRect()
         {
             return ViewUtil.GetTypeRect<ObjectControl>(Root);

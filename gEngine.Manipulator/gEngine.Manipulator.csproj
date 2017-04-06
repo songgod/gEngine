@@ -66,14 +66,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CurveManipulator.cs" />
-    <Compile Include="CurveTrackAdorner.cs" />
     <Compile Include="LineManipulator.cs" />
-    <Compile Include="LineTrackAdorner.cs" />
     <Compile Include="ManipulatorBase.cs" />
-    <Compile Include="MapControlAdonDectZoomPan.cs" />
+    <Compile Include="ManipulatorSetter.cs" />
     <Compile Include="MapControlZoomPan.cs" />
     <Compile Include="PolyLineManipulator.cs" />
-    <Compile Include="PolyTrackAdorner.cs" />
     <Compile Include="ZoomPan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
