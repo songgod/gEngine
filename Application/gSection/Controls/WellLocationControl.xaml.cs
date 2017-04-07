@@ -100,7 +100,7 @@ namespace GPTDxWPFRibbonApplication1.Controls
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.Dispatcher.Invoke(DispatcherPriority.Send, (ThreadStart)delegate ()
+            this.Dispatcher.Invoke(DispatcherPriority.SystemIdle, (ThreadStart)delegate ()
             {
                 mc.FullView();
             });

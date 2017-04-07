@@ -27,8 +27,8 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
         {
             TabItems = new ObservableCollection<DXTabItem>();
             NewSectionSetViewModel.RibbonViewModelOpenPageToTab += new Action<string, string>(OpenPageToTab);
-            UndoCommands = new Stack<IUndoRedoCommand>();
-            RedoCommands = new Stack<IUndoRedoCommand>();
+            DicUndoCommands = new Dictionary<DXTabItem, Stack<IUndoRedoCommand>>();
+            DicRedoCommands = new Dictionary<DXTabItem, Stack<IUndoRedoCommand>>();
         }
 
         #region Property
@@ -45,14 +45,14 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
             set
             {
                 manipulatorBehavior = value;
-                if(value is WellLocationsConnectManipulator)
+                if (value is WellLocationsConnectManipulator)
                 {
                     ((WellLocationsConnectManipulator)ManipulatorBehavior).OnDrawWellLine += RibbonViewModel_OnDrawWellLine;
                 }
             }
         }
         public ObservableCollection<DXTabItem> TabItems { get; set; }
-
+        public DXTabItem CurrentTabItem { get; set; }
 
         //鼠标位置
         public static readonly DependencyProperty MousePositionProperty =
@@ -64,10 +64,11 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
             set { SetValue(MousePositionProperty, value); }
         }
         //撤销
-        public Stack<IUndoRedoCommand> UndoCommands { get; protected set; }
+        //public Stack<IUndoRedoCommand> UndoCommands { get; protected set; }
+        public Dictionary<DXTabItem, Stack<IUndoRedoCommand>> DicUndoCommands { get; protected set; }
         //重做
-        public Stack<IUndoRedoCommand> RedoCommands { get; protected set; }
-
+        //public Stack<IUndoRedoCommand> RedoCommands { get; protected set; }
+        public Dictionary<DXTabItem, Stack<IUndoRedoCommand>> DicRedoCommands { get; protected set; }
         #endregion
 
         #region Commands
@@ -119,7 +120,7 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
                     {
                         TabAddItem(barBtnItem, dialog.FileName);
                     }
-                    
+
                 });
             }
         }
@@ -183,6 +184,7 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
                     {
                         FullViewObject = ((IView)newItem.Content).FullScreenObject;
                         ManipulatorBehavior = ((IView)newItem.Content).ManipulatorBehavior;
+                        CurrentTabItem = newItem;
                     }
 
                 });
@@ -292,15 +294,23 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
 
         #region 撤销重做命令
 
-        private void RibbonViewModel_OnDrawWellLine(IUndoRedoCommand idcm)
+        private void RibbonViewModel_OnDrawWellLine(Behavior<UIElement> behavior)//IUndoRedoCommand idcm
         {
-            WellLocationsConnectManipulator command = idcm as WellLocationsConnectManipulator;
-
+            //WellLocationsConnectManipulator command = idcm as WellLocationsConnectManipulator;
+            ConnectWellCommand command = new ConnectWellCommand(behavior);
             if (command == null) return;
             if (command is IUndoRedoCommand)
             {
-                UndoCommands.Push(command);
-                RedoCommands.Clear();
+                if (CurrentTabItem == null)
+                    return;
+                //新增Undo，清空Redo
+                if (!DicUndoCommands.ContainsKey(CurrentTabItem))
+                {
+                    DicUndoCommands.Add(CurrentTabItem, new Stack<IUndoRedoCommand>());
+                    DicRedoCommands.Add(CurrentTabItem, new Stack<IUndoRedoCommand>());
+                }
+                DicUndoCommands[CurrentTabItem].Push(command);
+                DicRedoCommands[CurrentTabItem].Clear();
             }
         }
         public System.Windows.Input.ICommand UndoCommand
@@ -312,15 +322,19 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
         }
         protected bool CanUndoCommandExecute()
         {
-            return UndoCommands.Count > 0;
+            if (CurrentTabItem == null|| !DicUndoCommands.Keys.Contains(CurrentTabItem))
+                return false;
+            return DicUndoCommands[CurrentTabItem].Count > 0;
         }
         protected void UndoCommandExecute()
         {
-            if (UndoCommands.Count > 0)
+            if (CurrentTabItem == null|| !DicUndoCommands.Keys.Contains(CurrentTabItem))
+                return;
+            if (DicUndoCommands[CurrentTabItem].Count > 0)
             {
-                IUndoRedoCommand command = UndoCommands.Pop();
+                IUndoRedoCommand command = DicUndoCommands[CurrentTabItem].Pop();
                 command.Undo();
-                RedoCommands.Push(command);
+                DicRedoCommands[CurrentTabItem].Push(command);
             }
         }
         public System.Windows.Input.ICommand RedoCommand
@@ -332,25 +346,35 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
         }
         protected bool CanRedoCommandExecute()
         {
-            return RedoCommands.Count > 0;
+            if (CurrentTabItem == null|| !DicRedoCommands.Keys.Contains(CurrentTabItem))
+                return false;
+            return DicRedoCommands[CurrentTabItem].Count > 0;
         }
         protected void RedoCommandExecute()
         {
-            if (RedoCommands.Count > 0)
+            if (CurrentTabItem == null|| !DicRedoCommands.Keys.Contains(CurrentTabItem))
+                return;
+            if (DicRedoCommands[CurrentTabItem].Count > 0)
             {
-                IUndoRedoCommand command = RedoCommands.Pop();
+                IUndoRedoCommand command = DicRedoCommands[CurrentTabItem].Pop();
                 if (command != null)
                 {
                     command.Redo();
-                    UndoCommands.Push(command);
+                    DicUndoCommands[CurrentTabItem].Push(command);
                 }
             }
         }
 
         public void ClearURCommand()
         {
-            UndoCommands.Clear();
-            RedoCommands.Clear();
+            if (CurrentTabItem == null)
+                return;
+            if (!DicUndoCommands.Keys.Contains(CurrentTabItem))
+                return;
+            if (!DicRedoCommands.Keys.Contains(CurrentTabItem))
+                return;
+            DicUndoCommands[CurrentTabItem].Clear();
+            DicRedoCommands[CurrentTabItem].Clear();
         }
         #endregion
 
@@ -379,6 +403,7 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
                     return;
             }
             TabItems.Add(tabItem);
+            CurrentTabItem = tabItem;
         }
 
         /// <summary>
@@ -401,13 +426,14 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
                     return;
             }
             TabItems.Add(tabItem);
+            CurrentTabItem = tabItem;
         }
 
         /// <summary>
         /// 打开新页签（带有参数）
         /// </summary>
         /// <param name="barBtnItem"></param>
-        private void TabAddItem(BarButtonItem barBtnItem,string parm)
+        private void TabAddItem(BarButtonItem barBtnItem, string parm)
         {
             DXTabItem tabItem = new DXTabItem();
             tabItem.Header = barBtnItem.Content;
@@ -426,6 +452,7 @@ namespace GPTDxWPFRibbonApplication1.ViewModels
                     return;
             }
             TabItems.Add(tabItem);
+            CurrentTabItem = tabItem;
         }
 
         #endregion

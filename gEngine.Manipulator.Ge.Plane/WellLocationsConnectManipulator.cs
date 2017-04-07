@@ -12,15 +12,16 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interactivity;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
 namespace gEngine.Manipulator.Ge.Plane
 {
     public delegate void FinishSelectWellLocations(HashSet<string> names);
-    public delegate void DrawWellLineDelegate(IUndoRedoCommand urc);
+    public delegate void DrawWellLineDelegate(Behavior<UIElement> behavior);
 
-    public class WellLocationsConnectManipulator : PolyLineManipulator, IUndoRedoCommand
+    public class WellLocationsConnectManipulator : PolyLineManipulator
     {
         #region 属性
         public bool IsStopMove { get; set; }
@@ -28,11 +29,6 @@ namespace gEngine.Manipulator.Ge.Plane
         public Stack<string> UndoSelectWellLocationstHistory { get; set; }
         public HashSet<Point> WellPointList { get; set; }
         public Stack<Point> UndoWellPointListHistory { get; set; }
-
-        public string Title
-        {
-            get; set;
-        }
 
         public event FinishSelectWellLocations OnFinishSelect;
         public event DrawWellLineDelegate OnDrawWellLine;

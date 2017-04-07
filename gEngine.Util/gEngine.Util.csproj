@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandManager.cs" />
+    <Compile Include="CustomExtensions.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="IUndoRedoCommand.cs" />
     <Compile Include="ObservedCollection.cs" />
