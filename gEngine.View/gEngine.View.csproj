@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="DataTemplateChooser.cs" />
     <Compile Include="FindChild.cs" />
+    <Compile Include="FindContext.cs" />
     <Compile Include="FindParent.cs" />
     <Compile Include="LayerControl.xaml.cs">
       <DependentUpon>LayerControl.xaml</DependentUpon>
@@ -96,13 +97,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\gEngine.Graph.Ge.Plane\gEngine.Graph.Ge.Plane.csproj">
-      <Project>{82739B38-8706-493D-A571-C743AFCEAD12}</Project>
-      <Name>gEngine.Graph.Ge.Plane</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\gEngine.Graph.Ge\gEngine.Graph.Ge.csproj">
-      <Project>{3BD77E4F-A348-4EDB-B60C-68B749249B91}</Project>
-      <Name>gEngine.Graph.Ge</Name>
+    <ProjectReference Include="..\gEngine.Graph.Interface\gEngine.Graph.Interface.csproj">
+      <Project>{1C98A821-B030-4FF2-83AE-D49B1B3B8C67}</Project>
+      <Name>gEngine.Graph.Interface</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

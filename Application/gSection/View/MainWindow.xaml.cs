@@ -1,17 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using DevExpress.Xpf.Ribbon;
+﻿using DevExpress.Xpf.Ribbon;
 
 namespace gSection.View
 {
@@ -20,6 +7,7 @@ namespace gSection.View
     /// </summary>
     public partial class MainWindow : DXRibbonWindow
     {
+        public TabControl TabControl { get { return tc; } }
 
         public string[] ClipartImages { get; set; }
 
@@ -45,6 +33,9 @@ namespace gSection.View
                  "/RibbonDemo;component/Images/Clipart/caServerEnabled.png",
                  "/RibbonDemo;component/Images/Clipart/caWebCam.png"
              };
+
+            this.DataContext = this;
+
         }
     }
 }

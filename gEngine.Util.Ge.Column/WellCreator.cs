@@ -9,12 +9,11 @@ namespace gEngine.Util.Ge.Column
 {
     public class WellCreator
     {
-        public IObjects Create(IDBWell db)
+        public Well Create(IDBWell db)
         {
             if (db == null)
                 return null;
-
-            IObjects res = new IObjects();
+            
 
             Well well = new Well() { Name = db.Name };
             well.Depths = new Utility.ObsDoubles(db.Depths);
@@ -26,14 +25,8 @@ namespace gEngine.Util.Ge.Column
                 c.Values = new Utility.ObsDoubles(db.Columns[i].Item2);
                 well.Columns.Add(c);
             }
-            
-            res.Add(well);
-            return res;
-        }
 
-        public Type ProcessType()
-        {
-            return typeof(IDBWell);
+            return well;
         }
     }
 }

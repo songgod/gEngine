@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using gEngine.Graph.Interface;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -27,6 +28,14 @@ namespace gEngine.View
             get
             {
                 return FindParent.FindVisualParent<MapControl>(this);
+            }
+        }
+
+        public ILayer LayerContext
+        {
+            get
+            {
+                return FindContext.Find<ILayer>(this);
             }
         }
 

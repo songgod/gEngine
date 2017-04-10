@@ -9,6 +9,9 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:gSection"
          xmlns:view="clr-namespace:gSection.View"
+        xmlns:vm="clr-namespace:gSection.ViewModel"
+        xmlns:cmdmap="clr-namespace:gSection.Commands.Map"
+        xmlns:cmdsecion="clr-namespace:gSection.Commands.Section"
         xmlns:cvt="clr-namespace:gSection.Converters"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="gSection.View.MainWindow"
@@ -89,7 +92,7 @@
                 </dxr:RibbonPage>
                 <dxr:RibbonPage x:Name="pageRef" Caption="参考">
                     <dxr:RibbonPageGroup Caption="平面信息">
-                        <dxb:BarButtonItem Content="BarButtonItem"/>
+                        <dxb:BarButtonItem Content="打开平面图" Command="{x:Static cmdmap:CommandsMap.NewPlaneMapCommand}" CommandParameter="{Binding}"/>
                     </dxr:RibbonPageGroup>
                     <dxr:RibbonPageGroup Caption="地震信息">
                         <dxb:BarCheckItem Content="BarCheckItem"/>
@@ -98,7 +101,7 @@
                 </dxr:RibbonPage>
                 <dxr:RibbonPage Caption="剖面管理">
                     <dxr:RibbonPageGroup Caption="剖面">
-                        <dxb:BarButtonItem Content="打开剖面图" LargeGlyph="{dx:DXImage Image=BOFolder_32x32.png}" Glyph="{dx:DXImage Image=BOFolder_16x16.png}"/>
+                        <dxb:BarButtonItem Content="新建剖面图" Command="{x:Static cmdmap:CommandsMap.NewSectionMapCommand}" CommandParameter="{Binding}" LargeGlyph="{dx:DXImage Image=BOFolder_32x32.png}" Glyph="{dx:DXImage Image=BOFolder_16x16.png}"/>
                     </dxr:RibbonPageGroup>
                     <dxr:RibbonPageGroup Caption="新建剖面图">
                         <dxb:BarButtonItem Content="BarButtonItem"/>
@@ -393,6 +396,7 @@
                 </dxr:RibbonPage>
             </dxr:RibbonPageCategory>
         </dxr:RibbonControl>
+        <view:TabControl DataContext="{x:Static vm:Project.Single}" Grid.Row="1" x:Name="tc"/>
         <dxr:RibbonStatusBarControl Grid.Row="2">
             <dxr:RibbonStatusBarControl.RightItems>
                 <dxb:BarButtonItem x:Name="printItem" Content="Print" Glyph="{dx:DXImage Image=Print_16x16.png}"/>

@@ -39,7 +39,7 @@ namespace gEngine.Data.Ge.Txt
                     DBWellLocation well = new DBWellLocation();
                     string[] arrLine = curLine.Split('\t');
                     well.Name = arrLine[0];
-                    well.WellCategory = int.Parse(arrLine[1]);
+                    well.WellCategory = String.IsNullOrEmpty(arrLine[1]) ? 0 : int.Parse(arrLine[1]);
                     well.WellType = arrLine[2];
                     well.x = double.Parse(arrLine[3]);
                     well.y = double.Parse(arrLine[4]);

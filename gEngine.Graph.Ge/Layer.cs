@@ -25,5 +25,19 @@ namespace gEngine.Graph.Ge
         // Using a DependencyProperty as the backing store for Objects.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ObjectsProperty =
             DependencyProperty.Register("Objects", typeof(IObjects), typeof(Layer));
+
+
+
+        public string Type
+        {
+            get { return (string)GetValue(TypeProperty); }
+            set { SetValue(TypeProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Type.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TypeProperty =
+            DependencyProperty.Register("Type", typeof(string), typeof(Layer));
+
+
     }
 }

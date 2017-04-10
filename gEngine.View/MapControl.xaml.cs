@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using gEngine.Graph.Interface;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
@@ -28,6 +29,34 @@ namespace gEngine.View
             var item = layeritemscontrol.ItemContainerGenerator.ContainerFromIndex(index);
             LayerControl lc = FindChild.FindVisualChild<LayerControl>(item, "layercontrol");
             return lc;
+        }
+
+        public int ActiveLayerControlIndex
+        {
+            get
+            {
+                return layeritemscontrol.Items.CurrentPosition;
+            }
+            set
+            {
+                layeritemscontrol.Items.MoveCurrentToPosition(value);
+            }
+        }
+
+        public LayerControl ActiveLayerControl
+        {
+            get
+            {
+                return GetLayerControl(ActiveLayerControlIndex);
+            }
+        }
+
+        public IMap MapContext
+        {
+            get
+            {
+                return FindContext.Find<IMap>(this);
+            }
         }
 
         public Canvas EditLayer
@@ -84,6 +113,11 @@ namespace gEngine.View
         public Point Lp2Dp(Point p)
         {
             return root.TranslatePoint(p, this);
-        } 
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            FullView();
+        }
     }
 }

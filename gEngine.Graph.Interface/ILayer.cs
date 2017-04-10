@@ -9,6 +9,8 @@ namespace gEngine.Graph.Interface
     {
         string Name { get; set; }
 
+        string Type { get; set; }
+
         IObjects Objects { get; set; }
     }
 

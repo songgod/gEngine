@@ -36,7 +36,8 @@ namespace gEngine.View.Ge.Column
             double top = Math.Ceiling(dbs[0] / 10) * 10;//顶深向上取整
             double firstScale = top - mindepth == 0 ? 10 : top - mindepth;//第一个刻度点
             int LongitudinalProportion = int.Parse(values[1].ToString()); //纵向比例
-
+            if (LongitudinalProportion == 0)
+                LongitudinalProportion = 1;
             PathGeometry geom = new PathGeometry();
 
             {

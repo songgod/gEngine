@@ -7,7 +7,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              Background="Transparent" 
-              ClipToBounds="True">
+              ClipToBounds="True"
+             Loaded="UserControl_Loaded">
     <Grid x:Name="root">
         <ItemsControl x:Name="layeritemscontrol" ItemsSource="{Binding Layers}">
             <ItemsControl.ItemsPanel>

@@ -4,14 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace gSection.Commands
+namespace gSection.Commands.Map
 {
-    public class CommandsInstance
+    public class CommandsMap
     {
-        static CommandsInstance()
+        static CommandsMap()
         {
             NewPlaneMapCommand = new NewPlaneMapCommand();
+            NewSectionMapCommand = new NewSectionMapCommand();
         }
         public static NewPlaneMapCommand NewPlaneMapCommand { get; set; }
+        public static NewSectionMapCommand NewSectionMapCommand { get; set; }
     }
 }

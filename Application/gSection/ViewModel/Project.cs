@@ -1,4 +1,5 @@
-﻿using gEngine.Data.Interface;
+﻿using gEngine.Data.Ge.Txt;
+using gEngine.Data.Interface;
 using gEngine.Graph.Interface;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,17 @@ namespace gSection.ViewModel
 {
     public class Project
     {
-        public Project() 
+        static Project()
         {
-
+            Single = new Project();
+        }
+        public static Project Single { get; }
+        protected Project() 
+        {
+            Maps = new IMaps();
+            OpenMaps = new IMaps();
+            String dbpath = @"D:\gSectionData";
+            DBFactory = new TxtDBFactory() { DBPath = dbpath };
         }
 
         public IMaps Maps { get; set; }
