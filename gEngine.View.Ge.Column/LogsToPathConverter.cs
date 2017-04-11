@@ -1,7 +1,10 @@
 ﻿using gEngine.Graph.Ge;
 using gEngine.Graph.Ge.Column;
 using gEngine.Utility;
+using gEngine.View;
+using gTopology;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Windows;
@@ -42,8 +45,6 @@ namespace gEngine.View.Ge.Column
                 return null;
 
             double mindepth = owner.Depths[0];
-            double maxdepth = owner.Depths[owner.Depths.Count - 1];
-            double minusDepths = Math.Ceiling((maxdepth - mindepth) / 10) * 10;//取底深减顶深差值，向上取整
 
             double[] validValueList = vls.Select(s => s).Where(s => (s != InvalidValue)).ToArray();//从曲线数组中去除无效值，形成有效值数组
             double xMin = validValueList.Min();
@@ -59,11 +60,11 @@ namespace gEngine.View.Ge.Column
             }
 
             PathGeometry geom = new PathGeometry();
-            PathFigure fg = new PathFigure();
-            PolyLineSegment pls = new PolyLineSegment();
             double StartY = (owner.Depths[vls.ToList().IndexOf(validValueList[0])] - mindepth) * Enums.PerMilePx / owner.LongitudinalProportion;// 计算StartPoint的Y值，Y值为第一个有效值的深度，X值为最小值，保证闭合时连线为直线
             double EndY = (owner.Depths[vls.ToList().LastIndexOf(validValueList[validValueList.Length - 1])] - mindepth) * Enums.PerMilePx / owner.LongitudinalProportion;// 增加一个结束点，Y值为最后一个有效值的深度，X值为最小值，保证闭合时连线为直线
-            fg.StartPoint = new Point() { X = 0, Y = StartY };
+
+            gTopology.PointList pointlist = new gTopology.PointList();
+            pointlist.Add(new Point() { X = 0, Y = StartY });
 
             for (int i = 0; i < vls.Count; ++i)
             {
@@ -79,14 +80,19 @@ namespace gEngine.View.Ge.Column
                         x = Math.Log10(vls[i]) - Math.Log10(xMin);
                     }
                     double yValue = (owner.Depths[i] - mindepth) * Enums.PerMilePx / owner.LongitudinalProportion;//根据纵向比例，计算出Y值
-                    pls.Points.Add(new Point() { X = x, Y = yValue });
+                    pointlist.Add(new Point() { X = x, Y = yValue });
                 }
             }
 
-            pls.Points.Add(new Point(0, EndY));
-            fg.Segments.Add(pls);
-            fg.IsClosed = true;
-            geom.Figures.Add(fg);
+            pointlist.Add(new Point() { X = 0, Y = EndY });
+
+            gTopology.PointList plist = gTopology.SimpleLine.Simplifier(pointlist, 1);
+
+            PathFigure figure = new PathFigure() { StartPoint = plist[0], IsClosed = true };
+            PointCollection pc = new PointCollection(plist.GetRange(1, plist.Count - 1));
+            PolyLineSegment pls = new PolyLineSegment() { Points = pc };
+            figure.Segments.Add(pls);
+            geom.Figures.Add(figure);
             return geom;
         }
 
@@ -110,17 +116,18 @@ namespace gEngine.View.Ge.Column
 
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            ObsDoubles vls = values[0] as ObsDoubles;
-            if (vls == null)
+            if (string.IsNullOrEmpty(values[3].ToString()))
                 return null;
 
-            if (vls.Count <= 1)
-                return null;
+            string dataStr = values[3].ToString().Substring(1, values[3].ToString().Count() - 2).Replace("L"," ");
 
-            double[] validValueList = vls.Select(s => s).Where(s => (s != InvalidValue)).ToArray();
+            PointCollectionConverter pcconverter = new PointCollectionConverter();
+            PointCollection pc = new PointCollection();
+            pc = (PointCollection)pcconverter.ConvertFromString(dataStr);
+            List<Point> pointList = pc.ToList();
 
-            double xMin = Math.Floor(validValueList.Min()); // 色标最小值
-            double xMax = Math.Ceiling(validValueList.Max()); // 色标最大值
+            double xMin_color = 0; // 色标最小值
+            double xMax_color = 60; // 色标最大值
 
             // 定义色标颜色值（彩虹色）
             Color[] colors = new Color[7] { Colors.Red, Colors.Orange, Colors.Yellow, Colors.Green, Colors.Indigo, Colors.Blue, Colors.Violet };
@@ -128,14 +135,14 @@ namespace gEngine.View.Ge.Column
             // 定义色标与数值范围字典表
             System.Collections.Generic.Dictionary<string, string> colorDic = new System.Collections.Generic.Dictionary<string, string>();
 
-            double interval = Math.Ceiling((xMax - xMin) / 6); //处理最大值与最小值间隔，保证彩虹色都使用
+            double interval = Math.Ceiling((xMax_color - xMin_color) / 6); //处理最大值与最小值间隔，保证彩虹色都使用
 
             for (int skip = 0; skip < 7; skip++)
             {
-                double xRange = xMin + (interval * skip);
-                double xNextRange = xMin + (interval * (skip + 1));
+                double xRange = xMin_color + (interval * skip);
+                double xNextRange = xMin_color + (interval * (skip + 1));
                 colorDic.Add(string.Format(@"{0}_{1}", xRange, xNextRange), string.Format(@"{0}_{1}", skip, skip + 1));
-                if (xNextRange >= xMax)
+                if (xNextRange >= xMax_color)
                     break;
             }
 
@@ -149,14 +156,12 @@ namespace gEngine.View.Ge.Column
             lineGradientBrush.GradientStops.Add(new GradientStop() { Color = Colors.White, Offset = 0 });
 
             char split = '_';
-
-            for (int i = 0; i < validValueList.Length; i++)
+            for (int i = 0; i < pointList.Count; i++)
             {
-                double xPoint = validValueList[i];
-
+                double xPoint = pointList[i].X > xMax_color ? xMax_color : pointList[i].X;
                 var colorDicValue = colorDic.FirstOrDefault(x =>
                              double.Parse(x.Key.Split(split)[0]) <= xPoint &&
-                             double.Parse(x.Key.Split(split)[1]) > xPoint
+                             double.Parse(x.Key.Split(split)[1]) >= xPoint
                     ).Value;
                 var colorDicKey = colorDic.FirstOrDefault(q => q.Value == colorDicValue).Key;
 
@@ -166,14 +171,14 @@ namespace gEngine.View.Ge.Column
                 Color s_color = colors[int.Parse(colorStrs[0])];
                 Color d_color = colors[int.Parse(colorStrs[1])];
 
-                Color vColor = GetGradientColor(s_color,d_color, xPoint, double.Parse(keyStrs[0]), double.Parse(keyStrs[1]));
-                lineGradientBrush.GradientStops.Add(new GradientStop(vColor, (double)i / validValueList.Length));
+                Color vColor = GetGradientColor(s_color, d_color, xPoint, double.Parse(keyStrs[0]), double.Parse(keyStrs[1]));
+                lineGradientBrush.GradientStops.Add(new GradientStop(vColor, (double)i / pointList.Count));
             }
 
             lineGradientBrush.GradientStops.Add(new GradientStop() { Color = Colors.White, Offset = 1 });
             return lineGradientBrush;
         }
-
+        
         private Color GetGradientColor(Color sourceColor, Color destColor, double xValue, double xMin, double xMax)
         {
             int redSpace = destColor.R - sourceColor.R;

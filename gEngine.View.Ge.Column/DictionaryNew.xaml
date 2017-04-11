@@ -21,15 +21,16 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Canvas>
-                    <TextBlock Text="{Binding Name}" VerticalAlignment="Center" HorizontalAlignment="Center" Canvas.Top="15" FontWeight="Bold" >
-                    </TextBlock>
-                </Canvas>
+                <TextBlock Text="{Binding Name}" VerticalAlignment="Center" HorizontalAlignment="Center" Canvas.Top="10" FontWeight="Bold" >
+                </TextBlock>
+            </Canvas>
             <Canvas Grid.Row="1">
                 <Canvas.Resources>
                     <local:DepthToPathConverter x:Key="d2p"/>
                     <local:DepthToScaleConverter x:Key="d2c"/>
                     <local:DepthDistanceConverter x:Key="d2d"/>
                     <local:DepthFirstScaleTopOffset x:Key="d2top"/>
+                    <local:WellModelConverter x:Key="wellModel"/>
                 </Canvas.Resources>
                 <StackPanel x:Name="spDepths" Canvas.Left="{Binding DepthsOffset}">
                     <Grid>
@@ -41,7 +42,7 @@
                             <ColumnDefinition Width="60"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Border BorderThickness="0,0,0,1" BorderBrush="Black">
-                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left">
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">
                                 <TextBlock.Text>
                                     <!--<Binding Path="Name"></Binding>-->
                                     深度
@@ -71,6 +72,17 @@
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
                 </StackPanel>
+                <StackPanel x:Name="spLogsBorder">
+                    <Path x:Name="pathLogsBorder" Stroke="Black" StrokeThickness="1">
+                        <Path.Data>
+                            <MultiBinding Converter="{StaticResource wellModel}">
+                                <Binding Path="Columns"/>
+                                <Binding Path="Depths"/>
+                                <Binding Path="LongitudinalProportion"/>
+                            </MultiBinding>
+                        </Path.Data>
+                    </Path>
+                </StackPanel>
             </Canvas>
         </Grid>
     </DataTemplate>
@@ -88,12 +100,19 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="60"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Border BorderThickness="0,0,0,1" BorderBrush="Black">
-                    <TextBlock Text="{Binding Path= Name}" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0" >
+                <Border BorderThickness="0,0,0,0" BorderBrush="Black">
+                    <TextBlock Text="{Binding Path= Name}" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" >
                     </TextBlock>
                 </Border>
                 <StackPanel Grid.Row="1" Grid.Column="0">
-                    <Path x:Name="PathDepth"  StrokeThickness="1">
+                    <Path x:Name="PathLogs"  StrokeThickness="1">
+                        <Path.Data>
+                            <MultiBinding Converter="{StaticResource l2p}">
+                                <Binding Path="Values"/>
+                                <Binding Path="Owner"/>
+                                <Binding Path="MathType"/>
+                            </MultiBinding>
+                        </Path.Data>
                         <Path.Stroke>
                             <SolidColorBrush Color="{Binding Color}"></SolidColorBrush>
                         </Path.Stroke>
@@ -103,15 +122,9 @@
                                 <Binding Path="Values"/>
                                 <Binding Path="Owner"/>
                                 <Binding Path="MathType"/>
+                                <Binding ElementName="PathLogs" Path="Data"></Binding>
                             </MultiBinding>
                         </Path.Fill>
-                        <Path.Data>
-                            <MultiBinding Converter="{StaticResource l2p}">
-                                <Binding Path="Values"/>
-                                <Binding Path="Owner"/>
-                                <Binding Path="MathType"/>
-                            </MultiBinding>
-                        </Path.Data>
                     </Path>
                 </StackPanel>
             </Grid>

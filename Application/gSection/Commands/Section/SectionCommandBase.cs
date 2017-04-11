@@ -1,5 +1,4 @@
-﻿using gEngine.Manipulator;
-using gEngine.Manipulator.Ge.Section;
+﻿using gEngine.Graph.Interface;
 using gEngine.View;
 using gSection.View;
 using System;
@@ -7,29 +6,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace gSection.Commands.Section
 {
-    public class EraseFaceCommand : SectionCommandBase
+    public class SectionCommandBase : Command
     {
-        public override void Execute(object parameter)
+        public override bool CanExecute(object parameter)
         {
             MainWindow mw = parameter as MainWindow;
             if (mw == null)
-                return;
+                return false;
 
             TabControl tc = mw.TabControl;
             MapControl mc = tc.ActiveMapControl;
             if (mc == null)
-                return;
+                return false;
 
             LayerControl lc = mc.ActiveLayerControl;
             if (lc == null)
-                return;
+                return false;
 
-            SetFaceTypeManipulator dm = new SetFaceTypeManipulator() { FaceType = -1 };
-            ManipulatorSetter.SetManipulator(dm, lc);
+            ILayer layer = lc.LayerContext;
+            if (layer == null)
+                return false;
+
+            return layer.Type == "Section";
         }
+
+        public override void Execute(object parameter) { }
     }
 }

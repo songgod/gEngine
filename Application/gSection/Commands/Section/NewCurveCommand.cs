@@ -4,19 +4,32 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using gEngine.Manipulator;
+using gEngine.Manipulator.Ge.Section;
+using gEngine.View;
+using gSection.View;
 
 namespace gSection.Commands.Section
 {
-    public class NewCurveCommand : Command
+    public class NewCurveCommand : SectionCommandBase
     {
-        public override bool CanExecute(object parameter)
-        {
-            throw new NotImplementedException();
-        }
-
         public override void Execute(object parameter)
         {
-            throw new NotImplementedException();
+            MainWindow mw = parameter as MainWindow;
+            if (mw == null)
+                return;
+
+            TabControl tc = mw.TabControl;
+            MapControl mc = tc.ActiveMapControl;
+            if (mc == null)
+                return;
+
+            LayerControl lc = mc.ActiveLayerControl;
+            if (lc == null)
+                return;
+
+            DrawCurveManipulator dm = new DrawCurveManipulator();
+            ManipulatorSetter.SetManipulator(dm, lc);
         }
     }
 }

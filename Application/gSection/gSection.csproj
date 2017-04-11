@@ -125,6 +125,7 @@
     <Compile Include="Commands\Section\NewFaultCommand.cs" />
     <Compile Include="Commands\Section\NewLineCommand.cs" />
     <Compile Include="Commands\Section\ReplaceLineCommand.cs" />
+    <Compile Include="Commands\Section\SectionCommandBase.cs" />
     <Compile Include="Converters\ObjectsEqualityConverter.cs" />
     <Compile Include="ViewModel\Project.cs" />
     <Compile Include="View\TabControl.xaml.cs">
@@ -600,6 +601,10 @@
     <ProjectReference Include="..\..\gEngine.Manipulator.Ge.Plane\gEngine.Manipulator.Ge.Plane.csproj">
       <Project>{70026887-FD51-4A98-8E50-4B55F750013B}</Project>
       <Name>gEngine.Manipulator.Ge.Plane</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\gEngine.Manipulator.Ge.Section\gEngine.Manipulator.Ge.Section.csproj">
+      <Project>{036A5D25-0AF4-4259-B83A-E04026F1749C}</Project>
+      <Name>gEngine.Manipulator.Ge.Section</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\gEngine.Manipulator\gEngine.Manipulator.csproj">
       <Project>{b4eedb17-eb3d-4e22-ab7c-d8e366564b8f}</Project>
