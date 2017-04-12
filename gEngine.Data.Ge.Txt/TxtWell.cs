@@ -25,9 +25,6 @@ namespace gEngine.Data.Ge.Txt
             }
         }
 
-        private void a()
-        { }
-
         private bool IsDecimal(string numstr, out double result)
         {
             try
