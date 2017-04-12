@@ -48,6 +48,11 @@ namespace gEngine.Data.Ge.Txt
             int curveCount = 0;//定义曲线的条数
             bool colFlag = true;//曲线标题的标识
 
+            if (!File.Exists(txtfilepath))
+                return false;
+
+            Name = System.IO.Path.GetFileNameWithoutExtension(txtfilepath);
+
             var file = File.Open(txtfilepath, FileMode.Open);
 
             System.Text.RegularExpressions.Regex whitespace = new System.Text.RegularExpressions.Regex(@"\s+", System.Text.RegularExpressions.RegexOptions.Compiled);
@@ -67,16 +72,9 @@ namespace gEngine.Data.Ge.Txt
                         if (colFlag)
                         {
                             colFlag = false;
-                            for (int i = 0; i < curveCount; i++)
+                            for (int i = 1; i < curveCount; i++)
                             {
-                                if (i.Equals(0))
-                                {
-                                    Name = strColumns[i];
-                                }
-                                else
-                                {
-                                    Columns.Add(new Tuple<string, List<double>>(strColumns[i], new List<double>()));
-                                }
+                                Columns.Add(new Tuple<string, List<double>>(strColumns[i], new List<double>()));
                             }
                         }
                         else

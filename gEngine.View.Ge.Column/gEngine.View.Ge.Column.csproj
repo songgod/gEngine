@@ -49,6 +49,12 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Condition="'$(Platform)' == 'x86'" Include="gTopology">
+      <HintPath>..\3rdlib\gToplogy\x86\gTopology.dll</HintPath>
+    </Reference>
+    <Reference Condition="'$(Platform)' == 'x64'" Include="gTopology">
+      <HintPath>..\3rdlib\gToplogy\x64\gTopology.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />

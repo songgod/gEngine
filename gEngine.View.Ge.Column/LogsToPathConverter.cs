@@ -18,7 +18,7 @@ namespace gEngine.View.Ge.Column
     {
         public LogsToPathConverter()
         {
-            InvalidValue = -99999;
+            InvalidValue = -9999;
         }
 
         public double InvalidValue { get; set; }
@@ -53,9 +53,9 @@ namespace gEngine.View.Ge.Column
             MathType mathType = (MathType)values[2];
             if (mathType == MathType.DEFAULT)
             {
-                if (xMax - xMin > 60)
-                    mathType = MathType.ARITHM;
-                else
+                //if (xMax - xMin > 60)
+                //    mathType = MathType.ARITHM;
+                //else
                     mathType = MathType.LINER;
             }
 
