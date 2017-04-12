@@ -1,6 +1,7 @@
 ﻿using gEngine.Graph.Ge;
 using gEngine.Graph.Ge.Plane;
 using gEngine.Manipulator;
+using gEngine.Util;
 using gEngine.View;
 using System;
 using System.Collections.Generic;
@@ -11,30 +12,43 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interactivity;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
 namespace gEngine.Manipulator.Ge.Plane
 {
     public delegate void FinishSelectWellLocations(HashSet<string> names);
+    public delegate void DrawWellLineDelegate(Behavior<UIElement> behavior);
 
     public class WellLocationsConnectManipulator : PolyLineManipulator
     {
         #region 属性
-        public HashSet<string> SelectWellLocations { get; set; }
         public bool IsStopMove { get; set; }
-        public HashSet<Point> wellPointList { get; set; }
+        public HashSet<string> SelectWellLocations { get; set; }
+        public Stack<string> UndoSelectWellLocationstHistory { get; set; }
+        public HashSet<Point> WellPointList { get; set; }
+        public Stack<Point> UndoWellPointListHistory { get; set; }
 
         public event FinishSelectWellLocations OnFinishSelect;
+        public event DrawWellLineDelegate OnDrawWellLine;
         #endregion
 
         #region 构造函数
 
         public WellLocationsConnectManipulator()
         {
+            InitPara();
+        }
+        public void InitPara()
+        {
             SelectWellLocations = new HashSet<string>();
-            wellPointList = new HashSet<Point>();
-        } 
+            UndoSelectWellLocationstHistory = new Stack<string>();
+            WellPointList = new HashSet<Point>();
+            UndoWellPointListHistory = new Stack<Point>();
+            IsStopMove = false;
+        }
+
         #endregion
 
         #region 事件
@@ -69,12 +83,19 @@ namespace gEngine.Manipulator.Ge.Plane
                 SelectWellLocations.Add(wl.WellNum);
                 WellPosition = new Point(wl.X, wl.Y);
                 Point p = lc.Root.RenderTransform.Transform(WellPosition);//转换到圆心
-                wellPointList.Add(p);
+                WellPointList.Add(p);
 
                 this.TrackAdorner.RemoveLastPoint();
                 this.TrackAdorner.AddPoint(p);
                 this.TrackAdorner.AddPoint(p);
 
+                //执行画线事件
+                if (OnDrawWellLine != null)
+                {
+                    UndoWellPointListHistory.Clear();
+                    UndoSelectWellLocationstHistory.Clear();
+                    OnDrawWellLine.Invoke(this);
+                }
             }
         }
 
@@ -108,7 +129,7 @@ namespace gEngine.Manipulator.Ge.Plane
             if (OnFinishSelect != null && SelectWellLocations.Count != 0)
             {
                 Point lastPoint = this.TrackAdorner.Track.Points[this.TrackAdorner.Track.Points.Count - 1];
-                if (!wellPointList.Contains(lastPoint))
+                if (!WellPointList.Contains(lastPoint))
                 {
                     this.TrackAdorner.Track.Points.Remove(lastPoint);
                 }
@@ -138,7 +159,46 @@ namespace gEngine.Manipulator.Ge.Plane
             if (wl == null)
                 return null;
             return wl;
-        } 
+        }
+
+        public void Undo()
+        {
+            string lastWell = SelectWellLocations.Last();
+
+            //1.没有结束画线，lastPoint是多余点
+            if (!IsStopMove)
+            {
+                this.TrackAdorner.Track.Points.Remove(WellPointList.Last());
+            }
+            //2.结束画线
+            else
+            {
+                this.TrackAdorner.RemoveLastPoint();
+            }
+
+            UndoSelectWellLocationstHistory.Push(lastWell);
+            UndoWellPointListHistory.Push(WellPointList.Last());
+            WellPointList.Remove(WellPointList.Last());
+            SelectWellLocations.Remove(lastWell);
+        }
+
+        public void Redo()
+        {
+            Point p = UndoWellPointListHistory.Pop();
+            string s = UndoSelectWellLocationstHistory.Pop();
+
+            if (!IsStopMove)
+            {
+                this.TrackAdorner.Track.Points.Insert(this.TrackAdorner.Track.Points.Count - 1, p);
+            }
+            else
+            {
+                this.TrackAdorner.Track.Points.Add(p);
+            }
+
+            WellPointList.Add(p);
+            SelectWellLocations.Add(s);
+        }
         #endregion
     }
 }

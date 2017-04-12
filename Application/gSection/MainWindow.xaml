@@ -86,8 +86,8 @@
             <dxr:RibbonDefaultPageCategory>
                 <dxr:RibbonPage x:Name="pageStart" Caption="开始">
                     <dxr:RibbonPageGroup Caption="编辑">
-                        <dxb:BarButtonItem Content="撤销" LargeGlyph="{dx:DXImage Image=Undo_32x32.png}" Glyph="{dx:DXImage Image=Undo_16x16.png}"/>
-                        <dxb:BarButtonItem Content="重做" LargeGlyph="{dx:DXImage Image=Redo_32x32.png}" Glyph="{dx:DXImage Image=Redo_16x16.png}"/>
+                        <dxb:BarButtonItem Content="撤销" LargeGlyph="{dx:DXImage Image=Undo_32x32.png}" Glyph="{dx:DXImage Image=Undo_16x16.png}" Command="{Binding UndoCommand}"/>
+                        <dxb:BarButtonItem Content="重做" LargeGlyph="{dx:DXImage Image=Redo_32x32.png}" Glyph="{dx:DXImage Image=Redo_16x16.png}" Command="{Binding RedoCommand}"/>
                         <dxb:BarButtonItem Content="删除" LargeGlyph="{dx:DXImage Image=Delete_32x32.png}" Glyph="{dx:DXImage Image=Delete_16x16.png}"/>
                         <dxb:BarButtonItem Content="清理内存" LargeGlyph="pack://application:,,,/GPTDxWPFRibbonApplication1;component/Images/GDS/清理内存.png" Glyph="pack://application:,,,/GPTDxWPFRibbonApplication1;component/Images/GDS/清理内存.png"/>
                     </dxr:RibbonPageGroup>
@@ -123,7 +123,7 @@
                                            LargeGlyph="{dx:DXImage Image=BOFolder_32x32.png}" Glyph="{dx:DXImage Image=BOFolder_16x16.png}" >
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="ItemClick">
-                                    <i:InvokeCommandAction Command="{Binding TabOpenCommand}" CommandParameter="{Binding ElementName=btnShowJWT}" />
+                                    <i:InvokeCommandAction Command="{Binding OpenFileToTabCommand}" CommandParameter="{Binding ElementName=btnShowJWT}" />
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </dxb:BarButtonItem>

@@ -28,6 +28,8 @@ using gEngine.Graph.Ge.Plane;
 using gTopology;
 using GPTDxWPFRibbonApplication1.ViewModels;
 using gEngine.Manipulator.Ge.Plane;
+using System.Windows.Threading;
+using System.Threading;
 
 namespace GPTDxWPFRibbonApplication1.Controls
 {
@@ -59,12 +61,20 @@ namespace GPTDxWPFRibbonApplication1.Controls
         #endregion
 
 
-        public WellLocationControl()
+        public WellLocationControl():this(string.Empty)
+        {
+            
+        }
+
+        public WellLocationControl(string fileName)
         {
             InitializeComponent();
-            CreateWellLocation();
+            CreateWellLocation(fileName);
             mb = new WellLocationsConnectManipulator();
             ((WellLocationsConnectManipulator)mb).OnFinishSelect += Dm_OnFinishSelect;
+            
+
+
         }
 
         private void Dm_OnFinishSelect(System.Collections.Generic.HashSet<string> names)
@@ -75,11 +85,11 @@ namespace GPTDxWPFRibbonApplication1.Controls
         }
 
 
-        private void CreateWellLocation()
+        private void CreateWellLocation(string fileName)
         {
             Map map = new Map();
             Layer layer = new Layer();
-            TXTWellLocations twl = new TXTWellLocations() { TxtFile = "d:/welllocations.txt" };
+            TXTWellLocations twl = new TXTWellLocations() { TxtFile = fileName };
             WellLocationsCreator c = new WellLocationsCreator();
             layer.Objects = c.Create(twl);
             map.Layers.Add(layer);
@@ -90,19 +100,10 @@ namespace GPTDxWPFRibbonApplication1.Controls
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            mc.FullView();
-        }
-
-        /// <summary>
-        /// 下右键：结束画线，打开剖面设计页
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void mc_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            //ManipulatorSetter.ClearManipulator(mc.GetLayerControl(0));
-            //string winName = "GPTDxWPFRibbonApplication1.DXNewSectionSet";
-            //OpenWindow(winName);
+            this.Dispatcher.Invoke(DispatcherPriority.SystemIdle, (ThreadStart)delegate ()
+            {
+                mc.FullView();
+            });
         }
 
         private void OpenWindow(string winName, string wellNums)
