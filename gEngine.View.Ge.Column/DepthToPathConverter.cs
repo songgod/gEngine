@@ -73,6 +73,7 @@ namespace gEngine.View.Ge.Column
         {
             WellColumns cols = values[0] as WellColumns;//曲线数据
             ObsDoubles depths = values[1] as ObsDoubles;//深度
+            WellLayerDatas layerDatas = values[3] as WellLayerDatas;
             if (depths == null || depths.Count <= 1)
                 return null;
 
@@ -83,8 +84,8 @@ namespace gEngine.View.Ge.Column
             double firstScale = top - mindepth == 0 ? 10 : top - mindepth;//第一个刻度点
             int LongitudinalProportion = int.Parse(values[2].ToString()); //纵向比例
 
-            int colsCount = cols.Count + 1;//曲线条数（包括深度曲线）
-            int colsWidth = 60;//曲线宽度，目前深度曲线宽度也为60
+            int colsCount = cols.Count + 1 + 1 + layerDatas.Count;//曲线条数（包括深度曲线、层号曲线和分层数据曲线）
+            int colsWidth = 60;//曲线宽度，目前深度曲线宽度、层号曲线和分层数据曲线宽度也为60
 
             PathGeometry geom = new PathGeometry();
             {

@@ -61,6 +61,8 @@
   <ItemGroup>
     <Compile Include="IDBBase.cs" />
     <Compile Include="IDBWell.cs" />
+    <Compile Include="IDBWellLayer.cs" />
+    <Compile Include="IDBWellLayerData.cs" />
     <Compile Include="IDBWellLocation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

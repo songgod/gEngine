@@ -30,6 +30,8 @@
                     <local:DepthToScaleConverter x:Key="d2c"/>
                     <local:DepthDistanceConverter x:Key="d2d"/>
                     <local:DepthFirstScaleTopOffset x:Key="d2top"/>
+                    <local:WellLayerToPathConverter x:Key="w2p"/>
+                    <local:BoundaryNameToPathConverter x:Key="bn2p"/>
                     <local:WellModelConverter x:Key="wellModel"/>
                 </Canvas.Resources>
                 <StackPanel x:Name="spDepths" Canvas.Left="{Binding DepthsOffset}">
@@ -41,7 +43,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="60"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                        <Border BorderThickness="0,0,0,0" BorderBrush="Black">
                             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">
                                 <TextBlock.Text>
                                     <!--<Binding Path="Name"></Binding>-->
@@ -79,9 +81,58 @@
                                 <Binding Path="Columns"/>
                                 <Binding Path="Depths"/>
                                 <Binding Path="LongitudinalProportion"/>
+                                <Binding Path="WellLayerDatasUI"/>
                             </MultiBinding>
                         </Path.Data>
                     </Path>
+                </StackPanel>
+                <StackPanel x:Name="spWellLayer" Canvas.Left="{Binding Offset}" DataContext="{Binding Path=WellLayers}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Border BorderThickness="0,0,0,0" BorderBrush="Black">
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <TextBlock.Text>
+                                    层号
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </Border>
+                        <Canvas Background="White" Grid.Row="1" MinWidth="1">
+                            <Path x:Name="PathWellLayer"  Stroke="Black" StrokeThickness="1">
+                                <Path.Data>
+                                    <MultiBinding Converter="{StaticResource w2p}">
+                                        <Binding Path="Owner"/>
+                                        <Binding Path="TopDepths"/>
+                                        <Binding Path="Thickness"/>
+                                    </MultiBinding>
+                                </Path.Data>
+                            </Path>
+                            <Path x:Name="PathBoundaryName" Fill="Black">
+                                <Path.Data>
+                                    <MultiBinding Converter="{StaticResource bn2p}">
+                                        <Binding Path="Owner"/>
+                                        <Binding Path="TopDepths"/>
+                                        <Binding Path="Thickness"/>
+                                        <Binding Path="BoundaryNames"/>
+                                    </MultiBinding>
+                                </Path.Data>
+                            </Path>
+                        </Canvas>
+                    </Grid>
+                </StackPanel>
+                <StackPanel x:Name="spWellLayerData">
+                    <ItemsControl ItemsSource="{Binding WellLayerDatasUI}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <Canvas x:Name="cvsWellLayerDataPanel"></Canvas>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
                 </StackPanel>
             </Canvas>
         </Grid>
@@ -124,6 +175,39 @@
                                 <Binding Path="MathType"/>
                                 <Binding ElementName="PathLogs" Path="Data"></Binding>
                             </MultiBinding>
+                        </Path.Fill>
+                    </Path>
+                </StackPanel>
+            </Grid>
+        </Canvas>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type gc:WellLayerData}">
+        <Canvas>
+            <Grid Canvas.Left="{Binding Offset}">
+                <Grid.Resources>
+                    <local:WellLayerDataToPathConverter x:Key="wld2p"/>
+                </Grid.Resources>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Border BorderThickness="0,0,0,0" BorderBrush="Black">
+                    <TextBlock Text="{Binding Path= Name}" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" >
+                    </TextBlock>
+                </Border>
+                <StackPanel Grid.Row="1" Grid.Column="0">
+                    <Path x:Name="PathLayerData">
+                        <Path.Data>
+                            <MultiBinding Converter="{StaticResource wld2p}">
+                                <Binding Path="Owner"/>
+                                <Binding Path="WellLayerDatas"/>
+                            </MultiBinding>
+                        </Path.Data>
+                        <Path.Fill>
+                            <SolidColorBrush Color="Green"/>
                         </Path.Fill>
                     </Path>
                 </StackPanel>

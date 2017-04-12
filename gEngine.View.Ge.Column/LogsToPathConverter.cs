@@ -18,7 +18,7 @@ namespace gEngine.View.Ge.Column
     {
         public LogsToPathConverter()
         {
-            InvalidValue = -99999;
+            InvalidValue = -9999;
         }
 
         public double InvalidValue { get; set; }
@@ -50,11 +50,12 @@ namespace gEngine.View.Ge.Column
             double xMin = validValueList.Min();
             double xMax = validValueList.Max();
 
+            // 曲线在使用对数时，抽稀算法无法抽稀出数据，暂时都用线性的 2017-4-7
             MathType mathType = (MathType)values[2];
             if (mathType == MathType.DEFAULT)
             {
                 if (xMax - xMin > 60)
-                    mathType = MathType.ARITHM;
+                    mathType = MathType.LINER;
                 else
                     mathType = MathType.LINER;
             }
@@ -109,7 +110,7 @@ namespace gEngine.View.Ge.Column
     {
         public LogsToFillConverter()
         {
-            InvalidValue = -99999;
+            InvalidValue = -9999;
         }
 
         public double InvalidValue { get; set; }

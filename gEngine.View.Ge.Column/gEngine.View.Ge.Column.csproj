@@ -77,6 +77,8 @@
     </Compile>
     <Compile Include="LogsToPathConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WellLayerDataToPathConverter.cs" />
+    <Compile Include="WellLayerToPathConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Dictionary.xaml">

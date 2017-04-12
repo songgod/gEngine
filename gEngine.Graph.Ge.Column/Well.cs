@@ -10,6 +10,9 @@ namespace gEngine.Graph.Ge.Column
         {
             Columns = new WellColumns();
             Depths = new ObsDoubles();
+            WellLayers = new WellLayers();
+            WellLayerDatas = new WellLayerDatas();
+            WellLayerDatasUI = new WellLayerDatas();
         }
 
         public WellColumns Columns
@@ -21,6 +24,36 @@ namespace gEngine.Graph.Ge.Column
         // Using a DependencyProperty as the backing store for Columns.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ColumnsProperty =
             DependencyProperty.Register("Columns", typeof(WellColumns), typeof(Well));
+
+        public WellLayers WellLayers
+        {
+            get { return (WellLayers)GetValue(WellLayersProperty); }
+            set { SetValue(WellLayersProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Columns.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty WellLayersProperty =
+            DependencyProperty.Register("WellLayers", typeof(WellLayers), typeof(Well));
+
+        public WellLayerDatas WellLayerDatas
+        {
+            get { return (WellLayerDatas)GetValue(WellLayerDatasProperty); }
+            set { SetValue(WellLayerDatasProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Columns.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty WellLayerDatasProperty =
+            DependencyProperty.Register("WellLayerDatas", typeof(WellLayerDatas), typeof(Well));
+
+        public WellLayerDatas WellLayerDatasUI
+        {
+            get { return (WellLayerDatas)GetValue(WellLayerDatasUIProperty); }
+            set { SetValue(WellLayerDatasUIProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Columns.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty WellLayerDatasUIProperty =
+            DependencyProperty.Register("WellLayerDatasUI", typeof(WellLayerDatas), typeof(Well));
 
 
         public ObsDoubles Depths
