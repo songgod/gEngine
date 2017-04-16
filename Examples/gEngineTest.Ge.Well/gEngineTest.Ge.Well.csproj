@@ -131,6 +131,10 @@
       <Project>{B1C2609B-A3ED-43E0-9DA2-DF27029D44FC}</Project>
       <Name>gEngine.Data.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\gEngine.Graph.Ge.Column\gEngine.Graph.Ge.Column.csproj">
+      <Project>{95227940-90F7-40B4-9027-3EEECD8ED6DE}</Project>
+      <Name>gEngine.Graph.Ge.Column</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\gEngine.Graph.Ge\gEngine.Graph.Ge.csproj">
       <Project>{3BD77E4F-A348-4EDB-B60C-68B749249B91}</Project>
       <Name>gEngine.Graph.Ge</Name>
@@ -146,6 +150,10 @@
     <ProjectReference Include="..\..\gEngine.Util.Ge.Column\gEngine.Util.Ge.Column.csproj">
       <Project>{6209A699-8823-4A0B-8A0C-BDAE9CE52305}</Project>
       <Name>gEngine.Util.Ge.Column</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\gEngine.Util\gEngine.Util.csproj">
+      <Project>{84acb6c4-cf62-4f4b-a7e5-5c642edc041a}</Project>
+      <Name>gEngine.Util</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\gEngine.View.Ge.Column\gEngine.View.Ge.Column.csproj">
       <Project>{763b3662-8a27-45be-90a6-b2bd51c2ca47}</Project>

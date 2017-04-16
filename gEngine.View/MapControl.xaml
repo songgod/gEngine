@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:gEngine.View"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
-             Background="LightBlue" 
+             Background="Transparent" 
               ClipToBounds="True"
              IsManipulationEnabled="True"
              Loaded="UserControl_Loaded">
