@@ -38,9 +38,9 @@ namespace gEngineTest.MapDxTab
             Map map = new Map() { Name = "Column" };
             Layer layer = new Layer();
 
-            TxtWell tw = new TxtWell() { TxtFile = "D:\\Data\\MulWellColumnDataNew.txt" };
+            TxtWell tw = new TxtWell() { TxtFile = "D:\\Data\\M.txt" };
             WellCreator wc = new WellCreator();
-            layer.Objects = wc.Create(tw);
+            layer.Objects.Add(wc.Create(tw));
             map.Layers.Add(layer);
             Project.Maps.Add(map);
         }

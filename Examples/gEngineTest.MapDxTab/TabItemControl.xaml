@@ -10,7 +10,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              Loaded="UserControl_Loaded">
-    <gv:MapControl x:Name="mc" ItemsSource="{Binding Layers}">
+    <gv:MapControl x:Name="mc">
         <i:Interaction.Behaviors>
             <em:MapControlZoomPan/>
         </i:Interaction.Behaviors>
