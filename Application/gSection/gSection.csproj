@@ -126,6 +126,9 @@
     <Compile Include="Commands\Section\NewLineCommand.cs" />
     <Compile Include="Commands\Section\ReplaceLineCommand.cs" />
     <Compile Include="Commands\Section\SectionCommandBase.cs" />
+    <Compile Include="Commands\UndoRedo\CommandsUR.cs" />
+    <Compile Include="Commands\UndoRedo\RedoCommand.cs" />
+    <Compile Include="Commands\UndoRedo\UndoCommand.cs" />
     <Compile Include="Converters\ObjectsEqualityConverter.cs" />
     <Compile Include="ViewModel\Project.cs" />
     <Compile Include="View\TabControl.xaml.cs">
@@ -647,6 +650,7 @@
       <Name>gEngine.View</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

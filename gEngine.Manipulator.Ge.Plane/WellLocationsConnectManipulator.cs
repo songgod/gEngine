@@ -1,6 +1,7 @@
 ﻿using gEngine.Graph.Ge;
 using gEngine.Graph.Ge.Plane;
 using gEngine.Manipulator;
+using gEngine.Util;
 using gEngine.View;
 using System;
 using System.Collections.Generic;
@@ -50,8 +51,10 @@ namespace gEngine.Manipulator.Ge.Plane
             {
                 SelectWellLocations.Add(wl.WellNum);
                 base.MouseLeftButtonUp(sender, e);
+                AddUndoCommand(e, wl.WellNum);
             }
         }
+
         /// <summary>
         /// 覆盖父类鼠标移动事件
         /// </summary>
@@ -70,8 +73,11 @@ namespace gEngine.Manipulator.Ge.Plane
             }
 
             SelectWellLocations.Clear();
+            ClearCommands();
             base.MouseRightButtonUp(sender, e);
         }
+
+        
         #endregion
 
         #region 方法
@@ -89,7 +95,24 @@ namespace gEngine.Manipulator.Ge.Plane
             if (wl == null)
                 return null;
             return wl;
-        } 
+        }
+
+        private void AddUndoCommand(MouseButtonEventArgs e,string wellNum)
+        {
+            MapControl mc = this.AssociatedObject.Owner;
+            Point p = mc.Dp2LP(e.GetPosition(mc));
+            IUndoRedoCommand undoCommand = new UndoConnectWellCommand(this, p, wellNum);
+            UndoRedoCommandManager undoManager = UndoRedoCommandManager.CreateInstance();
+            undoManager.AddCommand(mc, undoCommand);
+        }
+
+        private void ClearCommands()
+        {
+            MapControl mc = this.AssociatedObject.Owner;
+            UndoRedoCommandManager undoManager = UndoRedoCommandManager.CreateInstance();
+            undoManager.Clear(mc);
+        }
+
         #endregion
     }
 }

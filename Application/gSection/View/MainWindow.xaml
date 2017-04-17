@@ -12,6 +12,7 @@
         xmlns:vm="clr-namespace:gSection.ViewModel"
         xmlns:cmdmap="clr-namespace:gSection.Commands.Map"
         xmlns:cmdsecion="clr-namespace:gSection.Commands.Section"
+        xmlns:cmdundo="clr-namespace:gSection.Commands.UndoRedo"
         xmlns:cvt="clr-namespace:gSection.Converters"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="gSection.View.MainWindow"
@@ -79,8 +80,8 @@
             <dxr:RibbonDefaultPageCategory>
                 <dxr:RibbonPage x:Name="pageStart" Caption="开始">
                     <dxr:RibbonPageGroup Caption="编辑">
-                        <dxb:BarButtonItem Content="撤销" LargeGlyph="{dx:DXImage Image=Undo_32x32.png}" Glyph="{dx:DXImage Image=Undo_16x16.png}"/>
-                        <dxb:BarButtonItem Content="重做" LargeGlyph="{dx:DXImage Image=Redo_32x32.png}" Glyph="{dx:DXImage Image=Redo_16x16.png}"/>
+                        <dxb:BarButtonItem Content="撤销"  Command="{x:Static cmdundo:CommandsUR.UndoCommand}" CommandParameter="{Binding}" LargeGlyph="{dx:DXImage Image=Undo_32x32.png}" Glyph="{dx:DXImage Image=Undo_16x16.png}"/>
+                        <dxb:BarButtonItem Content="重做"  Command="{x:Static cmdundo:CommandsUR.RedoCommand}" CommandParameter="{Binding}" LargeGlyph="{dx:DXImage Image=Redo_32x32.png}" Glyph="{dx:DXImage Image=Redo_16x16.png}"/>
                         <dxb:BarButtonItem Content="删除" LargeGlyph="{dx:DXImage Image=Delete_32x32.png}" Glyph="{dx:DXImage Image=Delete_16x16.png}"/>
                         <dxb:BarButtonItem Content="清理内存" LargeGlyph="pack://application:,,,/gSection;component/Images/GDS/清理内存.png" Glyph="pack://application:,,,/gSection;component/Images/GDS/清理内存.png"/>
                     </dxr:RibbonPageGroup>
