@@ -35,7 +35,7 @@ namespace gEngineTest.Ge.Well
 
             TxtWell tw = new TxtWell() { TxtFile = "D:\\Data\\MulWellColumnDataNew.txt" };
             WellCreator wc = new WellCreator();
-            layer.Objects = wc.Create(tw);
+            layer.Objects.Add(wc.Create(tw));
 
             Binding bd = new Binding("Objects") { Source = layer };
             lyControl.SetBinding(ItemsControl.ItemsSourceProperty, bd);

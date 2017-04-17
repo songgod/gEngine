@@ -6,15 +6,15 @@
              xmlns:vc="clr-namespace:gEngine.View.Ge.Column;assembly=gEngine.View.Ge.Column"
              StartupUri="View/MainWindow.xaml" Startup="OnAppStartup_UpdateThemeName">
     <Application.Resources>
-         
-    	<ResourceDictionary>
-    		<ResourceDictionary.MergedDictionaries>
-    			<ResourceDictionary Source="zh-cn.xaml"/>
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="zh-cn.xaml"/>
                 <vs:Dictionary/>
                 <vc:DictionaryNew/>
                 <vp:Dictionary/>
-    		</ResourceDictionary.MergedDictionaries>
-    	</ResourceDictionary>
-         
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
     </Application.Resources>
 </Application>

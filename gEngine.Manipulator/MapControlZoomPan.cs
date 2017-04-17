@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Interactivity;
 using System.Windows.Media;
 
@@ -13,6 +14,7 @@ namespace gEngine.Manipulator
     public class MapControlZoomPan : MapManipulator
     {
         private Point mousedown;
+        private Point center;
 
         protected override void OnAttached()
         {
@@ -31,12 +33,42 @@ namespace gEngine.Manipulator
 
         private void AssociatedObject_ManipulationDelta(object sender, System.Windows.Input.ManipulationDeltaEventArgs e)
         {
-            throw new NotImplementedException();
+            int num = e.Manipulators.Count<IManipulator>();
+            if (num > 2)
+            {
+                return;
+            }
+            MapControl associatedObject = base.AssociatedObject;
+            if (num == 1)
+            {
+                Vector v = this.AssociatedObject.Dp2LP(e.DeltaManipulation.Translation);
+                this.AssociatedObject.Move(v);
+            }
+            else
+            {
+                this.AssociatedObject.Zoom(center, e.DeltaManipulation.Scale);
+            }
+            e.Handled = true;
         }
 
         private void AssociatedObject_ManipulationStarting(object sender, System.Windows.Input.ManipulationStartingEventArgs e)
         {
-            throw new NotImplementedException();
+            FrameworkElement fw = VisualTreeHelper.GetParent(this.AssociatedObject) as FrameworkElement;
+            if(fw==null)
+            {
+                throw new Exception("null");
+            }
+            e.ManipulationContainer = fw;
+            e.Mode = (ManipulationModes.TranslateX | ManipulationModes.TranslateY | ManipulationModes.Scale);
+            Rect empty = Rect.Empty;
+            foreach (IManipulator current in e.Manipulators)
+            {
+                Point p = current.GetPosition(this.AssociatedObject);
+                p = this.AssociatedObject.Dp2LP(p);
+                empty.Union(p);
+            }
+            this.center = new Point((empty.Left + empty.Right) / 2.0, (empty.Top + empty.Bottom) / 2.0);
+            e.Handled = true;
         }
 
         private void AssociatedObject_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
