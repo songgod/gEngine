@@ -26,6 +26,8 @@ public partial class TabControl : DXTabControl
         public TabControl()
         {
             InitializeComponent();
+           
+            this.View.HideButtonShowMode = HideButtonShowMode.InAllTabs;
         }
 
         public int MapControlCount
