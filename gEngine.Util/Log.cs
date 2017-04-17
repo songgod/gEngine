@@ -25,6 +25,7 @@ namespace gEngine.Util
         {
             writer.WriteLine(log);
             writer.Flush();
+            Console.Write(log+"\n");
         }
 
         public static Log Single()
@@ -37,17 +38,17 @@ namespace gEngine.Util
 
         public static void LogError(string err)
         {
-            Single().WriteLog("Error: " + DateTime.Now + "/t" + err);
+            Single().WriteLog("Error: " + DateTime.Now + "\t" + err);
         }
 
         public static void LogWarning(string warning)
         {
-            Single().WriteLog("Warning: "+DateTime.Now + "/t" + warning);
+            Single().WriteLog("Warning: "+DateTime.Now + "\t" + warning);
         }
 
         public static void LogInfo(string info)
         {
-            Single().WriteLog("Info: "+DateTime.Now + "/t" + info);
+            Single().WriteLog("Info: "+DateTime.Now + "\t" + info);
         }
     }
 }
