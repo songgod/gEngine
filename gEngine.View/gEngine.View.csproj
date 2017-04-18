@@ -101,6 +101,10 @@
       <Project>{1C98A821-B030-4FF2-83AE-D49B1B3B8C67}</Project>
       <Name>gEngine.Graph.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\gEngine.Util\gEngine.Util.csproj">
+      <Project>{84ACB6C4-CF62-4F4B-A7E5-5C642EDC041A}</Project>
+      <Name>gEngine.Util</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

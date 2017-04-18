@@ -11,11 +11,6 @@ namespace gSection.Commands.UndoRedo
 {
     public class RedoCommand : Command
     {
-        UndoRedoCommandManager _undoManager;
-        public RedoCommand()
-        {
-            _undoManager = UndoRedoCommandManager.CreateInstance();
-        }
         public override bool CanExecute(object parameter)
         {
             MainWindow mw = parameter as MainWindow;
@@ -26,8 +21,7 @@ namespace gSection.Commands.UndoRedo
             MapControl mc = tc.ActiveMapControl;
             if (mc == null) return false;
 
-            if (!_undoManager.DicRedoCommands.ContainsKey(mc)) return false;
-            return _undoManager.DicRedoCommands[mc].Count > 0;
+            return mc.UndoRedoCommandManager.RedoCommands.Count > 0;
         }
 
         public override void Execute(object parameter)
@@ -40,7 +34,8 @@ namespace gSection.Commands.UndoRedo
             MapControl mc = tc.ActiveMapControl;
             if (mc == null)
                 return;
-            _undoManager.Redo(mc);
+
+            mc.UndoRedoCommandManager.Redo();
         }
     }
 }

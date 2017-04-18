@@ -56,7 +56,7 @@ namespace gSection.Commands.Map
             if (lc == null)
                 return;
 
-            WellLocationsConnectManipulator mp = new WellLocationsConnectManipulator();
+            WellLocationsConnectManipulator mp = new WellLocationsConnectManipulator(mc);
             mp.OnFinishSelect += Mp_OnFinishSelect;
             ManipulatorSetter.SetManipulator(mp, lc);
         }
