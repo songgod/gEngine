@@ -60,7 +60,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IDBBase.cs" />
+    <Compile Include="IDBDiscreteData.cs" />
     <Compile Include="IDBFactory.cs" />
+    <Compile Include="IDBHorizon.cs" />
     <Compile Include="IDBWell.cs" />
     <Compile Include="IDBWellLocation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -65,6 +65,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\gEngine.Data.Ge.Txt\gEngine.Data.Ge.Txt.csproj">
+      <Project>{48a388bf-1160-46e5-a68c-e5a819026c6e}</Project>
+      <Name>gEngine.Data.Ge.Txt</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.Data.Ge\gEngine.Data.Ge.csproj">
+      <Project>{94c3209d-a3a9-4d3c-b851-c14d390cc23a}</Project>
+      <Name>gEngine.Data.Ge</Name>
+    </ProjectReference>
     <ProjectReference Include="..\gEngine.Data.Interface\gEngine.Data.Interface.csproj">
       <Project>{B1C2609B-A3ED-43E0-9DA2-DF27029D44FC}</Project>
       <Name>gEngine.Data.Interface</Name>

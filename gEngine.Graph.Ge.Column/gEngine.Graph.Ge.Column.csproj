@@ -65,6 +65,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Well.cs" />
     <Compile Include="WellColumn.cs" />
+    <Compile Include="WellColumn_N.cs" />
+    <Compile Include="WellDepth.cs" />
+    <Compile Include="WellLogColumn.cs" />
+    <Compile Include="WellSegmentColumn.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\gEngine.Graph.Ge\gEngine.Graph.Ge.csproj">

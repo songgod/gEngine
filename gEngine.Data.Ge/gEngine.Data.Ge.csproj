@@ -61,6 +61,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DBBase.cs" />
+    <Compile Include="DBDiscreteData.cs" />
+    <Compile Include="DBHorizon.cs" />
     <Compile Include="DBWell.cs" />
     <Compile Include="DBWellLocation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
