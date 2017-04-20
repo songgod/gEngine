@@ -45,6 +45,10 @@
             </dx:IEnumerableDataSource>
         </ResourceDictionary>
     </dxr:DXRibbonWindow.Resources>
+    <dxr:DXRibbonWindow.InputBindings>
+        <KeyBinding Gesture="Ctrl+Z"  Command="{x:Static cmdundo:CommandsUR.UndoCommand}" CommandParameter="{Binding}"/>
+        <KeyBinding Gesture="Ctrl+Y"  Command="{x:Static cmdundo:CommandsUR.RedoCommand}" CommandParameter="{Binding}"/>
+    </dxr:DXRibbonWindow.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
