@@ -1,4 +1,5 @@
 ﻿using gEngine.Graph.Interface;
+using gEngine.Util;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -14,6 +15,12 @@ namespace gEngine.View
         public MapControl()
         {
             InitializeComponent();
+            UndoRedoCommandManager = new UndoRedoCommandManager();
+        }
+
+        public UndoRedoCommandManager UndoRedoCommandManager
+        {
+            get;set;
         }
 
         public int LayerControlCount

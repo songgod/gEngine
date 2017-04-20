@@ -56,7 +56,7 @@ namespace gSection.Commands.Map
             if (lc == null)
                 return;
 
-            WellLocationsConnectManipulator mp = new WellLocationsConnectManipulator();
+            WellLocationsConnectManipulator mp = new WellLocationsConnectManipulator(mc);
             mp.OnFinishSelect += Mp_OnFinishSelect;
             ManipulatorSetter.SetManipulator(mp, lc);
         }
@@ -78,5 +78,53 @@ namespace gSection.Commands.Map
             Project.Single.Maps.Add(new Tuple<string, IMap>(null,map));
             Project.Single.OpenMaps.Add(map);
         }
+
+        //private void Mp_OnFinishSelect(HashSet<string> names)
+        //{
+        //    List<string> horizonsNames = Project.Single.DBFactory.HorizonsNames;
+        //    List<string> discreteDataNames = Project.Single.DBFactory.DiscreteDataNames;
+        //    SectionLayerCreator sc = new SectionLayerCreator();
+        //    Layer layer = sc.CreateSectionLayer(names, horizonsNames, discreteDataNames);
+        //    gEngine.Graph.Ge.Map map = new gEngine.Graph.Ge.Map() { Name = "Plane" };
+        //    map.Layers.Add(layer);
+        //    Project.Single.Maps.Add(map);
+        //    Project.Single.OpenMaps.Add(map);
+
+
+        //DBWells wells = new DBWells();
+
+        //IDBHorizons horizons = null;
+        //List<string> HorizonsNames = Project.Single.DBFactory.HorizonsNames;
+        //if (HorizonsNames.Count != 0)
+        //{
+        //    horizons = Project.Single.DBFactory.GetHorizons(HorizonsNames[0]);
+        //}
+
+        //IDBDiscreteDatas discreteDatas = null;
+        //List<string> DiscreteDataNames = Project.Single.DBFactory.DiscreteDataNames;
+        //if (DiscreteDataNames.Count != 0)
+        //{
+        //    discreteDatas = Project.Single.DBFactory.GetDiscreteData(DiscreteDataNames[0]);
+        //}
+
+        //foreach (string name in names)
+        //{
+        //    IDBWell wl = Project.Single.DBFactory.GetWell(name);
+        //    if (wl != null)
+        //    {
+        //        wells.Add(wl);
+        //    }
+        //}
+
+        //Project.Single.DBFactory.GetHorizonDataByWell("M", horizons);
+
+        //SectionLayerCreator sc = new SectionLayerCreator();
+        ////Layer layer = sc.CreateSectionLayer(wells);
+        //Layer layer = sc.CreateSectionLayer(wells, horizons, discreteDatas);
+        //gEngine.Graph.Ge.Map map = new gEngine.Graph.Ge.Map() { Name = "Plane" };
+        //map.Layers.Add(layer);
+        //Project.Single.Maps.Add(map);
+        //Project.Single.OpenMaps.Add(map);
+        //}
     }
 }

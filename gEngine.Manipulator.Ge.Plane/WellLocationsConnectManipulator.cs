@@ -24,16 +24,18 @@ namespace gEngine.Manipulator.Ge.Plane
         
         #region 属性
         public HashSet<string> SelectWellLocations { get; set; }
-
+        MapControl _mc;
         public event FinishSelectWellLocations OnFinishSelect;
         #endregion
 
         #region 构造函数
 
-        public WellLocationsConnectManipulator()
+        public WellLocationsConnectManipulator(MapControl mc)
         {
+            _mc = mc;
             SelectWellLocations = new HashSet<string>();
-        } 
+            ClearCommands();
+        }
         #endregion
 
         #region 事件
@@ -99,18 +101,14 @@ namespace gEngine.Manipulator.Ge.Plane
 
         private void AddUndoCommand(MouseButtonEventArgs e,string wellNum)
         {
-            MapControl mc = this.AssociatedObject.Owner;
-            Point p = mc.Dp2LP(e.GetPosition(mc));
+            Point p = _mc.Dp2LP(e.GetPosition(_mc));
             IUndoRedoCommand undoCommand = new UndoConnectWellCommand(this, p, wellNum);
-            UndoRedoCommandManager undoManager = UndoRedoCommandManager.CreateInstance();
-            undoManager.AddCommand(mc, undoCommand);
+            _mc.UndoRedoCommandManager.AddCommand(undoCommand);
         }
 
         private void ClearCommands()
         {
-            MapControl mc = this.AssociatedObject.Owner;
-            UndoRedoCommandManager undoManager = UndoRedoCommandManager.CreateInstance();
-            undoManager.Clear(mc);
+            _mc.UndoRedoCommandManager.Clear();
         }
 
         #endregion

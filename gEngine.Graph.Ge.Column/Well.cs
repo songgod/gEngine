@@ -12,6 +12,16 @@ namespace gEngine.Graph.Ge.Column
             Depths = new ObsDoubles();
         }
 
+        public WellColumn_Ns WellColumn_N
+        {
+            get { return (WellColumn_Ns) GetValue(WellColumn_NProperty); }
+            set { SetValue(WellColumn_NProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Columns.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty WellColumn_NProperty =
+            DependencyProperty.Register("WellColumn_N", typeof(WellColumn_Ns), typeof(Well));
+
         public WellColumns Columns
         {
             get { return (WellColumns)GetValue(ColumnsProperty); }
@@ -21,7 +31,6 @@ namespace gEngine.Graph.Ge.Column
         // Using a DependencyProperty as the backing store for Columns.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ColumnsProperty =
             DependencyProperty.Register("Columns", typeof(WellColumns), typeof(Well));
-
 
         public ObsDoubles Depths
         {
