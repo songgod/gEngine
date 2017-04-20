@@ -60,8 +60,9 @@ namespace gEngineTest.Ge.WellLocation
             //}
             map.Layers.Add(layer);
             //3.绑定lc数据源
-            Binding bd = new Binding("Layers") { Source = map };
-            mc.SetBinding(ItemsControl.ItemsSourceProperty, bd);
+            mc.DataContext = map;
+            //Binding bd = new Binding("Layers") { Source = map };
+            //mc.SetBinding(ItemsControl.ItemsSourceProperty, bd);
 
             
         }
@@ -80,7 +81,7 @@ namespace gEngineTest.Ge.WellLocation
         {
             ManipulatorSetter.SetManipulator(dm, mc.GetLayerControl(0));
 
-            dm.IsStopMove = false;
+            //dm.IsStopMove = false;
             dm.SelectWellLocations.Clear();
         }
 

@@ -15,7 +15,7 @@ namespace gEngine.Manipulator
 {
     public class PolyLineManipulator : LayerManipulator
     {
-        protected Polyline TrackAdorner { get; set; }
+        public Polyline TrackAdorner { get; set; }
 
         protected override void OnAttached()
         {

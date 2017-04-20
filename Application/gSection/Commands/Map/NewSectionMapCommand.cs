@@ -56,7 +56,7 @@ namespace gSection.Commands.Map
             if (lc == null)
                 return;
 
-            WellLocationsConnectManipulator mp = new WellLocationsConnectManipulator();
+            WellLocationsConnectManipulator mp = new WellLocationsConnectManipulator(mc);
             mp.OnFinishSelect += Mp_OnFinishSelect;
             ManipulatorSetter.SetManipulator(mp, lc);
         }
@@ -73,7 +73,7 @@ namespace gSection.Commands.Map
 
             SectionLayerCreator sc = new SectionLayerCreator();
             Layer layer = sc.CreateSectionLayer(wells);
-            gEngine.Graph.Ge.Map map = new gEngine.Graph.Ge.Map() { Name = "Plane" };
+            gEngine.Graph.Ge.Map map = new gEngine.Graph.Ge.Map() { Name = "Column" };
             map.Layers.Add(layer);
             Project.Single.Maps.Add(map);
             Project.Single.OpenMaps.Add(map);

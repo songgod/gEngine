@@ -1,6 +1,7 @@
 ﻿using gEngine.Graph.Ge;
 using gEngine.Graph.Ge.Plane;
 using gEngine.Manipulator;
+using gEngine.Util;
 using gEngine.View;
 using System;
 using System.Collections.Generic;
@@ -23,16 +24,18 @@ namespace gEngine.Manipulator.Ge.Plane
         
         #region 属性
         public HashSet<string> SelectWellLocations { get; set; }
-
+        MapControl _mc;
         public event FinishSelectWellLocations OnFinishSelect;
         #endregion
 
         #region 构造函数
 
-        public WellLocationsConnectManipulator()
+        public WellLocationsConnectManipulator(MapControl mc)
         {
+            _mc = mc;
             SelectWellLocations = new HashSet<string>();
-        } 
+            ClearCommands();
+        }
         #endregion
 
         #region 事件
@@ -50,8 +53,10 @@ namespace gEngine.Manipulator.Ge.Plane
             {
                 SelectWellLocations.Add(wl.WellNum);
                 base.MouseLeftButtonUp(sender, e);
+                AddUndoCommand(e, wl.WellNum);
             }
         }
+
         /// <summary>
         /// 覆盖父类鼠标移动事件
         /// </summary>
@@ -70,8 +75,11 @@ namespace gEngine.Manipulator.Ge.Plane
             }
 
             SelectWellLocations.Clear();
+            ClearCommands();
             base.MouseRightButtonUp(sender, e);
         }
+
+        
         #endregion
 
         #region 方法
@@ -89,7 +97,20 @@ namespace gEngine.Manipulator.Ge.Plane
             if (wl == null)
                 return null;
             return wl;
-        } 
+        }
+
+        private void AddUndoCommand(MouseButtonEventArgs e,string wellNum)
+        {
+            Point p = _mc.Dp2LP(e.GetPosition(_mc));
+            IUndoRedoCommand undoCommand = new UndoConnectWellCommand(this, p, wellNum);
+            _mc.UndoRedoCommandManager.AddCommand(undoCommand);
+        }
+
+        private void ClearCommands()
+        {
+            _mc.UndoRedoCommandManager.Clear();
+        }
+
         #endregion
     }
 }

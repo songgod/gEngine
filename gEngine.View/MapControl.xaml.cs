@@ -1,4 +1,5 @@
 ﻿using gEngine.Graph.Interface;
+using gEngine.Util;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -14,6 +15,12 @@ namespace gEngine.View
         public MapControl()
         {
             InitializeComponent();
+            UndoRedoCommandManager = new UndoRedoCommandManager();
+        }
+
+        public UndoRedoCommandManager UndoRedoCommandManager
+        {
+            get;set;
         }
 
         public int LayerControlCount
@@ -110,9 +117,23 @@ namespace gEngine.View
             return TranslatePoint(p, root);
         }
 
+        public Vector Dp2LP(Vector v)
+        {
+            Point p0 = TranslatePoint(new Point(0,0), root);
+            Point p1 = TranslatePoint(new Point(v.X, v.Y), root);
+            return p1 - p0;
+        }
+
         public Point Lp2Dp(Point p)
         {
             return root.TranslatePoint(p, this);
+        }
+
+        public Vector Lp2Dp(Vector v)
+        {
+            Point p0 = root.TranslatePoint(new Point(0, 0), this);
+            Point p1 = root.TranslatePoint(new Point(v.X, v.Y), this);
+            return p1 - p0;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)

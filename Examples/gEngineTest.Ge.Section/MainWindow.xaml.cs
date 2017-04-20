@@ -1,4 +1,5 @@
 ﻿using gEngine.Graph.Ge;
+using gEngine.Manipulator;
 using gEngine.Manipulator.Ge.Section;
 using gEngine.Util.Ge.Section;
 using System;
@@ -27,7 +28,8 @@ namespace gEngineTest.Ge.Section
         {
             InitializeComponent();
             Map map = new Map();
-            Layer SectionLayer = SectionLayerCreator.CreateSectionLayer();
+            SectionLayerCreator sc = new SectionLayerCreator();
+            Layer SectionLayer = sc.CreateSectionLayer();
             map.Layers.Add(SectionLayer);
             Binding bd = new Binding("Layers") { Source = map };
             mc.SetBinding(ItemsControl.ItemsSourceProperty, bd);
