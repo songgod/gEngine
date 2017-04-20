@@ -32,7 +32,7 @@ namespace gEngine.Util.Ge.Section
         public Layer CreateSectionLayer(IDBWells wells)
         {
             Layer layer = new Layer() { Type = "Section" };
-            layer.Objects.Add(new SectionObject());
+            
             WellCreator wc = new WellCreator();
             Random rdm = new Random();
             int wellCount = 0;
@@ -63,6 +63,7 @@ namespace gEngine.Util.Ge.Section
                 }
                     
             }
+            layer.Objects.Add(new SectionObject());
             return layer;
         }
     }

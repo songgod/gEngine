@@ -17,6 +17,7 @@ namespace gEngine.Data.Ge.Txt
             DiscreteDatasFolder = "DiscreteDatas";
             HorizonsFolder = "Horizons";
         }
+        public string DBType { get { return "Txt"; } }
         public string DBPath { get; set; }
         public string WellLocationsFolder { get; set; }
         public string WellsFolder { get; set; }

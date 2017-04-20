@@ -8,6 +8,7 @@ namespace gEngine.Data.Interface
 {
     public interface IDBFactory
     {
+        string DBType { get; }
         List<string> WellLocationsNames { get; }
         IDBWellLocations GetWellLocations(string name);
         List<string> WellNames { get; }

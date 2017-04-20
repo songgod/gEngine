@@ -63,6 +63,7 @@
     <Compile Include="Converter\TxtWellLocationsConverter.cs" />
     <Compile Include="Converter\TxtWellConverter.cs" />
     <Compile Include="TxtDBFactory.cs" />
+    <Compile Include="TxtDBFactoryCreater.cs" />
     <Compile Include="TXTWellLocations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TxtWell.cs" />

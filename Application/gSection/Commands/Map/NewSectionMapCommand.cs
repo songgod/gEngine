@@ -75,7 +75,7 @@ namespace gSection.Commands.Map
             Layer layer = sc.CreateSectionLayer(wells);
             gEngine.Graph.Ge.Map map = new gEngine.Graph.Ge.Map() { Name = "Column" };
             map.Layers.Add(layer);
-            Project.Single.Maps.Add(map);
+            Project.Single.Maps.Add(new Tuple<string, IMap>(null,map));
             Project.Single.OpenMaps.Add(map);
         }
     }
