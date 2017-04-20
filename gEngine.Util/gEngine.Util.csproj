@@ -70,8 +70,9 @@
     <Compile Include="ObservedCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ICommand.cs" />
+    <Compile Include="StringUtil.cs" />
     <Compile Include="UndoRedoCommandManager.cs" />
-    <Compile Include="WebUtil.cs" />
+    <Compile Include="NumUtil.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
