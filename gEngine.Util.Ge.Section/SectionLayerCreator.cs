@@ -77,7 +77,7 @@ namespace gEngine.Util.Ge.Section
             WellCreator wc = new WellCreator();
             Random rdm = new Random();
 
-            IDBFactory DBFactory = new TxtDBFactory();
+            IDBSource DBFactory = new TxtDBSource();
 
             // 井曲线数据
             IDBWells wells = new DBWells();

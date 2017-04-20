@@ -9,16 +9,15 @@ using System.Threading.Tasks;
 
 namespace gEngine.Data.Ge.Txt
 {
-    public class TxtDBFactory : IDBFactory
+    public class TxtDBSource : IDBSource
     {
-        public TxtDBFactory()
+        public TxtDBSource()
         {
             WellLocationsFolder = "WellLocations";
             WellsFolder = "Wells";
             DiscreteDatasFolder = "DiscreteDatas";
             HorizonsFolder = "Horizons";
         }
-        public string DBType { get { return "Txt"; } }
         public string DBPath { get; set; }
         public string WellLocationsFolder { get; set; }
         public string WellsFolder { get; set; }

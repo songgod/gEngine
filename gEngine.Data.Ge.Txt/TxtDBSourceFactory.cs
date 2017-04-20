@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace gEngine.Data.Ge.Txt
 {
-    public class TxtDBFactoryCreater : IDBFactoryCreater
+    public class TxtDBSourceFactory : IDBSourceFactory
     {
         public string SupportType
         {
@@ -17,9 +17,9 @@ namespace gEngine.Data.Ge.Txt
             }
         }
 
-        public IDBFactory CreateFactory(string url)
+        public IDBSource CreateSource(string url)
         {
-            return new TxtDBFactory() { DBPath = url };
+            return new TxtDBSource() { DBPath = url };
         }
     }
 }
