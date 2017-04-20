@@ -21,7 +21,7 @@ namespace gEngine.Manipulator.Ge.Plane
 
     public class WellLocationsConnectManipulator : PolyLineManipulator
     {
-        
+
         #region 属性
         public HashSet<string> SelectWellLocations { get; set; }
         MapControl _mc;
@@ -48,12 +48,13 @@ namespace gEngine.Manipulator.Ge.Plane
         /// <param name="e"></param>
         protected override void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            Shape sp = null;
             WellLocation wl = GetClickWell(e);
             if (wl != null)
             {
                 SelectWellLocations.Add(wl.WellNum);
-                base.MouseLeftButtonUp(sender, e);
-                AddUndoCommand(e, wl.WellNum);
+                DrawLine(wl);//这里没有调用父类事件base.MouseLeftButtonUp(sender, e)，因为该事件不能定位井中心
+                AddUndoCommand(e, wl);
             }
         }
 
@@ -79,7 +80,7 @@ namespace gEngine.Manipulator.Ge.Plane
             base.MouseRightButtonUp(sender, e);
         }
 
-        
+
         #endregion
 
         #region 方法
@@ -99,10 +100,25 @@ namespace gEngine.Manipulator.Ge.Plane
             return wl;
         }
 
-        private void AddUndoCommand(MouseButtonEventArgs e,string wellNum)
+        /// <summary>
+        /// 井连线
+        /// </summary>
+        /// <param name="wl"></param>
+        private void DrawLine(WellLocation wl)
         {
-            Point p = _mc.Dp2LP(e.GetPosition(_mc));
-            IUndoRedoCommand undoCommand = new UndoConnectWellCommand(this, p, wellNum);
+            if (this.TrackAdorner.Points.Count > 1)
+            {
+                this.TrackAdorner.Points.RemoveAt(this.TrackAdorner.Points.Count - 1);
+            }
+            Point p = new Point(wl.X, wl.Y); //定位井中心
+            this.TrackAdorner.Points.Add(p);
+            this.TrackAdorner.Points.Add(p);
+        }
+
+        private void AddUndoCommand(MouseButtonEventArgs e, WellLocation wl)
+        {
+            Point p = new Point(wl.X, wl.Y);
+            IUndoRedoCommand undoCommand = new UndoConnectWellCommand(this, wl);
             _mc.UndoRedoCommandManager.AddCommand(undoCommand);
         }
 

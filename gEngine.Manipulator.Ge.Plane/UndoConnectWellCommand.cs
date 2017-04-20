@@ -1,4 +1,5 @@
-﻿using gEngine.Manipulator;
+﻿using gEngine.Graph.Ge.Plane;
+using gEngine.Manipulator;
 using gEngine.Manipulator.Ge.Plane;
 using gEngine.Util;
 using System;
@@ -7,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace gEngine.Manipulator.Ge.Plane
 {
@@ -15,11 +18,11 @@ namespace gEngine.Manipulator.Ge.Plane
         private WellLocationsConnectManipulator _mp;
         private Point _p;
         private string _wellNum;
-        public UndoConnectWellCommand(WellLocationsConnectManipulator mp, Point p,string wellNum)
+        public UndoConnectWellCommand(WellLocationsConnectManipulator mp, WellLocation wl)
         {
             _mp = mp;
-            _p = p;
-            _wellNum = wellNum;
+            _p = new Point(wl.X, wl.Y); 
+            _wellNum = wl.WellNum;
         }
         public void Undo()
         {
