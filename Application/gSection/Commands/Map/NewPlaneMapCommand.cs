@@ -1,4 +1,5 @@
 ﻿using gEngine.Data.Interface;
+using gEngine.Graph.Interface;
 using gEngine.Util.Ge.Plane;
 using gSection.ViewModel;
 using System;
@@ -32,7 +33,7 @@ namespace gSection.Commands.Map
             PlaneLayerCreator pc = new PlaneLayerCreator();
             gEngine.Graph.Ge.Layer layer = pc.CreateWellLocationLayer(wls);
             map.Layers.Add(layer);
-            Project.Single.Maps.Add(map);
+            Project.Single.Maps.Add(new Tuple<string, IMap>(null, map));
             Project.Single.OpenMaps.Add(map);
         }
     }

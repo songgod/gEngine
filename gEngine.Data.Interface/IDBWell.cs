@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace gEngine.Data.Interface
 {
+    using Interface;
     using DoubleValues = List<double>;
     public interface IDBWell : IDBBase
     {

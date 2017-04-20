@@ -1,5 +1,6 @@
 ﻿using gEngine.Data.Interface;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace gEngine.Data.Ge.Txt
             DiscreteDatasFolder = "DiscreteDatas";
             HorizonsFolder = "Horizons";
         }
+        public string DBType { get { return "Txt"; } }
         public string DBPath { get; set; }
         public string WellLocationsFolder { get; set; }
         public string WellsFolder { get; set; }
@@ -31,7 +33,7 @@ namespace gEngine.Data.Ge.Txt
             {
                 if (fi.Extension == ".txt")
                 {
-                    res.Add(fi.Name.Substring(0,fi.Name.Length-4));
+                    res.Add(fi.Name.Substring(0, fi.Name.Length - 4));
                 }
             }
             return res;
@@ -63,6 +65,56 @@ namespace gEngine.Data.Ge.Txt
         {
             string fullpath = DBPath + "/" + WellsFolder + "/" + name + ".txt";
             return new TxtWell() { TxtFile = fullpath };
+        }
+
+        public List<string> HorizonsNames
+        {
+            get
+            {
+                return GetTxtFilesNames(DBPath + "/" + HorizonsFolder);
+            }
+        }
+
+        public IDBHorizons GetHorizons(string name)
+        {
+            string fullpath = DBPath + "/" + HorizonsFolder + "/" + name + ".txt";
+            return new TxtHorizon() { TxtFile = fullpath };
+        }
+
+        public List<string> DiscreteDataNames
+        {
+            get
+            {
+                return GetTxtFilesNames(DBPath + "/" + DiscreteDatasFolder);
+            }
+        }
+
+        public IDBDiscreteDatas GetDiscreteData(string name)
+        {
+            string fullpath = DBPath + "/" + DiscreteDatasFolder + "/" + name + ".txt";
+            return new TxtDiscreteData() { TxtFile = fullpath };
+        }
+
+        public List<IDBHorizons> GetHorizonDataByWells(HashSet<string> wellNames, string horizonName)
+        {
+            IDBHorizons horizons = GetHorizons(horizonName);
+            List<IDBHorizons> lsHorizon = new List<IDBHorizons>();
+            foreach (var wellName in wellNames)
+            {
+                IEnumerable<IDBHorizon> e = horizons.Horizons.Where(s => s.Name == wellName);
+                IEnumerator etor = e.GetEnumerator();
+                IDBHorizons cs = new DBHorizons();
+                cs.ColNames = horizons.ColNames;
+                cs.Name = wellName;
+                while (etor.MoveNext())
+                {
+                    IDBHorizon horizon = (IDBHorizon) etor.Current;
+                    cs.Horizons.Add(horizon);
+                }
+
+                lsHorizon.Add(cs);
+            }
+            return lsHorizon;
         }
     }
 }

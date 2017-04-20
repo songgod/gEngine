@@ -1,4 +1,6 @@
-﻿using gEngine.Data.Interface;
+﻿using gEngine.Data.Ge;
+using gEngine.Data.Ge.Txt;
+using gEngine.Data.Interface;
 using gEngine.Graph.Ge;
 using gEngine.Graph.Ge.Column;
 using gEngine.Graph.Ge.Section;
@@ -32,7 +34,7 @@ namespace gEngine.Util.Ge.Section
         public Layer CreateSectionLayer(IDBWells wells)
         {
             Layer layer = new Layer() { Type = "Section" };
-            layer.Objects.Add(new SectionObject());
+            
             WellCreator wc = new WellCreator();
             Random rdm = new Random();
             int wellCount = 0;
@@ -55,14 +57,52 @@ namespace gEngine.Util.Ge.Section
                             colsOffset = depthsWidth;
                             well.DepthsOffset = i * 60;
                         }
-                        well.Columns[i].Color = Color.FromRgb((byte)rdm.Next(0, 255), (byte)rdm.Next(0, 255), (byte)rdm.Next(0, 255));
+                        well.Columns[i].Color = Color.FromRgb((byte) rdm.Next(0, 255), (byte) rdm.Next(0, 255), (byte) rdm.Next(0, 255));
                         well.Columns[i].Offset = colsOffset + i * 60;
                     }
+
+
                     wellCount++;
                     layer.Objects.Add(well);
                 }
-                    
+
             }
+            return layer;
+        }
+
+        public Layer CreateSectionLayer(HashSet<string> names, List<string> horizonNames, List<string> discreteDataNames)
+        {
+            Layer layer = new Layer() { Type = "Section" };
+ 
+            WellCreator wc = new WellCreator();
+            Random rdm = new Random();
+
+            IDBFactory DBFactory = new TxtDBFactory();
+
+            // 井曲线数据
+            IDBWells wells = new DBWells();
+            foreach (string name in names)
+            {
+                IDBWell wl = DBFactory.GetWell(name);
+                if (wl != null)
+                    wells.Add(wl);
+            }
+
+
+            // 井分层界限数据
+            List<IDBHorizons> lsHorizon = new List<IDBHorizons>();
+            if (horizonNames.Count != 0)
+            {
+               lsHorizon =  DBFactory.GetHorizonDataByWells(names, horizonNames[0]);
+            }
+
+            foreach (var item in wells)
+            {
+                IDBHorizons horizons = null;
+                
+                //Well well = wc.Create(item, horizons, discreteDatas);
+            }
+            layer.Objects.Add(new SectionObject());
             return layer;
         }
     }
