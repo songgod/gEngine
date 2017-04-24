@@ -66,17 +66,17 @@ namespace gSection.Commands.Map
             DBWells wells = new DBWells();
             foreach (string name in names)
             {
-                IDBWell wl = Project.Single.DBFactory.GetWell(name);
+                IDBWell wl = Project.Single.DBSource.GetWell(name);
                 if (wl != null)
                     wells.Add(wl);
             }
 
+
             SectionLayerCreator sc = new SectionLayerCreator();
             Layer layer = sc.CreateSectionLayer(wells);
-            gEngine.Graph.Ge.Map map = new gEngine.Graph.Ge.Map() { Name = "Column" };
+
+            IMap map = Project.Single.NewMap("Ge", "Column");
             map.Layers.Add(layer);
-            Project.Single.Maps.Add(new Tuple<string, IMap>(null,map));
-            Project.Single.OpenMaps.Add(map);
         }
 
         //private void Mp_OnFinishSelect(HashSet<string> names)

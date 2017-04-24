@@ -10,19 +10,19 @@ namespace gEngine.Data.Interface
 {
     static public class Register
     {
-        static private Dictionary<string, IDBFactoryCreater> dicfactorycreater;
+        static private Dictionary<string, IDBSourceFactory> dicSourcefactory;
 
         static Register()
         {
-            dicfactorycreater = new Dictionary<string, IDBFactoryCreater>();
+            dicSourcefactory = new Dictionary<string, IDBSourceFactory>();
         }
 
-        static public void Regist(string type, IDBFactoryCreater creater)
+        static public void Regist(string type, IDBSourceFactory creater)
         {
             if (string.IsNullOrEmpty(type) || creater == null)
                 return;
 
-            dicfactorycreater[type] = creater;
+            dicSourcefactory[type] = creater;
         }
 
         static public void UnRegist(string type)
@@ -30,18 +30,18 @@ namespace gEngine.Data.Interface
             if (string.IsNullOrEmpty(type))
                 return;
 
-            dicfactorycreater.Remove(type);
+            dicSourcefactory.Remove(type);
         }
 
-        static public IDBFactoryCreater GetCreater(string type)
+        static public IDBSourceFactory GetDBFactory(string type)
         {
-            if (string.IsNullOrEmpty(type) || !dicfactorycreater.ContainsKey(type))
+            if (string.IsNullOrEmpty(type) || !dicSourcefactory.ContainsKey(type))
                 return null;
 
-            return dicfactorycreater[type];
+            return dicSourcefactory[type];
         }
 
-        static public void LoadCreater()
+        static public void LoadDBFactorys()
         {
             string dir = Directory.GetCurrentDirectory();
             string qstr = dir + "\\gEngine.Data";
@@ -52,13 +52,13 @@ namespace gEngine.Data.Interface
                 Type[] types = ab.GetTypes();
                 foreach (Type t in types)
                 {
-                    Type type = typeof(IDBFactoryCreater);
+                    Type type = typeof(IDBSourceFactory);
                     var interfaces = t.GetInterfaces();
                     foreach (var interf in interfaces)
                     {
                         if(interf==type)
                         {
-                            IDBFactoryCreater bs = (IDBFactoryCreater)(ab.CreateInstance(t.FullName));
+                            IDBSourceFactory bs = (IDBSourceFactory)(ab.CreateInstance(t.FullName));
                             Regist(bs.SupportType, bs);
                         }
                     }
@@ -66,15 +66,15 @@ namespace gEngine.Data.Interface
             }
         }
 
-        static public IDBFactory CreateDBFactory(string info)
+        static public IDBSource CreateDBSource(string info)
         {
             string type = info.Substring(info.LastIndexOf('.') + 1);
             string url = info.Substring(0, info.LastIndexOf('.'));
-            IDBFactoryCreater c = GetCreater(type);
+            IDBSourceFactory c = GetDBFactory(type);
             if (c == null)
                 return null;
 
-            return c.CreateFactory(url);
+            return c.CreateSource(url);
         }
     }
 }

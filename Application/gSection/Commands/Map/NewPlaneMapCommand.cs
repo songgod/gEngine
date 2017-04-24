@@ -15,7 +15,7 @@ namespace gSection.Commands.Map
     {
         public override bool CanExecute(object parameter)
         {
-            List<string> names = Project.Single.DBFactory.WellLocationsNames;
+            List<string> names = Project.Single.DBSource.WellLocationsNames;
             if (names.Count == 0)
                 return false;
 
@@ -24,17 +24,16 @@ namespace gSection.Commands.Map
 
         public override void Execute(object parameter)
         {
-            List<string> names = Project.Single.DBFactory.WellLocationsNames;
+            List<string> names = Project.Single.DBSource.WellLocationsNames;
             if (names.Count == 0)
                 return;
 
-            IDBWellLocations wls = Project.Single.DBFactory.GetWellLocations(names[0]);
-            gEngine.Graph.Ge.Map map = new gEngine.Graph.Ge.Map() { Name = "Plane" };
+            IDBWellLocations wls = Project.Single.DBSource.GetWellLocations(names[0]);
             PlaneLayerCreator pc = new PlaneLayerCreator();
             gEngine.Graph.Ge.Layer layer = pc.CreateWellLocationLayer(wls);
+
+            IMap map = Project.Single.NewMap("Ge", "Plane");
             map.Layers.Add(layer);
-            Project.Single.Maps.Add(new Tuple<string, IMap>(null, map));
-            Project.Single.OpenMaps.Add(map);
         }
     }
 }

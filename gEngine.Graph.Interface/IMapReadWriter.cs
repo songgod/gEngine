@@ -4,11 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace gEngine.Data.Interface
+namespace gEngine.Graph.Interface
 {
-    public interface IDBFactoryCreater
+    public interface IMapReadWriter
     {
         string SupportType { get; }
-        IDBFactory CreateFactory(string url);
+        IMap ReadMap(string url);
+
+        bool WriteMap(string url);
+
+        IMap CreateMap();
     }
 }

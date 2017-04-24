@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace gEngine.Data.Interface
 {
-    public interface IDBFactory
+    public interface IDBSource
     {
-        string DBType { get; }
         List<string> WellLocationsNames { get; }
         IDBWellLocations GetWellLocations(string name);
         List<string> WellNames { get; }

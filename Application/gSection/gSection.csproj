@@ -277,6 +277,10 @@
       <Project>{1c98a821-b030-4ff2-83ae-d49b1b3b8c67}</Project>
       <Name>gEngine.Graph.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\gEngine.Graph.Rw.Ge\gEngine.Graph.Rw.Ge.csproj">
+      <Project>{22b205af-0d40-4854-bde8-65961840db5d}</Project>
+      <Name>gEngine.Graph.Rw.Ge</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\gEngine.Manipulator.Ge.Plane\gEngine.Manipulator.Ge.Plane.csproj">
       <Project>{70026887-fd51-4a98-8e50-4b55f750013b}</Project>
       <Name>gEngine.Manipulator.Ge.Plane</Name>
