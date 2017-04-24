@@ -13,6 +13,7 @@
         xmlns:cmdmap="clr-namespace:gSection.Commands.Map"
         xmlns:cmdsecion="clr-namespace:gSection.Commands.Section"
         xmlns:cmdundo="clr-namespace:gSection.Commands.UndoRedo"
+        xmlns:cmdov="clr-namespace:gSection.Commands.OperateView"
         xmlns:cvt="clr-namespace:gSection.Converters"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="gSection.View.MainWindow"
@@ -259,7 +260,7 @@
                 <dxr:RibbonPage Caption="修饰"/>
                 <dxr:RibbonPage Caption="视图">
                     <dxr:RibbonPageGroup Caption="">
-                        <dxb:BarButtonItem Content="全图显示" LargeGlyph="pack://application:,,,/gSection;component/Images/GDS/20150310095307390_easyicon_net_32.ico" Glyph="pack://application:,,,/gSection;component/Images/GDS/20150310095307390_easyicon_net_32.ico"/>
+                        <dxb:BarButtonItem Content="全图显示" Command="{x:Static cmdov:CommandsOperateView.FullViewCommand }" CommandParameter="{Binding}" LargeGlyph="pack://application:,,,/gSection;component/Images/GDS/20150310095307390_easyicon_net_32.ico" Glyph="pack://application:,,,/gSection;component/Images/GDS/20150310095307390_easyicon_net_32.ico"/>
                     </dxr:RibbonPageGroup>
                     <dxr:RibbonPageGroup Caption="视图缩放">
                         <dxb:BarButtonItem Content="视图放大" LargeGlyph="pack://application:,,,/gSection;component/Images/GDS/20150707101248177_easyicon_net_64.ico"/>

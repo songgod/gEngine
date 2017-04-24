@@ -103,6 +103,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\OperateView\CommandsOperateView.cs" />
+    <Compile Include="Commands\OperateView\FullViewCommand.cs" />
     <Compile Include="ViewModel\Project.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
