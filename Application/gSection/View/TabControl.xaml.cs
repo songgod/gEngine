@@ -15,19 +15,34 @@ using System.Windows.Shapes;
 using System.Globalization;
 using DevExpress.Xpf.Core;
 using gEngine.View;
+using gSection.ViewModel;
+using gEngine.Graph.Interface;
 
 namespace gSection.View
 {
-/// <summary>
-/// TabControl.xaml 的交互逻辑
-/// </summary>
-public partial class TabControl : DXTabControl
+    /// <summary>
+    /// TabControl.xaml 的交互逻辑
+    /// </summary>
+    public partial class TabControl : DXTabControl
     {
         public TabControl()
         {
             InitializeComponent();
-           
+
             this.View.HideButtonShowMode = HideButtonShowMode.InAllTabs;
+            this.TabHidden += TabControl_TabHidden;
+            Project.Single.OpenMaps.OnItemAdded += OpenMaps_OnItemAdded;
+            
+        }
+
+        private void TabControl_TabHidden(object sender, TabControlTabHiddenEventArgs e)
+        {
+            Project.Single.OpenMaps.RemoveAt(e.TabIndex);
+        }
+
+        private void OpenMaps_OnItemAdded(int aIndex, IMap aItem)
+        {
+            this.SelectItem(aIndex);
         }
 
         public int MapControlCount
@@ -66,5 +81,7 @@ public partial class TabControl : DXTabControl
                 return GetMapControl(ActiveMapControlIndex);
             }
         }
+
+        
     }
 }

@@ -48,7 +48,6 @@ namespace gEngine.Manipulator.Ge.Plane
         /// <param name="e"></param>
         protected override void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Shape sp = null;
             WellLocation wl = GetClickWell(e);
             if (wl != null)
             {
