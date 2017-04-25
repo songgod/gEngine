@@ -23,13 +23,15 @@ namespace gEngine.Data.Ge.Txt
                 ReadFromTxt(value);
             }
         }
-
+        
         public bool ReadFromTxt(string txtfilepath)
         {
             if (txtfilepath == TxtFile)
                 return true;
             int curveCount = 0;//定义曲线的条数
             bool colFlag = true;//曲线标题的标识
+            double deaultvalue = -9999;
+            string defaultstring = "defaultstring";
 
             var file = File.Open(txtfilepath, FileMode.Open);
 
@@ -52,33 +54,32 @@ namespace gEngine.Data.Ge.Txt
                         }
                         else
                         {
-                            double outResult;
                             IDBDiscreteData DiscreteData = new DBDiscreteData();
-                            DiscreteData.Name = string.IsNullOrEmpty(strColumns[0]) == true ? WebUtil.Single.NullValue.ToString() : strColumns[0];
-                            DiscreteData.LayerNumber = string.IsNullOrEmpty(strColumns[1]) == true ? WebUtil.Single.NullValue.ToString() : strColumns[1];
-                            DiscreteData.SerialNumber = string.IsNullOrEmpty(strColumns[2]) == true ? WebUtil.Single.NullValue.ToString() : strColumns[2];
-                            DiscreteData.Top_MeasuredDepth = WebUtil.Single.IsDecimal(strColumns[3], out outResult) == true ? outResult : WebUtil.Single.NullValue;
-                            DiscreteData.MeasuredThickness = WebUtil.Single.IsDecimal(strColumns[4], out outResult) == true ? outResult : WebUtil.Single.NullValue;
+                            DiscreteData.Name = StringUtil.ValidString(strColumns[0],defaultstring);
+                            DiscreteData.LayerNumber = StringUtil.ValidString(strColumns[1], defaultstring);
+                            DiscreteData.SerialNumber = StringUtil.ValidString(strColumns[2], defaultstring);
+                            DiscreteData.Top_MeasuredDepth = NumUtil.ToDouble(strColumns[3], true, deaultvalue);
+                            DiscreteData.MeasuredThickness = NumUtil.ToDouble(strColumns[4], true, deaultvalue);
                             for (int i = 5; i < curveCount; i++)
                             {
                                 if (Type.IndexOf(i).Equals(-1))
                                 {
                                     if (strColumns.Length > i)
                                     {
-                                        double value = string.IsNullOrEmpty(strColumns[i]) == true ? WebUtil.Single.NullValue : double.Parse(strColumns[i]);
+                                        double value = NumUtil.ToDouble(strColumns[i], true, deaultvalue);
                                         DiscreteData.DDiscreteDatas.Add(value);
                                     }
                                     else
                                     {
-                                        DiscreteData.DDiscreteDatas.Add(WebUtil.Single.NullValue);
+                                        DiscreteData.DDiscreteDatas.Add(deaultvalue);
                                     }
                                 }
                                 else
                                 {
-                                    string value = WebUtil.Single.NullValue.ToString();
+                                    string value = defaultstring.ToString();
                                     if (strColumns.Length > i)
                                     {
-                                        value = string.IsNullOrEmpty(strColumns[i]) == true ? value : strColumns[i];
+                                        value = StringUtil.ValidString(strColumns[i], defaultstring);
                                     }
                                     DiscreteData.SDiscreteDatas.Add(value);
                                 }

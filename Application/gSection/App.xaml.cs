@@ -5,7 +5,6 @@ using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Windows;
-using gEngine.Data.Interface;
 
 namespace gSection
 {
@@ -22,10 +21,10 @@ namespace gSection
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            Register.LoadCreater();
+            gEngine.Data.Interface.Register.LoadDBFactorys();
+            gEngine.Graph.Interface.Registry.LoadReadWriter();
             Project.NewProject();
-            string dbpath = @"D:\gSectionData.Txt";
-            Project.Single.DBTuple = new Project.DBFactoryTuple(dbpath, Register.CreateDBFactory(dbpath));
+            Project.Single.OpenDBSource(@"D:\gSectionData.Txt");
         }
     }
 }

@@ -80,6 +80,7 @@
       <DependentUpon>ObjectControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Registry.cs" />
     <Compile Include="ViewUtil.cs" />
   </ItemGroup>
   <ItemGroup>

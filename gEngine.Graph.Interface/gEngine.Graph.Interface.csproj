@@ -59,10 +59,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IMapReadWriter.cs" />
     <Compile Include="ILayer.cs" />
     <Compile Include="IMap.cs" />
     <Compile Include="IObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Registry.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\gEngine.Util\gEngine.Util.csproj">

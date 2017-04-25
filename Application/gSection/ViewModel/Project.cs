@@ -54,9 +54,8 @@ namespace gSection.ViewModel
             int index = Maps.FindIndex(item => item.Item2 == aItem);
             if (index < 0 || index >= Maps.Count)
                 return;
-            string item1 = Maps[index].Item1;
-            Maps.RemoveAt(index);
-            Maps.Insert(index,new Tuple<string, IMap>(item1, null));
+
+            Maps[index] = new Tuple<string, IMap>(Maps[index].Item1, null);
         }
 
         private void Maps_OnItemRemoved(int aIndex, Tuple<string, IMap> aItem)
@@ -65,23 +64,11 @@ namespace gSection.ViewModel
                 OpenMaps.Remove(aItem.Item2);
         }
 
-        public bool Read()
-        {
-            return false;
-        }
-        public bool Save()
-        {
-            return false;
-        }
+        public class MapCollection : ObservedCollection<Tuple<string, IMap>> { }
 
-        public class MapCollection : ObservedCollection<Tuple<string, IMap>>
+        public class DBSourceTuple : Tuple<string, IDBSource>
         {
-
-        }
-
-        public class DBFactoryTuple : Tuple<string, IDBFactory>
-        {
-            public DBFactoryTuple(string url, IDBFactory db) : base(url, db)
+            public DBSourceTuple(string url, IDBSource db) : base(url, db)
             {
             }
         }
@@ -90,9 +77,9 @@ namespace gSection.ViewModel
 
         public IMaps OpenMaps { get; private set; }
 
-        public DBFactoryTuple DBTuple { get; set; }
+        public DBSourceTuple DBTuple { get; set; }
 
-        public IDBFactory DBFactory
+        public IDBSource DBSource
         {
             get
             {
@@ -113,6 +100,53 @@ namespace gSection.ViewModel
                 url = value;
                 Read();
             }
+        }
+
+        public bool Read()
+        {
+            return false;
+        }
+        public bool Save()
+        {
+            return false;
+        }
+
+        public bool OpenDBSource(string url)
+        {
+            IDBSource source = gEngine.Data.Interface.Register.CreateDBSource(url);
+            if (source == null)
+                return false;
+            DBTuple = new Project.DBSourceTuple(url, source);
+            return true;
+        }
+
+        public IMap OpenMap(string url)
+        {
+            int index = Maps.FindIndex(s => s.Item1 == url);
+            if (index < 0 || index >= Maps.Count)
+                return null;
+
+            IMap map = gEngine.Graph.Interface.Registry.ReadMap(url);
+            if (map == null)
+                return null;
+
+            Maps[index] = new Tuple<string, IMap>(url, map);
+            OpenMaps.Add(map);
+            return map;
+        }
+
+        public IMap NewMap(string type, string name)
+        {
+            if (String.IsNullOrEmpty(type) || String.IsNullOrEmpty(name))
+                return null;
+
+            IMap map = gEngine.Graph.Interface.Registry.CreateMap(type);
+            if (map == null)
+                return null;
+            map.Name = name;
+            Maps.Add(new Tuple<string, IMap>("", map));
+            OpenMaps.Add(map);
+            return map;
         }
     }
 }
