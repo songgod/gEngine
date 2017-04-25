@@ -61,70 +61,46 @@ namespace gSection.Commands.Map
             ManipulatorSetter.SetManipulator(mp, lc);
         }
 
-        private void Mp_OnFinishSelect(HashSet<string> names)
-        {
-            DBWells wells = new DBWells();
-            foreach (string name in names)
-            {
-                IDBWell wl = Project.Single.DBFactory.GetWell(name);
-                if (wl != null)
-                    wells.Add(wl);
-            }
-
-            SectionLayerCreator sc = new SectionLayerCreator();
-            Layer layer = sc.CreateSectionLayer(wells);
-            gEngine.Graph.Ge.Map map = new gEngine.Graph.Ge.Map() { Name = "Column" };
-            map.Layers.Add(layer);
-            Project.Single.Maps.Add(new Tuple<string, IMap>(null,map));
-            Project.Single.OpenMaps.Add(map);
-        }
-
         //private void Mp_OnFinishSelect(HashSet<string> names)
         //{
-        //    List<string> horizonsNames = Project.Single.DBFactory.HorizonsNames;
-        //    List<string> discreteDataNames = Project.Single.DBFactory.DiscreteDataNames;
-        //    SectionLayerCreator sc = new SectionLayerCreator();
-        //    Layer layer = sc.CreateSectionLayer(names, horizonsNames, discreteDataNames);
-        //    gEngine.Graph.Ge.Map map = new gEngine.Graph.Ge.Map() { Name = "Plane" };
-        //    map.Layers.Add(layer);
-        //    Project.Single.Maps.Add(map);
-        //    Project.Single.OpenMaps.Add(map);
-
-
-        //DBWells wells = new DBWells();
-
-        //IDBHorizons horizons = null;
-        //List<string> HorizonsNames = Project.Single.DBFactory.HorizonsNames;
-        //if (HorizonsNames.Count != 0)
-        //{
-        //    horizons = Project.Single.DBFactory.GetHorizons(HorizonsNames[0]);
-        //}
-
-        //IDBDiscreteDatas discreteDatas = null;
-        //List<string> DiscreteDataNames = Project.Single.DBFactory.DiscreteDataNames;
-        //if (DiscreteDataNames.Count != 0)
-        //{
-        //    discreteDatas = Project.Single.DBFactory.GetDiscreteData(DiscreteDataNames[0]);
-        //}
-
-        //foreach (string name in names)
-        //{
-        //    IDBWell wl = Project.Single.DBFactory.GetWell(name);
-        //    if (wl != null)
+        //    DBWells wells = new DBWells();
+        //    foreach (string name in names)
         //    {
-        //        wells.Add(wl);
+        //        IDBWell wl = Project.Single.DBFactory.GetWell(name);
+        //        if (wl != null)
+        //            wells.Add(wl);
         //    }
+
+        //    SectionLayerCreator sc = new SectionLayerCreator();
+        //    Layer layer = sc.CreateSectionLayer(wells);
+        //    gEngine.Graph.Ge.Map map = new gEngine.Graph.Ge.Map() { Name = "Column" };
+        //    map.Layers.Add(layer);
+        //    Project.Single.Maps.Add(new Tuple<string, IMap>(null, map));
+        //    Project.Single.OpenMaps.Add(map);
         //}
 
-        //Project.Single.DBFactory.GetHorizonDataByWell("M", horizons);
+        private void Mp_OnFinishSelect(HashSet<string> names)
+        {
+            string horizonName = string.Empty;
+            string discreteName = string.Empty;
+            IDBFactory db = Project.Single.DBFactory;
 
-        //SectionLayerCreator sc = new SectionLayerCreator();
-        ////Layer layer = sc.CreateSectionLayer(wells);
-        //Layer layer = sc.CreateSectionLayer(wells, horizons, discreteDatas);
-        //gEngine.Graph.Ge.Map map = new gEngine.Graph.Ge.Map() { Name = "Plane" };
-        //map.Layers.Add(layer);
-        //Project.Single.Maps.Add(map);
-        //Project.Single.OpenMaps.Add(map);
-        //}
+            List<string> horizonsNames = Project.Single.DBFactory.HorizonsNames;
+            List<string> discreteNames = Project.Single.DBFactory.DiscreteDataNames;
+            if (horizonsNames.Count != 0)
+            {
+                horizonName = horizonsNames[0];
+            }
+            if (discreteNames.Count != 0)
+            {
+                discreteName = discreteNames[0];
+            }
+            SectionLayerCreator sc = new SectionLayerCreator();
+            Layer layer = sc.CreateSectionLayer(db, names, horizonName, discreteName);
+            gEngine.Graph.Ge.Map map = new gEngine.Graph.Ge.Map() { Name = "Column" };
+            map.Layers.Add(layer);
+            Project.Single.Maps.Add(new Tuple<string, IMap>(null, map));
+            Project.Single.OpenMaps.Add(map);
+        }
     }
 }

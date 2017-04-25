@@ -37,16 +37,6 @@ namespace gEngine.Graph.Ge.Column
         public static readonly DependencyProperty MathTypProperty =
             DependencyProperty.Register("MathTyp", typeof(MathType), typeof(WellLogColumn));
 
-        public Color Color
-        {
-            get { return (Color) GetValue(ColorProperty); }
-            set { SetValue(ColorProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for Depths.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ColorProperty =
-            DependencyProperty.Register("Color", typeof(Color), typeof(WellLogColumn));
-
         public int Offset
         {
             get { return (int) GetValue(OffsetProperty); }

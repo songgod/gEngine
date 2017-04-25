@@ -34,7 +34,7 @@ namespace gEngine.Util.Ge.Section
         public Layer CreateSectionLayer(IDBWells wells)
         {
             Layer layer = new Layer() { Type = "Section" };
-            
+
             WellCreator wc = new WellCreator();
             Random rdm = new Random();
             int wellCount = 0;
@@ -70,37 +70,32 @@ namespace gEngine.Util.Ge.Section
             return layer;
         }
 
-        public Layer CreateSectionLayer(HashSet<string> names, List<string> horizonNames, List<string> discreteDataNames)
+        public Layer CreateSectionLayer(IDBFactory db, HashSet<string> names, string horizonName, string discreteName)
         {
             Layer layer = new Layer() { Type = "Section" };
- 
-            WellCreator wc = new WellCreator();
-            Random rdm = new Random();
 
-            IDBFactory DBFactory = new TxtDBFactory();
+            WellCreator wc = new WellCreator();
 
             // 井曲线数据
+            int WellLocation = 0;
             IDBWells wells = new DBWells();
             foreach (string name in names)
             {
-                IDBWell wl = DBFactory.GetWell(name);
-                if (wl != null)
-                    wells.Add(wl);
-            }
-
-
-            // 井分层界限数据
-            List<IDBHorizons> lsHorizon = new List<IDBHorizons>();
-            if (horizonNames.Count != 0)
-            {
-               lsHorizon =  DBFactory.GetHorizonDataByWells(names, horizonNames[0]);
-            }
-
-            foreach (var item in wells)
-            {
-                IDBHorizons horizons = null;
-                
-                //Well well = wc.Create(item, horizons, discreteDatas);
+                IDBWell wl = db.GetWell(name);
+                IDBHorizons horizons = db.GetHorizonsByWell(name, horizonName);
+                IDBDiscreteDatas discretes = db.GetDiscretesByWell(name, discreteName);
+                Well well = wc.Create(wl, horizons, discretes);
+                if (well != null)
+                {
+                    well.LongitudinalProportion = 1500;
+                    well.Location = WellLocation;
+                    foreach (var item in well.WellColumn_N)
+                    {
+                        WellLocation += item.Width;
+                    }
+                    WellLocation += 50;
+                    layer.Objects.Add(well);
+                }
             }
             layer.Objects.Add(new SectionObject());
             return layer;

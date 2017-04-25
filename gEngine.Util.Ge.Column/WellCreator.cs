@@ -9,6 +9,11 @@ namespace gEngine.Util.Ge.Column
 {
     public class WellCreator
     {
+        public int RoadWidth
+        {
+            get { return 60; }
+        }
+
         public Well Create(IDBWell db)
         {
             if (db == null)
@@ -28,42 +33,61 @@ namespace gEngine.Util.Ge.Column
             return well;
         }
 
-        //public Well Create(IDBWell db, IDBHorizons horizons, IDBDiscreteDatas discreteDatas)
-        //{
-        //    if (db == null)
-        //        return null;
+        public Well Create(IDBWell db, IDBHorizons horizons, IDBDiscreteDatas discretes)
+        {
+            if (db == null)
+                return null;
 
+            Random rdm = new Random();
 
-        //    Well well = new Well() { Name = db.Name };
-        //    well.Depths = new Utility.ObsDoubles(db.Depths);
+            Well well = new Well() { Name = db.Name };
+            well.Depths = new Utility.ObsDoubles(db.Depths);
 
-        //    WellDepth wdepth = new WellDepth() { Name = db.Name, Owner = well };
-        //    wdepth.Depths = new Utility.ObsDoubles(db.Depths);
-        //    well.WellColumn_N.Add(wdepth);
+            WellDepth WDepth = new WellDepth() { Name = "深度", Owner = well };
+            WDepth.Depths = new Utility.ObsDoubles(db.Depths);
+            WDepth.Color = Colors.Black;
+            WDepth.Width = RoadWidth;
+            well.WellColumn_N.Add(WDepth);
 
-        //    for (int i = 0; i < db.Columns.Count; i++)
-        //    {
-        //        string name = db.Columns[i].Item1;
-        //        WellLogColumn logColumn = new WellLogColumn() { Name = db.Columns[i].Item1, Owner = well, MathType = Enums.MathType.DEFAULT };
-        //        logColumn.Values = new Utility.ObsDoubles(db.Columns[i].Item2);
-        //        well.WellColumn_N.Add(logColumn);
-        //    }
+            for (int i = 0; i < db.Columns.Count; i++)
+            {
+                string name = db.Columns[i].Item1;
+                WellLogColumn logColumn = new WellLogColumn() { Name = db.Columns[i].Item1, Owner = well, MathType = Enums.MathType.DEFAULT };
+                logColumn.Values = new Utility.ObsDoubles(db.Columns[i].Item2);
+                logColumn.Color = Color.FromRgb((byte) rdm.Next(0, 255), (byte) rdm.Next(0, 255), (byte) rdm.Next(0, 255));
+                logColumn.Width = RoadWidth;
+                well.WellColumn_N.Add(logColumn);
+            }
 
-        //    WellSegmentColumn segmentColumn = new WellSegmentColumn() { Name = db.Name, Owner = well };
+            if (horizons.Horizons.Count > 0)
+            {
+                WellSegmentColumn segmentColumn = new WellSegmentColumn() { Owner = well, Color = Colors.Black, Width = RoadWidth };
+                for (int i = 0; i < horizons.Horizons.Count; i++)
+                {
+                    WellSegmentColumn.Segment segment = new WellSegmentColumn.Segment();
+                    segment.Name = horizons.Horizons[i].LayerNumber;
+                    segment.Top = horizons.Horizons[i].Top_MeasuredDepth;
+                    segment.Bottom = horizons.Horizons[i].MeasuredThickness;
+                    segmentColumn.Segments.Add(segment);
+                }
+                well.WellColumn_N.Add(segmentColumn);
+            }
 
-        //    for (int i = 0; i < horizons.Horizons.Count; i++)
-        //    {
-        //        WellSegmentColumn.Segment segment = new WellSegmentColumn.Segment();
-        //        segment.Name = horizons.Horizons[i].LayerNumber;
-        //        segment.Top = horizons.Horizons[i].Top_MeasuredDepth;
-        //        segment.Bottom = horizons.Horizons[i].MeasuredThickness;
+            if (discretes.DiscreteDatas.Count > 0)
+            {
+                WellSegmentColumn segmentColumn = new WellSegmentColumn() { Owner = well, Color = Colors.Black, Width = RoadWidth };
+                for (int i = 0; i < discretes.DiscreteDatas.Count; i++)
+                {
+                    WellSegmentColumn.Segment segment = new WellSegmentColumn.Segment();
+                    segment.Top = discretes.DiscreteDatas[i].Top_MeasuredDepth;
+                    segment.Bottom = discretes.DiscreteDatas[i].MeasuredThickness;
+                    segment.Color = Colors.Green;
+                    segmentColumn.Segments.Add(segment);
+                }
+                well.WellColumn_N.Add(segmentColumn);
+            }
 
-        //        segmentColumn.Segments.Add(segment);
-        //    }
-
-        //    well.WellColumn_N.Add(segmentColumn);
-
-        //    return well;
-        //}
+            return well;
+        }
     }
 }
