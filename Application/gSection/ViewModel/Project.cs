@@ -64,19 +64,7 @@ namespace gSection.ViewModel
                 OpenMaps.Remove(aItem.Item2);
         }
 
-        public bool Read()
-        {
-            return false;
-        }
-        public bool Save()
-        {
-            return false;
-        }
-
-        public class MapCollection : ObservedCollection<Tuple<string, IMap>>
-        {
-
-        }
+        public class MapCollection : ObservedCollection<Tuple<string, IMap>> { }
 
         public class DBSourceTuple : Tuple<string, IDBSource>
         {
@@ -112,6 +100,15 @@ namespace gSection.ViewModel
                 url = value;
                 Read();
             }
+        }
+
+        public bool Read()
+        {
+            return false;
+        }
+        public bool Save()
+        {
+            return false;
         }
 
         public bool OpenDBSource(string url)
