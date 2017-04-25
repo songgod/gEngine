@@ -83,10 +83,10 @@ namespace gSection.Commands.Map
         {
             string horizonName = string.Empty;
             string discreteName = string.Empty;
-            IDBFactory db = Project.Single.DBFactory;
+            IDBSource db = Project.Single.DBSource;
 
-            List<string> horizonsNames = Project.Single.DBFactory.HorizonsNames;
-            List<string> discreteNames = Project.Single.DBFactory.DiscreteDataNames;
+            List<string> horizonsNames = Project.Single.DBSource.HorizonsNames;
+            List<string> discreteNames = Project.Single.DBSource.DiscreteDataNames;
             if (horizonsNames.Count != 0)
             {
                 horizonName = horizonsNames[0];

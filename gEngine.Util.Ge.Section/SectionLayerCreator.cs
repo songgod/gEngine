@@ -70,7 +70,7 @@ namespace gEngine.Util.Ge.Section
             return layer;
         }
 
-        public Layer CreateSectionLayer(IDBFactory db, HashSet<string> names, string horizonName, string discreteName)
+        public Layer CreateSectionLayer(IDBSource db, HashSet<string> names, string horizonName, string discreteName)
         {
             Layer layer = new Layer() { Type = "Section" };
 
