@@ -26,6 +26,7 @@ namespace gSection
             gEngine.Manipulator.Registry.LoadManipulators();
             Project.NewProject();
             Project.Single.OpenDBSource(@"D:\gSectionData.Txt");
+            gEngine.View.Registry.LoadLocalElement();
         }
     }
 }
