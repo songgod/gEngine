@@ -30,7 +30,7 @@ namespace gEngineTest.Ge.WellLocation
             InitializeComponent();
             CreateWellLocation();
 
-            dm = new WellLocationsConnectManipulator();
+            dm = (WellLocationsConnectManipulator)(gEngine.Manipulator.Registry.CreateManipulator("WellLocationsConnectManipulator",mc));
             dm.OnFinishSelect += Dm_OnFinishSelect;
 
         }

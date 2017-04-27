@@ -55,7 +55,6 @@ namespace gSection.Commands.Map
             LayerControl lc = mc.ActiveLayerControl;
             if (lc == null)
                 return;
-
             WellLocationsConnectManipulator mp = new WellLocationsConnectManipulator(mc);
             mp.OnFinishSelect += Mp_OnFinishSelect;
             ManipulatorSetter.SetManipulator(mp, lc);

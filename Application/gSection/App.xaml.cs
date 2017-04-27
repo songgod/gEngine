@@ -23,8 +23,10 @@ namespace gSection
             base.OnStartup(e);
             gEngine.Data.Interface.Register.LoadDBFactorys();
             gEngine.Graph.Interface.Registry.LoadReadWriter();
+            gEngine.Manipulator.Registry.LoadManipulators();
             Project.NewProject();
             Project.Single.OpenDBSource(@"D:\gSectionData.Txt");
+            gEngine.View.Registry.LoadLocalElement();
         }
     }
 }

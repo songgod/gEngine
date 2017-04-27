@@ -510,4 +510,20 @@ namespace gEngine.Manipulator.Ge.Section
             return new PointCollection(line.Points);
         }
     }
+
+    public class EDCFactory : IManipulatorFactory
+    {
+        public string Name
+        {
+            get
+            {
+                return "EditCurveManipulator";
+            }
+        }
+
+        public IManipulatorBase CreateManipulator(object param)
+        {
+            return new EditCurveManipulator();
+        }
+    }
 }

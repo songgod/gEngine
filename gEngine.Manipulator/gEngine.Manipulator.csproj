@@ -66,15 +66,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CurveManipulator.cs" />
+    <Compile Include="IManipulatorFactory.cs" />
     <Compile Include="LineManipulator.cs" />
     <Compile Include="ManipulatorBase.cs" />
     <Compile Include="ManipulatorSetter.cs" />
     <Compile Include="MapControlZoomPan.cs" />
     <Compile Include="PolyLineManipulator.cs" />
+    <Compile Include="Registry.cs" />
     <Compile Include="ZoomPan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\gEngine.Util\gEngine.Util.csproj">
+      <Project>{84ACB6C4-CF62-4F4B-A7E5-5C642EDC041A}</Project>
+      <Name>gEngine.Util</Name>
+    </ProjectReference>
     <ProjectReference Include="..\gEngine.View\gEngine.View.csproj">
       <Project>{932485ea-2f95-4caa-8bcd-df68c496854e}</Project>
       <Name>gEngine.View</Name>

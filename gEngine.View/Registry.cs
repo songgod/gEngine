@@ -106,19 +106,34 @@ namespace gEngine.View
                 Type[] types = ab.GetTypes();
                 foreach (Type t in types)
                 {
-                    Type valuetype = typeof(IValueConverter);
-                    Type mvaluetype = typeof(IMultiValueConverter);
-                    var interfaces = t.GetInterfaces();
-                    foreach (var interf in interfaces)
+                    //Type valuetype = typeof(IValueConverter);
+                    //Type mvaluetype = typeof(IMultiValueConverter);
+                    //var interfaces = t.GetInterfaces();
+                    //foreach (var interf in interfaces)
+                    //{
+                    //    //if (interf == valuetype)
+                    //    //{
+                    //    //    IValueConverter bs = (IValueConverter)(ab.CreateInstance(t.FullName));
+                    //    //    Regist(bs.SupportType, bs);
+                    //    //}
+                    //}
+
+                    Type resourceDictType = typeof(ResourceDictionary);
+
+                    if (resourceDictType == t.BaseType)
                     {
-                        //if (interf == valuetype)
-                        //{
-                        //    IValueConverter bs = (IValueConverter)(ab.CreateInstance(t.FullName));
-                        //    Regist(bs.SupportType, bs);
-                        //}
+                        ResourceDictionary resourceDict = (ResourceDictionary)(ab.CreateInstance(t.FullName));
+                        Application.Current.Resources.MergedDictionaries.Add(resourceDict);
+
+                        
                     }
+
+
                 }
             }
         }
+
+
+
     }
 }
