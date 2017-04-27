@@ -25,6 +25,7 @@ namespace gSection
             gEngine.Graph.Interface.Registry.LoadReadWriter();
             Project.NewProject();
             Project.Single.OpenDBSource(@"D:\gSectionData.Txt");
+            gEngine.View.Registry.LoadLocalElement();
         }
     }
 }
