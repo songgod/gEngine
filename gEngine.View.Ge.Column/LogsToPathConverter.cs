@@ -109,17 +109,21 @@ namespace gEngine.View.Ge.Column
     {
         public LogsToFillConverter()
         {
-            InvalidValue = -99999;
+            InvalidValue = -9999;
         }
 
         public double InvalidValue { get; set; }
 
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            if (string.IsNullOrEmpty(values[3].ToString()))
+            ObsDoubles vls = values[0] as ObsDoubles;
+            if (vls == null)
                 return null;
 
-            string dataStr = values[3].ToString().Substring(1, values[3].ToString().Count() - 2).Replace("L"," ");
+            if (string.IsNullOrEmpty(values[1].ToString()))
+                return null;
+
+            string dataStr = values[1].ToString().Substring(1, values[1].ToString().Count() - 2).Replace("L"," ");
 
             PointCollectionConverter pcconverter = new PointCollectionConverter();
             PointCollection pc = new PointCollection();

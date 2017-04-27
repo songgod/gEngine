@@ -10,19 +10,7 @@ namespace gEngine.Graph.Ge.Column
         {
             Columns = new WellColumns();
             Depths = new ObsDoubles();
-
-            WellColumn_N = new WellColumn_Ns();
         }
-
-        public WellColumn_Ns WellColumn_N
-        {
-            get { return (WellColumn_Ns) GetValue(WellColumn_NProperty); }
-            set { SetValue(WellColumn_NProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for Columns.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty WellColumn_NProperty =
-            DependencyProperty.Register("WellColumn_N", typeof(WellColumn_Ns), typeof(Well));
 
         public WellColumns Columns
         {
@@ -56,19 +44,6 @@ namespace gEngine.Graph.Ge.Column
         // Using a DependencyProperty as the backing store for Depths.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty LocationProperty =
             DependencyProperty.Register("Location", typeof(int), typeof(Well));
-
-        /// <summary>
-        /// 井深度道位置
-        /// </summary>
-        public int DepthsOffset
-        {
-            get { return (int)GetValue(DepthsOffsetProperty); }
-            set { SetValue(DepthsOffsetProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for Depths.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty DepthsOffsetProperty =
-            DependencyProperty.Register("DepthsOffset", typeof(int), typeof(Well));
 
         public int LongitudinalProportion
         {

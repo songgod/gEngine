@@ -8,7 +8,7 @@ using System.Windows.Media;
 
 namespace gEngine.Graph.Ge.Column
 {
-    public class WellSegmentColumn : WellColumn_N
+    public class WellSegmentColumn : WellColumn
     {
         public WellSegmentColumn()
         {

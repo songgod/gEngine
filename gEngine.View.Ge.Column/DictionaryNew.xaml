@@ -20,114 +20,160 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Canvas>
-                <TextBlock Text="{Binding Name}" VerticalAlignment="Center" HorizontalAlignment="Center" Canvas.Top="10" FontWeight="Bold" >
+            <StackPanel Grid.Row="0">
+                <TextBlock Text="{Binding Name}" VerticalAlignment="Center" HorizontalAlignment="Center"  FontWeight="Bold" >
                 </TextBlock>
-            </Canvas>
+            </StackPanel>
+            <ItemsControl ItemsSource="{Binding Columns}" Grid.Row="1">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel x:Name="ColumnPanel" Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <ContentControl Content="{Binding}"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <StackPanel Grid.Row="1">
+                <StackPanel.Resources>
+                    <local:WellToModelConverter x:Key="WellModel"/>
+                </StackPanel.Resources>
+                <Path x:Name="pathLogsBorder" Stroke="Black" StrokeThickness="1">
+                    <Path.Data>
+                        <MultiBinding Converter="{StaticResource WellModel}">
+                            <Binding Path="Columns"/>
+                        </MultiBinding>
+                    </Path.Data>
+                </Path>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type gc:WellLogColumn}">
+        <Grid>
+            <Grid.Resources>
+                <local:LogsToPathConverter x:Key="l2p"/>
+                <local:LogsToFillConverter x:Key="l2f"/>
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{Binding Width}"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Border>
+                <TextBlock Text="{Binding Path= Name}" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" >
+                </TextBlock>
+            </Border>
+            <StackPanel Grid.Row="1">
+                <Path x:Name="PathLogs"  StrokeThickness="1">
+                    <Path.Data>
+                        <MultiBinding Converter="{StaticResource l2p}">
+                            <Binding Path="Values"/>
+                            <Binding Path="Owner"/>
+                            <Binding Path="MathType"/>
+                        </MultiBinding>
+                    </Path.Data>
+                    <Path.Stroke>
+                        <SolidColorBrush Color="{Binding Color}"></SolidColorBrush>
+                    </Path.Stroke>
+                    <Path.Fill>
+                        <MultiBinding Converter="{StaticResource l2f}">
+                            <Binding Path="Values"/>
+                            <Binding ElementName="PathLogs" Path="Data"></Binding>
+                        </MultiBinding>
+                    </Path.Fill>
+                </Path>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type gc:WellSegmentColumn}">
+        <Grid>
+            <Grid.Resources>
+                <local:SegmentToPathConverter x:Key="s2p"/>
+                <local:SegmentToFillConverter x:Key="s2f"/>
+                <local:SegmentToNameConverter x:Key="s2n"/>
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{Binding Width}"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Border>
+                <TextBlock Text="{Binding Path= Name}" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0">
+                </TextBlock>
+            </Border>
             <Canvas Grid.Row="1">
-                <Canvas.Resources>
-                    <local:DepthToPathConverter x:Key="d2p"/>
-                    <local:DepthToScaleConverter x:Key="d2c"/>
-                    <local:DepthDistanceConverter x:Key="d2d"/>
-                    <local:DepthFirstScaleTopOffset x:Key="d2top"/>
-                    <local:WellModelConverter x:Key="wellModel"/>
-                </Canvas.Resources>
-                <StackPanel x:Name="spDepths" Canvas.Left="{Binding DepthsOffset}">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="50"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="60"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Border BorderThickness="0,0,0,1" BorderBrush="Black">
-                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">
-                                <TextBlock.Text>
-                                    <!--<Binding Path="Name"></Binding>-->
-                                    深度
-                                </TextBlock.Text>
-                            </TextBlock>
-                        </Border>
-                        <Canvas Background="White" Grid.Row="1" MinWidth="1">
-                            <Path x:Name="PathDepth"  Stroke="Blue" StrokeThickness="1">
-                                <Path.Data>
-                                    <MultiBinding Converter="{StaticResource d2p}">
-                                        <Binding Path="Depths"/>
-                                        <Binding Path="LongitudinalProportion"/>
-                                    </MultiBinding>
-                                </Path.Data>
-                            </Path>
-                            <TextBlock LineHeight="{Binding LongitudinalProportion,Converter={StaticResource d2d}}" Text="{Binding Depths,Converter={StaticResource d2c}}" Canvas.Left="20" Canvas.Top="{Binding LongitudinalProportion,Converter={StaticResource d2top}}"  HorizontalAlignment="Center">
-                            </TextBlock>
-                        </Canvas>
-                    </Grid>
-                </StackPanel>
-                <StackPanel x:Name="spColumn">
-                    <ItemsControl ItemsSource="{Binding Columns}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <Canvas x:Name="cvsColumnPanel"></Canvas>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
-                </StackPanel>
-                <StackPanel x:Name="spLogsBorder">
-                    <Path x:Name="pathLogsBorder" Stroke="Black" StrokeThickness="1">
-                        <Path.Data>
-                            <MultiBinding Converter="{StaticResource wellModel}">
-                                <Binding Path="Columns"/>
-                                <Binding Path="Depths"/>
-                                <Binding Path="LongitudinalProportion"/>
-                            </MultiBinding>
-                        </Path.Data>
-                    </Path>
-                </StackPanel>
+                <Path x:Name="PathLogs"  StrokeThickness="1">
+                    <Path.Data>
+                        <MultiBinding Converter="{StaticResource s2p}">
+                            <Binding Path="Segments"/>
+                            <Binding Path="Owner"/>
+                            <Binding Path="Width"/>
+                        </MultiBinding>
+                    </Path.Data>
+                    <Path.Stroke>
+                        <SolidColorBrush Color="{Binding Color}"></SolidColorBrush>
+                    </Path.Stroke>
+                    <Path.Fill>
+                        <MultiBinding Converter="{StaticResource s2f}">
+                            <Binding Path="Segments"/>
+                        </MultiBinding>
+                    </Path.Fill>
+                </Path>
+                <Path x:Name="PathSegmentName" Fill="Black">
+                    <Path.Data>
+                        <MultiBinding Converter="{StaticResource s2n}">
+                            <Binding Path="Segments"/>
+                            <Binding Path="Owner"/>
+                        </MultiBinding>
+                    </Path.Data>
+                </Path>
             </Canvas>
         </Grid>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type gc:WellColumn}">
-        <Canvas>
-            <Grid Canvas.Left="{Binding Offset}">
-                <Grid.Resources>
-                    <local:LogsToPathConverter x:Key="l2p"/>
-                    <local:LogsToFillConverter x:Key="l2f"/>
-                </Grid.Resources>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Border BorderThickness="0,0,0,0" BorderBrush="Black">
-                    <TextBlock Text="{Binding Path= Name}" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" >
-                    </TextBlock>
-                </Border>
-                <StackPanel Grid.Row="1" Grid.Column="0">
-                    <Path x:Name="PathLogs"  StrokeThickness="1">
-                        <Path.Data>
-                            <MultiBinding Converter="{StaticResource l2p}">
-                                <Binding Path="Values"/>
-                                <Binding Path="Owner"/>
-                                <Binding Path="MathType"/>
-                            </MultiBinding>
-                        </Path.Data>
-                        <Path.Stroke>
-                            <SolidColorBrush Color="{Binding Color}"></SolidColorBrush>
-                        </Path.Stroke>
-                        <Path.Fill>
-                            <MultiBinding Converter="{StaticResource l2f}">
-                                <!--绑定参数只是占位用，待设置功能开发完更换-->
-                                <Binding Path="Values"/>
-                                <Binding Path="Owner"/>
-                                <Binding Path="MathType"/>
-                                <Binding ElementName="PathLogs" Path="Data"></Binding>
-                            </MultiBinding>
-                        </Path.Fill>
-                    </Path>
-                </StackPanel>
-            </Grid>
-        </Canvas>
+    <DataTemplate DataType="{x:Type gc:WellDepth}">
+        <Grid>
+            <Grid.Resources>
+                <local:DepthToPathConverter x:Key="d2p"/>
+                <local:DepthToScaleConverter x:Key="d2c"/>
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{Binding Width}"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Border>
+                <TextBlock Text="{Binding Path= Name}" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0">
+                </TextBlock>
+            </Border>
+            <Canvas Grid.Row="1">
+                <Path x:Name="PathLogs">
+                    <Path.Data>
+                        <MultiBinding Converter="{StaticResource d2p}">
+                            <Binding Path="Depths"/>
+                            <Binding Path="Owner"/>
+                        </MultiBinding>
+                    </Path.Data>
+                    <Path.Stroke>
+                        <SolidColorBrush Color="{Binding Color}"></SolidColorBrush>
+                    </Path.Stroke>
+                </Path>
+                <Path x:Name="PathScale" Fill="Black">
+                    <Path.Data>
+                        <MultiBinding Converter="{StaticResource d2c}">
+                            <Binding Path="Depths"/>
+                            <Binding Path="Owner"/>
+                        </MultiBinding>
+                    </Path.Data>
+                </Path>
+            </Canvas>
+        </Grid>
     </DataTemplate>
 </ResourceDictionary>

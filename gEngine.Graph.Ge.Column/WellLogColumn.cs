@@ -10,7 +10,7 @@ using static gEngine.Graph.Ge.Column.Enums;
 
 namespace gEngine.Graph.Ge.Column
 {
-    public class WellLogColumn : WellColumn_N
+    public class WellLogColumn : WellColumn
     {
         public WellLogColumn()
         {
@@ -36,15 +36,5 @@ namespace gEngine.Graph.Ge.Column
         // Using a DependencyProperty as the backing store for MathTyp.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MathTypProperty =
             DependencyProperty.Register("MathTyp", typeof(MathType), typeof(WellLogColumn));
-
-        public int Offset
-        {
-            get { return (int) GetValue(OffsetProperty); }
-            set { SetValue(OffsetProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for Depths.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty OffsetProperty =
-            DependencyProperty.Register("Offset", typeof(int), typeof(WellLogColumn));
     }
 }

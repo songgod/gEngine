@@ -31,45 +31,6 @@ namespace gEngine.Util.Ge.Section
             return layer;
         }
 
-        public Layer CreateSectionLayer(IDBWells wells)
-        {
-            Layer layer = new Layer() { Type = "Section" };
-
-            WellCreator wc = new WellCreator();
-            Random rdm = new Random();
-            int wellCount = 0;
-            int WellWidthSum = 0;
-            foreach (var item in wells)
-            {
-                Well well = wc.Create(item);
-                if (well != null)
-                {
-                    well.LongitudinalProportion = 1500;//vm.SLongitudinalProportion == 0 ? 1500 : vm.SLongitudinalProportion;//纵向比例
-                    int depthsWidth = 60;// 深度道宽度
-                    int colsOffset = 0; // 曲线偏移
-                    well.Location = wellCount == 0 ? 0 : WellWidthSum;
-                    WellWidthSum += (well.Columns.Count * 60 + depthsWidth) + 50;
-                    for (int i = 0; i < well.Columns.Count; i++)
-                    {
-                        // 初步定义深度道显示在第一条曲线右侧
-                        if (i.Equals(1))
-                        {
-                            colsOffset = depthsWidth;
-                            well.DepthsOffset = i * 60;
-                        }
-                        well.Columns[i].Color = Color.FromRgb((byte) rdm.Next(0, 255), (byte) rdm.Next(0, 255), (byte) rdm.Next(0, 255));
-                        well.Columns[i].Offset = colsOffset + i * 60;
-                    }
-
-
-                    wellCount++;
-                    layer.Objects.Add(well);
-                }
-
-            }
-            return layer;
-        }
-
         public Layer CreateSectionLayer(IDBSource db, HashSet<string> names, string horizonName, string discreteName)
         {
             Layer layer = new Layer() { Type = "Section" };
@@ -89,7 +50,7 @@ namespace gEngine.Util.Ge.Section
                 {
                     well.LongitudinalProportion = 1500;
                     well.Location = WellLocation;
-                    foreach (var item in well.WellColumn_N)
+                    foreach (var item in well.Columns)
                     {
                         WellLocation += item.Width;
                     }

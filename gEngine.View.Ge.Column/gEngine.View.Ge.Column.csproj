@@ -72,9 +72,6 @@
   <ItemGroup>
     <Compile Include="DepthToPathConverter.cs" />
     <Compile Include="DepthToScaleConverter.cs" />
-    <Compile Include="dic.xaml.cs">
-      <DependentUpon>dic.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Dictionary.xaml.cs">
       <DependentUpon>Dictionary.xaml</DependentUpon>
     </Compile>
@@ -82,14 +79,11 @@
       <DependentUpon>DictionaryNew.xaml</DependentUpon>
     </Compile>
     <Compile Include="LogsToPathConverter.cs" />
-    <Compile Include="LogsToPathConverter_N.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SegmentToPathConverter.cs" />
+    <Compile Include="WellToModelConverter.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="dic.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Dictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

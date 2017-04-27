@@ -32,7 +32,6 @@ namespace gEngine.Data.Ge.Txt
             bool colFlag = true;//曲线标题的标识
             double deaultvalue = -9999;
             string defaultstring = "defaultstring";
-            double outResult = deaultvalue;
 
             var file = File.Open(txtfilepath, FileMode.Open);
 
@@ -67,11 +66,9 @@ namespace gEngine.Data.Ge.Txt
                                 {
                                     if (strColumns.Length > i)
                                     {
-                                        //double value = NumUtil.ToDouble(strColumns[i], true, deaultvalue);
-                                        //DiscreteData.DDiscreteDatas.Add(value);
                                         if (!string.IsNullOrEmpty(strColumns[i]))
                                         {
-                                            double result = NumUtil.ToDouble(strColumns[i], out outResult) == true ? outResult : deaultvalue;
+                                            double result = NumUtil.ToDouble(strColumns[i]);
                                             DiscreteData.DDiscreteDatas.Add(result);
                                         }
                                         else

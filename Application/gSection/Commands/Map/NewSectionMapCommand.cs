@@ -61,24 +61,6 @@ namespace gSection.Commands.Map
             ManipulatorSetter.SetManipulator(mp, lc);
         }
 
-        //private void Mp_OnFinishSelect(HashSet<string> names)
-        //{
-        //    DBWells wells = new DBWells();
-        //    foreach (string name in names)
-        //    {
-        //        IDBWell wl = Project.Single.DBFactory.GetWell(name);
-        //        if (wl != null)
-        //            wells.Add(wl);
-        //    }
-
-        //    SectionLayerCreator sc = new SectionLayerCreator();
-        //    Layer layer = sc.CreateSectionLayer(wells);
-        //    gEngine.Graph.Ge.Map map = new gEngine.Graph.Ge.Map() { Name = "Column" };
-        //    map.Layers.Add(layer);
-        //    Project.Single.Maps.Add(new Tuple<string, IMap>(null, map));
-        //    Project.Single.OpenMaps.Add(map);
-        //}
-
         private void Mp_OnFinishSelect(HashSet<string> names)
         {
             string horizonName = string.Empty;
@@ -97,10 +79,8 @@ namespace gSection.Commands.Map
             }
             SectionLayerCreator sc = new SectionLayerCreator();
             Layer layer = sc.CreateSectionLayer(db, names, horizonName, discreteName);
-            gEngine.Graph.Ge.Map map = new gEngine.Graph.Ge.Map() { Name = "Column" };
+            IMap map = Project.Single.NewMap("Ge", "Column");
             map.Layers.Add(layer);
-            Project.Single.Maps.Add(new Tuple<string, IMap>(null, map));
-            Project.Single.OpenMaps.Add(map);
         }
     }
 }
