@@ -26,4 +26,20 @@ namespace gEngine.Manipulator.Ge.Section
             base.MouseLeftButtonUp(sender, e);
         }
     }
+
+    public class DLMFactory : IManipulatorFactory
+    {
+        public string Name
+        {
+            get
+            {
+                return "DrawLineManipulator";
+            }
+        }
+
+        public IManipulatorBase CreateManipulator(object param)
+        {
+            return new DrawLineManipulator();
+        }
+    }
 }

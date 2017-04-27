@@ -14,54 +14,62 @@ namespace gEngine.Manipulator
 {
     public static class ManipulatorSetter
     {
-        public static bool SetManipulator(Behavior mp, UIElement elm)
+        public static bool SetManipulator(IManipulatorBase mp, UIElement elm)
         {
-            if (mp == null || elm == null)
+            if (mp == null || elm == null || !mp.CanAttach(elm))
                 return false;
 
             BehaviorCollection bc = Interaction.GetBehaviors(elm);
             bc.Clear();
-            bc.Add(mp);
+            bc.Add(mp.AsBehavior());
             return true;
         }
 
-        public static bool AddManipulator(Behavior mp, UIElement elm)
+        public static bool AddManipulator(IManipulatorBase mp, UIElement elm)
         {
             if (mp == null || elm == null)
                 return false;
 
             BehaviorCollection bc = Interaction.GetBehaviors(elm);
-            bc.Add(mp);
+            bc.Add(mp.AsBehavior());
             return true;
         }
 
-        public static bool RemoveManipulator(Behavior mp, UIElement elm)
+        public static bool RemoveManipulator(IManipulatorBase mp, UIElement elm)
         {
             if (mp == null || elm == null)
                 return false;
             BehaviorCollection bc = Interaction.GetBehaviors(elm);
-            bc.Remove(mp);
+            bc.Remove(mp.AsBehavior());
             return true;
         }
 
-        public static bool ClearManipulator(LayerControl SectionLayer)
+        public static bool ClearManipulator(UIElement elm)
         {
-            if (SectionLayer == null)
+            if (elm == null)
                 return false;
 
-            BehaviorCollection bc = Interaction.GetBehaviors(SectionLayer);
+            BehaviorCollection bc = Interaction.GetBehaviors(elm);
             bc.Clear();
             return true;
         }
 
-        public static bool IsContainManipulator(this LayerControl SectionLayer)
+        public static bool IsContainManipulator(UIElement elm)
         {
-            if (SectionLayer == null)
+            if (elm == null)
                 return false;
-            BehaviorCollection bc = Interaction.GetBehaviors(SectionLayer);
+            BehaviorCollection bc = Interaction.GetBehaviors(elm);
             if (bc.Count > 0)
                 return true;
             return false;
+        }
+
+        public static bool CanAttachManipulator(IManipulatorBase mp, UIElement elm)
+        {
+            if (mp == null || elm == null)
+                return false;
+
+            return mp.CanAttach(elm);
         }
     }
 }

@@ -39,4 +39,20 @@ namespace gEngine.Manipulator.Ge.Section
             base.MouseLeftButtonUp(sender, e);
         }
     }
+
+    public class RLFactory : IManipulatorFactory
+    {
+        public string Name
+        {
+            get
+            {
+                return "ReplaceLineManipulator";
+            }
+        }
+
+        public IManipulatorBase CreateManipulator(object param)
+        {
+            return new ReplaceLineManipulator();
+        }
+    }
 }
