@@ -94,26 +94,36 @@ namespace gEngine.Data.Ge.Txt
             return new TxtDiscreteData() { TxtFile = fullpath };
         }
 
-        public List<IDBHorizons> GetHorizonDataByWells(HashSet<string> wellNames, string horizonName)
+        public IDBHorizons GetHorizonsByWell(string wellName, string horizonName)
         {
             IDBHorizons horizons = GetHorizons(horizonName);
-            List<IDBHorizons> lsHorizon = new List<IDBHorizons>();
-            foreach (var wellName in wellNames)
+            IEnumerable<IDBHorizon> e = horizons.Horizons.Where(s => s.Name == wellName);
+            IEnumerator etor = e.GetEnumerator();
+            IDBHorizons horizonResult = new DBHorizons();
+            horizonResult.ColNames = horizons.ColNames;
+            horizonResult.Name = wellName;
+            while (etor.MoveNext())
             {
-                IEnumerable<IDBHorizon> e = horizons.Horizons.Where(s => s.Name == wellName);
-                IEnumerator etor = e.GetEnumerator();
-                IDBHorizons cs = new DBHorizons();
-                cs.ColNames = horizons.ColNames;
-                cs.Name = wellName;
-                while (etor.MoveNext())
-                {
-                    IDBHorizon horizon = (IDBHorizon) etor.Current;
-                    cs.Horizons.Add(horizon);
-                }
-
-                lsHorizon.Add(cs);
+                IDBHorizon horizon = (IDBHorizon) etor.Current;
+                horizonResult.Horizons.Add(horizon);
             }
-            return lsHorizon;
+            return horizonResult;
+        }
+
+        public IDBDiscreteDatas GetDiscretesByWell(string wellName, string discreteName)
+        {
+            IDBDiscreteDatas discretes = GetDiscreteData(discreteName);
+            IEnumerable<IDBDiscreteData> e = discretes.DiscreteDatas.Where(s => s.Name == wellName);
+            IEnumerator etor = e.GetEnumerator();
+            IDBDiscreteDatas discreteResult = new DBDiscreteDatas();
+            discreteResult.ColNames = discretes.ColNames;
+            discreteResult.Name = wellName;
+            while (etor.MoveNext())
+            {
+                IDBDiscreteData discrete = (IDBDiscreteData) etor.Current;
+                discreteResult.DiscreteDatas.Add(discrete);
+            }
+            return discreteResult;
         }
     }
 }

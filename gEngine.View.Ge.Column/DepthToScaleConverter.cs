@@ -14,16 +14,21 @@ namespace gEngine.View.Ge.Column
     {
         public DepthToScaleConverter()
         {
-            MainScaleInterval = 20;
+            //MainScaleInterval = 20;
         }
 
         /// <summary>
         /// 主刻度数值步长
         /// </summary>
+        //public static double MainScaleInterval
+        //{
+        //    get;
+        //    set;
+        //}
+
         public static double MainScaleInterval
         {
-            get;
-            set;
+            get { return 20; }
         }
 
         public static double FirstScale

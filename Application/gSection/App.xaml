@@ -11,8 +11,9 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="zh-cn.xaml"/>
                 <vs:Dictionary/>
-                <vc:DictionaryNew/>
-                <!--<vp:Dictionary/>-->
+                <!--<vc:DictionaryNew/>-->
+                <vc:dic></vc:dic>
+                <vp:Dictionary/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
 

@@ -10,6 +10,10 @@ namespace gEngine.Graph.Ge.Column
 {
     public class WellSegmentColumn : WellColumn_N
     {
+        public WellSegmentColumn()
+        {
+            Segments = new List<Segment>();
+        }
        public List<Segment> Segments
         {
             get { return (List<Segment>) GetValue(SegmentsProperty); }

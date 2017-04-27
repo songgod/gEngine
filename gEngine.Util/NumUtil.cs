@@ -34,6 +34,11 @@ namespace gEngine.Util
             }
         }
 
+        public static bool ToDouble(string numstr, out double result)
+        {
+            return double.TryParse(numstr,out result);
+        }
+
         static public decimal ToDecimal(string numstr, bool usedefault = false, decimal defaultvalue = -9999)
         {
             try

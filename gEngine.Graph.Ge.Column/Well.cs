@@ -10,6 +10,8 @@ namespace gEngine.Graph.Ge.Column
         {
             Columns = new WellColumns();
             Depths = new ObsDoubles();
+
+            WellColumn_N = new WellColumn_Ns();
         }
 
         public WellColumn_Ns WellColumn_N

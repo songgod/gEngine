@@ -32,9 +32,9 @@ namespace gEngine.Data.Ge.Txt
             bool colFlag = true;//曲线标题的标识
             double deaultvalue = -9999;
             string defaultstring = "defaultstring";
+            double outResult = deaultvalue;
 
             var file = File.Open(txtfilepath, FileMode.Open);
-
             using (var stream = new StreamReader(file, Encoding.GetEncoding("gb2312")))
             {
                 while (!stream.EndOfStream)
@@ -66,7 +66,16 @@ namespace gEngine.Data.Ge.Txt
                                 {
                                     if (strColumns.Length > i)
                                     {
-                                        Horizon.DHorizonDatas.Add(NumUtil.ToDouble(strColumns[i], true, deaultvalue));
+                                        //Horizon.DHorizonDatas.Add(NumUtil.ToDouble(strColumns[i], true, deaultvalue));
+                                        if (!string.IsNullOrEmpty(strColumns[i]))
+                                        {
+                                            double result = NumUtil.ToDouble(strColumns[i], out outResult) == true ? outResult : deaultvalue;
+                                            Horizon.DHorizonDatas.Add(result);
+                                        }
+                                        else
+                                        {
+                                            Horizon.DHorizonDatas.Add(deaultvalue);
+                                        }
                                     }
                                     else
                                     {

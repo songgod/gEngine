@@ -21,6 +21,8 @@ namespace gEngine.Data.Interface
 
         IDBDiscreteDatas GetDiscreteData(string name);
 
-        List<IDBHorizons> GetHorizonDataByWells(HashSet<string> wellNames, string horizonName);
+        IDBHorizons GetHorizonsByWell(string wellName, string horizonName);
+
+        IDBDiscreteDatas GetDiscretesByWell(string wellName, string discreteName);
     }
 }
