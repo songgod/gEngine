@@ -23,6 +23,25 @@ namespace gEngine.View.Ge.Plane
         public Dictionary()
         {
             InitializeComponent();
+
+            //WellTypeToColorConverter wtlConverter = new WellTypeToColorConverter();
+            //Binding binding = new Binding("WellType");
+            //binding.Converter = wtlConverter;
+            //FrameworkElementFactory fef = new FrameworkElementFactory(typeof(Path));
+            //fef.SetBinding(Path.DataProperty, binding);
+            
+
+            //FrameworkElementFactory fef = new FrameworkElementFactory(typeof(TextBlock));
+
+            //Binding placeBinding = new Binding();
+
+            //fef.SetBinding(TextBlock.TextProperty, placeBinding);
+
+            //placeBinding.Path = new PropertyPath("Name");
+
+            //DataTemplate dataTemplate = new DataTemplate();
+
+            //dataTemplate.VisualTree = fef;
         }
     }
 }

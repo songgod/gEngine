@@ -12,88 +12,49 @@ namespace gEngine.View
 {
     static public class Registry
     {
-        static private Dictionary<string, DataTemplate> dictemplate;
-        static private Dictionary<string, IValueConverter> dicValueConverter;
-        static private Dictionary<string, IMultiValueConverter> dicMultiValueConverter;
+        static private ResourceDictionary resDictionary;
+        
 
         static Registry()
         {
-            dictemplate = new Dictionary<string, DataTemplate>();
-            dicValueConverter = new Dictionary<string, IValueConverter>();
-            dicMultiValueConverter = new Dictionary<string, IMultiValueConverter>();
+            resDictionary = new ResourceDictionary();
         }
 
-        static public void Regist(string name, DataTemplate dt)
+        static public void Regist(ResourceDictionary rd)
         {
-            if (string.IsNullOrEmpty(name) || dt == null)
+            if (rd == null)
+                return;
+            resDictionary.MergedDictionaries.Add(rd);
+        }
+
+        static public void UnRegist(ResourceDictionary rd)
+        {
+            if (rd==null)
                 return;
 
-            dictemplate[name] = dt;
+            resDictionary.MergedDictionaries.Remove(rd);
         }
 
-        static public void UnRegistDataTemplate(string name)
+        static public ResourceDictionary GetResourceDictionary(string dataTemplateName)
         {
-            if (string.IsNullOrEmpty(name))
-                return;
-
-            dictemplate.Remove(name);
-        }
-
-        static public DataTemplate GetDataTemplate(string name)
-        {
-            if (string.IsNullOrEmpty(name) || !dictemplate.ContainsKey(name))
+            if (string.IsNullOrEmpty(dataTemplateName))
                 return null;
 
-            return dictemplate[name];
+            foreach (ResourceDictionary mergedResDic in resDictionary.MergedDictionaries)
+            {
+                foreach (var v in mergedResDic.Values)
+                {
+                    if (v.GetType() == typeof(DataTemplate))
+                    {
+                        DataTemplate dataTemplate = v as DataTemplate;
+                        if (dataTemplate.DataTemplateKey.ToString() == dataTemplateName)
+                            return mergedResDic;
+                    }
+                }
+            }
+            return null;
         }
 
-        static public void Regist(string name, IValueConverter ivc)
-        {
-            if (string.IsNullOrEmpty(name) || ivc == null)
-                return;
-
-            dicValueConverter[name] = ivc;
-        }
-
-        static public void UnRegistValueConverter(string name)
-        {
-            if (string.IsNullOrEmpty(name))
-                return;
-
-            dicValueConverter.Remove(name);
-        }
-
-        static public IValueConverter GetValueConverter(string name)
-        {
-            if (string.IsNullOrEmpty(name) || !dicValueConverter.ContainsKey(name))
-                return null;
-
-            return dicValueConverter[name];
-        }
-
-        static public void Regist(string name, IMultiValueConverter imvc)
-        {
-            if (string.IsNullOrEmpty(name) || imvc == null)
-                return;
-
-            dicMultiValueConverter[name] = imvc;
-        }
-
-        static public void UnRegistMultiValueConverter(string name)
-        {
-            if (string.IsNullOrEmpty(name))
-                return;
-
-            dicMultiValueConverter.Remove(name);
-        }
-
-        static public IMultiValueConverter GetMultiValueConverter(string name)
-        {
-            if (string.IsNullOrEmpty(name) || !dicValueConverter.ContainsKey(name))
-                return null;
-
-            return dicMultiValueConverter[name];
-        }
 
         static public void LoadLocalElement()
         {
@@ -106,31 +67,16 @@ namespace gEngine.View
                 Type[] types = ab.GetTypes();
                 foreach (Type t in types)
                 {
-                    //Type valuetype = typeof(IValueConverter);
-                    //Type mvaluetype = typeof(IMultiValueConverter);
-                    //var interfaces = t.GetInterfaces();
-                    //foreach (var interf in interfaces)
-                    //{
-                    //    //if (interf == valuetype)
-                    //    //{
-                    //    //    IValueConverter bs = (IValueConverter)(ab.CreateInstance(t.FullName));
-                    //    //    Regist(bs.SupportType, bs);
-                    //    //}
-                    //}
-
                     Type resourceDictType = typeof(ResourceDictionary);
-
                     if (resourceDictType == t.BaseType)
                     {
                         ResourceDictionary resourceDict = (ResourceDictionary)(ab.CreateInstance(t.FullName));
-                        Application.Current.Resources.MergedDictionaries.Add(resourceDict);
-
-                        
+                        Regist(resourceDict);
                     }
-
-
                 }
             }
+            Application.Current.Resources.MergedDictionaries.Add(resDictionary);
+
         }
 
 
