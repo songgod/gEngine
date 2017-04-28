@@ -9,7 +9,7 @@ using System.Windows.Media;
 
 namespace gEngine.Graph.Ge.Column
 {
-    public class WellDepth : WellColumn_N
+    public class WellDepth : WellColumn
     {
         public ObsDoubles Depths
         {

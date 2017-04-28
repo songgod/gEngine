@@ -86,4 +86,20 @@ namespace gEngine.Manipulator.Ge.Section
             base.MouseLeftButtonUp(sender, e);
         }
     }
+
+    public class ERLFactory : IManipulatorFactory
+    {
+        public string Name
+        {
+            get
+            {
+                return "EraseLineManipulator";
+            }
+        }
+
+        public IManipulatorBase CreateManipulator(object param)
+        {
+            return new EraseLineManipulator();
+        }
+    }
 }

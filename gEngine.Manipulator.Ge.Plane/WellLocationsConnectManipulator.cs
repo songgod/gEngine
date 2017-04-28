@@ -128,4 +128,20 @@ namespace gEngine.Manipulator.Ge.Plane
 
         #endregion
     }
+
+    public class WLCMFactory : IManipulatorFactory
+    {
+        public string Name
+        {
+            get
+            {
+                return "WellLocationsConnectManipulator";
+            }
+        }
+
+        public IManipulatorBase CreateManipulator(object param)
+        {
+            return new WellLocationsConnectManipulator(param as MapControl);
+        }
+    }
 }

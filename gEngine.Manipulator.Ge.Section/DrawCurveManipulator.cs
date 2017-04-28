@@ -28,4 +28,20 @@ namespace gEngine.Manipulator.Ge.Section
             base.MouseLeftButtonUp(sender, e);
         }
     }
+
+    public class DCMFactory : IManipulatorFactory
+    {
+        public string Name
+        {
+            get
+            {
+                return "DrawCurveManipulator";
+            }
+        }
+
+        public IManipulatorBase CreateManipulator(object param)
+        {
+            return new DrawCurveManipulator();
+        }
+    }
 }

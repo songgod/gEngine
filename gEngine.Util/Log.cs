@@ -39,6 +39,7 @@ namespace gEngine.Util
         public static void LogError(string err)
         {
             Single().WriteLog("Error: " + DateTime.Now + "\t" + err);
+            throw new Exception(err);
         }
 
         public static void LogWarning(string warning)

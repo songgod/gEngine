@@ -18,5 +18,11 @@ namespace gEngineTest.Ge.WellLocation
 
             //DevExpress.Xpf.Core.ApplicationThemeHelper.UpdateApplicationThemeName();
         }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            gEngine.Manipulator.Registry.LoadManipulators();
+        }
     }
 }

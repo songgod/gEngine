@@ -18,7 +18,7 @@ namespace gEngine.Util
         static public double InvalidDouble { get; set; }
         static public decimal InvalidDecimal { get; set; }
         static public bool DefaultBool { get; set; }
-        static public double ToDouble(string numstr, bool usedefault=false, double defaultvalue = -9999)
+        static public double ToDouble(string numstr, bool usedefault = false, double defaultvalue = -9999)
         {
             try
             {
@@ -28,15 +28,17 @@ namespace gEngine.Util
             }
             catch
             {
-                if(usedefault)
+                if (usedefault)
                     return defaultvalue;
                 return InvalidDouble;
             }
         }
 
-        public static bool ToDouble(string numstr, out double result)
+        public static double ToDouble(string numstr)
         {
-            return double.TryParse(numstr,out result);
+            double outresult;
+            double result = double.TryParse(numstr, out outresult) == true ? outresult : InvalidDouble;
+            return result;
         }
 
         static public decimal ToDecimal(string numstr, bool usedefault = false, decimal defaultvalue = -9999)
@@ -49,7 +51,7 @@ namespace gEngine.Util
             }
             catch
             {
-                if(usedefault)
+                if (usedefault)
                     return defaultvalue;
                 return InvalidDecimal;
             }
@@ -65,7 +67,7 @@ namespace gEngine.Util
             }
             catch
             {
-                if(usedefault)
+                if (usedefault)
                     return defaultvalue;
                 return DefaultBool;
             }

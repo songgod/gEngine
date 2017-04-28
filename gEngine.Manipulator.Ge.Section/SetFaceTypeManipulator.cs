@@ -68,4 +68,20 @@ namespace gEngine.Manipulator.Ge.Section
             }
         }
     }
+
+    public class SFTFactory : IManipulatorFactory
+    {
+        public string Name
+        {
+            get
+            {
+                return "SetFaceTypeManipulator";
+            }
+        }
+
+        public IManipulatorBase CreateManipulator(object param)
+        {
+            return new SetFaceTypeManipulator();
+        }
+    }
 }
