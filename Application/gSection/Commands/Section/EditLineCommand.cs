@@ -27,8 +27,9 @@ namespace gSection.Commands.Section
             LayerControl lc = mc.ActiveLayerControl;
             if (lc == null)
                 return;
-
-            EditCurveManipulator dm = new EditCurveManipulator();
+            EditCurveManipulator dm = gEngine.Manipulator.Registry.CreateManipulator("EditCurveManipulator") as EditCurveManipulator;
+            if (dm == null)
+                return;
             ManipulatorSetter.SetManipulator(dm, lc);
         }
     }

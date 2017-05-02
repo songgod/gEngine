@@ -56,7 +56,9 @@ namespace gSection.Commands.Map
             LayerControl lc = mc.ActiveLayerControl;
             if (lc == null)
                 return;
-            WellLocationsConnectManipulator mp = new WellLocationsConnectManipulator(mc);
+            WellLocationsConnectManipulator mp = gEngine.Manipulator.Registry.CreateManipulator("WellLocationsConnectManipulator", mc) as WellLocationsConnectManipulator;
+            if (mp == null)
+                return;
             mp.OnFinishSelect += Mp_OnFinishSelect;
             ManipulatorSetter.SetManipulator(mp, lc);
         }

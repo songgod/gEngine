@@ -27,8 +27,10 @@ namespace gSection.Commands.Section
             LayerControl lc = mc.ActiveLayerControl;
             if (lc == null)
                 return;
-
-            SetFaceTypeManipulator dm = new SetFaceTypeManipulator() { FaceType = -1 };
+            SetFaceTypeManipulator dm = gEngine.Manipulator.Registry.CreateManipulator("SetFaceTypeManipulator") as SetFaceTypeManipulator;
+            if (dm == null)
+                return;
+            dm.FaceType = -1;
             ManipulatorSetter.SetManipulator(dm, lc);
         }
     }

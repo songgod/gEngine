@@ -27,8 +27,9 @@ namespace gSection.Commands.Section
             LayerControl lc = mc.ActiveLayerControl;
             if (lc == null)
                 return;
-
-            ReplaceLineManipulator dm = new ReplaceLineManipulator();
+            ReplaceLineManipulator dm = gEngine.Manipulator.Registry.CreateManipulator("ReplaceLineManipulator") as ReplaceLineManipulator;
+            if (dm == null)
+                return;
             ManipulatorSetter.SetManipulator(dm, lc);
         }
     }
