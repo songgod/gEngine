@@ -17,13 +17,13 @@ using System.Windows.Shapes;
 
 namespace gEngine.Manipulator.Ge.Plane
 {
-    public delegate void FinishSelectWellLocations(HashSet<string> names);
+    public delegate void FinishSelectWellLocations(Stack<WellLocation> wellLocs);
 
     public class WellLocationsConnectManipulator : PolyLineManipulator
     {
 
         #region 属性
-        public HashSet<string> SelectWellLocations { get; set; }
+        public Stack<WellLocation> SelectWellLocations { get; set; }
         MapControl _mc;
         public event FinishSelectWellLocations OnFinishSelect;
         #endregion
@@ -32,9 +32,23 @@ namespace gEngine.Manipulator.Ge.Plane
 
         public WellLocationsConnectManipulator(MapControl mc)
         {
+            SelectWellLocations = new Stack<WellLocation>();
             _mc = mc;
-            SelectWellLocations = new HashSet<string>();
-            ClearCommands();
+            _mc.Focus();
+            _mc.KeyDown += _mc_KeyDown;
+        }
+
+        private void _mc_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Back)
+            {
+                if (SelectWellLocations.Count <= 0)
+                    return;
+                WellLocation wl=SelectWellLocations.Pop();
+                this.TrackAdorner.Points.Remove(new Point(wl.X,wl.Y));
+                if (this.TrackAdorner.Points.Count == 1)
+                    this.TrackAdorner.Points.RemoveAt(this.TrackAdorner.Points.Count - 1);
+            }
         }
         #endregion
 
@@ -49,11 +63,11 @@ namespace gEngine.Manipulator.Ge.Plane
         protected override void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             WellLocation wl = GetClickWell(e);
-            if (wl != null)
+            if (wl != null&& !SelectWellLocations.Contains(wl))
             {
-                SelectWellLocations.Add(wl.WellNum);
+                SelectWellLocations.Push(wl);
                 DrawLine(wl);//这里没有调用父类事件base.MouseLeftButtonUp(sender, e)，因为该事件不能定位井中心
-                AddUndoCommand(e, wl);
+                //AddUndoCommand(e, wl);
             }
         }
 
@@ -75,7 +89,7 @@ namespace gEngine.Manipulator.Ge.Plane
             }
 
             SelectWellLocations.Clear();
-            ClearCommands();
+            //ClearCommands();
             base.MouseRightButtonUp(sender, e);
         }
 
@@ -112,18 +126,6 @@ namespace gEngine.Manipulator.Ge.Plane
             Point p = new Point(wl.X, wl.Y); //定位井中心
             this.TrackAdorner.Points.Add(p);
             this.TrackAdorner.Points.Add(p);
-        }
-
-        private void AddUndoCommand(MouseButtonEventArgs e, WellLocation wl)
-        {
-            Point p = new Point(wl.X, wl.Y);
-            IUndoRedoCommand undoCommand = new UndoConnectWellCommand(this, wl);
-            _mc.UndoRedoCommandManager.AddCommand(undoCommand);
-        }
-
-        private void ClearCommands()
-        {
-            _mc.UndoRedoCommandManager.Clear();
         }
 
         #endregion

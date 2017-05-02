@@ -8,7 +8,7 @@
              d:DesignHeight="300" d:DesignWidth="300"
              Background="Transparent" 
               ClipToBounds="True"
-             IsManipulationEnabled="True"
+             IsManipulationEnabled="True" Focusable="True"
              Loaded="UserControl_Loaded">
     <Grid x:Name="root">
         <ItemsControl x:Name="layeritemscontrol" ItemsSource="{Binding Layers}">

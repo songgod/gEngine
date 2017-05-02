@@ -13,7 +13,7 @@ namespace gEngine.View
     static public class Registry
     {
         static private ResourceDictionary resDictionary;
-        
+
 
         static Registry()
         {
@@ -24,18 +24,19 @@ namespace gEngine.View
         {
             if (rd == null)
                 return;
-            resDictionary.MergedDictionaries.Add(rd);
+            if (!resDictionary.MergedDictionaries.Contains(rd))
+                resDictionary.MergedDictionaries.Add(rd);
         }
 
         static public void UnRegist(ResourceDictionary rd)
         {
-            if (rd==null)
+            if (rd == null)
                 return;
 
             resDictionary.MergedDictionaries.Remove(rd);
         }
 
-        static public ResourceDictionary GetResourceDictionary(string dataTemplateName)
+        static public DataTemplate GetDataTemplate(string dataTemplateName)
         {
             if (string.IsNullOrEmpty(dataTemplateName))
                 return null;
@@ -48,7 +49,7 @@ namespace gEngine.View
                     {
                         DataTemplate dataTemplate = v as DataTemplate;
                         if (dataTemplate.DataTemplateKey.ToString() == dataTemplateName)
-                            return mergedResDic;
+                            return dataTemplate;
                     }
                 }
             }
