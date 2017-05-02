@@ -27,8 +27,9 @@ namespace gSection.Commands.Section
             LayerControl lc = mc.ActiveLayerControl;
             if (lc == null)
                 return;
-
-            DrawLineManipulator dm = new DrawLineManipulator();
+            DrawLineManipulator dm = gEngine.Manipulator.Registry.CreateManipulator("DrawLineManipulator") as DrawLineManipulator;
+            if (dm == null)
+                return;
             ManipulatorSetter.SetManipulator(dm, lc);
         }
     }

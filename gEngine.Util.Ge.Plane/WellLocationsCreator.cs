@@ -32,6 +32,7 @@ namespace gEngine.Util.Ge.Plane
                     wl.WellType = WellType.Y;
                 }
                 res.Add(wl);
+                //wl.DataTemplate = "WellLocationTemplate";
             }
             
             return res;
