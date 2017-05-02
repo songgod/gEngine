@@ -27,8 +27,9 @@ namespace gSection.Commands.Section
             LayerControl lc = mc.ActiveLayerControl;
             if (lc == null)
                 return;
-
-            DrawCurveManipulator dm = new DrawCurveManipulator();
+            DrawCurveManipulator dm = gEngine.Manipulator.Registry.CreateManipulator("DrawCurveManipulator") as DrawCurveManipulator;
+            if (dm == null)
+                return;
             ManipulatorSetter.SetManipulator(dm, lc);
         }
     }

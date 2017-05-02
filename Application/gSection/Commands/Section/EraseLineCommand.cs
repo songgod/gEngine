@@ -27,8 +27,9 @@ namespace gSection.Commands.Section
             LayerControl lc = mc.ActiveLayerControl;
             if (lc == null)
                 return;
-
-            EraseLineManipulator dm = new EraseLineManipulator();
+            EraseLineManipulator dm = gEngine.Manipulator.Registry.CreateManipulator("EraseLineManipulator") as EraseLineManipulator;
+            if (dm == null)
+                return;
             ManipulatorSetter.SetManipulator(dm, lc);
         }
     }
