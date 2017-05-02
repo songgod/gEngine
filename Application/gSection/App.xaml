@@ -10,7 +10,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="zh-cn.xaml"/>
                 <vs:Dictionary/>
-                <vc:DictionaryNew/>
+                <vc:Dictionary/>
                 <vp:Dictionary/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
