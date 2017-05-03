@@ -1,6 +1,7 @@
 ﻿using gEngine.Data.Ge;
 using gEngine.Data.Interface;
 using gEngine.Graph.Ge;
+using gEngine.Graph.Ge.Plane;
 using gEngine.Graph.Interface;
 using gEngine.Manipulator;
 using gEngine.Manipulator.Ge.Plane;
@@ -62,7 +63,7 @@ namespace gSection.Commands.Map
             ManipulatorSetter.SetManipulator(mp, lc);
         }
 
-        private void Mp_OnFinishSelect(HashSet<string> names)
+        private void Mp_OnFinishSelect(Stack<WellLocation> wellLocs)
         {
             string horizonName = string.Empty;
             string discreteName = string.Empty;
@@ -79,7 +80,7 @@ namespace gSection.Commands.Map
                 discreteName = discreteNames[0];
             }
             SectionLayerCreator sc = new SectionLayerCreator();
-            Layer layer = sc.CreateSectionLayer(db, names, horizonName, discreteName);
+            Layer layer = sc.CreateSectionLayer(db, wellLocs, horizonName, discreteName);
             IMap map = Project.Single.NewMap("Ge", "Column");
             map.Layers.Add(layer);
         }

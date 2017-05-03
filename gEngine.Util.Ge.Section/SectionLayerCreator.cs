@@ -3,6 +3,7 @@ using gEngine.Data.Ge.Txt;
 using gEngine.Data.Interface;
 using gEngine.Graph.Ge;
 using gEngine.Graph.Ge.Column;
+using gEngine.Graph.Ge.Plane;
 using gEngine.Graph.Ge.Section;
 using gEngine.Util.Ge.Column;
 using System;
@@ -31,7 +32,7 @@ namespace gEngine.Util.Ge.Section
             return layer;
         }
 
-        public Layer CreateSectionLayer(IDBSource db, HashSet<string> names, string horizonName, string discreteName)
+        public Layer CreateSectionLayer(IDBSource db, Stack<WellLocation> wellLocs, string horizonName, string discreteName)
         {
             Layer layer = new Layer() { Type = "Section" };
 
@@ -40,8 +41,9 @@ namespace gEngine.Util.Ge.Section
             // 井曲线数据
             int WellLocation = 0;
             IDBWells wells = new DBWells();
-            foreach (string name in names)
+            foreach (WellLocation wellLoc in wellLocs)
             {
+                string name = wellLoc.WellNum;
                 IDBWell wl = db.GetWell(name);
                 IDBHorizons horizons = db.GetHorizonsByWell(name, horizonName);
                 IDBDiscreteDatas discretes = db.GetDiscretesByWell(name, discreteName);

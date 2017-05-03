@@ -17,19 +17,21 @@ namespace gEngine.Manipulator.Ge.Plane
     {
         private WellLocationsConnectManipulator _mp;
         private Point _p;
-        private string _wellNum;
+        //private string _wellNum;
+        private WellLocation _wl;
         public UndoConnectWellCommand(WellLocationsConnectManipulator mp, WellLocation wl)
         {
             _mp = mp;
+            _wl = wl;
             _p = new Point(wl.X, wl.Y); 
-            _wellNum = wl.WellNum;
+            //_wellNum = wl.WellNum;
         }
         public void Undo()
         {
             _mp.TrackAdorner.Points.Remove(_p);
             if (_mp.TrackAdorner.Points.Count == 1)
                 _mp.TrackAdorner.Points.RemoveAt(_mp.TrackAdorner.Points.Count - 1);
-            _mp.SelectWellLocations.Remove(_wellNum);
+            _mp.SelectWellLocations.Pop();
         }
         public void Redo()
         {
@@ -39,7 +41,7 @@ namespace gEngine.Manipulator.Ge.Plane
             }
             _mp.TrackAdorner.Points.Add(_p);
             _mp.TrackAdorner.Points.Add(_p);
-            _mp.SelectWellLocations.Add(_wellNum);
+            _mp.SelectWellLocations.Push(_wl);
         }
 
         
