@@ -1,5 +1,6 @@
 ﻿using gEngine.Utility;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 
 namespace gEngine.Graph.Ge.Column
@@ -8,36 +9,44 @@ namespace gEngine.Graph.Ge.Column
     {
         public Well()
         {
-            Columns = new WellColumns();
-            Depths = new ObsDoubles();
+            LstColumns = new List<LstWellColumns>();
         }
 
-        public WellColumns Columns
+        public List<LstWellColumns> LstColumns
         {
-            get { return (WellColumns)GetValue(ColumnsProperty); }
-            set { SetValue(ColumnsProperty, value); }
+            get { return (List<LstWellColumns>) GetValue(LstColumnsProperty); }
+            set { SetValue(LstColumnsProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Columns.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ColumnsProperty =
-            DependencyProperty.Register("Columns", typeof(WellColumns), typeof(Well));
+        public static readonly DependencyProperty LstColumnsProperty =
+            DependencyProperty.Register("LstColumns", typeof(List<LstWellColumns>), typeof(Well));
 
         public ObsDoubles Depths
         {
-            get { return (ObsDoubles)GetValue(DepthsProperty); }
-            set { SetValue(DepthsProperty, value); }
+            get
+            {
+                foreach (var lstColumns in LstColumns)
+                {
+                    foreach (var columns in lstColumns.Columns)
+                    {
+                       Type type = columns.GetType();
+                        if (type.Name.Equals("WellDepth"))
+                        {
+                            return ((WellDepth) columns).Depths;
+                        }
+                    }
+                }
+                return null;
+            }
         }
-
-        // Using a DependencyProperty as the backing store for Depths.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty DepthsProperty =
-            DependencyProperty.Register("Depths", typeof(ObsDoubles), typeof(Well));
-
+       
         /// <summary>
         /// 每口井位置
         /// </summary>
         public int Location
         {
-            get { return (int)GetValue(LocationProperty); }
+            get { return (int) GetValue(LocationProperty); }
             set { SetValue(LocationProperty, value); }
         }
 
@@ -47,7 +56,7 @@ namespace gEngine.Graph.Ge.Column
 
         public int LongitudinalProportion
         {
-            get { return (int)GetValue(LongitudinalProportionProperty); }
+            get { return (int) GetValue(LongitudinalProportionProperty); }
             set { SetValue(LongitudinalProportionProperty, value); }
         }
 

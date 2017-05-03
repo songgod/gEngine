@@ -15,15 +15,15 @@ namespace gEngine.View.Ge.Column
     /// <summary>
     /// 通过曲线模板画曲线道边框
     /// </summary>
-    public class WellToModelConverter:IMultiValueConverter
+    public class WellToModelConverter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            WellColumns wellcols = values[0] as WellColumns;
-            if (wellcols == null)
+            List<LstWellColumns> lstWellColumns = values[0] as List<LstWellColumns>;
+            if (lstWellColumns == null)
                 return null;
 
-            ObsDoubles depths = ((WellColumn) wellcols[0]).Owner.Depths as ObsDoubles;
+            ObsDoubles depths = ((LstWellColumns) lstWellColumns[0]).Columns[0].Owner.Depths as ObsDoubles;
 
             if (depths == null || depths.Count <= 1)
                 return null;
@@ -33,19 +33,19 @@ namespace gEngine.View.Ge.Column
             double depth = Math.Ceiling((maxdepth - mindepth) / 10) * 10;//取底深减顶深差值，向上取整
             double top = Math.Ceiling(depths[0] / 10) * 10;//顶深向上取整
             double firstScale = top - mindepth == 0 ? 10 : top - mindepth;//第一个刻度点
-            int LongitudinalProportion = ((WellColumn) wellcols[0]).Owner.LongitudinalProportion; //纵向比例
+            int LongitudinalProportion = ((LstWellColumns) lstWellColumns[0]).Columns[0].Owner.LongitudinalProportion; //纵向比例
             int WellWidth = 0; //每口井宽度
 
             PathGeometry geom = new PathGeometry();
 
             // 画各曲线道边框竖线，由于曲线名称占60高度，需增加
             int i = 0;
-            foreach (var item in wellcols)
+            foreach (var item in lstWellColumns)
             {
-                WellWidth += item.Width;
+                WellWidth += item.Columns[0].Width;
                 PathFigure fg = new PathFigure();
-                fg.StartPoint = new Point() { X = i * item.Width, Y = 0 };
-                LineSegment ls = new LineSegment() { Point = new Point() { X = i * item.Width, Y = 60 + depth * Enums.PerMilePx / LongitudinalProportion } };
+                fg.StartPoint = new Point() { X = i * item.Columns[0].Width, Y = 0 };
+                LineSegment ls = new LineSegment() { Point = new Point() { X = i * item.Columns[0].Width, Y = 60 + depth * Enums.PerMilePx / LongitudinalProportion } };
                 fg.Segments.Add(ls);
                 geom.Figures.Add(fg);
                 i++;

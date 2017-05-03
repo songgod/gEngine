@@ -1,5 +1,5 @@
 ﻿<ResourceDictionary x:Class="gEngine.View.Ge.Column.Dictionary"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
@@ -24,7 +24,7 @@
                 <TextBlock Text="{Binding Name}" VerticalAlignment="Center" HorizontalAlignment="Center"  FontWeight="Bold" >
                 </TextBlock>
             </StackPanel>
-            <ItemsControl ItemsSource="{Binding Columns}" Grid.Row="1">
+            <ItemsControl ItemsSource="{Binding LstColumns}" Grid.Row="1">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel x:Name="ColumnPanel" Orientation="Horizontal"/>
@@ -43,12 +43,26 @@
                 <Path x:Name="pathLogsBorder" Stroke="Black" StrokeThickness="1">
                     <Path.Data>
                         <MultiBinding Converter="{StaticResource WellModel}">
-                            <Binding Path="Columns"/>
+                            <Binding Path="LstColumns"/>
                         </MultiBinding>
                     </Path.Data>
                 </Path>
             </StackPanel>
         </Grid>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type gc:LstWellColumns}">
+        <ItemsControl ItemsSource="{Binding Columns}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid x:Name="ColumnGrid"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <ContentControl Content="{Binding}"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </DataTemplate>
     <DataTemplate DataType="{x:Type gc:WellLogColumn}">
         <Grid>
@@ -175,5 +189,5 @@
                 </Path>
             </Canvas>
         </Grid>
-    </DataTemplate>     
+    </DataTemplate>
 </ResourceDictionary>

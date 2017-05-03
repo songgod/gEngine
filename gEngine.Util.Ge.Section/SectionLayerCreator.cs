@@ -52,9 +52,9 @@ namespace gEngine.Util.Ge.Section
                 {
                     well.LongitudinalProportion = 1500;
                     well.Location = WellLocation;
-                    foreach (var item in well.Columns)
+                    foreach (var item in well.LstColumns)
                     {
-                        WellLocation += item.Width;
+                        WellLocation += item.Columns[0].Width;
                     }
                     WellLocation += 50;
                     layer.Objects.Add(well);
