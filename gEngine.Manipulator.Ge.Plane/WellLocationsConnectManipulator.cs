@@ -24,18 +24,27 @@ namespace gEngine.Manipulator.Ge.Plane
 
         #region 属性
         public Stack<WellLocation> SelectWellLocations { get; set; }
-        MapControl _mc;
         public event FinishSelectWellLocations OnFinishSelect;
         #endregion
 
         #region 构造函数
 
-        public WellLocationsConnectManipulator(MapControl mc)
+        public WellLocationsConnectManipulator()
         {
             SelectWellLocations = new Stack<WellLocation>();
-            _mc = mc;
-            _mc.Focus();
-            _mc.KeyDown += _mc_KeyDown;
+        }
+
+        protected override void OnAttached()
+        {
+            base.OnAttached();
+            if (this.AssociatedObject == null)
+                return;
+
+            MapControl mc = this.AssociatedObject.Owner;
+            if (mc == null)
+                return;
+            mc.Focus();
+            mc.KeyDown += _mc_KeyDown;
         }
 
         private void _mc_KeyDown(object sender, KeyEventArgs e)
@@ -67,7 +76,6 @@ namespace gEngine.Manipulator.Ge.Plane
             {
                 SelectWellLocations.Push(wl);
                 DrawLine(wl);//这里没有调用父类事件base.MouseLeftButtonUp(sender, e)，因为该事件不能定位井中心
-                //AddUndoCommand(e, wl);
             }
         }
 
@@ -89,7 +97,6 @@ namespace gEngine.Manipulator.Ge.Plane
             }
 
             SelectWellLocations.Clear();
-            //ClearCommands();
             base.MouseRightButtonUp(sender, e);
         }
 
@@ -143,7 +150,7 @@ namespace gEngine.Manipulator.Ge.Plane
 
         public IManipulatorBase CreateManipulator(object param)
         {
-            return new WellLocationsConnectManipulator(param as MapControl);
+            return new WellLocationsConnectManipulator();
         }
     }
 }
