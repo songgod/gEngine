@@ -52,6 +52,8 @@ namespace gEngine.Data.Ge.Txt
                 return false;
 
             Name = System.IO.Path.GetFileNameWithoutExtension(txtfilepath);
+            Columns = new List<Tuple<string, List<double>>>();
+            Depths = new List<double>();
 
             var file = File.Open(txtfilepath, FileMode.Open);
 
@@ -59,8 +61,6 @@ namespace gEngine.Data.Ge.Txt
 
             using (var stream = new StreamReader(file, Encoding.GetEncoding("gb2312")))
             {
-                Columns = new List<Tuple<string, List<double>>>();
-                Depths = new List<double>();
                 while (!stream.EndOfStream)
                 {
                     //string strLine = System.Text.RegularExpressions.Regex.Replace(stream.ReadLine().Trim().ToString(), @"\s+", " ");

@@ -10,6 +10,8 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:em="clr-namespace:gEngine.Manipulator;assembly=gEngine.Manipulator"
              mc:Ignorable="d" 
+                 Margin="1"
+                 Padding="1"
              d:DesignHeight="300" d:DesignWidth="300"
                  DestroyContentOnTabSwitching="False"
                  TabContentCacheMode="CacheAllTabs" 

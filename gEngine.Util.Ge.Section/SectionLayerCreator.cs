@@ -45,6 +45,8 @@ namespace gEngine.Util.Ge.Section
             {
                 string name = wellLoc.WellNum;
                 IDBWell wl = db.GetWell(name);
+                if (wl == null)
+                    continue;
                 IDBHorizons horizons = db.GetHorizonsByWell(name, horizonName);
                 IDBDiscreteDatas discretes = db.GetDiscretesByWell(name, discreteName);
                 Well well = wc.Create(wl, horizons, discretes);
