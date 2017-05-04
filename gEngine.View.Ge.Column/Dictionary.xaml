@@ -50,8 +50,8 @@
             </StackPanel>
         </Grid>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type gc:LstWellColumns}">
-        <ItemsControl ItemsSource="{Binding Columns}">
+    <DataTemplate DataType="{x:Type gc:WellColumns}">
+        <ItemsControl ItemsSource="{Binding}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Grid x:Name="ColumnGrid"/>

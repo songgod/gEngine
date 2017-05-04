@@ -40,21 +40,5 @@ namespace gEngine.Graph.Ge.Column
 
     public class WellColumns : ObservedCollection<WellColumn> { }
 
-    public class LstWellColumns : Object
-    {
-        public LstWellColumns()
-        {
-            Columns = new WellColumns();
-        }
-
-        public WellColumns Columns
-        {
-            get { return (WellColumns) GetValue(ColumnsProperty); }
-            set { SetValue(ColumnsProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for Columns.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ColumnsProperty =
-            DependencyProperty.Register("Columns", typeof(WellColumns), typeof(LstWellColumns));
-    }
+    public class LstWellColumns : ObservedCollection<WellColumns>{ }
 }
