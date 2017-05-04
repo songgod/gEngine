@@ -75,7 +75,7 @@ namespace gSection.ViewModel
 
         public MapCollection Maps { get; private set; }
 
-        public IMaps OpenMaps { get; private set; }
+        public IMaps OpenMaps { get; set; }
 
         public DBSourceTuple DBTuple { get; set; }
 
