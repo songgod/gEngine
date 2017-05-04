@@ -63,7 +63,10 @@ namespace gEngine.Data.Ge.Txt
         public IDBWell GetWell(string name)
         {
             string fullpath = DBPath + "/" + WellsFolder + "/" + name + ".txt";
-            return new TxtWell() { TxtFile = fullpath };
+            TxtWell w = new TxtWell();
+            if (w.ReadFromTxt(fullpath) == false)
+                return null;
+            return w;
         }
 
         public List<string> HorizonsNames
