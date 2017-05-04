@@ -9,18 +9,28 @@ namespace gEngine.Graph.Ge.Column
     {
         public Well()
         {
-            LstColumns = new List<LstWellColumns>();
+            LstColumns = new LstWellColumns();
         }
 
-        public List<LstWellColumns> LstColumns
+        public LstWellColumns LstColumns
         {
-            get { return (List<LstWellColumns>) GetValue(LstColumnsProperty); }
+            get { return (LstWellColumns) GetValue(LstColumnsProperty); }
             set { SetValue(LstColumnsProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Columns.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty LstColumnsProperty =
-            DependencyProperty.Register("LstColumns", typeof(List<LstWellColumns>), typeof(Well));
+            DependencyProperty.Register("LstColumns", typeof(LstWellColumns), typeof(Well));
+
+        public WellColumns Columns
+        {
+            get { return (WellColumns) GetValue(ColumnsProperty); }
+            set { SetValue(ColumnsProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Columns.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ColumnsProperty =
+            DependencyProperty.Register("Columns", typeof(WellColumns), typeof(Well));
 
         public ObsDoubles Depths
         {
@@ -28,19 +38,19 @@ namespace gEngine.Graph.Ge.Column
             {
                 foreach (var lstColumns in LstColumns)
                 {
-                    foreach (var columns in lstColumns.Columns)
+                    foreach (var cols in lstColumns)
                     {
-                       Type type = columns.GetType();
+                        Type type = cols.GetType();
                         if (type.Name.Equals("WellDepth"))
                         {
-                            return ((WellDepth) columns).Depths;
+                            return ((WellDepth) cols).Depths;
                         }
                     }
                 }
                 return null;
             }
         }
-       
+
         /// <summary>
         /// 每口井位置
         /// </summary>

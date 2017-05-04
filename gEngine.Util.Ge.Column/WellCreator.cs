@@ -23,29 +23,29 @@ namespace gEngine.Util.Ge.Column
 
             Well well = new Well() { Name = db.Name };
 
-            LstWellColumns LstWellColumns = null;
+            WellColumns WellColumns = null;
 
             for (int i = 0; i < db.Columns.Count; i++)
             {
-                LstWellColumns = new LstWellColumns();
+                WellColumns = new WellColumns();
                 string name = db.Columns[i].Item1;
                 WellLogColumn logColumn = new WellLogColumn() { Name = db.Columns[i].Item1, Owner = well, MathType = Enums.MathType.DEFAULT };
                 logColumn.Values = new Utility.ObsDoubles(db.Columns[i].Item2);
                 logColumn.Color = Color.FromRgb((byte) rdm.Next(0, 255), (byte) rdm.Next(0, 255), (byte) rdm.Next(0, 255));
                 logColumn.Width = RoadWidth;
-                LstWellColumns.Columns.Add(logColumn);
-                well.LstColumns.Add(LstWellColumns);
+                WellColumns.Add(logColumn);
+                well.LstColumns.Add(WellColumns);
             }
 
-            LstWellColumns = new LstWellColumns();
+            WellColumns = new WellColumns();
             WellDepth WDepth = new WellDepth() { Name = "深度", Owner = well };
             WDepth.Depths = new Utility.ObsDoubles(db.Depths);
             WDepth.Color = Colors.Black;
             WDepth.Width = RoadWidth;
-            LstWellColumns.Columns.Add(WDepth);
-            well.LstColumns.Add(LstWellColumns);
+            WellColumns.Add(WDepth);
+            well.LstColumns.Add(WellColumns);
 
-            LstWellColumns = new LstWellColumns();
+            WellColumns = new WellColumns();
             if (horizons.Horizons.Count > 0)
             {
                 WellSegmentColumn segmentColumn = new WellSegmentColumn() { Owner = well, Color = Colors.Black, Width = RoadWidth };
@@ -57,7 +57,7 @@ namespace gEngine.Util.Ge.Column
                     segment.Bottom = horizons.Horizons[i].MeasuredThickness;
                     segmentColumn.Segments.Add(segment);
                 }
-                LstWellColumns.Columns.Add(segmentColumn);
+                WellColumns.Add(segmentColumn);
             }
 
             if (discretes.DiscreteDatas.Count > 0)
@@ -71,10 +71,9 @@ namespace gEngine.Util.Ge.Column
                     segment.Color = Colors.Green;
                     segmentColumn.Segments.Add(segment);
                 }
-                LstWellColumns.Columns.Add(segmentColumn);
+                WellColumns.Add(segmentColumn);
             }
-            well.LstColumns.Add(LstWellColumns);
-
+            well.LstColumns.Add(WellColumns);
             return well;
         }
     }

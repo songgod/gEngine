@@ -54,7 +54,7 @@ namespace gEngine.Util.Ge.Section
                     well.Location = WellLocation;
                     foreach (var item in well.LstColumns)
                     {
-                        WellLocation += item.Columns[0].Width;
+                        WellLocation += item[0].Width;
                     }
                     WellLocation += 50;
                     layer.Objects.Add(well);

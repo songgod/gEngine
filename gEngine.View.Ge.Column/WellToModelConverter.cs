@@ -19,11 +19,11 @@ namespace gEngine.View.Ge.Column
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            List<LstWellColumns> lstWellColumns = values[0] as List<LstWellColumns>;
+            LstWellColumns lstWellColumns = values[0] as LstWellColumns;
             if (lstWellColumns == null)
                 return null;
 
-            ObsDoubles depths = ((LstWellColumns) lstWellColumns[0]).Columns[0].Owner.Depths as ObsDoubles;
+            ObsDoubles depths = ((WellColumns) lstWellColumns[0])[0].Owner.Depths as ObsDoubles;
 
             if (depths == null || depths.Count <= 1)
                 return null;
@@ -33,7 +33,7 @@ namespace gEngine.View.Ge.Column
             double depth = Math.Ceiling((maxdepth - mindepth) / 10) * 10;//取底深减顶深差值，向上取整
             double top = Math.Ceiling(depths[0] / 10) * 10;//顶深向上取整
             double firstScale = top - mindepth == 0 ? 10 : top - mindepth;//第一个刻度点
-            int LongitudinalProportion = ((LstWellColumns) lstWellColumns[0]).Columns[0].Owner.LongitudinalProportion; //纵向比例
+            int LongitudinalProportion = ((WellColumns) lstWellColumns[0])[0].Owner.LongitudinalProportion; //纵向比例
             int WellWidth = 0; //每口井宽度
 
             PathGeometry geom = new PathGeometry();
@@ -42,10 +42,10 @@ namespace gEngine.View.Ge.Column
             int i = 0;
             foreach (var item in lstWellColumns)
             {
-                WellWidth += item.Columns[0].Width;
+                WellWidth += item[0].Width;
                 PathFigure fg = new PathFigure();
-                fg.StartPoint = new Point() { X = i * item.Columns[0].Width, Y = 0 };
-                LineSegment ls = new LineSegment() { Point = new Point() { X = i * item.Columns[0].Width, Y = 60 + depth * Enums.PerMilePx / LongitudinalProportion } };
+                fg.StartPoint = new Point() { X = i * item[0].Width, Y = 0 };
+                LineSegment ls = new LineSegment() { Point = new Point() { X = i * item[0].Width, Y = 60 + depth * Enums.PerMilePx / LongitudinalProportion } };
                 fg.Segments.Add(ls);
                 geom.Figures.Add(fg);
                 i++;
