@@ -46,7 +46,7 @@ namespace gEngineTest.Symbol
             PathFigure pf = new PathFigure() { StartPoint = pc.First() };
             pf.Segments.Add(ps);
             pathgeom.Figures.Add(pf);
-            Geometry geom = SymbolMgr.GetStrokeSymbol(symbol).Create(pathgeom);
+            Geometry geom = Registry.GetStrokeSymbol(null,symbol).Create(pathgeom);
             return geom;
         }
 

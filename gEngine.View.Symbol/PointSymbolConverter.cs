@@ -10,8 +10,13 @@ namespace gEngine.View.Symbol
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string symbol = (string)value;
-            PointSymbol psym = SymbolMgr.GetSymbol(symbol, PointSymbol.type) as PointSymbol;
+            string symbol = value as string;
+            if (string.IsNullOrEmpty(symbol))
+                return Registry.DefaultPointSymbol.Create();
+
+            string symbolname = symbol.Substring(symbol.LastIndexOf('@') + 1);
+            string factoryname = symbol.Substring(0,symbol.LastIndexOf('@'));
+            PointSymbol psym = Registry.GetPointSymbol(factoryname, symbolname);
             return psym.Create();
         }
 
