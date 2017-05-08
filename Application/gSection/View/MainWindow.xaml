@@ -408,7 +408,26 @@
                 </dxr:RibbonPage>
             </dxr:RibbonPageCategory>
         </dxr:RibbonControl>
-        <view:TabControl DataContext="{x:Static vm:Project.Single}" Grid.Row="1" x:Name="tc"/>
+        <Grid Grid.Row="1" x:Name="ProjectGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <view:TabControl DataContext="{x:Static vm:Project.Single}" Grid.Column="0" x:Name="tc"/>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <ListView Grid.Row="0">
+                    <ListItem></ListItem>
+                </ListView>
+                <TreeView Grid.Row="1">
+                    
+                </TreeView>
+            </Grid>
+        </Grid>
+        
         <dxr:RibbonStatusBarControl Grid.Row="2">
             <dxr:RibbonStatusBarControl.RightItems>
                 <dxb:BarButtonItem x:Name="printItem" Content="Print" Glyph="{dx:DXImage Image=Print_16x16.png}"/>
