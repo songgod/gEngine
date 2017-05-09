@@ -94,7 +94,8 @@
                         <dxb:BarButtonItem Content="打印" LargeGlyph="{dx:DXImage Image=Printer_32x32.png}" Glyph="{dx:DXImage Image=Printer_16x16.png}"/>
                         <dxb:BarButtonItem Content="设置范围" LargeGlyph="{dx:DXImage Image=RangeArea_32x32.png}" Glyph="{dx:DXImage Image=RangeArea_16x16.png}"/>
                     </dxr:RibbonPageGroup>
-                    <dxr:RibbonPageGroup Caption="常用功能"/>
+                    <dxr:RibbonPageGroup Caption="常用功能">
+                    </dxr:RibbonPageGroup>
                 </dxr:RibbonPage>
                 <dxr:RibbonPage x:Name="pageRef" Caption="参考">
                     <dxr:RibbonPageGroup Caption="平面信息">
@@ -257,7 +258,11 @@
                         </dxr:RibbonGalleryBarItem>
                     </dxr:RibbonPageGroup>
                 </dxr:RibbonPage>
-                <dxr:RibbonPage Caption="修饰"/>
+                <dxr:RibbonPage Caption="修饰">
+                    <dxr:RibbonPageGroup Caption="通用图层">
+                        <dxb:BarButtonItem Content="比例尺" Command="{x:Static cmdov:CommandsOperateView.ScaleRuleCommand}"/>
+                    </dxr:RibbonPageGroup>
+                </dxr:RibbonPage>
                 <dxr:RibbonPage Caption="视图">
                     <dxr:RibbonPageGroup Caption="">
                         <dxb:BarButtonItem Content="全图显示" Command="{x:Static cmdov:CommandsOperateView.FullViewCommand }" CommandParameter="{Binding}" LargeGlyph="pack://application:,,,/gSection;component/Images/GDS/20150310095307390_easyicon_net_32.ico" Glyph="pack://application:,,,/gSection;component/Images/GDS/20150310095307390_easyicon_net_32.ico"/>
@@ -423,11 +428,11 @@
                     <ListItem></ListItem>
                 </ListView>
                 <TreeView Grid.Row="1">
-                    
+
                 </TreeView>
             </Grid>
         </Grid>
-        
+
         <dxr:RibbonStatusBarControl Grid.Row="2">
             <dxr:RibbonStatusBarControl.RightItems>
                 <dxb:BarButtonItem x:Name="printItem" Content="Print" Glyph="{dx:DXImage Image=Print_16x16.png}"/>
