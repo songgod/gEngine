@@ -8,16 +8,8 @@ using System.Threading.Tasks;
 
 namespace gEngine.Util.Ge.Plane
 {
-    public class PlaneLayerCreator : IToolBase
+    public class PlaneLayerCreator
     {
-        public string Name
-        {
-            get
-            {
-                return "PlaneLayerCreator";
-            }
-        }
-
         public Layer CreateWellLocationLayer()
         {
             return new Layer() { Type = "WellPlane" };

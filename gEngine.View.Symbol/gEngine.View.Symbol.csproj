@@ -68,11 +68,19 @@
     <Compile Include="ISymbol.cs" />
     <Compile Include="FillSymbol.cs" />
     <Compile Include="FillSymbolConverter.cs" />
+    <Compile Include="ISymbolFactory.cs" />
     <Compile Include="StrokeSymbol.cs" />
     <Compile Include="PointSymbol.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SymbolMgr.cs" />
+    <Compile Include="Registry.cs" />
     <Compile Include="PointSymbolConverter.cs" />
+    <Compile Include="StrokeSymbolConverter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\gEngine.Util\gEngine.Util.csproj">
+      <Project>{84ACB6C4-CF62-4F4B-A7E5-5C642EDC041A}</Project>
+      <Name>gEngine.Util</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

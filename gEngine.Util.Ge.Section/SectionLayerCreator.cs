@@ -15,16 +15,8 @@ using System.Windows.Media;
 
 namespace gEngine.Util.Ge.Section
 {
-    public class SectionLayerCreator : IToolBase
+    public class SectionLayerCreator
     {
-        public string Name
-        {
-            get
-            {
-                return "SectionLayerCreator";
-            }
-        }
-
         public Layer CreateSectionLayer()
         {
             Layer layer = new Layer() { Type = "Section" };
@@ -45,6 +37,8 @@ namespace gEngine.Util.Ge.Section
             {
                 string name = wellLoc.WellNum;
                 IDBWell wl = db.GetWell(name);
+                if (wl == null)
+                    continue;
                 IDBHorizons horizons = db.GetHorizonsByWell(name, horizonName);
                 IDBDiscreteDatas discretes = db.GetDiscretesByWell(name, discreteName);
                 Well well = wc.Create(wl, horizons, discretes);

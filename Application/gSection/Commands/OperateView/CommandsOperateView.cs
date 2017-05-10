@@ -9,10 +9,11 @@ namespace gSection.Commands.OperateView
     public class CommandsOperateView
     {
         public static FullViewCommand FullViewCommand { get; set; }
-
+        public static ScaleRuleCommand ScaleRuleCommand { get; set; }
         static CommandsOperateView()
         {
             FullViewCommand = new FullViewCommand();
+            ScaleRuleCommand = new ScaleRuleCommand();
         }
     }
 }

@@ -70,6 +70,7 @@
     <Compile Include="FindChild.cs" />
     <Compile Include="FindContext.cs" />
     <Compile Include="FindParent.cs" />
+    <Compile Include="IToolBase.cs" />
     <Compile Include="LayerControl.xaml.cs">
       <DependentUpon>LayerControl.xaml</DependentUpon>
     </Compile>

@@ -22,4 +22,6 @@ namespace gEngine.View.Symbol
         public abstract string Name { get; }
         public abstract Brush Create();
     }
+
+
 }

@@ -46,6 +46,20 @@ namespace gEngine.Util.Ge.Column
             well.LstColumns.Add(WellColumns);
 
             WellColumns = new WellColumns();
+            if (discretes.DiscreteDatas.Count > 0)
+            {
+                WellSegmentColumn segmentColumn = new WellSegmentColumn() { Owner = well, Width = RoadWidth, Name = "二类砂岩" };
+                for (int i = 0; i < discretes.DiscreteDatas.Count; i++)
+                {
+                    WellSegmentColumn.Segment segment = new WellSegmentColumn.Segment();
+                    segment.Top = discretes.DiscreteDatas[i].Top_MeasuredDepth;
+                    segment.Bottom = discretes.DiscreteDatas[i].MeasuredThickness;
+                    segment.Color = Colors.Green;
+                    segmentColumn.Segments.Add(segment);
+                }
+                WellColumns.Add(segmentColumn);
+            }
+
             if (horizons.Horizons.Count > 0)
             {
                 WellSegmentColumn segmentColumn = new WellSegmentColumn() { Owner = well, Color = Colors.Black, Width = RoadWidth };
@@ -60,19 +74,6 @@ namespace gEngine.Util.Ge.Column
                 WellColumns.Add(segmentColumn);
             }
 
-            if (discretes.DiscreteDatas.Count > 0)
-            {
-                WellSegmentColumn segmentColumn = new WellSegmentColumn() { Owner = well, Width = RoadWidth, Name = "二类砂岩" };
-                for (int i = 0; i < discretes.DiscreteDatas.Count; i++)
-                {
-                    WellSegmentColumn.Segment segment = new WellSegmentColumn.Segment();
-                    segment.Top = discretes.DiscreteDatas[i].Top_MeasuredDepth;
-                    segment.Bottom = discretes.DiscreteDatas[i].MeasuredThickness;
-                    segment.Color = Colors.Green;
-                    segmentColumn.Segments.Add(segment);
-                }
-                WellColumns.Add(segmentColumn);
-            }
             well.LstColumns.Add(WellColumns);
             return well;
         }

@@ -1,24 +1,31 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Media;
 
 namespace gEngine.View.Symbol
 {
-
-    public class FillSymbolConverter : IValueConverter
+    public class StrokeSymbolConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            PathGeometry path = parameter as PathGeometry;
+            if (path == null)
+                return null;
+
             string symbol = value as string;
 
             if (string.IsNullOrEmpty(symbol))
-                return Registry.DefaultFillSymbol.Create();
+                return Registry.DefaultStrokeSymbol.Create(path);
 
             string symbolname = symbol.Substring(symbol.LastIndexOf('@') + 1);
             string factoryname = symbol.Substring(0, symbol.LastIndexOf('@'));
-            FillSymbol fsym = Registry.GetFillSymbol(factoryname, symbolname);
-            return fsym.Create();
+            StrokeSymbol ssym = Registry.GetStrokeSymbol(factoryname, symbolname);
+            return ssym.Create(path);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
