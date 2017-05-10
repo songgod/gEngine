@@ -1,0 +1,17 @@
+﻿<Window x:Class="gEngineTest.Compass.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:gEngineTest.Compass"
+         xmlns:gb="clr-namespace:gEngine.Graph.Ge.Basic;assembly=gEngine.Graph.Ge.Basic"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Window.Resources>
+        <gb:Compress x:Key="cp" CompressData="M79.66667,11.333333 L42.33301,144.33367 L79.99967,85.000516 L116.99933,144.66733 z"  RotateAngle="0" />
+    </Window.Resources>
+    <Grid>
+        <ContentControl x:Name="cont" /> 
+    </Grid>
+   
+</Window>
