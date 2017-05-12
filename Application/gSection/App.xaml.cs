@@ -1,10 +1,4 @@
-﻿using gSection.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Windows;
+﻿using System.Windows;
 
 namespace gSection
 {
@@ -24,9 +18,8 @@ namespace gSection
             gEngine.Data.Interface.Register.LoadDBFactorys();
             gEngine.Graph.Interface.Registry.LoadReadWriter();
             gEngine.Manipulator.Registry.LoadManipulators();
-            Project.NewProject();
-            Project.Single.OpenDBSource(@"D:\gSectionData.Txt");
             gEngine.View.Registry.LoadLocalElement();
+            gEngine.Project.Registry.LoadLocalElement();
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using DevExpress.Xpf.Ribbon;
+using gEngine.Project;
+using gEngine.Project.Controls;
 
 namespace gSection.View
 {
@@ -7,12 +9,25 @@ namespace gSection.View
     /// </summary>
     public partial class MainWindow : DXRibbonWindow
     {
-        public TabControl TabControl { get { return tc; } }
-
         public string[] ClipartImages { get; set; }
+
+        public Project Projects { get; set; }
+
+        public ProjectControl ProjectControl
+        {
+            get
+            {
+                return prjctrl;
+            }
+        }
 
         public MainWindow()
         {
+            gEngine.Project.Registry.InstallCommands(this);
+
+            Projects = new Project();
+            Projects.OpenDBSource(@"D:\gSectionData.Txt");
+
             InitializeComponent();
 
             ClipartImages = new string[] {

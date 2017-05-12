@@ -1,4 +1,6 @@
 ﻿using gEngine.Utility;
+using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace gEngine.Graph.Interface
 {
@@ -9,5 +11,18 @@ namespace gEngine.Graph.Interface
         ILayers Layers { get; set; }
     }
 
-    public class IMaps : ObservedCollection<IMap> { }
+    public class IMaps : ObservedCollection<IMap>
+    {
+        private int currentindex = -1;
+
+        public int CurrentIndex
+        {
+            get { return currentindex; }
+            set
+            {
+                currentindex = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("CurrentIndex"));
+            }
+        }
+    }
 }

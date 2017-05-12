@@ -2,6 +2,7 @@
 
 using System;
 using gEngine.Utility;
+using System.ComponentModel;
 
 namespace gEngine.Graph.Interface
 {
@@ -16,6 +17,16 @@ namespace gEngine.Graph.Interface
 
     public class ILayers : ObservedCollection<ILayer>
     {
+        private int currentindex=-1;
 
+        public int CurrentIndex
+        {
+            get { return currentindex; }
+            set
+            {
+                currentindex = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("CurrentIndex"));
+            }
+        }
     }
 }

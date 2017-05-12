@@ -32,16 +32,18 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x64\Debug\</OutputPath>
+    <OutputPath>..\..\bin\x64\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <OutputPath>bin\x64\Release\</OutputPath>
+    <OutputPath>..\..\bin\x64\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
@@ -52,7 +54,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x86\Debug\</OutputPath>
+    <OutputPath>..\..\bin\x86\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
@@ -61,7 +63,7 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <OutputPath>bin\x86\Release\</OutputPath>
+    <OutputPath>..\..\bin\x86\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
@@ -103,17 +105,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Commands\OperateView\CommandsOperateView.cs" />
-    <Compile Include="Commands\OperateView\FullViewCommand.cs" />
-    <Compile Include="ViewModel\Project.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\TabControl.xaml.cs">
-      <DependentUpon>TabControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Window1.xaml.cs">
-      <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
     <Page Include="en-us.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -123,32 +116,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Commands\Command.cs" />
-    <Compile Include="Commands\Map\CommandsMap.cs" />
-    <Compile Include="Commands\Map\NewPlaneMapCommand.cs" />
-    <Compile Include="Commands\Map\NewSectionMapCommand.cs" />
-    <Compile Include="Commands\Section\CommandsSectionEdit.cs" />
-    <Compile Include="Commands\Section\EditLineCommand.cs" />
-    <Compile Include="Commands\Section\EraseFaceCommand.cs" />
-    <Compile Include="Commands\Section\EraseLineCommand.cs" />
-    <Compile Include="Commands\Section\NewCurveCommand.cs" />
-    <Compile Include="Commands\Section\NewFaultCommand.cs" />
-    <Compile Include="Commands\Section\NewLineCommand.cs" />
-    <Compile Include="Commands\Section\ReplaceLineCommand.cs" />
-    <Compile Include="Commands\Section\SectionCommandBase.cs" />
-    <Compile Include="Commands\UndoRedo\CommandsUR.cs" />
-    <Compile Include="Commands\UndoRedo\RedoCommand.cs" />
-    <Compile Include="Commands\UndoRedo\UndoCommand.cs" />
     <Compile Include="Converters\ObjectsEqualityConverter.cs" />
     <Page Include="View\MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\TabControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Window1.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -245,81 +214,29 @@
     <Resource Include="Images\RibbonStyle\TabletOffice.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\gEngine.Data.Ge.Txt\gEngine.Data.Ge.Txt.csproj">
-      <Project>{48a388bf-1160-46e5-a68c-e5a819026c6e}</Project>
-      <Name>gEngine.Data.Ge.Txt</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\gEngine.Data.Ge\gEngine.Data.Ge.csproj">
-      <Project>{94c3209d-a3a9-4d3c-b851-c14d390cc23a}</Project>
-      <Name>gEngine.Data.Ge</Name>
+    <ProjectReference Include="..\..\gEngine.Commands\gEngine.Commands.csproj">
+      <Project>{bc931bb9-d78c-437d-b5d2-04be6e318172}</Project>
+      <Name>gEngine.Commands</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\gEngine.Data.Interface\gEngine.Data.Interface.csproj">
       <Project>{b1c2609b-a3ed-43e0-9da2-df27029d44fc}</Project>
       <Name>gEngine.Data.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\gEngine.Graph.Ge.Column\gEngine.Graph.Ge.Column.csproj">
-      <Project>{95227940-90f7-40b4-9027-3eeecd8ed6de}</Project>
-      <Name>gEngine.Graph.Ge.Column</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\gEngine.Graph.Ge.Plane\gEngine.Graph.Ge.Plane.csproj">
-      <Project>{82739b38-8706-493d-a571-c743afcead12}</Project>
-      <Name>gEngine.Graph.Ge.Plane</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\gEngine.Graph.Ge.Section\gEngine.Graph.Ge.Section.csproj">
-      <Project>{53d7a20d-84b5-499f-b183-d440854b7c8c}</Project>
-      <Name>gEngine.Graph.Ge.Section</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\gEngine.Graph.Ge\gEngine.Graph.Ge.csproj">
-      <Project>{3bd77e4f-a348-4edb-b60c-68b749249b91}</Project>
-      <Name>gEngine.Graph.Ge</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\gEngine.Graph.Interface\gEngine.Graph.Interface.csproj">
       <Project>{1c98a821-b030-4ff2-83ae-d49b1b3b8c67}</Project>
       <Name>gEngine.Graph.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\gEngine.Graph.Rw.Ge\gEngine.Graph.Rw.Ge.csproj">
-      <Project>{22b205af-0d40-4854-bde8-65961840db5d}</Project>
-      <Name>gEngine.Graph.Rw.Ge</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\gEngine.Manipulator.Ge.Plane\gEngine.Manipulator.Ge.Plane.csproj">
-      <Project>{70026887-fd51-4a98-8e50-4b55f750013b}</Project>
-      <Name>gEngine.Manipulator.Ge.Plane</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\gEngine.Manipulator.Ge.Section\gEngine.Manipulator.Ge.Section.csproj">
-      <Project>{036a5d25-0af4-4259-b83a-e04026f1749c}</Project>
-      <Name>gEngine.Manipulator.Ge.Section</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\gEngine.Manipulator\gEngine.Manipulator.csproj">
       <Project>{b4eedb17-eb3d-4e22-ab7c-d8e366564b8f}</Project>
       <Name>gEngine.Manipulator</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\gEngine.Util.Ge.Column\gEngine.Util.Ge.Column.csproj">
-      <Project>{6209a699-8823-4a0b-8a0c-bdae9ce52305}</Project>
-      <Name>gEngine.Util.Ge.Column</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\gEngine.Util.Ge.Plane\gEngine.Util.Ge.Plane.csproj">
-      <Project>{73f67444-d0e8-4eac-8951-8b5c8d8f42cd}</Project>
-      <Name>gEngine.Util.Ge.Plane</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\gEngine.Util.Ge.Section\gEngine.Util.Ge.Section.csproj">
-      <Project>{b3d6b10a-4c31-4981-97fa-3437cb583729}</Project>
-      <Name>gEngine.Util.Ge.Section</Name>
+    <ProjectReference Include="..\..\gEngine.Project\gEngine.Project.csproj">
+      <Project>{87ac18ca-2b57-4f9a-a4c2-24c6e296f91b}</Project>
+      <Name>gEngine.Project</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\gEngine.Util\gEngine.Util.csproj">
       <Project>{84acb6c4-cf62-4f4b-a7e5-5c642edc041a}</Project>
       <Name>gEngine.Util</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\gEngine.View.Ge.Column\gEngine.View.Ge.Column.csproj">
-      <Project>{763b3662-8a27-45be-90a6-b2bd51c2ca47}</Project>
-      <Name>gEngine.View.Ge.Column</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\gEngine.View.Ge.Plane\gEngine.View.Ge.Plane.csproj">
-      <Project>{57f49817-a06c-4b8b-bc19-b6cd36800969}</Project>
-      <Name>gEngine.View.Ge.Plane</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\gEngine.View.Ge.Section\gEngine.View.Ge.Section.csproj">
-      <Project>{94fb234d-24ad-4fd9-bc79-0257073bc3eb}</Project>
-      <Name>gEngine.View.Ge.Section</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\gEngine.View.Symbol\gEngine.View.Symbol.csproj">
       <Project>{1600379b-c8b5-4375-a1d5-3b81bd7fccf7}</Project>
@@ -1425,7 +1342,9 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ViewModel\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

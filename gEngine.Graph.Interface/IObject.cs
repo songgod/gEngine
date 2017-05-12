@@ -1,4 +1,5 @@
 ﻿using gEngine.Utility;
+using System.ComponentModel;
 
 namespace gEngine.Graph.Interface
 {
