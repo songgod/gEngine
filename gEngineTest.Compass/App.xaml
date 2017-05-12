@@ -1,0 +1,15 @@
+﻿<Application x:Class="gEngineTest.Compass.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:gEngineTest.Compass"
+              xmlns:vb="clr-namespace:gEngine.View.Ge.Basic;assembly=gEngine.View.Ge.Basic"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <vb:Dictionary/>
+                <vb:ComprassDict/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
