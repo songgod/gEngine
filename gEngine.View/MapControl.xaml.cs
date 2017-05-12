@@ -74,6 +74,14 @@ namespace gEngine.View
             }
         }
 
+        public Canvas BackGroundLayer
+        {
+            get
+            {
+                return BackGroundCanvas;
+            }
+        }
+
         public void FullView()
         {
             Rect r = Rect.Empty;

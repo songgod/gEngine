@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{41CCE278-3322-4AEB-A637-1C1BFF69FE82}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>gEngineTest.Ge.WellLocation</RootNamespace>
     <AssemblyName>gEngineTest.Ge.WellLocation</AssemblyName>

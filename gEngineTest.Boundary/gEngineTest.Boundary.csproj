@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CD67992A-B207-4289-8094-FDC0468626DD}</ProjectGuid>
+    <ProjectGuid>{5C711185-32C4-4E5A-9D54-40B077C1C562}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>gEngineTest.Compass</RootNamespace>
-    <AssemblyName>gEngineTest.Compass</AssemblyName>
+    <RootNamespace>gEngineTest.Boundary</RootNamespace>
+    <AssemblyName>gEngineTest.Boundary</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -16,11 +16,11 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>bin\x86\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -56,9 +56,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Window1.xaml.cs">
-      <DependentUpon>Window1.xaml</DependentUpon>
-    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -71,10 +68,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Window1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -104,11 +97,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="ddd.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\gEngine.Data.Ge.Txt\gEngine.Data.Ge.Txt.csproj">
-      <Project>{48A388BF-1160-46E5-A68C-E5A819026C6E}</Project>
+      <Project>{48a388bf-1160-46e5-a68c-e5a819026c6e}</Project>
       <Name>gEngine.Data.Ge.Txt</Name>
     </ProjectReference>
     <ProjectReference Include="..\gEngine.Data.Ge\gEngine.Data.Ge.csproj">
@@ -128,12 +118,20 @@
       <Name>gEngine.Graph.Ge</Name>
     </ProjectReference>
     <ProjectReference Include="..\gEngine.Graph.Interface\gEngine.Graph.Interface.csproj">
-      <Project>{1c98a821-b030-4ff2-83ae-d49b1b3b8c67}</Project>
+      <Project>{1C98A821-B030-4FF2-83AE-D49B1B3B8C67}</Project>
       <Name>gEngine.Graph.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\gEngine.Manipulator.Ge.Basic\gEngine.Manipulator.Ge.Basic.csproj">
+      <Project>{D22A8E54-B94B-4657-AAC3-09BA23F213F1}</Project>
+      <Name>gEngine.Manipulator.Ge.Basic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\gEngine.Manipulator\gEngine.Manipulator.csproj">
-      <Project>{B4EEDB17-EB3D-4E22-AB7C-D8E366564B8F}</Project>
+      <Project>{b4eedb17-eb3d-4e22-ab7c-d8e366564b8f}</Project>
       <Name>gEngine.Manipulator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.Util.Ge.Basic\gEngine.Util.Ge.Basic.csproj">
+      <Project>{b85489f1-d87b-4740-ad9c-77195b8743f3}</Project>
+      <Name>gEngine.Util.Ge.Basic</Name>
     </ProjectReference>
     <ProjectReference Include="..\gEngine.Util.Ge.Plane\gEngine.Util.Ge.Plane.csproj">
       <Project>{73F67444-D0E8-4EAC-8951-8B5C8D8F42CD}</Project>
@@ -147,13 +145,18 @@
       <Project>{68766b32-0e50-4b96-987b-a8cb20535573}</Project>
       <Name>gEngine.View.Ge.Basic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\gEngine.View.Ge.Plane\gEngine.View.Ge.Plane.csproj">
+      <Project>{57f49817-a06c-4b8b-bc19-b6cd36800969}</Project>
+      <Name>gEngine.View.Ge.Plane</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.View.Symbol\gEngine.View.Symbol.csproj">
+      <Project>{1600379b-c8b5-4375-a1d5-3b81bd7fccf7}</Project>
+      <Name>gEngine.View.Symbol</Name>
+    </ProjectReference>
     <ProjectReference Include="..\gEngine.View\gEngine.View.csproj">
       <Project>{932485ea-2f95-4caa-8bcd-df68c496854e}</Project>
       <Name>gEngine.View</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

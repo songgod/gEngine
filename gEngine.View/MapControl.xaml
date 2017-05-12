@@ -11,6 +11,7 @@
              IsManipulationEnabled="True" Focusable="True"
              Loaded="UserControl_Loaded">
     <Grid x:Name="root">
+        <Canvas x:Name="BackGroundCanvas" Background="Transparent"/>
         <ItemsControl x:Name="layeritemscontrol" ItemsSource="{Binding Layers}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>

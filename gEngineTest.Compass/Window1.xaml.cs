@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace gEngine.View.Ge.Basic
+namespace gEngineTest.Compass
 {
     /// <summary>
-    /// CompressDict.xaml 的交互逻辑
+    /// Window1.xaml 的交互逻辑
     /// </summary>
-    public partial class CompressDict : ResourceDictionary
+    public partial class Window1 : Window
     {
-        public CompressDict()
+        public Window1()
         {
             InitializeComponent();
         }

@@ -24,15 +24,15 @@ namespace gEngineTest.Ge.WellLocation
     /// </summary>
     public partial class MainWindow : Window
     {
-        WellLocationsConnectManipulator dm;
+        PolyLineManipulator dm;
         public MainWindow()
         {
             InitializeComponent();
             CreateWellLocation();
 
-            dm = (WellLocationsConnectManipulator)(gEngine.Manipulator.Registry.CreateManipulator("WellLocationsConnectManipulator",mc));
-            dm.OnFinishSelect += Dm_OnFinishSelect;
-
+            //dm = (WellLocationsConnectManipulator)(gEngine.Manipulator.Registry.CreateManipulator("WellLocationsConnectManipulator",mc));
+            //dm.OnFinishSelect += Dm_OnFinishSelect;
+            dm = (PolyLineManipulator)(gEngine.Manipulator.Registry.CreateManipulator("WellLocationsConnectManipulator", mc));
         }
 
         private void Dm_OnFinishSelect(System.Collections.Generic.HashSet<string> names)
@@ -82,7 +82,7 @@ namespace gEngineTest.Ge.WellLocation
             ManipulatorSetter.SetManipulator(dm, mc.GetLayerControl(0));
 
             //dm.IsStopMove = false;
-            dm.SelectWellLocations.Clear();
+            //dm.SelectWellLocations.Clear();
         }
 
 

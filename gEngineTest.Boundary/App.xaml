@@ -1,14 +1,15 @@
-﻿<Application x:Class="gEngineTest.Compass.App"
+﻿<Application x:Class="gEngineTest.Boundary.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:gEngineTest.Compass"
-              xmlns:vb="clr-namespace:gEngine.View.Ge.Basic;assembly=gEngine.View.Ge.Basic"
+             xmlns:local="clr-namespace:gEngineTest.Boundary"
+             xmlns:vb="clr-namespace:gEngine.View.Ge.Basic;assembly=gEngine.View.Ge.Basic"
+              xmlns:gp="clr-namespace:gEngine.View.Ge.Plane;assembly=gEngine.View.Ge.Plane"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <vb:Dictionary/>
-                <vb:ComprassDict/>
+                <vb:BoundaryDict/>
+                <gp:Dictionary/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
