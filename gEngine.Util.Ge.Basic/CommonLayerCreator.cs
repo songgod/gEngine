@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace gEngine.Util.Ge.Basic
 {
-    public class ScaleRuleLayerCreator
+    public class CommonLayerCreator
     {
         public Layer Create()
         {
-            Layer layer = new Layer() { Type = "ScaleRule" };
+            Layer layer = new Layer() { Type = "Common" };
 
             ScaleRule ScaleRule = new ScaleRule();
             ScaleRule.Unit = "米";

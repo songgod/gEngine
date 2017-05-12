@@ -18,8 +18,8 @@ namespace gEngine.Project.Plane
         public NewPlaneMapCommand()
         {
             Command = PlaneCommands.NewPlaneMapCommand;
-            Executed += NewPlaneMapCommand_Executed; ;
-            CanExecute += NewPlaneMapCommand_CanExecute; ;
+            Executed += NewPlaneMapCommand_Executed;
+            CanExecute += NewPlaneMapCommand_CanExecute;
         }
 
         private void NewPlaneMapCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)

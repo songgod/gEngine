@@ -9,15 +9,12 @@ namespace gEngine.Commands
 {
     public static class OperateViewCommands
     {
-        public static FullViewCommand FullViewCommand { get; set; }
-        public static ScaleRuleCommand ScaleRuleCommand { get; set; }
-        static CommandsOperateView()
+        
+        static OperateViewCommands()
         {
-            FullViewCommand = new FullViewCommand();
-            ScaleRuleCommand = new ScaleRuleCommand();
+            FullViewCommand = new RoutedUICommand("FullViewCommand", "FullViewCommand",typeof(OperateViewCommands));
         }
 
         public static RoutedCommand FullViewCommand { get; set; }
-
     }
 }

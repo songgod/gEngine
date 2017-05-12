@@ -256,7 +256,7 @@
                 </dxr:RibbonPage>
                 <dxr:RibbonPage Caption="修饰">
                     <dxr:RibbonPageGroup Caption="通用图层">
-                        <dxb:BarButtonItem Content="比例尺" Command="{x:Static cmdov:CommandsOperateView.ScaleRuleCommand}"/>
+                        <dxb:BarButtonItem Content="比例尺" Command="{x:Static prjcmds:BasicCommands.NewCommonLayerCommand}" CommandTarget="{Binding ElementName=prjctrl}"/>
                     </dxr:RibbonPageGroup>
                 </dxr:RibbonPage>
                 <dxr:RibbonPage Caption="视图">

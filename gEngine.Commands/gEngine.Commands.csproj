@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BasicCommands.cs" />
     <Compile Include="OperateViewCommands.cs" />
     <Compile Include="PlaneCommands.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
