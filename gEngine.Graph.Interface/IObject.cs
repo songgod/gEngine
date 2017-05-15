@@ -7,6 +7,10 @@ namespace gEngine.Graph.Interface
     {
         string Name { get; set; }
 
+        bool Visible { get; set; }
+
+        bool Editable { get; set; }
+
         string DataTemplate { get; set; }
     }
     public class IObjects : ObservedCollection<IObject> { }

@@ -39,5 +39,30 @@ namespace gEngine.Graph.Ge
             DependencyProperty.Register("Type", typeof(string), typeof(Layer));
 
 
+
+
+        public bool Visible
+        {
+            get { return (bool)GetValue(VisibleProperty); }
+            set { SetValue(VisibleProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Visible.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty VisibleProperty =
+            DependencyProperty.Register("Visible", typeof(bool), typeof(Layer), new PropertyMetadata(true));
+
+
+
+        public bool Editable
+        {
+            get { return (bool)GetValue(EditableProperty); }
+            set { SetValue(EditableProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Editable.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty EditableProperty =
+            DependencyProperty.Register("Editable", typeof(bool), typeof(Layer), new PropertyMetadata(true));
+
+
     }
 }

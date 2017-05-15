@@ -19,5 +19,27 @@ namespace gEngine.Graph.Ge
         // Using a DependencyProperty as the backing store for DataTemplate.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty DataTemplateProperty =
             DependencyProperty.Register("DataTemplate", typeof(string), typeof(Base));
+
+        public bool Visible
+        {
+            get { return (bool)GetValue(VisibleProperty); }
+            set { SetValue(VisibleProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Visible.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty VisibleProperty =
+            DependencyProperty.Register("Visible", typeof(bool), typeof(Object), new PropertyMetadata(true));
+
+
+
+        public bool Editable
+        {
+            get { return (bool)GetValue(EditableProperty); }
+            set { SetValue(EditableProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Editable.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty EditableProperty =
+            DependencyProperty.Register("Editable", typeof(bool), typeof(Object), new PropertyMetadata(true));
     }
 }

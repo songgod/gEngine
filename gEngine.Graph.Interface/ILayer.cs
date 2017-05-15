@@ -12,6 +12,10 @@ namespace gEngine.Graph.Interface
 
         string Type { get; set; }
 
+        bool Visible { get; set; }
+
+        bool Editable { get; set; }
+
         IObjects Objects { get; set; }
     }
 
