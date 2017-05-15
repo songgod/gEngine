@@ -109,13 +109,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{5381
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{68C50B5B-67DF-41B1-B22A-ED9E74F6DB02}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gEngine.Project.Plane", "gEngine.Project.Plane\gEngine.Project.Plane.csproj", "{073E653E-65B9-480B-A556-7005C468BA4A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gEngine.Project.Ge.Plane", "gEngine.Project.Plane\gEngine.Project.Ge.Plane.csproj", "{073E653E-65B9-480B-A556-7005C468BA4A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gEngine.Project.Section", "gEngine.Project.Section\gEngine.Project.Section.csproj", "{3B16524E-7054-493C-BEB8-8FBA7EEE8A6D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gEngine.Project.Ge.Section", "gEngine.Project.Section\gEngine.Project.Ge.Section.csproj", "{3B16524E-7054-493C-BEB8-8FBA7EEE8A6D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gEngine.Commands", "gEngine.Commands\gEngine.Commands.csproj", "{BC931BB9-D78C-437D-B5D2-04BE6E318172}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gEngine.Project.Basic", "gEngine.Project.Basic\gEngine.Project.Basic.csproj", "{FC48C1FD-EA48-41E3-8048-498FC61D141E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gEngine.Project.Ge.Basic", "gEngine.Project.Basic\gEngine.Project.Ge.Basic.csproj", "{FC48C1FD-EA48-41E3-8048-498FC61D141E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

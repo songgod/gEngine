@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace gEngine.Project.Plane
+namespace gEngine.Project.Ge.Plane.Commands
 {
     public class NewPlaneMapCommand : CommandBinding
     {

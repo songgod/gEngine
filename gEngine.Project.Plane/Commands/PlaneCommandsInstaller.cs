@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace gEngine.Project.Plane.Commands
+namespace gEngine.Project.Ge.Plane.Commands
 {
     public class PlaneCommandsInstaller : CommandInstaller
     {

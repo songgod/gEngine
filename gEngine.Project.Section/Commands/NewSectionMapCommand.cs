@@ -12,7 +12,7 @@ using gEngine.View;
 using System.Collections.Generic;
 using System.Windows.Input;
 
-namespace gEngine.Project.Section.Commands
+namespace gEngine.Project.Ge.Section.Commands
 {
     public class NewSectionMapCommand : CommandBinding
     {

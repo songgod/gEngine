@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace gEngine.Project.Basic
+namespace gEngine.Project.Ge.Basic.Commands
 {
     public class NewCommonLayerCommand : CommandBinding
     {

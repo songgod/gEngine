@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FC48C1FD-EA48-41E3-8048-498FC61D141E}</ProjectGuid>
+    <ProjectGuid>{073E653E-65B9-480B-A556-7005C468BA4A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>gEngine.Project.Basic</RootNamespace>
-    <AssemblyName>gEngine.Project.Basic</AssemblyName>
+    <RootNamespace>gEngine.Project.Ge.Plane</RootNamespace>
+    <AssemblyName>gEngine.Project.Ge.Plane</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -49,7 +49,6 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DevExpress.Xpf.Core.v16.1, Version=16.1.2.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -63,15 +62,18 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\BasicCommandsInstaller.cs" />
-    <Compile Include="Commands\NewCommonLayerCommand.cs" />
+    <Compile Include="Commands\PlaneCommandsInstaller.cs" />
+    <Compile Include="Commands\NewPlaneMapCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\gEngine.Commands\gEngine.Commands.csproj">
       <Project>{BC931BB9-D78C-437D-B5D2-04BE6E318172}</Project>
       <Name>gEngine.Commands</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.Data.Interface\gEngine.Data.Interface.csproj">
+      <Project>{B1C2609B-A3ED-43E0-9DA2-DF27029D44FC}</Project>
+      <Name>gEngine.Data.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\gEngine.Graph.Ge\gEngine.Graph.Ge.csproj">
       <Project>{3BD77E4F-A348-4EDB-B60C-68B749249B91}</Project>
@@ -85,17 +87,13 @@
       <Project>{87AC18CA-2B57-4F9A-A4C2-24C6E296F91B}</Project>
       <Name>gEngine.Project</Name>
     </ProjectReference>
-    <ProjectReference Include="..\gEngine.Util.Ge.Basic\gEngine.Util.Ge.Basic.csproj">
-      <Project>{B85489F1-D87B-4740-AD9C-77195B8743F3}</Project>
-      <Name>gEngine.Util.Ge.Basic</Name>
+    <ProjectReference Include="..\gEngine.Util.Ge.Plane\gEngine.Util.Ge.Plane.csproj">
+      <Project>{73F67444-D0E8-4EAC-8951-8B5C8D8F42CD}</Project>
+      <Name>gEngine.Util.Ge.Plane</Name>
     </ProjectReference>
     <ProjectReference Include="..\gEngine.Util\gEngine.Util.csproj">
       <Project>{84acb6c4-cf62-4f4b-a7e5-5c642edc041a}</Project>
       <Name>gEngine.Util</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\gEngine.View\gEngine.View.csproj">
-      <Project>{932485EA-2F95-4CAA-8BCD-DF68C496854E}</Project>
-      <Name>gEngine.View</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

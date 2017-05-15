@@ -9,7 +9,7 @@ using gEngine.Manipulator.Ge.Section;
 using gEngine.View;
 using gEngine.Commands;
 
-namespace gEngine.Project.Section.Commands.SectionEdit
+namespace gEngine.Project.Ge.Section.Commands.SectionEdit
 {
     public class NewFaultCommand : SectionCommandBase
     {

@@ -2,7 +2,7 @@
 using System.Windows;
 using gEngine.Project;
 
-namespace gEngine.Project.Basic
+namespace gEngine.Project.Ge.Basic.Commands
 {
     public class BasicCommandsInstaller : CommandInstaller
     {

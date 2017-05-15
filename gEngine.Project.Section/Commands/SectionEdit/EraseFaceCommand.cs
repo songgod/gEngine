@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace gEngine.Project.Section.Commands.SectionEdit
+namespace gEngine.Project.Ge.Section.Commands.SectionEdit
 {
     public class EraseFaceCommand : SectionCommandBase
     {

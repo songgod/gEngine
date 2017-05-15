@@ -1,5 +1,5 @@
 ﻿using gEngine.Project.Commands;
-using gEngine.Project.Section.Commands.SectionEdit;
+using gEngine.Project.Ge.Section.Commands.SectionEdit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace gEngine.Project.Section.Commands
+namespace gEngine.Project.Ge.Section.Commands
 {
     public class SectionCommandsInstaller : CommandInstaller
     {
