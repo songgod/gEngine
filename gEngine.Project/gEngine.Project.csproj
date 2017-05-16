@@ -71,6 +71,7 @@
     <Compile Include="Commands\FullViewCommand.cs" />
     <Compile Include="Commands\ProjectCommandsInstaller.cs" />
     <Compile Include="Commands\RedoCommand.cs" />
+    <Compile Include="Commands\SetLayerVisibleCommand.cs" />
     <Compile Include="Commands\UndoCommand.cs" />
     <Compile Include="Controls\LayerMgrControl.xaml.cs">
       <DependentUpon>LayerMgrControl.xaml</DependentUpon>

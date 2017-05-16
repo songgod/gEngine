@@ -13,8 +13,10 @@ namespace gEngine.Commands
         static OperateViewCommands()
         {
             FullViewCommand = new RoutedUICommand("FullViewCommand", "FullViewCommand",typeof(OperateViewCommands));
+            SetLayerVisibleCommand = new RoutedUICommand("SetLayerVisibleCommand", "SetLayerVisibleCommand", typeof(OperateViewCommands));
         }
 
         public static RoutedCommand FullViewCommand { get; set; }
+        public static RoutedCommand SetLayerVisibleCommand { get; set; }
     }
 }
