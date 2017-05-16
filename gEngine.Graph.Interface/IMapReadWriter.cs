@@ -11,7 +11,7 @@ namespace gEngine.Graph.Interface
         string SupportType { get; }
         IMap ReadMap(string url);
 
-        bool WriteMap(string url);
+        bool WriteMap(IMap map, string url);
 
         IMap CreateMap();
     }

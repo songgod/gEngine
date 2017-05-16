@@ -76,14 +76,14 @@ namespace gEngine.Graph.Interface
             return rw.ReadMap(url);
         }
 
-        static public bool WriteMap(string url)
+        static public bool WriteMap(IMap map, string url)
         {
             string type = url.Substring(url.LastIndexOf('.') + 1);
             IMapReadWriter rw = GetReadWriter(type);
             if (rw == null)
                 return false;
 
-            return rw.WriteMap(url);
+            return rw.WriteMap(map,url);
         }
 
         static public IMap CreateMap(string type)
