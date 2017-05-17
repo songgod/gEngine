@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:gp="clr-namespace:gEngine.Graph.Ge.Plane;assembly=gEngine.Graph.Ge.Plane"
              xmlns:local="clr-namespace:gEngine.View.Ge.Plane"
-             xmlns:sym="clr-namespace:gEngine.View.Symbol;assembly=gEngine.View.Symbol"
+             xmlns:sym="clr-namespace:gEngine.Symbol;assembly=gEngine.Symbol"
              mc:Ignorable="d">
     <DataTemplate DataType="{x:Type gp:WellLocation}" x:Key="WellLocationTemplate">
         <DataTemplate.Resources>
