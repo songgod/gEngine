@@ -51,11 +51,41 @@ namespace gEngine.Graph.Rw.Ge
             }
         }
 
+        //public bool WriteMap(IMap map, string url)
+        //{
+        //    if (map == null || string.IsNullOrEmpty(url))
+        //        return false;
+
+
+        //    XmlDocument xmldoc = new XmlDocument();
+        //    xmldoc.AppendChild(xmldoc.CreateXmlDeclaration("1.0", "UTF-8", null));
+        //    XmlElement xmlmap = xmldoc.CreateElement("Map");
+        //    xmlmap.SetAttribute("Name", map.Name);
+        //    xmldoc.AppendChild(xmlmap);
+        //    foreach (ILayer layer in map.Layers)
+        //    {
+        //        string layertype = layer.GetType().ToString();
+        //        RWLayerBase layerrw = Registry.GetLayerRW(layertype);
+        //        if (layerrw == null)
+        //        {
+        //            Log.LogWarning("Cound not find "+ layertype+" layer readerwriter");
+        //            continue;
+        //        }
+
+        //        XmlElement xmllayer = xmlmap.OwnerDocument.CreateElement(layer.GetType().ToString());
+        //        layerrw.WriteLayer(xmllayer, layer);
+        //        xmlmap.AppendChild(xmllayer);
+        //    }
+        //    xmldoc.Save(url);
+        //    return true;
+        //}
+
         public bool WriteMap(IMap map, string url)
         {
             if (map == null || string.IsNullOrEmpty(url))
                 return false;
-            
+
+
             XmlDocument xmldoc = new XmlDocument();
             xmldoc.AppendChild(xmldoc.CreateXmlDeclaration("1.0", "UTF-8", null));
             XmlElement xmlmap = xmldoc.CreateElement("Map");
@@ -63,15 +93,15 @@ namespace gEngine.Graph.Rw.Ge
             xmldoc.AppendChild(xmlmap);
             foreach (ILayer layer in map.Layers)
             {
-                string layertype = layer.GetType().ToString();
+                string layertype = layer.GetType().Name.ToString();
                 RWLayerBase layerrw = Registry.GetLayerRW(layertype);
                 if (layerrw == null)
                 {
-                    Log.LogWarning("Cound not find "+ layertype+" layer readerwriter");
+                    Log.LogWarning("Cound not find " + layertype + " layer readerwriter");
                     continue;
                 }
-                    
-                XmlElement xmllayer = xmlmap.OwnerDocument.CreateElement(layer.GetType().ToString());
+
+                XmlElement xmllayer = xmlmap.OwnerDocument.CreateElement(layertype);
                 layerrw.WriteLayer(xmllayer, layer);
                 xmlmap.AppendChild(xmllayer);
             }

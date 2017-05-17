@@ -158,5 +158,19 @@ namespace gEngine.Project
             OpenMaps.Add(map);
             return map;
         }
+
+        public bool WriteMap(IMap map,string url)
+        {
+            if (map == null)
+                return false;
+
+            if (string.IsNullOrEmpty(url))
+
+                return false;
+
+            bool a = gEngine.Graph.Interface.Registry.WriteMap(map, url);
+
+            return true;
+        }
     }
 }

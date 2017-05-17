@@ -1,5 +1,5 @@
-﻿using gEngine.Graph.Ge.Column;
-using gEngine.Graph.Interface;
+﻿using gEngine.Graph.Interface;
+using gEngine.Graph.Ge.Plane;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,16 +9,16 @@ using System.Xml;
 
 namespace gEngine.Graph.Rw.Ge
 {
-    class RWWell : RWObjectBase
+    class RWWellLocation : RWObjectBase
     {
-        public override string SupportType { get { return "Well"; }}
+        public override string SupportType { get { return "WellLocation"; } }
         public override IObject Read(XmlNode node)
         {
-            Well well = new Well();
+            WellLocation WellLocation = new WellLocation();
+            
+            return WellLocation;
 
             
-
-            return well;
         }
         public override void Write(XmlNode node, IObject obj)
         {
