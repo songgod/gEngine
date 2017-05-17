@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:gEngine.View"
              mc:Ignorable="d"
-              Visibility="{Binding Visible}"
               ItemsSource="{Binding Objects}"
              d:DesignHeight="300" d:DesignWidth="300">
     <ItemsControl.ItemsPanel>

@@ -66,6 +66,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BoolVisibilityConverter.cs" />
     <Compile Include="DataTemplateChooser.cs" />
     <Compile Include="FindChild.cs" />
     <Compile Include="FindContext.cs" />
