@@ -18,6 +18,7 @@ namespace gEngine.Graph.Rw.Ge
             DicObjectRW = new Dictionary<string, RWObjectBase>();
             DicLayerRW = new Dictionary<string, RWLayerBase>();
             RegistObjRW(new RWWell());
+            RegistObjRW(new RWWellLocation());
             RegistLayerRW(new RWLayerBase());
             RegistLayerRW(new RwSectionLayer());
         }

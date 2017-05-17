@@ -1,5 +1,6 @@
 ﻿using gEngine.Graph.Ge;
 using gEngine.Graph.Interface;
+using gEngine.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,20 @@ namespace gEngine.Graph.Rw.Ge
 
         public virtual void WriteLayer(XmlNode node, ILayer layer)
         {
+            foreach (IObject obj in layer.Objects)
+            {
+                string objecttype = obj.GetType().Name.ToString();
 
+                RWObjectBase objectrw = Registry.GetObjectRW(objecttype);
+
+                if (objectrw == null)
+                {
+                    Log.LogWarning("Cound not find " + objecttype + " object readerwriter");
+                    continue;
+                }
+
+
+            }
         }
     }
 }
