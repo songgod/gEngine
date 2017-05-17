@@ -40,7 +40,7 @@ namespace gEngineTest.MapDxTab
 
             TxtWell tw = new TxtWell() { TxtFile = "D:\\Data\\M.txt" };
             WellCreator wc = new WellCreator();
-            layer.Objects.Add(wc.Create(tw));
+            layer.Objects.Add(wc.Create(tw,null,null));
             map.Layers.Add(layer);
             Project.Maps.Add(map);
         }
