@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace gEngine.View.Symbol
+namespace gEngine.Symbol
 {
     public static class Registry
     {
@@ -26,7 +26,7 @@ namespace gEngine.View.Symbol
 
         static public ISymbolFactory LoadSymbolFactory(string ext)
         {
-            string libpath = Directory.GetCurrentDirectory() + "/" + "gEngine.View.Symbol." + ext;
+            string libpath = Directory.GetCurrentDirectory() + "/" + "gEngine.Symbol." + ext;
             try
             {
                 Assembly ab = Assembly.LoadFrom(libpath);

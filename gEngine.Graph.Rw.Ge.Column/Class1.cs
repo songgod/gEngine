@@ -3,13 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 
-namespace gEngine.Symbol
+namespace gEngine.Graph.Rw.Ge.Column
 {
-    public interface ISymbol
+    public class Class1
     {
-        string Type { get; }
-        string Name { get; }
     }
 }

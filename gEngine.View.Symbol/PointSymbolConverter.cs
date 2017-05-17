@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace gEngine.View.Symbol
+namespace gEngine.Symbol
 {
 
     public class PointSymbolConverter : IValueConverter

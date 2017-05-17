@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1600379B-C8B5-4375-A1D5-3B81BD7FCCF7}</ProjectGuid>
+    <ProjectGuid>{060EF400-60DE-46A7-BCD0-5A91089044AF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>gEngine.View.Symbol</RootNamespace>
-    <AssemblyName>gEngine.View.Symbol</AssemblyName>
+    <RootNamespace>gEngine.Graph.Rw.Ge.Basic</RootNamespace>
+    <AssemblyName>gEngine.Graph.Rw.Ge.Basic</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -49,8 +49,6 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -59,28 +57,10 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DefaultFillSymbol.cs" />
-    <Compile Include="DefaultPointSymbol.cs" />
-    <Compile Include="DefaultStrokeSymbol.cs" />
-    <Compile Include="ISymbol.cs" />
-    <Compile Include="FillSymbol.cs" />
-    <Compile Include="FillSymbolConverter.cs" />
-    <Compile Include="ISymbolFactory.cs" />
-    <Compile Include="StrokeSymbol.cs" />
-    <Compile Include="PointSymbol.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Registry.cs" />
-    <Compile Include="PointSymbolConverter.cs" />
-    <Compile Include="StrokeSymbolConverter.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\gEngine.Util\gEngine.Util.csproj">
-      <Project>{84ACB6C4-CF62-4F4B-A7E5-5C642EDC041A}</Project>
-      <Name>gEngine.Util</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
