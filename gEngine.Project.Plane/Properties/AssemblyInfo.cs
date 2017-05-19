@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -21,6 +22,8 @@ using System.Runtime.InteropServices;
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
 [assembly: Guid("073e653e-65b9-480b-a556-7005c468ba4a")]
+
+[assembly: NeutralResourcesLanguage("zh-chs", UltimateResourceFallbackLocation.Satellite)]
 
 // 程序集的版本信息由下列四个值组成: 
 //

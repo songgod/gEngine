@@ -22,6 +22,9 @@ namespace gEngine.Util
         {
             try
             {
+                if (string.IsNullOrEmpty(numstr) && usedefault)
+                    return defaultvalue;
+
                 double db;
                 db = Convert.ToDouble(numstr);
                 return db;
@@ -45,6 +48,9 @@ namespace gEngine.Util
         {
             try
             {
+                if (string.IsNullOrEmpty(numstr) && usedefault)
+                    return defaultvalue;
+
                 decimal dt;
                 dt = Convert.ToDecimal(numstr);
                 return dt;
@@ -61,6 +67,9 @@ namespace gEngine.Util
         {
             try
             {
+                if (string.IsNullOrEmpty(numstr) && usedefault)
+                    return defaultvalue;
+
                 bool v;
                 v = Convert.ToBoolean(numstr);
                 return v;
