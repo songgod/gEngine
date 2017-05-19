@@ -22,7 +22,7 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <local:LayerMgrControl x:Name="layermgr" MapSource="{Binding Path=Project.OpenMaps.CurrentIndex, ElementName=UserControl_Project, Converter={StaticResource micvt}, Mode=OneWay}"  Grid.Row="0"/>
+            <local:LayerMgrControl x:Name="layermgr" MapSource="{Binding Path=Project.OpenMaps.CurrentIndex, ElementName=UserControl_Project, Converter={StaticResource micvt},ConverterParameter={x:Reference Name=tc},Mode=OneWay}"  Grid.Row="0"/>
             <local:ToolsControl x:Name="toolcontrol" DataContext="{Binding ElementName=tc}" Grid.Row="1"/>
         </Grid>
     </Grid>

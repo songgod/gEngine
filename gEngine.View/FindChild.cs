@@ -13,6 +13,8 @@ namespace gEngine.View
         public static childitem FindVisualChild<childitem>(DependencyObject obj, string name)
             where childitem : FrameworkElement
         {
+            if (obj == null)
+                return null;
             for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
             {
                 DependencyObject child = VisualTreeHelper.GetChild(obj, i);

@@ -5,8 +5,27 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:gEngine.Project"
              mc:Ignorable="d" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"  
+             xmlns:cvt="clr-namespace:gEngine.Project.Converter"
+             xmlns:prjcmds="clr-namespace:gEngine.Commands;assembly=gEngine.Commands"
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-            
-    </Grid>
+    <UserControl.Resources>
+        <cvt:ImagePathConverter x:Key="imageConvert"/>
+        <DataTemplate x:Key="listBoxTemplate">
+            <StackPanel Orientation="Horizontal" Height="18">
+                <Image x:Name="eyeImage" Source="{Binding VisibalityImageName,Converter={StaticResource ResourceKey=imageConvert}}"
+                       Opacity="{ Binding VisibalityImageOpacity}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonDown">
+                            <i:InvokeCommandAction  Command="{x:Static prjcmds:OperateViewCommands.SetLayerVisibleCommand}" CommandParameter="{ Binding ElementName=eyeImage}" >
+                            </i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Image>
+                <TextBlock Margin="5 0 0 0" Text="|" Foreground="LightGray"/>
+                <TextBlock x:Name="tbName" Text="{ Binding Name}"  Margin="5 0 0 0 "/>
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+    <ListBox x:Name="lbLayers" ItemTemplate="{ StaticResource listBoxTemplate}" />
 </UserControl>

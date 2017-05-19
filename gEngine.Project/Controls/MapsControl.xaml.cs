@@ -62,6 +62,11 @@ namespace gEngine.Project.Controls
             }
             return -1;
         }
+
+        private void DXTabControl_SelectionChanged(object sender, TabControlSelectionChangedEventArgs e)
+        {
+            MapsSource.CurrentIndex = e.NewSelectedIndex;
+        }
     }
 }
 

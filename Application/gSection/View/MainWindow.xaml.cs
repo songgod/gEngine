@@ -1,6 +1,8 @@
 ﻿using DevExpress.Xpf.Ribbon;
+using gEngine.Graph.Interface;
 using gEngine.Project;
 using gEngine.Project.Controls;
+using System.Windows;
 
 namespace gSection.View
 {
@@ -51,6 +53,12 @@ namespace gSection.View
 
             this.DataContext = this;
 
+            this.prjctrl.MapsControl.SelectionChanged += MapsControl_SelectionChanged;
+        }
+
+        private void MapsControl_SelectionChanged(object sender, DevExpress.Xpf.Core.TabControlSelectionChangedEventArgs e)
+        {
+            this.prjctrl.LayerMgrControl.BuildListViewSource();
         }
     }
 }

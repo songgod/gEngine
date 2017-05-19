@@ -17,7 +17,8 @@
                  DestroyContentOnTabSwitching="False"
                  TabContentCacheMode="CacheAllTabs"
                  SelectedIndex="{Binding Path=CurrentIndex, Source=MapsSource}"
-                 ItemsSource="{Binding MapsSource, Mode=TwoWay}">
+                 ItemsSource="{Binding MapsSource, Mode=TwoWay}"
+                 SelectionChanged="DXTabControl_SelectionChanged">
     <dx:DXTabControl.ItemHeaderTemplate>
         <DataTemplate>
             <TextBlock Text="{Binding Name}"/>
