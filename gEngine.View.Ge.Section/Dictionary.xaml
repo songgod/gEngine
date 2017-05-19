@@ -46,14 +46,17 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Path Stroke="Black" StrokeThickness="1">
+                            <Path.Resources>
+                                <FrameworkElement x:Key="ProxyElement" DataContext="{Binding}"/>
+                            </Path.Resources>
                             <Path.Data>
                                 <PathGeometry>
                                     <PathGeometry.Figures>
                                         <PathFigureCollection>
-                                            <PathFigure StartPoint="{Binding StartPoint}">
+                                            <PathFigure StartPoint="{Binding DataContext.StartPoint, Source={StaticResource ProxyElement}}">
                                                 <PathFigure.Segments>
                                                     <PathSegmentCollection>
-                                                        <PolyBezierSegment Points="{Binding PointsWithoutFirst}"/>
+                                                        <PolyBezierSegment Points="{Binding DataContext.PointsWithoutFirst, Source={StaticResource ProxyElement}}"/>
                                                     </PathSegmentCollection>
                                                 </PathFigure.Segments>
                                             </PathFigure>
@@ -74,10 +77,13 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Ellipse Width="10" Height="10" Fill="Red">
+                            <Ellipse.Resources>
+                                <FrameworkElement x:Key="ProxyElement" DataContext="{Binding}"/>
+                            </Ellipse.Resources>
                             <Ellipse.RenderTransform>
                                 <TransformGroup>
                                     <TranslateTransform X="-5" Y="-5"/>
-                                    <TranslateTransform X="{Binding X}" Y="{Binding Y}"/>
+                                    <TranslateTransform X="{Binding DataContext.X, Source={StaticResource ProxyElement}}" Y="{Binding DataContext.Y, Source={StaticResource ProxyElement}}"/>
                                 </TransformGroup>
                             </Ellipse.RenderTransform>
                         </Ellipse>
