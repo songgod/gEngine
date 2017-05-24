@@ -8,7 +8,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <!--<vc:Dictionary/>-->
-                <vc:DictionaryNew></vc:DictionaryNew>
+                <vc:Dictionary></vc:Dictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

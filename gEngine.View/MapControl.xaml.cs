@@ -33,6 +33,8 @@ namespace gEngine.View
 
         public LayerControl GetLayerControl(int index)
         {
+            if (index < 0)
+                return null;
             var item = layeritemscontrol.ItemContainerGenerator.ContainerFromIndex(index);
             LayerControl lc = FindChild.FindVisualChild<LayerControl>(item, "layercontrol");
             return lc;

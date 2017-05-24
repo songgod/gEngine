@@ -159,6 +159,26 @@ namespace gEngine.Project
             return map;
         }
 
+        public IMap NewMap(string type, string name,ILayers layers)
+        {
+            if (String.IsNullOrEmpty(type) || String.IsNullOrEmpty(name))
+                return null;
+
+            IMap map = gEngine.Graph.Interface.Registry.CreateMap(type);
+            if (map == null)
+                return null;
+            map.Name = name;
+            Maps.Add(new Tuple<string, IMap>("", map));
+
+            foreach (var layer in layers)
+            {
+                map.Layers.Add(layer);
+            }
+
+            OpenMaps.Add(map);
+            return map;
+        }
+
         public bool WriteMap(IMap map,string url)
         {
             if (map == null)

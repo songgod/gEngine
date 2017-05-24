@@ -1,6 +1,7 @@
 ﻿using gEngine.Graph.Interface;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media;
 
 namespace gEngine.View
@@ -13,6 +14,8 @@ namespace gEngine.View
         public LayerControl()
         {
             InitializeComponent();
+            Binding bd = new Binding("Visible") { Converter = new BooleanToVisibilityConverter(), Mode=BindingMode.TwoWay };
+            BindingOperations.SetBinding(this, VisibilityProperty, bd);
         }
 
         public Canvas Root

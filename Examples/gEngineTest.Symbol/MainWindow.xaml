@@ -5,7 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:gEngineTest.Symbol"
-        xmlns:sym="clr-namespace:gEngine.View.Symbol;assembly=gEngine.View.Symbol"
+        xmlns:sym="clr-namespace:gEngine.Symbol;assembly=gEngine.Symbol"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Window.Resources>

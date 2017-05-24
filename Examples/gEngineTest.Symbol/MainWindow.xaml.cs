@@ -1,4 +1,4 @@
-﻿using gEngine.View.Symbol;
+﻿using gEngine.Symbol;
 using System;
 using System.Collections.Generic;
 using System.Globalization;

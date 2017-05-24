@@ -1,4 +1,4 @@
-﻿<dx:DXTabControl x:Class="gEngine.Project.Controls.MapsControl"
+﻿<dx:DXTabControl x:Uid="dx:DXTabControl_1" x:Class="gEngine.Project.Controls.MapsControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -17,17 +17,18 @@
                  DestroyContentOnTabSwitching="False"
                  TabContentCacheMode="CacheAllTabs"
                  SelectedIndex="{Binding Path=CurrentIndex, Source=MapsSource}"
-                 ItemsSource="{Binding MapsSource, Mode=TwoWay}">
+                 ItemsSource="{Binding MapsSource, Mode=TwoWay}"
+                 SelectionChanged="DXTabControl_SelectionChanged">
     <dx:DXTabControl.ItemHeaderTemplate>
-        <DataTemplate>
-            <TextBlock Text="{Binding Name}"/>
+        <DataTemplate x:Uid="DataTemplate_1">
+            <TextBlock x:Uid="TextBlock_1" Text="{Binding Name}"/>
         </DataTemplate>
     </dx:DXTabControl.ItemHeaderTemplate>
     <dx:DXTabControl.ItemTemplate>
-        <DataTemplate>
-            <gv:MapControl x:Name="mc">
+        <DataTemplate x:Uid="DataTemplate_2">
+            <gv:MapControl x:Uid="mc" x:Name="mc">
                 <i:Interaction.Behaviors>
-                    <em:MapControlZoomPan/>
+                    <em:MapControlZoomPan x:Uid="em:MapControlZoomPan_1"/>
                 </i:Interaction.Behaviors>
             </gv:MapControl>
         </DataTemplate>

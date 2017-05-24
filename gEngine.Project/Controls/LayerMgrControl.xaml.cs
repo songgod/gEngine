@@ -26,12 +26,44 @@ namespace gEngine.Project.Controls
             InitializeComponent();
         }
 
+        public void BuildListViewSource()
+        {
+            if (MapSource == null)
+                return;
+            List<LayerCtrlObject> soureList = new List<LayerCtrlObject>();
+            ILayers layers = this.MapSource.Layers;
+            foreach (ILayer layer in layers)
+            {
+                LayerCtrlObject lco = new LayerCtrlObject();
+                lco.Name = layer.Name;
+                lco.VisibalityImageName = "Small/eye.png";
+                lco.VisibalityImageOpacity = layer.Visible ? 1.0 : 0.2;
+                soureList.Add(lco);
+
+                foreach (IObject obj in layer.Objects)
+                {
+                    lco = new LayerCtrlObject();
+                    lco.Name = obj.Name;
+                    lco.VisibalityImageName = "Small/eye.png";
+                    lco.VisibalityImageOpacity = obj.Visible ? 1.0 : 0.2;
+                    soureList.Add(lco);
+                }
+            }
+            lbLayers.ItemsSource = soureList;
+        }
 
 
         public IMap MapSource
         {
-            get { return (IMap)GetValue(MapSourceProperty); }
-            set { SetValue(MapSourceProperty, value); }
+            get
+            {
+                return (IMap)GetValue(MapSourceProperty);
+            }
+            set
+            {
+
+                SetValue(MapSourceProperty, value);
+            }
         }
 
         // Using a DependencyProperty as the backing store for MapSource.  This enables animation, styling, binding, etc...
@@ -40,4 +72,32 @@ namespace gEngine.Project.Controls
 
 
     }
+
+    public class LayerCtrlObject : DependencyObject
+    {
+        public string Name { get; set; }
+
+        public string VisibalityImageName { get; set; }
+
+        public double VisibalityImageOpacity
+        {
+            get
+            {
+                return (double)GetValue(VisibalityImageOpacityProperty);
+            }
+            set
+            {
+                SetValue(VisibalityImageOpacityProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty VisibalityImageOpacityProperty =
+            DependencyProperty.Register("VisibalityImageOpacity", typeof(double), typeof(LayerCtrlObject));
+
+        public string EditImageName { get; set; }
+        public double EditImageOpacity { get; set; }
+    }
+
+
 }
+

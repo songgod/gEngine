@@ -23,6 +23,7 @@ namespace gEngine.Project.Commands
                 return;
 
             ui.CommandBindings.Add(new FullViewCommand());
+            ui.CommandBindings.Add(new SetLayerVisibleCommand());
         }
     }
 }

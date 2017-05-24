@@ -53,6 +53,9 @@ namespace gEngine.Project.Ge.Plane.Commands
 
             IMap map = pctrl.Project.NewMap("Ge", "Plane");
             map.Layers.Add(layer);
+
+            
+            bool a = pctrl.Project.WriteMap(map, @"D:\map.Ge");
             e.Handled = true;
         }
     }
