@@ -10,22 +10,22 @@
              xmlns:prjcmds="clr-namespace:gEngine.Commands;assembly=gEngine.Commands"
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
-        <cvt:ImagePathConverter x:Key="imageConvert"/>
-        <DataTemplate x:Key="listBoxTemplate">
-            <StackPanel Orientation="Horizontal" Height="18">
-                <Image x:Name="eyeImage" Source="{Binding VisibalityImageName,Converter={StaticResource ResourceKey=imageConvert}}"
+        <cvt:ImagePathConverter x:Uid="cvt:ImagePathConverter_1" x:Key="imageConvert"/>
+        <DataTemplate x:Uid="DataTemplate_1" x:Key="listBoxTemplate">
+            <StackPanel x:Uid="StackPanel_1" Orientation="Horizontal" Height="18">
+                <Image x:Uid="eyeImage" x:Name="eyeImage" Source="{Binding VisibalityImageName,Converter={StaticResource ResourceKey=imageConvert}}"
                        Opacity="{ Binding VisibalityImageOpacity}">
                     <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseLeftButtonDown">
-                            <i:InvokeCommandAction  Command="{x:Static prjcmds:OperateViewCommands.SetLayerVisibleCommand}" CommandParameter="{ Binding ElementName=eyeImage}" >
+                        <i:EventTrigger x:Uid="i:EventTrigger_1" EventName="MouseLeftButtonDown">
+                            <i:InvokeCommandAction  x:Uid="i:InvokeCommandAction_1" Command="{x:Static prjcmds:OperateViewCommands.SetLayerVisibleCommand}" CommandParameter="{ Binding ElementName=eyeImage}" >
                             </i:InvokeCommandAction>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Image>
-                <TextBlock Margin="5 0 0 0" Text="|" Foreground="LightGray"/>
-                <TextBlock x:Name="tbName" Text="{ Binding Name}"  Margin="5 0 0 0 "/>
+                <TextBlock x:Uid="TextBlock_1" Margin="5 0 0 0" Text="|" Foreground="LightGray"/>
+                <TextBlock x:Uid="tbName" x:Name="tbName" Text="{ Binding Name}"  Margin="5 0 0 0 "/>
             </StackPanel>
         </DataTemplate>
     </UserControl.Resources>
-    <ListBox x:Name="lbLayers" ItemTemplate="{ StaticResource listBoxTemplate}" />
+    <ListBox x:Uid="lbLayers" x:Name="lbLayers" ItemTemplate="{ StaticResource listBoxTemplate}" />
 </UserControl>

@@ -90,7 +90,7 @@
                         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_6" Content="打印" LargeGlyph="{dx:DXImage Image=Printer_32x32.png}" Glyph="{dx:DXImage Image=Printer_16x16.png}"/>
                         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_7" Content="设置范围" LargeGlyph="{dx:DXImage Image=RangeArea_32x32.png}" Glyph="{dx:DXImage Image=RangeArea_16x16.png}"/>
                     </dxr:RibbonPageGroup>
-                    <dxr:RibbonPageGroup Caption="常用功能">
+                    <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_29" Caption="常用功能">
                     </dxr:RibbonPageGroup>
                 </dxr:RibbonPage>
                 <dxr:RibbonPage x:Uid="pageRef" x:Name="pageRef" Caption="参考">

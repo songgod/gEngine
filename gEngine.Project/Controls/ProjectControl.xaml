@@ -22,8 +22,8 @@
                 <RowDefinition x:Uid="RowDefinition_1" Height="1*"/>
                 <RowDefinition x:Uid="RowDefinition_2" Height="1*"/>
             </Grid.RowDefinitions>
-            <local:LayerMgrControl x:Name="layermgr" MapSource="{Binding Path=Project.OpenMaps.CurrentIndex, ElementName=UserControl_Project, Converter={StaticResource micvt}, Mode=OneWay}"  Grid.Row="0"/>
-            <local:ToolsControl x:Name="toolcontrol" DataContext="{Binding ElementName=tc}" Grid.Row="1"/>
+            <local:LayerMgrControl x:Uid="layermgr" x:Name="layermgr" MapSource="{Binding Path=Project.OpenMaps.CurrentIndex, ElementName=UserControl_Project, Converter={StaticResource micvt}, Mode=OneWay}"  Grid.Row="0"/>
+            <local:ToolsControl x:Uid="toolcontrol" x:Name="toolcontrol" DataContext="{Binding ElementName=tc}" Grid.Row="1"/>
         </Grid>
     </Grid>
 </UserControl>
