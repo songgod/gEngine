@@ -91,6 +91,8 @@
                         <dxb:BarButtonItem Content="设置范围" LargeGlyph="{dx:DXImage Image=RangeArea_32x32.png}" Glyph="{dx:DXImage Image=RangeArea_16x16.png}"/>
                     </dxr:RibbonPageGroup>
                     <dxr:RibbonPageGroup Caption="常用功能">
+                        <dxb:BarButtonItem Content="打开工程"/>
+                        <dxb:BarButtonItem Content="保存工程"/>
                     </dxr:RibbonPageGroup>
                 </dxr:RibbonPage>
                 <dxr:RibbonPage x:Name="pageRef" Caption="参考">

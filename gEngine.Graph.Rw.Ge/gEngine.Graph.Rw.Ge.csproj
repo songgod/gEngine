@@ -66,8 +66,6 @@
     <Compile Include="RWLayerBase.cs" />
     <Compile Include="RWObjectBase.cs" />
     <Compile Include="RWSectionLayer.cs" />
-    <Compile Include="RWWell.cs" />
-    <Compile Include="RWWellLocation.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\gEngine.Graph.Ge.Column\gEngine.Graph.Ge.Column.csproj">
