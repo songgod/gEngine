@@ -74,6 +74,8 @@ namespace gEngine.Project.Ge.Plane.Commands
 
             //先增加layer，再创建IMap
             layer.Name = "平面图Layer层";
+            layer.Visible = true;
+            layer.Editable = true;
             ILayers layers = new ILayers();
             layers.Add(layer);
             IMap map = pctrl.Project.NewMap("Ge", "Plane", layers);

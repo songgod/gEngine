@@ -31,6 +31,8 @@ namespace gEngine.Util.Ge.Plane
                 {
                     wl.WellType = WellType.Y;
                 }
+                wl.Editable = true;
+                wl.Visible = true;
                 res.Add(wl);
                 //wl.DataTemplate = "WellLocationTemplate";
             }

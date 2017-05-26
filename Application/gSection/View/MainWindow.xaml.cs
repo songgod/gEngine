@@ -53,12 +53,7 @@ namespace gSection.View
 
             this.DataContext = this;
 
-            this.prjctrl.MapsControl.SelectionChanged += MapsControl_SelectionChanged;
         }
 
-        private void MapsControl_SelectionChanged(object sender, DevExpress.Xpf.Core.TabControlSelectionChangedEventArgs e)
-        {
-            this.prjctrl.LayerMgrControl.BuildListViewSource();
-        }
     }
 }

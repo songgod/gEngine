@@ -1,5 +1,6 @@
 ﻿using gEngine.Graph.Ge;
 using gEngine.Graph.Ge.Plane;
+using gEngine.Graph.Interface;
 using gEngine.Manipulator;
 using gEngine.Util;
 using gEngine.View;
@@ -32,6 +33,7 @@ namespace gEngine.Manipulator.Ge.Plane
         public WellLocationsConnectManipulator()
         {
             SelectWellLocations = new Stack<WellLocation>();
+
         }
 
         protected override void OnAttached()
@@ -53,8 +55,8 @@ namespace gEngine.Manipulator.Ge.Plane
             {
                 if (SelectWellLocations.Count <= 0)
                     return;
-                WellLocation wl=SelectWellLocations.Pop();
-                this.TrackAdorner.Points.Remove(new Point(wl.X,wl.Y));
+                WellLocation wl = SelectWellLocations.Pop();
+                this.TrackAdorner.Points.Remove(new Point(wl.X, wl.Y));
                 if (this.TrackAdorner.Points.Count == 1)
                     this.TrackAdorner.Points.RemoveAt(this.TrackAdorner.Points.Count - 1);
             }
@@ -72,7 +74,7 @@ namespace gEngine.Manipulator.Ge.Plane
         protected override void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             WellLocation wl = GetClickWell(e);
-            if (wl != null&& !SelectWellLocations.Contains(wl))
+            if (wl != null && !SelectWellLocations.Contains(wl))
             {
                 SelectWellLocations.Push(wl);
                 DrawLine(wl);//这里没有调用父类事件base.MouseLeftButtonUp(sender, e)，因为该事件不能定位井中心

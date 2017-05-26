@@ -1327,6 +1327,9 @@
   <ItemGroup>
     <Resource Include="Images\Small\eye.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Small\Pencil.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>$(MSBUILD) /t:updateuid $(ProjectPath)</PreBuildEvent>
