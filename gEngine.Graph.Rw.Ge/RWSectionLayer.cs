@@ -12,19 +12,20 @@ namespace gEngine.Graph.Rw.Ge
     {
         public override string SupportType { get { return "SectionLayer"; } }
 
-        public override ILayer ReadLayer(XmlNode node)
+        public override void ReadLayer(ILayer Ilayer, XmlNode node)
         {
             //SectionLayer layer = new SectionLayer;
-
-
-
-            //return layer;
-            return base.ReadLayer(node);
+            base.ReadLayer(Ilayer, node);
         }
 
         public override void WriteLayer(XmlNode node, ILayer layer)
         {
             base.WriteLayer(node, layer);
+        }
+
+        public override ILayer CreateLayer()
+        {
+            return base.CreateLayer();
         }
     }
 }

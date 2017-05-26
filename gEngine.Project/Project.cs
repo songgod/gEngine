@@ -185,12 +185,10 @@ namespace gEngine.Project
                 return false;
 
             if (string.IsNullOrEmpty(url))
-
                 return false;
 
-            bool a = gEngine.Graph.Interface.Registry.WriteMap(map, url);
-
-            return true;
+            bool IsSuccess = gEngine.Graph.Interface.Registry.WriteMap(map, url);
+            return IsSuccess;
         }
     }
 }
