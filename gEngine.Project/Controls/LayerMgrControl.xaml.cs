@@ -29,7 +29,10 @@ namespace gEngine.Project.Controls
         public void BuildListViewSource()
         {
             if (MapSource == null)
+            {
+                lbLayers.ItemsSource = null;
                 return;
+            }  
             List<LayerCtrlObject> soureList = new List<LayerCtrlObject>();
             ILayers layers = this.MapSource.Layers;
             foreach (ILayer layer in layers)
@@ -38,6 +41,8 @@ namespace gEngine.Project.Controls
                 lco.Name = layer.Name;
                 lco.VisibalityImageName = "Small/eye.png";
                 lco.VisibalityImageOpacity = layer.Visible ? 1.0 : 0.2;
+                lco.EditImageName= "Small/Pencil.png";
+                lco.EditImageOpacity = layer.Editable ? 1.0 : 0.2;
                 soureList.Add(lco);
 
                 foreach (IObject obj in layer.Objects)
@@ -46,6 +51,8 @@ namespace gEngine.Project.Controls
                     lco.Name = obj.Name;
                     lco.VisibalityImageName = "Small/eye.png";
                     lco.VisibalityImageOpacity = obj.Visible ? 1.0 : 0.2;
+                    lco.EditImageName = "Small/Pencil.png";
+                    lco.EditImageOpacity = obj.Editable ? 1.0 : 0.2;
                     soureList.Add(lco);
                 }
             }
@@ -95,7 +102,20 @@ namespace gEngine.Project.Controls
             DependencyProperty.Register("VisibalityImageOpacity", typeof(double), typeof(LayerCtrlObject));
 
         public string EditImageName { get; set; }
-        public double EditImageOpacity { get; set; }
+        public double EditImageOpacity
+        {
+            get
+            {
+                return (double)GetValue(EditImageOpacityProperty);
+            }
+            set
+            {
+                SetValue(EditImageOpacityProperty, value);
+            }
+        }
+        public static readonly DependencyProperty EditImageOpacityProperty =
+            DependencyProperty.Register("EditImageOpacity", typeof(double), typeof(LayerCtrlObject));
+
     }
 
 

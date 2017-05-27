@@ -26,6 +26,16 @@ namespace gEngine.Project.Commands
 
         private void SetLayerVisibleCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
+            Image vImage = e.Parameter as Image;
+            LayerCtrlObject lco = vImage.DataContext as LayerCtrlObject;
+            LayerMgrControl layerMgr = FindParent.FindVisualParent<LayerMgrControl>(vImage);
+
+            IMap map = layerMgr.MapSource;
+            if (map == null)
+                return;
+            ILayers layers = map.Layers;
+            if (layers == null)
+                return;
             e.CanExecute = true;
             e.Handled = true;
         }

@@ -19,8 +19,6 @@ namespace gEngine.Project.Controls
             InitializeComponent();
             this.View.HideButtonShowMode = HideButtonShowMode.InAllTabs;
             this.DataContext = this;
-            Binding bd = new Binding("CurrentIndex") { Source = MapsSource };
-            BindingOperations.SetBinding(this, SelectedIndexProperty, bd);
         }
 
         public IMaps MapsSource
@@ -63,11 +61,6 @@ namespace gEngine.Project.Controls
                     return i;
             }
             return -1;
-        }
-
-        private void DXTabControl_SelectionChanged(object sender, TabControlSelectionChangedEventArgs e)
-        {
-            MapsSource.CurrentIndex = e.NewSelectedIndex;
         }
     }
 }

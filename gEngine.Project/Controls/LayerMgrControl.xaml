@@ -11,6 +11,7 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <cvt:ImagePathConverter x:Uid="cvt:ImagePathConverter_1" x:Key="imageConvert"/>
+        <cvt:VisibilityConverter  x:Uid="cvt:VisibilityConverter_1" x:Key="visibConvert"/>
         <DataTemplate x:Uid="DataTemplate_1" x:Key="listBoxTemplate">
             <StackPanel x:Uid="StackPanel_1" Orientation="Horizontal" Height="18">
                 <Image x:Uid="eyeImage" x:Name="eyeImage" Source="{Binding VisibalityImageName,Converter={StaticResource ResourceKey=imageConvert}}"
@@ -18,6 +19,16 @@
                     <i:Interaction.Triggers>
                         <i:EventTrigger x:Uid="i:EventTrigger_1" EventName="MouseLeftButtonDown">
                             <i:InvokeCommandAction  x:Uid="i:InvokeCommandAction_1" Command="{x:Static prjcmds:OperateViewCommands.SetLayerVisibleCommand}" CommandParameter="{ Binding ElementName=eyeImage}" >
+                            </i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Image>
+                <TextBlock x:Uid="TextBlock_2" Margin="5 0 0 0" Text="|" Foreground="LightGray"/>
+                <Image x:Uid="editImage" x:Name="editImage" Source="{Binding EditImageName,Converter={StaticResource ResourceKey=imageConvert}}"
+                       Opacity="{ Binding EditImageOpacity}"  Margin="5 0 0 0">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger x:Uid="i:EventTrigger_2" EventName="MouseLeftButtonDown">
+                            <i:InvokeCommandAction  x:Uid="i:InvokeCommandAction_2" Command="{x:Static prjcmds:OperateViewCommands.SetLayerEditableCommand}" CommandParameter="{ Binding ElementName=editImage}" >
                             </i:InvokeCommandAction>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
