@@ -91,6 +91,9 @@
                         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_7" Content="设置范围" LargeGlyph="{dx:DXImage Image=RangeArea_32x32.png}" Glyph="{dx:DXImage Image=RangeArea_16x16.png}"/>
                     </dxr:RibbonPageGroup>
                     <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_29" Caption="常用功能">
+                        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_39" Content="打开工程" Command="{x:Static prjcmds:ProjectCommands.OpenCommand}" CommandTarget="{Binding ElementName=prjctrl}" Glyph="{dx:DXImage Image=Open_16x16.png}" LargeGlyph="{dx:DXImage Image=Open_32x32.png}"/>
+                        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_40" Content="保存工程" Command="{x:Static prjcmds:ProjectCommands.SaveCommand}" CommandTarget="{Binding ElementName=prjctrl}" Glyph="{dx:DXImage Image=Save_16x16.png}" LargeGlyph="{dx:DXImage Image=Save_32x32.png}"/>
+                        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_41" Content="另存为工程" Command="{x:Static prjcmds:ProjectCommands.SaveAsCommand}" CommandTarget="{Binding ElementName=prjctrl}" Glyph="{dx:DXImage Image=SaveAs_16x16.png}" LargeGlyph="{dx:DXImage Image=SaveAs_32x32.png}"/>
                     </dxr:RibbonPageGroup>
                 </dxr:RibbonPage>
                 <dxr:RibbonPage x:Uid="pageRef" x:Name="pageRef" Caption="参考">
