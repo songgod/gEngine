@@ -3,9 +3,13 @@ using gEngine.Graph.Interface;
 using gEngine.Utility;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Xml;
+using Microsoft.Win32;
 
 namespace gEngine.Project
 {
@@ -22,14 +26,110 @@ namespace gEngine.Project
         public bool Open(string url)
         {
             Url = url;
-            return Read();
+
+            XmlDocument xmldoc = new XmlDocument();
+
+            XmlReaderSettings setting = new XmlReaderSettings() { IgnoreComments = true };
+            XmlReader reader = XmlReader.Create(Url, setting);
+            xmldoc.Load(reader);
+            XmlNode xmlproj = xmldoc.SelectSingleNode("Gepro");
+
+            foreach (XmlNode node in xmlproj.ChildNodes)
+            {
+                foreach (XmlNode cNode in node)
+                {
+                    string MapUrl = cNode.Attributes["Url"].Value;
+                    OpenMap(MapUrl);
+                }
+            }
+            reader.Close();
+
+            return true;
         }
 
         public bool Save()
         {
-            if (String.IsNullOrEmpty(Url))
-                return false;
-            return Write();
+            if (string.IsNullOrEmpty(Url))
+            {
+                SaveFileDialog SaveFileDialog = new SaveFileDialog();
+                SaveFileDialog.Filter = "工程文件|*.Gepro";
+                if (SaveFileDialog.ShowDialog() == true)
+                {
+                    if (File.Exists(SaveFileDialog.FileName))
+                    {
+                        MessageBox.Show("工程文件名称重复，请重新输入！");
+                        return false;
+                    }
+
+                    string ProjectName = SaveFileDialog.FileName;
+                    string ProjPath = ProjectName.Substring(0, ProjectName.LastIndexOf(@"\"));
+                    string MapsPath = ProjPath + @"\Maps";
+                    if (Directory.Exists(MapsPath))
+                    {
+                        MessageBox.Show("图件目录重复！");
+                        return false;
+                    }
+                    else
+                    {
+                        DirectoryInfo directoryInfo = new DirectoryInfo(MapsPath);
+                        directoryInfo.Create();
+                        XmlDocument xmldoc = new XmlDocument();
+                        xmldoc.AppendChild(xmldoc.CreateXmlDeclaration("1.0", "UTF-8", null));
+                        XmlElement xmlproj = xmldoc.CreateElement("Gepro");
+                        xmldoc.AppendChild(xmlproj);
+
+                        XmlElement xmlmaps = xmlproj.OwnerDocument.CreateElement("Maps");
+                        xmlproj.AppendChild(xmlmaps);
+                        int index = 0;
+                        foreach (IMap map in OpenMaps)
+                        {
+                            string MapFile = MapsPath + @"\" + map.Name + ".Ge";
+                            XmlElement xmlmap = xmldoc.CreateElement(map.Name);
+                            xmlmap.SetAttribute("Name", map.Name);
+                            xmlmap.SetAttribute("Url", MapFile);
+                            xmlmaps.AppendChild(xmlmap);
+                            WriteMap(map, MapFile);
+                            Maps[index] = new Tuple<string, IMap>(MapFile, map);
+                            index++;
+                        }
+                        xmldoc.Save(ProjectName);
+                        return true;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("取消保存");
+                    return false;
+                }
+            }
+            else
+            {
+                string ProjectName = Url;
+                string ProjPath = ProjectName.Substring(0, ProjectName.LastIndexOf(@"\"));
+                string MapsPath = ProjPath + @"\Maps";
+                XmlDocument xmldoc = new XmlDocument();
+                xmldoc.Load(ProjectName);
+                XmlNode node = xmldoc.SelectSingleNode("Gepro");
+                XmlNode childNode = node.SelectSingleNode("Maps");
+                int index = 0;
+                foreach (IMap map in OpenMaps)
+                {
+                    if (string.IsNullOrEmpty(Maps[index].Item1))
+                    {
+                        string MapFile = MapsPath + @"\" + map.Name + ".Ge";
+                        XmlElement xmlmap = xmldoc.CreateElement(map.Name);
+                        xmlmap.SetAttribute("Name", map.Name);
+                        xmlmap.SetAttribute("Url", MapFile);
+                        childNode.AppendChild(xmlmap);
+                        WriteMap(map, MapFile);
+                        Maps[index] = new Tuple<string, IMap>(MapFile, map);
+                    }
+                    index++;
+                }
+
+                xmldoc.Save(ProjectName);
+                return true;
+            }
         }
 
         public bool SaveAs(string url)
@@ -132,7 +232,7 @@ namespace gEngine.Project
             if (map == null)
                 return null;
 
-            if (find==false)
+            if (find == false)
             {
                 Maps.Add(new Tuple<string, IMap>(url, map));
             }
@@ -159,7 +259,7 @@ namespace gEngine.Project
             return map;
         }
 
-        public IMap NewMap(string type, string name,ILayers layers)
+        public IMap NewMap(string type, string name, ILayers layers)
         {
             if (String.IsNullOrEmpty(type) || String.IsNullOrEmpty(name))
                 return null;
@@ -179,7 +279,7 @@ namespace gEngine.Project
             return map;
         }
 
-        public bool WriteMap(IMap map,string url)
+        public bool WriteMap(IMap map, string url)
         {
             if (map == null)
                 return false;

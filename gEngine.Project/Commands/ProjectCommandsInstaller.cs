@@ -24,6 +24,9 @@ namespace gEngine.Project.Commands
 
             ui.CommandBindings.Add(new FullViewCommand());
             ui.CommandBindings.Add(new SetLayerVisibleCommand());
+            ui.CommandBindings.Add(new OpenProjectCommand());
+            ui.CommandBindings.Add(new SaveProjectCommand());
+            ui.CommandBindings.Add(new SaveAsProjectCommand());
         }
     }
 }
