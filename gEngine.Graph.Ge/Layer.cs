@@ -59,9 +59,26 @@ namespace gEngine.Graph.Ge
             set { SetValue(EditableProperty, value); }
         }
 
+        
         // Using a DependencyProperty as the backing store for Editable.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty EditableProperty =
             DependencyProperty.Register("Editable", typeof(bool), typeof(Layer), new PropertyMetadata(true));
+
+        public double Opacity
+        {
+            get
+            {
+                return (double)GetValue(OpacityProperty);
+            }
+
+            set
+            {
+                SetValue(OpacityProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty OpacityProperty =
+            DependencyProperty.Register("Opacity", typeof(double), typeof(Layer), new PropertyMetadata(1.0));
 
 
     }

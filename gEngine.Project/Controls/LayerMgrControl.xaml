@@ -38,5 +38,33 @@
             </StackPanel>
         </DataTemplate>
     </UserControl.Resources>
-    <ListBox x:Uid="lbLayers" x:Name="lbLayers" ItemTemplate="{ StaticResource listBoxTemplate}" />
+    <Grid x:Uid="Grid_1">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Uid="ColumnDefinition_1" Width="60"/>
+            <ColumnDefinition x:Uid="ColumnDefinition_2" Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition x:Uid="RowDefinition_1" Height="30" />
+            <RowDefinition x:Uid="RowDefinition_2" Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock x:Uid="TextBlock_3" Text="不透明度:" Grid.Column="0" Grid.Row="0" />
+        <ComboBox x:Uid="ComboBox_1" DataContext="{Binding SelectedItem,ElementName=lbLayers}" x:Name="cbOpacity" ScrollViewer.PanningMode="None" IsEditable="True" Grid.Column="1" Grid.Row="0" Text="{Binding SelectedItem.LayerOpacity,ElementName=lbLayers}">
+            <ComboBoxItem x:Uid="ComboBoxItem_1">
+                <Slider x:Uid="Slider_1" Width="220" SmallChange="0.01" LargeChange="0.05" Maximum="1" Minimum="0" 
+                        Value="{Binding SelectedItem.LayerOpacity,ElementName=lbLayers}"
+                        IsSnapToTickEnabled="True" TickFrequency="0.01" >
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger x:Uid="i:EventTrigger_3" EventName="ValueChanged">
+                            <i:InvokeCommandAction  x:Uid="i:InvokeCommandAction_3" Command="{x:Static prjcmds:OperateViewCommands.SetLayerOpacityCommand}" CommandParameter="{Binding ElementName=cbOpacity}">
+                            </i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Slider>
+            </ComboBoxItem>
+        </ComboBox> 
+        <ListBox x:Uid="lbLayers" x:Name="lbLayers" ItemTemplate="{ StaticResource listBoxTemplate}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"/>
+    </Grid>
+            
+
+
 </UserControl>
