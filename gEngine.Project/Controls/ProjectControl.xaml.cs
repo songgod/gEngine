@@ -47,13 +47,13 @@ namespace gEngine.Project.Controls
             }
         }
 
-        public ToolsControl ToolsControl
-        {
-            get
-            {
-                return toolcontrol;
-            }
-        }
+        //public ToolsControl ToolsControl
+        //{
+        //    get
+        //    {
+        //        return toolcontrol;
+        //    }
+        //}
 
         public MapsControl MapsControl
         {

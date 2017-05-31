@@ -28,10 +28,10 @@
         <Grid x:Uid="Grid_2" Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition x:Uid="RowDefinition_1" Height="1*"/>
-                <RowDefinition x:Uid="RowDefinition_2" Height="1*"/>
+                <!--<RowDefinition x:Uid="RowDefinition_2" Height="1*"/>-->
             </Grid.RowDefinitions>
             <local:LayerMgrControl x:Uid="layermgr" x:Name="layermgr"   Grid.Row="0" MapSource="{Binding Path=Project.OpenMaps.CurrentIndex, ElementName=UserControl_Project, Converter={StaticResource micvt},ConverterParameter={x:Reference Name=tc},Mode=OneWay}"/>
-            <local:ToolsControl x:Uid="toolcontrol" x:Name="toolcontrol" DataContext="{Binding ElementName=tc}" Grid.Row="1"/>
+            <!--<local:ToolsControl x:Uid="toolcontrol" x:Name="toolcontrol" DataContext="{Binding ElementName=tc}" Grid.Row="1"/>-->
         </Grid>
     </Grid>
 </UserControl>

@@ -31,7 +31,7 @@ namespace gEngine.Graph.Rw.Ge.Plane
             WellLocation.WellType = (WellType) Enum.Parse(typeof(WellType), node.Attributes["WellType"].Value);
             WellLocation.X = double.Parse(node.Attributes["X"].Value);
             WellLocation.Y = double.Parse(node.Attributes["Y"].Value);
-            WellLocation.Symbol = node.Attributes["Symbol"].Value;
+            //WellLocation.Symbol = node.Attributes["Symbol"].Value;
         }
 
         public override void Write(XmlNode node, IObject obj)
@@ -65,9 +65,9 @@ namespace gEngine.Graph.Rw.Ge.Plane
             xmlY.Value = string.IsNullOrEmpty(wl.Y.ToString()) == false ? wl.Y.ToString() : string.Empty;
             node.Attributes.Append(xmlY);
 
-            XmlAttribute xmlSymbol = doc.CreateAttribute("Symbol");
-            xmlSymbol.Value = wl.Symbol != null ? wl.Symbol.ToString() : string.Empty;
-            node.Attributes.Append(xmlSymbol);
+            //XmlAttribute xmlSymbol = doc.CreateAttribute("Symbol");
+            //xmlSymbol.Value = wl.Symbol != null ? wl.Symbol.ToString() : string.Empty;
+            //node.Attributes.Append(xmlSymbol);
         }
 
         public override IObject CreateObject()
