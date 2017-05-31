@@ -71,6 +71,10 @@
       <Project>{82739b38-8706-493d-a571-c743afcead12}</Project>
       <Name>gEngine.Graph.Ge.Plane</Name>
     </ProjectReference>
+    <ProjectReference Include="..\gEngine.Graph.Ge.Section\gEngine.Graph.Ge.Section.csproj">
+      <Project>{53D7A20D-84B5-499F-B183-D440854B7C8C}</Project>
+      <Name>gEngine.Graph.Ge.Section</Name>
+    </ProjectReference>
     <ProjectReference Include="..\gEngine.Graph.Ge\gEngine.Graph.Ge.csproj">
       <Project>{3BD77E4F-A348-4EDB-B60C-68B749249B91}</Project>
       <Name>gEngine.Graph.Ge</Name>

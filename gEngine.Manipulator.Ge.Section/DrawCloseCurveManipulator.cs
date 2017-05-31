@@ -1,4 +1,5 @@
-﻿using gTopology;
+﻿using gEngine.Graph.Ge.Section;
+using gTopology;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,9 +28,11 @@ namespace gEngine.Manipulator.Ge.Section
                 return;
 
             Topology editor = new Topology(graph);
-            editor.LinAddCurve(new PointList(TrackAdorner.Points.ToList()), graphutil.Tolerance, true);
+            editor.LinAddCurve(new PointList(TrackAdorner.Points.ToList()), graphutil.Tolerance, true, LineType);
             base.MouseLeftButtonUp(sender, e);
         }
+
+        public int LineType { get; set; }
     }
 
     public class DCCMFactory : IManipulatorFactory
@@ -44,7 +47,7 @@ namespace gEngine.Manipulator.Ge.Section
 
         public IManipulatorBase CreateManipulator(object param)
         {
-            return new DrawCloseCurveManipulator();
+            return new DrawCloseCurveManipulator() { LineType = (int)param };
         }
     }
 }

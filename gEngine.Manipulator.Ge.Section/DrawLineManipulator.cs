@@ -1,4 +1,5 @@
-﻿using gTopology;
+﻿using gEngine.Graph.Ge.Section;
+using gTopology;
 using System.Windows;
 using System.Windows.Input;
 
@@ -21,10 +22,12 @@ namespace gEngine.Manipulator.Ge.Section
             Topology editor = new Topology(graph);
             Point start = new Point() { X = this.TrackAdorner.X1, Y = this.TrackAdorner.Y1 };
             Point end = new Point() { X = this.TrackAdorner.X2, Y = this.TrackAdorner.Y2 };
-            editor.LinAddLine(start, end, graphutil.Tolerance);
+            editor.LinAddLine(start, end, graphutil.Tolerance, LineType);
 
             base.MouseLeftButtonUp(sender, e);
         }
+
+        public int LineType { get; set; }
     }
 
     public class DLMFactory : IManipulatorFactory
@@ -39,7 +42,7 @@ namespace gEngine.Manipulator.Ge.Section
 
         public IManipulatorBase CreateManipulator(object param)
         {
-            return new DrawLineManipulator();
+            return new DrawLineManipulator() { LineType = (int)param };
         }
     }
 }
