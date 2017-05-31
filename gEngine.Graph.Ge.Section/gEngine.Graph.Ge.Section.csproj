@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="gTopology">
       <HintPath>..\3rdlib\gToplogy\x64\gTopology.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
