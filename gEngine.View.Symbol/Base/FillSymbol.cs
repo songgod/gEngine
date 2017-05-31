@@ -7,9 +7,10 @@ using System.Windows.Media;
 
 namespace gEngine.Symbol
 {
-    public abstract class StrokeSymbol : ISymbol
+    public abstract class FillSymbol : ISymbol
     {
-        public static readonly string type = "Stroke";
+        public static readonly string type = "Fill";
+
         public string Type
         {
             get
@@ -17,8 +18,10 @@ namespace gEngine.Symbol
                 return type;
             }
         }
-        
+
         public abstract string Name { get; }
-        public abstract PathGeometry Create(PathGeometry path);
+        public abstract Brush Create(OptionSetting param);
     }
+
+
 }

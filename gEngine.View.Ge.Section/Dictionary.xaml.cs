@@ -15,6 +15,10 @@ using System.Windows.Shapes;
 
 namespace gEngine.View.Ge.Section
 {
+    public class SectionObjectCanvas : Canvas
+    {
+
+    }
     /// <summary>
     /// Dictionary.xaml 的交互逻辑
     /// </summary>

@@ -9,11 +9,9 @@ namespace gEngine.Symbol
 {
     public class DefaultFillSymbol : FillSymbol
     {
-        private SolidColorBrush brush;
         private static readonly string name = "DefaultPointSymbol";
         public DefaultFillSymbol()
         {
-            brush = new SolidColorBrush(Colors.LightGray);
         }
 
         public override string Name
@@ -24,9 +22,9 @@ namespace gEngine.Symbol
             }
         }
 
-        public override Brush Create()
+        public override Brush Create(OptionSetting param)
         {
-            return brush;
+            return new SolidColorBrush(Colors.LightGray);
         }
     }
 }

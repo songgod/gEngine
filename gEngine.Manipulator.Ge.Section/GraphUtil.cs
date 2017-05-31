@@ -1,5 +1,6 @@
 ﻿using gEngine.Graph.Ge.Section;
 using gEngine.View;
+using gEngine.View.Ge.Section;
 using System;
 using System.Collections.Generic;
 using System.Linq;

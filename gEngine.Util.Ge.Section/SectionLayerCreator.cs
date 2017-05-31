@@ -19,14 +19,13 @@ namespace gEngine.Util.Ge.Section
     {
         public Layer CreateSectionLayer()
         {
-            Layer layer = new Layer() { Type = "Section" };
-            layer.Objects.Add(new SectionObject());
+            Layer layer = new SectionLayer();
             return layer;
         }
 
         public Layer CreateSectionLayer(IDBSource db, Stack<WellLocation> wellLocs, string horizonName, string discreteName)
         {
-            Layer layer = new Layer() { Type = "Section" };
+            Layer layer = new SectionLayer();
 
             WellCreator wc = new WellCreator();
 
@@ -51,10 +50,9 @@ namespace gEngine.Util.Ge.Section
                         WellLocation += item[0].Width;
                     }
                     WellLocation += 50;
-                    layer.Objects.Add(well);
+                    layer.Objects.Insert(0,well);
                 }
             }
-            layer.Objects.Add(new SectionObject());
             return layer;
         }
     }

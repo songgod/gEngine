@@ -1,9 +1,14 @@
-﻿using System;
+﻿using gEngine.Graph.Ge;
+using gEngine.Graph.Ge.Section;
+using gEngine.Symbol;
+using gEngine.View.Ge;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
 
@@ -17,7 +22,19 @@ namespace gEngine.View.Ge.Section
             if (valid==false)
                 return null;
 
-            return new SolidColorBrush() { Color = Colors.Yellow };
+            int type = (int)values[0];
+            SectionObject secobj = (SectionObject)values[2];
+
+            Brush fillb = new SolidColorBrush() { Color = Colors.Gray };
+            if (secobj.DicFillStyle.ContainsKey(type) == false)
+                return fillb;
+
+            FillStyle fillstyle = secobj.DicFillStyle[type];
+            Brush stylebrush = FillStyle2BrushConverter.ConverterFromFillStyle(fillstyle);
+            if (stylebrush == null)
+                return fillb;
+
+            return stylebrush;
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
@@ -25,6 +42,7 @@ namespace gEngine.View.Ge.Section
             throw new NotImplementedException();
         }
     }
+
     public class Region2PathDataConverter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
@@ -47,7 +65,7 @@ namespace gEngine.View.Ge.Section
                 geom.Figures.Add(figure);
             }
 
-            if(insidepointlist!=null)
+            if (insidepointlist != null)
             {
                 for (int i = 0; i < insidepointlist.Count; i++)
                 {
@@ -63,6 +81,44 @@ namespace gEngine.View.Ge.Section
             }
 
             return geom;
+        }
+
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class Type2LineStyleConverter : IMultiValueConverter
+    {
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        {
+            int type = (int)values[0];
+            SectionObject secobj = (SectionObject)values[1];
+            LineStyle linestyle = new NormalLineStyle() { Color = Colors.Black, Width = 1.0 };
+            if (secobj.DicLineStyle.ContainsKey(type) == false)
+                return linestyle;
+            return secobj.DicLineStyle[type];
+        }
+
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class Line2PathDataConverter : IMultiValueConverter
+    {
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        {
+            Point start = (Point)values[0];
+            gTopology.PointList plist = (gTopology.PointList)(values[1]);
+            PointCollection points = new PointCollection(plist.ToArray());
+            PathFigure pf = new PathFigure() { StartPoint = start };
+            pf.Segments.Add(new PolyBezierSegment() { Points = points });
+            PathGeometry pg = new PathGeometry();
+            pg.Figures.Add(pf);
+            return pg;
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)

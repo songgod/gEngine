@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media;
 
 namespace gEngine.Symbol
 {
-    public abstract class FillSymbol : ISymbol
+    public abstract class PointSymbol : ISymbol
     {
-        public static readonly string type = "Fill";
-
+        public static readonly string type = "Point";
         public string Type
         {
             get
@@ -20,8 +20,6 @@ namespace gEngine.Symbol
         }
 
         public abstract string Name { get; }
-        public abstract Brush Create();
+        public abstract object Create(OptionSetting param);
     }
-
-
 }

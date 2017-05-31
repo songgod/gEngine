@@ -11,10 +11,9 @@ namespace gEngine.Symbol
 {
     public class DefaultPointSymbol : PointSymbol
     {
-        private EllipseGeometry geom;
         public DefaultPointSymbol()
         {
-            geom = new EllipseGeometry() { RadiusX = 10, RadiusY = 10 };
+
         }
 
         private static readonly string name = "DefaultPointSymbol";
@@ -26,9 +25,11 @@ namespace gEngine.Symbol
             }
         }
 
-        public override Geometry Create()
+        public override object Create(OptionSetting param)
         {
-            return geom;
+            Path path = new Path() { Fill = new SolidColorBrush(Colors.White), Stroke = new SolidColorBrush(Colors.Black) };
+            path.Data = new EllipseGeometry() { RadiusX = 10, RadiusY = 10 };
+            return path;
         }
     }
 }

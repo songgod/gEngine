@@ -4,16 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:gp="clr-namespace:gEngine.Graph.Ge.Plane;assembly=gEngine.Graph.Ge.Plane"
+             xmlns:gv="clr-namespace:gEngine.View.Ge;assembly=gEngine.View.Ge"
              xmlns:local="clr-namespace:gEngine.View.Ge.Plane"
              xmlns:sym="clr-namespace:gEngine.Symbol;assembly=gEngine.Symbol"
              mc:Ignorable="d">
     <DataTemplate DataType="{x:Type gp:WellLocation}">
         <StackPanel>
             <StackPanel.Resources>
-                <local:WellTypeToColorConverter x:Key="wellTypeConverter"/>
                 <sym:PointSymbolConverter x:Key="pointsymbolconverter"/>
             </StackPanel.Resources>
-            <Path Data="{Binding Symbol, Converter={StaticResource pointsymbolconverter}}" Fill="{Binding WellType,Converter={ StaticResource wellTypeConverter}}">
+            <gv:PointControl PointStyle="{Binding Path=PointStyle}">
                 <ToolTipService.ToolTip>
                     <TextBlock>
                         <TextBlock.Text>
@@ -25,12 +25,13 @@
                         </TextBlock.Text>
                     </TextBlock>
                 </ToolTipService.ToolTip>
-                <Path.RenderTransform>
+                <gv:PointControl.RenderTransform>
                     <TransformGroup>
                         <TranslateTransform X="{Binding X}" Y="{Binding Y}" />
                     </TransformGroup>
-                </Path.RenderTransform>
-            </Path>
+                </gv:PointControl.RenderTransform>
+            </gv:PointControl>
+
             <TextBlock Text="{Binding WellNum}" >
                 <TextBlock.RenderTransform>
                     <TransformGroup>

@@ -16,6 +16,6 @@
     <Grid>
         <Polyline Points= "{Binding Path=Polygon.Points}" Fill="{Binding Path=Polygon.Symbol, Converter={StaticResource fc}}"/>
         <Path Data="{Binding Path=Point.Symbol, Converter={StaticResource pc}}" Width="20" Height="20" Fill="Gold"/>
-        <Path Data="{Binding Path=Line.Points, Converter={StaticResource sc}, ConverterParameter=Line.Symbol}" Stroke="Black"/>
+        <Path Data="{Binding Path=Line.Points, Converter={StaticResource sc}, ConverterParameter=Symbol.gesym@GeStrokeSymbol}" Stroke="Black"/>
     </Grid>
 </Window>
