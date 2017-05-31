@@ -46,17 +46,17 @@ namespace gEngine.Project.Controls
                 lco.LayerOpacity = layer.Opacity;
                 soureList.Add(lco);
 
-                foreach (IObject obj in layer.Objects)
-                {
-                    lco = new LayerCtrlObject();
-                    lco.Name = obj.Name;
-                    lco.VisibalityImageName = "Small/eye.png";
-                    lco.VisibalityImageOpacity = obj.Visible ? 1.0 : 0.2;
-                    lco.EditImageName = "Small/Pencil.png";
-                    lco.EditImageOpacity = obj.Editable ? 1.0 : 0.2;
-                    lco.LayerOpacity = obj.Opacity;
-                    soureList.Add(lco);
-                }
+                //foreach (IObject obj in layer.Objects)
+                //{
+                //    lco = new LayerCtrlObject();
+                //    lco.Name = obj.Name;
+                //    lco.VisibalityImageName = "Small/eye.png";
+                //    lco.VisibalityImageOpacity = obj.Visible ? 1.0 : 0.2;
+                //    lco.EditImageName = "Small/Pencil.png";
+                //    lco.EditImageOpacity = obj.Editable ? 1.0 : 0.2;
+                //    lco.LayerOpacity = obj.Opacity;
+                //    soureList.Add(lco);
+                //}
             }
             lbLayers.ItemsSource = soureList;
         }
