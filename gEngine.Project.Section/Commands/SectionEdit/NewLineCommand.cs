@@ -8,6 +8,7 @@ using gEngine.Manipulator;
 using gEngine.Manipulator.Ge.Section;
 using gEngine.View;
 using gEngine.Commands;
+using gEngine.Graph.Ge.Section;
 
 namespace gEngine.Project.Ge.Section.Commands.SectionEdit
 {
@@ -20,7 +21,7 @@ namespace gEngine.Project.Ge.Section.Commands.SectionEdit
 
         public override void SetManipulator(LayerControl lc)
         {
-            DrawLineManipulator dm = gEngine.Manipulator.Registry.CreateManipulator("DrawLineManipulator") as DrawLineManipulator;
+            DrawLineManipulator dm = gEngine.Manipulator.Registry.CreateManipulator("DrawLineManipulator",SectionObject.LineType.StratumLine) as DrawLineManipulator;
             if (dm == null)
                 return;
             ManipulatorSetter.SetManipulator(dm, lc);
