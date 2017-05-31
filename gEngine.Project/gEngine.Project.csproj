@@ -52,8 +52,14 @@
   <ItemGroup>
     <Compile Include="CommandInstaller.cs" />
     <Compile Include="Commands\FullViewCommand.cs" />
+    <Compile Include="Commands\OpenMapsSelectCommand.cs" />
+    <Compile Include="Commands\OpenProjectCommand.cs" />
     <Compile Include="Commands\ProjectCommandsInstaller.cs" />
     <Compile Include="Commands\RedoCommand.cs" />
+    <Compile Include="Commands\SetLayerEditableCommand.cs" />
+    <Compile Include="Commands\SaveAsProjectCommand.cs" />
+    <Compile Include="Commands\SaveProjectCommand.cs" />
+    <Compile Include="Commands\SetLayerOpacityCommand.cs" />
     <Compile Include="Commands\SetLayerVisibleCommand.cs" />
     <Compile Include="Commands\UndoCommand.cs" />
     <Compile Include="Controls\LayerMgrControl.xaml.cs">
@@ -68,7 +74,9 @@
     <Compile Include="Controls\ProjectControl.xaml.cs">
       <DependentUpon>ProjectControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converter\ImagePathConverter.cs" />
     <Compile Include="Converter\MapIndexConverter.cs" />
+    <Compile Include="Converter\VisibilityConverter.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controls\ToolsControl.xaml.cs">

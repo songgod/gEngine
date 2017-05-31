@@ -19,8 +19,6 @@ namespace gEngine.Project.Controls
             InitializeComponent();
             this.View.HideButtonShowMode = HideButtonShowMode.InAllTabs;
             this.DataContext = this;
-            Binding bd = new Binding("CurrentIndex") { Source = MapsSource };
-            BindingOperations.SetBinding(this, SelectedIndexProperty, bd);
         }
 
         public IMaps MapsSource

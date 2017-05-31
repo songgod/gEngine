@@ -7,6 +7,8 @@
              xmlns:cvt="clr-namespace:gEngine.Project.Converter"
              x:Name="UserControl_Project"
              mc:Ignorable="d" 
+             xmlns:prjcmds="clr-namespace:gEngine.Commands;assembly=gEngine.Commands"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <cvt:MapIndexConverter x:Uid="cvt:MapIndexConverter_1" x:Key="micvt"/>
@@ -16,13 +18,19 @@
             <ColumnDefinition x:Uid="ColumnDefinition_1" Width="5*"/>
             <ColumnDefinition x:Uid="ColumnDefinition_2" Width="1*"/>
         </Grid.ColumnDefinitions>
-        <local:MapsControl x:Uid="tc" MapsSource="{Binding Path=Project.OpenMaps, ElementName=UserControl_Project}" Grid.Column="0" x:Name="tc"/>
+        <local:MapsControl x:Uid="tc" MapsSource="{Binding Path=Project.OpenMaps, ElementName=UserControl_Project}" Grid.Column="0" x:Name="tc">
+            <i:Interaction.Triggers>
+                <i:EventTrigger x:Uid="i:EventTrigger_1" EventName="SelectionChanged">
+                    <i:InvokeCommandAction x:Uid="i:InvokeCommandAction_1" Command="{x:Static prjcmds:OperateViewCommands.OpenMapsSelectCommand}" CommandParameter="{Binding ElementName=UserControl_Project}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </local:MapsControl>
         <Grid x:Uid="Grid_2" Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition x:Uid="RowDefinition_1" Height="1*"/>
                 <RowDefinition x:Uid="RowDefinition_2" Height="1*"/>
             </Grid.RowDefinitions>
-            <local:LayerMgrControl x:Uid="layermgr" x:Name="layermgr" MapSource="{Binding Path=Project.OpenMaps.CurrentIndex, ElementName=UserControl_Project, Converter={StaticResource micvt}, Mode=OneWay}"  Grid.Row="0"/>
+            <local:LayerMgrControl x:Uid="layermgr" x:Name="layermgr"   Grid.Row="0" MapSource="{Binding Path=Project.OpenMaps.CurrentIndex, ElementName=UserControl_Project, Converter={StaticResource micvt},ConverterParameter={x:Reference Name=tc},Mode=OneWay}"/>
             <local:ToolsControl x:Uid="toolcontrol" x:Name="toolcontrol" DataContext="{Binding ElementName=tc}" Grid.Row="1"/>
         </Grid>
     </Grid>

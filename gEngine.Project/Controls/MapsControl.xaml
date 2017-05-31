@@ -16,7 +16,8 @@
              d:DesignHeight="300" d:DesignWidth="300"
                  DestroyContentOnTabSwitching="False"
                  TabContentCacheMode="CacheAllTabs"
-                 ItemsSource="{Binding MapsSource, Mode=TwoWay}">
+                 ItemsSource="{Binding MapsSource, Mode=TwoWay}"
+                 >
     <dx:DXTabControl.ItemHeaderTemplate>
         <DataTemplate x:Uid="DataTemplate_1">
             <TextBlock x:Uid="TextBlock_1" Text="{Binding Name}"/>

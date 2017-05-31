@@ -11,7 +11,11 @@ namespace gEngine.Graph.Rw.Ge
     public abstract class RWObjectBase
     {
         public abstract string SupportType { get; }
-        public abstract IObject Read(XmlNode node);
+
+        public abstract void Read(IObject Object, XmlNode node);
+
         public abstract void Write(XmlNode node, IObject obj);
+
+        public abstract IObject CreateObject();
     }
 }

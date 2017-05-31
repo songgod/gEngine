@@ -45,6 +45,7 @@
     <Compile Include="BasicCommands.cs" />
     <Compile Include="OperateViewCommands.cs" />
     <Compile Include="PlaneCommands.cs" />
+    <Compile Include="ProjectCommands.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SectionCommands.cs" />
     <Compile Include="SectionEditCommands.cs" />

@@ -35,27 +35,6 @@ namespace gEngine.Project.Ge.Plane.Commands
             e.Handled = true;
         }
 
-        //private void NewPlaneMapCommand_Executed(object sender, ExecutedRoutedEventArgs e)
-        //{
-        //    ProjectControl pctrl = e.OriginalSource as ProjectControl;
-        //    if (pctrl == null || pctrl.Project == null || pctrl.Project.DBSource == null)
-        //        return;
-
-        //    List<string> names = pctrl.Project.DBSource.WellLocationsNames;
-        //    if (names.Count == 0)
-        //        return;
-
-        //    //弹出对话框，选择信息？
-
-        //    IDBWellLocations wls = pctrl.Project.DBSource.GetWellLocations(names[0]);
-        //    PlaneLayerCreator pc = new PlaneLayerCreator();
-        //    gEngine.Graph.Ge.Layer layer = pc.CreateWellLocationLayer(wls);
-
-        //    IMap map = pctrl.Project.NewMap("Ge", "Plane");
-        //    map.Layers.Add(layer);
-        //    e.Handled = true;
-        //}
-
         private void NewPlaneMapCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             ProjectControl pctrl = e.OriginalSource as ProjectControl;
@@ -72,11 +51,13 @@ namespace gEngine.Project.Ge.Plane.Commands
             PlaneLayerCreator pc = new PlaneLayerCreator();
             gEngine.Graph.Ge.Layer layer = pc.CreateWellLocationLayer(wls);
 
-            IMap map = pctrl.Project.NewMap("Ge", "Plane");
-            map.Layers.Add(layer);
-
-            
-            bool a = pctrl.Project.WriteMap(map, @"D:\map.Ge");
+            //先增加layer，再创建IMap
+            layer.Name = "平面图Layer层";
+            layer.Visible = true;
+            layer.Editable = true;
+            ILayers layers = new ILayers();
+            layers.Add(layer);
+            IMap map = pctrl.Project.NewMap("Ge", "Plane", layers);
             e.Handled = true;
         }
     }

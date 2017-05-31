@@ -1,6 +1,8 @@
 ﻿using DevExpress.Xpf.Ribbon;
+using gEngine.Graph.Interface;
 using gEngine.Project;
 using gEngine.Project.Controls;
+using System.Windows;
 
 namespace gSection.View
 {
@@ -52,5 +54,6 @@ namespace gSection.View
             this.DataContext = this;
 
         }
+
     }
 }

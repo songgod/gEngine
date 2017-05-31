@@ -10,6 +10,7 @@ namespace gEngine.Graph.Interface
         bool Visible { get; set; }
 
         bool Editable { get; set; }
+        double Opacity { get; set; }
 
         string DataTemplate { get; set; }
     }

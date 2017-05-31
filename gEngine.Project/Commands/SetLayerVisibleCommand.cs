@@ -1,10 +1,17 @@
 ﻿using gEngine.Commands;
+using gEngine.Graph.Interface;
+using gEngine.Project.Controls;
+using gEngine.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace gEngine.Project.Commands
 {
@@ -19,14 +26,52 @@ namespace gEngine.Project.Commands
 
         private void SetLayerVisibleCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            //string param = e.Parameter as string;
-            //int layerid = param.Substring(0, param.LastIndexOf(':'));
-            throw new NotImplementedException();
+            Image vImage = e.Parameter as Image;
+            if (vImage == null)
+                return;
+            LayerCtrlObject lco = vImage.DataContext as LayerCtrlObject;
+            if (lco == null)
+                return;
+            LayerMgrControl layerMgr = FindParent.FindVisualParent<LayerMgrControl>(vImage);
+
+            IMap map = layerMgr.MapSource;
+            if (map == null)
+                return;
+            ILayers layers = map.Layers;
+            if (layers == null)
+                return;
+            e.CanExecute = true;
+            e.Handled = true;
         }
 
         private void SetLayerVisibleCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            Image vImage = e.Parameter as Image;
+            LayerCtrlObject lco= vImage.DataContext as LayerCtrlObject;
+            LayerMgrControl layerMgr = FindParent.FindVisualParent<LayerMgrControl>(vImage);
+
+            IMap map = layerMgr.MapSource;
+            ILayers layers = map.Layers;
+            foreach (ILayer layer in layers)
+            {
+                if (lco.Name == layer.Name)
+                {
+                    layer.Visible = !layer.Visible;
+                    lco.VisibalityImageOpacity = layer.Visible ? 1.0 : 0.2;
+                }
+                if (layer.Visible)
+                {
+                    foreach (IObject obj in layer.Objects)
+                    {
+                        if (lco.Name == obj.Name)
+                        {
+                            obj.Visible = !obj.Visible;
+                            lco.VisibalityImageOpacity = obj.Visible ? 1.0 : 0.2;
+                        }
+                    }
+                }
+            }
+            e.Handled = true;
         }
     }
 }

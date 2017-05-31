@@ -19,7 +19,7 @@ namespace gEngine.Util.Ge.Plane
             {
                 WellLocation wl = new WellLocation();
                 wl.WellNum = item.Name;
-                wl.WellNum = item.Name;
+                wl.Name = item.Name;
                 wl.X = item.x;
                 wl.Y = item.y;
                 wl.WellCategory = (WellCategory)(item.WellCategory);
@@ -31,6 +31,8 @@ namespace gEngine.Util.Ge.Plane
                 {
                     wl.WellType = WellType.Y;
                 }
+                wl.Editable = true;
+                wl.Visible = true;
                 res.Add(wl);
                 //wl.DataTemplate = "WellLocationTemplate";
             }

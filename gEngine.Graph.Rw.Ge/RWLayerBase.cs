@@ -12,21 +12,42 @@ namespace gEngine.Graph.Rw.Ge
 {
     public class RWLayerBase
     {
-        public virtual  string SupportType { get { return "Layer"; } }
-        public virtual ILayer ReadLayer(XmlNode node)
+        public virtual string SupportType { get { return "Layer"; } }
+
+        public virtual void ReadLayer(ILayer Ilayer, XmlNode node)
         {
-            Layer layer = new Layer();
+            if (node == null)
+                return;
 
-            
+            Layer layer = (Layer) Ilayer;
 
-            return layer;
+            foreach (XmlNode childNode in node.ChildNodes)
+            {
+                RWObjectBase objectrw = Registry.GetObjectRW(childNode.Name);
+                if (objectrw == null)
+                {
+                    Log.LogWarning("Cound not find " + childNode.Name + " object readerwriter");
+                    continue;
+                }
+                IObject Object = objectrw.CreateObject();
+                objectrw.Read(Object, childNode);
+                if (Object == null)
+                    continue;
+                layer.Objects.Add(Object);
+            }
         }
 
         public virtual void WriteLayer(XmlNode node, ILayer layer)
         {
-            foreach (IObject obj in layer.Objects)
+            if (layer == null)
+                return;
+
+            if (node == null)
+                return;
+
+            foreach (IObject Object in layer.Objects)
             {
-                string objecttype = obj.GetType().Name.ToString();
+                string objecttype = Object.GetType().Name.ToString();
 
                 RWObjectBase objectrw = Registry.GetObjectRW(objecttype);
 
@@ -36,8 +57,15 @@ namespace gEngine.Graph.Rw.Ge
                     continue;
                 }
 
-
+                XmlElement xmlobject = node.OwnerDocument.CreateElement(objecttype);
+                objectrw.Write(xmlobject, Object);
+                node.AppendChild(xmlobject);
             }
+        }
+
+        public virtual ILayer CreateLayer()
+        {
+            return new Layer();
         }
     }
 }

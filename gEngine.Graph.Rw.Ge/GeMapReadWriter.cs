@@ -27,19 +27,34 @@ namespace gEngine.Graph.Rw.Ge
 
         public IMap ReadMap(string url)
         {
+            if (string.IsNullOrEmpty(url))
+                return null;
+
+            Registry.LoadLocalRW();
+
             XmlDocument xmldoc = new XmlDocument();
-            
+
             try
             {
                 XmlReaderSettings setting = new XmlReaderSettings() { IgnoreComments = true };
-                XmlReader reader = XmlReader.Create(url,setting);
+                XmlReader reader = XmlReader.Create(url, setting);
                 xmldoc.Load(reader);
                 XmlNode xmlmap = xmldoc.SelectSingleNode("Map");
                 Map map = new Map() { Name = xmlmap.Attributes["Name"].Value };
                 foreach (XmlNode node in xmlmap.ChildNodes)
                 {
                     RWLayerBase layerrw = Registry.GetLayerRW(node.Name);
-                    ILayer layer = layerrw.ReadLayer(node);
+                    if (layerrw == null)
+                    {
+                        Log.LogWarning("Cound not find " + node.Name + " layer readerwriter");
+                        continue;
+                    }
+                    ILayer layer = layerrw.CreateLayer();
+                    layerrw.ReadLayer(layer,node);
+                    if (layer == null)
+                        continue;
+                    layer.Name = node.Attributes["Name"].Value;
+                    layer.Type = node.Attributes["Type"].Value;
                     map.Layers.Add(layer);
                 }
                 reader.Close();
@@ -51,40 +66,12 @@ namespace gEngine.Graph.Rw.Ge
             }
         }
 
-        //public bool WriteMap(IMap map, string url)
-        //{
-        //    if (map == null || string.IsNullOrEmpty(url))
-        //        return false;
-
-
-        //    XmlDocument xmldoc = new XmlDocument();
-        //    xmldoc.AppendChild(xmldoc.CreateXmlDeclaration("1.0", "UTF-8", null));
-        //    XmlElement xmlmap = xmldoc.CreateElement("Map");
-        //    xmlmap.SetAttribute("Name", map.Name);
-        //    xmldoc.AppendChild(xmlmap);
-        //    foreach (ILayer layer in map.Layers)
-        //    {
-        //        string layertype = layer.GetType().ToString();
-        //        RWLayerBase layerrw = Registry.GetLayerRW(layertype);
-        //        if (layerrw == null)
-        //        {
-        //            Log.LogWarning("Cound not find "+ layertype+" layer readerwriter");
-        //            continue;
-        //        }
-
-        //        XmlElement xmllayer = xmlmap.OwnerDocument.CreateElement(layer.GetType().ToString());
-        //        layerrw.WriteLayer(xmllayer, layer);
-        //        xmlmap.AppendChild(xmllayer);
-        //    }
-        //    xmldoc.Save(url);
-        //    return true;
-        //}
-
         public bool WriteMap(IMap map, string url)
         {
             if (map == null || string.IsNullOrEmpty(url))
                 return false;
 
+            Registry.LoadLocalRW();
 
             XmlDocument xmldoc = new XmlDocument();
             xmldoc.AppendChild(xmldoc.CreateXmlDeclaration("1.0", "UTF-8", null));
@@ -102,6 +89,8 @@ namespace gEngine.Graph.Rw.Ge
                 }
 
                 XmlElement xmllayer = xmlmap.OwnerDocument.CreateElement(layertype);
+                xmllayer.SetAttribute("Name", layer.Name);
+                xmllayer.SetAttribute("Type", layer.Type);
                 layerrw.WriteLayer(xmllayer, layer);
                 xmlmap.AppendChild(xmllayer);
             }
