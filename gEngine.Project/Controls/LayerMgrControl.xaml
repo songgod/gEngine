@@ -44,10 +44,10 @@
             <ColumnDefinition x:Uid="ColumnDefinition_2" Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition x:Uid="RowDefinition_1" Height="30" />
+            <!--<RowDefinition x:Uid="RowDefinition_1" Height="30" />-->
             <RowDefinition x:Uid="RowDefinition_2" Height="*" />
         </Grid.RowDefinitions>
-        <TextBlock x:Uid="TextBlock_3" Text="不透明度:" Grid.Column="0" Grid.Row="0" />
+        <!--<TextBlock x:Uid="TextBlock_3" Text="不透明度:" Grid.Column="0" Grid.Row="0" />
         <ComboBox x:Uid="ComboBox_1" DataContext="{Binding SelectedItem,ElementName=lbLayers}" x:Name="cbOpacity" ScrollViewer.PanningMode="None" IsEditable="True" Grid.Column="1" Grid.Row="0" Text="{Binding SelectedItem.LayerOpacity,ElementName=lbLayers}">
             <ComboBoxItem x:Uid="ComboBoxItem_1">
                 <Slider x:Uid="Slider_1" Width="220" SmallChange="0.01" LargeChange="0.05" Maximum="1" Minimum="0" 
@@ -61,7 +61,7 @@
                     </i:Interaction.Triggers>
                 </Slider>
             </ComboBoxItem>
-        </ComboBox> 
+        </ComboBox>--> 
         <ListBox x:Uid="lbLayers" x:Name="lbLayers" ItemTemplate="{ StaticResource listBoxTemplate}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"/>
     </Grid>
             

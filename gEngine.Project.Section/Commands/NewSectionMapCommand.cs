@@ -94,8 +94,11 @@ namespace gEngine.Project.Ge.Section.Commands
             }
             SectionLayerCreator sc = new SectionLayerCreator();
             Layer layer = sc.CreateSectionLayer(db, wellLocs, horizonName, discreteName);
-            IMap map = Project.NewMap("Ge", "Column");
-            map.Layers.Add(layer);
+            layer.Name = "柱状图Layer图层";
+            ILayers layers = new ILayers();
+            layers.Add(layer);
+            IMap map = Project.NewMap("Ge", "Column", layers);
+            //map.Layers.Add(layer);
         }
     }
 }
