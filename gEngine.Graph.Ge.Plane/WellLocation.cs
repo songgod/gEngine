@@ -71,14 +71,14 @@ namespace gEngine.Graph.Ge.Plane
 
 
 
-        public string Symbol
+        public PointStyle PointStyle
         {
-            get { return (string)GetValue(SymbolProperty); }
-            set { SetValue(SymbolProperty, value); }
+            get { return (PointStyle)GetValue(PointStyleProperty); }
+            set { SetValue(PointStyleProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for Symbol.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty SymbolProperty =
-            DependencyProperty.Register("Symbol", typeof(string), typeof(WellLocation));
+        // Using a DependencyProperty as the backing store for PointStyle.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty PointStyleProperty =
+            DependencyProperty.Register("PointStyle", typeof(PointStyle), typeof(WellLocation), new PropertyMetadata(new PointStyle() { SymbolLib="gesym", Symbol= "GePointSymbol" }));
     }
 }

@@ -25,9 +25,11 @@ namespace gEngine.Symbol
             }
         }
 
-        public override PathGeometry Create(PathGeometry path)
+        public override object Create(LineOptionSetting param)
         {
-            return path;
+            Path res = new Path() { Stroke = new SolidColorBrush(Colors.Black) };
+            res.Data = param.Path;
+            return res;
         }
     }
 }

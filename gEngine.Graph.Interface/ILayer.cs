@@ -16,6 +16,8 @@ namespace gEngine.Graph.Interface
 
         bool Editable { get; set; }
 
+        double Opacity { get; set; }
+
         IObjects Objects { get; set; }
     }
 

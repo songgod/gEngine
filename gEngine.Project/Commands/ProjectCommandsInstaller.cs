@@ -30,6 +30,7 @@ namespace gEngine.Project.Commands
             ui.CommandBindings.Add(new SaveProjectCommand());
             ui.CommandBindings.Add(new SaveAsProjectCommand());
             ui.CommandBindings.Add(new OpenMapCommand());
+            ui.CommandBindings.Add(new SetLayerOpacityCommand());
         }
     }
 }

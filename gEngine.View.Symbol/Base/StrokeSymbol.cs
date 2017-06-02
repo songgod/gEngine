@@ -7,9 +7,9 @@ using System.Windows.Media;
 
 namespace gEngine.Symbol
 {
-    public abstract class PointSymbol : ISymbol
+    public abstract class StrokeSymbol : ISymbol
     {
-        public static readonly string type = "Point";
+        public static readonly string type = "Stroke";
         public string Type
         {
             get
@@ -17,8 +17,8 @@ namespace gEngine.Symbol
                 return type;
             }
         }
-
+        
         public abstract string Name { get; }
-        public abstract Geometry Create();
+        public abstract object Create(LineOptionSetting param);
     }
 }

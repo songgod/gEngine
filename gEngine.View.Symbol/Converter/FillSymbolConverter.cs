@@ -10,15 +10,9 @@ namespace gEngine.Symbol
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string symbol = value as string;
+            OptionSetting option = value as OptionSetting;
 
-            if (string.IsNullOrEmpty(symbol))
-                return Registry.DefaultFillSymbol.Create();
-
-            string symbolname = symbol.Substring(symbol.LastIndexOf('@') + 1);
-            string factoryname = symbol.Substring(0, symbol.LastIndexOf('@'));
-            FillSymbol fsym = Registry.GetFillSymbol(factoryname, symbolname);
-            return fsym.Create();
+            return Registry.CreateFillBrush(option);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -5,9 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:gEngine.View.Ge.Section"
              xmlns:gs="clr-namespace:gEngine.Graph.Ge.Section;assembly=gEngine.Graph.Ge.Section"
+             xmlns:gv="clr-namespace:gEngine.View.Ge;assembly=gEngine.View.Ge"
              mc:Ignorable="d">
     <DataTemplate DataType="{x:Type gs:SectionObject}">
-        <Canvas x:Name="SectionObjectCanvas" Background="Yellow">
+        <local:SectionObjectCanvas x:Name="SectionObjectCanvas" Background="Yellow">   
             <ItemsControl ItemsSource="{Binding TopGraph.Regions}">
                 <ItemsControl.Resources>
                     <local:Region2PathDataConverter x:Key="f2p"/>
@@ -25,6 +26,7 @@
                                 <MultiBinding Converter="{StaticResource t2f}">
                                     <Binding Path="Type"/>
                                     <Binding Path="Valid"/>
+                                    <Binding Path="DataContext" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type local:SectionObjectCanvas},AncestorLevel=1}"/>
                                 </MultiBinding>
                             </Path.Fill>
                             <Path.Data>
@@ -38,6 +40,10 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
             <ItemsControl ItemsSource="{Binding TopGraph.Bounds}">
+                <ItemsControl.Resources>
+                    <local:Type2LineStyleConverter x:Key="t2s"/>
+                    <local:Line2PathDataConverter x:Key="l2p"/>
+                </ItemsControl.Resources>
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <Canvas x:Name="bounds"/>
@@ -45,26 +51,20 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Path Stroke="Black" StrokeThickness="1">
-                            <Path.Resources>
-                                <FrameworkElement x:Key="ProxyElement" DataContext="{Binding}"/>
-                            </Path.Resources>
-                            <Path.Data>
-                                <PathGeometry>
-                                    <PathGeometry.Figures>
-                                        <PathFigureCollection>
-                                            <PathFigure StartPoint="{Binding DataContext.StartPoint, Source={StaticResource ProxyElement}}">
-                                                <PathFigure.Segments>
-                                                    <PathSegmentCollection>
-                                                        <PolyBezierSegment Points="{Binding DataContext.PointsWithoutFirst, Source={StaticResource ProxyElement}}"/>
-                                                    </PathSegmentCollection>
-                                                </PathFigure.Segments>
-                                            </PathFigure>
-                                        </PathFigureCollection>
-                                    </PathGeometry.Figures>
-                                </PathGeometry>
-                            </Path.Data>
-                        </Path>
+                        <gv:LineControl>
+                            <gv:LineControl.LineStyle>
+                                <MultiBinding Converter="{StaticResource t2s}">
+                                    <Binding Path="Type"/>
+                                    <Binding Path="DataContext" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type local:SectionObjectCanvas},AncestorLevel=1}"/>
+                                </MultiBinding>
+                            </gv:LineControl.LineStyle>
+                            <gv:LineControl.Data>
+                                <MultiBinding Converter="{StaticResource l2p}">
+                                    <Binding Path="StartPoint"/>
+                                    <Binding Path="PointsWithoutFirst"/>
+                                </MultiBinding>
+                            </gv:LineControl.Data>
+                        </gv:LineControl>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
@@ -77,20 +77,17 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Ellipse Width="10" Height="10" Fill="Red">
-                            <Ellipse.Resources>
-                                <FrameworkElement x:Key="ProxyElement" DataContext="{Binding}"/>
-                            </Ellipse.Resources>
                             <Ellipse.RenderTransform>
                                 <TransformGroup>
                                     <TranslateTransform X="-5" Y="-5"/>
-                                    <TranslateTransform X="{Binding DataContext.X, Source={StaticResource ProxyElement}}" Y="{Binding DataContext.Y, Source={StaticResource ProxyElement}}"/>
+                                    <TranslateTransform X="{Binding X}" Y="{Binding Y}"/>
                                 </TransformGroup>
                             </Ellipse.RenderTransform>
                         </Ellipse>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-        </Canvas>
+        </local:SectionObjectCanvas>
     </DataTemplate>
     <DataTemplate DataType="{x:Type gs:TrendLineObject}">
         <Polyline Points="{Binding Points}" Stroke="Black" StrokeThickness="1"/>

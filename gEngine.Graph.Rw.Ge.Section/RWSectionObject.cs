@@ -66,9 +66,10 @@ namespace gEngine.Graph.Rw.Ge.Section
                             r.FirstHalf = Int32.Parse(cSNode.Attributes["FirstHalf"].Value);
                             r.Type = Int32.Parse(cSNode.Attributes["Type"].Value);
                             r.InnerNum = Int32.Parse(cSNode.Attributes["InnerNum"].Value);
-                            if (!string.IsNullOrEmpty(cSNode.Attributes["InnerHead"].Value))
+                            string s = cSNode.Attributes["InnerHead"].Value;
+                            if (!string.IsNullOrEmpty(s))
                             {
-                                string[] strList = (node.Attributes["InnerHead"].Value).Split(' ');
+                                string[] strList = s.Split(' ');
                                 r.InnerHead = strList.Select(n => { return Int32.Parse(n); }).ToList();
                             }
                             ds.Regions.Add(r);
@@ -139,7 +140,7 @@ namespace gEngine.Graph.Rw.Ge.Section
 
             foreach (HalfEdge h in ds.HalfEdges)
             {
-                XmlElement xmlHalfEdge = xmlInterPoints.OwnerDocument.CreateElement("InterPoint");
+                XmlElement xmlHalfEdge = xmlInterPoints.OwnerDocument.CreateElement("HalfEdge");
                 xmlHalfEdge.SetAttribute("Start", h.Start.ToString("0"));
                 xmlHalfEdge.SetAttribute("Twin", h.Twin.ToString("0"));
                 xmlHalfEdge.SetAttribute("LeftRegion", h.LeftRegion.ToString("0"));
@@ -161,7 +162,7 @@ namespace gEngine.Graph.Rw.Ge.Section
 
             foreach (Segment s in ds.Segments)
             {
-                XmlElement xmlSegment = xmlInterPoints.OwnerDocument.CreateElement("InterPoint");
+                XmlElement xmlSegment = xmlInterPoints.OwnerDocument.CreateElement("Segment");
                 xmlSegment.SetAttribute("X1", s.X1.ToString());
                 xmlSegment.SetAttribute("Y1", s.Y1.ToString());
                 xmlSegment.SetAttribute("X2", s.X2.ToString());

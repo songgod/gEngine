@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="gTopology">
       <HintPath>..\3rdlib\gToplogy\x64\gTopology.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -72,6 +73,14 @@
     <ProjectReference Include="..\gEngine.Graph.Interface\gEngine.Graph.Interface.csproj">
       <Project>{1c98a821-b030-4ff2-83ae-d49b1b3b8c67}</Project>
       <Name>gEngine.Graph.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.View.Ge\gEngine.View.Ge.csproj">
+      <Project>{BC05DE82-7172-43BC-A025-9827E0275209}</Project>
+      <Name>gEngine.View.Ge</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.View.Symbol\gEngine.Symbol.csproj">
+      <Project>{1600379b-c8b5-4375-a1d5-3b81bd7fccf7}</Project>
+      <Name>gEngine.Symbol</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

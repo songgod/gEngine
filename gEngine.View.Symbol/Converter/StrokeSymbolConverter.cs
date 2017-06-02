@@ -13,19 +13,8 @@ namespace gEngine.Symbol
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            PathGeometry path = parameter as PathGeometry;
-            if (path == null)
-                return null;
-
-            string symbol = value as string;
-
-            if (string.IsNullOrEmpty(symbol))
-                return Registry.DefaultStrokeSymbol.Create(path);
-
-            string symbolname = symbol.Substring(symbol.LastIndexOf('@') + 1);
-            string factoryname = symbol.Substring(0, symbol.LastIndexOf('@'));
-            StrokeSymbol ssym = Registry.GetStrokeSymbol(factoryname, symbolname);
-            return ssym.Create(path);
+            LineOptionSetting param = value as LineOptionSetting;
+            return Registry.CreateStroke(param);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -33,7 +33,9 @@
   <ItemGroup>
     <Reference Include="gTopology">
       <HintPath>..\3rdlib\gToplogy\x64\gTopology.dll</HintPath>
+      <Private>False</Private>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SectionLayer.cs" />
     <Compile Include="SectionObject.cs" />
     <Compile Include="TrendLineObject.cs" />
   </ItemGroup>

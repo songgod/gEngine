@@ -9,6 +9,7 @@ namespace gEngine.Symbol
     public interface ISymbolFactory
     {
         bool LoadFromUrl(string url);
+        string Url { get; set; }
         PointSymbol GetPointSymbol(string name);
         StrokeSymbol GetStrokeSymbol(string name);
         FillSymbol GetFillSymbol(string name);

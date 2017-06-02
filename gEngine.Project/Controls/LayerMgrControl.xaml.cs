@@ -43,18 +43,20 @@ namespace gEngine.Project.Controls
                 lco.VisibalityImageOpacity = layer.Visible ? 1.0 : 0.2;
                 lco.EditImageName= "Small/Pencil.png";
                 lco.EditImageOpacity = layer.Editable ? 1.0 : 0.2;
+                lco.LayerOpacity = layer.Opacity;
                 soureList.Add(lco);
 
-                foreach (IObject obj in layer.Objects)
-                {
-                    lco = new LayerCtrlObject();
-                    lco.Name = obj.Name;
-                    lco.VisibalityImageName = "Small/eye.png";
-                    lco.VisibalityImageOpacity = obj.Visible ? 1.0 : 0.2;
-                    lco.EditImageName = "Small/Pencil.png";
-                    lco.EditImageOpacity = obj.Editable ? 1.0 : 0.2;
-                    soureList.Add(lco);
-                }
+                //foreach (IObject obj in layer.Objects)
+                //{
+                //    lco = new LayerCtrlObject();
+                //    lco.Name = obj.Name;
+                //    lco.VisibalityImageName = "Small/eye.png";
+                //    lco.VisibalityImageOpacity = obj.Visible ? 1.0 : 0.2;
+                //    lco.EditImageName = "Small/Pencil.png";
+                //    lco.EditImageOpacity = obj.Editable ? 1.0 : 0.2;
+                //    lco.LayerOpacity = obj.Opacity;
+                //    soureList.Add(lco);
+                //}
             }
             lbLayers.ItemsSource = soureList;
         }
@@ -77,6 +79,10 @@ namespace gEngine.Project.Controls
         public static readonly DependencyProperty MapSourceProperty =
             DependencyProperty.Register("MapSource", typeof(IMap), typeof(LayerMgrControl));
 
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            
+        }
 
     }
 
@@ -115,6 +121,21 @@ namespace gEngine.Project.Controls
         }
         public static readonly DependencyProperty EditImageOpacityProperty =
             DependencyProperty.Register("EditImageOpacity", typeof(double), typeof(LayerCtrlObject));
+
+        public double LayerOpacity
+        {
+            get
+            {
+                return (double)GetValue(LayerOpacityProperty);
+            }
+            set
+            {
+                SetValue(LayerOpacityProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty LayerOpacityProperty =
+            DependencyProperty.Register("LayerOpacity", typeof(double), typeof(LayerCtrlObject));
 
     }
 
