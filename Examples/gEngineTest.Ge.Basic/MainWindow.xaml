@@ -9,8 +9,14 @@
         Title="MainWindow" Height="350" Width="525">
     <Window.Resources>
         <gb:Rect x:Key="rect" Left="100" Top="100" Width="100" Height="100"/>
+        <gb:Line x:Key="line" Start="20,20" End="40,40"/>
+        <gb:PolyLine x:Key="polyline" Points="20,20,30,50,60,30"/>
+        <gb:BeizerLine x:Key="bezierline" Points="50,50,70,30,60,100,30,80"/>
     </Window.Resources>
     <Grid>
         <ContentControl Content="{StaticResource rect}"/>
+        <ContentControl Content="{StaticResource line}"/>
+        <ContentControl Content="{StaticResource polyline}"/>
+        <ContentControl Content="{StaticResource bezierline}"/>
     </Grid>
 </Window>

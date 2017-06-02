@@ -1,0 +1,43 @@
+﻿<ResourceDictionary x:Class="gEngine.View.Ge.Basic.LinesDict"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:gEngine.View.Ge.Basic"
+             xmlns:gb="clr-namespace:gEngine.Graph.Ge.Basic;assembly=gEngine.Graph.Ge.Basic"
+             xmlns:gv="clr-namespace:gEngine.View.Ge;assembly=gEngine.View.Ge"
+             mc:Ignorable="d">
+    <DataTemplate DataType="{x:Type gb:Line}">
+        <gv:LineControl LineStyle="{Binding LinStyle}">
+            <gv:LineControl.Resources>
+                <local:TwoPoints2PathGeometryConverter x:Key="tp2pgc"/>
+            </gv:LineControl.Resources>
+            <gv:LineControl.Data>
+                <MultiBinding Converter="{StaticResource tp2pgc}">
+                    <Binding Path="Start"/>
+                    <Binding Path="End"/>
+                </MultiBinding>
+            </gv:LineControl.Data>
+        </gv:LineControl>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type gb:PolyLine}">
+        <gv:LineControl LineStyle="{Binding LinStyle}">
+            <gv:LineControl.Resources>
+                <local:Ponits2PolylinePathGeometryConverter x:Key="p2plpgc"/>
+            </gv:LineControl.Resources>
+            <gv:LineControl.Data>
+                <Binding Path="Points" Converter="{StaticResource p2plpgc}"/>
+            </gv:LineControl.Data>
+        </gv:LineControl> 
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type gb:BeizerLine}">
+        <gv:LineControl LineStyle="{Binding LinStyle}">
+            <gv:LineControl.Resources>
+                <local:Points2PolyBezierPathGeometryConverter x:Key="p2pbpgc"/>
+            </gv:LineControl.Resources>
+            <gv:LineControl.Data>
+                <Binding Path="Points" Converter="{StaticResource p2pbpgc}"/>
+            </gv:LineControl.Data>
+        </gv:LineControl>
+    </DataTemplate>
+</ResourceDictionary>
