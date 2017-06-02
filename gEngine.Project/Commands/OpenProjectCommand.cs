@@ -1,4 +1,5 @@
-﻿using gEngine.Commands;
+﻿using DevExpress.Xpf.Ribbon;
+using gEngine.Commands;
 using gEngine.Project.Controls;
 using Microsoft.Win32;
 using System;
@@ -28,7 +29,7 @@ namespace gEngine.Project.Commands
 
         private void OpenCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            ProjectControl pc = e.OriginalSource as ProjectControl;
+            ProjectControl pc = e.Parameter as ProjectControl;
             if (pc == null || pc.Project == null)
                 return;
 
@@ -36,7 +37,7 @@ namespace gEngine.Project.Commands
             OpenFileDialog.Filter = "工程文件|*.Gepro";
             if (OpenFileDialog.ShowDialog() == true)
             {
-                if (pc.Project.Open(OpenFileDialog.FileName))
+                if (pc.Project.OpenMapList(OpenFileDialog.FileName))
                 {
                     MessageBox.Show("打开成功");
                 }

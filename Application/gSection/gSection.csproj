@@ -84,6 +84,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\ThemedContentControl.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -96,6 +97,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Converters\ObjectsEqualityConverter.cs" />
+    <Page Include="View\BackstageViewPanes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\BackstageViewStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -1329,6 +1338,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Small\Pencil.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Small\clock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Small\computer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Small\new file.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

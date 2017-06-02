@@ -21,6 +21,22 @@ namespace gEngine.Project
             OpenMaps = new IMaps();
             Maps.OnItemRemoved += Maps_OnItemRemoved;
             OpenMaps.OnItemRemoved += OpenMaps_OnItemRemoved;
+            MapList = new ObservedCollection<MapList>();
+        }
+
+        public bool OpenMapList(string url)
+        {
+            Url = url;
+            string ProjectName = url;
+            string ProjPath = ProjectName.Substring(0, ProjectName.LastIndexOf(@"\"));
+            string MapPath = ProjPath + "\\Maps";
+            var files = Directory.GetFiles(MapPath, "*.Ge", SearchOption.TopDirectoryOnly).Where(s => s.StartsWith(MapPath));
+            foreach (var item in files)
+            {
+                MapList map = new MapList(item);
+                MapList.Add(map);
+            }
+            return true;
         }
 
         public bool Open(string url)
@@ -289,6 +305,18 @@ namespace gEngine.Project
 
             bool IsSuccess = gEngine.Graph.Interface.Registry.WriteMap(map, url);
             return IsSuccess;
+        }
+
+        public ObservedCollection<MapList> MapList { get; set; }
+    }
+
+    public class MapList
+    {
+        public string Url { get; set; }
+        public MapList() { }
+        public MapList(string url)
+        {
+            Url = url;
         }
     }
 }
