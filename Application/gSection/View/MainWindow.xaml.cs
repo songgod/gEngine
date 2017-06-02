@@ -30,6 +30,7 @@ namespace gSection.View
             Projects = new Project();
             Projects.OpenDBSource(@"D:\gSectionData.Txt");
 
+
             InitializeComponent();
 
             ClipartImages = new string[] {
@@ -50,10 +51,7 @@ namespace gSection.View
                  "/RibbonDemo;component/Images/Clipart/caServerEnabled.png",
                  "/RibbonDemo;component/Images/Clipart/caWebCam.png"
              };
-
             this.DataContext = this;
-
         }
-
     }
 }
