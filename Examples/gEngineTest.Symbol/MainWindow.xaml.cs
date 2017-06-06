@@ -41,13 +41,14 @@ namespace gEngineTest.Symbol
         {
             PointCollection pc = value as PointCollection;
             string symbol = parameter as string;
+            
             PathGeometry pathgeom = new PathGeometry();
             PolyLineSegment ps = new PolyLineSegment() { Points = pc };
             PathFigure pf = new PathFigure() { StartPoint = pc.First() };
             pf.Segments.Add(ps);
             pathgeom.Figures.Add(pf);
-            Geometry geom = Registry.CreateStrokeGeometry(pathgeom, symbol);
-            return geom;
+            LineOptionSetting setting = new LineOptionSetting() { Path = pathgeom, Factory = "", Symbol = symbol };
+            return Registry.CreateStroke(setting);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
