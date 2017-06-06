@@ -22,10 +22,100 @@ namespace gEngine.Project
             Maps.OnItemRemoved += Maps_OnItemRemoved;
             OpenMaps.OnItemRemoved += OpenMaps_OnItemRemoved;
             MapList = new ObservedCollection<MapList>();
+            RecentProjectList();
         }
+
+        #region RecentProject
+
+        public void RecentProjectList()
+        {
+            RecentProjects = new ObservedCollection<RecentProjects>();
+            string dir = Directory.GetCurrentDirectory();
+            string ProjectName = dir + "\\ProjectMRUList.Project";
+            if (File.Exists(ProjectName))
+            {
+                XmlDocument xmldoc = new XmlDocument();
+                XmlReaderSettings setting = new XmlReaderSettings() { IgnoreComments = true };
+                XmlReader reader = XmlReader.Create(ProjectName, setting);
+                xmldoc.Load(reader);
+                XmlNode xmlproj = xmldoc.SelectSingleNode("Projects");
+                foreach (XmlNode node in xmlproj.ChildNodes)
+                {
+                    string ProjectUrl = node.Attributes["Url"].Value;
+                    RecentProjects RecentProject = new RecentProjects(ProjectUrl);
+                    RecentProjects.Add(RecentProject);
+                }
+                reader.Close();
+            }
+            else
+            {
+                XmlDocument xmldoc = new XmlDocument();
+                xmldoc.AppendChild(xmldoc.CreateXmlDeclaration("1.0", "UTF-8", null));
+                XmlElement xmlproj = xmldoc.CreateElement("Projects");
+                xmldoc.AppendChild(xmlproj);
+                xmldoc.Save(ProjectName);
+            }
+        }
+
+        public bool WriteRecentProject(string url)
+        {
+            string dir = Directory.GetCurrentDirectory();
+            string ProjectName = dir + "\\ProjectMRUList.Project";
+
+            XmlDocument xmldoc = new XmlDocument();
+            xmldoc.Load(ProjectName);
+            var res = RecentProjects.Where(s => s.Url == url);
+            if (res.Count().Equals(0))
+            {
+                XmlNode xmlprojs = xmldoc.SelectSingleNode("Projects");
+                XmlElement xmlproj = xmldoc.CreateElement("Project");
+                xmlproj.SetAttribute("Url", url);
+                xmlprojs.AppendChild(xmlproj);
+                xmldoc.Save(ProjectName);
+                RecentProjects RecentProject = new RecentProjects(url);
+                RecentProjects.Add(RecentProject);
+            }
+
+            return true;
+        }
+
+        public bool IsExistProject(string url)
+        {
+            string dir = Directory.GetCurrentDirectory();
+            string ProjectName = dir + "\\ProjectMRUList.Project";
+            if (File.Exists(url))
+            {
+                return true;
+            }
+            else
+            {
+                XmlDocument xmldoc = new XmlDocument();
+                xmldoc.Load(ProjectName);
+                XmlNodeList xnl = xmldoc.SelectSingleNode("Projects").ChildNodes;
+
+                foreach (XmlNode xn in xnl)
+                {
+                    XmlElement xe = (XmlElement) xn;
+                    if (xe.GetAttribute("Url") == url)
+                    {
+                        xe.ParentNode.RemoveChild(xe);
+                    }
+                }
+                xmldoc.Save(ProjectName);
+
+                RecentProjects.Remove(RecentProjects.Where(s => s.Url == url).Single());
+
+                return false;
+            }
+        }
+
+        #endregion
 
         public bool OpenMapList(string url)
         {
+            OpenMaps.Clear();
+            Maps.Clear();
+            MapList.Clear();
             Url = url;
             string ProjectName = url;
             string ProjPath = ProjectName.Substring(0, ProjectName.LastIndexOf(@"\"));
@@ -308,6 +398,8 @@ namespace gEngine.Project
         }
 
         public ObservedCollection<MapList> MapList { get; set; }
+
+        public ObservedCollection<RecentProjects> RecentProjects { get; set; }
     }
 
     public class MapList
@@ -315,6 +407,16 @@ namespace gEngine.Project
         public string Url { get; set; }
         public MapList() { }
         public MapList(string url)
+        {
+            Url = url;
+        }
+    }
+
+    public class RecentProjects
+    {
+        public string Url { get; set; }
+        public RecentProjects() { }
+        public RecentProjects(string url)
         {
             Url = url;
         }

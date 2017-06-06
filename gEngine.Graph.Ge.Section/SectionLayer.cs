@@ -12,7 +12,6 @@ namespace gEngine.Graph.Ge.Section
         {
             Type = "Section";
             SectionObject = new SectionObject();
-            Objects.Add(SectionObject);
         }
         
 

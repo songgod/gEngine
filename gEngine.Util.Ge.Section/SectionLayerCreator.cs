@@ -26,6 +26,7 @@ namespace gEngine.Util.Ge.Section
         public Layer CreateSectionLayer(IDBSource db, Stack<WellLocation> wellLocs, string horizonName, string discreteName)
         {
             Layer layer = new SectionLayer();
+            layer.Objects.Add(new SectionObject());
 
             WellCreator wc = new WellCreator();
 

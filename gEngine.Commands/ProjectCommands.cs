@@ -14,10 +14,12 @@ namespace gEngine.Commands
             OpenCommand = new RoutedUICommand("打开工程", "OpenCommand", typeof(ProjectCommands));
             SaveCommand = new RoutedUICommand("保存工程", "SaveCommand", typeof(ProjectCommands));
             SaveAsCommand = new RoutedUICommand("另存为工程", "SaveAsCommand", typeof(ProjectCommands));
+            OpenRecentCommand = new RoutedUICommand("打开最近的工程文件", "OpenRecentCommand", typeof(ProjectCommands));
         }
 
         public static RoutedCommand OpenCommand { get; set; }
         public static RoutedCommand SaveCommand { get; set; }
         public static RoutedCommand SaveAsCommand { get; set; }
+        public static RoutedCommand OpenRecentCommand { get; set; }
     }
 }

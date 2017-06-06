@@ -59,10 +59,16 @@
         </controls:ThemedContentControl>
     </ControlTemplate>
     <DataTemplate  x:Uid="DataTemplate_1" x:Key="ProjectItemTemplate" >
-        <TextBlock x:Uid="TextBlock_3" Text="{Binding Path=Url}"/>
+        <TextBlock x:Name="txtProjectUrl" x:Uid="TextBlock_4" Text="{Binding Path=Url}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger x:Uid="i:EventTrigger_3" EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction  x:Uid="i:InvokeCommandAction_2" Command="{x:Static prjcmds:ProjectCommands.OpenRecentCommand}" CommandParameter="{Binding ElementName=txtProjectUrl }"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </TextBlock>
     </DataTemplate>
     <DataTemplate  x:Uid="DataTemplate_2" x:Key="MapItemTemplate" >
-        <TextBlock x:Name="txtMapUrl" x:Uid="TextBlock_4" Text="{Binding Path=Url}">
+        <TextBlock x:Name="txtMapUrl" x:Uid="txtMapUrl" Text="{Binding Path=Url}">
             <i:Interaction.Triggers>
                 <i:EventTrigger x:Uid="i:EventTrigger_2" EventName="MouseLeftButtonDown">
                     <i:InvokeCommandAction   x:Uid="i:InvokeCommandAction_1"  Command="{x:Static prjcmds:MapCommands.OpenMapCommand}" CommandParameter="{Binding ElementName=txtMapUrl }"/>

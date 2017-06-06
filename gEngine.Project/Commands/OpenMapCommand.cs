@@ -31,12 +31,13 @@ namespace gEngine.Project.Commands
         {
             TextBlock TextBlock = e.Parameter as TextBlock;
             string url = TextBlock.Text;
-
             ApplicationMenuContentControl ApplicationControl = FindParent.FindVisualParent<ApplicationMenuContentControl>(TextBlock);
+            if (ApplicationControl == null)
+                return;
             DXRibbonWindow DxWindow = ApplicationControl.DataContext as DXRibbonWindow;
             ProjectControl pc = FindChild.FindVisualChild<ProjectControl>(DxWindow, "prjctrl");
-
             pc.Project.OpenMap(url);
+            ApplicationControl.Close();
             e.Handled = true;
         }
     }

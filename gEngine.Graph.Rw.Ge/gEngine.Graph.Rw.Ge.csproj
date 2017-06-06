@@ -50,6 +50,10 @@
     <Compile Include="RWSectionLayer.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\gEngine.Graph.Ge.Section\gEngine.Graph.Ge.Section.csproj">
+      <Project>{53d7a20d-84b5-499f-b183-d440854b7c8c}</Project>
+      <Name>gEngine.Graph.Ge.Section</Name>
+    </ProjectReference>
     <ProjectReference Include="..\gEngine.Graph.Ge\gEngine.Graph.Ge.csproj">
       <Project>{3BD77E4F-A348-4EDB-B60C-68B749249B91}</Project>
       <Name>gEngine.Graph.Ge</Name>

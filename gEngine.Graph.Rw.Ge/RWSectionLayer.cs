@@ -1,4 +1,5 @@
-﻿using gEngine.Graph.Interface;
+﻿using gEngine.Graph.Ge.Section;
+using gEngine.Graph.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace gEngine.Graph.Rw.Ge
 
         public override ILayer CreateLayer()
         {
-            return base.CreateLayer();
+            return new SectionLayer() ;
         }
     }
 }

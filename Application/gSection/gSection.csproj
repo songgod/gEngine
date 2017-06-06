@@ -1346,7 +1346,13 @@
     <Resource Include="Images\Small\computer.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Small\new file.png" />
+    <Resource Include="Images\Small\FileNew_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Small\FileNew_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Small\FileOpen2_16x16.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
