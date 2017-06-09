@@ -1,8 +1,11 @@
-﻿using DevExpress.Xpf.Ribbon;
+﻿using DevExpress.Mvvm;
+using DevExpress.Xpf.Ribbon;
 using gEngine.Graph.Interface;
 using gEngine.Project;
 using gEngine.Project.Controls;
+using System.IO;
 using System.Windows;
+using System.Windows.Input;
 
 namespace gSection.View
 {
@@ -15,11 +18,22 @@ namespace gSection.View
 
         public Project Projects { get; set; }
 
+        public RecentProject RecentProjects { get; set; }
+
         public ProjectControl ProjectControl
         {
             get
             {
                 return prjctrl;
+            }
+        }
+
+        public RecentProjectControl RecentProjectControl
+        {
+            get
+            {
+                RecentProjectControl RecentProjectControl = gEngine.View.FindChild.FindVisualChild<RecentProjectControl>(this.BackstageViewControl_1, "rprjcontrols");
+                return RecentProjectControl;
             }
         }
 
@@ -30,6 +44,15 @@ namespace gSection.View
             Projects = new Project();
             Projects.OpenDBSource(@"D:\gSectionData.Txt");
 
+            #region RecentProject
+
+            string dir = Directory.GetCurrentDirectory();
+
+            string ProjectListUrl = dir + "\\ProjectMRUList.Project";
+            RecentProjects = new RecentProject();
+            RecentProjects.Open(ProjectListUrl);
+
+            #endregion
 
             InitializeComponent();
 
@@ -52,6 +75,28 @@ namespace gSection.View
                  "/RibbonDemo;component/Images/Clipart/caWebCam.png"
              };
             this.DataContext = this;
+        }
+
+        public ICommand CloseApplicationMenuCommand
+        {
+            get
+            {
+                return new DelegateCommand(() =>
+                {
+                    this.BackstageViewControl_1.Close();
+                });
+            }
+        }
+
+        public ICommand SetOpenMapTabIndexCommand
+        {
+            get
+            {
+                return new DelegateCommand(() =>
+                {
+                    BackstageViewControl_1.SelectedTabIndex = 1;
+                });
+            }
         }
     }
 }

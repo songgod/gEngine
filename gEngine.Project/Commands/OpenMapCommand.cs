@@ -29,15 +29,22 @@ namespace gEngine.Project.Commands
 
         private void OpenMapCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            TextBlock TextBlock = e.Parameter as TextBlock;
-            string url = TextBlock.Text;
-            ApplicationMenuContentControl ApplicationControl = FindParent.FindVisualParent<ApplicationMenuContentControl>(TextBlock);
-            if (ApplicationControl == null)
+            List<object> LsPara = e.Parameter as List<object>;
+
+            if (LsPara == null)
                 return;
-            DXRibbonWindow DxWindow = ApplicationControl.DataContext as DXRibbonWindow;
-            ProjectControl pc = FindChild.FindVisualChild<ProjectControl>(DxWindow, "prjctrl");
-            pc.Project.OpenMap(url);
-            ApplicationControl.Close();
+
+            if (LsPara[0] == null || LsPara[1] == null)
+                return;
+
+            ProjectControl pc = LsPara[0] as ProjectControl;
+            TextBlock TextBlock = LsPara[1] as TextBlock;
+            string MapFileName = TextBlock.Text;
+
+            if (pc == null || pc.Project == null)
+                return;
+            pc.Project.OpenMap(MapFileName);
+            pc.MapsControl.SelectLast();
             e.Handled = true;
         }
     }

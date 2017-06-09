@@ -28,14 +28,24 @@ namespace gEngine.Project.Commands
             e.Handled = true;
         }
 
+
         private void OpenCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            BackstageViewControl BackstageViewControl = e.Parameter as BackstageViewControl;
-            ApplicationMenuContentControl ApplicationControl = FindParent.FindVisualParent<ApplicationMenuContentControl>(BackstageViewControl);
-            DXRibbonWindow DxWindow = ApplicationControl.DataContext as DXRibbonWindow;
-            ProjectControl pc = FindChild.FindVisualChild<ProjectControl>(DxWindow, "prjctrl");
-           
+            List<object> LsPara = e.Parameter as List<object>;
+
+            if (LsPara == null)
+                return;
+
+            if (LsPara[0] == null || LsPara[1] == null)
+                return;
+
+            ProjectControl pc = LsPara[0] as ProjectControl;
+            RecentProjectControl rpc = LsPara[1] as RecentProjectControl;
+
             if (pc == null || pc.Project == null)
+                return;
+
+            if (rpc == null || rpc.Project == null)
                 return;
 
             OpenFileDialog OpenFileDialog = new OpenFileDialog();
@@ -43,22 +53,10 @@ namespace gEngine.Project.Commands
 
             if (OpenFileDialog.ShowDialog() == true)
             {
-                if (OpenFileDialog.FileName.Equals(pc.Project.Url))
-                {
-                    MessageBox.Show("您选择的工区已经打开！");
-                    return;
-                }
-
-                if (pc.Project.OpenMapList(OpenFileDialog.FileName))
-                {
-                    MessageBox.Show("打开成功");
-                    pc.Project.WriteRecentProject(OpenFileDialog.FileName);
-                    BackstageViewControl.SelectedTabIndex = 1;
-                }
-                else
-                {
-                    MessageBox.Show("打开失败");
-                }
+                pc.Project = new Project();
+                pc.Project.OpenDBSource(@"D:\gSectionData.Txt");
+                pc.Project.Open(OpenFileDialog.FileName);
+                rpc.Project.Write(OpenFileDialog.FileName);
             }
             else
             {

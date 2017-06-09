@@ -33,38 +33,34 @@ namespace gEngine.Project.Commands
 
         private void OpenRecentCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            TextBlock TextBlock = e.Parameter as TextBlock;
-            string url = TextBlock.Text;
-            BackstageViewControl BackstageViewControl = FindParent.FindVisualParent<BackstageViewControl>(TextBlock);
-            ApplicationMenuContentControl ApplicationControl = FindParent.FindVisualParent<ApplicationMenuContentControl>(BackstageViewControl);
-            DXRibbonWindow DxWindow = ApplicationControl.DataContext as DXRibbonWindow;
-            ProjectControl pc = FindChild.FindVisualChild<ProjectControl>(DxWindow, "prjctrl");
+            List<object> LsPara = e.Parameter as List<object>;
+
+            if (LsPara == null)
+                return;
+
+            if (LsPara[0] == null || LsPara[1] == null || LsPara[2] == null)
+                return;
+
+            ProjectControl pc = LsPara[0] as ProjectControl;
+            RecentProjectControl rpc = LsPara[1] as RecentProjectControl;
+            TextBlock TextBlock = LsPara[2] as TextBlock;
+            string ProjectFile = TextBlock.Text;
 
             if (pc == null || pc.Project == null)
                 return;
 
-            if (!pc.Project.IsExistProject(url))
+            if (rpc == null || rpc.Project == null)
+                return;
+
+            if (!rpc.Project.IsExistProject(ProjectFile))
             {
                 MessageBox.Show("您选择的工区文件不存在，请选择其它工区文件！");
                 return;
             }
 
-            if (url.Equals(pc.Project.Url))
-            {
-                MessageBox.Show("您选择的工区已经打开！");
-                return;
-            }
-
-            if (pc.Project.OpenMapList(url))
-            {
-                MessageBox.Show("打开成功");
-                BackstageViewControl.SelectedTabIndex = 1;
-            }
-            else
-            {
-                MessageBox.Show("打开失败");
-            }
-
+            pc.Project = new Project();
+            pc.Project.OpenDBSource(@"D:\gSectionData.Txt");
+            pc.Project.Open(ProjectFile);
             e.Handled = true;
         }
     }

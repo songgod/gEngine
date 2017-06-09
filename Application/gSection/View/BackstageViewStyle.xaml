@@ -3,6 +3,7 @@
                     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
                     xmlns:prjcmds="clr-namespace:gEngine.Commands;assembly=gEngine.Commands"
                     xmlns:local="clr-namespace:gSection.View"
+                    xmlns:prjcvts="clr-namespace:gEngine.Project.Converter;assembly=gEngine.Project"
                     xmlns:controls="clr-namespace:gSection.Controls">
     <Style x:Uid="Style_1" TargetType="controls:ThemedContentControl">
         <Setter x:Uid="Setter_1" Property="LightThemeNormalForeground" Value="#FF5E5E5E" />
@@ -60,18 +61,44 @@
     </ControlTemplate>
     <DataTemplate  x:Uid="DataTemplate_1" x:Key="ProjectItemTemplate" >
         <TextBlock x:Name="txtProjectUrl" x:Uid="TextBlock_4" Text="{Binding Path=Url}">
+            <TextBlock.Resources>
+                <prjcvts:MultiCommandParaConverter x:Uid="prjcvts:MultiCommandParaConverter_1" x:Key="c2l"></prjcvts:MultiCommandParaConverter>
+            </TextBlock.Resources>
             <i:Interaction.Triggers>
                 <i:EventTrigger x:Uid="i:EventTrigger_3" EventName="MouseLeftButtonDown">
-                    <i:InvokeCommandAction  x:Uid="i:InvokeCommandAction_2" Command="{x:Static prjcmds:ProjectCommands.OpenRecentCommand}" CommandParameter="{Binding ElementName=txtProjectUrl }"/>
+                    <i:InvokeCommandAction  x:Uid="i:InvokeCommandAction_2" Command="{x:Static prjcmds:ProjectCommands.OpenRecentCommand}">
+                        <i:InvokeCommandAction.CommandParameter>
+                            <MultiBinding x:Uid="MultiBinding_1" Converter="{StaticResource c2l}"> 
+                                <Binding  x:Uid="Binding_1" ElementName="prjctrl"></Binding>
+                                <Binding x:Uid="Binding_2" ElementName="txtProjectUrl"></Binding>
+                            </MultiBinding>
+                        </i:InvokeCommandAction.CommandParameter>
+                    </i:InvokeCommandAction>
+                </i:EventTrigger>
+                <i:EventTrigger x:Uid="i:EventTrigger_5" EventName="MouseLeftButtonDown">
+                     <i:InvokeCommandAction x:Uid="i:InvokeCommandAction_5" Command="{Binding DataContext.SetOpenMapTabIndexCommand, RelativeSource={RelativeSource AncestorType=Window}}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </TextBlock>
     </DataTemplate>
     <DataTemplate  x:Uid="DataTemplate_2" x:Key="MapItemTemplate" >
-        <TextBlock x:Name="txtMapUrl" x:Uid="txtMapUrl" Text="{Binding Path=Url}">
+        <TextBlock x:Name="txtMapUrl" x:Uid="txtMapUrl" Text="{Binding Path=Item1}">
+            <TextBlock.Resources>
+                <prjcvts:MultiCommandParaConverter x:Uid="prjcvts:MultiCommandParaConverter_2" x:Key="c2l"></prjcvts:MultiCommandParaConverter>
+            </TextBlock.Resources>
             <i:Interaction.Triggers>
-                <i:EventTrigger x:Uid="i:EventTrigger_2" EventName="MouseLeftButtonDown">
-                    <i:InvokeCommandAction   x:Uid="i:InvokeCommandAction_1"  Command="{x:Static prjcmds:MapCommands.OpenMapCommand}" CommandParameter="{Binding ElementName=txtMapUrl }"/>
+                <i:EventTrigger x:Uid="i:EventTrigger_4" EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction  x:Uid="i:InvokeCommandAction_3" Command="{x:Static prjcmds:MapCommands.OpenMapCommand}">
+                        <i:InvokeCommandAction.CommandParameter>
+                            <MultiBinding x:Uid="MultiBinding_2" Converter="{StaticResource c2l}">
+                                <Binding x:Uid="Binding_3" ElementName="prjctrl"></Binding>
+                                <Binding x:Uid="Binding_4" ElementName="txtMapUrl"></Binding>
+                            </MultiBinding>
+                        </i:InvokeCommandAction.CommandParameter>
+                    </i:InvokeCommandAction>
+                </i:EventTrigger>
+                 <i:EventTrigger x:Uid="i:EventTrigger_6" EventName="MouseLeftButtonDown">
+                     <i:InvokeCommandAction  x:Uid="i:InvokeCommandAction_4" Command="{Binding DataContext.CloseApplicationMenuCommand, RelativeSource={RelativeSource AncestorType=Window}}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </TextBlock>

@@ -23,6 +23,11 @@ namespace gEngine.View.Ge.Section
                 return null;
 
             int type = (int)values[0];
+
+            Type t = values[2].GetType();
+            if (t != typeof(SectionObject))
+                return null;
+            
             SectionObject secobj = (SectionObject)values[2];
 
             Brush fillb = new SolidColorBrush() { Color = Colors.Gray };
