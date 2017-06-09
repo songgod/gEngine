@@ -65,40 +65,58 @@
                 <dxb:BarItemLink x:Uid="dxb:BarItemLink_1" BarItemName="ribbonStyleItem" RibbonStyle="SmallWithText"/>
             </dxr:RibbonControl.PageHeaderItems>
             <dxr:RibbonControl.ApplicationMenu x:Uid="a">
-               <dxr:BackstageViewControl x:Name="BackstageViewControl_1" x:Uid="dxr:BackstageViewControl_1">
+                <dxr:BackstageViewControl x:Name="BackstageViewControl_1" x:Uid="dxr:BackstageViewControl_1">
                     <dxr:BackstageButtonItem x:Uid="dxr:BackstageButtonItem_1" Content="New" Glyph="{dx:DXImage Image=New_16x16.png}" MinWidth="150"/>
-                        <dxr:BackstageTabItem x:Uid="dxr:BackstageTabItem_OpenProject" dxb:MergingProperties.AllowMerging="True"  dxb:MergingProperties.ElementMergingBehavior="InternalWithInternal" dxb:BarNameScope.IsScopeOwner="True">
-                            <dxr:BackstageTabItem.Content>
-                                <StackPanel x:Uid="StackPanel_1" Orientation="Horizontal" Margin="-19 0 0 0">
-                                    <Image x:Uid="Image_1" Source="../Images/Small/FileOpen2_16x16.png" Margin="0 0 4 0"></Image>
+                    <dxr:BackstageTabItem x:Uid="dxr:BackstageTabItem_OpenProject" dxb:MergingProperties.AllowMerging="True"  dxb:MergingProperties.ElementMergingBehavior="InternalWithInternal" dxb:BarNameScope.IsScopeOwner="True">
+                        <dxr:BackstageTabItem.Content>
+                            <Grid x:Uid="Grid_2">
+                                <Grid.RenderTransform>
+                                    <TranslateTransform x:Uid="TranslateTransform_1" X="-19"></TranslateTransform>
+                                </Grid.RenderTransform>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition x:Uid="ColumnDefinition_1" Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition x:Uid="ColumnDefinition_2" Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Image x:Uid="Image_1" Source="../Images/Small/FileOpen2_16x16.png" Margin="0 0 4 0"></Image>
+                                <StackPanel x:Uid="StackPanel_1" VerticalAlignment="Center" Grid.Column="1">
                                     <TextBlock x:Uid="TextBlock_1" Text="打开工区"></TextBlock>
                                 </StackPanel>
-                            </dxr:BackstageTabItem.Content>
-                            <dxr:BackstageTabItem.ControlPane>
-                                <ContentControl  x:Uid="ContentControl_4" Template="{StaticResource ProjectTemplate}"></ContentControl>
-                            </dxr:BackstageTabItem.ControlPane>
-                        </dxr:BackstageTabItem>
-                        <dxr:BackstageTabItem  x:Uid="dxr:BackstageTabItem_OpenMap"  dxb:MergingProperties.AllowMerging="True"   MinWidth="150" dxb:MergingProperties.ElementMergingBehavior="InternalWithInternal" dxb:BarNameScope.IsScopeOwner="True">
-                            <dxr:BackstageTabItem.Content>
-                                <StackPanel x:Uid="StackPanel_2" Orientation="Horizontal" Margin="-19 0 0 0">
-                                    <Image x:Uid="Image_2" Source="../Images/Small/FileNew_16x16.png" Margin="0 0 4 0"></Image>
+                            </Grid>
+                        </dxr:BackstageTabItem.Content>
+                        <dxr:BackstageTabItem.ControlPane>
+                            <ContentControl  x:Uid="ContentControl_4" Template="{StaticResource ProjectTemplate}"></ContentControl>
+                        </dxr:BackstageTabItem.ControlPane>
+                    </dxr:BackstageTabItem>
+                    <dxr:BackstageTabItem  x:Uid="dxr:BackstageTabItem_OpenMap"  dxb:MergingProperties.AllowMerging="True" MinWidth="150" dxb:MergingProperties.ElementMergingBehavior="InternalWithInternal" dxb:BarNameScope.IsScopeOwner="True">
+                        <dxr:BackstageTabItem.Content>
+                            <Grid x:Uid="Grid_3">
+                                <Grid.RenderTransform>
+                                    <TranslateTransform x:Uid="TranslateTransform_2" X="-19"></TranslateTransform>
+                                </Grid.RenderTransform>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition x:Uid="ColumnDefinition_3" Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition x:Uid="ColumnDefinition_4" Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Image x:Uid="Image_2" Source="../Images/Small/FileNew_16x16.png" Margin="0 0 4 0"></Image>
+                                <StackPanel x:Uid="StackPanel_2" VerticalAlignment="Center" Grid.Column="1">
                                     <TextBlock x:Uid="TextBlock_2" Text="打开图件"></TextBlock>
                                 </StackPanel>
-                            </dxr:BackstageTabItem.Content>
-                            <dxr:BackstageTabItem.ControlPane>
-                                <ContentControl  x:Uid="ContentControl_5" Template="{StaticResource MapTemplate}"></ContentControl>
-                            </dxr:BackstageTabItem.ControlPane>
-                        </dxr:BackstageTabItem>
-                        <dxr:BackstageButtonItem  x:Uid="dxr:BackstageButtonItem_4" Content="保存" Glyph="{dx:DXImage Image=Save_16x16.png}" MinWidth="150" Command="{x:Static prjcmds:ProjectCommands.SaveCommand}" CommandTarget="{Binding ElementName=prjctrl}"/>
-                        <dxr:BackstageButtonItem  x:Uid="dxr:BackstageButtonItem_5" Content="另存为" Glyph="{dx:DXImage Image=SaveAs_16x16.png}" MinWidth="150" Command="{x:Static prjcmds:ProjectCommands.SaveAsCommand}" CommandTarget="{Binding ElementName=prjctrl}"/>
-                        <dxr:BackstageTabItem x:Uid="dxr:BackstageTabItem_1" dxb:MergingProperties.AllowMerging="True" Content="Recent" dxb:MergingProperties.ElementMergingBehavior="InternalWithInternal" dxb:BarNameScope.IsScopeOwner="True">
-                        </dxr:BackstageTabItem>
-                        <dxr:BackstageTabItem x:Uid="dxr:BackstageTabItem_2" dxb:MergingProperties.AllowMerging="True" Content="Options" dxb:MergingProperties.ElementMergingBehavior="InternalWithInternal" dxb:BarNameScope.IsScopeOwner="True">
-                            <!--<view:OptionPanel/>-->
-                        </dxr:BackstageTabItem>
-                        <dxr:BackstageTabItem x:Uid="dxr:BackstageTabItem_3" dxb:MergingProperties.AllowMerging="True" Content="Help" dxb:MergingProperties.ElementMergingBehavior="InternalWithInternal" dxb:BarNameScope.IsScopeOwner="True"/>
-                        <dxr:BackstageButtonItem x:Uid="dxr:BackstageButtonItem_3" Content="Close" Glyph="{dx:DXImage Image=Close_16x16.png}"/>
-                    </dxr:BackstageViewControl>
+                            </Grid>
+                        </dxr:BackstageTabItem.Content>
+                        <dxr:BackstageTabItem.ControlPane>
+                            <ContentControl  x:Uid="ContentControl_5" Template="{StaticResource MapTemplate}"></ContentControl>
+                        </dxr:BackstageTabItem.ControlPane>
+                    </dxr:BackstageTabItem>
+                    <dxr:BackstageButtonItem  x:Uid="dxr:BackstageButtonItem_4" Content="保存" Glyph="{dx:DXImage Image=Save_16x16.png}" MinWidth="150" Command="{x:Static prjcmds:ProjectCommands.SaveCommand}" CommandTarget="{Binding ElementName=prjctrl}"/>
+                    <dxr:BackstageButtonItem  x:Uid="dxr:BackstageButtonItem_5" Content="另存为" Glyph="{dx:DXImage Image=SaveAs_16x16.png}" MinWidth="150" Command="{x:Static prjcmds:ProjectCommands.SaveAsCommand}" CommandTarget="{Binding ElementName=prjctrl}"/>
+                    <dxr:BackstageTabItem x:Uid="dxr:BackstageTabItem_1" dxb:MergingProperties.AllowMerging="True" Content="Recent" dxb:MergingProperties.ElementMergingBehavior="InternalWithInternal" dxb:BarNameScope.IsScopeOwner="True">
+                    </dxr:BackstageTabItem>
+                    <dxr:BackstageTabItem x:Uid="dxr:BackstageTabItem_2" dxb:MergingProperties.AllowMerging="True" Content="Options" dxb:MergingProperties.ElementMergingBehavior="InternalWithInternal" dxb:BarNameScope.IsScopeOwner="True">
+                        <!--<view:OptionPanel/>-->
+                    </dxr:BackstageTabItem>
+                    <dxr:BackstageTabItem x:Uid="dxr:BackstageTabItem_3" dxb:MergingProperties.AllowMerging="True" Content="Help" dxb:MergingProperties.ElementMergingBehavior="InternalWithInternal" dxb:BarNameScope.IsScopeOwner="True"/>
+                    <dxr:BackstageButtonItem x:Uid="dxr:BackstageButtonItem_3" Content="Close" Glyph="{dx:DXImage Image=Close_16x16.png}"/>
+                </dxr:BackstageViewControl>
             </dxr:RibbonControl.ApplicationMenu>
             <dxr:RibbonControl.ToolbarItems>
                 <dxr:RibbonSpacingSelectorItemLink x:Uid="dxr:RibbonSpacingSelectorItemLink_1" BarItemName="spacingSelector"/>

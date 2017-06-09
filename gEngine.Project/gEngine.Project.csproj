@@ -79,9 +79,6 @@
     <Compile Include="Controls\ProjectControl.xaml.cs">
       <DependentUpon>ProjectControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\RecentProjectControl.xaml.cs">
-      <DependentUpon>RecentProjectControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Converter\ImagePathConverter.cs" />
     <Compile Include="Converter\MapIndexConverter.cs" />
     <Compile Include="Converter\MultiCommandParaConverter.cs" />
@@ -108,10 +105,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ProjectControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\RecentProjectControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

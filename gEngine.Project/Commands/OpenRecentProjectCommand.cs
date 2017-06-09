@@ -38,21 +38,16 @@ namespace gEngine.Project.Commands
             if (LsPara == null)
                 return;
 
-            if (LsPara[0] == null || LsPara[1] == null || LsPara[2] == null)
+            if (LsPara[0] == null || LsPara[1] == null)
                 return;
 
             ProjectControl pc = LsPara[0] as ProjectControl;
-            RecentProjectControl rpc = LsPara[1] as RecentProjectControl;
-            TextBlock TextBlock = LsPara[2] as TextBlock;
+            TextBlock TextBlock = LsPara[1] as TextBlock;
             string ProjectFile = TextBlock.Text;
 
             if (pc == null || pc.Project == null)
                 return;
-
-            if (rpc == null || rpc.Project == null)
-                return;
-
-            if (!rpc.Project.IsExistProject(ProjectFile))
+            if (!RecentProject.IsExistProject(ProjectFile))
             {
                 MessageBox.Show("您选择的工区文件不存在，请选择其它工区文件！");
                 return;

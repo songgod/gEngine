@@ -1,0 +1,51 @@
+﻿<UserControl x:Uid="UserControl_1" x:Class="gSection.Controls.RecentProjectControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:prjcmds="clr-namespace:gEngine.Commands;assembly=gEngine.Commands"
+             xmlns:prjcvts="clr-namespace:gEngine.Project.Converter;assembly=gEngine.Project"
+             xmlns:prj="clr-namespace:gEngine.Project;assembly=gEngine.Project"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             mc:Ignorable="d" 
+             x:Name="UserControl_1"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid x:Uid="Grid_1">
+            <dxe:ListBoxEdit x:Name="lbProjects" x:Uid="dxe:ListBoxEdit_1" ShowBorder="False" AllowItemHighlighting="True"  ItemsSource="{x:Static prj:RecentProject.OpenProjects}">
+            <dxe:ListBoxEdit.ItemTemplate>
+                <DataTemplate x:Uid="DataTemplate_1">
+                    <Grid x:Uid="Grid_2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition x:Uid="ColumnDefinition_1" Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition x:Uid="ColumnDefinition_2" Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Image x:Uid="Image_1" Source="pack://application:,,,/gSection;component/Images/GDS/project.png"></Image>
+                        <StackPanel x:Uid="StackPanel_1" Grid.Column="1" VerticalAlignment="Center">
+                            <TextBlock x:Name="txtProjectUrl" x:Uid="TextBlock_4" Text="{Binding}">
+                                <TextBlock.Resources>
+                                    <prjcvts:MultiCommandParaConverter x:Uid="prjcvts:MultiCommandParaConverter_1" x:Key="c2l"></prjcvts:MultiCommandParaConverter>
+                                </TextBlock.Resources>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger x:Uid="i:EventTrigger_3" EventName="MouseLeftButtonDown">
+                                <i:InvokeCommandAction  x:Uid="i:InvokeCommandAction_2" Command="{x:Static prjcmds:ProjectCommands.OpenRecentCommand}">
+                                    <i:InvokeCommandAction.CommandParameter>
+                                        <MultiBinding x:Uid="MultiBinding_1" Converter="{StaticResource c2l}"> 
+                                            <Binding  x:Uid="Binding_1" ElementName="prjctrl"></Binding>
+                                            <Binding x:Uid="Binding_2" ElementName="txtProjectUrl"></Binding>
+                                        </MultiBinding>
+                                    </i:InvokeCommandAction.CommandParameter>
+                                </i:InvokeCommandAction>
+                            </i:EventTrigger>
+                            <i:EventTrigger x:Uid="i:EventTrigger_5" EventName="MouseLeftButtonDown">
+                                 <i:InvokeCommandAction x:Uid="i:InvokeCommandAction_5" Command="{Binding DataContext.SetOpenMapTabIndexCommand, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                            </TextBlock>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </dxe:ListBoxEdit.ItemTemplate>
+        </dxe:ListBoxEdit>
+    </Grid>
+</UserControl>

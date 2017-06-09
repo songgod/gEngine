@@ -28,26 +28,11 @@ namespace gEngine.Project.Commands
             e.Handled = true;
         }
 
-
         private void OpenCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            List<object> LsPara = e.Parameter as List<object>;
-
-            if (LsPara == null)
-                return;
-
-            if (LsPara[0] == null || LsPara[1] == null)
-                return;
-
-            ProjectControl pc = LsPara[0] as ProjectControl;
-            RecentProjectControl rpc = LsPara[1] as RecentProjectControl;
-
+            ProjectControl pc = e.Parameter as ProjectControl;
             if (pc == null || pc.Project == null)
                 return;
-
-            if (rpc == null || rpc.Project == null)
-                return;
-
             OpenFileDialog OpenFileDialog = new OpenFileDialog();
             OpenFileDialog.Filter = "工程文件|*.Gepro";
 
@@ -56,7 +41,7 @@ namespace gEngine.Project.Commands
                 pc.Project = new Project();
                 pc.Project.OpenDBSource(@"D:\gSectionData.Txt");
                 pc.Project.Open(OpenFileDialog.FileName);
-                rpc.Project.Write(OpenFileDialog.FileName);
+                RecentProject.Write(OpenFileDialog.FileName);
             }
             else
             {

@@ -84,10 +84,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\RecentProjectControl.xaml.cs">
+      <DependentUpon>RecentProjectControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ThemedContentControl.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\RecentProjectControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="en-us.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -1353,6 +1360,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Small\FileOpen2_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\GDS\project.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

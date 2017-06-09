@@ -9,17 +9,17 @@ using System.Xml;
 
 namespace gEngine.Project
 {
-    public class RecentProject
+    public static class RecentProject
     {
-        public RecentProject()
+        static RecentProject()
         {
             OpenProjects = new ObservedCollection<string>();
         }
 
-        public ObservedCollection<string> OpenProjects { get; set; }
+        public static ObservedCollection<string> OpenProjects { get; set; }
 
-        private string projectListUrl;
-        public string ProjectListUrl
+        private static string projectListUrl;
+        public static string ProjectListUrl
         {
             get
             {
@@ -31,7 +31,7 @@ namespace gEngine.Project
             }
         }
 
-        public bool Open(string url)
+        public static bool Open(string url)
         {
             ProjectListUrl = url;
             if (File.Exists(url))
@@ -59,7 +59,7 @@ namespace gEngine.Project
             return true;
         }
 
-        public bool Write(string url)
+        public static bool Write(string url)
         {
             if (string.IsNullOrEmpty(ProjectListUrl))
                 return false;
@@ -80,7 +80,7 @@ namespace gEngine.Project
             return true;
         }
 
-        public bool IsExistProject(string url)
+        public static bool IsExistProject(string url)
         {
             if (string.IsNullOrEmpty(ProjectListUrl))
                 return false;

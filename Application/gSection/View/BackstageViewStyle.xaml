@@ -59,33 +59,18 @@
             <Border x:Uid="Border_1" Width="1" Background="{Binding ElementName=themedContentControl, Path=Foreground}" Margin="0,20,0,20"/>
         </controls:ThemedContentControl>
     </ControlTemplate>
-    <DataTemplate  x:Uid="DataTemplate_1" x:Key="ProjectItemTemplate" >
-        <TextBlock x:Name="txtProjectUrl" x:Uid="TextBlock_4" Text="{Binding Path=Url}">
-            <TextBlock.Resources>
-                <prjcvts:MultiCommandParaConverter x:Uid="prjcvts:MultiCommandParaConverter_1" x:Key="c2l"></prjcvts:MultiCommandParaConverter>
-            </TextBlock.Resources>
-            <i:Interaction.Triggers>
-                <i:EventTrigger x:Uid="i:EventTrigger_3" EventName="MouseLeftButtonDown">
-                    <i:InvokeCommandAction  x:Uid="i:InvokeCommandAction_2" Command="{x:Static prjcmds:ProjectCommands.OpenRecentCommand}">
-                        <i:InvokeCommandAction.CommandParameter>
-                            <MultiBinding x:Uid="MultiBinding_1" Converter="{StaticResource c2l}"> 
-                                <Binding  x:Uid="Binding_1" ElementName="prjctrl"></Binding>
-                                <Binding x:Uid="Binding_2" ElementName="txtProjectUrl"></Binding>
-                            </MultiBinding>
-                        </i:InvokeCommandAction.CommandParameter>
-                    </i:InvokeCommandAction>
-                </i:EventTrigger>
-                <i:EventTrigger x:Uid="i:EventTrigger_5" EventName="MouseLeftButtonDown">
-                     <i:InvokeCommandAction x:Uid="i:InvokeCommandAction_5" Command="{Binding DataContext.SetOpenMapTabIndexCommand, RelativeSource={RelativeSource AncestorType=Window}}"/>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </TextBlock>
-    </DataTemplate>
     <DataTemplate  x:Uid="DataTemplate_2" x:Key="MapItemTemplate" >
-        <TextBlock x:Name="txtMapUrl" x:Uid="txtMapUrl" Text="{Binding Path=Item1}">
-            <TextBlock.Resources>
-                <prjcvts:MultiCommandParaConverter x:Uid="prjcvts:MultiCommandParaConverter_2" x:Key="c2l"></prjcvts:MultiCommandParaConverter>
-            </TextBlock.Resources>
+        <Grid x:Uid="Grid_1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Uid="ColumnDefinition_1" Width="Auto"></ColumnDefinition>
+                <ColumnDefinition x:Uid="ColumnDefinition_2" Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Image x:Uid="Image_1" Source="/gSection;component/Images/Small/FileNew_32x32.png" />
+            <StackPanel x:Uid="StackPanel_2" Grid.Column="1" VerticalAlignment="Center">
+                <TextBlock x:Name="txtMapUrl" x:Uid="txtMapUrl" Text="{Binding Path=Item1}">
+                    <TextBlock.Resources>
+                        <prjcvts:MultiCommandParaConverter x:Uid="prjcvts:MultiCommandParaConverter_2" x:Key="c2l"></prjcvts:MultiCommandParaConverter>
+                    </TextBlock.Resources>
             <i:Interaction.Triggers>
                 <i:EventTrigger x:Uid="i:EventTrigger_4" EventName="MouseLeftButtonDown">
                     <i:InvokeCommandAction  x:Uid="i:InvokeCommandAction_3" Command="{x:Static prjcmds:MapCommands.OpenMapCommand}">
@@ -101,6 +86,8 @@
                      <i:InvokeCommandAction  x:Uid="i:InvokeCommandAction_4" Command="{Binding DataContext.CloseApplicationMenuCommand, RelativeSource={RelativeSource AncestorType=Window}}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
-        </TextBlock>
+                </TextBlock>
+            </StackPanel>
+        </Grid>
     </DataTemplate>
 </ResourceDictionary>

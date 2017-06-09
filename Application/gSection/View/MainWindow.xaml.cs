@@ -18,22 +18,11 @@ namespace gSection.View
 
         public Project Projects { get; set; }
 
-        public RecentProject RecentProjects { get; set; }
-
         public ProjectControl ProjectControl
         {
             get
             {
                 return prjctrl;
-            }
-        }
-
-        public RecentProjectControl RecentProjectControl
-        {
-            get
-            {
-                RecentProjectControl RecentProjectControl = gEngine.View.FindChild.FindVisualChild<RecentProjectControl>(this.BackstageViewControl_1, "rprjcontrols");
-                return RecentProjectControl;
             }
         }
 
@@ -49,8 +38,7 @@ namespace gSection.View
             string dir = Directory.GetCurrentDirectory();
 
             string ProjectListUrl = dir + "\\ProjectMRUList.Project";
-            RecentProjects = new RecentProject();
-            RecentProjects.Open(ProjectListUrl);
+            RecentProject.Open(ProjectListUrl);
 
             #endregion
 
