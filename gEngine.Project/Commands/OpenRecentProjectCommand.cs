@@ -54,7 +54,6 @@ namespace gEngine.Project.Commands
             }
 
             pc.Project = new Project();
-            pc.Project.OpenDBSource(@"D:\gSectionData.Txt");
             pc.Project.Open(ProjectFile);
             e.Handled = true;
         }

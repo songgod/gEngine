@@ -33,15 +33,6 @@ namespace gSection.View
             Projects = new Project();
             Projects.OpenDBSource(@"D:\gSectionData.Txt");
 
-            #region RecentProject
-
-            string dir = Directory.GetCurrentDirectory();
-
-            string ProjectListUrl = dir + "\\ProjectMRUList.Project";
-            RecentProject.Open(ProjectListUrl);
-
-            #endregion
-
             InitializeComponent();
 
             ClipartImages = new string[] {

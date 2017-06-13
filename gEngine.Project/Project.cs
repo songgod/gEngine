@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Xml;
 using Microsoft.Win32;
+using System.Text.RegularExpressions;
 
 namespace gEngine.Project
 {
@@ -35,6 +36,12 @@ namespace gEngine.Project
             XmlNode xmlproj = xmldoc.SelectSingleNode("Gepro");
             foreach (XmlNode node in xmlproj.ChildNodes)
             {
+                if (node.Name.Equals("DBSource"))
+                {
+                    string dbName = node.Attributes["Url"].Value;
+                    OpenDBSource(dbName);
+                }
+
                 foreach (XmlNode cNode in node)
                 {
                     string MapFileName = cNode.Attributes["Url"].Value;
@@ -45,7 +52,7 @@ namespace gEngine.Project
 
             return true;
         }
-        
+
         public bool Save()
         {
             if (string.IsNullOrEmpty(Url))
@@ -70,31 +77,9 @@ namespace gEngine.Project
                     }
                     else
                     {
-                        Url = ProjectName;
                         DirectoryInfo directoryInfo = new DirectoryInfo(MapsPath);
                         directoryInfo.Create();
-                        XmlDocument xmldoc = new XmlDocument();
-                        xmldoc.AppendChild(xmldoc.CreateXmlDeclaration("1.0", "UTF-8", null));
-                        XmlElement xmlproj = xmldoc.CreateElement("Gepro");
-                        xmldoc.AppendChild(xmlproj);
-
-                        XmlElement xmlmaps = xmlproj.OwnerDocument.CreateElement("Maps");
-                        xmlproj.AppendChild(xmlmaps);
-                        int index = 0;
-                        foreach (IMap map in OpenMaps)
-                        {
-                            string MapFileName =  map.Name + ".Ge";
-                            string MapFile = MapsPath + @"\" + MapFileName;
-                            XmlElement xmlmap = xmldoc.CreateElement(map.Name);
-                            xmlmap.SetAttribute("Name", map.Name);
-                            xmlmap.SetAttribute("Url", MapFileName);
-                            xmlmaps.AppendChild(xmlmap);
-                            WriteMap(map, MapFile);
-                            Maps[index] = new Tuple<string, IMap>(MapFileName, map);
-                            index++;
-                        }
-                        xmldoc.Save(ProjectName);
-                        return true;
+                        return SaveAllMap(ProjectName);
                     }
                 }
                 else
@@ -106,31 +91,7 @@ namespace gEngine.Project
             else
             {
                 string ProjectName = Url;
-                string ProjPath = ProjectName.Substring(0, ProjectName.LastIndexOf(@"\"));
-                string MapsPath = ProjPath + @"\Maps";
-                XmlDocument xmldoc = new XmlDocument();
-                xmldoc.Load(ProjectName);
-                XmlNode node = xmldoc.SelectSingleNode("Gepro");
-                XmlNode childNode = node.SelectSingleNode("Maps");
-                int index = 0;
-                foreach (IMap map in OpenMaps)
-                {
-                    if (string.IsNullOrEmpty(Maps[index].Item1))
-                    {
-                        string MapFileName = map.Name + ".Ge";
-                        string MapFile = MapsPath + @"\" + MapFileName;
-                        XmlElement xmlmap = xmldoc.CreateElement(map.Name);
-                        xmlmap.SetAttribute("Name", map.Name);
-                        xmlmap.SetAttribute("Url", MapFileName);
-                        childNode.AppendChild(xmlmap);
-                        WriteMap(map, MapFile);
-                        Maps[index] = new Tuple<string, IMap>(MapFileName, map);
-                    }
-                    index++;
-                }
-
-                xmldoc.Save(ProjectName);
-                return true;
+                return SaveAllMap(ProjectName);
             }
         }
 
@@ -138,6 +99,76 @@ namespace gEngine.Project
         {
             Url = url;
             return Save();
+        }
+
+        public bool SaveAllMap(string ProjectName)
+        {
+            string ProjPath = ProjectName.Substring(0, ProjectName.LastIndexOf(@"\"));
+            string MapsPath = ProjPath + @"\Maps";
+            XmlDocument xmldoc = new XmlDocument();
+            XmlElement xmlproj = null;
+            XmlElement xmlmaps = null;
+            if (string.IsNullOrEmpty(Url))
+            {
+                Url = ProjectName;
+                xmldoc.AppendChild(xmldoc.CreateXmlDeclaration("1.0", "UTF-8", null));
+                xmlproj = xmldoc.CreateElement("Gepro");
+                xmldoc.AppendChild(xmlproj);
+                xmlmaps = xmlproj.OwnerDocument.CreateElement("Maps");
+                xmlproj.AppendChild(xmlmaps);
+                XmlElement xmldbsource = xmlproj.OwnerDocument.CreateElement("DBSource");
+                xmldbsource.SetAttribute("Url", DBTuple.Item1);
+                xmlproj.AppendChild(xmldbsource);
+            }
+            else
+            {
+                xmldoc.Load(ProjectName);
+                xmlproj = xmldoc.SelectSingleNode("Gepro") as XmlElement;
+                xmlmaps = xmlproj.SelectSingleNode("Maps") as XmlElement;
+            }
+
+            for (int index = 0; index < Maps.Count; index++)
+            {
+                string MapFileName = string.Empty;
+                string MapFile = string.Empty;
+                if (string.IsNullOrEmpty(Maps[index].Item1))
+                {
+                    MapFileName = Maps[index].Item2.Name + ".Ge";
+                    MapFile = MapsPath + @"\" + MapFileName;
+                    Maps[index] = new Tuple<string, IMap>(MapFileName, Maps[index].Item2);
+                }
+                else
+                {
+                    bool IsDic = IsDirectory(Maps[index].Item1);
+                    if (IsDic)
+                    {
+                        MapFileName = Maps[index].Item1;
+                        MapFile = Maps[index].Item1;
+                    }
+                }
+
+                if (Maps[index].Item2 != null)
+                    WriteMap(Maps[index].Item2, MapFile);
+
+                string mapPath = Maps[index].Item1;
+                XmlNodeList xmlnodelist = xmlmaps.SelectNodes(string.Format(@"*[@Url='{0}']", mapPath));
+                int nodeCount = xmlnodelist.Count;
+                if (nodeCount <= 0)
+                {
+                    XmlElement xmlmap = xmldoc.CreateElement(Maps[index].Item2.Name);
+                    xmlmap.SetAttribute("Url", MapFileName);
+                    xmlmaps.AppendChild(xmlmap);
+                }
+            }
+            xmldoc.Save(ProjectName);
+            return true;
+        }
+
+        public bool IsDirectory(string filepath)
+        {
+            string pattern = @"[\\+]|[//+]";
+            Regex regex = new Regex(pattern);
+            return regex.IsMatch(filepath);
         }
 
         private void OpenMaps_OnItemRemoved(int aIndex, IMap aItem)

@@ -14,6 +14,9 @@ namespace gEngine.Project
         static RecentProject()
         {
             OpenProjects = new ObservedCollection<string>();
+            string dir = Directory.GetCurrentDirectory();
+            string ProjectListUrl = dir + "\\ProjectMRUList.Project";
+            Open(ProjectListUrl);
         }
 
         public static ObservedCollection<string> OpenProjects { get; set; }

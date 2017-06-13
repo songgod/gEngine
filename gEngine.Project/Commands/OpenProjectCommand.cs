@@ -39,7 +39,6 @@ namespace gEngine.Project.Commands
             if (OpenFileDialog.ShowDialog() == true)
             {
                 pc.Project = new Project();
-                pc.Project.OpenDBSource(@"D:\gSectionData.Txt");
                 pc.Project.Open(OpenFileDialog.FileName);
                 RecentProject.Write(OpenFileDialog.FileName);
             }
