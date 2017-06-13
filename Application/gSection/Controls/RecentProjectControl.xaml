@@ -20,12 +20,9 @@
                             <ColumnDefinition x:Uid="ColumnDefinition_1" Width="Auto"></ColumnDefinition>
                             <ColumnDefinition x:Uid="ColumnDefinition_2" Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Image x:Uid="Image_1" Source="pack://application:,,,/gSection;component/Images/GDS/project.png"></Image>
-                        <StackPanel x:Uid="StackPanel_1" Grid.Column="1" VerticalAlignment="Center">
-                            <TextBlock x:Name="txtProjectUrl" x:Uid="TextBlock_4" Text="{Binding}">
-                                <TextBlock.Resources>
-                                    <prjcvts:MultiCommandParaConverter x:Uid="prjcvts:MultiCommandParaConverter_1" x:Key="c2l"></prjcvts:MultiCommandParaConverter>
-                                </TextBlock.Resources>
+                        <Grid.Resources>
+                             <prjcvts:MultiCommandParaConverter x:Uid="prjcvts:MultiCommandParaConverter_1" x:Key="c2l"></prjcvts:MultiCommandParaConverter>
+                        </Grid.Resources>
                         <i:Interaction.Triggers>
                             <i:EventTrigger x:Uid="i:EventTrigger_3" EventName="MouseLeftButtonDown">
                                 <i:InvokeCommandAction  x:Uid="i:InvokeCommandAction_2" Command="{x:Static prjcmds:ProjectCommands.OpenRecentCommand}">
@@ -41,6 +38,9 @@
                                  <i:InvokeCommandAction x:Uid="i:InvokeCommandAction_5" Command="{Binding DataContext.SetOpenMapTabIndexCommand, RelativeSource={RelativeSource AncestorType=Window}}"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
+                        <Image x:Uid="Image_1" Source="pack://application:,,,/gSection;component/Images/GDS/project.png"></Image>
+                        <StackPanel x:Uid="StackPanel_1" Grid.Column="1" VerticalAlignment="Center">
+                            <TextBlock x:Name="txtProjectUrl" x:Uid="TextBlock_4" Text="{Binding}">
                             </TextBlock>
                         </StackPanel>
                     </Grid>
