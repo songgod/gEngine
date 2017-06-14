@@ -91,10 +91,18 @@ namespace gEngine.Project
             }
         }
 
-        public bool SaveAs(string url)
+        public bool SaveAs()
         {
-            Url = url;
-            return Write();
+            string url = Url;
+            Url = null;
+            bool saved = Save();
+            if (!saved)
+            {
+                Url = url;
+                return false;
+            }
+                
+            return true;
         }
 
         public bool OpenDBSource(string url)

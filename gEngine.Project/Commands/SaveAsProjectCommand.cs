@@ -42,7 +42,7 @@ namespace gEngine.Project.Commands
             if (pc.Project.Maps.Count == 0 || pc.Project.DBSource == null)
                 return;
 
-            if (pc.Project.SaveAs(string.Empty))
+            if (pc.Project.SaveAs())
             {
                 MessageBox.Show("保存成功！");
             }
