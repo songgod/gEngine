@@ -18,35 +18,45 @@
             </Grid.ColumnDefinitions>
             <StackPanel x:Uid="StackPanel_2" Grid.Column="0" SnapsToDevicePixels="True">
                 <ContentControl x:Uid="ContentControl_2" Content="打开" Template="{StaticResource HeaderTemplate}"></ContentControl>
-                <Grid x:Uid="Grid_3">
+                <Grid x:Uid="Grid_6">
                     <Grid.RowDefinitions>
-                        <RowDefinition x:Uid="RowDefinition_6" Height="Auto"/>
-                        <RowDefinition x:Uid="RowDefinition_7" Height="Auto"/>
+                        <RowDefinition x:Uid="RowDefinition_10" Height="Auto"></RowDefinition>
+                        <RowDefinition x:Uid="RowDefinition_11" Height="Auto"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition x:Uid="ColumnDefinition_4" Width="Auto"/>
-                        <ColumnDefinition x:Uid="ColumnDefinition_5" Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Image x:Uid="Image_1" Grid.Row="0" Grid.Column="0" Source="../Images/GDS/已打开工区.png"></Image>
-                    <StackPanel x:Uid="StackPanel_4" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
-                        <TextBlock x:Uid="TextBlock_1" Text="最近使用的工区" VerticalAlignment="Center" FontSize="12"></TextBlock>
+                    <StackPanel x:Uid="StackPanel_10" Style="{StaticResource BackstageCommandStyle}">
+                        <Grid x:Uid="Grid_7">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition  x:Uid="ColumnDefinition_11" Width="Auto"/>
+                                <ColumnDefinition x:Uid="ColumnDefinition_12" Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image x:Uid="Image_1"  Grid.Column="0" Source="../Images/GDS/已打开工区.png"></Image>
+                            <StackPanel x:Uid="StackPanel_4" Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock x:Uid="TextBlock_1" Text="最近使用的工区" VerticalAlignment="Center" FontSize="12"></TextBlock>
+                            </StackPanel>
+                        </Grid>
                     </StackPanel>
-                    <Image x:Uid="Image_2" Grid.Row="1" Grid.Column="0" Source="../Images/GDS/打开电脑.png">
-                    </Image>
-                    <StackPanel x:Uid="StackPanel_5" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
-                        <TextBlock x:Uid="TextBlock_2" Text="计算机" FontSize="12">
-                            <TextBlock.Resources>
-                                <prjcvts:MultiCommandParaConverter  x:Uid="prjcvts:MultiCommandParaConverter_1" x:Key="c2l"></prjcvts:MultiCommandParaConverter>
-                            </TextBlock.Resources><i:Interaction.Triggers>
-                            <i:EventTrigger x:Uid="i:EventTrigger_2" EventName="MouseLeftButtonDown">
-                                <i:InvokeCommandAction   x:Uid="i:InvokeCommandAction_1" Command="{x:Static prjcmds:ProjectCommands.OpenCommand}" CommandParameter="{Binding ElementName=prjctrl}">
-                                </i:InvokeCommandAction>
-                            </i:EventTrigger>
-                            <i:EventTrigger  x:Uid="i:EventTrigger_3" EventName="MouseLeftButtonDown">
-                                <i:InvokeCommandAction  x:Uid="i:InvokeCommandAction_2" Command="{Binding DataContext.SetOpenMapTabIndexCommand, RelativeSource={RelativeSource AncestorType=Window}}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                        </TextBlock>
+                    <StackPanel x:Uid="StackPanel_11" Grid.Row="1"  Style="{StaticResource BackstageCommandStyle}">
+                        <Grid x:Uid="Grid_8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition  x:Uid="ColumnDefinition_13" Width="Auto"/>
+                                <ColumnDefinition x:Uid="ColumnDefinition_14" Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger x:Uid="i:EventTrigger_2" EventName="MouseLeftButtonDown">
+                                    <i:InvokeCommandAction   x:Uid="i:InvokeCommandAction_1" Command="{x:Static prjcmds:ProjectCommands.OpenCommand}" CommandParameter="{Binding ElementName=prjctrl}">
+                                    </i:InvokeCommandAction>
+                                </i:EventTrigger>
+                                <i:EventTrigger  x:Uid="i:EventTrigger_3" EventName="MouseLeftButtonDown">
+                                    <i:InvokeCommandAction  x:Uid="i:InvokeCommandAction_2" Command="{Binding DataContext.SetOpenMapTabIndexCommand, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <Image x:Uid="Image_2" Grid.Column="0" Source="../Images/GDS/打开电脑.png">
+                            </Image>
+                            <StackPanel x:Uid="StackPanel_5" Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock x:Uid="TextBlock_2" Text="计算机" FontSize="12">
+                                </TextBlock>
+                            </StackPanel>
+                        </Grid>
                     </StackPanel>
                 </Grid>
             </StackPanel>
@@ -66,23 +76,35 @@
             </Grid.ColumnDefinitions>
             <StackPanel x:Uid="StackPanel_6" Grid.Column="0" SnapsToDevicePixels="True">
                 <ContentControl x:Uid="ContentControl_4" Content="打开" Template="{StaticResource HeaderTemplate}"></ContentControl>
-                <Grid x:Uid="Grid_5">
+                <Grid x:Uid="Grid_9">
                     <Grid.RowDefinitions>
-                        <RowDefinition x:Uid="RowDefinition_8" Height="Auto"/>
-                        <RowDefinition x:Uid="RowDefinition_9" Height="Auto"/>
+                        <RowDefinition  x:Uid="RowDefinition_12" Height="Auto"></RowDefinition>
+                        <RowDefinition  x:Uid="RowDefinition_13" Height="Auto"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition x:Uid="ColumnDefinition_9" Width="Auto"/>
-                        <ColumnDefinition x:Uid="ColumnDefinition_10" Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Image x:Uid="Image_3" Grid.Row="0" Grid.Column="0" Source="../Images/GDS/打开工区图件.png"></Image>
-                    <StackPanel x:Uid="StackPanel_7" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
-                        <TextBlock x:Uid="TextBlock_3" Text="本工区包含的图件" VerticalAlignment="Center" FontSize="12"></TextBlock>
+                    <StackPanel x:Uid="StackPanel_12" Style="{StaticResource BackstageCommandStyle}">
+                        <Grid x:Uid="Grid_10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_15" Width="Auto"/>
+                                <ColumnDefinition  x:Uid="ColumnDefinition_16" Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image x:Uid="Image_3" Grid.Column="0" Source="../Images/GDS/打开工区图件.png"></Image>
+                            <StackPanel x:Uid="StackPanel_7" Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock x:Uid="TextBlock_3" Text="本工区包含的图件" VerticalAlignment="Center" FontSize="12"></TextBlock>
+                            </StackPanel>
+                        </Grid>
                     </StackPanel>
-                    <Image x:Uid="Image_4" Grid.Row="1" Grid.Column="0" Source="../Images/GDS/新建图件.png">
-                    </Image>
-                    <StackPanel x:Uid="StackPanel_8" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
-                        <TextBlock x:Uid="TextBlock_4" Text="新建" FontSize="12"></TextBlock>
+                    <StackPanel x:Uid="StackPanel_13" Grid.Row="1" Style="{StaticResource BackstageCommandStyle}">
+                        <Grid x:Uid="Grid_11">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Uid="ColumnDefinition_17" Width="Auto"/>
+                                <ColumnDefinition  x:Uid="ColumnDefinition_18" Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image x:Uid="Image_4" Grid.Column="0" Source="../Images/GDS/新建图件.png">
+                            </Image>
+                            <StackPanel x:Uid="StackPanel_8" Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock x:Uid="TextBlock_4" Text="新建" FontSize="12"></TextBlock>
+                            </StackPanel>
+                        </Grid>
                     </StackPanel>
                 </Grid>
             </StackPanel>

@@ -18,6 +18,15 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style x:Uid="Style_2" x:Key="BackstageCommandStyle" TargetType="{x:Type StackPanel}">
+        <Style.Triggers>
+            <Trigger x:Uid="Trigger_1" Property="IsMouseOver" Value="True">
+                <Setter x:Uid="Setter_6" Property="Background" Value="AliceBlue"></Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
     <ControlTemplate x:Uid="ControlTemplate_3" x:Key="HeaderTemplate" TargetType="{x:Type ContentControl}">
         <StackPanel x:Uid="StackPanel_1" SnapsToDevicePixels="True">
             <controls:ThemedContentControl x:Uid="controls:ThemedContentControl_1" FontSize="14" FontWeight="Bold" Content="{TemplateBinding Content}" Margin="2,7,2,5" SnapsToDevicePixels="True" />
@@ -65,12 +74,9 @@
                 <ColumnDefinition x:Uid="ColumnDefinition_1" Width="Auto"></ColumnDefinition>
                 <ColumnDefinition x:Uid="ColumnDefinition_2" Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Image x:Uid="Image_1" Source="/gSection;component/Images/Small/FileNew_32x32.png" />
-            <StackPanel x:Uid="StackPanel_2" Grid.Column="1" VerticalAlignment="Center">
-                <TextBlock x:Name="txtMapUrl" x:Uid="txtMapUrl" Text="{Binding Path=Item1}">
-                    <TextBlock.Resources>
-                        <prjcvts:MultiCommandParaConverter x:Uid="prjcvts:MultiCommandParaConverter_2" x:Key="c2l"></prjcvts:MultiCommandParaConverter>
-                    </TextBlock.Resources>
+            <Grid.Resources>
+                <prjcvts:MultiCommandParaConverter x:Uid="prjcvts:MultiCommandParaConverter_2" x:Key="c2l"></prjcvts:MultiCommandParaConverter>
+            </Grid.Resources>
             <i:Interaction.Triggers>
                 <i:EventTrigger x:Uid="i:EventTrigger_4" EventName="MouseLeftButtonDown">
                     <i:InvokeCommandAction  x:Uid="i:InvokeCommandAction_3" Command="{x:Static prjcmds:MapCommands.OpenMapCommand}">
@@ -82,10 +88,13 @@
                         </i:InvokeCommandAction.CommandParameter>
                     </i:InvokeCommandAction>
                 </i:EventTrigger>
-                 <i:EventTrigger x:Uid="i:EventTrigger_6" EventName="MouseLeftButtonDown">
-                     <i:InvokeCommandAction  x:Uid="i:InvokeCommandAction_4" Command="{Binding DataContext.CloseApplicationMenuCommand, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                <i:EventTrigger x:Uid="i:EventTrigger_6" EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction  x:Uid="i:InvokeCommandAction_4" Command="{Binding DataContext.CloseApplicationMenuCommand, RelativeSource={RelativeSource AncestorType=Window}}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
+            <Image x:Uid="Image_1" Source="/gSection;component/Images/Small/FileNew_32x32.png" />
+            <StackPanel x:Uid="StackPanel_2" Grid.Column="1" VerticalAlignment="Center">
+                <TextBlock x:Name="txtMapUrl" x:Uid="txtMapUrl" Text="{Binding Path=Item1}">
                 </TextBlock>
             </StackPanel>
         </Grid>
