@@ -8,7 +8,7 @@
              xmlns:gv="clr-namespace:gEngine.View.Ge;assembly=gEngine.View.Ge"
              mc:Ignorable="d">
     <DataTemplate DataType="{x:Type gs:SectionObject}">
-        <local:SectionObjectCanvas x:Name="SectionObjectCanvas" Background="Yellow">   
+        <local:SectionObjectCanvas x:Name="SectionObjectCanvas" Background="Yellow">
             <ItemsControl ItemsSource="{Binding TopGraph.Regions}">
                 <ItemsControl.Resources>
                     <local:Region2PathDataConverter x:Key="f2p"/>
@@ -88,8 +88,5 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </local:SectionObjectCanvas>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type gs:TrendLineObject}">
-        <Polyline Points="{Binding Points}" Stroke="Black" StrokeThickness="1"/>
     </DataTemplate>
 </ResourceDictionary>

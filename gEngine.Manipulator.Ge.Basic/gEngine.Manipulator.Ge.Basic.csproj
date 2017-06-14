@@ -46,6 +46,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BoundaryManipulator.cs" />
+    <Compile Include="DrawLineManipulator.cs" />
+    <Compile Include="EditLineManipulator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
