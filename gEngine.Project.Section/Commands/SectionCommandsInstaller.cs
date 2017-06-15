@@ -31,6 +31,7 @@ namespace gEngine.Project.Ge.Section.Commands
             ui.CommandBindings.Add(new NewFaultCommand());
             ui.CommandBindings.Add(new NewLineCommand());
             ui.CommandBindings.Add(new ReplaceLineCommand());
+            ui.CommandBindings.Add(new DrawTrendLineCommand());
         }
     }
 }

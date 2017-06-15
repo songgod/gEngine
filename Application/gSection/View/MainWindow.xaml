@@ -164,7 +164,7 @@
                     </dxr:RibbonPageGroup>
                     <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_8" Caption="趋势线">
                         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_15" Content="插入趋势线" LargeGlyph="{dx:DXImage Image=StackedLineWithoutMarkers_32x32.png}" Glyph="{dx:DXImage Image=StackedLineWithoutMarkers_16x16.png}"/>
-                        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_16" Content="手绘趋势线" LargeGlyph="{dx:DXImage Image=StackedLineWithoutMarkers_32x32.png}" Glyph="{dx:DXImage Image=StackedLineWithoutMarkers_16x16.png}"/>
+                        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_16" Content="手绘趋势线" Command="{x:Static prjcmds:SectionEditCommands.DrawTrendLineCommand}" CommandTarget="{Binding ElementName=prjctrl}" LargeGlyph="{dx:DXImage Image=StackedLineWithoutMarkers_32x32.png}" Glyph="{dx:DXImage Image=StackedLineWithoutMarkers_16x16.png}"/>
                         <dxb:BarSplitCheckItem x:Uid="dxb:BarSplitCheckItem_1" Content="线型" LargeGlyph="{dx:DXImage Image=HorizontalGridlinesMajor_32x32.png}" RibbonStyle="SmallWithText" Glyph="{dx:DXImage Image=HorizontalGridlinesMajor_16x16.png}"/>
                         <dxb:BarEditItem x:Uid="dxb:BarEditItem_1" Content="粗细" EditWidth="44" EditValue="1.0">
                             <dxb:BarEditItem.EditSettings>
