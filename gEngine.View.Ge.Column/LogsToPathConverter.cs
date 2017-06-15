@@ -2,7 +2,6 @@
 using gEngine.Graph.Ge.Column;
 using gEngine.Utility;
 using gEngine.View;
-using gTopology;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -63,7 +62,7 @@ namespace gEngine.View.Ge.Column
             double StartY = (owner.Depths[vls.ToList().IndexOf(validValueList[0])] - mindepth) * Enums.PerMilePx / owner.LongitudinalProportion;// 计算StartPoint的Y值，Y值为第一个有效值的深度，X值为最小值，保证闭合时连线为直线
             double EndY = (owner.Depths[vls.ToList().LastIndexOf(validValueList[validValueList.Length - 1])] - mindepth) * Enums.PerMilePx / owner.LongitudinalProportion;// 增加一个结束点，Y值为最后一个有效值的深度，X值为最小值，保证闭合时连线为直线
 
-            gTopology.PointList pointlist = new gTopology.PointList();
+            PointCollection pointlist = new PointCollection();
             pointlist.Add(new Point() { X = 0, Y = StartY });
 
             for (int i = 0; i < vls.Count; ++i)
@@ -86,10 +85,10 @@ namespace gEngine.View.Ge.Column
 
             pointlist.Add(new Point() { X = 0, Y = EndY });
 
-            gTopology.PointList plist = gTopology.SimpleLine.Simplifier(pointlist, 1);
+            PointCollection plist = GraphAlgo.SimpleLine.Simplifier(pointlist, 1);
 
             PathFigure figure = new PathFigure() { StartPoint = plist[0], IsClosed = true };
-            PointCollection pc = new PointCollection(plist.GetRange(1, plist.Count - 1));
+            PointCollection pc = new PointCollection(plist.ToList().GetRange(1, plist.Count - 1));
             PolyLineSegment pls = new PolyLineSegment() { Points = pc };
             figure.Segments.Add(pls);
             geom.Figures.Add(figure);
