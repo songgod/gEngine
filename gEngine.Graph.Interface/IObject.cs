@@ -13,6 +13,7 @@ namespace gEngine.Graph.Interface
         double Opacity { get; set; }
 
         string DataTemplate { get; set; }
+        bool IsSelected { get; set; }
     }
     public class IObjects : ObservedCollection<IObject> { }
 }

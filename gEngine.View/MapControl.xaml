@@ -24,6 +24,6 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-        <Canvas x:Name="EditCanvas" Background="Transparent"/>
+        <Canvas x:Name="EditCanvas" Background="AliceBlue"/>
     </Grid>
 </UserControl>

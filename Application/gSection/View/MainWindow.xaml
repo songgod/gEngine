@@ -10,10 +10,12 @@
         xmlns:local="clr-namespace:gSection"
         xmlns:prjcontrols="clr-namespace:gEngine.Project.Controls;assembly=gEngine.Project"
         xmlns:prjcmds="clr-namespace:gEngine.Commands;assembly=gEngine.Commands"
+        xmlns:cmds="clr-namespace:gSection.Commands"
         xmlns:cvt="clr-namespace:gSection.Converters"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="gSection.View.MainWindow"
-        Title="MainWindow" Height="725" Width="1452">
+        Title="MainWindow" Height="725" Width="1452"
+    x:Name="dxrWindow">
     <dxr:DXRibbonWindow.Resources>
         <ResourceDictionary x:Uid="ResourceDictionary_1">
             <cvt:ObjectsEqualityConverter x:Uid="cvt:ObjectsEqualityConverter_1" x:Key="objectsEqualityConverter"/>
@@ -265,6 +267,10 @@
                 <dxr:RibbonPage x:Uid="dxr:RibbonPage_5" Caption="视图">
                     <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_18" Caption="">
                         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_28" Content="全图显示" Command="{x:Static prjcmds:OperateViewCommands.FullViewCommand}" CommandTarget="{Binding ElementName=prjctrl}" LargeGlyph="pack://application:,,,/gSection;component/Images/GDS/20150310095307390_easyicon_net_32.ico" Glyph="pack://application:,,,/gSection;component/Images/GDS/20150310095307390_easyicon_net_32.ico"/>
+                        <dxb:BarButtonItem  x:Uid="dxb:BarButtonItem_42" x:Name="bbiSelect" Content="选择" 
+                                            Command="{x:Static cmds:RibbonCommands.SelectObjectCommand}" CommandTarget="{Binding ElementName=dxrWindow}"
+                                            LargeGlyph="pack://application:,,,/gSection;component/Images/GDS/20150707101222971_easyicon_net_64.ico" Glyph="pack://application:,,,/gSection;component/Images/GDS/20150707101222971_easyicon_net_64.ico" RibbonStyle="Large"/>
+                            <!--MouseLeftButtonDown="bbiSelect_MouseLeftButtonDown"-->
                     </dxr:RibbonPageGroup>
                     <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_19" Caption="视图缩放">
                         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_29" Content="视图放大" LargeGlyph="pack://application:,,,/gSection;component/Images/GDS/20150707101248177_easyicon_net_64.ico"/>
@@ -339,78 +345,7 @@
                     </dxr:RibbonPageGroup>
                 </dxr:RibbonPage>
             </dxr:RibbonDefaultPageCategory>
-            <dxr:RibbonPageCategory x:Uid="dxr:RibbonPageCategory_1" Caption="剖面图">
-                <dxr:RibbonPage x:Uid="dxr:RibbonPage_6" Caption="单井设置">
-                    <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_23" Caption="Ribbon Page Group"/>
-                </dxr:RibbonPage>
-                <dxr:RibbonPage x:Uid="dxr:RibbonPage_7" Caption="手绘设置">
-                    <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_24" Caption="地层线">
-                        <dxb:BarSplitCheckItem x:Uid="dxb:BarSplitCheckItem_8" Content="地层线" LargeGlyph="{dx:DXImage Image=LineStyle_32x32.png}" Glyph="{dx:DXImage Image=LineStyle_16x16.png}" RibbonStyle="SmallWithText"/>
-                        <dxb:BarEditItem x:Uid="dxb:BarEditItem_23" Content="粗细" EditWidth="44" EditValue="1.0">
-                            <dxb:BarEditItem.EditSettings>
-                                <dxe:TextEditSettings x:Uid="dxe:TextEditSettings_12"/>
-                            </dxb:BarEditItem.EditSettings>
-                        </dxb:BarEditItem>
-                        <dxb:BarEditItem x:Uid="dxb:BarEditItem_24" Content="颜色">
-                            <dxb:BarEditItem.EditSettings>
-                                <dxe:PopupColorEditSettings x:Uid="dxe:PopupColorEditSettings_6"/>
-                            </dxb:BarEditItem.EditSettings>
-                        </dxb:BarEditItem>
-                    </dxr:RibbonPageGroup>
-                    <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_25" Caption="砂体线">
-                        <dxb:BarSplitCheckItem x:Uid="dxb:BarSplitCheckItem_9" Content="线型" LargeGlyph="{dx:DXImage Image=HorizontalGridlinesMajor_32x32.png}" RibbonStyle="SmallWithText" Glyph="{dx:DXImage Image=HorizontalGridlinesMajor_16x16.png}"/>
-                        <dxb:BarEditItem x:Uid="dxb:BarEditItem_25" Content="粗细" EditWidth="44" EditValue="1.0">
-                            <dxb:BarEditItem.EditSettings>
-                                <dxe:TextEditSettings x:Uid="dxe:TextEditSettings_13"/>
-                            </dxb:BarEditItem.EditSettings>
-                        </dxb:BarEditItem>
-                        <dxb:BarEditItem x:Uid="dxb:BarEditItem_26" Content="颜色">
-                            <dxb:BarEditItem.EditSettings>
-                                <dxe:PopupColorEditSettings x:Uid="dxe:PopupColorEditSettings_7"/>
-                            </dxb:BarEditItem.EditSettings>
-                        </dxb:BarEditItem>
-                    </dxr:RibbonPageGroup>
-                    <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_26" Caption="断层">
-                        <dxb:BarSplitCheckItem x:Uid="dxb:BarSplitCheckItem_10" Content="线型" LargeGlyph="{dx:DXImage Image=HorizontalGridlinesMajor_32x32.png}" RibbonStyle="SmallWithText" Glyph="{dx:DXImage Image=HorizontalGridlinesMajor_16x16.png}"/>
-                        <dxb:BarEditItem x:Uid="dxb:BarEditItem_27" Content="粗细" EditWidth="44" EditValue="1.0">
-                            <dxb:BarEditItem.EditSettings>
-                                <dxe:TextEditSettings x:Uid="dxe:TextEditSettings_14"/>
-                            </dxb:BarEditItem.EditSettings>
-                        </dxb:BarEditItem>
-                        <dxb:BarEditItem x:Uid="dxb:BarEditItem_28" Content="颜色">
-                            <dxb:BarEditItem.EditSettings>
-                                <dxe:PopupColorEditSettings x:Uid="dxe:PopupColorEditSettings_8"/>
-                            </dxb:BarEditItem.EditSettings>
-                        </dxb:BarEditItem>
-                    </dxr:RibbonPageGroup>
-                    <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_27" Caption="界面">
-                        <dxb:BarSplitCheckItem x:Uid="dxb:BarSplitCheckItem_11" Content="线型" LargeGlyph="{dx:DXImage Image=HorizontalGridlinesMajor_32x32.png}" RibbonStyle="SmallWithText" Glyph="{dx:DXImage Image=HorizontalGridlinesMajor_16x16.png}"/>
-                        <dxb:BarEditItem x:Uid="dxb:BarEditItem_29" Content="粗细" EditWidth="44" EditValue="1.0">
-                            <dxb:BarEditItem.EditSettings>
-                                <dxe:TextEditSettings x:Uid="dxe:TextEditSettings_15"/>
-                            </dxb:BarEditItem.EditSettings>
-                        </dxb:BarEditItem>
-                        <dxb:BarEditItem x:Uid="dxb:BarEditItem_30" Content="颜色">
-                            <dxb:BarEditItem.EditSettings>
-                                <dxe:PopupColorEditSettings x:Uid="dxe:PopupColorEditSettings_9"/>
-                            </dxb:BarEditItem.EditSettings>
-                        </dxb:BarEditItem>
-                    </dxr:RibbonPageGroup>
-                    <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_28" Caption="趋势线">
-                        <dxb:BarSplitCheckItem x:Uid="dxb:BarSplitCheckItem_12" Content="线型" LargeGlyph="{dx:DXImage Image=HorizontalGridlinesMajor_32x32.png}" RibbonStyle="SmallWithText" Glyph="{dx:DXImage Image=HorizontalGridlinesMajor_16x16.png}"/>
-                        <dxb:BarEditItem x:Uid="dxb:BarEditItem_31" Content="粗细" EditWidth="44" EditValue="1.0">
-                            <dxb:BarEditItem.EditSettings>
-                                <dxe:TextEditSettings x:Uid="dxe:TextEditSettings_16"/>
-                            </dxb:BarEditItem.EditSettings>
-                        </dxb:BarEditItem>
-                        <dxb:BarEditItem x:Uid="dxb:BarEditItem_32" Content="颜色">
-                            <dxb:BarEditItem.EditSettings>
-                                <dxe:PopupColorEditSettings x:Uid="dxe:PopupColorEditSettings_10"/>
-                            </dxb:BarEditItem.EditSettings>
-                        </dxb:BarEditItem>
-                    </dxr:RibbonPageGroup>
-                </dxr:RibbonPage>
-            </dxr:RibbonPageCategory>
+            
         </dxr:RibbonControl>
         <prjcontrols:ProjectControl x:Uid="prjctrl" Project="{Binding Projects}" Grid.Row="1" x:Name="prjctrl"/>
         <dxr:RibbonStatusBarControl x:Uid="dxr:RibbonStatusBarControl_1" Grid.Row="2">
