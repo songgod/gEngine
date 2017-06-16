@@ -29,9 +29,7 @@ namespace gSection.View
         public MainWindow()
         {
             gEngine.Project.Registry.InstallCommands(this);
-
             Projects = new Project();
-            Projects.OpenDBSource(@"D:\gSectionData.Txt");
 
             InitializeComponent();
 

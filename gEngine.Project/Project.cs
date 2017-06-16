@@ -272,7 +272,7 @@ namespace gEngine.Project
 
             for (int index = 0; index < Maps.Count; index++)
             {
-                XmlElement xmlmap = xmldoc.CreateElement(Maps[index].Item2.Name);
+                XmlElement xmlmap = xmldoc.CreateElement("Map");
                 xmlmap.SetAttribute("Url", Maps[index].Item1);
                 xmlmaps.AppendChild(xmlmap);
             }

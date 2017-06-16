@@ -1364,6 +1364,10 @@
   <ItemGroup>
     <Resource Include="Images\GDS\project.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\GDS\数据源16.png" />
+    <Resource Include="Images\GDS\数据源32.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>$(MSBUILD) /t:updateuid $(ProjectPath)</PreBuildEvent>

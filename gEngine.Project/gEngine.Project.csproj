@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="CommandInstaller.cs" />
     <Compile Include="Commands\FullViewCommand.cs" />
+    <Compile Include="Commands\OpenDBSourceCommand.cs" />
     <Compile Include="Commands\OpenMapCommand.cs" />
     <Compile Include="Commands\OpenMapsSelectCommand.cs" />
     <Compile Include="Commands\OpenProjectCommand.cs" />

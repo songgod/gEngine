@@ -136,6 +136,7 @@
                         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_7" Content="设置范围" LargeGlyph="{dx:DXImage Image=RangeArea_32x32.png}" Glyph="{dx:DXImage Image=RangeArea_16x16.png}"/>
                     </dxr:RibbonPageGroup>
                     <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_29" Caption="常用功能">
+                        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_39" Content="设置数据源" Command="{x:Static prjcmds:ProjectCommands.OpenDBSourceCommand}" CommandTarget="{Binding ElementName=prjctrl}" LargeGlyph="pack://application:,,,/gSection;component/Images/GDS/数据源32.png" Glyph="pack://application:,,,/gSection;component/Images/GDS/数据源16.png"></dxb:BarButtonItem>
                     </dxr:RibbonPageGroup>
                 </dxr:RibbonPage>
                 <dxr:RibbonPage x:Uid="pageRef" x:Name="pageRef" Caption="参考">
