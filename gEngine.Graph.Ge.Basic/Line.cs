@@ -7,7 +7,7 @@ using System.Windows;
 
 namespace gEngine.Graph.Ge.Basic
 {
-    public class Line : Base
+    public class Line : Object
     {
         public Point Start
         {

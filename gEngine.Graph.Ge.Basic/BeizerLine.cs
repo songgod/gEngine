@@ -8,7 +8,7 @@ using System.Windows.Media;
 
 namespace gEngine.Graph.Ge.Basic
 {
-    public class BeizerLine : Base
+    public class BeizerLine : Object
     {
 
 

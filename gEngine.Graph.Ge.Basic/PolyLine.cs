@@ -8,7 +8,7 @@ using System.Windows.Media;
 
 namespace gEngine.Graph.Ge.Basic
 {
-    public class PolyLine : Base
+    public class PolyLine : Object
     {
 
 
