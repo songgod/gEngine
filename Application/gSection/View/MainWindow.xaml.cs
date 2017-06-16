@@ -63,7 +63,7 @@ namespace gSection.View
                  "/RibbonDemo;component/Images/Clipart/caWebCam.png"
              };
             this.DataContext = this;
-        }
+        
 
             gEngine.RibbonPageCategory.Registry.AddRibbonPageCategory(ribbonControl);
 
