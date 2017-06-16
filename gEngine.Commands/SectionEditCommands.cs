@@ -18,6 +18,7 @@ namespace gEngine.Commands
             NewFaultCommand = new RoutedUICommand("NewFaultCommand", "NewFaultCommand", typeof(SectionEditCommands));
             NewLineCommand = new RoutedUICommand("NewLineCommand", "NewLineCommand", typeof(SectionEditCommands));
             ReplaceLineCommand = new RoutedUICommand("ReplaceLineCommand", "ReplaceLineCommand", typeof(SectionEditCommands));
+            DrawTrendLineCommand = new RoutedUICommand("DrawTrendLineCommand", "DrawTrendLineCommand", typeof(SectionEditCommands));
         }
 
         public static RoutedCommand EditLineCommand { get; set; }
@@ -27,5 +28,6 @@ namespace gEngine.Commands
         public static RoutedCommand NewFaultCommand { get; set; }
         public static RoutedCommand NewLineCommand { get; set; }
         public static RoutedCommand ReplaceLineCommand { get; set; }
+        public static RoutedCommand DrawTrendLineCommand { get; set; }
     }
 }

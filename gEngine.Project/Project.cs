@@ -10,11 +10,48 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Xml;
 using Microsoft.Win32;
+using System.Text.RegularExpressions;
 
 namespace gEngine.Project
 {
     public class Project
     {
+        public string Url { get; set; }
+
+        public string MapsPath
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(Url))
+                    return null;
+
+                return Url.Substring(0, Url.LastIndexOf(@"\")) + @"\Maps";
+            }
+        }
+
+        public class MapCollection : ObservedCollection<Tuple<string, IMap>> { }
+        public MapCollection Maps { get; private set; }
+
+        public IMaps OpenMaps { get; set; }
+
+        public class DBSourceTuple : Tuple<string, IDBSource>
+        {
+            public DBSourceTuple(string url, IDBSource db) : base(url, db)
+            {
+            }
+        }
+        public DBSourceTuple DBTuple { get; set; }
+
+        public IDBSource DBSource
+        {
+            get
+            {
+                if (DBTuple != null)
+                    return DBTuple.Item2;
+                return null;
+            }
+        }
+
         public Project()
         {
             Maps = new MapCollection();
@@ -26,25 +63,7 @@ namespace gEngine.Project
         public bool Open(string url)
         {
             Url = url;
-
-            XmlDocument xmldoc = new XmlDocument();
-
-            XmlReaderSettings setting = new XmlReaderSettings() { IgnoreComments = true };
-            XmlReader reader = XmlReader.Create(Url, setting);
-            xmldoc.Load(reader);
-            XmlNode xmlproj = xmldoc.SelectSingleNode("Gepro");
-
-            foreach (XmlNode node in xmlproj.ChildNodes)
-            {
-                foreach (XmlNode cNode in node)
-                {
-                    string MapUrl = cNode.Attributes["Url"].Value;
-                    OpenMap(MapUrl);
-                }
-            }
-            reader.Close();
-
-            return true;
+            return read();
         }
 
         public bool Save()
@@ -55,87 +74,239 @@ namespace gEngine.Project
                 SaveFileDialog.Filter = "工程文件|*.Gepro";
                 if (SaveFileDialog.ShowDialog() == true)
                 {
-                    if (File.Exists(SaveFileDialog.FileName))
-                    {
-                        MessageBox.Show("工程文件名称重复，请重新输入！");
+                    if (!CheckSave(SaveFileDialog.FileName))
                         return false;
-                    }
 
-                    string ProjectName = SaveFileDialog.FileName;
-                    string ProjPath = ProjectName.Substring(0, ProjectName.LastIndexOf(@"\"));
-                    string MapsPath = ProjPath + @"\Maps";
-                    if (Directory.Exists(MapsPath))
-                    {
-                        MessageBox.Show("图件目录重复！");
-                        return false;
-                    }
-                    else
-                    {
-                        DirectoryInfo directoryInfo = new DirectoryInfo(MapsPath);
-                        directoryInfo.Create();
-                        XmlDocument xmldoc = new XmlDocument();
-                        xmldoc.AppendChild(xmldoc.CreateXmlDeclaration("1.0", "UTF-8", null));
-                        XmlElement xmlproj = xmldoc.CreateElement("Gepro");
-                        xmldoc.AppendChild(xmlproj);
-
-                        XmlElement xmlmaps = xmlproj.OwnerDocument.CreateElement("Maps");
-                        xmlproj.AppendChild(xmlmaps);
-                        int index = 0;
-                        foreach (IMap map in OpenMaps)
-                        {
-                            string MapFile = MapsPath + @"\" + map.Name + ".Ge";
-                            XmlElement xmlmap = xmldoc.CreateElement(map.Name);
-                            xmlmap.SetAttribute("Name", map.Name);
-                            xmlmap.SetAttribute("Url", MapFile);
-                            xmlmaps.AppendChild(xmlmap);
-                            WriteMap(map, MapFile);
-                            Maps[index] = new Tuple<string, IMap>(MapFile, map);
-                            index++;
-                        }
-                        xmldoc.Save(ProjectName);
-                        return true;
-                    }
+                    Url = SaveFileDialog.FileName;
+                    DirectoryInfo directoryInfo = new DirectoryInfo(MapsPath);
+                    directoryInfo.Create();
+                    
+                    return Write();
                 }
-                else
-                {
-                    MessageBox.Show("取消保存");
-                    return false;
-                }
+                return false;
             }
             else
             {
-                string ProjectName = Url;
-                string ProjPath = ProjectName.Substring(0, ProjectName.LastIndexOf(@"\"));
-                string MapsPath = ProjPath + @"\Maps";
-                XmlDocument xmldoc = new XmlDocument();
-                xmldoc.Load(ProjectName);
-                XmlNode node = xmldoc.SelectSingleNode("Gepro");
-                XmlNode childNode = node.SelectSingleNode("Maps");
-                int index = 0;
-                foreach (IMap map in OpenMaps)
-                {
-                    if (string.IsNullOrEmpty(Maps[index].Item1))
-                    {
-                        string MapFile = MapsPath + @"\" + map.Name + ".Ge";
-                        XmlElement xmlmap = xmldoc.CreateElement(map.Name);
-                        xmlmap.SetAttribute("Name", map.Name);
-                        xmlmap.SetAttribute("Url", MapFile);
-                        childNode.AppendChild(xmlmap);
-                        WriteMap(map, MapFile);
-                        Maps[index] = new Tuple<string, IMap>(MapFile, map);
-                    }
-                    index++;
-                }
-
-                xmldoc.Save(ProjectName);
-                return true;
+                return Write();
             }
         }
 
-        public bool SaveAs(string url)
+        public bool SaveAs()
         {
-            Url = url;
-            return Save();
+            string url = Url;
+            Url = null;
+            bool saved = Save();
+            if (!saved)
+            {
+                Url = url;
+                return false;
+            }
+                
+            return true;
+        }
+
+        public bool OpenDBSource(string url)
+        {
+            IDBSource source = gEngine.Data.Interface.Register.CreateDBSource(url);
+            if (source == null)
+                return false;
+            DBTuple = new Project.DBSourceTuple(url, source);
+            return true;
+        }
+
+        public IMap OpenMap(string url)
+        {
+            string fullurl="";
+            IMap map = null;
+            for (int i=0;i<Maps.Count;++i)
+            {
+                if (Maps[i].Item1 == url) 
+                {
+                    if (Maps[i].Item2 != null)//已经打开
+                        return Maps[i].Item2;
+                    else
+                    {
+                        fullurl = GetMapFullPath(Maps[i].Item1);
+                        map = gEngine.Graph.Interface.Registry.ReadMap(fullurl);
+                        if (map == null)
+                            return null;
+
+                        Maps[i] = new Tuple<string, IMap>(url, map);
+                        OpenMaps.Add(map);
+                        return map;
+                    }
+                }
+            }
+
+            fullurl = GetMapFullPath(url);
+            map = gEngine.Graph.Interface.Registry.ReadMap(fullurl);
+            if (map == null)
+                return null;
+            Maps.Add(new Tuple<string, IMap>(url, map));
+            OpenMaps.Add(map);
+            return map;
+        }
+
+        public IMap NewMap(string type, string name)
+        {
+            if (String.IsNullOrEmpty(type) || String.IsNullOrEmpty(name))
+                return null;
+            string url = name + "." + type;
+            var res = Maps.Where(item => item.Item1 == url);
+            if (res.Count() != 0)
+            {
+                MessageBox.Show("存在同名图件");
+                return null;
+            }
+                
+
+            IMap map = gEngine.Graph.Interface.Registry.CreateMap(type);
+            if (map == null)
+                return null;
+            map.Name = name;
+            Maps.Add(new Tuple<string, IMap>(url, map));
+            OpenMaps.Add(map);
+            return map;
+        }
+
+        public IMap NewMap(string type, string name, ILayers layers)
+        {
+            if (String.IsNullOrEmpty(type) || String.IsNullOrEmpty(name))
+                return null;
+
+            string url = name + "." + type;
+            var res = Maps.Where(item => item.Item1 == url);
+            if (res.Count() != 0)
+            {
+                MessageBox.Show("存在同名图件");
+                return null;
+            }
+
+            IMap map = gEngine.Graph.Interface.Registry.CreateMap(type);
+            if (map == null)
+                return null;
+            map.Name = name;
+            Maps.Add(new Tuple<string, IMap>(url, map));
+
+            foreach (var layer in layers)
+            {
+                map.Layers.Add(layer);
+            }
+
+            OpenMaps.Add(map);
+            return map;
+        }
+
+        public bool SaveMap(string url)
+        {
+            if (string.IsNullOrEmpty(url))
+                return false;
+
+            var res = Maps.Where(item => item.Item1 == url);
+            if (res.Count() == 0)
+                return false;
+
+            Tuple<string, IMap> tuplemap = res.ElementAt(0);
+
+            string fullurl = GetMapFullPath(url);
+
+            bool IsSuccess = gEngine.Graph.Interface.Registry.WriteMap(tuplemap.Item2, fullurl);
+            return IsSuccess;
+        }
+
+        public bool SaveAllMaps()
+        {
+            if (string.IsNullOrEmpty(Url))
+                return false;
+
+            foreach (var item in Maps)
+            {
+                SaveMap(item.Item1);
+            }
+            return true;
+        }
+
+        private string GetMapFullPath(string url)
+        {
+            if (url.Contains('\\') || url.Contains('/'))
+            {
+                return url;
+            }
+            else
+            {
+                return MapsPath + @"\" + url;
+            }
+        }
+
+        private bool CheckSave(string url)
+        {
+            if (File.Exists(url))
+            {
+                MessageBox.Show("工程文件名称重复，请重新输入！");
+                return false;
+            }
+            string ProjPath = url.Substring(0, url.LastIndexOf(@"\"));
+            string MapsPath = ProjPath + @"\Maps";
+            if (Directory.Exists(MapsPath))
+            {
+                MessageBox.Show("图件目录重复！");
+                return false;
+            }
+            return true;
+        }
+
+        private bool Write()
+        {
+            if (string.IsNullOrEmpty(Url))
+                return false;
+            SaveAllMaps();
+
+            string ProjPath = Url.Substring(0, Url.LastIndexOf(@"\"));
+            string MapsPath = ProjPath + @"\Maps";
+            XmlDocument xmldoc = new XmlDocument();
+            xmldoc.AppendChild(xmldoc.CreateXmlDeclaration("1.0", "UTF-8", null));
+            XmlElement xmlproj = xmldoc.CreateElement("Gepro");
+            xmldoc.AppendChild(xmlproj);
+            XmlElement xmlmaps = xmlproj.OwnerDocument.CreateElement("Maps");
+            xmlproj.AppendChild(xmlmaps);
+
+            for (int index = 0; index < Maps.Count; index++)
+            {
+                XmlElement xmlmap = xmldoc.CreateElement("Map");
+                xmlmap.SetAttribute("Url", Maps[index].Item1);
+                xmlmaps.AppendChild(xmlmap);
+            }
+            XmlElement xmldbsource = xmlproj.OwnerDocument.CreateElement("DBSource");
+            xmldbsource.SetAttribute("Url", DBTuple.Item1);
+            xmlproj.AppendChild(xmldbsource);
+            xmldoc.Save(Url);
+            return true;
+        }
+
+        private bool read()
+        {
+            XmlDocument xmldoc = new XmlDocument();
+
+            XmlReaderSettings setting = new XmlReaderSettings() { IgnoreComments = true };
+            XmlReader reader = XmlReader.Create(Url, setting);
+            xmldoc.Load(reader);
+            XmlNode xmlproj = xmldoc.SelectSingleNode("Gepro");
+            foreach (XmlNode node in xmlproj.ChildNodes)
+            {
+                if (node.Name.Equals("DBSource"))
+                {
+                    string dbName = node.Attributes["Url"].Value;
+                    OpenDBSource(dbName);
+                }
+
+                foreach (XmlNode cNode in node)
+                {
+                    string MapFileName = cNode.Attributes["Url"].Value;
+                    Maps.Add(new Tuple<string, IMap>(MapFileName, null));
+                }
+            }
+            reader.Close();
+            return true;
         }
 
         private void OpenMaps_OnItemRemoved(int aIndex, IMap aItem)
@@ -156,139 +327,6 @@ namespace gEngine.Project
         {
             if (OpenMaps.Contains(aItem.Item2))
                 OpenMaps.Remove(aItem.Item2);
-        }
-
-        public class MapCollection : ObservedCollection<Tuple<string, IMap>> { }
-
-        public class DBSourceTuple : Tuple<string, IDBSource>
-        {
-            public DBSourceTuple(string url, IDBSource db) : base(url, db)
-            {
-            }
-        }
-
-        public MapCollection Maps { get; private set; }
-
-        public IMaps OpenMaps { get; set; }
-
-        public DBSourceTuple DBTuple { get; set; }
-
-        public IDBSource DBSource
-        {
-            get
-            {
-                if (DBTuple != null)
-                    return DBTuple.Item2;
-                return null;
-            }
-        }
-        private string url;
-        public string Url
-        {
-            get
-            {
-                return url;
-            }
-            set
-            {
-                url = value;
-                Read();
-            }
-        }
-
-        public bool Read()
-        {
-            return false;
-        }
-        public bool Write()
-        {
-            return false;
-        }
-
-        public bool OpenDBSource(string url)
-        {
-            IDBSource source = gEngine.Data.Interface.Register.CreateDBSource(url);
-            if (source == null)
-                return false;
-            DBTuple = new Project.DBSourceTuple(url, source);
-            return true;
-        }
-
-        public IMap OpenMap(string url)
-        {
-            bool find = false;
-            int index = 0;
-            foreach (var item in Maps)
-            {
-                if (item.Item1 == url)
-                {
-                    find = true;
-                    break;
-                }
-                index++;
-            }
-
-            IMap map = gEngine.Graph.Interface.Registry.ReadMap(url);
-            if (map == null)
-                return null;
-
-            if (find == false)
-            {
-                Maps.Add(new Tuple<string, IMap>(url, map));
-            }
-            else
-            {
-                Maps[index] = new Tuple<string, IMap>(url, map);
-            }
-
-            OpenMaps.Add(map);
-            return map;
-        }
-
-        public IMap NewMap(string type, string name)
-        {
-            if (String.IsNullOrEmpty(type) || String.IsNullOrEmpty(name))
-                return null;
-
-            IMap map = gEngine.Graph.Interface.Registry.CreateMap(type);
-            if (map == null)
-                return null;
-            map.Name = name;
-            Maps.Add(new Tuple<string, IMap>("", map));
-            OpenMaps.Add(map);
-            return map;
-        }
-
-        public IMap NewMap(string type, string name, ILayers layers)
-        {
-            if (String.IsNullOrEmpty(type) || String.IsNullOrEmpty(name))
-                return null;
-
-            IMap map = gEngine.Graph.Interface.Registry.CreateMap(type);
-            if (map == null)
-                return null;
-            map.Name = name;
-            Maps.Add(new Tuple<string, IMap>("", map));
-
-            foreach (var layer in layers)
-            {
-                map.Layers.Add(layer);
-            }
-
-            OpenMaps.Add(map);
-            return map;
-        }
-
-        public bool WriteMap(IMap map, string url)
-        {
-            if (map == null)
-                return false;
-
-            if (string.IsNullOrEmpty(url))
-                return false;
-
-            bool IsSuccess = gEngine.Graph.Interface.Registry.WriteMap(map, url);
-            return IsSuccess;
         }
     }
 }

@@ -1,0 +1,104 @@
+﻿<ResourceDictionary x:Uid="ResourceDictionary_1" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+                    xmlns:prjcmds="clr-namespace:gEngine.Commands;assembly=gEngine.Commands"
+                    xmlns:local="clr-namespace:gSection.View"
+                     xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                   xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                    xmlns:prjcvts="clr-namespace:gEngine.Project.Converter;assembly=gEngine.Project"
+                    xmlns:controls="clr-namespace:gSection.Controls">
+    <Style x:Uid="Style_1" TargetType="controls:ThemedContentControl">
+        <Setter x:Uid="Setter_1" Property="LightThemeNormalForeground" Value="#FF5E5E5E" />
+        <Setter x:Uid="Setter_2" Property="LightThemeHoverForeground" Value="#FF5E5E5E" />
+        <Setter x:Uid="Setter_3" Property="DarkThemeNormalForeground" Value="#FFFCFCFC" />
+        <Setter x:Uid="Setter_4" Property="DarkThemeHoverForeground" Value="#FF5E5E5E" />
+        <Setter x:Uid="Setter_5" Property="Template">
+            <Setter.Value>
+                <ControlTemplate x:Uid="ControlTemplate_2" TargetType="controls:ThemedContentControl">
+                    <ContentPresenter x:Uid="ContentPresenter_1" Content="{TemplateBinding Content}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Uid="Style_2" x:Key="BackstageCommandStyle" TargetType="{x:Type StackPanel}">
+        <Style.Triggers>
+            <Trigger x:Uid="Trigger_1" Property="IsMouseOver" Value="True">
+                <Setter x:Uid="Setter_6" Property="Background" Value="AliceBlue"></Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <ControlTemplate x:Uid="ControlTemplate_3" x:Key="HeaderTemplate" TargetType="{x:Type ContentControl}">
+        <StackPanel x:Uid="StackPanel_1" SnapsToDevicePixels="True">
+            <controls:ThemedContentControl x:Uid="controls:ThemedContentControl_1" FontSize="14" FontWeight="Bold" Content="{TemplateBinding Content}" Margin="2,7,2,5" SnapsToDevicePixels="True" />
+            <controls:ThemedContentControl x:Uid="separatorForegroundTextBlock" x:Name="separatorForegroundTextBlock">
+                <controls:ThemedContentControl.LightThemeNormalForeground>
+                    <LinearGradientBrush x:Uid="LinearGradientBrush_3" StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop x:Uid="GradientStop_7" Offset="0" Color="#FFFCFCFC" />
+                        <GradientStop x:Uid="GradientStop_8" Offset="0.5" Color="#FFD7D7D7" />
+                        <GradientStop x:Uid="GradientStop_9" Offset="1" Color="#FFFCFCFC" />
+                    </LinearGradientBrush>
+                </controls:ThemedContentControl.LightThemeNormalForeground>
+                <controls:ThemedContentControl.DarkThemeNormalForeground>
+                    <LinearGradientBrush x:Uid="LinearGradientBrush_4" StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop x:Uid="GradientStop_10" Offset="0" Color="#FF5E5E5E" />
+                        <GradientStop x:Uid="GradientStop_11" Offset="0.5" Color="#FFDCDCDC" />
+                        <GradientStop x:Uid="GradientStop_12" Offset="1" Color="#FF5E5E5E" />
+                    </LinearGradientBrush>
+                </controls:ThemedContentControl.DarkThemeNormalForeground>
+                <Border x:Uid="Border_2" Height="1" Margin="0,0,0,5" Background="{Binding ElementName=separatorForegroundTextBlock, Path=Foreground}" />
+            </controls:ThemedContentControl>
+        </StackPanel>
+    </ControlTemplate>
+    <ControlTemplate  x:Uid="ControlTemplate_1" x:Key="VerticalSeparatorTemplate" TargetType="{x:Type ContentControl}">
+        <controls:ThemedContentControl x:Uid="themedContentControl" x:Name="themedContentControl">
+            <controls:ThemedContentControl.LightThemeNormalForeground>
+                <LinearGradientBrush x:Uid="LinearGradientBrush_1" StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop x:Uid="GradientStop_1" Offset="0" Color="#FFFCFCFC" />
+                    <GradientStop x:Uid="GradientStop_2" Offset="0.5" Color="#FFD7D7D7" />
+                    <GradientStop x:Uid="GradientStop_3" Offset="1" Color="#FFFCFCFC" />
+                </LinearGradientBrush>
+            </controls:ThemedContentControl.LightThemeNormalForeground>
+            <controls:ThemedContentControl.DarkThemeNormalForeground>
+                <LinearGradientBrush x:Uid="LinearGradientBrush_2" StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop x:Uid="GradientStop_4" Offset="0" Color="#FF5E5E5E" />
+                    <GradientStop x:Uid="GradientStop_5" Offset="0.5" Color="#FFDCDCDC" />
+                    <GradientStop x:Uid="GradientStop_6" Offset="1" Color="#FF5E5E5E" />
+                </LinearGradientBrush>
+            </controls:ThemedContentControl.DarkThemeNormalForeground>
+            <Border x:Uid="Border_1" Width="1" Background="{Binding ElementName=themedContentControl, Path=Foreground}" Margin="0,20,0,20"/>
+        </controls:ThemedContentControl>
+    </ControlTemplate>
+    <DataTemplate  x:Uid="DataTemplate_2" x:Key="MapItemTemplate" >
+        <Grid x:Uid="Grid_1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Uid="ColumnDefinition_1" Width="Auto"></ColumnDefinition>
+                <ColumnDefinition x:Uid="ColumnDefinition_2" Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.Resources>
+                <prjcvts:MultiCommandParaConverter x:Uid="prjcvts:MultiCommandParaConverter_2" x:Key="c2l"></prjcvts:MultiCommandParaConverter>
+            </Grid.Resources>
+            <i:Interaction.Triggers>
+                <i:EventTrigger x:Uid="i:EventTrigger_4" EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction  x:Uid="i:InvokeCommandAction_3" Command="{x:Static prjcmds:MapCommands.OpenMapCommand}">
+                        <i:InvokeCommandAction.CommandParameter>
+                            <MultiBinding x:Uid="MultiBinding_2" Converter="{StaticResource c2l}">
+                                <Binding x:Uid="Binding_3" ElementName="prjctrl"></Binding>
+                                <Binding x:Uid="Binding_4" ElementName="txtMapUrl"></Binding>
+                            </MultiBinding>
+                        </i:InvokeCommandAction.CommandParameter>
+                    </i:InvokeCommandAction>
+                </i:EventTrigger>
+                <i:EventTrigger x:Uid="i:EventTrigger_6" EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction  x:Uid="i:InvokeCommandAction_4" Command="{Binding DataContext.CloseApplicationMenuCommand, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Image x:Uid="Image_1" Source="/gSection;component/Images/Small/FileNew_32x32.png" />
+            <StackPanel x:Uid="StackPanel_2" Grid.Column="1" VerticalAlignment="Center">
+                <TextBlock x:Name="txtMapUrl" x:Uid="txtMapUrl" Text="{Binding Path=Item1}">
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>

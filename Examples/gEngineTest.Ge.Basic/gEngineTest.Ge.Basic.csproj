@@ -109,6 +109,10 @@
       <Project>{1c98a821-b030-4ff2-83ae-d49b1b3b8c67}</Project>
       <Name>gEngine.Graph.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\gEngine.Util\gEngine.Util.csproj">
+      <Project>{84ACB6C4-CF62-4F4B-A7E5-5C642EDC041A}</Project>
+      <Name>gEngine.Util</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\gEngine.View.Ge.Basic\gEngine.View.Ge.Basic.csproj">
       <Project>{68766b32-0e50-4b96-987b-a8cb20535573}</Project>
       <Name>gEngine.View.Ge.Basic</Name>

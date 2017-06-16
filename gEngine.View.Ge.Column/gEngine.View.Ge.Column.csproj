@@ -31,8 +31,10 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="gTopology">
-      <HintPath>..\3rdlib\gToplogy\x64\gTopology.dll</HintPath>
+    <Reference Include="GraphAlgo, Version=1.0.6374.29894, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\3rdlib\GraphAlgo\x64\GraphAlgo.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />

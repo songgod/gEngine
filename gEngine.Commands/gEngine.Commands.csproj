@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BasicCommands.cs" />
+    <Compile Include="MapCommands.cs" />
     <Compile Include="OperateViewCommands.cs" />
     <Compile Include="PlaneCommands.cs" />
     <Compile Include="ProjectCommands.cs" />

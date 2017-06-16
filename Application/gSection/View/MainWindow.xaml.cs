@@ -1,4 +1,5 @@
-﻿using DevExpress.Xpf.Ribbon;
+﻿using DevExpress.Mvvm;
+using DevExpress.Xpf.Ribbon;
 using gEngine.Graph.Interface;
 using gEngine.Project;
 using gEngine.Project.Commands;
@@ -10,6 +11,7 @@ using gSection.Converters;
 using System;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Input;
 
 namespace gSection.View
 {
@@ -37,7 +39,6 @@ namespace gSection.View
             install.Install(this);
 
             Projects = new Project();
-            Projects.OpenDBSource(@"D:\gSectionData.Txt");
 
 
 
@@ -61,8 +62,8 @@ namespace gSection.View
                  "/RibbonDemo;component/Images/Clipart/caServerEnabled.png",
                  "/RibbonDemo;component/Images/Clipart/caWebCam.png"
              };
-
             this.DataContext = this;
+        }
 
             gEngine.RibbonPageCategory.Registry.AddRibbonPageCategory(ribbonControl);
 
@@ -84,6 +85,16 @@ namespace gSection.View
                 }
             }
         }
+        public ICommand CloseApplicationMenuCommand
+        {
+            get
+            {
+                return new DelegateCommand(() =>
+                {
+                    this.BackstageViewControl_1.Close();
+                });
+            }
+        }
 
         private RibbonPageCategory GetRibPageCategory(GeRibbonPageCategory grpc)
         {
@@ -98,6 +109,16 @@ namespace gSection.View
                 }
             }
             return null;
+        }
+        public ICommand SetOpenMapTabIndexCommand
+        {
+            get
+            {
+                return new DelegateCommand(() =>
+                {
+                    BackstageViewControl_1.SelectedTabIndex = 1;
+                });
+            }
         }
     }
 }

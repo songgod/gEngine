@@ -22,6 +22,11 @@ namespace gEngine.Graph.Ge
 
     public class NormalLineStyle : LineStyle
     {
+        public NormalLineStyle()
+        {
+            Width = 1;
+            Color = Colors.Black;
+        }
         public override LineType LinType { get { return LineType.NormalLine; } }
 
         public Color Color { get; set; }

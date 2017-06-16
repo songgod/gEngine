@@ -31,6 +31,11 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GraphAlgo, Version=1.0.6375.16859, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\3rdlib\GraphAlgo\x64\GraphAlgo.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -46,6 +51,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BoundaryManipulator.cs" />
+    <Compile Include="DrawBezierLineObjectManipulator.cs" />
+    <Compile Include="DrawLineObjectManipulator.cs" />
+    <Compile Include="EditLineManipulator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -53,9 +61,21 @@
       <Project>{DB606377-AAA0-45BD-A6BE-4F4C4CD111AF}</Project>
       <Name>gEngine.Graph.Ge.Basic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\gEngine.Graph.Ge\gEngine.Graph.Ge.csproj">
+      <Project>{3bd77e4f-a348-4edb-b60c-68b749249b91}</Project>
+      <Name>gEngine.Graph.Ge</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.Graph.Interface\gEngine.Graph.Interface.csproj">
+      <Project>{1C98A821-B030-4FF2-83AE-D49B1B3B8C67}</Project>
+      <Name>gEngine.Graph.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\gEngine.Manipulator\gEngine.Manipulator.csproj">
       <Project>{B4EEDB17-EB3D-4E22-AB7C-D8E366564B8F}</Project>
       <Name>gEngine.Manipulator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.Util\gEngine.Util.csproj">
+      <Project>{84acb6c4-cf62-4f4b-a7e5-5c642edc041a}</Project>
+      <Name>gEngine.Util</Name>
     </ProjectReference>
     <ProjectReference Include="..\gEngine.View\gEngine.View.csproj">
       <Project>{932485ea-2f95-4caa-8bcd-df68c496854e}</Project>

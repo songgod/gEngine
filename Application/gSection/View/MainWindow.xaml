@@ -8,6 +8,7 @@
         xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:gSection"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:prjcontrols="clr-namespace:gEngine.Project.Controls;assembly=gEngine.Project"
         xmlns:prjcmds="clr-namespace:gEngine.Commands;assembly=gEngine.Commands"
         xmlns:cmds="clr-namespace:gSection.Commands"
@@ -42,6 +43,9 @@
                     <dx:DesignDataSettings x:Uid="dx:DesignDataSettings_1" DataObjectType="{x:Type local:App}" RowCount="5"/>
                 </dx:DesignDataManager.DesignData>
             </dx:IEnumerableDataSource>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary x:Uid="ResourceDictionary_2" Source="/gSection;component/View/BackstageViewPanes.xaml" />
+            </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </dxr:DXRibbonWindow.Resources>
     <dxr:DXRibbonWindow.InputBindings>
@@ -62,10 +66,51 @@
                 <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_1" Content="BarButtonItem"/>
                 <dxb:BarItemLink x:Uid="dxb:BarItemLink_1" BarItemName="ribbonStyleItem" RibbonStyle="SmallWithText"/>
             </dxr:RibbonControl.PageHeaderItems>
-            <dxr:RibbonControl.ApplicationMenu>
-                <dxr:BackstageViewControl x:Uid="dxr:BackstageViewControl_1">
+            <dxr:RibbonControl.ApplicationMenu x:Uid="a">
+                <dxr:BackstageViewControl x:Name="BackstageViewControl_1" x:Uid="dxr:BackstageViewControl_1">
                     <dxr:BackstageButtonItem x:Uid="dxr:BackstageButtonItem_1" Content="New" Glyph="{dx:DXImage Image=New_16x16.png}" MinWidth="150"/>
-                    <dxr:BackstageButtonItem x:Uid="dxr:BackstageButtonItem_2" Content="Open"/>
+                    <dxr:BackstageTabItem x:Uid="dxr:BackstageTabItem_OpenProject" dxb:MergingProperties.AllowMerging="True"  dxb:MergingProperties.ElementMergingBehavior="InternalWithInternal" dxb:BarNameScope.IsScopeOwner="True">
+                        <dxr:BackstageTabItem.Content>
+                            <Grid x:Uid="Grid_2">
+                                <Grid.RenderTransform>
+                                    <TranslateTransform x:Uid="TranslateTransform_1" X="-19"></TranslateTransform>
+                                </Grid.RenderTransform>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition x:Uid="ColumnDefinition_1" Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition x:Uid="ColumnDefinition_2" Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Image x:Uid="Image_1" Source="../Images/Small/FileOpen2_16x16.png" Margin="0 0 4 0"></Image>
+                                <StackPanel x:Uid="StackPanel_1" VerticalAlignment="Center" Grid.Column="1">
+                                    <TextBlock x:Uid="TextBlock_1" Text="打开工区"></TextBlock>
+                                </StackPanel>
+                            </Grid>
+                        </dxr:BackstageTabItem.Content>
+                        <dxr:BackstageTabItem.ControlPane>
+                            <ContentControl  x:Uid="ContentControl_4" Template="{StaticResource ProjectTemplate}"></ContentControl>
+                        </dxr:BackstageTabItem.ControlPane>
+                    </dxr:BackstageTabItem>
+                    <dxr:BackstageTabItem  x:Uid="dxr:BackstageTabItem_OpenMap"  dxb:MergingProperties.AllowMerging="True" MinWidth="150" dxb:MergingProperties.ElementMergingBehavior="InternalWithInternal" dxb:BarNameScope.IsScopeOwner="True">
+                        <dxr:BackstageTabItem.Content>
+                            <Grid x:Uid="Grid_3">
+                                <Grid.RenderTransform>
+                                    <TranslateTransform x:Uid="TranslateTransform_2" X="-19"></TranslateTransform>
+                                </Grid.RenderTransform>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition x:Uid="ColumnDefinition_3" Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition x:Uid="ColumnDefinition_4" Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Image x:Uid="Image_2" Source="../Images/Small/FileNew_16x16.png" Margin="0 0 4 0"></Image>
+                                <StackPanel x:Uid="StackPanel_2" VerticalAlignment="Center" Grid.Column="1">
+                                    <TextBlock x:Uid="TextBlock_2" Text="打开图件"></TextBlock>
+                                </StackPanel>
+                            </Grid>
+                        </dxr:BackstageTabItem.Content>
+                        <dxr:BackstageTabItem.ControlPane>
+                            <ContentControl  x:Uid="ContentControl_5" Template="{StaticResource MapTemplate}"></ContentControl>
+                        </dxr:BackstageTabItem.ControlPane>
+                    </dxr:BackstageTabItem>
+                    <dxr:BackstageButtonItem  x:Uid="dxr:BackstageButtonItem_4" Content="保存" Glyph="{dx:DXImage Image=Save_16x16.png}" MinWidth="150" Command="{x:Static prjcmds:ProjectCommands.SaveCommand}" CommandTarget="{Binding ElementName=prjctrl}"/>
+                    <dxr:BackstageButtonItem  x:Uid="dxr:BackstageButtonItem_5" Content="另存为" Glyph="{dx:DXImage Image=SaveAs_16x16.png}" MinWidth="150" Command="{x:Static prjcmds:ProjectCommands.SaveAsCommand}" CommandTarget="{Binding ElementName=prjctrl}"/>
                     <dxr:BackstageTabItem x:Uid="dxr:BackstageTabItem_1" dxb:MergingProperties.AllowMerging="True" Content="Recent" dxb:MergingProperties.ElementMergingBehavior="InternalWithInternal" dxb:BarNameScope.IsScopeOwner="True">
                     </dxr:BackstageTabItem>
                     <dxr:BackstageTabItem x:Uid="dxr:BackstageTabItem_2" dxb:MergingProperties.AllowMerging="True" Content="Options" dxb:MergingProperties.ElementMergingBehavior="InternalWithInternal" dxb:BarNameScope.IsScopeOwner="True">
@@ -93,9 +138,7 @@
                         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_7" Content="设置范围" LargeGlyph="{dx:DXImage Image=RangeArea_32x32.png}" Glyph="{dx:DXImage Image=RangeArea_16x16.png}"/>
                     </dxr:RibbonPageGroup>
                     <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_29" Caption="常用功能">
-                        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_39" Content="打开工程" Command="{x:Static prjcmds:ProjectCommands.OpenCommand}" CommandTarget="{Binding ElementName=prjctrl}" Glyph="{dx:DXImage Image=Open_16x16.png}" LargeGlyph="{dx:DXImage Image=Open_32x32.png}"/>
-                        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_40" Content="保存工程" Command="{x:Static prjcmds:ProjectCommands.SaveCommand}" CommandTarget="{Binding ElementName=prjctrl}" Glyph="{dx:DXImage Image=Save_16x16.png}" LargeGlyph="{dx:DXImage Image=Save_32x32.png}"/>
-                        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_41" Content="另存为工程" Command="{x:Static prjcmds:ProjectCommands.SaveAsCommand}" CommandTarget="{Binding ElementName=prjctrl}" Glyph="{dx:DXImage Image=SaveAs_16x16.png}" LargeGlyph="{dx:DXImage Image=SaveAs_32x32.png}"/>
+                        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_39" Content="设置数据源" Command="{x:Static prjcmds:ProjectCommands.OpenDBSourceCommand}" CommandTarget="{Binding ElementName=prjctrl}" LargeGlyph="pack://application:,,,/gSection;component/Images/GDS/数据源32.png" Glyph="pack://application:,,,/gSection;component/Images/GDS/数据源16.png"></dxb:BarButtonItem>
                     </dxr:RibbonPageGroup>
                 </dxr:RibbonPage>
                 <dxr:RibbonPage x:Uid="pageRef" x:Name="pageRef" Caption="参考">
@@ -124,7 +167,7 @@
                     </dxr:RibbonPageGroup>
                     <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_8" Caption="趋势线">
                         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_15" Content="插入趋势线" LargeGlyph="{dx:DXImage Image=StackedLineWithoutMarkers_32x32.png}" Glyph="{dx:DXImage Image=StackedLineWithoutMarkers_16x16.png}"/>
-                        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_16" Content="手绘趋势线" LargeGlyph="{dx:DXImage Image=StackedLineWithoutMarkers_32x32.png}" Glyph="{dx:DXImage Image=StackedLineWithoutMarkers_16x16.png}"/>
+                        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_16" Content="手绘趋势线" Command="{x:Static prjcmds:SectionEditCommands.DrawTrendLineCommand}" CommandTarget="{Binding ElementName=prjctrl}" LargeGlyph="{dx:DXImage Image=StackedLineWithoutMarkers_32x32.png}" Glyph="{dx:DXImage Image=StackedLineWithoutMarkers_16x16.png}"/>
                         <dxb:BarSplitCheckItem x:Uid="dxb:BarSplitCheckItem_1" Content="线型" LargeGlyph="{dx:DXImage Image=HorizontalGridlinesMajor_32x32.png}" RibbonStyle="SmallWithText" Glyph="{dx:DXImage Image=HorizontalGridlinesMajor_16x16.png}"/>
                         <dxb:BarEditItem x:Uid="dxb:BarEditItem_1" Content="粗细" EditWidth="44" EditValue="1.0">
                             <dxb:BarEditItem.EditSettings>
@@ -347,7 +390,7 @@
             </dxr:RibbonDefaultPageCategory>
             
         </dxr:RibbonControl>
-        <prjcontrols:ProjectControl x:Uid="prjctrl" Project="{Binding Projects}" Grid.Row="1" x:Name="prjctrl"/>
+        <prjcontrols:ProjectControl x:Uid="prjctrl" Project="{Binding Projects,Mode=TwoWay}" Grid.Row="1" x:Name="prjctrl"/>
         <dxr:RibbonStatusBarControl x:Uid="dxr:RibbonStatusBarControl_1" Grid.Row="2">
             <dxr:RibbonStatusBarControl.RightItems>
                 <dxb:BarButtonItem x:Uid="printItem" x:Name="printItem" Content="Print" Glyph="{dx:DXImage Image=Print_16x16.png}"/>
