@@ -53,7 +53,13 @@
     <Compile Include="CalcTolerance.cs" />
     <Compile Include="DrawCloseCurveManipulator.cs" />
     <Compile Include="DrawCurveManipulator.cs" />
+    <Compile Include="DrawCurveFaultManipulator.cs" />
+    <Compile Include="DrawCurveSandManipulator.cs" />
+    <Compile Include="DrawLineFaultManipulator.cs" />
     <Compile Include="DrawLineManipulator.cs" />
+    <Compile Include="DrawLineStratumManipulator.cs" />
+    <Compile Include="DrawLineSandManipulator.cs" />
+    <Compile Include="DrawCurveStratumManipulator.cs" />
     <Compile Include="EditCurveManipulator.cs" />
     <Compile Include="EraseLineManipulator.cs" />
     <Compile Include="GraphUtil.cs" />
@@ -74,9 +80,17 @@
       <Project>{3BD77E4F-A348-4EDB-B60C-68B749249B91}</Project>
       <Name>gEngine.Graph.Ge</Name>
     </ProjectReference>
+    <ProjectReference Include="..\gEngine.Graph.Interface\gEngine.Graph.Interface.csproj">
+      <Project>{1C98A821-B030-4FF2-83AE-D49B1B3B8C67}</Project>
+      <Name>gEngine.Graph.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\gEngine.Manipulator\gEngine.Manipulator.csproj">
       <Project>{b4eedb17-eb3d-4e22-ab7c-d8e366564b8f}</Project>
       <Name>gEngine.Manipulator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.Util.Ge.Section\gEngine.Util.Ge.Section.csproj">
+      <Project>{B3D6B10A-4C31-4981-97FA-3437CB583729}</Project>
+      <Name>gEngine.Util.Ge.Section</Name>
     </ProjectReference>
     <ProjectReference Include="..\gEngine.View.Ge.Section\gEngine.View.Ge.Section.csproj">
       <Project>{94FB234D-24AD-4FD9-BC79-0257073BC3EB}</Project>

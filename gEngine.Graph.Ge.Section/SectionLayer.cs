@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace gEngine.Graph.Ge.Section
 {
@@ -11,10 +12,14 @@ namespace gEngine.Graph.Ge.Section
         public SectionLayer()
         {
             Type = "Section";
-            SectionObject = new SectionObject();
+            SandObject = new SandObject();
+            StratumObject = new StratumObject();
+            Objects.Add(StratumObject);
+            Objects.Add(SandObject);
         }
         
 
-        public SectionObject SectionObject { get; private set; }
+        public SandObject SandObject { get; private set; }
+        public StratumObject StratumObject { get; private set; }
     }
 }

@@ -46,13 +46,16 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\SectionEdit\DrawTrendLineCommand.cs" />
+    <Compile Include="Commands\SectionEdit\NewLineStratumCommand.cs" />
+    <Compile Include="Commands\SectionEdit\NewTrendLineCommand.cs" />
     <Compile Include="Commands\SectionEdit\EditLineCommand.cs" />
     <Compile Include="Commands\SectionEdit\EraseFaceCommand.cs" />
     <Compile Include="Commands\SectionEdit\EraseLineCommand.cs" />
-    <Compile Include="Commands\SectionEdit\NewCurveCommand.cs" />
-    <Compile Include="Commands\SectionEdit\NewFaultCommand.cs" />
-    <Compile Include="Commands\SectionEdit\NewLineCommand.cs" />
+    <Compile Include="Commands\SectionEdit\NewCurveFaultCommand.cs" />
+    <Compile Include="Commands\SectionEdit\NewCurveSandCommand.cs" />
+    <Compile Include="Commands\SectionEdit\NewCurveStratumCommand.cs" />
+    <Compile Include="Commands\SectionEdit\NewLineFaultCommand.cs" />
+    <Compile Include="Commands\SectionEdit\NewLineSandCommand.cs" />
     <Compile Include="Commands\SectionCommandsInstaller.cs" />
     <Compile Include="Commands\NewSectionMapCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

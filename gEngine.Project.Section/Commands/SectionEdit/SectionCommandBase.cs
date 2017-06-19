@@ -57,10 +57,10 @@ namespace gEngine.Project.Ge.Section.Commands.SectionEdit
             LayerControl lc = mc.ActiveLayerControl;
             if (lc == null)
                 return;
-            SetManipulator(lc);
+            SetManipulator(lc,e.Parameter);
             e.Handled = true;
         }
 
-        public abstract void SetManipulator(LayerControl lc);
+        public abstract void SetManipulator(LayerControl lc, object param);
     }
 }

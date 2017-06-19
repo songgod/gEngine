@@ -14,19 +14,10 @@ namespace gEngine.Graph.Ge.Section
         {
             TopGraph = new gTopology.Graph();
             DicLineStyle = new Dictionary<int, LineStyle>();
-            DicLineStyle[(int)LineType.FaultLine] = new NormalLineStyle() { Color = Colors.Green };
-            DicLineStyle[(int)LineType.StratumLine] = new NormalLineStyle() { Color = Colors.Black };
             DicFillStyle = new Dictionary<int, FillStyle>();
         }
 
         public gTopology.Graph TopGraph { get; set; }
-
-        public enum LineType
-        {
-            UnKonwnLine=0,
-            FaultLine,
-            StratumLine
-        }
 
         public Dictionary<int,LineStyle> DicLineStyle { get; set; }
 

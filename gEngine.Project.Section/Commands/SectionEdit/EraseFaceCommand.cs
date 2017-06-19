@@ -20,9 +20,9 @@ namespace gEngine.Project.Ge.Section.Commands.SectionEdit
             Command = SectionEditCommands.EraseFaceCommand;
         }
 
-        public override void SetManipulator(LayerControl lc)
+        public override void SetManipulator(LayerControl lc, object param)
         {
-            SetFaceTypeManipulator dm = gEngine.Manipulator.Registry.CreateManipulator("SetFaceTypeManipulator") as SetFaceTypeManipulator;
+            SetFaceTypeManipulator dm = gEngine.Manipulator.Registry.CreateManipulator("SetFaceTypeManipulator",param) as SetFaceTypeManipulator;
             if (dm == null)
                 return;
             dm.FaceType = -1;

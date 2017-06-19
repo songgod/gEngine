@@ -9,41 +9,27 @@ namespace gEngine.Manipulator.Ge.Section
 {
     public class DrawCurveManipulator : CurveManipulator
     {
-        protected GraphUtil graphutil = null;
         protected override void OnAttached()
         {
             base.OnAttached();
-            graphutil = new GraphUtil(this.AssociatedObject);
         }
         protected override void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if (TrackAdorner.Points.Count == 0)
+            if (TrackAdorner.Points.Count == 0 || Graph==null)
                 return;
 
-            gTopology.Graph graph = graphutil.Graph;
-            if (graph == null)
-                return;
-
-            Topology editor = new Topology(graph);
-            editor.LinAddCurve(new PointList(TrackAdorner.Points.ToList()), graphutil.Tolerance, false, LineType);
+            Topology editor = new Topology(Graph);
+            editor.LinAddCurve(new PointList(TrackAdorner.Points.ToList()), Tolerance, false, LineType);
             base.MouseLeftButtonUp(sender, e);
         }
         public int LineType { get; set; }
-    }
-
-    public class DCMFactory : IManipulatorFactory
-    {
-        public string Name
+        public gTopology.Graph Graph { get; set; }
+        public double Tolerance
         {
             get
             {
-                return "DrawCurveManipulator";
+                return CalcTolerance.GetTolerance(this.AssociatedObject);
             }
-        }
-
-        public IManipulatorBase CreateManipulator(object param)
-        {
-            return new DrawCurveManipulator() { LineType = (int)param };
         }
     }
 }

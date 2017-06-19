@@ -1,4 +1,5 @@
-﻿using gEngine.Graph.Ge.Basic;
+﻿using gEngine.Graph.Ge;
+using gEngine.Graph.Ge.Basic;
 using gEngine.Util;
 using GraphAlgo;
 using System;
@@ -14,6 +15,11 @@ namespace gEngine.Manipulator.Ge.Basic
 {
     public class DrawBezierLineObjectManipulator : CurveManipulator
     {
+        public DrawBezierLineObjectManipulator()
+        {
+            LineStyle = new NormalLineStyle();
+        }
+        public LineStyle LineStyle { get; set; }
         public double GetTolerance()
         {
             int pixelsize = 5;
@@ -30,11 +36,12 @@ namespace gEngine.Manipulator.Ge.Basic
             if (this.TrackAdorner.Points.Count>0)
             {
                 PointCollection ps = BezierFitCubic.FitCubic(this.TrackAdorner.Points, GetTolerance());
-                if (ps.Count>0)
+                if (ps!=null && ps.Count>0)
                 {
                     BeizerLine beizerline = new BeizerLine()
                     {
-                        Points = new PointCollection(ps)
+                        Points = new PointCollection(ps),
+                        LinStyle = this.LineStyle
                     };
                     this.AssociatedObject.LayerContext.Objects.Add(beizerline);
                 }
@@ -55,7 +62,10 @@ namespace gEngine.Manipulator.Ge.Basic
 
         public IManipulatorBase CreateManipulator(object param)
         {
-            return new DrawBezierLineObjectManipulator();
+            LineStyle style = param as LineStyle;
+            DrawBezierLineObjectManipulator dm = new DrawBezierLineObjectManipulator();
+            if(style!=null) dm.LineStyle = style;
+            return dm;
         }
     }
 }
