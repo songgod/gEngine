@@ -2,9 +2,15 @@
 using DevExpress.Xpf.Ribbon;
 using gEngine.Graph.Interface;
 using gEngine.Project;
+using gEngine.Project.Commands;
 using gEngine.Project.Controls;
-using System.IO;
+using gEngine.RibbonPageCategory;
+using gSection.CommandBindings;
+using gSection.Commands;
+using gSection.Converters;
+using System;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace gSection.View
@@ -29,9 +35,12 @@ namespace gSection.View
         public MainWindow()
         {
             gEngine.Project.Registry.InstallCommands(this);
+            RibbonCommandInstaller install = new RibbonCommandInstaller();
+            install.Install(this);
 
             Projects = new Project();
-            Projects.OpenDBSource(@"D:\gSectionData.Txt");
+
+
 
             InitializeComponent();
 
@@ -54,8 +63,28 @@ namespace gSection.View
                  "/RibbonDemo;component/Images/Clipart/caWebCam.png"
              };
             this.DataContext = this;
+        
+
+            gEngine.RibbonPageCategory.Registry.AddRibbonPageCategory(ribbonControl);
+
         }
 
+        public void Mpl_OnSelectObject(IObject iobject)
+        {
+            GeRibbonPageCategory grpc = gEngine.RibbonPageCategory.Registry.GetRibbonPageCategory(iobject.GetType());
+            RibbonPageCategory rpc = GetRibPageCategory(grpc);
+            if(rpc!=null)
+            {
+                BindingExpression exp = rpc.GetBindingExpression(IsVisibleProperty);
+                if(exp==null)
+                {
+                    Binding bd = new Binding("IsSelected");
+                    bd.Source = iobject;
+                    bd.Mode = BindingMode.OneWay;
+                    rpc.SetBinding(RibbonPageCategory.IsVisibleProperty, bd);
+                }
+            }
+        }
         public ICommand CloseApplicationMenuCommand
         {
             get
@@ -67,6 +96,20 @@ namespace gSection.View
             }
         }
 
+        private RibbonPageCategory GetRibPageCategory(GeRibbonPageCategory grpc)
+        {
+            foreach (var rpc in this.ribbonControl.Categories)
+            {
+                if (rpc is RibbonPageCategory)
+                {
+                    if (rpc == grpc)
+                    {
+                        return rpc as RibbonPageCategory;
+                    }
+                }
+            }
+            return null;
+        }
         public ICommand SetOpenMapTabIndexCommand
         {
             get

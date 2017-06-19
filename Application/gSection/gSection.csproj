@@ -84,6 +84,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CommandBindings\SelectObjectCommand.cs" />
+    <Compile Include="Commands\RibbonCommandInstaller.cs" />
+    <Compile Include="Commands\RibbonCommands.cs" />
+    <Compile Include="Converters\RibPageCategoryVisibleConvert.cs" />
     <Compile Include="Controls\RecentProjectControl.xaml.cs">
       <DependentUpon>RecentProjectControl.xaml</DependentUpon>
     </Compile>
@@ -228,6 +232,10 @@
     <ProjectReference Include="..\..\gEngine.Project\gEngine.Project.csproj">
       <Project>{87ac18ca-2b57-4f9a-a4c2-24c6e296f91b}</Project>
       <Name>gEngine.Project</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\gEngine.RibbonPageCategory\gEngine.RibbonPageCategory.csproj">
+      <Project>{dce49078-3fad-4c85-bc8c-713553bfddd4}</Project>
+      <Name>gEngine.RibbonPageCategory</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\gEngine.Util\gEngine.Util.csproj">
       <Project>{84acb6c4-cf62-4f4b-a7e5-5c642edc041a}</Project>
@@ -1363,6 +1371,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\GDS\project.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\GDS\数据源16.png" />
+    <Resource Include="Images\GDS\数据源32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

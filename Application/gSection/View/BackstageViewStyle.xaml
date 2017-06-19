@@ -3,6 +3,8 @@
                     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
                     xmlns:prjcmds="clr-namespace:gEngine.Commands;assembly=gEngine.Commands"
                     xmlns:local="clr-namespace:gSection.View"
+                     xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                   xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/core"
                     xmlns:prjcvts="clr-namespace:gEngine.Project.Converter;assembly=gEngine.Project"
                     xmlns:controls="clr-namespace:gSection.Controls">
     <Style x:Uid="Style_1" TargetType="controls:ThemedContentControl">

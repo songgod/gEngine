@@ -1,0 +1,85 @@
+﻿<gerpc:GeRibbonPageCategory x:Class="gEngine.RibbonPageCategory.Ge.Column.WellColumnRibbonPageCategory"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:gEngine.RibbonPageCategory.Ge.Column"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:gerpc="clr-namespace:gEngine.RibbonPageCategory;assembly=gEngine.RibbonPageCategory"    
+             Caption="剖面图"
+             IsVisible="False">
+    <dxr:RibbonPage x:Uid="dxr:RibbonPage_6" Caption="单井设置">
+        <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_23" Caption="Ribbon Page Group"/>
+    </dxr:RibbonPage>
+    <dxr:RibbonPage x:Uid="dxr:RibbonPage_7" Caption="手绘设置">
+        <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_24" Caption="地层线">
+            <dxb:BarSplitCheckItem x:Uid="dxb:BarSplitCheckItem_8" Content="地层线" LargeGlyph="{dx:DXImage Image=LineStyle_32x32.png}" Glyph="{dx:DXImage Image=LineStyle_16x16.png}" RibbonStyle="SmallWithText"/>
+            <dxb:BarEditItem x:Uid="dxb:BarEditItem_23" Content="粗细" EditWidth="44" EditValue="1.0">
+                <dxb:BarEditItem.EditSettings>
+                    <dxe:TextEditSettings x:Uid="dxe:TextEditSettings_12"/>
+                </dxb:BarEditItem.EditSettings>
+            </dxb:BarEditItem>
+            <dxb:BarEditItem x:Uid="dxb:BarEditItem_24" Content="颜色">
+                <dxb:BarEditItem.EditSettings>
+                    <dxe:PopupColorEditSettings x:Uid="dxe:PopupColorEditSettings_6"/>
+                </dxb:BarEditItem.EditSettings>
+            </dxb:BarEditItem>
+        </dxr:RibbonPageGroup>
+        <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_25" Caption="砂体线">
+            <dxb:BarSplitCheckItem x:Uid="dxb:BarSplitCheckItem_9" Content="线型" LargeGlyph="{dx:DXImage Image=HorizontalGridlinesMajor_32x32.png}" RibbonStyle="SmallWithText" Glyph="{dx:DXImage Image=HorizontalGridlinesMajor_16x16.png}"/>
+            <dxb:BarEditItem x:Uid="dxb:BarEditItem_25" Content="粗细" EditWidth="44" EditValue="1.0">
+                <dxb:BarEditItem.EditSettings>
+                    <dxe:TextEditSettings x:Uid="dxe:TextEditSettings_13"/>
+                </dxb:BarEditItem.EditSettings>
+            </dxb:BarEditItem>
+            <dxb:BarEditItem x:Uid="dxb:BarEditItem_26" Content="颜色">
+                <dxb:BarEditItem.EditSettings>
+                    <dxe:PopupColorEditSettings x:Uid="dxe:PopupColorEditSettings_7"/>
+                </dxb:BarEditItem.EditSettings>
+            </dxb:BarEditItem>
+        </dxr:RibbonPageGroup>
+        <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_26" Caption="断层">
+            <dxb:BarSplitCheckItem x:Uid="dxb:BarSplitCheckItem_10" Content="线型" LargeGlyph="{dx:DXImage Image=HorizontalGridlinesMajor_32x32.png}" RibbonStyle="SmallWithText" Glyph="{dx:DXImage Image=HorizontalGridlinesMajor_16x16.png}"/>
+            <dxb:BarEditItem x:Uid="dxb:BarEditItem_27" Content="粗细" EditWidth="44" EditValue="1.0">
+                <dxb:BarEditItem.EditSettings>
+                    <dxe:TextEditSettings x:Uid="dxe:TextEditSettings_14"/>
+                </dxb:BarEditItem.EditSettings>
+            </dxb:BarEditItem>
+            <dxb:BarEditItem x:Uid="dxb:BarEditItem_28" Content="颜色">
+                <dxb:BarEditItem.EditSettings>
+                    <dxe:PopupColorEditSettings x:Uid="dxe:PopupColorEditSettings_8"/>
+                </dxb:BarEditItem.EditSettings>
+            </dxb:BarEditItem>
+        </dxr:RibbonPageGroup>
+        <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_27" Caption="界面">
+            <dxb:BarSplitCheckItem x:Uid="dxb:BarSplitCheckItem_11" Content="线型" LargeGlyph="{dx:DXImage Image=HorizontalGridlinesMajor_32x32.png}" RibbonStyle="SmallWithText" Glyph="{dx:DXImage Image=HorizontalGridlinesMajor_16x16.png}"/>
+            <dxb:BarEditItem x:Uid="dxb:BarEditItem_29" Content="粗细" EditWidth="44" EditValue="1.0">
+                <dxb:BarEditItem.EditSettings>
+                    <dxe:TextEditSettings x:Uid="dxe:TextEditSettings_15"/>
+                </dxb:BarEditItem.EditSettings>
+            </dxb:BarEditItem>
+            <dxb:BarEditItem x:Uid="dxb:BarEditItem_30" Content="颜色">
+                <dxb:BarEditItem.EditSettings>
+                    <dxe:PopupColorEditSettings x:Uid="dxe:PopupColorEditSettings_9"/>
+                </dxb:BarEditItem.EditSettings>
+            </dxb:BarEditItem>
+        </dxr:RibbonPageGroup>
+        <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_28" Caption="趋势线">
+            <dxb:BarSplitCheckItem x:Uid="dxb:BarSplitCheckItem_12" Content="线型" LargeGlyph="{dx:DXImage Image=HorizontalGridlinesMajor_32x32.png}" RibbonStyle="SmallWithText" Glyph="{dx:DXImage Image=HorizontalGridlinesMajor_16x16.png}"/>
+            <dxb:BarEditItem x:Uid="dxb:BarEditItem_31" Content="粗细" EditWidth="44" EditValue="1.0">
+                <dxb:BarEditItem.EditSettings>
+                    <dxe:TextEditSettings x:Uid="dxe:TextEditSettings_16"/>
+                </dxb:BarEditItem.EditSettings>
+            </dxb:BarEditItem>
+            <dxb:BarEditItem x:Uid="dxb:BarEditItem_32" Content="颜色">
+                <dxb:BarEditItem.EditSettings>
+                    <dxe:PopupColorEditSettings x:Uid="dxe:PopupColorEditSettings_10"/>
+                </dxb:BarEditItem.EditSettings>
+            </dxb:BarEditItem>
+        </dxr:RibbonPageGroup>
+    </dxr:RibbonPage>
+</gerpc:GeRibbonPageCategory>

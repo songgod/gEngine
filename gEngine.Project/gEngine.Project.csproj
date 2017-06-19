@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="CommandInstaller.cs" />
     <Compile Include="Commands\FullViewCommand.cs" />
+    <Compile Include="Commands\OpenDBSourceCommand.cs" />
     <Compile Include="Commands\OpenMapCommand.cs" />
     <Compile Include="Commands\OpenMapsSelectCommand.cs" />
     <Compile Include="Commands\OpenProjectCommand.cs" />
@@ -80,6 +81,7 @@
       <DependentUpon>ProjectControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converter\ImagePathConverter.cs" />
+    <Compile Include="Converter\IsSelectedConverter.cs" />
     <Compile Include="Converter\MapIndexConverter.cs" />
     <Compile Include="Converter\MultiCommandParaConverter.cs" />
     <Compile Include="Converter\VisibilityConverter.cs" />
