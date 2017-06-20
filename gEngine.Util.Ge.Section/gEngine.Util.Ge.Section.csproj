@@ -34,6 +34,7 @@
     <Reference Include="gTopology, Version=1.0.6375.28341, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\3rdlib\gToplogy\x64\gTopology.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
