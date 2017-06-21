@@ -48,7 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RWSandObject.cs" />
     <Compile Include="RWSectionObject.cs" />
+    <Compile Include="RWStratumObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\gEngine.Graph.Ge.Section\gEngine.Graph.Ge.Section.csproj">

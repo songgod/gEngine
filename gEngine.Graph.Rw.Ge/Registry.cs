@@ -33,13 +33,28 @@ namespace gEngine.Graph.Rw.Ge
                 foreach (Type t in types)
                 {
                     Type objecttype = typeof(RWObjectBase);
-                    if (t.BaseType == objecttype)
+
+                    if (t != objecttype)
                     {
-                        RWObjectBase bs = (RWObjectBase) (ab.CreateInstance(t.FullName));
-                        RegistObjRW(bs);
+                        if (FindChildClass(t) == objecttype)
+                        {
+                            RWObjectBase bs = (RWObjectBase) (ab.CreateInstance(t.FullName));
+                            RegistObjRW(bs);
+                        }
                     }
                 }
             }
+        }
+
+        public static Type FindChildClass(Type t)
+        {
+            var parent = t.BaseType;
+            if (parent.Name != "Object")
+            {
+                return FindChildClass(parent);
+            }
+            else
+                return t;
         }
 
         static public void RegistObjRW(RWObjectBase rw)
