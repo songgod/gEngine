@@ -51,6 +51,7 @@
     <Compile Include="RWSandObject.cs" />
     <Compile Include="RWSectionObject.cs" />
     <Compile Include="RWStratumObject.cs" />
+    <Compile Include="SectionReadWriterInstaller.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\gEngine.Graph.Ge.Section\gEngine.Graph.Ge.Section.csproj">

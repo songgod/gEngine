@@ -36,7 +36,7 @@ namespace gEngine.Graph.Rw.Ge.Column
                 WellColumns WellColumns = new WellColumns();
                 foreach (XmlNode cNode in childNode.ChildNodes)
                 {
-                    RWWellColumn objectrw = Registry.GetObjectRW(cNode.Name);
+                    RWWellColumn objectrw = (RWWellColumn) Registry.GetObjectRW(cNode.Name);
                     if (objectrw == null)
                     {
                         Log.LogWarning("Cound not find " + cNode.Name + " object readerwriter");
@@ -71,7 +71,7 @@ namespace gEngine.Graph.Rw.Ge.Column
                 foreach (IObject Object in WellColumns)
                 {
                     string objecttype = Object.GetType().Name.ToString();
-                    RWWellColumn objectrw = Registry.GetObjectRW(objecttype);
+                    RWWellColumn objectrw =(RWWellColumn) Registry.GetObjectRW(objecttype);
                     if (objectrw == null)
                     {
                         Log.LogWarning("Cound not find " + objecttype + " object readerwriter");

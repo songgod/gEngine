@@ -17,8 +17,6 @@ namespace gEngine.Graph.Rw.Ge
         {
             DicObjectRW = new Dictionary<string, RWObjectBase>();
             DicLayerRW = new Dictionary<string, RWLayerBase>();
-            RegistLayerRW(new RWLayerBase());
-            RegistLayerRW(new RwSectionLayer());
         }
 
         static public void LoadLocalRW()
@@ -32,29 +30,19 @@ namespace gEngine.Graph.Rw.Ge
                 Type[] types = ab.GetTypes();
                 foreach (Type t in types)
                 {
-                    Type objecttype = typeof(RWObjectBase);
-
-                    if (t != objecttype)
+                    Type registertype = typeof(IGeReadWriterInstaller);
+                    var interfaces = t.GetInterfaces();
+                    foreach (var interf in interfaces)
                     {
-                        if (FindChildClass(t) == objecttype)
+                        if (interf == registertype)
                         {
-                            RWObjectBase bs = (RWObjectBase) (ab.CreateInstance(t.FullName));
-                            RegistObjRW(bs);
+                            IGeReadWriterInstaller gerwInstaller = (IGeReadWriterInstaller) (ab.CreateInstance(t.FullName));
+                            gerwInstaller.InstallLayerReadWriter();
+                            gerwInstaller.InstallObjectReadWriter();
                         }
                     }
                 }
             }
-        }
-
-        public static Type FindChildClass(Type t)
-        {
-            var parent = t.BaseType;
-            if (parent.Name != "Object")
-            {
-                return FindChildClass(parent);
-            }
-            else
-                return t;
         }
 
         static public void RegistObjRW(RWObjectBase rw)
