@@ -1,12 +1,12 @@
 ﻿using DevExpress.Xpf.Ribbon;
 using gEngine.Commands;
 using gEngine.Project.Controls;
+using gEngine.Util;
 using gEngine.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -33,29 +33,32 @@ namespace gEngine.Project.Commands
 
         private void OpenRecentCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            List<object> LsPara = e.Parameter as List<object>;
-
-            if (LsPara == null)
-                return;
-
-            if (LsPara[0] == null || LsPara[1] == null)
-                return;
-
-            ProjectControl pc = LsPara[0] as ProjectControl;
-            TextBlock TextBlock = LsPara[1] as TextBlock;
-            string ProjectFile = TextBlock.Text;
-
-            if (pc == null || pc.Project == null)
-                return;
-            if (!RecentProject.IsExistProject(ProjectFile))
+            if(DoubleClickTimer.IsDoubleClick())
             {
-                MessageBox.Show("您选择的工区文件不存在，请选择其它工区文件！");
-                return;
-            }
+                List<object> LsPara = e.Parameter as List<object>;
 
-            pc.Project = new Project();
-            pc.Project.Open(ProjectFile);
-            e.Handled = true;
+                if (LsPara == null)
+                    return;
+
+                if (LsPara[0] == null || LsPara[1] == null)
+                    return;
+
+                ProjectControl pc = LsPara[0] as ProjectControl;
+                TextBlock TextBlock = LsPara[1] as TextBlock;
+                string ProjectFile = TextBlock.Text;
+
+                if (pc == null || pc.Project == null)
+                    return;
+                if (!RecentProject.IsExistProject(ProjectFile))
+                {
+                    MessageBox.Show("您选择的工区文件不存在，请选择其它工区文件！");
+                    return;
+                }
+
+                pc.Project = new Project();
+                pc.Project.Open(ProjectFile);
+                e.Handled = true;
+            }
         }
     }
 }

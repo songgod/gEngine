@@ -42,6 +42,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DoubleClickTimer.cs" />
     <Compile Include="ExtensionsHelper.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="IUndoRedoCommand.cs" />

@@ -91,7 +91,7 @@
                     </i:InvokeCommandAction>
                 </i:EventTrigger>
                 <i:EventTrigger x:Uid="i:EventTrigger_6" EventName="MouseLeftButtonDown">
-                    <i:InvokeCommandAction  x:Uid="i:InvokeCommandAction_4" Command="{Binding DataContext.CloseApplicationMenuCommand, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                    <i:InvokeCommandAction  x:Uid="i:InvokeCommandAction_4" Command="{Binding DataContext.CloseApplicationMenuCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding Path=Item1}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <Image x:Uid="Image_1" Source="/gSection;component/Images/Small/FileNew_32x32.png" />
