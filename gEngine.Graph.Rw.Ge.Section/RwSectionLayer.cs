@@ -7,15 +7,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 
-namespace gEngine.Graph.Rw.Ge
+namespace gEngine.Graph.Rw.Ge.Section
 {
-    public class RwSectionLayer : RWLayerBase
+    class RWSectionLayer : RWLayerBase
     {
         public override string SupportType { get { return "SectionLayer"; } }
 
         public override void ReadLayer(ILayer Ilayer, XmlNode node)
         {
-            //SectionLayer layer = new SectionLayer;
             base.ReadLayer(Ilayer, node);
         }
 
@@ -26,7 +25,7 @@ namespace gEngine.Graph.Rw.Ge
 
         public override ILayer CreateLayer()
         {
-            return new SectionLayer() ;
+            return new SectionLayer();
         }
     }
 }

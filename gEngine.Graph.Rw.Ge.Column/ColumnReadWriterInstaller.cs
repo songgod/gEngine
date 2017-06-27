@@ -10,8 +10,6 @@ namespace gEngine.Graph.Rw.Ge.Column
     {
         public void InstallLayerReadWriter()
         {
-            Registry.RegistLayerRW(new RWLayerBase());
-            Registry.RegistLayerRW(new RwSectionLayer());
         }
 
         public void InstallObjectReadWriter()

@@ -4,17 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace gEngine.Graph.Rw.Ge.Plane
+namespace gEngine.Graph.Rw.Ge
 {
-    public class PlaneReadWriterInstaller : IGeReadWriterInstaller
+    public class ReadWriterInstaller : IGeReadWriterInstaller
     {
         public void InstallLayerReadWriter()
         {
+            Registry.RegistLayerRW(new RWLayerBase());
         }
 
         public void InstallObjectReadWriter()
         {
-            Registry.RegistObjRW(new RWWellLocation());
         }
     }
 }

@@ -45,10 +45,10 @@
     <Compile Include="GeMapReadWriter.cs" />
     <Compile Include="IGeReadWriterInstaller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReadWriterInstaller.cs" />
     <Compile Include="Registry.cs" />
     <Compile Include="RWLayerBase.cs" />
     <Compile Include="RWObjectBase.cs" />
-    <Compile Include="RWSectionLayer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\gEngine.Graph.Ge.Section\gEngine.Graph.Ge.Section.csproj">

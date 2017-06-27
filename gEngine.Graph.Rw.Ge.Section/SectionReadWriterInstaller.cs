@@ -10,8 +10,7 @@ namespace gEngine.Graph.Rw.Ge.Section
     {
         public void InstallLayerReadWriter()
         {
-            Registry.RegistLayerRW(new RWLayerBase());
-            Registry.RegistLayerRW(new RwSectionLayer());
+            Registry.RegistLayerRW(new RWSectionLayer());
         }
 
         public void InstallObjectReadWriter()

@@ -22,7 +22,7 @@ namespace gEngine.Graph.Rw.Ge
         static public void LoadLocalRW()
         {
             string dir = Directory.GetCurrentDirectory();
-            string qstr = dir + "\\gEngine.Graph.Rw.Ge.";
+            string qstr = dir + "\\gEngine.Graph.Rw.Ge";
             var files = Directory.GetFiles(dir, "*.dll", SearchOption.TopDirectoryOnly).Where(s => s.StartsWith(qstr));
             foreach (var item in files)
             {
