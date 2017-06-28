@@ -13,7 +13,7 @@ namespace gEngine.Symbol.gesym
     {
         public GePointSymbol()
         {
-            
+
         }
 
         private static readonly string name = "GePointSymbol";
@@ -27,7 +27,7 @@ namespace gEngine.Symbol.gesym
 
         public override object Create(OptionSetting param)
         {
-            if (param==null)
+            if (param == null)
                 return null;
 
             string shape = param.GetValue<string>("Shape");
@@ -37,9 +37,9 @@ namespace gEngine.Symbol.gesym
             double w = param.GetValue<double>("Width");
             double h = param.GetValue<double>("Height");
             if (w <= 0)
-                w = 10.0;
+                w = 20.0;
             if (h <= 0)
-                h = 10.0;
+                h = 20.0;
 
             Brush stroke = param.GetValue<Brush>("Stroke");
             if (stroke == null)
@@ -51,9 +51,9 @@ namespace gEngine.Symbol.gesym
 
             if (shape == "Ellipse")
             {
-                return new Path() { Fill = fill, Stroke = stroke,Data= new EllipseGeometry() { RadiusX = w, RadiusY = h } };
+                return new Path() { Stretch = Stretch.Fill, Fill = fill, Stroke = stroke,Width=w,Height=h, Data = new EllipseGeometry() { RadiusX = w/2, RadiusY = h/2 } };
             }
-            else if(shape == "Rectangle")
+            else if (shape == "Rectangle")
             {
                 return new Path() { Fill = fill, Stroke = stroke, Data = new RectangleGeometry() { RadiusX = w, RadiusY = h } };
             }
