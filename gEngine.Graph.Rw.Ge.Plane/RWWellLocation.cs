@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 using System.Xml;
 using static gEngine.Graph.Ge.Plane.Enums;
 
@@ -31,7 +32,19 @@ namespace gEngine.Graph.Rw.Ge.Plane
             WellLocation.WellType = (WellType) Enum.Parse(typeof(WellType), node.Attributes["WellType"].Value);
             WellLocation.X = double.Parse(node.Attributes["X"].Value);
             WellLocation.Y = double.Parse(node.Attributes["Y"].Value);
-            //WellLocation.Symbol = node.Attributes["Symbol"].Value;
+
+            foreach (XmlNode childNode in node.ChildNodes)
+            {
+                if (childNode.Name.Equals(WellLocation.PointStyle.GetType().Name))
+                {
+                    BrushConverter brushConverter = new BrushConverter();
+                    Brush brush = (Brush) brushConverter.ConvertFromString(childNode.Attributes["Color"].Value);
+                    Color color = (Color) ColorConverter.ConvertFromString(brush.ToString());
+                    WellLocation.PointStyle.Color = color;
+                    WellLocation.PointStyle.SymbolLib = childNode.Attributes["SymbolLib"].Value;
+                    WellLocation.PointStyle.Symbol = childNode.Attributes["Symbol"].Value;
+                }
+            } 
         }
 
         public override void Write(XmlNode node, IObject obj)
@@ -65,9 +78,21 @@ namespace gEngine.Graph.Rw.Ge.Plane
             xmlY.Value = string.IsNullOrEmpty(wl.Y.ToString()) == false ? wl.Y.ToString() : string.Empty;
             node.Attributes.Append(xmlY);
 
-            //XmlAttribute xmlSymbol = doc.CreateAttribute("Symbol");
-            //xmlSymbol.Value = wl.Symbol != null ? wl.Symbol.ToString() : string.Empty;
-            //node.Attributes.Append(xmlSymbol);
+            XmlElement XEPointStyle = node.OwnerDocument.CreateElement(wl.PointStyle.GetType().Name);
+            node.AppendChild(XEPointStyle);
+
+            XmlAttribute xmlColor = doc.CreateAttribute("Color");
+            xmlColor.Value = string.IsNullOrEmpty(wl.PointStyle.Color.ToString()) == false ? wl.PointStyle.Color.ToString() : string.Empty;
+            XEPointStyle.Attributes.Append(xmlColor);
+
+            XmlAttribute xmlSymbolLib = doc.CreateAttribute("SymbolLib");
+            xmlSymbolLib.Value = string.IsNullOrEmpty(wl.PointStyle.SymbolLib) == false ? wl.PointStyle.SymbolLib : string.Empty;
+            XEPointStyle.Attributes.Append(xmlSymbolLib);
+
+            XmlAttribute xmlSymbol = doc.CreateAttribute("Symbol");
+            xmlSymbol.Value = string.IsNullOrEmpty(wl.PointStyle.Symbol) == false ? wl.PointStyle.Symbol : string.Empty;
+            XEPointStyle.Attributes.Append(xmlSymbol);
+
         }
 
         public override IObject CreateObject()

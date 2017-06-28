@@ -18,9 +18,9 @@ namespace gEngine.Project.Ge.Section.Commands.SectionEdit
             Command = SectionEditCommands.EraseLineCommand;
         }
 
-        public override void SetManipulator(LayerControl lc)
+        public override void SetManipulator(LayerControl lc, object param)
         {
-            EraseLineManipulator dm = gEngine.Manipulator.Registry.CreateManipulator("EraseLineManipulator") as EraseLineManipulator;
+            EraseLineManipulator dm = gEngine.Manipulator.Registry.CreateManipulator("EraseLineManipulator",param) as EraseLineManipulator;
             if (dm == null)
                 return;
             ManipulatorSetter.SetManipulator(dm, lc);

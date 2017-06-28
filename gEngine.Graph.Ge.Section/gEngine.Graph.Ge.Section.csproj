@@ -48,8 +48,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SandObject.cs" />
     <Compile Include="SectionLayer.cs" />
     <Compile Include="SectionObject.cs" />
+    <Compile Include="StratumObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\gEngine.Graph.Ge\gEngine.Graph.Ge.csproj">

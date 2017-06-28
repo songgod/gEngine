@@ -43,5 +43,11 @@ namespace gEngineTest.Manipulator
             IManipulatorBase mp = Registry.CreateManipulator("DrawBezierLineObjectManipulator");
             ManipulatorSetter.SetManipulator(mp, mc.GetLayerControl(0));
         }
+
+        private void DrawPolyline_Click(object sender, RoutedEventArgs e)
+        {
+            IManipulatorBase mp = Registry.CreateManipulator("DrawPolyLineObjectManipulator");
+            ManipulatorSetter.SetManipulator(mp, mc.GetLayerControl(0));
+        }
     }
 }

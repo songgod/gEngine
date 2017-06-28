@@ -18,9 +18,9 @@ namespace gEngine.Project.Ge.Section.Commands.SectionEdit
             Command = SectionEditCommands.ReplaceLineCommand;
         }
 
-        public override void SetManipulator(LayerControl lc)
+        public override void SetManipulator(LayerControl lc, object param)
         {
-            ReplaceLineManipulator dm = gEngine.Manipulator.Registry.CreateManipulator("ReplaceLineManipulator") as ReplaceLineManipulator;
+            ReplaceLineManipulator dm = gEngine.Manipulator.Registry.CreateManipulator("ReplaceLineManipulator",param) as ReplaceLineManipulator;
             if (dm == null)
                 return;
             ManipulatorSetter.SetManipulator(dm, lc);

@@ -31,13 +31,12 @@ namespace gEngineTest.Ge.Section
             SectionLayerCreator sc = new SectionLayerCreator();
             Layer SectionLayer = sc.CreateSectionLayer();
             map.Layers.Add(SectionLayer);
-            Binding bd = new Binding("Layers") { Source = map };
-            mc.SetBinding(ItemsControl.ItemsSourceProperty, bd);
+            mc.DataContext = map;
         }
 
         private void AddLine_Click(object sender, RoutedEventArgs e)
         {
-            ManipulatorSetter.SetManipulator(new DrawLineManipulator(), mc.GetLayerControl(0));
+            ManipulatorSetter.SetManipulator(new DrawLineFaultManipulator(), mc.GetLayerControl(0));
         }
 
         private void EraseLine_Click(object sender, RoutedEventArgs e)
@@ -47,7 +46,7 @@ namespace gEngineTest.Ge.Section
 
         private void AddCurve_Click(object sender, RoutedEventArgs e)
         {
-            ManipulatorSetter.SetManipulator(new DrawCurveManipulator(), mc.GetLayerControl(0));
+            ManipulatorSetter.SetManipulator(new DrawCurveFaultManipulator(), mc.GetLayerControl(0));
         }
 
         private void AddCloseCurve_Click(object sender, RoutedEventArgs e)

@@ -10,16 +10,16 @@ using System.Threading.Tasks;
 
 namespace gEngine.Project.Ge.Section.Commands.SectionEdit
 {
-    public class DrawTrendLineCommand : SectionCommandBase
+    public class NewTrendLineCommand : SectionCommandBase
     {
-        public DrawTrendLineCommand()
+        public NewTrendLineCommand()
         {
-            Command = SectionEditCommands.DrawTrendLineCommand;
+            Command = SectionEditCommands.NewTrendLineCommand;
         }
 
-        public override void SetManipulator(LayerControl lc)
+        public override void SetManipulator(LayerControl lc, object param)
         {
-            IManipulatorBase dm = gEngine.Manipulator.Registry.CreateManipulator("DrawBezierLineObjectManipulator");
+            IManipulatorBase dm = gEngine.Manipulator.Registry.CreateManipulator("DrawBezierLineObjectManipulator",param);
             if (dm == null)
                 return;
             ManipulatorSetter.SetManipulator(dm, lc);

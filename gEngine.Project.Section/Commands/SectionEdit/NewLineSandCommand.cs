@@ -12,16 +12,16 @@ using gEngine.Graph.Ge.Section;
 
 namespace gEngine.Project.Ge.Section.Commands.SectionEdit
 {
-    public class NewFaultCommand : SectionCommandBase
+    public class NewLineSandCommand : SectionCommandBase
     {
-        public NewFaultCommand()
+        public NewLineSandCommand()
         {
-            Command = SectionEditCommands.NewFaultCommand;
+            Command = SectionEditCommands.NewLineSandCommand;
         }
 
-        public override void SetManipulator(LayerControl lc)
+        public override void SetManipulator(LayerControl lc, object param)
         {
-            DrawLineManipulator dm = gEngine.Manipulator.Registry.CreateManipulator("DrawLineManipulator", SectionObject.LineType.FaultLine) as DrawLineManipulator;
+            DrawLineSandManipulator dm = gEngine.Manipulator.Registry.CreateManipulator("DrawLineSandManipulator", param) as DrawLineSandManipulator;
             if (dm == null)
                 return;
             ManipulatorSetter.SetManipulator(dm, lc);

@@ -17,14 +17,12 @@ namespace gEngine.Graph.Rw.Ge
         {
             DicObjectRW = new Dictionary<string, RWObjectBase>();
             DicLayerRW = new Dictionary<string, RWLayerBase>();
-            RegistLayerRW(new RWLayerBase());
-            RegistLayerRW(new RwSectionLayer());
         }
 
         static public void LoadLocalRW()
         {
             string dir = Directory.GetCurrentDirectory();
-            string qstr = dir + "\\gEngine.Graph.Rw.Ge.";
+            string qstr = dir + "\\gEngine.Graph.Rw.Ge";
             var files = Directory.GetFiles(dir, "*.dll", SearchOption.TopDirectoryOnly).Where(s => s.StartsWith(qstr));
             foreach (var item in files)
             {
@@ -32,11 +30,16 @@ namespace gEngine.Graph.Rw.Ge
                 Type[] types = ab.GetTypes();
                 foreach (Type t in types)
                 {
-                    Type objecttype = typeof(RWObjectBase);
-                    if (t.BaseType == objecttype)
+                    Type registertype = typeof(IGeReadWriterInstaller);
+                    var interfaces = t.GetInterfaces();
+                    foreach (var interf in interfaces)
                     {
-                        RWObjectBase bs = (RWObjectBase) (ab.CreateInstance(t.FullName));
-                        RegistObjRW(bs);
+                        if (interf == registertype)
+                        {
+                            IGeReadWriterInstaller gerwInstaller = (IGeReadWriterInstaller) (ab.CreateInstance(t.FullName));
+                            gerwInstaller.InstallLayerReadWriter();
+                            gerwInstaller.InstallObjectReadWriter();
+                        }
                     }
                 }
             }

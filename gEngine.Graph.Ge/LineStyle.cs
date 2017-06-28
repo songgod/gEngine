@@ -32,6 +32,7 @@ namespace gEngine.Graph.Ge
         public Color Color { get; set; }
 
         public double Width { get; set; }
+        
     }
 
     public class ComplexLineStyle : LineStyle

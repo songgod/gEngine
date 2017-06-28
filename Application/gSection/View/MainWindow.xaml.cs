@@ -9,6 +9,8 @@ using gSection.CommandBindings;
 using gSection.Commands;
 using gSection.Converters;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -40,8 +42,6 @@ namespace gSection.View
 
             Projects = new Project();
 
-
-
             InitializeComponent();
 
             ClipartImages = new string[] {
@@ -63,36 +63,25 @@ namespace gSection.View
                  "/RibbonDemo;component/Images/Clipart/caWebCam.png"
              };
             this.DataContext = this;
-        
+
 
             gEngine.RibbonPageCategory.Registry.AddRibbonPageCategory(ribbonControl);
-
         }
 
         public void Mpl_OnSelectObject(IObject iobject)
         {
             GeRibbonPageCategory grpc = gEngine.RibbonPageCategory.Registry.GetRibbonPageCategory(iobject.GetType());
             RibbonPageCategory rpc = GetRibPageCategory(grpc);
-            if(rpc!=null)
+            if (rpc != null)
             {
                 BindingExpression exp = rpc.GetBindingExpression(IsVisibleProperty);
-                if(exp==null)
+                if (exp == null)
                 {
                     Binding bd = new Binding("IsSelected");
                     bd.Source = iobject;
                     bd.Mode = BindingMode.OneWay;
                     rpc.SetBinding(RibbonPageCategory.IsVisibleProperty, bd);
                 }
-            }
-        }
-        public ICommand CloseApplicationMenuCommand
-        {
-            get
-            {
-                return new DelegateCommand(() =>
-                {
-                    this.BackstageViewControl_1.Close();
-                });
             }
         }
 
@@ -110,13 +99,34 @@ namespace gSection.View
             }
             return null;
         }
+
+        public ICommand CloseApplicationMenuCommand
+        {
+            get
+            {
+                return new DelegateCommand<string>((MapName) =>
+                {
+                    var query = from q in Projects.Maps where q.Item1 == MapName select q;
+                    if (query.ToList().Count >= 0)
+                    {
+                        if (query.ElementAt(0).Item2 != null)
+                            this.BackstageViewControl_1.Close();
+                    }
+                });
+            }
+        }
+
         public ICommand SetOpenMapTabIndexCommand
         {
             get
             {
-                return new DelegateCommand(() =>
+                return new DelegateCommand<string>((ProjectUrl) =>
                 {
-                    BackstageViewControl_1.SelectedTabIndex = 1;
+                    if (Projects.Url != null)
+                    {
+                        if (Projects.Url.Equals(ProjectUrl))
+                            BackstageViewControl_1.SelectedTabIndex = 1;
+                    }
                 });
             }
         }

@@ -27,7 +27,7 @@
                             <i:EventTrigger x:Uid="i:EventTrigger_3" EventName="MouseLeftButtonDown">
                                 <i:InvokeCommandAction  x:Uid="i:InvokeCommandAction_2" Command="{x:Static prjcmds:ProjectCommands.OpenRecentCommand}">
                                     <i:InvokeCommandAction.CommandParameter>
-                                        <MultiBinding x:Uid="MultiBinding_1" Converter="{StaticResource c2l}"> 
+                                        <MultiBinding x:Uid="MultiBinding_1" Converter="{StaticResource c2l}">
                                             <Binding  x:Uid="Binding_1" ElementName="prjctrl"></Binding>
                                             <Binding x:Uid="Binding_2" ElementName="txtProjectUrl"></Binding>
                                         </MultiBinding>
@@ -35,7 +35,7 @@
                                 </i:InvokeCommandAction>
                             </i:EventTrigger>
                             <i:EventTrigger x:Uid="i:EventTrigger_5" EventName="MouseLeftButtonDown">
-                                 <i:InvokeCommandAction x:Uid="i:InvokeCommandAction_5" Command="{Binding DataContext.SetOpenMapTabIndexCommand, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                                <i:InvokeCommandAction x:Uid="i:InvokeCommandAction_5" Command="{Binding DataContext.SetOpenMapTabIndexCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding}"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                         <Image x:Uid="Image_1" Source="pack://application:,,,/gSection;component/Images/GDS/project.png"></Image>
