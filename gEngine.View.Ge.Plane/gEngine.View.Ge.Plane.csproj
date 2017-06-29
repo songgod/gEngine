@@ -52,6 +52,7 @@
       <DependentUpon>DictionaryTest.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WellPositionConverter.cs" />
     <Compile Include="WellTypeToColorConverter.cs" />
   </ItemGroup>
   <ItemGroup>

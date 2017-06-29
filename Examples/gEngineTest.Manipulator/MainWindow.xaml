@@ -14,6 +14,7 @@
         </Grid.RowDefinitions>
         <v:MapControl x:Name="mc" Grid.Row="0" DataContext="{Binding MapContext}"/>
         <StackPanel Orientation="Horizontal" Grid.Row="1">
+            <Button x:Name="DrawPolyline" Content="DrawPolyline" Click="DrawPolyline_Click"/>
             <Button x:Name="Drawline" Content="DrawLine" Click="Drawline_Click"/>
             <Button x:Name="DrawBezier" Content="DrawBezier" Click="DrawBezier_Click"/>
         </StackPanel>

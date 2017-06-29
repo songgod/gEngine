@@ -81,7 +81,6 @@
       <DependentUpon>ProjectControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converter\ImagePathConverter.cs" />
-    <Compile Include="Converter\IsSelectedConverter.cs" />
     <Compile Include="Converter\MapIndexConverter.cs" />
     <Compile Include="Converter\MultiCommandParaConverter.cs" />
     <Compile Include="Converter\VisibilityConverter.cs" />

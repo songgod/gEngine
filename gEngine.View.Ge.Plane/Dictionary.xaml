@@ -12,8 +12,9 @@
         <StackPanel>
             <StackPanel.Resources>
                 <sym:PointSymbolConverter x:Key="pointsymbolconverter"/>
+                <local:WellPositionConverter x:Key="wellPositionConverter"/>
             </StackPanel.Resources>
-            <gv:PointControl PointStyle="{Binding Path=PointStyle}">
+            <gv:PointControl PointStyle="{Binding Path=PointStyle}" x:Name="gvpc">
                 <ToolTipService.ToolTip>
                     <TextBlock>
                         <TextBlock.Text>
@@ -25,20 +26,14 @@
                         </TextBlock.Text>
                     </TextBlock>
                 </ToolTipService.ToolTip>
-                <gv:PointControl.RenderTransform>
-                    <TransformGroup>
-                        <TranslateTransform X="{Binding X}" Y="{Binding Y}" />
-                    </TransformGroup>
-                </gv:PointControl.RenderTransform>
             </gv:PointControl>
-
-            <TextBlock Text="{Binding WellNum}" >
-                <TextBlock.RenderTransform>
-                    <TransformGroup>
-                        <TranslateTransform X="{Binding X}" Y="{Binding Y}" />
-                    </TransformGroup>
-                </TextBlock.RenderTransform>
-            </TextBlock>
+            <TextBlock Text="{Binding WellNum}" />
+            <StackPanel.RenderTransform>
+                <TransformGroup><!--,Converter={StaticResource wellPositionConverter},ConverterParameter={x:Reference Name=gvpc}-->
+                    <TranslateTransform X="{Binding X}"
+                                        Y="{Binding Y}" />
+                </TransformGroup>
+            </StackPanel.RenderTransform>
         </StackPanel>
     </DataTemplate>
 </ResourceDictionary>

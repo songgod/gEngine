@@ -47,6 +47,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompressManipulator.cs" />
     <Compile Include="CurveManipulator.cs" />
     <Compile Include="IManipulatorFactory.cs" />
     <Compile Include="Converter\IsSelectedConverter.cs" />

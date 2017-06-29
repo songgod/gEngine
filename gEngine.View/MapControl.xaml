@@ -10,20 +10,22 @@
               ClipToBounds="True"
              IsManipulationEnabled="True" Focusable="True"
              Loaded="UserControl_Loaded">
-    <Grid x:Name="root">
-        <Canvas x:Name="BackGroundCanvas" Background="Transparent"/>
-        <ItemsControl x:Name="layeritemscontrol" ItemsSource="{Binding Layers}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <Canvas x:Name="mappanel"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <local:LayerControl x:Name="layercontrol"/>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-        <Canvas x:Name="EditCanvas" Background="Transparent"/>
-    </Grid>
+    <AdornerDecorator>
+        <Grid x:Name="root">
+            <Canvas x:Name="BackGroundCanvas" Background="Transparent"/>
+            <ItemsControl x:Name="layeritemscontrol" ItemsSource="{Binding Layers}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas x:Name="mappanel"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <local:LayerControl x:Name="layercontrol"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <Canvas x:Name="EditCanvas" Background="Transparent" IsHitTestVisible="False" />
+        </Grid>
+    </AdornerDecorator>
 </UserControl>
