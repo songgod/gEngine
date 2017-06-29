@@ -15,7 +15,7 @@ namespace gEngine.Graph.Rw.Ge.Plane
     {
         public override string SupportType { get { return "WellLocation"; } }
 
-        public override void Read(IObject Object,XmlNode node)
+        public override void Read(IObject Object, XmlNode node)
         {
             if (Object == null)
                 return;
@@ -25,7 +25,7 @@ namespace gEngine.Graph.Rw.Ge.Plane
             if (node.Name != Object.GetType().Name)
                 return;
 
-            WellLocation WellLocation = (WellLocation)Object;
+            WellLocation WellLocation = (WellLocation) Object;
 
             WellLocation.WellNum = node.Attributes["WellNum"].Value;
             WellLocation.WellCategory = (WellCategory) Enum.Parse(typeof(WellCategory), node.Attributes["WellCategory"].Value);
@@ -38,13 +38,16 @@ namespace gEngine.Graph.Rw.Ge.Plane
                 if (childNode.Name.Equals(WellLocation.PointStyle.GetType().Name))
                 {
                     BrushConverter brushConverter = new BrushConverter();
-                    Brush brush = (Brush) brushConverter.ConvertFromString(childNode.Attributes["Color"].Value);
-                    Color color = (Color) ColorConverter.ConvertFromString(brush.ToString());
-                    WellLocation.PointStyle.Color = color;
+                    Brush Stroke = (Brush) brushConverter.ConvertFromString(childNode.Attributes["Stroke"].Value);
+                    Brush Fill = (Brush) brushConverter.ConvertFromString(childNode.Attributes["Fill"].Value);
+                    WellLocation.PointStyle.Stroke = Stroke;
+                    WellLocation.PointStyle.Fill = Fill;
+                    WellLocation.PointStyle.Width = double.Parse(childNode.Attributes["Width"].Value);
+                    WellLocation.PointStyle.Height = double.Parse(childNode.Attributes["Height"].Value);
                     WellLocation.PointStyle.SymbolLib = childNode.Attributes["SymbolLib"].Value;
                     WellLocation.PointStyle.Symbol = childNode.Attributes["Symbol"].Value;
                 }
-            } 
+            }
         }
 
         public override void Write(XmlNode node, IObject obj)
@@ -81,9 +84,21 @@ namespace gEngine.Graph.Rw.Ge.Plane
             XmlElement XEPointStyle = node.OwnerDocument.CreateElement(wl.PointStyle.GetType().Name);
             node.AppendChild(XEPointStyle);
 
-            XmlAttribute xmlColor = doc.CreateAttribute("Color");
-            xmlColor.Value = string.IsNullOrEmpty(wl.PointStyle.Color.ToString()) == false ? wl.PointStyle.Color.ToString() : string.Empty;
-            XEPointStyle.Attributes.Append(xmlColor);
+            XmlAttribute xmlStroke = doc.CreateAttribute("Stroke");
+            xmlStroke.Value = string.IsNullOrEmpty(wl.PointStyle.Stroke.ToString()) == false ? wl.PointStyle.Stroke.ToString() : string.Empty;
+            XEPointStyle.Attributes.Append(xmlStroke);
+
+            XmlAttribute xmlFill = doc.CreateAttribute("Fill");
+            xmlFill.Value = string.IsNullOrEmpty(wl.PointStyle.Fill.ToString()) == false ? wl.PointStyle.Fill.ToString() : string.Empty;
+            XEPointStyle.Attributes.Append(xmlFill);
+
+            XmlAttribute xmlWidth = doc.CreateAttribute("Width");
+            xmlWidth.Value = string.IsNullOrEmpty(wl.PointStyle.Width.ToString()) == false ? wl.PointStyle.Width.ToString() : string.Empty;
+            XEPointStyle.Attributes.Append(xmlWidth);
+
+            XmlAttribute xmlHeight = doc.CreateAttribute("Height");
+            xmlHeight.Value = string.IsNullOrEmpty(wl.PointStyle.Height.ToString()) == false ? wl.PointStyle.Height.ToString() : string.Empty;
+            XEPointStyle.Attributes.Append(xmlHeight);
 
             XmlAttribute xmlSymbolLib = doc.CreateAttribute("SymbolLib");
             xmlSymbolLib.Value = string.IsNullOrEmpty(wl.PointStyle.SymbolLib) == false ? wl.PointStyle.SymbolLib : string.Empty;

@@ -1,5 +1,4 @@
-﻿using gEngine.Util;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,14 +8,14 @@ using System.Windows.Shapes;
 
 namespace gEngine.Symbol.gesym
 {
-    public class GePointSymbol : PointSymbol
+    public class GeEllipsePointSymbol : PointSymbol
     {
-        public GePointSymbol()
+        public GeEllipsePointSymbol()
         {
-            
+
         }
 
-        private static readonly string name = "GePointSymbol";
+        private static readonly string name = "GeEllipsePointSymbol";
         public override string Name
         {
             get
@@ -27,11 +26,7 @@ namespace gEngine.Symbol.gesym
 
         public override object Create(OptionSetting param)
         {
-            if (param==null)
-                return null;
-
-            string shape = param.GetValue<string>("Shape");
-            if (string.IsNullOrEmpty(shape))
+            if (param == null)
                 return null;
 
             double w = param.GetValue<double>("Width");
@@ -49,15 +44,7 @@ namespace gEngine.Symbol.gesym
             if (fill == null)
                 fill = new SolidColorBrush(Colors.White);
 
-            if (shape == "Ellipse")
-            {
-                return new Path() { Fill = fill, Stroke = stroke,Data= new EllipseGeometry() { RadiusX = w, RadiusY = h } };
-            }
-            else if(shape == "Rectangle")
-            {
-                return new Path() { Fill = fill, Stroke = stroke, Data = new RectangleGeometry() { RadiusX = w, RadiusY = h } };
-            }
-            return null;
+            return new Path() { Fill = fill, Stroke = stroke, Data = new EllipseGeometry() { RadiusX = w, RadiusY = h } };
         }
     }
 }

@@ -29,7 +29,10 @@ namespace gEngine.View.Ge
             OptionSetting setting = new OptionSetting();
             setting.Factory = style.SymbolLib;
             setting.Symbol = style.Symbol;
-            setting.Properties["Color"] = style.Color;
+            setting.Properties["Stroke"] = style.Stroke;
+            setting.Properties["Fill"] = style.Fill;
+            setting.Properties["Width"] = style.Width;
+            setting.Properties["Height"] = style.Height;
             return setting;
         }
     }

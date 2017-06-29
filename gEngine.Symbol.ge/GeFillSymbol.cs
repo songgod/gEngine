@@ -10,7 +10,7 @@ namespace gEngine.Symbol.gesym
 {
     public class GeFillSymbol : FillSymbol
     {
-        private static readonly string name = "DefaultPointSymbol";
+        private static readonly string name = "GeFillSymbol";
 
         public override string Name
         {
