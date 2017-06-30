@@ -17,6 +17,7 @@
             <Button x:Name="DrawPolyline" Content="DrawPolyline" Click="DrawPolyline_Click"/>
             <Button x:Name="Drawline" Content="DrawLine" Click="Drawline_Click"/>
             <Button x:Name="DrawBezier" Content="DrawBezier" Click="DrawBezier_Click"/>
+            <Button x:Name="DrawRect" Content="DrawRect" Click="DrawRect_Click"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -49,5 +49,10 @@ namespace gEngineTest.Manipulator
             IManipulatorBase mp = Registry.CreateManipulator("DrawPolyLineObjectManipulator");
             ManipulatorSetter.SetManipulator(mp, mc.GetLayerControl(0));
         }
+        private void DrawRect_Click(object sender, RoutedEventArgs e)
+        {
+            IManipulatorBase mp = Registry.CreateManipulator("DrawRectObjectManipulator");
+            ManipulatorSetter.SetManipulator(mp, mc.GetLayerControl(0));
+        }
     }
 }
