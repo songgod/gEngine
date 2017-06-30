@@ -26,6 +26,7 @@ namespace gEngine.Project.Commands
             ui.CommandBindings.Add(new SetLayerVisibleCommand());
             ui.CommandBindings.Add(new SetLayerEditableCommand());
             ui.CommandBindings.Add(new OpenMapsSelectCommand());
+            ui.CommandBindings.Add(new HideTabCommand());
             ui.CommandBindings.Add(new OpenProjectCommand());
             ui.CommandBindings.Add(new SaveProjectCommand());
             ui.CommandBindings.Add(new SaveAsProjectCommand());
