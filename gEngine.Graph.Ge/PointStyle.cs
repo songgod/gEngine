@@ -12,13 +12,20 @@ namespace gEngine.Graph.Ge
     {
         public PointStyle()
         {
-            Color = Colors.Black;
+            Stroke = new SolidColorBrush(Colors.Red);
+            Fill = new SolidColorBrush(Colors.White);
         }
 
         public string SymbolLib { get; set; }
 
         public string Symbol { get; set; }
 
-        public Color Color { get; set; }
+        public Brush Stroke { get; set; }
+
+        public Brush Fill { get; set; }
+
+        public double Width { get; set; }
+
+        public double Height { get; set; }
     }
 }

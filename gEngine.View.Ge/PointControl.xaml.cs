@@ -43,7 +43,6 @@ namespace gEngine.View.Ge
                 pc.Content = null;
 
             OptionSetting setting = PointStyle2OptionSettingConverter.CreateFromPointStyle(ps);
-
             object point = Registry.CreatePoint(setting);
             pc.Content = point;
         }
@@ -51,7 +50,7 @@ namespace gEngine.View.Ge
         // Using a DependencyProperty as the backing store for PointStyle.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty PointStyleProperty =
             DependencyProperty.Register("PointStyle", typeof(PointStyle), typeof(PointControl), 
-                new PropertyMetadata(new PointStyle() { SymbolLib = "gesym", Symbol = "GePointSymbol" }, new PropertyChangedCallback(PointControl.OnPointStyleChanged)));
+                new PropertyMetadata(new PointStyle() { SymbolLib = "ge", Symbol = "GeEllipsePointSymbol" }, new PropertyChangedCallback(PointControl.OnPointStyleChanged)));
 
 
     }

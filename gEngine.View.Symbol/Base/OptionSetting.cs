@@ -40,7 +40,7 @@ namespace gEngine.Symbol
             }
             set
             {
-                Properties["Properties"] = value;
+                Properties["Factory"] = value;
             }
         }
 
