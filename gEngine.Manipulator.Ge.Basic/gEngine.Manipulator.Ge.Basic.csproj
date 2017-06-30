@@ -55,7 +55,6 @@
     <Compile Include="DrawCompressObjectManipulator.cs" />
     <Compile Include="DrawLineObjectManipulator.cs" />
     <Compile Include="DrawPolyLineObjectManipulator.cs" />
-    <Compile Include="DrawRectObjectManipulator.cs" />
     <Compile Include="EditLineManipulator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

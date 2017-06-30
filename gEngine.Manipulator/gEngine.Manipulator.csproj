@@ -56,7 +56,6 @@
     <Compile Include="ManipulatorSetter.cs" />
     <Compile Include="MapControlZoomPan.cs" />
     <Compile Include="PolyLineManipulator.cs" />
-    <Compile Include="RectManipulator.cs" />
     <Compile Include="Registry.cs" />
     <Compile Include="SelectObjectManipulator.cs" />
     <Compile Include="ZoomPan.cs" />
