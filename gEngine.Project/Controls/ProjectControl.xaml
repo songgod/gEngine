@@ -23,6 +23,9 @@
                 <i:EventTrigger x:Uid="i:EventTrigger_1" EventName="SelectionChanged">
                     <i:InvokeCommandAction x:Uid="i:InvokeCommandAction_1" Command="{x:Static prjcmds:OperateViewCommands.OpenMapsSelectCommand}" CommandParameter="{Binding ElementName=UserControl_Project}"/>
                 </i:EventTrigger>
+                <i:EventTrigger x:Uid="i:EventTrigger_2" EventName="TabHidden">
+                <i:InvokeCommandAction x:Uid="i:InvokeCommandAction_2" Command="{x:Static prjcmds:OperateViewCommands.HideTabCommand}" CommandParameter="{Binding ElementName=UserControl_Project}"/>
+                </i:EventTrigger>
             </i:Interaction.Triggers>
         </local:MapsControl>
         <Grid x:Uid="Grid_2" Grid.Column="1">

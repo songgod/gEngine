@@ -3,12 +3,15 @@ using gEngine.Data.Interface;
 using gEngine.Graph.Interface;
 using gEngine.Project.Commands;
 using gEngine.Project.Controls;
+using gEngine.Project.Ge.Plane.Controls;
 using gEngine.Util.Ge.Plane;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace gEngine.Project.Ge.Plane.Commands
@@ -28,9 +31,9 @@ namespace gEngine.Project.Ge.Plane.Commands
             if (pc == null || pc.Project == null || pc.Project.DBSource == null)
                 return;
 
-            List<string> names = pc.Project.DBSource.WellLocationsNames;
-            if (names.Count == 0)
-                return;
+            //List<string> names = pc.Project.DBSource.WellLocationsNames;
+            //if (names.Count == 0)
+            //    return;
             e.CanExecute = true;
             e.Handled = true;
         }
@@ -46,18 +49,30 @@ namespace gEngine.Project.Ge.Plane.Commands
                 return;
 
             //弹出对话框，选择信息？
+            SelectWellLocationDocu msg = new SelectWellLocationDocu(names);
+            Window window = new Window
+            {
+                Height = 350,
+                Width = 510,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                Title = "井数据",
+                Content = msg
+            };
 
-            IDBWellLocations wls = pctrl.Project.DBSource.GetWellLocations(names[0]);
-            PlaneLayerCreator pc = new PlaneLayerCreator();
-            gEngine.Graph.Ge.Layer layer = pc.CreateWellLocationLayer(wls);
+            if (window.ShowDialog() == true)
+            {
+                IDBWellLocations wls = pctrl.Project.DBSource.GetWellLocations(msg.TxtName);
+                PlaneLayerCreator pc = new PlaneLayerCreator();
+                gEngine.Graph.Ge.Layer layer = pc.CreateWellLocationLayer(wls);
 
-            //先增加layer，再创建IMap
-            layer.Name = "平面图Layer图层";
-            layer.Visible = true;
-            layer.Editable = true;
-            ILayers layers = new ILayers();
-            layers.Add(layer);
-            IMap map = pctrl.Project.NewMap("Ge", "Plane", layers);
+                //先增加layer，再创建IMap
+                layer.Name = "平面图Layer图层";
+                layer.Visible = true;
+                layer.Editable = true;
+                ILayers layers = new ILayers();
+                layers.Add(layer);
+                IMap map = pctrl.Project.NewMap("Ge", "Plane", layers);
+            }
             e.Handled = true;
         }
     }

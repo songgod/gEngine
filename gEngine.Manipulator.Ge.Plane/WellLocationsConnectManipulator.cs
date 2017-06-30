@@ -77,8 +77,8 @@ namespace gEngine.Manipulator.Ge.Plane
             if (wl != null && !SelectWellLocations.Contains(wl))
             {
                 SelectWellLocations.Push(wl);
-                DrawLine(wl);//这里没有调用父类事件base.MouseLeftButtonUp(sender, e)，因为该事件不能定位井中心
-                //base.MouseLeftButtonUp(sender, e);
+                //DrawLine(wl);//这里没有调用父类事件base.MouseLeftButtonUp(sender, e)，因为该事件不能定位井中心
+                base.MouseLeftButtonUp(sender, e);
             }
         }
 
