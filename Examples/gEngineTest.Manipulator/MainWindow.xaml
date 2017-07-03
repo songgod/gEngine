@@ -18,6 +18,7 @@
             <Button x:Name="Drawline" Content="DrawLine" Click="Drawline_Click"/>
             <Button x:Name="DrawBezier" Content="DrawBezier" Click="DrawBezier_Click"/>
             <Button x:Name="DrawRect" Content="DrawRect" Click="DrawRect_Click"/>
+            <Button x:Name="DrawCompress" Content="DrawCompress" Click="DrawCompress_Click"/>
         </StackPanel>
     </Grid>
 </Window>

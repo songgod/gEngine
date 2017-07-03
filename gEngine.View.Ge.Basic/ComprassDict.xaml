@@ -11,6 +11,11 @@
             <local:RectToCompassConverter x:Key="r2c"/>
         </DataTemplate.Resources>
         <Canvas>
+            <!--<Ellipse Stroke="Black" Width="{Binding Width}" Height="{Binding Height}" >
+                <Ellipse.RenderTransform>
+                    <TranslateTransform Y="{Binding Top}" X="{Binding Left}"/>
+                </Ellipse.RenderTransform>
+            </Ellipse>-->
             <Polygon StrokeThickness="{Binding StrokeThickness}" Stroke="{Binding Stroke}" Fill="{Binding Fill}"  RenderTransformOrigin="0.5,0.5">
                 <Polygon.Points>
                     <MultiBinding Converter="{StaticResource r2c}">
@@ -22,7 +27,7 @@
                 </Polygon.Points>
                 <Polygon.RenderTransform>
                     <TransformGroup>
-                        <TranslateTransform Y="{Binding Top}" X="{Binding Left}"/>
+                        <!--<TranslateTransform Y="{Binding Top}" X="{Binding Left}"/>-->
                         <ScaleTransform />
                         <RotateTransform Angle="{Binding RotateAngle}" />
                     </TransformGroup>
