@@ -31,14 +31,7 @@ namespace gEngine.Manipulator
                 return;
 
 
-            mc.MouseLeftButtonDown += Oc_MouseLeftButtonDown;
-            mc.MouseLeftButtonUp += Mc_MouseLeftButtonUp;
-        }
-
-        private void Mc_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            //MapControl mc = this.AssociatedObject.Owner;
-            //mc.EditLayer.Visibility = Visibility.Visible;
+            mc.MouseLeftButtonDown += mc_MouseLeftButtonDown;
         }
 
         protected override void OnDetaching()
@@ -51,26 +44,17 @@ namespace gEngine.Manipulator
             if (mc == null)
                 return;
 
-            mc.MouseLeftButtonDown -= Oc_MouseLeftButtonDown;
-            mc.MouseLeftButtonUp -= Mc_MouseLeftButtonUp;
+            mc.MouseLeftButtonDown -= mc_MouseLeftButtonDown;
         }
 
-        private void Oc_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void mc_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            //1.清空所选项
             MapControl mc = this.AssociatedObject.Owner;
             IMap map = mc.DataContext as IMap;
             string mapName = map.Name;
 
             LayerControl lc = this.AssociatedObject;
             ILayer layer = lc.DataContext as ILayer;
-
-            //foreach (IObject n in layer.Objects)
-            //{
-            //    n.IsSelected = false;
-            //}
-            FrameworkElement element = e.OriginalSource as FrameworkElement;
-            IObject obj = element.DataContext as IObject;
 
             IEnumerable<ObjectControl> listOc = FindChild.FindVisualChildren<ObjectControl>(lc);
             foreach (ObjectControl oc in listOc)
@@ -80,44 +64,37 @@ namespace gEngine.Manipulator
                 IEnumerable<Path> paths = FindChild.FindVisualChildren<Path>(oc);
                 foreach (Path pt in paths)
                 {
-                    AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(pt);
-                    Adorner[] ads = adornerLayer.GetAdorners(pt);
+                    //1.清空所选项
+                    AdornerLayer adorLayer = AdornerLayer.GetAdornerLayer(pt);
+                    Adorner[] ads = adorLayer.GetAdorners(pt);
                     if (ads != null)
                     {
                         for (int i = ads.Length - 1; i >= 0; i--)
                         {
-                            adornerLayer.Remove(ads[i]);
+                            adorLayer.Remove(ads[i]);
+                        }
+                    }
+
+                    //2.给选择的Path设置选中状态
+                    Point p1 = e.GetPosition(this.AssociatedObject);
+                    HitTestResult hr = VisualTreeHelper.HitTest(this.AssociatedObject, p1);
+                    if (hr == null || hr.VisualHit == null)
+                        continue;
+                    FrameworkElement element = hr.VisualHit as FrameworkElement;
+                    if (element.DataContext == pt.DataContext)
+                    {
+                        AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(pt);
+                        OutlineAdorner conrner = new OutlineAdorner(pt);
+                        adornerLayer.Add(conrner);
+                        o.IsSelected = true;
+
+                        if (OnSelectObject != null)
+                        {
+                            OnSelectObject.Invoke(o);
                         }
                     }
                 }
             }
-
-            if (element is Shape)
-            {
-                Shape shape = element as Shape;
-                double defaultThick = shape.StrokeThickness;
-                obj.IsSelected = true;
-
-                //BindingExpression exp = element.GetBindingExpression(Shape.StrokeThicknessProperty);
-                //if (exp == null)
-                //{
-                //    Binding bd = new Binding("IsSelected") { };
-                //    bd.Source = obj;
-                //    bd.Converter = new IsSelectedConverter();
-                //    bd.ConverterParameter = defaultThick;
-                //    bd.Mode = BindingMode.OneWay;
-                //    element.SetBinding(Shape.StrokeThicknessProperty, bd);
-                //}
-                AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(element);
-                OutlineAdorner conrner = new OutlineAdorner(element);
-                adornerLayer.Add(conrner);
-            }
-
-            if (OnSelectObject != null && obj != null)
-            {
-                OnSelectObject.Invoke(obj);
-            }
-
         }
     }
 
@@ -146,10 +123,9 @@ namespace gEngine.Manipulator
         protected override void OnRender(System.Windows.Media.DrawingContext drawingContext)
         {
             Rect adornedElementRect = new Rect(this.AdornedElement.DesiredSize);
+            Pen renderPen = new Pen(new SolidColorBrush(Colors.Red), 3.0);
+            renderPen.DashStyle = new DashStyle(new DoubleCollection() { 2, 2 }, 0);
 
-            Pen renderPen = new Pen(new SolidColorBrush(Colors.Red), 2.0);
-            renderPen.DashStyle = new DashStyle(new DoubleCollection() { 2,2}, 0);
-            
             drawingContext.DrawRectangle(null, renderPen, adornedElementRect);
 
         }

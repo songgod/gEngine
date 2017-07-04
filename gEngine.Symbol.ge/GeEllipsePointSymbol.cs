@@ -32,9 +32,9 @@ namespace gEngine.Symbol.gesym
             double w = param.GetValue<double>("Width");
             double h = param.GetValue<double>("Height");
             if (w <= 0)
-                w = 10.0;
+                w = 20.0;
             if (h <= 0)
-                h = 10.0;
+                h = 20.0;
 
             Brush stroke = param.GetValue<Brush>("Stroke");
             if (stroke == null)
@@ -44,7 +44,7 @@ namespace gEngine.Symbol.gesym
             if (fill == null)
                 fill = new SolidColorBrush(Colors.White);
 
-            return new Path() { Fill = fill, Stroke = stroke, Data = new EllipseGeometry() { RadiusX = w, RadiusY = h } };
+            return new Path() { Fill = fill, Stroke = stroke, Data = new EllipseGeometry() { RadiusX = w / 2, RadiusY = h / 2 }, Height = h, Width = w, Stretch = Stretch.Fill };
         }
     }
 }
