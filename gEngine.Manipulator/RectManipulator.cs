@@ -12,7 +12,7 @@ using System.Windows.Shapes;
 
 namespace gEngine.Manipulator
 {
-    public class CompressManipulator : LayerManipulator
+    public class RectManipulator: LayerManipulator
     {
         public Rectangle TrackAdorner { get; set; }
         public Point location;
@@ -29,10 +29,11 @@ namespace gEngine.Manipulator
 
 
             Style style = new Style();
-            style.Setters.Add(new Setter() { Property = Polyline.StrokeProperty, Value = new SolidColorBrush() { Color = Colors.Red } });
-            style.Setters.Add(new Setter() { Property = Polyline.StrokeThicknessProperty, Value = 1.0 });
-            style.Setters.Add(new Setter() { Property = Polyline.StrokeDashArrayProperty, Value = new DoubleCollection() { 2, 3 } });
+            style.Setters.Add(new Setter() { Property = Rectangle.StrokeProperty, Value = new SolidColorBrush() { Color = Colors.Red } });
+            style.Setters.Add(new Setter() { Property = Rectangle.StrokeThicknessProperty, Value = 1.0 });
+            style.Setters.Add(new Setter() { Property = Rectangle.StrokeDashArrayProperty, Value = new DoubleCollection() { 2, 3 } });
             TrackAdorner = new Rectangle() { Style = style };
+            //TrackAdorner = new Rectangle { Stroke = new SolidColorBrush(Colors.Black), StrokeThickness = 1, StrokeDashArray = new DoubleCollection() { 2, 3 } };
             mc.EditLayer.Children.Add(TrackAdorner);
 
             mc.MouseLeftButtonUp += Mc_MouseLeftButtonUp;
@@ -50,6 +51,7 @@ namespace gEngine.Manipulator
         {
             MapControl mc = this.AssociatedObject.Owner;
             this.location = e.GetPosition(mc);
+            //this.TrackAdorner = null;
         }
 
         private void Mc_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
@@ -59,7 +61,7 @@ namespace gEngine.Manipulator
 
         protected virtual void MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
-            //this.TrackAdorner.Points.Clear();
+            this.TrackAdorner = null;
         }
 
         private void Mc_MouseMove(object sender, MouseEventArgs e)
@@ -87,15 +89,10 @@ namespace gEngine.Manipulator
 
         protected virtual void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            //MapControl mc = this.AssociatedObject.Owner;
 
-            //if (this.TrackAdorner.Points.Count > 1)
-            //{
-            //    this.TrackAdorner.Points.RemoveAt(this.TrackAdorner.Points.Count - 1);
-            //}
-            //Point p = mc.Dp2LP(e.GetPosition(mc));
-            //this.TrackAdorner.Points.Add(p);
-            //this.TrackAdorner.Points.Add(p);
+            //this.TrackAdorner = null;
+           
+
         }
 
         protected override void OnDetaching()
