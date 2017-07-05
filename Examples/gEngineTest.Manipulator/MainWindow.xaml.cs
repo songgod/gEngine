@@ -60,5 +60,11 @@ namespace gEngineTest.Manipulator
             IManipulatorBase mp = Registry.CreateManipulator("DrawCompressObjectManipulator");
             ManipulatorSetter.SetManipulator(mp, mc.GetLayerControl(0));
         }
+
+        private void DrawBoundary_Click(object sender, RoutedEventArgs e)
+        {
+            IManipulatorBase mp = Registry.CreateManipulator("DrawBoundaryObjectManipulator");
+            ManipulatorSetter.SetManipulator(mp, mc.GetLayerControl(0));
+        }
     }
 }

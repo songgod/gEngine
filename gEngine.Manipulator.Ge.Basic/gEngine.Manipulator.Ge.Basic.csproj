@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="BoundaryManipulator.cs" />
     <Compile Include="DrawBezierLineObjectManipulator.cs" />
+    <Compile Include="DrawBoundaryObjectManipulator.cs" />
     <Compile Include="DrawCompressObjectManipulator.cs" />
     <Compile Include="DrawLineObjectManipulator.cs" />
     <Compile Include="DrawPolyLineObjectManipulator.cs" />
