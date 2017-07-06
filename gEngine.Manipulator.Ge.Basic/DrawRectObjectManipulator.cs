@@ -1,46 +1,48 @@
 ﻿using gEngine.Graph.Ge;
+using gEngine.Graph.Ge.Basic;
+using gEngine.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
 namespace gEngine.Manipulator.Ge.Basic
 {
-    public class DrawCompressObjectManipulator: CompressManipulator
+    public class DrawRectObjectManipulator: RectManipulator
     {
-        public DrawCompressObjectManipulator()
+        public DrawRectObjectManipulator()
         {
             rectStyle = new NormalRectStyle();
         }
         public RectStyle rectStyle { get; set; }
         protected override void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Graph.Ge.Basic.Comprass com = new Graph.Ge.Basic.Comprass()
+            Graph.Ge.Basic.Rect rect = new Graph.Ge.Basic.Rect()
             {
                 Width = this.TrackAdorner.Width,
                 Height = this.TrackAdorner.Height,
                 Top = Canvas.GetTop(this.TrackAdorner),
                 Left = Canvas.GetLeft(this.TrackAdorner),
-                Fill = Brushes.Red,
-                Stroke = Brushes.Black,
-                StrokeThickness = 0,
-                RotateAngle=0
+                Fill = null,
+                Stroke = Brushes.Black
             };
-            this.AssociatedObject.LayerContext.Objects.Add(com);
+            this.AssociatedObject.LayerContext.Objects.Add(rect);
             base.MouseLeftButtonUp(sender, e);
         }
+
     }
-    public class DCMFactory : IManipulatorFactory
+    public class DRMFactory : IManipulatorFactory
     {
         public string Name
         {
             get
             {
-                return "DrawCompressObjectManipulator";
+                return "DrawRectObjectManipulator";
             }
         }
 
@@ -48,10 +50,9 @@ namespace gEngine.Manipulator.Ge.Basic
         {
             RectStyle style = param as RectStyle;
 
-            DrawCompressObjectManipulator dm = new DrawCompressObjectManipulator();
+            DrawRectObjectManipulator dm = new DrawRectObjectManipulator();
             if (style != null) dm.rectStyle = style;
             return dm;
         }
     }
-
 }

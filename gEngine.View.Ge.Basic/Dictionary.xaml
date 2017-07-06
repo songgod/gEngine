@@ -7,7 +7,7 @@
              xmlns:local="clr-namespace:gEngine.View.Ge.Basic"
              mc:Ignorable="d">
     <DataTemplate DataType="{x:Type gb:Rect}">
-        <Rectangle Width="{Binding Width}" Height="{Binding Height}" Fill="Green">
+        <Rectangle Width="{Binding Width}" Height="{Binding Height}" Fill="{Binding Height}" Stroke="{Binding Stroke}">
             <Rectangle.RenderTransform>
                 <TranslateTransform Y="{Binding Top}" X="{Binding Left}"/>
             </Rectangle.RenderTransform>
