@@ -59,6 +59,7 @@
     <Compile Include="PolyLineManipulator.cs" />
     <Compile Include="RectManipulator.cs" />
     <Compile Include="Registry.cs" />
+    <Compile Include="ScaleRuleManipulator.cs" />
     <Compile Include="SelectObjectManipulator.cs" />
     <Compile Include="ZoomPan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
