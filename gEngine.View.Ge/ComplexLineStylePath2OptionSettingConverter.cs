@@ -39,6 +39,8 @@ namespace gEngine.View.Ge
             LineOptionSetting setting = new LineOptionSetting();
             setting.Factory = style.SymbolLib;
             setting.Symbol = style.Symbol;
+            setting.Properties["Stroke"] = style.Stroke;
+            setting.Properties["Width"] = style.Width;
             setting.Path = path;
             return setting;
         }

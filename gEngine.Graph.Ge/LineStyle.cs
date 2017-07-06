@@ -37,11 +37,15 @@ namespace gEngine.Graph.Ge
 
     public class ComplexLineStyle : LineStyle
     {
+        public ComplexLineStyle()
+        {
+            Stroke = new SolidColorBrush(Colors.Black);
+        }
         public override LineType LinType { get { return LineType.ComplexLine; } }
         public string Symbol { get; set; }
         public string SymbolLib { get; set; }
 
-        public Color Color { get; set; }
+        public Brush Stroke { get; set; }
 
         public double Width { get; set; }
     }

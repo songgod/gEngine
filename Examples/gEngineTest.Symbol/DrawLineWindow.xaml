@@ -1,0 +1,15 @@
+﻿<Window x:Class="gEngineTest.Symbol.DrawLineWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:draw="clr-namespace:gEngine.View.Ge;assembly=gEngine.View.Ge"
+        xmlns:local="clr-namespace:gEngineTest.Symbol"
+        mc:Ignorable="d"
+        Title="DrawLineWindow" Height="300" Width="300">
+    <Grid>
+        <draw:LineControl x:Name="lineControl" Data="{Binding Path=Data}" LineStyle="{Binding Path=LineStyle}">
+           
+        </draw:LineControl>
+    </Grid>
+</Window>
