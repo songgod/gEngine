@@ -52,10 +52,12 @@
   <ItemGroup>
     <Compile Include="BoundaryManipulator.cs" />
     <Compile Include="DrawBezierLineObjectManipulator.cs" />
+    <Compile Include="DrawBoundaryObjectManipulator.cs" />
     <Compile Include="DrawCompressObjectManipulator.cs" />
     <Compile Include="DrawLineObjectManipulator.cs" />
     <Compile Include="DrawPolyLineObjectManipulator.cs" />
     <Compile Include="DrawRectObjectManipulator.cs" />
+    <Compile Include="DrawScaleRuleObjectManipulator.cs" />
     <Compile Include="EditLineManipulator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

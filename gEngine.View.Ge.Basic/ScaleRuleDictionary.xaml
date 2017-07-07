@@ -28,6 +28,8 @@
                         <Binding Path="ScaleSpace"/>
                         <Binding Path="ScaleHeight"/>
                         <Binding Path="Unit"/>
+                        <Binding Path="Top"/>
+                        <Binding Path="Left"/>
                     </MultiBinding>
                 </Path.Data>
             </Path>
@@ -38,6 +40,7 @@
                         <Binding Path="ScaleNumber"/>
                         <Binding Path="ScaleSpace"/>
                         <Binding Path="ScaleHeight"/>
+                        <Binding Path="Left"/>
                     </MultiBinding>
                 </Path.Data>
 

@@ -36,6 +36,11 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GraphAlgo, Version=1.0.6375.16859, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\3rdlib\GraphAlgo\x64\GraphAlgo.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -56,6 +61,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="DrawLineWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -63,6 +72,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DrawLineWindow.xaml.cs">
+      <DependentUpon>DrawLineWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -97,6 +109,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\gEngine.Graph.Ge\gEngine.Graph.Ge.csproj">
+      <Project>{3bd77e4f-a348-4edb-b60c-68b749249b91}</Project>
+      <Name>gEngine.Graph.Ge</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\gEngine.View.Ge\gEngine.View.Ge.csproj">
+      <Project>{bc05de82-7172-43bc-a025-9827e0275209}</Project>
+      <Name>gEngine.View.Ge</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\gEngine.View.Symbol\gEngine.Symbol.csproj">
       <Project>{1600379b-c8b5-4375-a1d5-3b81bd7fccf7}</Project>
       <Name>gEngine.Symbol</Name>

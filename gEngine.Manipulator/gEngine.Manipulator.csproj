@@ -47,6 +47,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BoundaryManipulator.cs" />
     <Compile Include="CompressManipulator.cs" />
     <Compile Include="CurveManipulator.cs" />
     <Compile Include="IManipulatorFactory.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="PolyLineManipulator.cs" />
     <Compile Include="RectManipulator.cs" />
     <Compile Include="Registry.cs" />
+    <Compile Include="ScaleRuleManipulator.cs" />
     <Compile Include="SelectObjectManipulator.cs" />
     <Compile Include="ZoomPan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

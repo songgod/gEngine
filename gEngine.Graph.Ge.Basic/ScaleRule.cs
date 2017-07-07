@@ -48,5 +48,27 @@ namespace gEngine.Graph.Ge.Basic
         // Using a DependencyProperty as the backing store for Top.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ScaleHeightProperty =
             DependencyProperty.Register("ScaleHeight", typeof(double), typeof(ScaleRule));
+
+        public double Top
+        {
+            get { return (double)GetValue(TopProperty); }
+            set { SetValue(TopProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Top.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TopProperty =
+            DependencyProperty.Register("Top", typeof(double), typeof(ScaleRule));
+
+
+
+        public double Left
+        {
+            get { return (double)GetValue(LeftProperty); }
+            set { SetValue(LeftProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Left.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty LeftProperty =
+            DependencyProperty.Register("Left", typeof(double), typeof(ScaleRule));
     }
 }
