@@ -18,6 +18,7 @@ namespace gEngine.Project.Controls
         {
             InitializeComponent();
             this.View.HideButtonShowMode = HideButtonShowMode.InAllTabs;
+            this.View.RemoveTabItemsOnHiding = true;
             this.DataContext = this;
         }
 

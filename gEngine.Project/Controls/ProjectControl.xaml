@@ -18,14 +18,14 @@
             <ColumnDefinition x:Uid="ColumnDefinition_1" Width="5*"/>
             <ColumnDefinition x:Uid="ColumnDefinition_2" Width="1*"/>
         </Grid.ColumnDefinitions>
-        <local:MapsControl x:Uid="tc" MapsSource="{Binding Path=Project.OpenMaps, ElementName=UserControl_Project}" Grid.Column="0" x:Name="tc">
+        <local:MapsControl x:Uid="tc" MapsSource="{Binding Path=Project.OpenMaps, Mode=TwoWay, ElementName=UserControl_Project}" Grid.Column="0" x:Name="tc">
             <i:Interaction.Triggers>
                 <i:EventTrigger x:Uid="i:EventTrigger_1" EventName="SelectionChanged">
                     <i:InvokeCommandAction x:Uid="i:InvokeCommandAction_1" Command="{x:Static prjcmds:OperateViewCommands.OpenMapsSelectCommand}" CommandParameter="{Binding ElementName=UserControl_Project}"/>
                 </i:EventTrigger>
-                <i:EventTrigger x:Uid="i:EventTrigger_2" EventName="TabHidden">
+                <!--<i:EventTrigger x:Uid="i:EventTrigger_2" EventName="TabHidden">
                 <i:InvokeCommandAction x:Uid="i:InvokeCommandAction_2" Command="{x:Static prjcmds:OperateViewCommands.HideTabCommand}" CommandParameter="{Binding ElementName=UserControl_Project}"/>
-                </i:EventTrigger>
+                </i:EventTrigger>-->
             </i:Interaction.Triggers>
         </local:MapsControl>
         <Grid x:Uid="Grid_2" Grid.Column="1">

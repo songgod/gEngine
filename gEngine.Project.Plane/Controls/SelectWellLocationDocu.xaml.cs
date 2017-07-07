@@ -18,46 +18,61 @@ namespace gEngine.Project.Ge.Plane.Controls
     /// <summary>
     /// SelectWellLocationDocu.xaml 的交互逻辑
     /// </summary>
-    public partial class SelectWellLocationDocu : UserControl
+    public partial class SelectWellLocationDocu : Window
     {
-        public string TxtName
+        public string FileName
         {
-            get; set;
+            get { return (string)GetValue(FileNameProperty); }
+            set { SetValue(FileNameProperty, value); }
         }
+
+        // Using a DependencyProperty as the backing store for FileName.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty FileNameProperty =
+            DependencyProperty.Register("FileName", typeof(string), typeof(SelectWellLocationDocu));
+
+
+
+        public string MapName
+        {
+            get { return (string)GetValue(MapNameProperty); }
+            set { SetValue(MapNameProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MapName.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MapNameProperty =
+            DependencyProperty.Register("MapName", typeof(string), typeof(SelectWellLocationDocu));
+
+
         public SelectWellLocationDocu(List<string> listTxt)
         {
             InitializeComponent();
             this.lbTxts.ItemsSource = listTxt;
+            this.SetBinding(FileNameProperty, new Binding("SelectedValue") { ElementName = "lbTxts", Mode = BindingMode.OneWay });
+            this.SetBinding(MapNameProperty, new Binding("Text") { ElementName = "tbxName", Mode = BindingMode.OneWay });
         }
 
         private void ButtonOk_Click(object sender, RoutedEventArgs e)
         {
-            if (lbTxts.SelectedIndex < 0)
+            if (string.IsNullOrEmpty(MapName))
+            {
+                MessageBox.Show("请输入图件名！");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(FileName))
             {
                 MessageBox.Show("请选择井数据！");
                 return;
             }
-            else
-            {
-                TxtName = lbTxts.SelectedValue.ToString();
-            }
-            Window parentWindow = Window.GetWindow((DependencyObject)sender);
             
-            if (parentWindow != null)
-            {
-                parentWindow.DialogResult = true;
-                parentWindow.Close();
-            }
+            this.DialogResult = true;
+            this.Close();
         }
 
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
-            Window parentWindow = Window.GetWindow((DependencyObject)sender);
-            if (parentWindow != null)
-            {
-                parentWindow.DialogResult = false;
-                parentWindow.Close();
-            }
+            this.DialogResult = false;
+            this.Close();
         }
     }
 }
