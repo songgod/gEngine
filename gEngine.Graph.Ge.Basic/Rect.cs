@@ -60,7 +60,7 @@ namespace gEngine.Graph.Ge.Basic
 
         // Using a DependencyProperty as the backing store for Depths.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty FillProperty =
-            DependencyProperty.Register("Fill", typeof(Brush), typeof(Boundary));
+            DependencyProperty.Register("Fill", typeof(Brush), typeof(Rect));
 
         public Brush Stroke
         {
@@ -70,6 +70,6 @@ namespace gEngine.Graph.Ge.Basic
 
         // Using a DependencyProperty as the backing store for Depths.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty StrokeProperty =
-            DependencyProperty.Register("Stroke", typeof(Brush), typeof(Boundary));
+            DependencyProperty.Register("Stroke", typeof(Brush), typeof(Rect));
     }
 }
