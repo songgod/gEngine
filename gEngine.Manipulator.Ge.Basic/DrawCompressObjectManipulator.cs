@@ -10,13 +10,13 @@ using System.Windows.Media;
 
 namespace gEngine.Manipulator.Ge.Basic
 {
-    public class DrawCompressObjectManipulator: CompressManipulator
+    public class DrawCompressObjectManipulator: RectManipulator
     {
         public DrawCompressObjectManipulator()
         {
-            rectStyle = new NormalRectStyle();
+            rectStyle = new NormalLineStyle();
         }
-        public RectStyle rectStyle { get; set; }
+        public LineStyle rectStyle { get; set; }
         protected override void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             Graph.Ge.Basic.Comprass com = new Graph.Ge.Basic.Comprass()
@@ -46,7 +46,7 @@ namespace gEngine.Manipulator.Ge.Basic
 
         public IManipulatorBase CreateManipulator(object param)
         {
-            RectStyle style = param as RectStyle;
+            LineStyle style = param as LineStyle;
 
             DrawCompressObjectManipulator dm = new DrawCompressObjectManipulator();
             if (style != null) dm.rectStyle = style;

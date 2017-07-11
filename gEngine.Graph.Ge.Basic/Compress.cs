@@ -42,7 +42,7 @@ namespace gEngine.Graph.Ge.Basic
 
         // Using a DependencyProperty as the backing store for Top.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TopProperty =
-            DependencyProperty.Register("Top", typeof(double), typeof(Rect));
+            DependencyProperty.Register("Top", typeof(double), typeof(Comprass));
 
 
 
@@ -54,7 +54,7 @@ namespace gEngine.Graph.Ge.Basic
 
         // Using a DependencyProperty as the backing store for Left.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty LeftProperty =
-            DependencyProperty.Register("Left", typeof(double), typeof(Rect));
+            DependencyProperty.Register("Left", typeof(double), typeof(Comprass));
 
 
 
@@ -66,7 +66,7 @@ namespace gEngine.Graph.Ge.Basic
 
         // Using a DependencyProperty as the backing store for Width.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty WidthProperty =
-            DependencyProperty.Register("Width", typeof(double), typeof(Rect));
+            DependencyProperty.Register("Width", typeof(double), typeof(Comprass));
 
         public double Height
         {
@@ -76,7 +76,7 @@ namespace gEngine.Graph.Ge.Basic
 
         // Using a DependencyProperty as the backing store for Height.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty HeightProperty =
-            DependencyProperty.Register("Height", typeof(double), typeof(Rect));
+            DependencyProperty.Register("Height", typeof(double), typeof(Comprass));
 
         public double StrokeThickness
         {
@@ -86,7 +86,7 @@ namespace gEngine.Graph.Ge.Basic
 
         // Using a DependencyProperty as the backing store for Top.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty StrokeThicknessProperty =
-            DependencyProperty.Register("StrokeThickness", typeof(double), typeof(Boundary));
+            DependencyProperty.Register("StrokeThickness", typeof(double), typeof(Comprass));
 
         public Brush Fill
         {
@@ -96,7 +96,7 @@ namespace gEngine.Graph.Ge.Basic
 
         // Using a DependencyProperty as the backing store for Depths.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty FillProperty =
-            DependencyProperty.Register("Fill", typeof(Brush), typeof(Boundary));
+            DependencyProperty.Register("Fill", typeof(Brush), typeof(Comprass));
 
         public Brush Stroke
         {
@@ -106,7 +106,7 @@ namespace gEngine.Graph.Ge.Basic
 
         // Using a DependencyProperty as the backing store for Depths.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty StrokeProperty =
-            DependencyProperty.Register("Stroke", typeof(Brush), typeof(Boundary));
+            DependencyProperty.Register("Stroke", typeof(Brush), typeof(Comprass));
 
     }
 }

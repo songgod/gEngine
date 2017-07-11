@@ -17,9 +17,9 @@ namespace gEngine.Manipulator.Ge.Basic
     {
         public DrawRectObjectManipulator()
         {
-            rectStyle = new NormalRectStyle();
+            rectStyle = new NormalLineStyle();
         }
-        public RectStyle rectStyle { get; set; }
+        public LineStyle rectStyle { get; set; }
         protected override void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             Graph.Ge.Basic.Rect rect = new Graph.Ge.Basic.Rect()
@@ -48,7 +48,7 @@ namespace gEngine.Manipulator.Ge.Basic
 
         public IManipulatorBase CreateManipulator(object param)
         {
-            RectStyle style = param as RectStyle;
+            LineStyle style = param as LineStyle;
 
             DrawRectObjectManipulator dm = new DrawRectObjectManipulator();
             if (style != null) dm.rectStyle = style;

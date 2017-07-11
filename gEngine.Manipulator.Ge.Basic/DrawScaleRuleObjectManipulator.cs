@@ -10,13 +10,13 @@ using System.Windows.Media;
 
 namespace gEngine.Manipulator.Ge.Basic
 {
-    public class DrawScaleRuleObjectManipulator: ScaleRuleManipulator
+    public class DrawScaleRuleObjectManipulator: RectManipulator
     {
         public DrawScaleRuleObjectManipulator()
         {
-            rectStyle = new NormalRectStyle();
+            rectStyle = new NormalLineStyle();
         }
-        public RectStyle rectStyle { get; set; }
+        public LineStyle rectStyle { get; set; }
         protected override void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             Graph.Ge.Basic.ScaleRule sca = new Graph.Ge.Basic.ScaleRule()
@@ -33,6 +33,9 @@ namespace gEngine.Manipulator.Ge.Basic
             //Width = this.TrackAdorner.Width,
             //Height = this.TrackAdorner.Height,
         }
+        protected override void MouseMove(object sender, MouseEventArgs e)
+        {
+        }
     }
     public class DSMFactory : IManipulatorFactory
     {
@@ -46,7 +49,7 @@ namespace gEngine.Manipulator.Ge.Basic
 
         public IManipulatorBase CreateManipulator(object param)
         {
-            RectStyle style = param as RectStyle;
+            LineStyle style = param as LineStyle;
 
             DrawScaleRuleObjectManipulator dm = new DrawScaleRuleObjectManipulator();
             if (style != null) dm.rectStyle = style;
