@@ -10,7 +10,7 @@ using System.Windows.Media;
 
 namespace gEngine.Manipulator.Ge.Basic
 {
-    public class DrawCompressObjectManipulator: CompressManipulator
+    public class DrawCompressObjectManipulator: RectManipulator
     {
         public DrawCompressObjectManipulator()
         {

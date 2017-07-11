@@ -10,7 +10,7 @@ using System.Windows.Media;
 
 namespace gEngine.Manipulator.Ge.Basic
 {
-    public class DrawScaleRuleObjectManipulator: ScaleRuleManipulator
+    public class DrawScaleRuleObjectManipulator: RectManipulator
     {
         public DrawScaleRuleObjectManipulator()
         {
@@ -32,6 +32,9 @@ namespace gEngine.Manipulator.Ge.Basic
             base.MouseLeftButtonUp(sender, e);
             //Width = this.TrackAdorner.Width,
             //Height = this.TrackAdorner.Height,
+        }
+        protected override void MouseMove(object sender, MouseEventArgs e)
+        {
         }
     }
     public class DSMFactory : IManipulatorFactory

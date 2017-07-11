@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace gEngine.Manipulator.Ge.Basic
 {
@@ -26,6 +27,7 @@ namespace gEngine.Manipulator.Ge.Basic
                 LinStyle = this.LineStyle
             };
             this.AssociatedObject.LayerContext.Objects.Add(line);
+           
             base.MouseLeftButtonUp(sender, e);
         }
     }
@@ -45,7 +47,7 @@ namespace gEngine.Manipulator.Ge.Basic
             LineStyle style = param as LineStyle;
 
             DrawLineObjectManipulator dm = new DrawLineObjectManipulator();
-            dm.LineStyle = style;
+            if (style != null) dm.LineStyle = style;
             return dm;
         }
     }
