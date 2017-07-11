@@ -50,8 +50,10 @@
     <Compile Include="BoundaryManipulator.cs" />
     <Compile Include="CompressManipulator.cs" />
     <Compile Include="CurveManipulator.cs" />
+    <Compile Include="EditDefaultManipulator.cs" />
     <Compile Include="IManipulatorFactory.cs" />
     <Compile Include="Converter\IsSelectedConverter.cs" />
+    <Compile Include="IObjectManipulatorFactory.cs" />
     <Compile Include="LineManipulator.cs" />
     <Compile Include="ManipulatorBase.cs" />
     <Compile Include="ManipulatorSetter.cs" />
@@ -65,6 +67,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\gEngine.Graph.Ge.Plane\gEngine.Graph.Ge.Plane.csproj">
+      <Project>{82739B38-8706-493D-A571-C743AFCEAD12}</Project>
+      <Name>gEngine.Graph.Ge.Plane</Name>
+    </ProjectReference>
     <ProjectReference Include="..\gEngine.Graph.Interface\gEngine.Graph.Interface.csproj">
       <Project>{1C98A821-B030-4FF2-83AE-D49B1B3B8C67}</Project>
       <Name>gEngine.Graph.Interface</Name>

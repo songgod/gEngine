@@ -56,45 +56,46 @@ namespace gEngine.Manipulator
             LayerControl lc = this.AssociatedObject;
             ILayer layer = lc.DataContext as ILayer;
 
-            IEnumerable<ObjectControl> listOc = FindChild.FindVisualChildren<ObjectControl>(lc);
-            foreach (ObjectControl oc in listOc)
+            HitTestResult hr = VisualTreeHelper.HitTest(this.AssociatedObject, e.GetPosition(this.AssociatedObject));
+            if (hr == null || hr.VisualHit == null)
+                return;
+            DependencyObject p = hr.VisualHit;
+            while (p != null)
             {
-                IObject o = oc.DataContext as IObject;
-                o.IsSelected = false;
-                IEnumerable<Path> paths = FindChild.FindVisualChildren<Path>(oc);
-                foreach (Path pt in paths)
+                ObjectControl oc = p as ObjectControl;
+                if (oc != null)
                 {
-                    //1.清空所选项
-                    AdornerLayer adorLayer = AdornerLayer.GetAdornerLayer(pt);
-                    Adorner[] ads = adorLayer.GetAdorners(pt);
-                    if (ads != null)
+                    IObject obj = oc.DataContext as IObject;
+                    if (obj != null)
                     {
-                        for (int i = ads.Length - 1; i >= 0; i--)
-                        {
-                            adorLayer.Remove(ads[i]);
-                        }
-                    }
+                        obj.IsSelected = !obj.IsSelected;
 
-                    //2.给选择的Path设置选中状态
-                    Point p1 = e.GetPosition(this.AssociatedObject);
-                    HitTestResult hr = VisualTreeHelper.HitTest(this.AssociatedObject, p1);
-                    if (hr == null || hr.VisualHit == null)
-                        continue;
-                    FrameworkElement element = hr.VisualHit as FrameworkElement;
-                    if (element.DataContext == pt.DataContext)
-                    {
-                        AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(pt);
-                        OutlineAdorner conrner = new OutlineAdorner(pt);
-                        adornerLayer.Add(conrner);
-                        o.IsSelected = true;
+                        //IEnumerable<Path> paths = FindChild.FindVisualChildren<Path>(oc);
+                        //foreach (Path pt in paths)
+                        //{
+                        //    AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(pt);
+                        //    OutlineAdorner conrner = new OutlineAdorner(pt);
+                        //    adornerLayer.Add(conrner);
 
-                        if (OnSelectObject != null)
-                        {
-                            OnSelectObject.Invoke(o);
-                        }
+                        //    if (OnSelectObject != null)
+                        //    {
+                        //        OnSelectObject.Invoke(obj);
+                        //    }
+                        //}
+
+                        IManipulatorBase mb = gEngine.Manipulator.Registry.CreateManipulator(obj);
+                        if (obj.IsSelected)
+                            ManipulatorSetter.SetManipulator(mb, oc);
+                        else
+                            ManipulatorSetter.RemoveManipulator(mb, oc);
+
+
+                        break;
                     }
                 }
+                p = VisualTreeHelper.GetParent(p);
             }
+
         }
     }
 

@@ -1,4 +1,5 @@
-﻿using gEngine.Util;
+﻿using gEngine.Graph.Interface;
+using gEngine.Util;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -48,6 +49,32 @@ namespace gEngine.Manipulator
             return dicManipulatorFactory[name];
         }
 
+        static public IManipulatorFactory GetManipulatorFactory(IObject iobject)
+        {
+            foreach (IManipulatorFactory mpf in dicManipulatorFactory.Values)
+            {
+                Type iobjtype = typeof(IObjectManipulatorFactory);
+                if (mpf is IObjectManipulatorFactory)
+                {
+                    IObjectManipulatorFactory ompf = mpf as IObjectManipulatorFactory;
+                    if (ompf.SupportIObject.GetType() == iobject.GetType())
+                    {
+                        return ompf;
+                    }
+                }
+            }
+            return null;
+        }
+
+        static public IManipulatorBase CreateManipulator(IObject iobject, object param = null)
+        {
+            IManipulatorFactory mpf = GetManipulatorFactory(iobject);
+            if (mpf == null)
+                return null;
+
+            return mpf.CreateManipulator(param);
+        }
+
         static public IManipulatorBase CreateManipulator(string name, object param=null)
         {
             IManipulatorFactory mpf = GetManipulatorFactory(name);
@@ -68,16 +95,19 @@ namespace gEngine.Manipulator
                 Type[] types = ab.GetTypes();
                 foreach (Type t in types)
                 {
+                    if (t.IsInterface)
+                        continue;
                     Type registertype = typeof(IManipulatorFactory);
                     var interfaces = t.GetInterfaces();
                     foreach (var interf in interfaces)
                     {
-                        if (interf == registertype)
+                        if (interf == registertype|| interf == typeof(IObjectManipulatorFactory))
                         {
                             IManipulatorFactory mpf = (IManipulatorFactory)(ab.CreateInstance(t.FullName));
                             string name = mpf.Name;
                             Regist(name, mpf);
-                        }
+                            break;
+                        }                        
                     }
                 }
             }
