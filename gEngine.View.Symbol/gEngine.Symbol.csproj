@@ -50,6 +50,7 @@
     <Compile Include="Base\ISymbol.cs" />
     <Compile Include="Base\FillSymbol.cs" />
     <Compile Include="Base\OptionSetting.cs" />
+    <Compile Include="Base\StrokePathUtil.cs" />
     <Compile Include="Converter\FillSymbolConverter.cs" />
     <Compile Include="Base\ISymbolFactory.cs" />
     <Compile Include="Base\StrokeSymbol.cs" />

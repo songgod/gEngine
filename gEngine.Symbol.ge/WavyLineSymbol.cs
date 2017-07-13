@@ -10,9 +10,9 @@ using System.Windows.Shapes;
 
 namespace gEngine.Symbol.gesym
 {
-    public class GeStrokeSymbol : StrokeSymbol
+    public class WavyLineSymbol : StrokeSymbol
     {
-        private static readonly string name = "GeStrokeSymbol";
+        private static readonly string name = "WavyLineSymbol";
         public override string Name
         {
             get
@@ -21,19 +21,24 @@ namespace gEngine.Symbol.gesym
             }
         }
 
-        public override object Create(LineOptionSetting param)
+        public override PathGeometry SymbolGeometry
         {
-            Brush stroke = param.GetValue<Brush>("Stroke");
-            if (stroke == null)
-                stroke = new SolidColorBrush(Colors.Black);
-            double strokeThickness = param.GetValue<double>("Width");
-            if (strokeThickness <= 0)
-                strokeThickness = 1;
-            Path res = new Path() { Stroke = stroke,StrokeThickness = strokeThickness };
-            PointCollection pc = PathGeometryToPoints.GetPointCollection(param.Path);
-            res.Data = ConverterToBeizer(pc);
-            //res.Data = param.Path;
-            return res;
+            get
+            {
+                PathGeometry geom = new PathGeometry();
+                PathFigure figure = new PathFigure() { StartPoint = new Point(50, 120) };
+                PointCollection pc = new PointCollection();
+                pc.Add(new Point(60, 0));
+                pc.Add(new Point(100,0));
+                pc.Add(new Point(150, 120));
+                pc.Add(new Point(170, 240));
+                pc.Add(new Point(240, 240));
+                pc.Add(new Point(300, 120));
+                PolyBezierSegment pbs = new PolyBezierSegment() { Points = pc };
+                figure.Segments.Add(pbs);
+                geom.Figures.Add(figure);
+                return geom;
+            }
         }
 
         public Geometry ConverterToBeizer(PointCollection pc)
