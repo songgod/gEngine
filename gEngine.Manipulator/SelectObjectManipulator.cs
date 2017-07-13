@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 
 namespace gEngine.Manipulator
 {
-    public delegate void SelectObjectDel(IObject iobject);
+    public delegate void SelectObjectDel(ObjectControl oc);
     public class SelectObjectManipulator : LayerManipulator
     {
         public event SelectObjectDel OnSelectObject;
@@ -50,15 +50,16 @@ namespace gEngine.Manipulator
         private void mc_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             MapControl mc = this.AssociatedObject.Owner;
-            IMap map = mc.DataContext as IMap;
-            string mapName = map.Name;
-
             LayerControl lc = this.AssociatedObject;
             ILayer layer = lc.DataContext as ILayer;
 
-            HitTestResult hr = VisualTreeHelper.HitTest(this.AssociatedObject, e.GetPosition(this.AssociatedObject));
-            if (hr == null || hr.VisualHit == null)
-                return;
+            Point pt = e.GetPosition(mc);
+            VisualTreeHelper.HitTest(mc, null,
+                new HitTestResultCallback(MyHitTestResult), new PointHitTestParameters(pt));
+
+        }
+        private HitTestResultBehavior MyHitTestResult(HitTestResult hr)
+        {
             DependencyObject p = hr.VisualHit;
             while (p != null)
             {
@@ -69,33 +70,21 @@ namespace gEngine.Manipulator
                     if (obj != null)
                     {
                         obj.IsSelected = !obj.IsSelected;
-
-                        //IEnumerable<Path> paths = FindChild.FindVisualChildren<Path>(oc);
-                        //foreach (Path pt in paths)
-                        //{
-                        //    AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(pt);
-                        //    OutlineAdorner conrner = new OutlineAdorner(pt);
-                        //    adornerLayer.Add(conrner);
-
-                        //    if (OnSelectObject != null)
-                        //    {
-                        //        OnSelectObject.Invoke(obj);
-                        //    }
-                        //}
-
                         IManipulatorBase mb = gEngine.Manipulator.Registry.CreateManipulator(obj);
                         if (obj.IsSelected)
                             ManipulatorSetter.SetManipulator(mb, oc);
                         else
-                            ManipulatorSetter.RemoveManipulator(mb, oc);
+                            ManipulatorSetter.ClearManipulator(oc);
 
-
-                        break;
+                        if (OnSelectObject != null)
+                        {
+                            OnSelectObject.Invoke(oc);
+                        }
                     }
                 }
                 p = VisualTreeHelper.GetParent(p);
             }
-
+            return HitTestResultBehavior.Continue;
         }
     }
 

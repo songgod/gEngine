@@ -97,16 +97,21 @@ namespace gEngine.Manipulator
                 {
                     if (t.IsInterface)
                         continue;
-                    Type registertype = typeof(IManipulatorFactory);
                     var interfaces = t.GetInterfaces();
                     foreach (var interf in interfaces)
                     {
-                        if (interf == registertype|| interf == typeof(IObjectManipulatorFactory))
+                        if (interf == typeof(IObjectManipulatorFactory))
                         {
-                            IManipulatorFactory mpf = (IManipulatorFactory)(ab.CreateInstance(t.FullName));
-                            string name = mpf.Name;
-                            Regist(name, mpf);
-                            break;
+                            IObjectManipulatorFactory mpf = (IObjectManipulatorFactory)(ab.CreateInstance(t.FullName));
+                            Regist(mpf.Name, mpf);
+                        }
+                        else if (interf == typeof(IManipulatorFactory))
+                        {
+                            if (!interfaces.Contains(typeof(IObjectManipulatorFactory)))
+                            {
+                                IManipulatorFactory mpf = (IManipulatorFactory)(ab.CreateInstance(t.FullName));
+                                Regist(mpf.Name, mpf);
+                            }
                         }                        
                     }
                 }

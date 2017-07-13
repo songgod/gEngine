@@ -5,6 +5,7 @@ using gEngine.Project;
 using gEngine.Project.Commands;
 using gEngine.Project.Controls;
 using gEngine.RibbonPageCategory;
+using gEngine.View;
 using gSection.CommandBindings;
 using gSection.Commands;
 using gSection.Converters;
@@ -68,8 +69,9 @@ namespace gSection.View
             gEngine.RibbonPageCategory.Registry.AddRibbonPageCategory(ribbonControl);
         }
 
-        public void Mpl_OnSelectObject(IObject iobject)
+        public void Mpl_OnSelectObject(ObjectControl oc)
         {
+            IObject iobject = oc.DataContext as IObject; ;
             GeRibbonPageCategory grpc = gEngine.RibbonPageCategory.Registry.GetRibbonPageCategory(iobject.GetType());
             RibbonPageCategory rpc = GetRibPageCategory(grpc);
             if (rpc != null)
