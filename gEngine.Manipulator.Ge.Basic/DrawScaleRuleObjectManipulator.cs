@@ -10,37 +10,40 @@ using System.Windows.Media;
 
 namespace gEngine.Manipulator.Ge.Basic
 {
-    public class DrawCompressObjectManipulator: RectManipulator
+    public class DrawScaleRuleObjectManipulator: RectManipulator
     {
-        public DrawCompressObjectManipulator()
+        public DrawScaleRuleObjectManipulator()
         {
             rectStyle = new NormalLineStyle();
         }
         public LineStyle rectStyle { get; set; }
         protected override void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Graph.Ge.Basic.Comprass com = new Graph.Ge.Basic.Comprass()
+            Graph.Ge.Basic.ScaleRule sca = new Graph.Ge.Basic.ScaleRule()
             {
-                Width = this.TrackAdorner.Width,
-                Height = this.TrackAdorner.Height,
-                Top = Canvas.GetTop(this.TrackAdorner),
-                Left = Canvas.GetLeft(this.TrackAdorner),
-                Fill = Brushes.Red,
-                Stroke = Brushes.Black,
-                StrokeThickness = 0,
-                RotateAngle=0
+                Unit = "米",
+                ScaleNumber = 2,
+                ScaleSpace = 10,
+                ScaleHeight = 2,
+                Top = this.location.Y,
+                Left = this.location.X
             };
-            this.AssociatedObject.LayerContext.Objects.Add(com);
+            this.AssociatedObject.LayerContext.Objects.Add(sca);
             base.MouseLeftButtonUp(sender, e);
+            //Width = this.TrackAdorner.Width,
+            //Height = this.TrackAdorner.Height,
+        }
+        protected override void MouseMove(object sender, MouseEventArgs e)
+        {
         }
     }
-    public class DCMFactory : IManipulatorFactory
+    public class DSMFactory : IManipulatorFactory
     {
         public string Name
         {
             get
             {
-                return "DrawCompressObjectManipulator";
+                return "DrawScaleRuleObjectManipulator";
             }
         }
 
@@ -48,10 +51,9 @@ namespace gEngine.Manipulator.Ge.Basic
         {
             LineStyle style = param as LineStyle;
 
-            DrawCompressObjectManipulator dm = new DrawCompressObjectManipulator();
+            DrawScaleRuleObjectManipulator dm = new DrawScaleRuleObjectManipulator();
             if (style != null) dm.rectStyle = style;
             return dm;
         }
     }
-
 }

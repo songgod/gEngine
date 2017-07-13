@@ -44,7 +44,7 @@ namespace gEngine.Symbol.gesym
             if (fill == null)
                 fill = new SolidColorBrush(Colors.White);
 
-            return new Path() { Fill = fill, Stroke = stroke, Data = new EllipseGeometry() { RadiusX = w / 2, RadiusY = h / 2 }, Height = h, Width = w, Stretch = Stretch.Fill };
+            return new Path() { Fill = fill, Stroke = stroke, Data = new EllipseGeometry() { RadiusX = w / 2, RadiusY = h / 2 }, Stretch = Stretch.Uniform };
         }
     }
 }

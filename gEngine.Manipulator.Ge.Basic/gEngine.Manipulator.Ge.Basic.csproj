@@ -57,6 +57,8 @@
     <Compile Include="DrawLineObjectManipulator.cs" />
     <Compile Include="DrawPolyLineObjectManipulator.cs" />
     <Compile Include="DrawRectObjectManipulator.cs" />
+    <Compile Include="DrawScaleRuleObjectManipulator.cs" />
+    <Compile Include="EditDefaultManipulatorFactory.cs" />
     <Compile Include="EditLineManipulator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -64,6 +66,10 @@
     <ProjectReference Include="..\gEngine.Graph.Ge.Basic\gEngine.Graph.Ge.Basic.csproj">
       <Project>{DB606377-AAA0-45BD-A6BE-4F4C4CD111AF}</Project>
       <Name>gEngine.Graph.Ge.Basic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.Graph.Ge.Plane\gEngine.Graph.Ge.Plane.csproj">
+      <Project>{82739B38-8706-493D-A571-C743AFCEAD12}</Project>
+      <Name>gEngine.Graph.Ge.Plane</Name>
     </ProjectReference>
     <ProjectReference Include="..\gEngine.Graph.Ge\gEngine.Graph.Ge.csproj">
       <Project>{3bd77e4f-a348-4edb-b60c-68b749249b91}</Project>

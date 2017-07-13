@@ -20,6 +20,7 @@
             <Button x:Name="DrawRect" Content="DrawRect" Click="DrawRect_Click"/>
             <Button x:Name="DrawCompress" Content="DrawCompress" Click="DrawCompress_Click"/>
             <Button x:Name="DrawBoundary" Content="DrawBoundary" Click="DrawBoundary_Click"/>
+            <Button x:Name="ScaleRule" Content="ScaleRule" Click="ScaleRule_Click"/>
             
         </StackPanel>
     </Grid>
