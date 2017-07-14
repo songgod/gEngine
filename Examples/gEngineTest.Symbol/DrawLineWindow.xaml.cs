@@ -100,7 +100,7 @@ namespace gEngineTest.Symbol
 
             //double len = vector.Length;
 
-
+            
             return geom;
         }
 

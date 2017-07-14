@@ -14,7 +14,10 @@ namespace gEngine.Symbol
     {
         public static object GetAfterConverterGeom(PathGeometry symbolGeom, LineOptionSetting param)
         {
+            PathGeometry traceGeom = param.Path;
+            PathGeometry cGeom = new PathGeometry();
             Brush stroke = param.GetValue<Brush>("Stroke");
+            stroke = new SolidColorBrush(Colors.Red);
             if (stroke == null)
                 stroke = new SolidColorBrush(Colors.Black);
             double strokeThickness = param.GetValue<double>("Width");
@@ -22,46 +25,77 @@ namespace gEngine.Symbol
                 strokeThickness = 1;
             Path res = new Path() { Stroke = stroke, StrokeThickness = strokeThickness };
 
-            Rect symbolRect = symbolGeom.Bounds;
-            double symbolLen = symbolRect.Width; // 250
-            double symbolWidth = symbolRect.Height; // 180
+            double symbolLen = symbolGeom.Bounds.Width;
 
-            Rect trajectRect = param.Path.Bounds;
-            double trajectLen = trajectRect.Width; // 370
-            double trajectWidth = trajectRect.Height; // 319.71269989013672
+            double traceLen = 0;
+            PointCollection pc_result = PathGeometryToPoints.GetPointCollection(traceGeom.GetFlattenedPathGeometry());
+            for (int i = 0; i < pc_result.Count - 1; i++)
+            {
+                traceLen += Distance(pc_result[i], pc_result[i + 1]);
+            }
 
-            // 0 <= n <= Lline / Ls (1.48)
 
-            //PathGeometry destPath = new PathGeometry();
-            //PathFigure destPf = new PathFigure() {StartPoint = param.Path.Figures[0].StartPoint };
-            //PolyLineSegment ply = new PolyLineSegment();
+            double n = traceLen / symbolLen;
+            double progress = 0;
+            for (int i = 0; i < n; i++)
+            {
+                PathFigureCollection symbolpfc = symbolGeom.Figures;
+                foreach (var pf in symbolpfc)
+                {
+                    Point StartPoint = pf.StartPoint;
 
-            //PointCollection pc = PathGeometryToPoints.GetPointCollection(symbolGeom);
-            //for (int i = 0; i < pc.Count; i++)
-            //{
-            //    Point point;
-            //    Point tangent;
-            //    double t = (pc[i].X + symbolLen) / trajectLen;
-            //    param.Path.GetPointAtFractionLength(t, out point, out tangent);
 
-            //    ply.Points.Add(point);
-            //    double arc =   Math.Atan2(tangent.Y, tangent.X);
-            //}
+                    Point point, tangent;
 
-            //PointCollection pc = PathGeometryToPoints.GetPointCollection(param.Path);
-            //res.Data = ConverterToBeizer(pc);
-            //res.Data = param.Path;
+                    traceGeom.GetPointAtFractionLength(progress, out point, out tangent);
 
-            //TransformGroup transformGroup = new TransformGroup();
+                    Matrix mt = new Matrix();
 
-            //transformGroup.Children.Add(new TranslateTransform(100, 200));
+                    mt.RotateAt(Math.Atan2(tangent.Y, tangent.X) * 180 / Math.PI, StartPoint.X, StartPoint.Y);
+                    mt.Translate(point.X - StartPoint.X, point.Y - StartPoint.Y);
+                    Point cStartPoint = mt.Transform(StartPoint);
 
-            //res.RenderTransform = transformGroup;
+                    PathFigure cPathFigure = new PathFigure() { StartPoint = cStartPoint };
 
-            symbolGeom.AddGeometry(param.Path);
+                    PathSegmentCollection symbolpsc = pf.Segments;
 
-            res.Data = symbolGeom;
+                    foreach (var ps in symbolpsc)
+                    {
+                        if (ps.GetType().Name == "PolyBezierSegment")
+                        {
+                            PolyBezierSegment pbs = ps as PolyBezierSegment;
+                            PointCollection pc = new PointCollection();
+                            for (int j = 0; j < pbs.Points.Count; j++)
+                            {
+                                progress = (pbs.Points[j].X - StartPoint.X + i * symbolLen) / traceLen;
+                                traceGeom.GetPointAtFractionLength(progress, out point, out tangent);
+
+                                Matrix mt_1 = new Matrix();
+                                mt_1.RotateAt(Math.Atan2(tangent.Y, tangent.X) * 180 / Math.PI, pbs.Points[j].X, pbs.Points[j].Y);
+                                mt_1.Translate(point.X - pbs.Points[j].X, point.Y - pbs.Points[j].Y);
+                                Point pt = mt_1.Transform(pbs.Points[j]);
+                                pc.Add(pt);
+                            }
+                            PolyBezierSegment cpbs = new PolyBezierSegment() { Points = pc };
+                            cPathFigure.Segments.Add(cpbs);
+                        }
+                    }
+                    cGeom.Figures.Add(cPathFigure);
+                }
+            }
+
+            //symbolGeom.AddGeometry(param.Path);
+            //cGeom.AddGeometry(traceGeom);
+
+
+
+            res.Data = cGeom;
             return res;
+        }
+
+        static double Distance(Point p0, Point p1)
+        {
+            return Math.Sqrt((Math.Pow((p1.X - p0.X), 2) + Math.Pow((p1.Y - p0.Y), 2)));
         }
     }
 }
