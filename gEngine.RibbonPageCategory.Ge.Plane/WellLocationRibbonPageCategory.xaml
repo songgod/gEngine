@@ -16,9 +16,9 @@
     <dxr:RibbonPage x:Uid="dxr:RibbonPage_8" Caption="类型">
         <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_30" Caption="符号">
             <dxb:BarSplitCheckItem Content="点风格" LargeGlyph="{dx:DXImage Image=LineStyle_32x32.png}" Glyph="{dx:DXImage Image=LineStyle_16x16.png}" RibbonStyle="SmallWithText"/>
-            <dxb:BarEditItem  x:Uid="dxb:BarEditItem_33" Content="大小" EditWidth="44" EditValue="1.0">
+            <dxb:BarEditItem  x:Uid="dxb:BarEditItem_33" Content="大小" EditWidth="100" EditValue="4.0">
                 <dxb:BarEditItem.EditSettings>
-                    <dxe:TextEditSettings x:Uid="dxe:TextEditSettings_17"/>
+                    <dxe:TextEditSettings x:Uid="dxe:TextEditSettings_17"  />
                 </dxb:BarEditItem.EditSettings>
             </dxb:BarEditItem>
             <dxb:BarEditItem x:Uid="dxb:BarEditItem_34" Content="内部色">
@@ -31,6 +31,7 @@
                     <dxe:PopupColorEditSettings x:Uid="dxe:PopupColorEditSettings_12" />
                 </dxb:BarEditItem.EditSettings>
             </dxb:BarEditItem>
+            
         </dxr:RibbonPageGroup>
     </dxr:RibbonPage>
 </gerpc:GeRibbonPageCategory>
