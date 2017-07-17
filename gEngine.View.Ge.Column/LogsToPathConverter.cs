@@ -87,7 +87,8 @@ namespace gEngine.View.Ge.Column
 
             PointCollection plist = GraphAlgo.SimpleLine.Simplifier(pointlist, 1);
 
-            PathFigure figure = new PathFigure() { StartPoint = plist[0], IsClosed = true };
+            //PathFigure figure = new PathFigure() { StartPoint = plist[0], IsClosed = true };
+            PathFigure figure = new PathFigure() { StartPoint = plist[0], IsClosed = false };
             PointCollection pc = new PointCollection(plist.ToList().GetRange(1, plist.Count - 1));
             PolyLineSegment pls = new PolyLineSegment() { Points = pc };
             figure.Segments.Add(pls);

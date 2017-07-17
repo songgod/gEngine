@@ -75,6 +75,15 @@ namespace gEngine.Util.Ge.Column
             }
 
             well.LstColumns.Add(WellColumns);
+
+            // 调整深度道和砂岩道，放到第一个曲线道右侧 2017-7-17
+            for (int i = well.LstColumns.Count - 1; i > well.LstColumns.Count - db.Columns.Count; i--)
+            {
+                well.LstColumns.Insert(1, well.LstColumns.ElementAt(well.LstColumns.Count-1));
+                well.LstColumns.RemoveAt(well.LstColumns.Count - 1);
+
+            }
+
             return well;
         }
     }

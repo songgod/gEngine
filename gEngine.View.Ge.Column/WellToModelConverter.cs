@@ -39,26 +39,27 @@ namespace gEngine.View.Ge.Column
             PathGeometry geom = new PathGeometry();
 
             // 画各曲线道边框竖线，由于曲线名称占60高度，需增加
-            int i = 0;
+            //int i = 0;
             foreach (var item in lstWellColumns)
             {
                 WellWidth += item[0].Width;
-                PathFigure fg = new PathFigure();
-                fg.StartPoint = new Point() { X = i * item[0].Width, Y = 0 };
-                LineSegment ls = new LineSegment() { Point = new Point() { X = i * item[0].Width, Y = 60 + depth * Enums.PerMilePx / LongitudinalProportion } };
-                fg.Segments.Add(ls);
-                geom.Figures.Add(fg);
-                i++;
+                //PathFigure fg = new PathFigure();
+                //fg.StartPoint = new Point() { X = i * item[0].Width, Y = 0 };
+                //LineSegment ls = new LineSegment() { Point = new Point() { X = i * item[0].Width, Y = 60 + depth * Enums.PerMilePx / LongitudinalProportion } };
+                //fg.Segments.Add(ls);
+                //geom.Figures.Add(fg);
+                //i++;
             }
 
-            PathFigure fg2 = new PathFigure();
-            fg2.StartPoint = new Point() { X = WellWidth, Y = 0 };
-            LineSegment ls2 = new LineSegment() { Point = new Point() { X = WellWidth, Y = 60 + depth * Enums.PerMilePx / LongitudinalProportion } };
-            fg2.Segments.Add(ls2);
-            geom.Figures.Add(fg2);
+            //PathFigure fg2 = new PathFigure();
+            //fg2.StartPoint = new Point() { X = WellWidth, Y = 0 };
+            //LineSegment ls2 = new LineSegment() { Point = new Point() { X = WellWidth, Y = 60 + depth * Enums.PerMilePx / LongitudinalProportion } };
+            //fg2.Segments.Add(ls2);
+            //geom.Figures.Add(fg2);
 
             // 画曲线名称上下边框线，曲线名称定义的高度是50
-            for (double y = 0; y <= 50; y = y + 50)
+            //for (double y = 0; y <= 50; y = y + 50)
+            for (double y = 50; y <= 50; y = y + 50)
             {
                 PathFigure fg = new PathFigure();
                 fg.StartPoint = new Point() { X = 0, Y = y };

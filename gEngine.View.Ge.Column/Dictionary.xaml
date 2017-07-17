@@ -93,12 +93,12 @@
                     <Path.Stroke>
                         <SolidColorBrush Color="{Binding Color}"></SolidColorBrush>
                     </Path.Stroke>
-                    <Path.Fill>
+                    <!--<Path.Fill>
                         <MultiBinding Converter="{StaticResource l2f}">
                             <Binding Path="Values"/>
                             <Binding ElementName="PathLogs" Path="Data"></Binding>
                         </MultiBinding>
-                    </Path.Fill>
+                    </Path.Fill>-->
                 </Path>
             </StackPanel>
         </Grid>
