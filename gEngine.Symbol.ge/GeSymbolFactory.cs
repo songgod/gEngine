@@ -26,7 +26,7 @@ namespace gEngine.Symbol.gesym
         private void Init()
         {
             DicFillSymbol["GeFillSymbol"] = new GeFillSymbol();
-            DicStrokeSymbol["WavyLineSymbol"] = new WavyLineSymbol();
+            DicStrokeSymbol["WavyLineSymbol"] = new GeWavyLineSymbol();
             DicPointSymbol["GeEllipsePointSymbol"] = new GeEllipsePointSymbol();
             DicPointSymbol["GeRectanglePointSymbol"] = new GeRectanglePointSymbol();
         }

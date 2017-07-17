@@ -173,12 +173,41 @@ namespace gEngine.Symbol
             return res;
         }
 
+        static private System.Windows.Shapes.Path CreateStrokePath(PathGeometry pg, LineOptionSetting param)
+        {
+            Brush stroke = param.GetValue<Brush>("Stroke");
+            if (stroke == null)
+                stroke = new SolidColorBrush(Colors.Black);
+            double strokeThickness = param.GetValue<double>("Width");
+            if (strokeThickness <= 0)
+                strokeThickness = 1;
+
+            System.Windows.Shapes.Path res = new System.Windows.Shapes.Path() { Stroke = stroke, StrokeThickness = strokeThickness };
+            res.Data = pg;
+            return res;
+        }
+
+        static private System.Windows.Shapes.Path CreateDefaultPath(LineOptionSetting param)
+        {
+            if (DefaultStrokeSymbol.GetType() == typeof(DefaultStrokeSymbol))
+            {
+                return CreateStrokePath(param.Path, param);
+            }
+            else
+            {
+                PathGeometry pg = StrokePathUtil.GetAfterConverterGeom(DefaultStrokeSymbol.SymbolGeometry, param.Path);
+                return CreateStrokePath(pg, param);
+            }
+        }
+
         static public object CreateStroke(LineOptionSetting param)
         {
             if (param == null ||
                 string.IsNullOrEmpty(param.Factory) ||
                 string.IsNullOrEmpty(param.Symbol) || param.Path == null)
-                return StrokePathUtil.GetAfterConverterGeom(DefaultStrokeSymbol.SymbolGeometry, param);
+            {
+                return CreateDefaultPath(param);
+            }
 
             string factoryname = param.Factory;
             string symbolname = param.Symbol;
@@ -186,13 +215,13 @@ namespace gEngine.Symbol
             StrokeSymbol ssym = GetStrokeSymbol(factoryname, symbolname);
             
             if (ssym == null)
-                return StrokePathUtil.GetAfterConverterGeom(DefaultStrokeSymbol.SymbolGeometry, param);
+                return CreateDefaultPath(param);
 
-            object res = StrokePathUtil.GetAfterConverterGeom(ssym.SymbolGeometry,param);
+            PathGeometry res = StrokePathUtil.GetAfterConverterGeom(ssym.SymbolGeometry,param.Path);
             if (res == null)
-                return StrokePathUtil.GetAfterConverterGeom(DefaultStrokeSymbol.SymbolGeometry, param);
+                return CreateDefaultPath(param);
 
-            return res;
+            return CreateStrokePath(res,param);
         }
 
         static public Brush CreateFillBrush(OptionSetting param)

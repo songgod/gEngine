@@ -72,7 +72,7 @@ namespace gSection.View
 
         public void Mpl_OnSelectObject(ObjectControl oc)
         {
-            IObject iobject = oc.DataContext as IObject; ;
+            IObject iobject = oc.DataContext as IObject; 
             GeRibbonPageCategory grpc = gEngine.RibbonPageCategory.Registry.GetRibbonPageCategory(iobject.GetType());
             RibbonPageCategory rpc = GetRibPageCategory(grpc);
             if (rpc != null)

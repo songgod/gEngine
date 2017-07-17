@@ -81,6 +81,8 @@ namespace gEngine.Manipulator
                             OnSelectObject.Invoke(oc);
                         }
                     }
+                    return HitTestResultBehavior.Stop;
+                    //break;
                 }
                 p = VisualTreeHelper.GetParent(p);
             }
