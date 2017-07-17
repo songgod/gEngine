@@ -14,5 +14,13 @@ namespace gEngine.View
             Binding bd = new Binding("Visible") { Converter = new BooleanToVisibilityConverter(), Mode = BindingMode.TwoWay };
             BindingOperations.SetBinding(this, VisibilityProperty, bd);
         }
+
+        public LayerControl Owner
+        {
+            get
+            {
+                return FindParent.FindVisualParent<LayerControl>(this);
+            }
+        }   
     }
 }

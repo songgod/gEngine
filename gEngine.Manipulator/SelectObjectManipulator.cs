@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 
 namespace gEngine.Manipulator
 {
-    public delegate void SelectObjectDel(IObject iobject);
+    public delegate void SelectObjectDel(ObjectControl oc);
     public class SelectObjectManipulator : LayerManipulator
     {
         public event SelectObjectDel OnSelectObject;
@@ -50,51 +50,41 @@ namespace gEngine.Manipulator
         private void mc_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             MapControl mc = this.AssociatedObject.Owner;
-            IMap map = mc.DataContext as IMap;
-            string mapName = map.Name;
-
             LayerControl lc = this.AssociatedObject;
             ILayer layer = lc.DataContext as ILayer;
 
-            IEnumerable<ObjectControl> listOc = FindChild.FindVisualChildren<ObjectControl>(lc);
-            foreach (ObjectControl oc in listOc)
-            {
-                IObject o = oc.DataContext as IObject;
-                o.IsSelected = false;
-                IEnumerable<Path> paths = FindChild.FindVisualChildren<Path>(oc);
-                foreach (Path pt in paths)
-                {
-                    //1.清空所选项
-                    AdornerLayer adorLayer = AdornerLayer.GetAdornerLayer(pt);
-                    Adorner[] ads = adorLayer.GetAdorners(pt);
-                    if (ads != null)
-                    {
-                        for (int i = ads.Length - 1; i >= 0; i--)
-                        {
-                            adorLayer.Remove(ads[i]);
-                        }
-                    }
+            Point pt = e.GetPosition(mc);
+            VisualTreeHelper.HitTest(mc, null,
+                new HitTestResultCallback(MyHitTestResult), new PointHitTestParameters(pt));
 
-                    //2.给选择的Path设置选中状态
-                    Point p1 = e.GetPosition(this.AssociatedObject);
-                    HitTestResult hr = VisualTreeHelper.HitTest(this.AssociatedObject, p1);
-                    if (hr == null || hr.VisualHit == null)
-                        continue;
-                    FrameworkElement element = hr.VisualHit as FrameworkElement;
-                    if (element.DataContext == pt.DataContext)
+        }
+        private HitTestResultBehavior MyHitTestResult(HitTestResult hr)
+        {
+            DependencyObject p = hr.VisualHit;
+            while (p != null)
+            {
+                ObjectControl oc = p as ObjectControl;
+                if (oc != null)
+                {
+                    IObject obj = oc.DataContext as IObject;
+                    if (obj != null)
                     {
-                        AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(pt);
-                        OutlineAdorner conrner = new OutlineAdorner(pt);
-                        adornerLayer.Add(conrner);
-                        o.IsSelected = true;
+                        obj.IsSelected = !obj.IsSelected;
+                        IManipulatorBase mb = gEngine.Manipulator.Registry.CreateManipulator(obj);
+                        if (obj.IsSelected)
+                            ManipulatorSetter.SetManipulator(mb, oc);
+                        else
+                            ManipulatorSetter.ClearManipulator(oc);
 
                         if (OnSelectObject != null)
                         {
-                            OnSelectObject.Invoke(o);
+                            OnSelectObject.Invoke(oc);
                         }
                     }
                 }
+                p = VisualTreeHelper.GetParent(p);
             }
+            return HitTestResultBehavior.Continue;
         }
     }
 

@@ -25,7 +25,7 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-            <Canvas x:Name="EditCanvas" Background="Transparent" IsHitTestVisible="False" />
+            <Canvas x:Name="EditCanvas" Background="Transparent" IsHitTestVisible="True" />
         </Grid>
     </AdornerDecorator>
 </UserControl>

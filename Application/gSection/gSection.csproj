@@ -57,6 +57,8 @@
   <ItemGroup>
     <Reference Include="DevExpress.Xpf.Core.v16.1" />
     <Reference Include="DevExpress.Data.v16.1" />
+    <Reference Include="DevExpress.Xpf.Grid.v16.1, Version=16.1.2.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Grid.v16.1.Core, Version=16.1.2.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.Ribbon.v16.1" />
     <Reference Include="DevExpress.Printing.v16.1.Core" />
     <Reference Include="DevExpress.Images.v16.1" />
@@ -1375,6 +1377,12 @@
   <ItemGroup>
     <Resource Include="Images\GDS\数据源16.png" />
     <Resource Include="Images\GDS\数据源32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Small\FileOpen_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Small\finger.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

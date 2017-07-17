@@ -1,4 +1,5 @@
-﻿using DevExpress.Xpf.Ribbon;
+﻿using DevExpress.Xpf.Grid;
+using DevExpress.Xpf.Ribbon;
 using gEngine.Commands;
 using gEngine.Project.Controls;
 using gEngine.Util;
@@ -26,26 +27,31 @@ namespace gEngine.Project.Commands
             e.CanExecute = true;
             e.Handled = true;
         }
-        
+
         private void OpenMapCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            if (DoubleClickTimer.IsDoubleClick())
+            List<object> LsPara = e.Parameter as List<object>;
+            if (LsPara == null)
+                return;
+            if (LsPara[2].Equals("ClickOpen") || DoubleClickTimer.IsDoubleClick())
             {
-                List<object> LsPara = e.Parameter as List<object>;
-
-                if (LsPara == null)
-                    return;
-
                 if (LsPara[0] == null || LsPara[1] == null)
                     return;
 
                 ProjectControl pc = LsPara[0] as ProjectControl;
-                TextBlock TextBlock = LsPara[1] as TextBlock;
-                string MapFileName = TextBlock.Text;
-
+                GridControl gc = LsPara[1] as GridControl;
+                
                 if (pc == null || pc.Project == null)
                     return;
-                pc.Project.OpenMap(MapFileName);
+
+                int[] selectedRowHandles = gc.GetSelectedRowHandles();
+
+                foreach (int i in selectedRowHandles)
+                {
+                    object MapFileName = gc.GetCellValue(i, "Item1");
+                    pc.Project.OpenMap(MapFileName.ToString());
+                }
+
                 pc.MapsControl.SelectLast();
                 e.Handled = true;
             }
