@@ -29,16 +29,7 @@ namespace gEngine.Symbol
         {
             get
             {
-                PathGeometry geom = new PathGeometry();
-                PathFigure figure = new PathFigure() { StartPoint = new Point(0, 0) };
-                PointCollection pc = new PointCollection();
-                pc.Add(new Point(250, 0));
-                pc.Add(new Point(50, 200));
-                pc.Add(new Point(300, 200));
-                PolyBezierSegment pbs = new PolyBezierSegment() { Points = pc };
-                figure.Segments.Add(pbs);
-                geom.Figures.Add(figure);
-                return geom;
+                return null;
             }
         }
     }

@@ -48,7 +48,7 @@
     <Compile Include="GeRectanglePointSymbol.cs" />
     <Compile Include="GeSymbolFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WavyLineSymbol.cs" />
+    <Compile Include="GeWavyLineSymbol.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\gEngine.Util\gEngine.Util.csproj">
