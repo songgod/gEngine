@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="CurveManipulator.cs" />
     <Compile Include="EditDefaultManipulator.cs" />
+    <Compile Include="EditRectangleManipulator.cs" />
     <Compile Include="IManipulatorFactory.cs" />
     <Compile Include="Converter\IsSelectedConverter.cs" />
     <Compile Include="IObjectManipulatorFactory.cs" />
@@ -64,6 +65,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\gEngine.Graph.Ge.Column\gEngine.Graph.Ge.Column.csproj">
+      <Project>{95227940-90F7-40B4-9027-3EEECD8ED6DE}</Project>
+      <Name>gEngine.Graph.Ge.Column</Name>
+    </ProjectReference>
     <ProjectReference Include="..\gEngine.Graph.Ge.Plane\gEngine.Graph.Ge.Plane.csproj">
       <Project>{82739B38-8706-493D-A571-C743AFCEAD12}</Project>
       <Name>gEngine.Graph.Ge.Plane</Name>
