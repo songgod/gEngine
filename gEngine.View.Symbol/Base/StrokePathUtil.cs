@@ -28,10 +28,12 @@ namespace gEngine.Symbol
             if (pathfigure == null)
                 return 0;
 
+            PathFigure pf = pathfigure.GetFlattenedPathFigure();
+
             double l = 0.0;
             Point lstp;
-            lstp = pathfigure.StartPoint;
-            foreach (var s in pathfigure.Segments)
+            lstp = pf.StartPoint;
+            foreach (var s in pf.Segments)
 
             {
                 PolyLineSegment pls = s as PolyLineSegment;
@@ -70,11 +72,10 @@ namespace gEngine.Symbol
 
             double symbolLen = GetSymbolWidth(symbolGeom);
             double symbolWid = GetSymolHeight(symbolGeom);
-
-            PathGeometry pflatg = tracepg.GetFlattenedPathGeometry();
-            foreach (var pflatf in pflatg.Figures)
+            
+            foreach (var tracepf in tracepg.Figures)
             {
-                double traceLen = GetTraceLen(pflatf);
+                double traceLen = GetTraceLen(tracepf);
 
                 double t_traceLen = traceLen;
                 double n = 0;
@@ -202,7 +203,6 @@ namespace gEngine.Symbol
                     n++;
                 }
             }
-            cpg.AddGeometry(tracepg);
 
             return cpg;
         }
