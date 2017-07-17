@@ -175,21 +175,22 @@ namespace gEngine.Symbol
 
         static public object CreateStroke(LineOptionSetting param)
         {
-            if (param == null || 
-                string.IsNullOrEmpty(param.Factory) || 
+            if (param == null ||
+                string.IsNullOrEmpty(param.Factory) ||
                 string.IsNullOrEmpty(param.Symbol) || param.Path == null)
-                return DefaultStrokeSymbol.Create(param);
+                return StrokePathUtil.GetAfterConverterGeom(DefaultStrokeSymbol.SymbolGeometry, param);
 
             string factoryname = param.Factory;
             string symbolname = param.Symbol;
 
             StrokeSymbol ssym = GetStrokeSymbol(factoryname, symbolname);
+            
             if (ssym == null)
-                return DefaultStrokeSymbol.Create(param);
+                return StrokePathUtil.GetAfterConverterGeom(DefaultStrokeSymbol.SymbolGeometry, param);
 
-            object res = ssym.Create(param);
-            if(res==null)
-                return DefaultStrokeSymbol.Create(param);
+            object res = StrokePathUtil.GetAfterConverterGeom(ssym.SymbolGeometry,param);
+            if (res == null)
+                return StrokePathUtil.GetAfterConverterGeom(DefaultStrokeSymbol.SymbolGeometry, param);
 
             return res;
         }

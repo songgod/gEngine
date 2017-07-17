@@ -1,4 +1,5 @@
 ﻿using DevExpress.Mvvm;
+using DevExpress.Xpf.Grid;
 using DevExpress.Xpf.Ribbon;
 using gEngine.Graph.Interface;
 using gEngine.Project;
@@ -102,17 +103,36 @@ namespace gSection.View
             return null;
         }
 
+        #region Command
+
         public ICommand CloseApplicationMenuCommand
         {
             get
             {
-                return new DelegateCommand<string>((MapName) =>
+                return new DelegateCommand<GridControl>((gcMap) =>
                 {
-                    var query = from q in Projects.Maps where q.Item1 == MapName select q;
-                    if (query.ToList().Count >= 0)
+                    int[] selectedRowHandles = gcMap.GetSelectedRowHandles();
+                    if (selectedRowHandles.Length == 0)
                     {
-                        if (query.ElementAt(0).Item2 != null)
+                        if (Projects.Maps.Count > 0)
+                        {
+                            gcMap.SelectionMode = MultiSelectMode.None;
                             this.BackstageViewControl_1.Close();
+                            return;
+                        }
+                    }
+                    foreach (int i in selectedRowHandles)
+                    {
+                        string MapName = gcMap.GetCellValue(i, "Item1").ToString();
+                        var query = from q in Projects.Maps where q.Item1 == MapName select q;
+                        if (query.ToList().Count >= 0)
+                        {
+                            if (query.ElementAt(0).Item2 != null)
+                            {
+                                this.BackstageViewControl_1.Close();
+                                break;
+                            }
+                        }
                     }
                 });
             }
@@ -132,5 +152,21 @@ namespace gSection.View
                 });
             }
         }
+
+        public ICommand SetMultiSelectMapCommand
+        {
+            get
+            {
+                return new DelegateCommand<GridControl>((gcMap) =>
+                {
+                    if (gcMap != null)
+                    {
+                        gcMap.SelectionMode = MultiSelectMode.MultipleRow;
+                    }
+                });
+            }
+        }
+
+        #endregion
     }
 }

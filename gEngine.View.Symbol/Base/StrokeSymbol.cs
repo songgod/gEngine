@@ -19,6 +19,7 @@ namespace gEngine.Symbol
         }
         
         public abstract string Name { get; }
-        public abstract object Create(LineOptionSetting param);
+
+        public abstract PathGeometry SymbolGeometry { get; }
     }
 }
