@@ -26,21 +26,14 @@ namespace gEngine.Symbol.gesym
             get
             {
                 PathGeometry geom = new PathGeometry();
-                //PathFigure figure = new PathFigure() { StartPoint = new Point(50, 120) };
-                //PointCollection pc = new PointCollection();
-                //pc.Add(new Point(60, 0));
-                //pc.Add(new Point(100,0));
-                //pc.Add(new Point(150, 120));
-                //pc.Add(new Point(170, 240));
-                //pc.Add(new Point(240, 240));
-                //pc.Add(new Point(300, 120));
-
                 PathFigure figure = new PathFigure() { StartPoint = new Point(0, 0) };
                 PointCollection pc = new PointCollection();
-                pc.Add(new Point(15, 0));
-                pc.Add(new Point(5, 10));
-                pc.Add(new Point(20, 10));
-
+                pc.Add(new Point(5, 5));
+                pc.Add(new Point(13, 5));
+                pc.Add(new Point(20, 0));
+                pc.Add(new Point(25, -5));
+                pc.Add(new Point(31, -5));
+                pc.Add(new Point(40, 0));
                 PolyBezierSegment pbs = new PolyBezierSegment() { Points = pc };
                 figure.Segments.Add(pbs);
                 geom.Figures.Add(figure);

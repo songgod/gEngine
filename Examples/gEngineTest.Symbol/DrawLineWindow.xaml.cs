@@ -31,26 +31,6 @@ namespace gEngineTest.Symbol
 
         static PathGeometry InitPathData()
         {
-            //PathGeometry geom = new PathGeometry();
-            //PathFigure figure = new PathFigure() { StartPoint = new Point(0, 0) };
-            //PointCollection pc = new PointCollection();
-            //pc.Add(new Point(250, 0));
-            //pc.Add(new Point(50, 200));
-            //pc.Add(new Point(300, 200));
-
-            //PointCollection pz = new PointCollection();
-
-            //pz.Add(new Point(350, 350));
-            //pz.Add(new Point(400, 400));
-
-
-            //PolyBezierSegment pbs = new PolyBezierSegment() { Points = pc };
-            //PolyLineSegment bls = new PolyLineSegment() { Points = pz };
-
-            //figure.Segments.Add(pbs);
-            //figure.Segments.Add(bls);
-            //geom.Figures.Add(figure);
-
             PathGeometry geom = new PathGeometry();
             PathFigure figure = new PathFigure() { StartPoint = new Point(50, 100) };
             PointCollection pc = new PointCollection();
@@ -67,40 +47,22 @@ namespace gEngineTest.Symbol
             PolyBezierSegment pbs = new PolyBezierSegment() { Points = pc };
             PolyLineSegment bls = new PolyLineSegment() { Points = pz };
 
+            //PathGeometry geom = new PathGeometry();
+            //PathFigure figure = new PathFigure() { StartPoint = new Point(100, 100) };
+            //PointCollection pz = new PointCollection();
+            //pz.Add(new Point(200, 200));
+
+            //PointCollection pc = new PointCollection();
+            //pc.Add(new Point(300, 200));
+            //pc.Add(new Point(400, 100));
+            //pc.Add(new Point(300, 50));
+
+            //PolyBezierSegment pbs = new PolyBezierSegment() { Points = pc };
+            //PolyLineSegment bls = new PolyLineSegment() { Points = pz };
+
             figure.Segments.Add(pbs);
             figure.Segments.Add(bls);
             geom.Figures.Add(figure);
-
-            //Rect rect = geom.Bounds;
-
-            //PathGeometry p = geom.GetFlattenedPathGeometry();
-
-            //double length = 0;
-            //PointCollection pc_result = PathGeometryToPoints.GetPointCollection(p);
-            //for (int i = 0; i < pc_result.Count - 1; i++)
-            //{
-            //    double ssss = Distance(pc_result[i], pc_result[i + 1]);
-            //    length += ssss;
-            //}
-
-            
-
-            //double s = length;
-
-            //Point Point1;
-            //Point Point2;
-            //geom.GetPointAtFractionLength(1, out Point1, out Point2);
-
-            //foreach (PathFigure pf in geom.Figures)
-            //{
-            //    PathFigure pf_result = pf.GetFlattenedPathFigure();
-            //}
-
-            //Vector vector = new Vector(100, 150);
-
-            //double len = vector.Length;
-
-            
             return geom;
         }
 
