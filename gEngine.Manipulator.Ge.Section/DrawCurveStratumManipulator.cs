@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace gEngine.Manipulator.Ge.Section
 {
@@ -13,12 +14,16 @@ namespace gEngine.Manipulator.Ge.Section
         protected override void OnAttached()
         {
             base.OnAttached();
-            SectionLayer sectionlayer = this.AssociatedObject.LayerContext as SectionLayer;
-            if (sectionlayer != null)
-            {
-                Graph = sectionlayer.StratumObject.TopGraph;
-                LineType = (int)SectionLayerEdit.SectionLineType.Stratum;
-            }
+        }
+
+        protected override void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (TrackAdorner.Points.Count == 0 || Graph == null)
+                return;
+
+            SectionLayerEdit editor = new SectionLayerEdit(SectionLayer);
+            editor.AddStratum(TrackAdorner.Points.ToList(), Tolerance);
+            base.MouseLeftButtonUp(sender, e);
         }
     }
 

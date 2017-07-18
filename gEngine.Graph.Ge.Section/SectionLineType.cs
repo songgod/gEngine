@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace gEngine.Graph.Ge.Section
 {
-    public class StratumObject : SectionObject
+    public enum SectionLineType
     {
+        UnKnown = 0,
+        Fault,
+        Stratum,
+        Sand
     }
 }

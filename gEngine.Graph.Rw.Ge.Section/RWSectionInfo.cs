@@ -10,25 +10,15 @@ using System.Xml;
 
 namespace gEngine.Graph.Rw.Ge.Section
 {
-    class RWSectionObject : RWObjectBase
+    class RWSectionInfo
     {
-        public override string SupportType { get { return "SectionObject"; } }
-
-        public override void Read(IObject Object, XmlNode node)
+        public void Read(SectionInfo info, XmlNode node)
         {
-            if (Object == null)
-                return;
-            if (node == null)
-                return;
-
-            if (node.Name != Object.GetType().Name)
+            if (info == null || node == null)
                 return;
 
             DataStruct ds = new DataStruct();
-
-            SectionObject SectionObject = (SectionObject) Object;
-            SectionObject.Name = node.Attributes["Name"].Value;
-
+            
             foreach (XmlNode childNode in node.ChildNodes)
             {
                 foreach (XmlNode cFNode in childNode.ChildNodes)
@@ -92,29 +82,21 @@ namespace gEngine.Graph.Rw.Ge.Section
                 }
             }
 
-            SectionObject.TopGraph = ds.ToGraph();
+            info.TopGraph = ds.ToGraph();
         }
 
-        public override void Write(XmlNode node, IObject obj)
+        public void Write(XmlNode node, SectionInfo info)
         {
-            if (obj == null)
+            if (info == null || node == null)
                 return;
-
-            if (node == null)
-                return;
-
-            SectionObject SectionObject = (SectionObject) obj;
-
-            gTopology.Graph graph = (gTopology.Graph) SectionObject.TopGraph;
+            
+            gTopology.Graph graph = info.TopGraph;
             DataStruct ds = new DataStruct();
             ds.FromGraph(graph);
 
             XmlDocument doc = node.OwnerDocument;
-            XmlAttribute xmlName = doc.CreateAttribute("Name");
-            xmlName.Value = string.IsNullOrEmpty(SectionObject.Name) == false ? SectionObject.Name : string.Empty;
-            node.Attributes.Append(xmlName);
 
-            XmlElement xmlgraph = node.OwnerDocument.CreateElement(SectionObject.TopGraph.GetType().Name);
+            XmlElement xmlgraph = node.OwnerDocument.CreateElement(info.TopGraph.GetType().Name);
             node.AppendChild(xmlgraph);
 
             XmlElement xmlInterPoints = xmlgraph.OwnerDocument.CreateElement("InterPoints");
@@ -172,11 +154,6 @@ namespace gEngine.Graph.Rw.Ge.Section
                 xmlSegment.SetAttribute("IncidentHalf", s.IncidentHalf.ToString());
                 xmlSegments.AppendChild(xmlSegment);
             }
-        }
-
-        public override IObject CreateObject()
-        {
-            return new SectionObject();
         }
     }
 }

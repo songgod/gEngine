@@ -12,18 +12,17 @@ namespace gEngine.Manipulator.Ge.Section
         protected override void OnAttached()
         {
             base.OnAttached();
+            SectionLayer = this.AssociatedObject.LayerContext as SectionLayer;
+            if (SectionLayer != null)
+            {
+                Graph = SectionLayer.SectionInfo.TopGraph;
+            }
         }
-        protected override void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            if (TrackAdorner.Points.Count == 0 || Graph==null)
-                return;
 
-            Topology editor = new Topology(Graph);
-            editor.LinAddCurve(new PointList(TrackAdorner.Points.ToList()), Tolerance, false, LineType);
-            base.MouseLeftButtonUp(sender, e);
-        }
-        public int LineType { get; set; }
+        public SectionLayer SectionLayer { get; set; }
+
         public gTopology.Graph Graph { get; set; }
+
         public double Tolerance
         {
             get

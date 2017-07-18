@@ -35,7 +35,7 @@ namespace gEngine.Manipulator.Ge.Section
                 ContentPresenter p = VisualTreeHelper.GetParent(canvas) as ContentPresenter;
                 if (p == null)
                     return null;
-                SectionObject so = p.DataContext as SectionObject;
+                SectionInfo so = p.DataContext as SectionInfo;
                 if (so == null)
                     return null;
                 graph = so.TopGraph;

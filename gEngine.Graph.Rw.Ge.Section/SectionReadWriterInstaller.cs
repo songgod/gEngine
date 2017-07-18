@@ -15,8 +15,7 @@ namespace gEngine.Graph.Rw.Ge.Section
 
         public void InstallObjectReadWriter()
         {
-            Registry.RegistObjRW(new RWSandObject());
-            Registry.RegistObjRW(new RWStratumObject());
+            
         }
     }
 }

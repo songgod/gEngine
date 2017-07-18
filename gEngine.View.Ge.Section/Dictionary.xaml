@@ -7,86 +7,55 @@
              xmlns:gs="clr-namespace:gEngine.Graph.Ge.Section;assembly=gEngine.Graph.Ge.Section"
              xmlns:gv="clr-namespace:gEngine.View.Ge;assembly=gEngine.View.Ge"
              mc:Ignorable="d">
-    <DataTemplate DataType="{x:Type gs:SectionObject}">
-        <local:SectionObjectCanvas x:Name="SectionObjectCanvas" Background="Yellow">
-            <ItemsControl ItemsSource="{Binding TopGraph.Regions}">
-                <ItemsControl.Resources>
-                    <local:Region2PathDataConverter x:Key="f2p"/>
-                    <local:Type2FillConverter x:Key="t2f"/>
-                </ItemsControl.Resources>
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <Canvas x:Name="regions"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Path>
-                            <Path.Fill>
-                                <MultiBinding Converter="{StaticResource t2f}">
-                                    <Binding Path="Type"/>
-                                    <Binding Path="Valid"/>
-                                    <Binding Path="DataContext" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type local:SectionObjectCanvas},AncestorLevel=1}"/>
-                                </MultiBinding>
-                            </Path.Fill>
-                            <Path.Data>
-                                <MultiBinding Converter="{StaticResource f2p}">
-                                    <Binding Path="Bound"/>
-                                    <Binding Path="InsideBounds"/>
-                                </MultiBinding>
-                            </Path.Data>
-                        </Path>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-            <ItemsControl ItemsSource="{Binding TopGraph.Bounds}">
-                <ItemsControl.Resources>
-                    <local:Type2LineStyleConverter x:Key="t2s"/>
-                    <local:Line2PathDataConverter x:Key="l2p"/>
-                </ItemsControl.Resources>
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <Canvas x:Name="bounds"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <gv:LineControl>
-                            <gv:LineControl.LineStyle>
-                                <MultiBinding Converter="{StaticResource t2s}">
-                                    <Binding Path="Type"/>
-                                    <Binding Path="DataContext" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type local:SectionObjectCanvas},AncestorLevel=1}"/>
-                                </MultiBinding>
-                            </gv:LineControl.LineStyle>
-                            <gv:LineControl.Data>
-                                <MultiBinding Converter="{StaticResource l2p}">
-                                    <Binding Path="StartPoint"/>
-                                    <Binding Path="PointsWithoutFirst"/>
-                                </MultiBinding>
-                            </gv:LineControl.Data>
-                        </gv:LineControl>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-            <ItemsControl ItemsSource="{Binding TopGraph.Nods}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <Canvas x:Name="node"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Ellipse Width="10" Height="10" Fill="Red">
-                            <Ellipse.RenderTransform>
-                                <TransformGroup>
-                                    <TranslateTransform X="-5" Y="-5"/>
-                                    <TranslateTransform X="{Binding X}" Y="{Binding Y}"/>
-                                </TransformGroup>
-                            </Ellipse.RenderTransform>
-                        </Ellipse>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </local:SectionObjectCanvas>
+    <DataTemplate DataType="{x:Type gs:NodeProxyObject}">
+        <gv:PointControl PointStyle="{Binding SectionInfo.NodeStyle}">
+            <gv:PointControl.RenderTransform>
+                <TransformGroup>
+                    <TranslateTransform X="0" Y="0"/>
+                    <TranslateTransform X="{Binding Node.X}" Y="{Binding Node.Y}"/>
+                </TransformGroup>
+            </gv:PointControl.RenderTransform>
+        </gv:PointControl>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type gs:LineProxyObject}">
+        <gv:LineControl>
+            <gv:LineControl.Resources>
+                <local:Type2LineStyleConverter x:Key="t2s"/>
+                <local:Line2PathDataConverter x:Key="l2p"/>
+            </gv:LineControl.Resources>
+            <gv:LineControl.LineStyle>
+                <MultiBinding Converter="{StaticResource t2s}">
+                    <Binding Path="Line.Type"/>
+                    <Binding Path="SectionInfo"/>
+                </MultiBinding>
+            </gv:LineControl.LineStyle>
+            <gv:LineControl.Data>
+                <MultiBinding Converter="{StaticResource l2p}">
+                    <Binding Path="Line.StartPoint"/>
+                    <Binding Path="Line.PointsWithoutFirst"/>
+                </MultiBinding>
+            </gv:LineControl.Data>
+        </gv:LineControl>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type gs:FaceProxyObject}">
+        <Path>
+            <Path.Resources>
+                <local:Region2PathDataConverter x:Key="f2p"/>
+                <local:Type2FillConverter x:Key="t2f"/>
+            </Path.Resources>
+            <Path.Fill>
+                <MultiBinding Converter="{StaticResource t2f}">
+                    <Binding Path="Face.Valid"/>
+                    <Binding Path="Face.Type"/>
+                    <Binding Path="SectionInfo"/>
+                </MultiBinding>
+            </Path.Fill>
+            <Path.Data>
+                <MultiBinding Converter="{StaticResource f2p}">
+                    <Binding Path="Face.Bound"/>
+                    <Binding Path="Face.InsideBounds"/>
+                </MultiBinding>
+            </Path.Data>
+        </Path>
     </DataTemplate>
 </ResourceDictionary>

@@ -27,8 +27,8 @@ namespace gEngine.Symbol
 
         public override object Create(OptionSetting param)
         {
-            Path path = new Path() { Fill = new SolidColorBrush(Colors.White), Stroke = new SolidColorBrush(Colors.Black),Stretch=Stretch.Fill,Width=20,Height=20 };
-            path.Data = new EllipseGeometry() { RadiusX = 10, RadiusY = 10 };
+            Path path = new Path() { Fill = new SolidColorBrush(Colors.Red), Stroke = new SolidColorBrush(Colors.Black)};
+            path.Data = new EllipseGeometry() { RadiusX = 2, RadiusY = 2 };
             return path;
         }
     }

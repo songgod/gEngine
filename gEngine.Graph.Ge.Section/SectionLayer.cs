@@ -12,14 +12,9 @@ namespace gEngine.Graph.Ge.Section
         public SectionLayer()
         {
             Type = "Section";
-            SandObject = new SandObject();
-            StratumObject = new StratumObject();
-            Objects.Add(StratumObject);
-            Objects.Add(SandObject);
+            SectionInfo = new SectionInfo();
         }
-        
 
-        public SandObject SandObject { get; private set; }
-        public StratumObject StratumObject { get; private set; }
+        public SectionInfo SectionInfo { get; private set; }
     }
 }

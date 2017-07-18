@@ -18,17 +18,13 @@ namespace gEngine.View.Ge.Section
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            bool valid = (bool)values[1];
+            bool valid = (bool)values[0];
             if (valid==false)
                 return null;
 
-            int type = (int)values[0];
-
-            Type t = values[2].GetType();
-            if (t != typeof(StratumObject) && t!=typeof(SandObject))
-                return null;
+            int type = (int)values[1];
             
-            SectionObject secobj = (SectionObject)values[2];
+            SectionInfo secobj = (SectionInfo)values[2];
 
             Brush fillb = new SolidColorBrush() { Color = Colors.Gray };
             if (secobj.DicFillStyle.ContainsKey(type) == false)
@@ -99,7 +95,7 @@ namespace gEngine.View.Ge.Section
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             int type = (int)values[0];
-            SectionObject secobj = (SectionObject)values[1];
+            SectionInfo secobj = (SectionInfo)values[1];
             LineStyle linestyle = new NormalLineStyle() { Color = Colors.Black, Width = 1.0 };
             if (secobj.DicLineStyle.ContainsKey(type) == false)
                 return linestyle;

@@ -10,35 +10,21 @@ using System.Windows.Input;
 
 namespace gEngine.Manipulator.Ge.Section
 {
-    public class DrawCurveFaultManipulator : CurveManipulator
+    public class DrawCurveFaultManipulator : DrawCurveManipulator
     {
         protected override void OnAttached()
         {
             base.OnAttached();
         }
+
         protected override void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if (TrackAdorner.Points.Count == 0)
+            if (TrackAdorner.Points.Count == 0 || Graph == null)
                 return;
-            SectionLayer layer = this.AssociatedObject.LayerContext as SectionLayer;
-            if(layer.StratumObject!=null)
-            {
-                Topology editor = new Topology(layer.StratumObject.TopGraph);
-                editor.LinAddCurve(new PointList(TrackAdorner.Points.ToList()), Tolerance, false, (int)SectionLayerEdit.SectionLineType.Stratum);
-            }
-            if (layer.SandObject != null)
-            {
-                Topology editor = new Topology(layer.SandObject.TopGraph);
-                editor.LinAddCurve(new PointList(TrackAdorner.Points.ToList()), Tolerance, false, (int)SectionLayerEdit.SectionLineType.Sand);
-            }
+
+            SectionLayerEdit editor = new SectionLayerEdit(SectionLayer);
+            editor.AddFault(TrackAdorner.Points.ToList(), Tolerance);
             base.MouseLeftButtonUp(sender, e);
-        }
-        public double Tolerance
-        {
-            get
-            {
-                return CalcTolerance.GetTolerance(this.AssociatedObject);
-            }
         }
     }
 

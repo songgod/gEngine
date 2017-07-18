@@ -10,21 +10,30 @@ namespace gEngine.Manipulator.Ge.Section
         protected override void OnAttached()
         {
             base.OnAttached();
+            SectionLayer = this.AssociatedObject.LayerContext as SectionLayer;
+            if (SectionLayer != null)
+            {
+                Graph = SectionLayer.SectionInfo.TopGraph;
+            }
         }
-        protected override void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+
+        public Point Start
         {
-            if (Graph == null)
-                return;
-
-            Topology editor = new Topology(Graph);
-            Point start = new Point() { X = this.TrackAdorner.X1, Y = this.TrackAdorner.Y1 };
-            Point end = new Point() { X = this.TrackAdorner.X2, Y = this.TrackAdorner.Y2 };
-            editor.LinAddLine(start, end, Tolerance, LineType);
-
-            base.MouseLeftButtonUp(sender, e);
+            get
+            {
+                return new Point() { X = this.TrackAdorner.X1, Y = this.TrackAdorner.Y1 };
+            }
         }
 
-        public int LineType { get; set; }
+        public Point End
+        {
+            get
+            {
+                return new Point() { X = this.TrackAdorner.X2, Y = this.TrackAdorner.Y2 };
+            }
+        }
+
+        public SectionLayer SectionLayer { get; set; }
 
         public gTopology.Graph Graph { get; set; }
 

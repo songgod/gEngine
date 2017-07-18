@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace gEngine.Manipulator.Ge.Section
 {
@@ -13,12 +14,17 @@ namespace gEngine.Manipulator.Ge.Section
         protected override void OnAttached()
         {
             base.OnAttached();
-            SectionLayer sectionlayer = this.AssociatedObject.LayerContext as SectionLayer;
-            if (sectionlayer != null)
-            {
-                Graph = sectionlayer.SandObject.TopGraph;
-                LineType = (int)SectionLayerEdit.SectionLineType.Sand;
-            }
+        }
+
+        protected override void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (Graph == null)
+                return;
+
+            SectionLayerEdit editor = new SectionLayerEdit(SectionLayer);
+            editor.AddSand(Start, End, Tolerance);
+
+            base.MouseLeftButtonUp(sender, e);
         }
     }
 

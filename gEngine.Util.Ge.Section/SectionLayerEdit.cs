@@ -20,60 +20,86 @@ namespace gEngine.Util.Ge.Section
             SectionLayer = layer;
         }
 
-        public enum SectionLineType
-        {
-            UnKnown = 0,
-            Fault,
-            Stratum,
-            Sand
-        }
-
         public void AddFault(List<Point> points, double tolerance)
         {
             if (SectionLayer == null)
                 return;
 
-            AddCurve(SectionLayer.SandObject, points, tolerance, SectionLineType.Fault);
-            AddCurve(SectionLayer.StratumObject, points, tolerance, SectionLineType.Fault);
+            AddCurve(points, tolerance, SectionLineType.Fault);
+        }
+
+        public void AddFault(Point start, Point end, double tolerance)
+        {
+            AddLine(start, end, tolerance, SectionLineType.Fault);
         }
 
         public void AddStratum(List<Point> points, double tolerance)
         {
-            AddCurve(SectionLayer.StratumObject, points, tolerance, SectionLineType.Stratum);
+            AddCurve(points, tolerance, SectionLineType.Stratum);
         }
 
         public void AddStratum(Point start, Point end, double tolerance)
         {
-            AddLine(SectionLayer.StratumObject, start, end, tolerance, SectionLineType.Stratum);
+            AddLine(start, end, tolerance, SectionLineType.Stratum);
         }
 
         public void AddSand(List<Point> points, double tolerance)
         {
-            AddCurve(SectionLayer.SandObject, points, tolerance, SectionLineType.Sand);
+            AddCurve(points, tolerance, SectionLineType.Sand);
         }
 
         public void AddSand(Point start, Point end, double tolerance)
         {
-            AddLine(SectionLayer.SandObject, start, end, tolerance, SectionLineType.Sand);
+            AddLine(start, end, tolerance, SectionLineType.Sand);
         }
 
-        private void AddCurve(SectionObject obj, List<Point> points, double tolerance, SectionLineType type)
+        private void AddCurve(List<Point> points, double tolerance, SectionLineType type)
         {
-            if (obj != null)
+            if (SectionLayer != null)
             {
-                Topology editor = new Topology(obj.TopGraph);
+                Topology editor = new Topology(SectionLayer.SectionInfo.TopGraph);
                 editor.LinAddCurve(new PointList(points), tolerance,false, (int)type);
+                RebuildGraph();
             }
         }
 
-        private void AddLine(SectionObject obj, Point start, Point end, double tolerance, SectionLineType type)
+        private void AddLine(Point start, Point end, double tolerance, SectionLineType type)
         {
-            if (obj != null)
+            if (SectionLayer != null)
             {
-                Topology editor = new Topology(obj.TopGraph);
+                Topology editor = new Topology(SectionLayer.SectionInfo.TopGraph);
                 editor.LinAddLine(start, end, tolerance, (int)type);
+                RebuildGraph();
             }
         }
 
+        public void ClearGraph()
+        {
+            for (int i = SectionLayer.Objects.Count - 1; i >= 0; i--)
+            {
+                if (SectionLayer.Objects[i].GetType() == typeof(NodeProxyObject) ||
+                    SectionLayer.Objects[i].GetType() == typeof(LineProxyObject) ||
+                    SectionLayer.Objects[i].GetType() == typeof(FaceProxyObject))
+                    SectionLayer.Objects.Remove(SectionLayer.Objects[i]);
+            }
+        }
+
+        public void RebuildGraph()
+        {
+            ClearGraph();
+            SectionInfo sinfo = SectionLayer.SectionInfo;
+            foreach (var item in sinfo.TopGraph.Nods)
+            {
+                SectionLayer.Objects.Add(new NodeProxyObject() { Node = item, SectionInfo=sinfo });
+            }
+            foreach (var item in sinfo.TopGraph.Bounds)
+            {
+                SectionLayer.Objects.Add(new LineProxyObject() { Line = item, SectionInfo = sinfo });
+            }
+            foreach (var item in sinfo.TopGraph.Regions)
+            {
+                SectionLayer.Objects.Add(new FaceProxyObject() { Face = item, SectionInfo = sinfo });
+            }
+        }
     }
 }
