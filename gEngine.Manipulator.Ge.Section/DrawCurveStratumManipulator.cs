@@ -18,11 +18,11 @@ namespace gEngine.Manipulator.Ge.Section
 
         protected override void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if (TrackAdorner.Points.Count == 0 || Graph == null)
+            if (TrackAdorner.Points.Count == 0 || GraphUtil.Graph == null)
                 return;
 
-            SectionLayerEdit editor = new SectionLayerEdit(SectionLayer);
-            editor.AddStratum(TrackAdorner.Points.ToList(), Tolerance);
+            SectionLayerEdit editor = new SectionLayerEdit(GraphUtil.SectionLayer);
+            editor.AddStratum(TrackAdorner.Points.ToList(), GraphUtil.Tolerance);
             base.MouseLeftButtonUp(sender, e);
         }
     }

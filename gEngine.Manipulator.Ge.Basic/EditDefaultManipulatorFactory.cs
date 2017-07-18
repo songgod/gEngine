@@ -18,11 +18,11 @@ namespace gEngine.Manipulator.Ge.Basic
             }
         }
 
-        public IObject SupportIObject
+        public Type SupportIObjectType
         {
             get
             {
-                return new WellLocation();
+                return typeof(WellLocation);
             }
         }
 

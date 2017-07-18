@@ -19,11 +19,11 @@ namespace gEngine.Manipulator.Ge.Column
             }
         }
 
-        public IObject SupportIObject
+        public Type SupportIObjectType
         {
             get
             {
-                return new Well();
+                return typeof(Well);
             }
         }
 

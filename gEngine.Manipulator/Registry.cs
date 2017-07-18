@@ -57,7 +57,7 @@ namespace gEngine.Manipulator
                 if (mpf is IObjectManipulatorFactory)
                 {
                     IObjectManipulatorFactory ompf = mpf as IObjectManipulatorFactory;
-                    if (ompf.SupportIObject.GetType() == iobject.GetType())
+                    if (ompf.SupportIObjectType == iobject.GetType())
                     {
                         return ompf;
                     }
@@ -100,19 +100,12 @@ namespace gEngine.Manipulator
                     var interfaces = t.GetInterfaces();
                     foreach (var interf in interfaces)
                     {
-                        if (interf == typeof(IObjectManipulatorFactory))
+                        if (interf == typeof(IManipulatorFactory))
                         {
-                            IObjectManipulatorFactory mpf = (IObjectManipulatorFactory)(ab.CreateInstance(t.FullName));
+                            IManipulatorFactory mpf = (IManipulatorFactory)(ab.CreateInstance(t.FullName));
                             Regist(mpf.Name, mpf);
-                        }
-                        else if (interf == typeof(IManipulatorFactory))
-                        {
-                            if (!interfaces.Contains(typeof(IObjectManipulatorFactory)))
-                            {
-                                IManipulatorFactory mpf = (IManipulatorFactory)(ab.CreateInstance(t.FullName));
-                                Regist(mpf.Name, mpf);
-                            }
-                        }                        
+                            break;
+                        }                  
                     }
                 }
             }

@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using gEngine.Graph.Interface;
+using System.Windows.Controls;
 using System.Windows.Data;
 
 namespace gEngine.View
@@ -21,6 +22,14 @@ namespace gEngine.View
             {
                 return FindParent.FindVisualParent<LayerControl>(this);
             }
-        }   
+        } 
+        
+        public IObject ObjectContext
+        {
+            get
+            {
+                return FindContext.Find<IObject>(this);
+            }
+        }  
     }
 }

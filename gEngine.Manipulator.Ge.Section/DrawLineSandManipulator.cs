@@ -18,11 +18,11 @@ namespace gEngine.Manipulator.Ge.Section
 
         protected override void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if (Graph == null)
+            if (GraphUtil.Graph == null)
                 return;
 
-            SectionLayerEdit editor = new SectionLayerEdit(SectionLayer);
-            editor.AddSand(Start, End, Tolerance);
+            SectionLayerEdit editor = new SectionLayerEdit(GraphUtil.SectionLayer);
+            editor.AddSand(Start, End, GraphUtil.Tolerance);
 
             base.MouseLeftButtonUp(sender, e);
         }

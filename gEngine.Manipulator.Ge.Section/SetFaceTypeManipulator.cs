@@ -17,11 +17,11 @@ namespace gEngine.Manipulator.Ge.Section
             FaceType = -1;
         }
 
-        protected GraphUtil graphutil = null;
-
         public int FaceType { get; set; }
 
         public bool InvalidFace { get; set; }
+
+        public GraphUtil GraphUtil { get; set; }
 
         protected override void OnAttached()
         {
@@ -34,7 +34,6 @@ namespace gEngine.Manipulator.Ge.Section
                 return;
 
             mc.MouseLeftButtonUp += Mc_MouseLeftButtonUp;
-            graphutil = new GraphUtil(this.AssociatedObject);
         }
 
         protected override void OnDetaching()
@@ -52,13 +51,14 @@ namespace gEngine.Manipulator.Ge.Section
 
         private void Mc_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            gTopology.Graph graph = graphutil.Graph;
+            gTopology.Graph graph = GraphUtil.Graph;
             if (graph == null)
                 return;
 
             Topology editer = new Topology(graph);
-            Point pos = e.GetPosition(graphutil.GraphContainer);
-            Face face = editer.FacHit(pos, graphutil.Tolerance);
+            MapControl mc = this.AssociatedObject.Owner;
+            Point pos = mc.Dp2LP(e.GetPosition(mc));
+            Face face = editer.FacHit(pos, GraphUtil.Tolerance);
             if (face != null)
             {
                 if (InvalidFace)

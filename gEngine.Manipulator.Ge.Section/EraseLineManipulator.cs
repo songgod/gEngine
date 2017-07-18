@@ -1,4 +1,6 @@
-﻿using gTopology;
+﻿using gEngine.Graph.Ge.Section;
+using gEngine.View;
+using gTopology;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -11,9 +13,9 @@ namespace gEngine.Manipulator.Ge.Section
     {
         private gTopology.Line SelectLine { get; set; }
         private Style OldTrackStyle { get; set; }
-        protected GraphUtil graphutil = null;
         protected PointList TrackPoints;
         public bool UseErasePart { get; set; }
+        public GraphUtil GraphUtil { get; set; }
         public EraseLineManipulator()
         {
             UseErasePart = true;
@@ -22,20 +24,21 @@ namespace gEngine.Manipulator.Ge.Section
         protected override void OnAttached()
         {
             base.OnAttached();
-            graphutil = new GraphUtil(this.AssociatedObject);
+            GraphUtil = new GraphUtil(this.AssociatedObject);
         }
 
         protected override void MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if(UseErasePart)
             {
-                gTopology.Graph graph = graphutil.Graph;
+                gTopology.Graph graph = GraphUtil.Graph;
                 if (graph == null)
                     return;
 
                 Topology editor = new Topology(graph);
-                Point pos = e.GetPosition(graphutil.GraphContainer);
-                gTopology.Line line = editor.LinHit(pos, graphutil.Tolerance);
+                MapControl mc = this.AssociatedObject.Owner;
+                Point pos = mc.Dp2LP(e.GetPosition(mc));
+                gTopology.Line line = editor.LinHit(pos, GraphUtil.Tolerance);
                 if(line!=null)
                 {
                     SelectLine = line;
@@ -57,8 +60,9 @@ namespace gEngine.Manipulator.Ge.Section
         {
             if (UseErasePart && SelectLine!=null && e.LeftButton == System.Windows.Input.MouseButtonState.Pressed)
             {
-                Topology editor = new Topology(graphutil.Graph);
-                Point pos = e.GetPosition(graphutil.GraphContainer);
+                Topology editor = new Topology(GraphUtil.Graph);
+                MapControl mc = this.AssociatedObject.Owner;
+                Point pos = mc.Dp2LP(e.GetPosition(mc));
                 Point np = editor.LinNearestPoint(SelectLine, pos);
                 TrackPoints.Add(np);
                 TrackAdorner.Points.Add(np);
@@ -70,14 +74,14 @@ namespace gEngine.Manipulator.Ge.Section
         {
             if (UseErasePart && SelectLine!= null && TrackPoints.Count!=0)
             {
-                Topology editor = new Topology(graphutil.Graph);
-                editor.LinEraseSubLine(SelectLine, TrackPoints, graphutil.Tolerance);
+                Topology editor = new Topology(GraphUtil.Graph);
+                editor.LinEraseSubLine(SelectLine, TrackPoints, GraphUtil.Tolerance);
                 TrackAdorner.Style = OldTrackStyle;
                 SelectLine = null;
             }
             else
             {
-                gTopology.Graph graph = graphutil.Graph;
+                gTopology.Graph graph = GraphUtil.Graph;
                 if (graph == null)
                     return;
                 Topology editor = new Topology(graph);

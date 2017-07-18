@@ -10,12 +10,10 @@ namespace gEngine.Manipulator.Ge.Section
         protected override void OnAttached()
         {
             base.OnAttached();
-            SectionLayer = this.AssociatedObject.LayerContext as SectionLayer;
-            if (SectionLayer != null)
-            {
-                Graph = SectionLayer.SectionInfo.TopGraph;
-            }
+            GraphUtil = new GraphUtil(this.AssociatedObject);
         }
+
+        public GraphUtil GraphUtil { get; set; }
 
         public Point Start
         {
@@ -30,18 +28,6 @@ namespace gEngine.Manipulator.Ge.Section
             get
             {
                 return new Point() { X = this.TrackAdorner.X2, Y = this.TrackAdorner.Y2 };
-            }
-        }
-
-        public SectionLayer SectionLayer { get; set; }
-
-        public gTopology.Graph Graph { get; set; }
-
-        public double Tolerance
-        {
-            get
-            {
-                return CalcTolerance.GetTolerance(this.AssociatedObject);
             }
         }
     }

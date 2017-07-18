@@ -14,26 +14,20 @@ namespace gEngine.Manipulator.Ge.Section
         protected override void OnAttached()
         {
             base.OnAttached();
+            GraphUtil = new GraphUtil(this.AssociatedObject);
         }
 
         protected override void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if (TrackAdorner.Points.Count == 0 || Graph==null)
+            if (TrackAdorner.Points.Count == 0 || GraphUtil.Graph == null)
                 return;
             
-            Topology editor = new Topology(Graph);
-            editor.LinAddCurve(new PointList(TrackAdorner.Points.ToList()), Tolerance, true, LineType);
+            Topology editor = new Topology(GraphUtil.Graph);
+            editor.LinAddCurve(new PointList(TrackAdorner.Points.ToList()), GraphUtil.Tolerance, true, LineType);
             base.MouseLeftButtonUp(sender, e);
         }
 
         public int LineType { get; set; }
-        public gTopology.Graph Graph { get; set; }
-        public double Tolerance
-        {
-            get
-            {
-                return CalcTolerance.GetTolerance(this.AssociatedObject);
-            }
-        }
+        public GraphUtil GraphUtil { get; set; }
     }
 }
