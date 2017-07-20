@@ -53,7 +53,6 @@ namespace gEngine.Manipulator
         {
             foreach (IManipulatorFactory mpf in dicManipulatorFactory.Values)
             {
-                Type iobjtype = typeof(IObjectManipulatorFactory);
                 if (mpf is IObjectManipulatorFactory)
                 {
                     IObjectManipulatorFactory ompf = mpf as IObjectManipulatorFactory;
@@ -63,7 +62,7 @@ namespace gEngine.Manipulator
                     }
                 }
             }
-            return null;
+            return new EditDefaultManipulatorFactory();
         }
 
         static public IManipulatorBase CreateManipulator(IObject iobject, object param = null)
