@@ -158,13 +158,27 @@
                             </ToolTip>
                         </Image.ToolTip>
                     </Image>
+                    <Image x:Uid="imgDelMap" x:Name="imgDelMap"  Source="../Images/small/delete_32x32.png" Margin="2 0 0 0">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger x:Uid="i:EventTrigger_9" EventName="MouseLeftButtonDown">
+                                <i:InvokeCommandAction x:Uid="i:InvokeCommandAction_8" Command="{x:Static prjcmds:MapCommands.DeleteMapCommand}">
+                                    <i:InvokeCommandAction.CommandParameter>
+                                        <MultiBinding x:Uid="MultiBinding_4" Converter="{StaticResource c2l}">
+                                            <Binding  x:Uid="Binding_9" ElementName="prjctrl"/>
+                                            <Binding  x:Uid="Binding_10" ElementName="gcMap"/>
+                                        </MultiBinding>
+                                    </i:InvokeCommandAction.CommandParameter>
+                                </i:InvokeCommandAction>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Image>
                 </StackPanel>
                 <dxg:GridControl x:Uid="dxg:GridControl_1" x:Name="gcMap" Tag="DClickOpen" ItemsSource="{Binding Projects.Maps}" Height="600"  ShowBorder="True" Grid.Row="1">
                     <dxg:GridControl.View>
-                        <dxg:TableView x:Uid="dxg:TableView_1" IndicatorWidth="0" RowMinHeight="30" ShowGroupPanel="False"></dxg:TableView>
+                        <dxg:TableView x:Uid="dxg:TableView_1" ShowIndicator="False" HeaderPanelMinHeight="20" RowMinHeight="30" ShowGroupPanel="False"></dxg:TableView>
                     </dxg:GridControl.View>
                     <dxg:GridControl.Columns>
-                        <dxg:GridColumn  x:Uid="mapName" x:Name="mapName" FieldName="Item1" Header="图件名称" AllowEditing="false">
+                        <dxg:GridColumn  x:Uid="mapName" x:Name="mapName" FieldName="Item1"   Header="图件名称" AllowEditing="false">
                         </dxg:GridColumn>
                     </dxg:GridControl.Columns>
                     <i:Interaction.Triggers>

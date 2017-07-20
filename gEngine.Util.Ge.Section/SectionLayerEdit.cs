@@ -88,17 +88,17 @@ namespace gEngine.Util.Ge.Section
         {
             ClearGraph();
             SectionInfo sinfo = SectionLayer.SectionInfo;
-            foreach (var item in sinfo.TopGraph.Nods)
+            foreach (var item in sinfo.TopGraph.Regions)
             {
-                SectionLayer.Objects.Add(new NodeProxyObject() { Node = item, SectionInfo=sinfo });
+                SectionLayer.Objects.Add(new FaceProxyObject() { Face = item, SectionInfo = sinfo });
             }
             foreach (var item in sinfo.TopGraph.Bounds)
             {
                 SectionLayer.Objects.Add(new LineProxyObject() { Line = item, SectionInfo = sinfo });
             }
-            foreach (var item in sinfo.TopGraph.Regions)
+            foreach (var item in sinfo.TopGraph.Nods)
             {
-                SectionLayer.Objects.Add(new FaceProxyObject() { Face = item, SectionInfo = sinfo });
+                SectionLayer.Objects.Add(new NodeProxyObject() { Node = item, SectionInfo = sinfo });
             }
         }
     }
