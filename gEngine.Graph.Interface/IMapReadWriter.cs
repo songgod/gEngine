@@ -14,5 +14,7 @@ namespace gEngine.Graph.Interface
         bool WriteMap(IMap map, string url);
 
         IMap CreateMap();
+
+        bool DeleteMap(string projectUr,string mapUrl);
     }
 }

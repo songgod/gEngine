@@ -3,10 +3,13 @@ using gEngine.Graph.Interface;
 using gEngine.Util;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Reflection;
+using System.Xml.Linq;
 
 namespace gEngine.Graph.Rw.Ge
 {
@@ -50,7 +53,7 @@ namespace gEngine.Graph.Rw.Ge
                         continue;
                     }
                     ILayer layer = layerrw.CreateLayer();
-                    layerrw.ReadLayer(layer,node);
+                    layerrw.ReadLayer(layer, node);
                     if (layer == null)
                         continue;
                     layer.Name = node.Attributes["Name"].Value;
@@ -95,6 +98,25 @@ namespace gEngine.Graph.Rw.Ge
                 xmlmap.AppendChild(xmllayer);
             }
             xmldoc.Save(url);
+            return true;
+        }
+
+        public bool DeleteMap(string projectUrl, string mapUrl)
+        {
+            if (mapUrl.Contains('\\') || mapUrl.Contains('/'))
+            {
+                //
+            }
+            else
+            {
+                string fullMapUrl = projectUrl.Substring(0, projectUrl.LastIndexOf(@"\")) + @"\Maps" + @"\" + mapUrl;
+                File.Delete(fullMapUrl);
+            }
+
+            XElement rootNode = XElement.Load(projectUrl);
+            IEnumerable<XElement> targetNodes = from target in rootNode.Descendants("Map") where target.Attribute("Url").Value.Equals(mapUrl) select target;
+            targetNodes.Remove();
+            rootNode.Save(projectUrl);
             return true;
         }
     }

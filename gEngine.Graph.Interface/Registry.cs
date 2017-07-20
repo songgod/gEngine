@@ -94,5 +94,14 @@ namespace gEngine.Graph.Interface
 
             return rw.CreateMap();
         }
+
+        static public bool DeleteMap(string projectUrl,string mapUrl)
+        {
+            string type = mapUrl.Substring(mapUrl.LastIndexOf('.') + 1);
+            IMapReadWriter rw = GetReadWriter(type);
+            if (rw == null)
+                return false;
+            return rw.DeleteMap(projectUrl,mapUrl);
+        }
     }
 }

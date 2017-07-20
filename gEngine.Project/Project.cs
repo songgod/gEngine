@@ -80,7 +80,7 @@ namespace gEngine.Project
                     Url = SaveFileDialog.FileName;
                     DirectoryInfo directoryInfo = new DirectoryInfo(MapsPath);
                     directoryInfo.Create();
-                    
+
                     return Write();
                 }
                 return false;
@@ -101,7 +101,7 @@ namespace gEngine.Project
                 Url = url;
                 return false;
             }
-                
+
             return true;
         }
 
@@ -116,11 +116,11 @@ namespace gEngine.Project
 
         public IMap OpenMap(string url)
         {
-            string fullurl="";
+            string fullurl = "";
             IMap map = null;
-            for (int i=0;i<Maps.Count;++i)
+            for (int i = 0; i < Maps.Count; ++i)
             {
-                if (Maps[i].Item1 == url) 
+                if (Maps[i].Item1 == url)
                 {
                     if (Maps[i].Item2 != null)//已经打开
                         return Maps[i].Item2;
@@ -158,7 +158,7 @@ namespace gEngine.Project
                 MessageBox.Show("存在同名图件");
                 return null;
             }
-                
+
 
             IMap map = gEngine.Graph.Interface.Registry.CreateMap(type);
             if (map == null)
@@ -224,6 +224,24 @@ namespace gEngine.Project
                 SaveMap(item.Item1);
             }
             return true;
+        }
+
+        public bool DeleteMap(string url)
+        {
+            if (string.IsNullOrEmpty(url))
+                return false;
+
+            if (string.IsNullOrEmpty(Url))
+                return false;
+
+            var targetMap = Maps.Where(x => x.Item1.Equals(url));
+            if (targetMap.Count().Equals(0))
+                return false;
+
+            Maps.Remove(targetMap.ElementAt(0));
+
+            bool IsSuccess = gEngine.Graph.Interface.Registry.DeleteMap(Url, url);
+            return IsSuccess;
         }
 
         private string GetMapFullPath(string url)
