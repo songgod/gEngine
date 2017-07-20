@@ -65,6 +65,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\gEngine.Commands\gEngine.Commands.csproj">
+      <Project>{bc931bb9-d78c-437d-b5d2-04be6e318172}</Project>
+      <Name>gEngine.Commands</Name>
+    </ProjectReference>
     <ProjectReference Include="..\gEngine.Graph.Ge.Column\gEngine.Graph.Ge.Column.csproj">
       <Project>{95227940-90F7-40B4-9027-3EEECD8ED6DE}</Project>
       <Name>gEngine.Graph.Ge.Column</Name>

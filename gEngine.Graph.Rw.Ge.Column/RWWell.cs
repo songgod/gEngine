@@ -11,7 +11,7 @@ using System.Xml;
 
 namespace gEngine.Graph.Rw.Ge.Column
 {
-    class RWWell : RWObjectBase
+    public class RWWell : RWObjectBase
     {
         public override string SupportType { get { return "Well"; } }
 
@@ -71,7 +71,7 @@ namespace gEngine.Graph.Rw.Ge.Column
                 foreach (IObject Object in WellColumns)
                 {
                     string objecttype = Object.GetType().Name.ToString();
-                    RWWellColumn objectrw =(RWWellColumn) Registry.GetObjectRW(objecttype);
+                    RWWellColumn objectrw = (RWWellColumn) Registry.GetObjectRW(objecttype);
                     if (objectrw == null)
                     {
                         Log.LogWarning("Cound not find " + objecttype + " object readerwriter");
