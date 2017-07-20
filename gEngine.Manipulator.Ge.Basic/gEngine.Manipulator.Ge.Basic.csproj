@@ -58,7 +58,6 @@
     <Compile Include="DrawPolyLineObjectManipulator.cs" />
     <Compile Include="DrawRectObjectManipulator.cs" />
     <Compile Include="DrawScaleRuleObjectManipulator.cs" />
-    <Compile Include="EditDefaultManipulatorFactory.cs" />
     <Compile Include="EditLineManipulator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

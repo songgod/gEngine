@@ -23,48 +23,42 @@ namespace gEngine.Manipulator
             base.OnAttached();
             if (this.AssociatedObject == null)
                 return;
-            ObjectControl oc = this.AssociatedObject;
-            LayerControl lc = oc.Owner;
-
-            MapControl mc = lc.Owner;
-            if (mc == null)
-                return;
-
-            Style style = new Style();
-            style.Setters.Add(new Setter() { Property = Rectangle.StrokeProperty, Value = new SolidColorBrush() { Color = Colors.Navy } });
-            style.Setters.Add(new Setter() { Property = Rectangle.StrokeThicknessProperty, Value = 1.0 });
-            style.Setters.Add(new Setter() { Property = Rectangle.StrokeDashArrayProperty, Value = new DoubleCollection() { 2.5, 2.5 } });
-            style.Setters.Add(new Setter() { Property = Rectangle.FillProperty, Value = Brushes.Transparent });
-            style.Setters.Add(new Setter() { Property = Rectangle.CursorProperty, Value = Cursors.Hand });
-            TrackAdorner = new Rectangle() { Style = style };
-
-            Rect rect = VisualTreeHelper.GetDescendantBounds(oc);
-            Canvas.SetLeft(TrackAdorner, rect.X);
-            Canvas.SetTop(TrackAdorner, rect.Y);
-            TrackAdorner.Height = rect.Height;
-            TrackAdorner.Width = rect.Width;
-
-            mc.EditLayer.Children.Add(TrackAdorner);
-            //mc.MouseLeftButtonUp += Mc_MouseLeftButtonUp;
-            //mc.MouseLeftButtonDown += Mc_MouseLeftButtonDown;
-            //mc.MouseRightButtonUp += Mc_MouseRightButtonUp;
-            //mc.MouseMove += Mc_MouseMove;
+            System.Windows.Media.Effects.DropShadowEffect effect =new System.Windows.Media.Effects.DropShadowEffect() ;
+            effect.BlurRadius = 10;
+            effect.Color = Colors.Blue;
+            effect.ShadowDepth = 0;
+            this.AssociatedObject.Effect = effect;
         }
 
         protected override void OnDetaching()
         {
             base.OnDetaching();
-            LayerControl lc = this.AssociatedObject.Owner;
-            MapControl mc = lc.Owner;
-            if (mc == null)
-                return;
-            mc.EditLayer.Children.Remove(TrackAdorner);
-            //mc.MouseLeftButtonUp -= Mc_MouseLeftButtonUp;
-            //mc.MouseLeftButtonDown -= Mc_MouseLeftButtonDown;
-            //mc.MouseRightButtonUp -= Mc_MouseRightButtonUp;
-            //mc.MouseMove -= Mc_MouseMove;
+            this.AssociatedObject.Effect = null;
         }
     }
 
-    
+
+    public class EditDefaultManipulatorFactory : IObjectManipulatorFactory
+    {
+        public string Name
+        {
+            get
+            {
+                return "EditDefaultManipulator";
+            }
+        }
+
+        public Type SupportIObjectType
+        {
+            get
+            {
+                return null;
+            }
+        }
+
+        public IManipulatorBase CreateManipulator(object param)
+        {
+            return new EditDefaultManipulator();
+        }
+    }
 }
