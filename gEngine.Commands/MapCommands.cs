@@ -12,8 +12,10 @@ namespace gEngine.Commands
         static MapCommands()
         {
             OpenMapCommand = new RoutedUICommand("打开图件", "OpenMapCommand", typeof(MapCommands));
+            DeleteMapCommand = new RoutedUICommand("删除图件", "DeleteMapCommand", typeof(MapCommands));
         }
 
         public static RoutedCommand OpenMapCommand { get; set; }
+        public static RoutedCommand DeleteMapCommand { get; set; }
     }
 }

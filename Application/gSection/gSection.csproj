@@ -1384,6 +1384,9 @@
   <ItemGroup>
     <Resource Include="Images\Small\finger.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Small\delete_32x32.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>$(MSBUILD) /t:updateuid $(ProjectPath)</PreBuildEvent>
