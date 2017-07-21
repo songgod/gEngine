@@ -24,6 +24,7 @@ namespace gEngine.Project.Ge.Section.Commands
             if (ui == null)
                 return;
             ui.CommandBindings.Add(new NewSectionMapCommand());
+            ui.CommandBindings.Add(new SaveTemplateCommand());
             ui.CommandBindings.Add(new EditLineCommand());
             ui.CommandBindings.Add(new EraseFaceCommand());
             ui.CommandBindings.Add(new EraseLineCommand());

@@ -34,6 +34,9 @@
     <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="RevertColorEffect">
+      <HintPath>F:\WORK\GDS\学习及搭建环境\WPF\MyWPFDemo\RevertColorEffect\RevertColorEffect\bin\Debug\RevertColorEffect.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -49,7 +52,6 @@
   <ItemGroup>
     <Compile Include="CurveManipulator.cs" />
     <Compile Include="EditDefaultManipulator.cs" />
-    <Compile Include="EditLineManipulator.cs" />
     <Compile Include="EditRectangleManipulator.cs" />
     <Compile Include="IManipulatorFactory.cs" />
     <Compile Include="Converter\IsSelectedConverter.cs" />
@@ -66,9 +68,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\gEngine.Graph.Ge.Basic\gEngine.Graph.Ge.Basic.csproj">
-      <Project>{db606377-aaa0-45bd-a6be-4f4c4cd111af}</Project>
-      <Name>gEngine.Graph.Ge.Basic</Name>
+    <ProjectReference Include="..\gEngine.Commands\gEngine.Commands.csproj">
+      <Project>{bc931bb9-d78c-437d-b5d2-04be6e318172}</Project>
+      <Name>gEngine.Commands</Name>
     </ProjectReference>
     <ProjectReference Include="..\gEngine.Graph.Ge.Column\gEngine.Graph.Ge.Column.csproj">
       <Project>{95227940-90F7-40B4-9027-3EEECD8ED6DE}</Project>

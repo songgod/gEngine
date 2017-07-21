@@ -12,8 +12,11 @@ namespace gEngine.Commands
         static SectionCommands()
         {
             NewSectionMapCommand = new RoutedUICommand("NewSectionMapCommand", "NewSectionMapCommand", typeof(SectionCommands));
+            SaveTemplateCommand = new RoutedUICommand("保存模板", "SaveTemplateCommand", typeof(SectionCommands));
         }
 
         public static RoutedCommand NewSectionMapCommand { get; set; }
+
+        public static RoutedCommand SaveTemplateCommand { get; set; }
     }
 }
