@@ -1,12 +1,16 @@
 ﻿using gEngine.Commands;
+using gEngine.Graph.Ge.Column;
 using gEngine.Graph.Interface;
 using gEngine.Graph.Rw.Ge;
 using gEngine.Graph.Rw.Ge.Column;
+using gEngine.View;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace gEngine.Project.Ge.Section.Commands
@@ -31,50 +35,23 @@ namespace gEngine.Project.Ge.Section.Commands
             if (e.Parameter == null)
                 return;
 
-            IObject Well = e.Parameter as IObject;
+            ObjectControl ObjectControl = e.Parameter as ObjectControl;
+            Well Well = ObjectControl.Content as Well;
 
-            
+            SaveFileDialog SaveFileDialog = new SaveFileDialog();
+            SaveFileDialog.Filter = "数据模板文件|*.tpl";
+            if (SaveFileDialog.ShowDialog() == true)
+            {
+                string tplName = SaveFileDialog.FileName;
+                bool isSave = gEngine.Graph.Tpl.Ge.Registry.SaveTemplate(Well, tplName);
 
-            ColumnReadWriterInstaller s = new ColumnReadWriterInstaller();
-            s.InstallObjectReadWriter();
+                if (isSave)
+                    MessageBox.Show("数据模板保存成功！");
+                else
+                    MessageBox.Show("数据模板保存失败！");
+            }
 
-
-
-
-            //List<object> LsPara = e.Parameter as List<object>;
-            //if (LsPara == null)
-            //    return;
-
-            //if (LsPara[0] == null || LsPara[1] == null)
-            //    return;
-
-            //ProjectControl pc = LsPara[0] as ProjectControl;
-            //GridControl gc = LsPara[1] as GridControl;
-
-            //if (pc == null || pc.Project == null)
-            //    return;
-
-            //int[] selectedRowHandles = gc.GetSelectedRowHandles();
-
-            //List<string> ls = new List<string>();
-            //foreach (int i in selectedRowHandles)
-            //{
-            //    object MapFileName = gc.GetCellValue(i, "Item1");
-            //    int count = pc.Project.OpenMaps.Where(s => s.Name.Equals(MapFileName.ToString())).Count();
-            //    if (count > 0)
-            //    {
-            //        MessageBox.Show(string.Format("您删除的图件名:{0} 正在运行，请关闭后删除！", MapFileName.ToString()));
-            //        break;
-            //    }
-            //    ls.Add(MapFileName.ToString());
-            //}
-
-            //foreach (string mapName in ls)
-            //{
-            //    pc.Project.DeleteMap(mapName);
-            //}
-
-            //e.Handled = true;
+            e.Handled = true;
         }
     }
 }

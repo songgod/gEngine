@@ -72,6 +72,10 @@
       <Project>{B1C2609B-A3ED-43E0-9DA2-DF27029D44FC}</Project>
       <Name>gEngine.Data.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\gEngine.Graph.Ge.Column\gEngine.Graph.Ge.Column.csproj">
+      <Project>{95227940-90f7-40b4-9027-3eeecd8ed6de}</Project>
+      <Name>gEngine.Graph.Ge.Column</Name>
+    </ProjectReference>
     <ProjectReference Include="..\gEngine.Graph.Ge.Plane\gEngine.Graph.Ge.Plane.csproj">
       <Project>{82739b38-8706-493d-a571-c743afcead12}</Project>
       <Name>gEngine.Graph.Ge.Plane</Name>
@@ -95,6 +99,10 @@
     <ProjectReference Include="..\gEngine.Graph.Rw.Ge\gEngine.Graph.Rw.Ge.csproj">
       <Project>{22b205af-0d40-4854-bde8-65961840db5d}</Project>
       <Name>gEngine.Graph.Rw.Ge</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.Graph.Tpl.Ge\gEngine.Graph.Tpl.Ge.csproj">
+      <Project>{1c84bf76-326d-48a8-b2d7-eed2e9bdec99}</Project>
+      <Name>gEngine.Graph.Tpl.Ge</Name>
     </ProjectReference>
     <ProjectReference Include="..\gEngine.Manipulator.Ge.Plane\gEngine.Manipulator.Ge.Plane.csproj">
       <Project>{70026887-FD51-4A98-8E50-4B55F750013B}</Project>

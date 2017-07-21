@@ -22,6 +22,7 @@ namespace gSection
             gEngine.Project.Registry.LoadLocalElement();
             gEngine.RibbonPageCategory.Registry.LoadLocalElement();
             gEngine.Symbol.Registry.LoadLocalSymbols();
+            gEngine.Graph.Tpl.Ge.Registry.LoadTemplate();
         }
     }
 }
