@@ -131,6 +131,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gEngine.RibbonPageCategory.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gEngineTest.Manipulator", "Examples\gEngineTest.Manipulator\gEngineTest.Manipulator.csproj", "{DBF578F9-E593-405A-9E6C-9F7AC02F7812}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gEngine.RibbonPageCategory.Ge.Basic", "gEngine.RibbonPageCategory.Ge.Basic\gEngine.RibbonPageCategory.Ge.Basic.csproj", "{7B008425-79FF-4480-922D-052CC464DF01}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -337,6 +339,10 @@ Global
 		{DBF578F9-E593-405A-9E6C-9F7AC02F7812}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBF578F9-E593-405A-9E6C-9F7AC02F7812}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBF578F9-E593-405A-9E6C-9F7AC02F7812}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B008425-79FF-4480-922D-052CC464DF01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B008425-79FF-4480-922D-052CC464DF01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B008425-79FF-4480-922D-052CC464DF01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B008425-79FF-4480-922D-052CC464DF01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -402,5 +408,6 @@ Global
 		{DCE49078-3FAD-4C85-BC8C-713553BFDDD4} = {4F8ADD10-3A7F-4A53-9438-B9AD15551C19}
 		{06A3DC4E-2921-42DD-8AE2-368AFCB1F063} = {5DA24075-76FD-4692-8D34-6ACB37AD65D5}
 		{DBF578F9-E593-405A-9E6C-9F7AC02F7812} = {84B78181-2142-4B58-9FDC-0C21C5733A58}
+		{7B008425-79FF-4480-922D-052CC464DF01} = {5DA24075-76FD-4692-8D34-6ACB37AD65D5}
 	EndGlobalSection
 EndGlobal

@@ -47,8 +47,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\NewPlaneLineCommand.cs" />
     <Compile Include="Commands\PlaneCommandsInstaller.cs" />
     <Compile Include="Commands\NewPlaneMapCommand.cs" />
+    <Compile Include="Controls\SelectLineStyleLocationDocu.xaml.cs">
+      <DependentUpon>SelectLineStyleLocationDocu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SelectWellLocationDocu.xaml.cs">
       <DependentUpon>SelectWellLocationDocu.xaml</DependentUpon>
     </Compile>
@@ -85,6 +89,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\SelectLineStyleLocationDocu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\SelectWellLocationDocu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
