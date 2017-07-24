@@ -74,33 +74,25 @@ namespace gSection.View
         {
             IObject iobject = oc.DataContext as IObject; 
             GeRibbonPageCategory grpc = gEngine.RibbonPageCategory.Registry.GetRibbonPageCategory(iobject.GetType());
-            RibbonPageCategory rpc = GetRibPageCategory(grpc);
-            if (rpc != null)
+            if (grpc != null)
             {
-                BindingExpression exp = rpc.GetBindingExpression(IsVisibleProperty);
+                BindingExpression exp = grpc.GetBindingExpression(IsVisibleProperty);
                 if (exp == null)
                 {
+                    //绑定1：将iobject的IsSelected属性绑定到ribbon的IsVisibleProperty属性上
                     Binding bd = new Binding("IsSelected");
                     bd.Source = iobject;
                     bd.Mode = BindingMode.OneWay;
-                    rpc.SetBinding(RibbonPageCategory.IsVisibleProperty, bd);
-                }
-            }
-        }
+                    grpc.SetBinding(RibbonPageCategory.IsVisibleProperty, bd);
 
-        private RibbonPageCategory GetRibPageCategory(GeRibbonPageCategory grpc)
-        {
-            foreach (var rpc in this.ribbonControl.Categories)
-            {
-                if (rpc is RibbonPageCategory)
-                {
-                    if (rpc == grpc)
-                    {
-                        return rpc as RibbonPageCategory;
-                    }
+                    //绑定2：将iobject绑定到ribbon的datacontext上
+                    Binding bd2 = new Binding();
+                    bd2.Source = iobject;
+                    bd2.Mode = BindingMode.OneWay;
+                    bd2.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+                    grpc.SetBinding(RibbonPageCategory.DataContextProperty, bd2);
                 }
             }
-            return null;
         }
 
         #region Command
