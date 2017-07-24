@@ -13,28 +13,20 @@ namespace gEngine.Graph.Ge
     {
         public PointStyle()
         {
-            SetDefaultProperty();
+            
         }
 
-        protected override Freezable CreateInstanceCore()
+
+        public string SymbolLib
         {
-            return new PointStyle();
+            get { return (string)GetValue(SymbolLibProperty); }
+            set { SetValue(SymbolLibProperty, value); }
         }
 
-        public string SymbolLib { get; set; }
+        // Using a DependencyProperty as the backing store for SymbolLib.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SymbolLibProperty =
+            DependencyProperty.Register("SymbolLib", typeof(string), typeof(PointStyle), new PropertyMetadata(""));
 
-        //public string Symbol { get; set; }
-
-        public Brush Stroke { get; set; }
-
-        public double Height { get; set; }
-
-        private void SetDefaultProperty()
-        {
-            Stroke = new SolidColorBrush(Colors.Red);
-
-            Height = 30;
-        }
 
 
 
@@ -46,9 +38,7 @@ namespace gEngine.Graph.Ge
 
         // Using a DependencyProperty as the backing store for Symbol.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SymbolProperty =
-            DependencyProperty.Register("Symbol", typeof(string), typeof(PointStyle));
-
-
+            DependencyProperty.Register("Symbol", typeof(string), typeof(PointStyle), new PropertyMetadata(""));
 
         public double Width
         {
@@ -58,15 +48,33 @@ namespace gEngine.Graph.Ge
 
         // Using a DependencyProperty as the backing store for Width.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty WidthProperty =
-            DependencyProperty.Register("Width", typeof(double), typeof(PointStyle),
-                new PropertyMetadata((double)30));
+            DependencyProperty.Register("Width", typeof(double), typeof(PointStyle), new PropertyMetadata(30.0));
 
-        //private static void OnWidthChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        //{
-        //    PointStyle ps = (PointStyle)d;
-        //    double w = (double)e.NewValue;
-        //    new PointStyle() { Width = w };
-        //}
+
+
+        public double Height
+        {
+            get { return (double)GetValue(HeightProperty); }
+            set { SetValue(HeightProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Height.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty HeightProperty =
+            DependencyProperty.Register("Height", typeof(double), typeof(PointStyle), new PropertyMetadata(30.0));
+
+
+
+        public Brush Stroke
+        {
+            get { return (Brush)GetValue(StrokeProperty); }
+            set { SetValue(StrokeProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Stroke.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty StrokeProperty =
+            DependencyProperty.Register("Stroke", typeof(Brush), typeof(PointStyle), new PropertyMetadata(new SolidColorBrush(Colors.Black)));
+
+
 
         public Brush Fill
         {
@@ -78,6 +86,9 @@ namespace gEngine.Graph.Ge
         public static readonly DependencyProperty FillProperty =
             DependencyProperty.Register("Fill", typeof(Brush), typeof(PointStyle), new PropertyMetadata(new SolidColorBrush(Colors.Red)));
 
-
+        protected override Freezable CreateInstanceCore()
+        {
+            return new PointStyle();
+        }
     }
 }

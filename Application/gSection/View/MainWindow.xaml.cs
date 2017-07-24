@@ -86,11 +86,7 @@ namespace gSection.View
                     grpc.SetBinding(RibbonPageCategory.IsVisibleProperty, bd);
 
                     //绑定2：将iobject绑定到ribbon的datacontext上
-                    Binding bd2 = new Binding();
-                    bd2.Source = iobject;
-                    bd2.Mode = BindingMode.OneWay;
-                    bd2.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
-                    grpc.SetBinding(RibbonPageCategory.DataContextProperty, bd2);
+                    grpc.DataContext = iobject;
                 }
             }
         }

@@ -23,24 +23,9 @@ namespace gEngine.RibbonPageCategory.Ge.Plane
     /// </summary>
     public partial class WellLocationRibbonPageCategory : GeRibbonPageCategory
     {
-        public WellLocation WellLocation
-        {
-            get { return (WellLocation)GetValue(WellLocationProperty); }
-            set { SetValue(WellLocationProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for Project.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty WellLocationProperty =
-            DependencyProperty.Register("WellLocation", typeof(WellLocation), typeof(WellLocationRibbonPageCategory));
-
         public WellLocationRibbonPageCategory()
         {
             InitializeComponent();
-            Binding bd = new Binding("DataContext");
-            bd.Source = this;
-            bd.Mode = BindingMode.TwoWay;//OneWay
-            this.SetBinding(WellLocationProperty, bd);
-
         }
         public override Type SupportType
         {
@@ -48,20 +33,6 @@ namespace gEngine.RibbonPageCategory.Ge.Plane
             {
                 return typeof(WellLocation);
             }
-        }
-
-
-        private void BarEditItem_EditValueChanged(object sender, RoutedEventArgs e)
-        {
-            //MessageBox.Show(e.Source.ToString());
-            DevExpress.Xpf.Bars.BarEditItem item = e.Source as DevExpress.Xpf.Bars.BarEditItem;
-            WellLocation data = item.DataContext as WellLocation;
-            double d1=data.PointStyle.Width;
-            //double d2 = double.Parse(item.EditValue.ToString());
-            //string wedllnum=data.WellNum;
-            //data.PointStyle.Width = d2;
-
-           
         }
     }
 }
