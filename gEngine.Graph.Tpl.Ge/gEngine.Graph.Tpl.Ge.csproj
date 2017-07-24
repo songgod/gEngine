@@ -4,37 +4,36 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{770BC631-DE5F-4D45-9F2D-B0A1C20661EE}</ProjectGuid>
+    <ProjectGuid>{1C84BF76-326D-48A8-B2D7-EED2E9BDEC99}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>gEngine.Manipulator.Ge.Column</RootNamespace>
-    <AssemblyName>gEngine.Manipulator.Ge.Column</AssemblyName>
+    <RootNamespace>gEngine.Graph.Tpl.Ge</RootNamespace>
+    <AssemblyName>gEngine.Graph.Tpl.Ge</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>..\bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
-    <OutputPath>..\bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,30 +43,25 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EditLineManipulatorFactory.cs" />
-    <Compile Include="EditRectangleManipulatorFactory.cs" />
+    <Compile Include="Registry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\gEngine.Graph.Ge.Basic\gEngine.Graph.Ge.Basic.csproj">
-      <Project>{db606377-aaa0-45bd-a6be-4f4c4cd111af}</Project>
-      <Name>gEngine.Graph.Ge.Basic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\gEngine.Graph.Ge.Column\gEngine.Graph.Ge.Column.csproj">
-      <Project>{95227940-90F7-40B4-9027-3EEECD8ED6DE}</Project>
-      <Name>gEngine.Graph.Ge.Column</Name>
-    </ProjectReference>
     <ProjectReference Include="..\gEngine.Graph.Ge\gEngine.Graph.Ge.csproj">
       <Project>{3bd77e4f-a348-4edb-b60c-68b749249b91}</Project>
       <Name>gEngine.Graph.Ge</Name>
     </ProjectReference>
     <ProjectReference Include="..\gEngine.Graph.Interface\gEngine.Graph.Interface.csproj">
-      <Project>{1C98A821-B030-4FF2-83AE-D49B1B3B8C67}</Project>
+      <Project>{1c98a821-b030-4ff2-83ae-d49b1b3b8c67}</Project>
       <Name>gEngine.Graph.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\gEngine.Manipulator\gEngine.Manipulator.csproj">
-      <Project>{B4EEDB17-EB3D-4E22-AB7C-D8E366564B8F}</Project>
-      <Name>gEngine.Manipulator</Name>
+    <ProjectReference Include="..\gEngine.Graph.Rw.Ge\gEngine.Graph.Rw.Ge.csproj">
+      <Project>{22b205af-0d40-4854-bde8-65961840db5d}</Project>
+      <Name>gEngine.Graph.Rw.Ge</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.Util\gEngine.Util.csproj">
+      <Project>{84acb6c4-cf62-4f4b-a7e5-5c642edc041a}</Project>
+      <Name>gEngine.Util</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

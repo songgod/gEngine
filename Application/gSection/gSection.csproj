@@ -227,6 +227,10 @@
       <Project>{1c98a821-b030-4ff2-83ae-d49b1b3b8c67}</Project>
       <Name>gEngine.Graph.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\gEngine.Graph.Tpl.Ge\gEngine.Graph.Tpl.Ge.csproj">
+      <Project>{1c84bf76-326d-48a8-b2d7-eed2e9bdec99}</Project>
+      <Name>gEngine.Graph.Tpl.Ge</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\gEngine.Manipulator\gEngine.Manipulator.csproj">
       <Project>{b4eedb17-eb3d-4e22-ab7c-d8e366564b8f}</Project>
       <Name>gEngine.Manipulator</Name>

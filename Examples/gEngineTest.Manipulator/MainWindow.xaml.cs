@@ -72,5 +72,11 @@ namespace gEngineTest.Manipulator
             IManipulatorBase mp = Registry.CreateManipulator("DrawScaleRuleObjectManipulator");
             ManipulatorSetter.SetManipulator(mp, mc.GetLayerControl(0));
         }
+
+        private void EditLine_Click(object sender, RoutedEventArgs e)
+        {
+            IManipulatorBase mp = Registry.CreateManipulator("EditLineManipulator");
+            ManipulatorSetter.SetManipulator(mp, mc.GetLayerControl(0));
+        }
     }
 }

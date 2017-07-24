@@ -1,0 +1,38 @@
+﻿<gerpc:GeribbonPageCategory x:Class="gEngineRibbonPageCategory.Ge.Basic.WellLineRibbonPageCategory"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:local="clr-namespace:gEngineRibbonPageCategory.Ge.Basic"
+             xmlns:gerpc="clr-namespace:gEngine.RibbonPageCategory;assembly=gEngine.RibbonPageCategory"         
+             mc:Ignorable="d" 
+               Caption="平面图"
+             IsVisible="False"
+             x:Name="ribLine">
+    <dxr:RibbonPage x:Uid="dxr:RibbonPage_8" Caption="类型">
+        <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_30" Caption="符号">
+            <dxb:BarSplitCheckItem Content="点风格" LargeGlyph="{dx:DXImage Image=LineStyle_32x32.png}" Glyph="{dx:DXImage Image=LineStyle_16x16.png}" RibbonStyle="SmallWithText"/>
+            <dxb:BarEditItem  x:Uid="dxb:BarEditItem_33" Content="大小" EditWidth="100" EditValue="4.0">
+                <dxb:BarEditItem.EditSettings>
+                    <dxe:TextEditSettings x:Uid="dxe:TextEditSettings_17"  />
+                </dxb:BarEditItem.EditSettings>
+            </dxb:BarEditItem>
+            <dxb:BarEditItem x:Uid="dxb:BarEditItem_34" Content="内部色">
+                <dxb:BarEditItem.EditSettings>
+                    <dxe:PopupColorEditSettings x:Uid="dxe:PopupColorEditSettings_11"/>
+                </dxb:BarEditItem.EditSettings>
+            </dxb:BarEditItem>
+            <dxb:BarEditItem  x:Uid="dxb:BarEditItem_35" Content="边界色">
+                <dxb:BarEditItem.EditSettings>
+                    <dxe:PopupColorEditSettings x:Uid="dxe:PopupColorEditSettings_12" />
+                </dxb:BarEditItem.EditSettings>
+            </dxb:BarEditItem>
+
+        </dxr:RibbonPageGroup>
+    </dxr:RibbonPage>
+</gerpc:GeribbonPageCategory>
