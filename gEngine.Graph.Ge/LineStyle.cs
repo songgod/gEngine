@@ -8,16 +8,25 @@ using System.Windows.Media;
 
 namespace gEngine.Graph.Ge
 {
-    public class LineStyle
+    public class LineStyle : Freezable
     {
+        public LineStyle()
+        {
+
+        }
         public enum LineType
         {
             NormalLine=0,
             ComplexLine,
             Unkown
         }
+       
 
         public virtual LineType LinType { get { return LineType.Unkown; } }
+        protected override Freezable CreateInstanceCore()
+        {
+            return new LineStyle();
+        }
     }
 
     public class NormalLineStyle : LineStyle
@@ -29,6 +38,7 @@ namespace gEngine.Graph.Ge
         }
         public override LineType LinType { get { return LineType.NormalLine; } }
 
+       
         public Color Color { get; set; }
 
         public double Width { get; set; }

@@ -58,7 +58,8 @@ namespace gEngine.View.Ge
 
         // Using a DependencyProperty as the backing store for LineStyle.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty LineStyleProperty =
-            DependencyProperty.Register("LineStyle", typeof(LineStyle), typeof(LineControl), new PropertyMetadata(null,new PropertyChangedCallback(LineControl.OnLineStyleChanged)));
+            DependencyProperty.Register("LineStyle", typeof(LineStyle), typeof(LineControl), 
+                new PropertyMetadata(null,new PropertyChangedCallback(LineControl.OnLineStyleChanged)));
 
 
         public PathGeometry Data
