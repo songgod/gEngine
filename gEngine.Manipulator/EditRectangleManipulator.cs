@@ -110,7 +110,7 @@ namespace gEngine.Manipulator
                     changeModel.Header = "更换模板";
 
                     contextMenu.Items.Add(saveModel);
-                    contextMenu.Items.Add(changeModel);
+                    //contextMenu.Items.Add(changeModel);
                     mc.EditLayer.ContextMenu = contextMenu;
                     return HitTestResultBehavior.Stop;
                 }

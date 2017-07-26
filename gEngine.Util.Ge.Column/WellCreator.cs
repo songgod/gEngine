@@ -62,7 +62,7 @@ namespace gEngine.Util.Ge.Column
 
             if (horizons.Horizons.Count > 0)
             {
-                WellSegmentColumn segmentColumn = new WellSegmentColumn() { Owner = well, Color = Colors.Black, Width = RoadWidth };
+                WellSegmentColumn segmentColumn = new WellSegmentColumn() { Owner = well, Color = Colors.Black, Name = string.Empty, Width = RoadWidth };
                 for (int i = 0; i < horizons.Horizons.Count; i++)
                 {
                     WellSegmentColumn.Segment segment = new WellSegmentColumn.Segment();
@@ -79,7 +79,7 @@ namespace gEngine.Util.Ge.Column
             // 调整深度道和砂岩道，放到第一个曲线道右侧 2017-7-17
             for (int i = well.LstColumns.Count - 1; i > well.LstColumns.Count - db.Columns.Count; i--)
             {
-                well.LstColumns.Insert(1, well.LstColumns.ElementAt(well.LstColumns.Count-1));
+                well.LstColumns.Insert(1, well.LstColumns.ElementAt(well.LstColumns.Count - 1));
                 well.LstColumns.RemoveAt(well.LstColumns.Count - 1);
 
             }

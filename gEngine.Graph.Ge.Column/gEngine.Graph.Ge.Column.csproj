@@ -56,6 +56,10 @@
       <Project>{3bd77e4f-a348-4edb-b60c-68b749249b91}</Project>
       <Name>gEngine.Graph.Ge</Name>
     </ProjectReference>
+    <ProjectReference Include="..\gEngine.Graph.Interface\gEngine.Graph.Interface.csproj">
+      <Project>{1c98a821-b030-4ff2-83ae-d49b1b3b8c67}</Project>
+      <Name>gEngine.Graph.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\gEngine.Util\gEngine.Util.csproj">
       <Project>{84ACB6C4-CF62-4F4B-A7E5-5C642EDC041A}</Project>
       <Name>gEngine.Util</Name>
