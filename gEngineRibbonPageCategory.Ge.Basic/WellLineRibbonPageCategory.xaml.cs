@@ -1,6 +1,6 @@
-﻿using gEngine.Graph.Ge.Plane;
-using gEngine.RibbonPageCategory;
-using gEngine.RibbonPageCategory.Ge;
+﻿using gEngine.RibbonPageCategory;
+using gEngine.Graph.Ge.Basic;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,14 +16,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace gEngine.RibbonPageCategory.Ge.Plane
+namespace gEngineRibbonPageCategory.Ge.Basic
 {
     /// <summary>
-    /// WellLocationRibbonPageCategory.xaml 的交互逻辑
+    /// WellLineRibbonPageCategory.xaml 的交互逻辑
     /// </summary>
-    public partial class WellLocationRibbonPageCategory : GeRibbonPageCategory
+    public partial class WellLineRibbonPageCategory : GeRibbonPageCategory
     {
-        public WellLocationRibbonPageCategory()
+        public WellLineRibbonPageCategory()
         {
             InitializeComponent();
         }
@@ -31,7 +31,7 @@ namespace gEngine.RibbonPageCategory.Ge.Plane
         {
             get
             {
-                return typeof(WellLocation);
+                return typeof(gEngine.Graph.Ge.Basic.Line);
             }
         }
     }

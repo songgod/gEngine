@@ -13,8 +13,9 @@
             <StackPanel.Resources>
                 <sym:PointSymbolConverter x:Key="pointsymbolconverter"/>
                 <local:WellPositionConverter x:Key="wellPositionConverter"/>
+                <gv:PointStyle2OptionSettingConverter  x:Key="PointStyle2OptionSettingConverter"/>
             </StackPanel.Resources>
-            <gv:PointControl PointStyle="{Binding Path=PointStyle}" x:Name="gvpc">
+            <gv:PointControl PointStyle="{Binding Path=PointStyle, Mode=TwoWay}" x:Name="gvpc">
                 <ToolTipService.ToolTip>
                     <TextBlock>
                         <TextBlock.Text>

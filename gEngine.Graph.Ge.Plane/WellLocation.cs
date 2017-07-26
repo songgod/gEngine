@@ -7,7 +7,10 @@ namespace gEngine.Graph.Ge.Plane
 
     public class WellLocation : Object
     {
-
+        public WellLocation()
+        {
+            PointStyle = new PointStyle() { SymbolLib = "ge", Symbol = "GeEllipsePointSymbol" };
+        }
 
         public string WellNum
         {
@@ -79,6 +82,6 @@ namespace gEngine.Graph.Ge.Plane
 
         // Using a DependencyProperty as the backing store for PointStyle.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty PointStyleProperty =
-            DependencyProperty.Register("PointStyle", typeof(PointStyle), typeof(WellLocation), new PropertyMetadata(new PointStyle() { SymbolLib="ge", Symbol= "GeEllipsePointSymbol" }));
+            DependencyProperty.Register("PointStyle", typeof(PointStyle), typeof(WellLocation));
     }
 }

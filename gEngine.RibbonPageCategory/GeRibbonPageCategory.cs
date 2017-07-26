@@ -11,7 +11,6 @@ namespace gEngine.RibbonPageCategory
     public  class GeRibbonPageCategory: DevExpress.Xpf.Ribbon.RibbonPageCategory
     {
         public virtual Type SupportType { get; }
-
-        public ObjectControl PageSource { get; }
+        
     }
 }

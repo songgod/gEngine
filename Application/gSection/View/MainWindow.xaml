@@ -168,7 +168,7 @@
                     <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_8" Caption="趋势线">
                         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_15" Content="插入趋势线" LargeGlyph="{dx:DXImage Image=StackedLineWithoutMarkers_32x32.png}" Glyph="{dx:DXImage Image=StackedLineWithoutMarkers_16x16.png}"/>
                         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_16" Content="手绘趋势线" Command="{x:Static prjcmds:SectionEditCommands.NewTrendLineCommand}" CommandTarget="{Binding ElementName=prjctrl}" LargeGlyph="{dx:DXImage Image=StackedLineWithoutMarkers_32x32.png}" Glyph="{dx:DXImage Image=StackedLineWithoutMarkers_16x16.png}"/>
-                        <dxb:BarSplitCheckItem x:Uid="dxb:BarSplitCheckItem_1" Content="线型" LargeGlyph="{dx:DXImage Image=HorizontalGridlinesMajor_32x32.png}" RibbonStyle="SmallWithText" Glyph="{dx:DXImage Image=HorizontalGridlinesMajor_16x16.png}"/>
+                        <dxb:BarSplitCheckItem x:Uid="dxb:BarSplitCheckItem_1" Content="线型" Command="{x:Static prjcmds:PlaneCommands.NewPlaneLineCommand}" CommandTarget="{Binding ElementName=prjctrl}" LargeGlyph="{dx:DXImage Image=HorizontalGridlinesMajor_32x32.png}" RibbonStyle="SmallWithText" Glyph="{dx:DXImage Image=HorizontalGridlinesMajor_16x16.png}"/>
                         <dxb:BarEditItem x:Uid="dxb:BarEditItem_1" Content="粗细" EditWidth="44" EditValue="1.0">
                             <dxb:BarEditItem.EditSettings>
                                 <dxe:TextEditSettings x:Uid="dxe:TextEditSettings_1"/>
@@ -182,7 +182,7 @@
                     </dxr:RibbonPageGroup>
                     <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_9" Caption="断层">
                         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_17" Content="添加断层线"  Command="{x:Static prjcmds:SectionEditCommands.NewCurveFaultCommand}" CommandTarget="{Binding ElementName=prjctrl}" LargeGlyph="{dx:DXImage Image=ScatterWithStraightLines_32x32.png}" Glyph="{dx:DXImage Image=ScatterWithStraightLines_16x16.png}"/>
-                        <dxb:BarSplitCheckItem x:Uid="dxb:BarSplitCheckItem_2" Content="线型" LargeGlyph="{dx:DXImage Image=HorizontalGridlinesMajor_32x32.png}" RibbonStyle="SmallWithText" Glyph="{dx:DXImage Image=HorizontalGridlinesMajor_16x16.png}"/>
+                        <dxb:BarSplitCheckItem x:Uid="dxb:BarSplitCheckItem_2" Content="线型"  LargeGlyph="{dx:DXImage Image=HorizontalGridlinesMajor_32x32.png}" RibbonStyle="SmallWithText" Glyph="{dx:DXImage Image=HorizontalGridlinesMajor_16x16.png}"/>
                         <dxb:BarEditItem x:Uid="dxb:BarEditItem_3" Content="粗细" EditWidth="44" EditValue="1.0">
                             <dxb:BarEditItem.EditSettings>
                                 <dxe:TextEditSettings x:Uid="dxe:TextEditSettings_2"/>
@@ -305,6 +305,7 @@
                 <dxr:RibbonPage x:Uid="dxr:RibbonPage_4" Caption="修饰">
                     <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_17" Caption="通用图层">
                         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_27" Content="比例尺" Command="{x:Static prjcmds:BasicCommands.NewCommonLayerCommand}" CommandTarget="{Binding ElementName=prjctrl}"/>
+                        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_29" Content="添加直线" Command="{x:Static prjcmds:BasicCommands.NewLineLayerCommand}" CommandTarget="{Binding ElementName=prjctrl}"/>
                     </dxr:RibbonPageGroup>
                 </dxr:RibbonPage>
                 <dxr:RibbonPage x:Uid="dxr:RibbonPage_5" Caption="视图">
@@ -316,7 +317,7 @@
                             <!--MouseLeftButtonDown="bbiSelect_MouseLeftButtonDown"-->
                     </dxr:RibbonPageGroup>
                     <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_19" Caption="视图缩放">
-                        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_29" Content="视图放大" LargeGlyph="pack://application:,,,/gSection;component/Images/GDS/20150707101248177_easyicon_net_64.ico"/>
+                        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_43" Content="视图放大" LargeGlyph="pack://application:,,,/gSection;component/Images/GDS/20150707101248177_easyicon_net_64.ico"/>
                         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_30" Content="视图缩小" LargeGlyph="pack://application:,,,/gSection;component/Images/GDS/20150707101252119_easyicon_net_64.ico" Glyph="pack://application:,,,/gSection;component/Images/GDS/20150707101252119_easyicon_net_64.ico" RibbonStyle="Large"/>
                         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_31" Content="局部放大" LargeGlyph="pack://application:,,,/gSection;component/Images/GDS/20150707101236441_easyicon_net_64.ico" Glyph="pack://application:,,,/gSection;component/Images/GDS/20150707101236441_easyicon_net_64.ico" RibbonStyle="Large"/>
                         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_32" LargeGlyph="pack://application:,,,/gSection;component/Images/GDS/20150707101244900_easyicon_net_64.ico" Glyph="pack://application:,,,/gSection;component/Images/GDS/20150707101244900_easyicon_net_64.ico" Content="恢复试图" RibbonStyle="Large"/>

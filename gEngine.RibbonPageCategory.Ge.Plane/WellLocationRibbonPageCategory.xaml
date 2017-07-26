@@ -10,27 +10,43 @@
              xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
              xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
              xmlns:gerpc="clr-namespace:gEngine.RibbonPageCategory;assembly=gEngine.RibbonPageCategory"          
-             Caption="平面图"
+             Caption="井符号设置"
              IsVisible="False"
-             x:Name="ribWellLocation">
-    <dxr:RibbonPage x:Uid="dxr:RibbonPage_8" Caption="类型">
-        <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_30" Caption="符号">
-            <dxb:BarSplitCheckItem Content="点风格" LargeGlyph="{dx:DXImage Image=LineStyle_32x32.png}" Glyph="{dx:DXImage Image=LineStyle_16x16.png}" RibbonStyle="SmallWithText"/>
-            <dxb:BarEditItem  x:Uid="dxb:BarEditItem_33" Content="大小" EditWidth="100" EditValue="4.0">
+             x:Name="ribWellLocation"
+             >
+    <dxr:RibbonPage x:Uid="dxr:RibbonPage_8" Caption="基本属性">
+        <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_30" Caption="">
+            <dxb:BarEditItem Content="井号" EditWidth="100" IsEnabled="True" 
+                             EditValue="{Binding Path=WellNum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                 <dxb:BarEditItem.EditSettings>
-                    <dxe:TextEditSettings x:Uid="dxe:TextEditSettings_17"  />
+                    <dxe:TextEditSettings x:Uid="dxe:TextEditSettings_7"/>
                 </dxb:BarEditItem.EditSettings>
             </dxb:BarEditItem>
-            <dxb:BarEditItem x:Uid="dxb:BarEditItem_34" Content="内部色">
+            <dxb:BarEditItem x:Uid="dxb:BarEditItem_33" Content="宽度" EditWidth="100"   
+                             EditValue="{Binding Path=PointStyle.Width,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" >
+                <dxb:BarEditItem.EditSettings><!--EditValueChanged="BarEditItem_EditValueChanged"-->
+                    <dxe:TextEditSettings  />
+                </dxb:BarEditItem.EditSettings>
+            </dxb:BarEditItem>
+            <dxb:BarEditItem Content="高度" EditWidth="100"
+                            EditValue="{Binding Path=PointStyle.Height, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" >
+                <dxb:BarEditItem.EditSettings>
+                    <dxe:TextEditSettings   />
+                </dxb:BarEditItem.EditSettings>
+            </dxb:BarEditItem>
+            <dxb:BarEditItem x:Uid="dxb:BarEditItem_34" Content="内部色" EditWidth="100" 
+                             EditValue="{Binding Path=PointStyle.Fill, Mode=TwoWay}">
                 <dxb:BarEditItem.EditSettings>
                     <dxe:PopupColorEditSettings x:Uid="dxe:PopupColorEditSettings_11"/>
                 </dxb:BarEditItem.EditSettings>
             </dxb:BarEditItem>
-            <dxb:BarEditItem  x:Uid="dxb:BarEditItem_35" Content="边界色">
+            <dxb:BarEditItem  x:Uid="dxb:BarEditItem_35" Content="边界色" EditWidth="100" >
                 <dxb:BarEditItem.EditSettings>
                     <dxe:PopupColorEditSettings x:Uid="dxe:PopupColorEditSettings_12" />
                 </dxb:BarEditItem.EditSettings>
             </dxb:BarEditItem>
+            <dxb:BarSplitCheckItem Content="点风格"  LargeGlyph="{dx:DXImage Image=LineStyle_32x32.png}"  
+                                   Glyph="{dx:DXImage Image=LineStyle_16x16.png}" RibbonStyle="SmallWithText"/>
             
         </dxr:RibbonPageGroup>
     </dxr:RibbonPage>
