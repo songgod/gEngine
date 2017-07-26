@@ -9,10 +9,10 @@ namespace gEngine.Graph.Ge.Basic
 {
     public class Line : Object
     {
-        public Line()
-        {
-            LinStyle = new ComplexLineStyle() { SymbolLib = "ge", Symbol = "GeEllipsePointSymbol" };
-        }
+        //public Line()
+        //{
+        //    LinStyle = new ComplexLineStyle() { SymbolLib = "ge", Symbol = "GeEllipsePointSymbol" };
+        //}
         public Point Start
         {
             get { return (Point)GetValue(StartProperty); }
@@ -46,6 +46,6 @@ namespace gEngine.Graph.Ge.Basic
 
         // Using a DependencyProperty as the backing store for LinStyle.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty LinStyleProperty =
-            DependencyProperty.Register("LinStyle", typeof(LineStyle), typeof(Line), new PropertyMetadata(new NormalLineStyle()));
+            DependencyProperty.Register("LinStyle", typeof(LineStyle), typeof(Line));
     }
 }
