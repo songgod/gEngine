@@ -15,7 +15,6 @@
 
     <dxr:RibbonPage x:Uid="dxr:RibbonPage_7" Caption="线设置">
         <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_24" Caption="直线样式">
-            <dxb:BarSplitCheckItem x:Uid="dxb:BarSplitCheckItem_8" Content="直线样式" LargeGlyph="{dx:DXImage Image=LineStyle_32x32.png}" Glyph="{dx:DXImage Image=LineStyle_16x16.png}" RibbonStyle="SmallWithText"/>
             <dxb:BarEditItem x:Uid="dxb:BarEditItem_23" Content="粗细" EditWidth="44"
                              EditValue="{Binding Path=LinStyle.Width,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                 <dxb:BarEditItem.EditSettings>
@@ -24,9 +23,33 @@
             </dxb:BarEditItem>
             <dxb:BarEditItem x:Uid="dxb:BarEditItem_24" Content="颜色" EditValue="{Binding Path=LinStyle.Color,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                 <dxb:BarEditItem.EditSettings>
-                    <dxe:PopupColorEditSettings x:Uid="dxe:PopupColorEditSettings_6"/>
+                    <dxe:TextEditSettings  />
                 </dxb:BarEditItem.EditSettings>
             </dxb:BarEditItem>
+            <dxb:BarEditItem x:Uid="dxb:BarEditItem_26" Content="点间隔" EditValue="{Binding Path=LinStyle.StrokeDashArray,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                <dxb:BarEditItem.EditSettings>
+                    <dxe:TextEditSettings  />
+                </dxb:BarEditItem.EditSettings>
+            </dxb:BarEditItem>
+            <dxb:BarSplitButtonItem x:Name="biInsertChartLineCommandGroup" ActAsDropDown="True" >
+                <dxr:GalleryDropDownPopupMenu>
+                    <dxr:GalleryDropDownPopupMenu.Gallery>
+                        <dxb:Gallery ColCount="4" ItemDescriptionHorizontalAlignment="Left" IsItemCaptionVisible="False" IsItemDescriptionVisible="False">
+                            <dxb:GalleryItemGroup x:Name="grpInsertChartLine2DCommandGroup"  IsCaptionVisible="True">
+                                <dxb:GalleryItem x:Name="biInsertChartLine" />
+                                <dxb:GalleryItem x:Name="biInsertChartStackedLine" />
+                                <dxb:GalleryItem x:Name="biInsertChartPercentStackedLine"/>
+                                <dxb:GalleryItem x:Name="biInsertChartLineWithMarkers" />
+                                <dxb:GalleryItem x:Name="biInsertChartStackedLineWithMarkers" />
+                                <dxb:GalleryItem x:Name="biInsertChartPercentStackedLineWithMarkers" />
+                            </dxb:GalleryItemGroup>
+                            <dxb:GalleryItemGroup x:Name="grpInsertChartLine3DCommandGroup"  IsCaptionVisible="True">
+                                <dxb:GalleryItem x:Name="biInsertChartLine3D" />
+                            </dxb:GalleryItemGroup>
+                        </dxb:Gallery>
+                    </dxr:GalleryDropDownPopupMenu.Gallery>
+                </dxr:GalleryDropDownPopupMenu>
+            </dxb:BarSplitButtonItem>
         </dxr:RibbonPageGroup>
       
     </dxr:RibbonPage>

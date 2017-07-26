@@ -61,6 +61,16 @@ namespace gEngine.Graph.Ge
         public static readonly DependencyProperty WidthProperty =
             DependencyProperty.Register("Width", typeof(double), typeof(NormalLineStyle), new PropertyMetadata(2.0));
 
+        public DoubleCollection StrokeDashArray
+        {
+            get { return (DoubleCollection)GetValue(StrokeDashArrayProperty); }
+            set { SetValue(StrokeDashArrayProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Width.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty StrokeDashArrayProperty =
+            DependencyProperty.Register("StrokeDashArray", typeof(DoubleCollection), typeof(NormalLineStyle));
+
     }
 
     public class ComplexLineStyle : LineStyle
