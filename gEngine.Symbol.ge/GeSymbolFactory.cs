@@ -16,6 +16,8 @@ namespace gEngine.Symbol.gesym
 
         public PointSymbols PointSymbols { get; set; }
 
+        public LineSymbols LineSymbols { get; set; }
+
 
         public GeSymbolFactory()
         {
@@ -48,6 +50,15 @@ namespace gEngine.Symbol.gesym
 
             if (PointSymbols.ContainsKey(name))
                 return PointSymbols[name];
+            return null;
+        }
+        public LineSymbol GetLineSymbol(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+                return null;
+
+            if (LineSymbols.ContainsKey(name))
+                return LineSymbols[name];
             return null;
         }
 

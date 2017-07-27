@@ -49,6 +49,7 @@
       <DependentUpon>LineControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ComplexLineStylePath2OptionSettingConverter.cs" />
+    <Compile Include="LineStyle2OptionSettingConverter.cs" />
     <Compile Include="PointControl.xaml.cs">
       <DependentUpon>PointControl.xaml</DependentUpon>
     </Compile>

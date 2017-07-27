@@ -45,11 +45,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\DefaultFillSymbol.cs" />
+    <Compile Include="Base\DefaultLineSymbol.cs" />
     <Compile Include="Base\DefaultPointSymbol.cs" />
     <Compile Include="Base\DefaultStrokeSymbol.cs" />
     <Compile Include="Base\ISymbolFactory.cs" />
     <Compile Include="Base\ISymbol.cs" />
     <Compile Include="Base\FillSymbol.cs" />
+    <Compile Include="Base\LineSymbol.cs" />
     <Compile Include="Base\OptionSetting.cs" />
     <Compile Include="Base\StrokePathUtil.cs" />
     <Compile Include="Converter\FillSymbolConverter.cs" />

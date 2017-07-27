@@ -14,10 +14,15 @@ namespace gEngine.Symbol
         string Url { get; set; }
         PointSymbol GetPointSymbol(string name);
         StrokeSymbol GetStrokeSymbol(string name);
+        LineSymbol GetLineSymbol(string name);
         FillSymbol GetFillSymbol(string name);
         PointSymbols PointSymbols { get; set; }
+
+        LineSymbols LineSymbols { get; set; }
     }
 
 
     public class PointSymbols : Dictionary<string, PointSymbol> { }
+
+    public class LineSymbols : Dictionary<string, LineSymbol> { }
 }

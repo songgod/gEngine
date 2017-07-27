@@ -1,5 +1,11 @@
-﻿using gEngine.Graph.Ge.Basic;
+﻿using DevExpress.Mvvm;
+using DevExpress.Xpf.Bars;
+using DevExpress.Xpf.Ribbon;
+using gEngine.Graph.Ge;
+using gEngine.Graph.Ge.Basic;
 using gEngine.RibbonPageCategory;
+using gEngine.Symbol;
+using gEngine.View.Ge;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,13 +31,78 @@ namespace gEngine.RibbonPageCategory.Ge.Basic
         public WellLineRibbonPageCategory()
         {
             InitializeComponent();
+            InitPointStyle();
+        }
+        private void InitPointStyle()
+        {
+            GalleryDropDownPopupMenu menu = new GalleryDropDownPopupMenu();
+            Gallery gallery = new Gallery();
+            gallery.ColCount = 4;
+            gallery.ItemDescriptionHorizontalAlignment = HorizontalAlignment.Left;
+            gallery.IsItemCaptionVisible = true;
+            gallery.IsItemDescriptionVisible = true;
+
+            GalleryItemGroup group = new GalleryItemGroup();
+            group.Caption = "简单线";
+            group.IsCaptionVisible = DevExpress.Utils.DefaultBoolean.True;
+
+            ComplexLineStyle pstyle = new ComplexLineStyle();
+            
+            pstyle.Width = 20;
+            
+            pstyle.Stroke = new SolidColorBrush(Colors.Black);
+            OptionSetting setting = LineStyle2OptionSettingConverter.CreateFromLineStyle(pstyle);
+
+            foreach (KeyValuePair<string, ISymbolFactory> kv in gEngine.Symbol.Registry.SymbolFactorys)
+            {
+                string key = kv.Key;
+                LineSymbols pss = kv.Value.LineSymbols;
+
+                foreach (LineSymbol symbol in pss.Values)
+                {
+                    Path path = symbol.Create(setting) as Path;
+
+                    if (path != null)
+                    {
+                        GalleryItem item = new GalleryItem();
+                        item.Caption = path;
+                        item.Command = SelectBarCommand;
+                        item.CommandParameter = new string[] { key, symbol.Name };
+                        group.Items.Add(item);
+                    }
+                }
+            }
+
+            gallery.Groups.Add(group);
+            menu.Gallery = gallery;
+            bsbLineStyle.PopupControl = menu;
         }
 
+        private void Path_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            //Path path = e.OriginalSource as Path;
+            //PointSymbol symbol = path.Tag as PointSymbol;
+            //WellLocation wl = this.DataContext as WellLocation;
+            //wl.PointStyle.Symbol = symbol.Name;
+
+        }
         public override Type SupportType
         {
             get
             {
                 return typeof(Graph.Ge.Basic.Line);
+            }
+        }
+        public ICommand SelectBarCommand
+        {
+            get
+            {
+                return new DelegateCommand<string[]>((parameter) =>
+                {
+                    ComplexLineStyle wl = this.DataContext as ComplexLineStyle;
+                    wl.SymbolLib = parameter[0] as string;
+                    wl.Symbol = parameter[1] as string;
+                });
             }
         }
     }

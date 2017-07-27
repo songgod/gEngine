@@ -31,24 +31,9 @@
                     <dxe:TextEditSettings  />
                 </dxb:BarEditItem.EditSettings>
             </dxb:BarEditItem>
-            <dxb:BarSplitButtonItem x:Name="biInsertChartLineCommandGroup" ActAsDropDown="True" >
-                <dxr:GalleryDropDownPopupMenu>
-                    <dxr:GalleryDropDownPopupMenu.Gallery>
-                        <dxb:Gallery ColCount="4" ItemDescriptionHorizontalAlignment="Left" IsItemCaptionVisible="False" IsItemDescriptionVisible="False">
-                            <dxb:GalleryItemGroup x:Name="grpInsertChartLine2DCommandGroup"  IsCaptionVisible="True">
-                                <dxb:GalleryItem x:Name="biInsertChartLine" />
-                                <dxb:GalleryItem x:Name="biInsertChartStackedLine" />
-                                <dxb:GalleryItem x:Name="biInsertChartPercentStackedLine"/>
-                                <dxb:GalleryItem x:Name="biInsertChartLineWithMarkers" />
-                                <dxb:GalleryItem x:Name="biInsertChartStackedLineWithMarkers" />
-                                <dxb:GalleryItem x:Name="biInsertChartPercentStackedLineWithMarkers" />
-                            </dxb:GalleryItemGroup>
-                            <dxb:GalleryItemGroup x:Name="grpInsertChartLine3DCommandGroup"  IsCaptionVisible="True">
-                                <dxb:GalleryItem x:Name="biInsertChartLine3D" />
-                            </dxb:GalleryItemGroup>
-                        </dxb:Gallery>
-                    </dxr:GalleryDropDownPopupMenu.Gallery>
-                </dxr:GalleryDropDownPopupMenu>
+            <dxb:BarSplitButtonItem Content="线风格"  LargeGlyph="{dx:DXImage Image=LineStyle_32x32.png}" x:Name="bsbLineStyle"
+                                   Glyph="{dx:DXImage Image=LineStyle_16x16.png}" RibbonStyle="SmallWithText">
+               
             </dxb:BarSplitButtonItem>
         </dxr:RibbonPageGroup>
       
