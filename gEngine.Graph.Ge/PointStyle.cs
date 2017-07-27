@@ -13,7 +13,8 @@ namespace gEngine.Graph.Ge
     {
         public PointStyle()
         {
-            
+            Stroke = new SolidColorBrush(Colors.Black);
+            Fill = new SolidColorBrush(Colors.Red);
         }
 
 
@@ -72,7 +73,7 @@ namespace gEngine.Graph.Ge
 
         // Using a DependencyProperty as the backing store for Stroke.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty StrokeProperty =
-            DependencyProperty.Register("Stroke", typeof(Brush), typeof(PointStyle), new PropertyMetadata(new SolidColorBrush(Colors.Black)));
+            DependencyProperty.Register("Stroke", typeof(Brush), typeof(PointStyle));
 
 
 
@@ -84,7 +85,7 @@ namespace gEngine.Graph.Ge
 
         // Using a DependencyProperty as the backing store for Fill.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty FillProperty =
-            DependencyProperty.Register("Fill", typeof(Brush), typeof(PointStyle), new PropertyMetadata(new SolidColorBrush(Colors.Red)));
+            DependencyProperty.Register("Fill", typeof(Brush), typeof(PointStyle));
 
         protected override Freezable CreateInstanceCore()
         {

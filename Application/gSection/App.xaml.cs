@@ -20,8 +20,9 @@ namespace gSection
             gEngine.Manipulator.Registry.LoadManipulators();
             gEngine.View.Registry.LoadLocalElement();
             gEngine.Project.Registry.LoadLocalElement();
-            gEngine.RibbonPageCategory.Registry.LoadLocalElement();
+            
             gEngine.Symbol.Registry.LoadLocalSymbols();
+            gEngine.RibbonPageCategory.Registry.LoadLocalElement();
             gEngine.Graph.Tpl.Ge.Registry.LoadTemplate();
         }
     }

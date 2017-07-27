@@ -1,4 +1,6 @@
-﻿using System;
+﻿using gEngine.Graph.Interface;
+using gEngine.Utility;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,5 +15,9 @@ namespace gEngine.Symbol
         PointSymbol GetPointSymbol(string name);
         StrokeSymbol GetStrokeSymbol(string name);
         FillSymbol GetFillSymbol(string name);
+        PointSymbols PointSymbols { get; set; }
     }
+
+
+    public class PointSymbols : Dictionary<string, PointSymbol> { }
 }

@@ -13,7 +13,11 @@
              Caption="井符号设置"
              IsVisible="False"
              x:Name="ribWellLocation"
+                             xmlns:prjcmds="clr-namespace:gEngine.Commands;assembly=gEngine.Commands"
              >
+    <gerpc:GeRibbonPageCategory.Resources>
+        <local:ChangePointSymbolMulitiConverter x:Key="ChangePointSymbolMulitiConverter"/>
+    </gerpc:GeRibbonPageCategory.Resources>
     <dxr:RibbonPage x:Uid="dxr:RibbonPage_8" Caption="基本属性">
         <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_30" Caption="">
             <dxb:BarEditItem Content="井号" EditWidth="100" IsEnabled="True" 
@@ -24,7 +28,7 @@
             </dxb:BarEditItem>
             <dxb:BarEditItem x:Uid="dxb:BarEditItem_33" Content="宽度" EditWidth="100"   
                              EditValue="{Binding Path=PointStyle.Width,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" >
-                <dxb:BarEditItem.EditSettings><!--EditValueChanged="BarEditItem_EditValueChanged"-->
+                <dxb:BarEditItem.EditSettings>
                     <dxe:TextEditSettings  />
                 </dxb:BarEditItem.EditSettings>
             </dxb:BarEditItem>
@@ -35,19 +39,46 @@
                 </dxb:BarEditItem.EditSettings>
             </dxb:BarEditItem>
             <dxb:BarEditItem x:Uid="dxb:BarEditItem_34" Content="内部色" EditWidth="100" 
-                             EditValue="{Binding Path=PointStyle.Fill, Mode=TwoWay}">
+                             EditValue="{Binding Path=PointStyle.Fill.Color, Mode=TwoWay}">
                 <dxb:BarEditItem.EditSettings>
                     <dxe:PopupColorEditSettings x:Uid="dxe:PopupColorEditSettings_11"/>
                 </dxb:BarEditItem.EditSettings>
             </dxb:BarEditItem>
-            <dxb:BarEditItem  x:Uid="dxb:BarEditItem_35" Content="边界色" EditWidth="100" >
+            <dxb:BarEditItem  x:Uid="dxb:BarEditItem_35" Content="边界色" EditWidth="100" 
+                              EditValue="{Binding Path=PointStyle.Stroke.Color, Mode=TwoWay}">
                 <dxb:BarEditItem.EditSettings>
                     <dxe:PopupColorEditSettings x:Uid="dxe:PopupColorEditSettings_12" />
                 </dxb:BarEditItem.EditSettings>
             </dxb:BarEditItem>
-            <dxb:BarSplitCheckItem Content="点风格"  LargeGlyph="{dx:DXImage Image=LineStyle_32x32.png}"  
-                                   Glyph="{dx:DXImage Image=LineStyle_16x16.png}" RibbonStyle="SmallWithText"/>
-            
+            <dxb:BarSplitButtonItem Content="点风格"  LargeGlyph="{dx:DXImage Image=LineStyle_32x32.png}" x:Name="bsbPointStyle"
+                                   Glyph="{dx:DXImage Image=LineStyle_16x16.png}" RibbonStyle="SmallWithText">
+                <!--<dxb:BarSplitButtonItem.PopupControl>
+                    <dxb:PopupMenu x:Name="pMenu">
+                        <dxb:BarButtonItem Content="圆形" Glyph="pack://application:,,,/gSection;component/Images/Small/circle-unfilled.png" LargeGlyph="{dx:DXImage Image=Italic_32x32.png}" 
+                                           Command="{Binding SelectBarCommand,ElementName=ribWellLocation}" Tag="ge.GeEllipsePointSymbol">
+                            <dxb:BarButtonItem.CommandParameter>
+                                <MultiBinding Converter="{StaticResource ChangePointSymbolMulitiConverter}">
+                                    <MultiBinding.Bindings>
+                                        <Binding Path="PointStyle"/>
+                                        <Binding Path="Tag" RelativeSource="{RelativeSource Self}"/>
+                                    </MultiBinding.Bindings>
+                                </MultiBinding>
+                            </dxb:BarButtonItem.CommandParameter>
+                        </dxb:BarButtonItem>
+                        <dxb:BarButtonItem Content="矩形" Glyph="pack://application:,,,/gSection;component/Images/Small/rectangle.png" LargeGlyph="{dx:DXImage Image=Italic_32x32.png}" 
+                                           Command="{Binding SelectBarCommand,ElementName=ribWellLocation}" Tag="ge.GeRectanglePointSymbol">
+                            <dxb:BarButtonItem.CommandParameter>
+                                <MultiBinding Converter="{StaticResource ChangePointSymbolMulitiConverter}">
+                                    <MultiBinding.Bindings>
+                                        <Binding Path="PointStyle"/>
+                                        <Binding Path="Tag" RelativeSource="{RelativeSource Self}"/>
+                                    </MultiBinding.Bindings>
+                                </MultiBinding>
+                            </dxb:BarButtonItem.CommandParameter>
+                        </dxb:BarButtonItem>
+                    </dxb:PopupMenu>
+                </dxb:BarSplitButtonItem.PopupControl>-->
+            </dxb:BarSplitButtonItem>
         </dxr:RibbonPageGroup>
     </dxr:RibbonPage>
 </gerpc:GeRibbonPageCategory>
