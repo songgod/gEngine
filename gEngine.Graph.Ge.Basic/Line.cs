@@ -9,10 +9,10 @@ namespace gEngine.Graph.Ge.Basic
 {
     public class Line : Object
     {
-        //public Line()
-        //{
-        //    LinStyle = new ComplexLineStyle() { SymbolLib = "ge", Symbol = "GeEllipsePointSymbol" };
-        //}
+        public Line()
+        {
+            LinStyle = new ComplexLineStyle() { SymbolLib = "ge", Symbol = "GeStoreLineSymbol" };
+        }
         public Point Start
         {
             get { return (Point)GetValue(StartProperty); }
