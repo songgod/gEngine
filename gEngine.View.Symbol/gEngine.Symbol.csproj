@@ -47,12 +47,12 @@
     <Compile Include="Base\DefaultFillSymbol.cs" />
     <Compile Include="Base\DefaultPointSymbol.cs" />
     <Compile Include="Base\DefaultStrokeSymbol.cs" />
+    <Compile Include="Base\ISymbolFactory.cs" />
     <Compile Include="Base\ISymbol.cs" />
     <Compile Include="Base\FillSymbol.cs" />
     <Compile Include="Base\OptionSetting.cs" />
     <Compile Include="Base\StrokePathUtil.cs" />
     <Compile Include="Converter\FillSymbolConverter.cs" />
-    <Compile Include="Base\ISymbolFactory.cs" />
     <Compile Include="Base\StrokeSymbol.cs" />
     <Compile Include="Base\PointSymbol.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -61,6 +61,10 @@
     <Compile Include="Converter\StrokeSymbolConverter.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\gEngine.Graph.Interface\gEngine.Graph.Interface.csproj">
+      <Project>{1C98A821-B030-4FF2-83AE-D49B1B3B8C67}</Project>
+      <Name>gEngine.Graph.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\gEngine.Util\gEngine.Util.csproj">
       <Project>{84ACB6C4-CF62-4F4B-A7E5-5C642EDC041A}</Project>
       <Name>gEngine.Util</Name>

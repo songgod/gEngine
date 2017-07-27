@@ -313,7 +313,7 @@
                         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_28" Content="全图显示" Command="{x:Static prjcmds:OperateViewCommands.FullViewCommand}" CommandTarget="{Binding ElementName=prjctrl}" LargeGlyph="pack://application:,,,/gSection;component/Images/GDS/20150310095307390_easyicon_net_32.ico" Glyph="pack://application:,,,/gSection;component/Images/GDS/20150310095307390_easyicon_net_32.ico"/>
                         <dxb:BarButtonItem  x:Uid="dxb:BarButtonItem_42" x:Name="bbiSelect" Content="选择" 
                                             Command="{x:Static cmds:RibbonCommands.SelectObjectCommand}" CommandTarget="{Binding ElementName=dxrWindow}"
-                                            LargeGlyph="pack://application:,,,/gSection;component/Images/GDS/20150707101222971_easyicon_net_64.ico" Glyph="pack://application:,,,/gSection;component/Images/GDS/20150707101222971_easyicon_net_64.ico" RibbonStyle="Large"/>
+                                            LargeGlyph="{dx:DXImage Image=SelectTool_32x32.png}" Glyph="{dx:DXImage Image=SelectTool_16x16.png}" RibbonStyle="Large"/>
                             <!--MouseLeftButtonDown="bbiSelect_MouseLeftButtonDown"-->
                     </dxr:RibbonPageGroup>
                     <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_19" Caption="视图缩放">
