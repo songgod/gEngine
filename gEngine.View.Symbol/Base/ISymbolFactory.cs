@@ -15,9 +15,6 @@ namespace gEngine.Symbol
         PointSymbol GetPointSymbol(string name);
         StrokeSymbol GetStrokeSymbol(string name);
         FillSymbol GetFillSymbol(string name);
-        PointSymbols PointSymbols { get; set; }
+        List<string> PointSymbolNames { get; set; }
     }
-
-
-    public class PointSymbols : Dictionary<string, PointSymbol> { }
 }
