@@ -20,37 +20,23 @@ namespace gEngine.Graph.Ge
             ComplexLine,
             Unkown
         }
-       
-
         public virtual LineType LinType { get { return LineType.Unkown; } }
         protected override Freezable CreateInstanceCore()
         {
             return new LineStyle();
         }
-    }
 
-    public class NormalLineStyle : LineStyle
-    {
-        public NormalLineStyle()
+        public Color Stroke
         {
-            Width = 1;
-            Color = Colors.Black;
-        }
-        public override LineType LinType { get { return LineType.NormalLine; } }
-
-
-        
-        public Color Color
-        {
-            get { return (Color)GetValue(ColorProperty); }
-            set { SetValue(ColorProperty, value); }
+            get { return (Color)GetValue(StrokeProperty); }
+            set { SetValue(StrokeProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for Width.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ColorProperty =
-            DependencyProperty.Register("Color", typeof(Color), typeof(NormalLineStyle), new PropertyMetadata(Colors.Black));
+        // Using a DependencyProperty as the backing store for Stroke.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty StrokeProperty =
+            DependencyProperty.Register("Stroke", typeof(Color), typeof(LineStyle), new PropertyMetadata(Colors.Black));
 
-       
+
         public double Width
         {
             get { return (double)GetValue(WidthProperty); }
@@ -59,8 +45,22 @@ namespace gEngine.Graph.Ge
 
         // Using a DependencyProperty as the backing store for Width.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty WidthProperty =
-            DependencyProperty.Register("Width", typeof(double), typeof(NormalLineStyle), new PropertyMetadata(2.0));
+            DependencyProperty.Register("Width", typeof(double), typeof(LineStyle), new PropertyMetadata(2.0));
 
+    }
+
+    public class NormalLineStyle : LineStyle
+    {
+        public NormalLineStyle()
+        {
+        }
+        public override LineType LinType { get { return LineType.NormalLine; } }
+
+        protected override Freezable CreateInstanceCore()
+        {
+            return new NormalLineStyle();
+        }
+        
         public DoubleCollection StrokeDashArray
         {
             get { return (DoubleCollection)GetValue(StrokeDashArrayProperty); }
@@ -77,11 +77,15 @@ namespace gEngine.Graph.Ge
     {
         public ComplexLineStyle()
         {
-            Stroke = new SolidColorBrush(Colors.Black);
+            
         }
         public override LineType LinType { get { return LineType.ComplexLine; } }
 
-       
+        protected override Freezable CreateInstanceCore()
+        {
+            return new ComplexLineStyle();
+        }
+
         public string Symbol
         {
             get { return (string)GetValue(SymbolProperty); }
@@ -103,25 +107,5 @@ namespace gEngine.Graph.Ge
             DependencyProperty.Register("SymbolLib", typeof(string), typeof(ComplexLineStyle), new PropertyMetadata(""));
 
         
-        public Brush Stroke
-        {
-            get { return (Brush)GetValue(StrokeProperty); }
-            set { SetValue(StrokeProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for Stroke.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty StrokeProperty =
-            DependencyProperty.Register("Stroke", typeof(Brush), typeof(ComplexLineStyle), new PropertyMetadata(new SolidColorBrush(Colors.Black)));
-
-       
-        public double Width
-        {
-            get { return (double)GetValue(WidthProperty); }
-            set { SetValue(WidthProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for Width.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty WidthProperty =
-            DependencyProperty.Register("Width", typeof(double), typeof(ComplexLineStyle), new PropertyMetadata(2.0));
     }
 }

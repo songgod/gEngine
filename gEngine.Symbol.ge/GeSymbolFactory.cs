@@ -12,27 +12,50 @@ namespace gEngine.Symbol.gesym
 {
     public class GeSymbolFactory : ISymbolFactory
     {
-        public Dictionary<string,FillSymbol> DicFillSymbol { get; set; }
-        public Dictionary<string,StrokeSymbol> DicStrokeSymbol { get; set; }
+        public Dictionary<string, FillSymbol> DicFillSymbol { get; set; }
+        public Dictionary<string, StrokeSymbol> DicStrokeSymbol { get; set; }
         public Dictionary<string, PointSymbol> DicPointSymbol { get; set; }
         public string Url { get; set; }
 
-        public List<string> PointSymbolNames { get; set; }
-        
+        public List<string> PointSymbolNames
+        {
+            get
+            {
+                return DicPointSymbol.Keys.ToList();
+            }
+            set
+            {
+            }
+        }
+
+        public List<string> StrokeSymbolNames
+        {
+            get
+            {
+                return DicStrokeSymbol.Keys.ToList();
+            }
+            set
+            {
+            }
+        }
+
+        public List<string> FillSymbolNames
+        {
+            get
+            {
+                return DicFillSymbol.Keys.ToList();
+            }
+            set
+            {
+            }
+        }
+
 
         public GeSymbolFactory()
         {
-            PointSymbolNames = new List<string>();
             DicFillSymbol = new Dictionary<string, FillSymbol>();
             DicStrokeSymbol = new Dictionary<string, StrokeSymbol>();
             DicPointSymbol = new Dictionary<string, PointSymbol>();
-            Init();
-        }
-
-        private void Init()
-        {
-            DicFillSymbol["GeFillSymbol"] = new GeFillSymbol();
-            DicStrokeSymbol["WavyLineSymbol"] = new GeWavyLineSymbol();
         }
 
         public FillSymbol GetFillSymbol(string name)
@@ -67,28 +90,10 @@ namespace gEngine.Symbol.gesym
 
         public bool LoadFromUrl(string url)
         {
-            string ext = url.Substring(url.LastIndexOf('.') + 1);
-            string libpath = Directory.GetCurrentDirectory() + "\\gEngine.Symbol." + ext + ".dll";
-            try
-            {
-                Assembly ab = Assembly.LoadFrom(libpath);
-                Type[] types = ab.GetTypes();
-                foreach (Type t in types)
-                {
-                    Type type = typeof(PointSymbol);
-                    if (type == t.BaseType)
-                    {
-                        PointSymbol ps = (PointSymbol)(ab.CreateInstance(t.FullName));
-                        DicPointSymbol[ps.Name] = ps;
-                        PointSymbolNames.Add(ps.Name);
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                Log.LogWarning("load symbol plugin " + libpath + "failed!");
-            }
-
+            DicFillSymbol["GeFillSymbol"] = new GeFillSymbol();
+            DicStrokeSymbol["WavyLineSymbol"] = new GeWavyLineSymbol();
+            DicPointSymbol["GeEllipsePointSymbol"] = new GeEllipsePointSymbol();
+            DicPointSymbol["GeRectanglePointSymbol"] = new GeRectanglePointSymbol();
             return true;
         }
     }

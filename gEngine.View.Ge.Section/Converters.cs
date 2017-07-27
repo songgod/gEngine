@@ -96,7 +96,7 @@ namespace gEngine.View.Ge.Section
         {
             int type = (int)values[0];
             SectionInfo secobj = (SectionInfo)values[1];
-            LineStyle linestyle = new NormalLineStyle() { Color = Colors.Black, Width = 1.0 };
+            LineStyle linestyle = new NormalLineStyle() { Stroke = Colors.Black, Width = 1.0 };
             if (secobj.DicLineStyle.ContainsKey(type) == false)
                 return linestyle;
             return secobj.DicLineStyle[type];

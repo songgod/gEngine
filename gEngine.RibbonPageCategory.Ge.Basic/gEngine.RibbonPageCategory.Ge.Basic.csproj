@@ -50,12 +50,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WellLineRibbonPageCategory.xaml.cs">
-      <DependentUpon>WellLineRibbonPageCategory.xaml</DependentUpon>
+    <Compile Include="LineRibbonPageCategory.xaml.cs">
+      <DependentUpon>LineRibbonPageCategory.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="WellLineRibbonPageCategory.xaml">
+    <Page Include="LineRibbonPageCategory.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

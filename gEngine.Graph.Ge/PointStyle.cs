@@ -13,7 +13,6 @@ namespace gEngine.Graph.Ge
     {
         public PointStyle()
         {
-            Stroke = new SolidColorBrush(Colors.Black);
             Fill = new SolidColorBrush(Colors.Red);
         }
 
@@ -65,15 +64,15 @@ namespace gEngine.Graph.Ge
 
 
 
-        public Brush Stroke
+        public Color Stroke
         {
-            get { return (Brush)GetValue(StrokeProperty); }
+            get { return (Color)GetValue(StrokeProperty); }
             set { SetValue(StrokeProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Stroke.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty StrokeProperty =
-            DependencyProperty.Register("Stroke", typeof(Brush), typeof(PointStyle));
+            DependencyProperty.Register("Stroke", typeof(Color), typeof(PointStyle), new PropertyMetadata(Colors.Black));
 
 
 
