@@ -17,15 +17,12 @@ namespace gEngine.Symbol
         static public StrokeSymbol DefaultStrokeSymbol { get; set; }
         static public FillSymbol DefaultFillSymbol { get; set; }
 
-        static public LineSymbol DefaultLineSymbol { get; set; }
-
         static Registry()
         {
             SymbolFactorys = new Dictionary<string, ISymbolFactory>();
             DefaultPointSymbol = new DefaultPointSymbol();
             DefaultStrokeSymbol = new DefaultStrokeSymbol();
             DefaultFillSymbol = new DefaultFillSymbol();
-            DefaultLineSymbol = new DefaultLineSymbol();
         }
 
         static public ISymbolFactory LoadSymbolFactory(string ext)
@@ -77,9 +74,7 @@ namespace gEngine.Symbol
             if (factory.LoadFromUrl(url) == false)
                 return;
             factory.Url = url;
-            factory.PointSymbols = RegisterPointSymbols(ext);
-            factory.LineSymbols = RegisterLineSymbols(ext);
-
+            
             SymbolFactorys[filename] = factory;
         }
 
@@ -250,59 +245,6 @@ namespace gEngine.Symbol
                 return DefaultFillSymbol.Create(param);
             return res;
         }
-
-        static public PointSymbols RegisterPointSymbols(string ext)
-        {
-            PointSymbols pss = new PointSymbols();
-            string libpath = Directory.GetCurrentDirectory() + "\\gEngine.Symbol." + ext + ".dll";
-            try
-            {
-                Assembly ab = Assembly.LoadFrom(libpath);
-                Type[] types = ab.GetTypes();
-                foreach (Type t in types)
-                {
-                    Type type = typeof(PointSymbol);
-                    if (type == t.BaseType)
-                    {
-                        PointSymbol ps = (PointSymbol)(ab.CreateInstance(t.FullName));
-                        pss[ps.Name] = ps;
-                    }
-                }
-
-            }
-            catch (Exception)
-            {
-                Log.LogWarning("load symbol plugin " + libpath + "failed!");
-            }
-            return pss;
-        }
-
-        static public LineSymbols RegisterLineSymbols(string ext)
-        {
-            LineSymbols lss = new LineSymbols();
-            string libpath = Directory.GetCurrentDirectory() + "\\gEngine.Symbol." + ext + ".dll";
-            try
-            {
-                Assembly ab = Assembly.LoadFrom(libpath);
-                Type[] types = ab.GetTypes();
-                foreach (Type t in types)
-                {
-                    Type type = typeof(LineSymbol);
-                    if (type == t.BaseType)
-                    {
-                        LineSymbol ls = (LineSymbol)(ab.CreateInstance(t.FullName));
-                        lss[ls.Name] = ls;
-                    }
-                }
-
-            }
-            catch (Exception)
-            {
-                Log.LogWarning("load symbol plugin " + libpath + "failed!");
-            }
-            return lss;
-        }
-
 
 
     }

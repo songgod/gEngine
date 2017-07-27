@@ -62,10 +62,11 @@ namespace gEngine.RibbonPageCategory.Ge.Plane
             foreach (KeyValuePair<string, ISymbolFactory> kv in gEngine.Symbol.Registry.SymbolFactorys)
             {
                 string key = kv.Key;
-                PointSymbols pss = kv.Value.PointSymbols;
 
-                foreach (PointSymbol symbol in pss.Values)
+                foreach (string symbolName in kv.Value.PointSymbolNames)
                 {
+                    PointSymbol symbol =kv.Value.GetPointSymbol(symbolName);
+
                     Path path = symbol.Create(setting) as Path;
 
                     if (path != null)
@@ -73,7 +74,7 @@ namespace gEngine.RibbonPageCategory.Ge.Plane
                         GalleryItem item = new GalleryItem();
                         item.Caption = path;
                         item.Command = SelectBarCommand;
-                        item.CommandParameter = new string[] { key, symbol.Name };
+                        item.CommandParameter = new string[] { key, symbolName };
                         group.Items.Add(item);
                     }
                 }
@@ -82,15 +83,6 @@ namespace gEngine.RibbonPageCategory.Ge.Plane
             gallery.Groups.Add(group);
             menu.Gallery = gallery;
             bsbPointStyle.PopupControl = menu;
-        }
-
-        private void Path_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            Path path = e.OriginalSource as Path;
-            PointSymbol symbol = path.Tag as PointSymbol;
-            WellLocation wl = this.DataContext as WellLocation;
-            wl.PointStyle.Symbol = symbol.Name;
-
         }
 
         public override Type SupportType
