@@ -1,6 +1,10 @@
-﻿using gEngine.Utility;
+﻿using gEngine.Graph.Interface;
+using gEngine.Utility;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Windows;
 
 namespace gEngine.Graph.Ge.Column
@@ -10,6 +14,28 @@ namespace gEngine.Graph.Ge.Column
         public Well()
         {
             LstColumns = new LstWellColumns();
+        }
+
+        public override IObject DeepClone()
+        {
+            Well well = new Well();
+            foreach (WellColumns wcs in LstColumns)
+            {
+                WellColumns twcs = new WellColumns();
+                foreach (WellColumn wc in wcs)
+                {
+                    WellColumn twc = (WellColumn) (wc.DeepClone());
+                    twc.Owner = well;
+                    twcs.Add(twc);
+                }
+
+                well.LstColumns.Add(twcs);
+            }
+
+            well.Name = Name;
+            well.Location = Location;
+            well.LongitudinalProportion = LongitudinalProportion;
+            return well;
         }
 
         public LstWellColumns LstColumns

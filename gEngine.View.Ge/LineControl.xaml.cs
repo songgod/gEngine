@@ -43,7 +43,7 @@ namespace gEngine.View.Ge
             if(ls.LinType==LineStyle.LineType.NormalLine)
             {
                 NormalLineStyle nls = ls as NormalLineStyle;
-                Path path = new Path() { Data = lc.Data, Stroke = new SolidColorBrush(nls.Color),StrokeThickness=nls.Width };
+                Path path = new Path() { Data = lc.Data, Stroke = new SolidColorBrush(nls.Color),StrokeThickness=nls.Width, StrokeDashArray=nls.StrokeDashArray };
                 lc.Content = path;
             }
             else if(ls.LinType==LineStyle.LineType.ComplexLine)
@@ -58,7 +58,8 @@ namespace gEngine.View.Ge
 
         // Using a DependencyProperty as the backing store for LineStyle.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty LineStyleProperty =
-            DependencyProperty.Register("LineStyle", typeof(LineStyle), typeof(LineControl), new PropertyMetadata(null,new PropertyChangedCallback(LineControl.OnLineStyleChanged)));
+            DependencyProperty.Register("LineStyle", typeof(LineStyle), typeof(LineControl), 
+                new PropertyMetadata(null,new PropertyChangedCallback(LineControl.OnLineStyleChanged)));
 
 
         public PathGeometry Data
@@ -87,7 +88,7 @@ namespace gEngine.View.Ge
             if (ls.LinType == LineStyle.LineType.NormalLine)
             {
                 NormalLineStyle nls = ls as NormalLineStyle;
-                Path path = new Path() { Data = pg, Stroke = new SolidColorBrush(nls.Color), StrokeThickness = nls.Width };
+                Path path = new Path() { Data = pg, Stroke = new SolidColorBrush(nls.Color), StrokeThickness = nls.Width, StrokeDashArray = nls.StrokeDashArray };
                 lc.Content = path;
             }
             else if (ls.LinType == LineStyle.LineType.ComplexLine)

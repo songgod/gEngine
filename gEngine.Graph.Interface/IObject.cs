@@ -14,6 +14,8 @@ namespace gEngine.Graph.Interface
 
         string DataTemplate { get; set; }
         bool IsSelected { get; set; }
+
+        IObject DeepClone();
     }
     public class IObjects : ObservedCollection<IObject> { }
 }

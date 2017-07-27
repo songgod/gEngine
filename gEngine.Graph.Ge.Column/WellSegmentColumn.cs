@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using gEngine.Graph.Interface;
 
 namespace gEngine.Graph.Ge.Column
 {
@@ -14,7 +15,26 @@ namespace gEngine.Graph.Ge.Column
         {
             Segments = new List<Segment>();
         }
-       public List<Segment> Segments
+
+        public override IObject DeepClone()
+        {
+            WellSegmentColumn wsc = new WellSegmentColumn();
+            wsc.Name = Name;
+            wsc.Color = Color;
+            wsc.Width = Width;
+            foreach (Segment seg in Segments)
+            {
+                Segment wseg = new Segment();
+                wseg.Top = seg.Top;
+                wseg.Bottom = seg.Bottom;
+                wseg.Name = seg.Name;
+                wseg.Color = seg.Color;
+                wsc.Segments.Add(wseg);
+            }
+            return wsc;
+        }
+
+        public List<Segment> Segments
         {
             get { return (List<Segment>) GetValue(SegmentsProperty); }
             set { SetValue(SegmentsProperty, value); }
@@ -26,6 +46,7 @@ namespace gEngine.Graph.Ge.Column
 
         public class Segment : DependencyObject
         {
+            
             public double Top
             {
                 get { return (double) GetValue(TopProperty); }

@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Media;
 using static gEngine.Graph.Ge.Column.Enums;
+using gEngine.Graph.Interface;
 
 namespace gEngine.Graph.Ge.Column
 {
@@ -11,6 +12,15 @@ namespace gEngine.Graph.Ge.Column
         {
             get { return (Well) GetValue(OwnerProperty); }
             set { SetValue(OwnerProperty, value); }
+        }
+
+        public override IObject DeepClone()
+        {
+            WellColumn wc = new WellColumn();
+            wc.Name = Name;
+            wc.Color = Color;
+            wc.Width = Width;
+            return wc;
         }
 
         // Using a DependencyProperty as the backing store for Owner.  This enables animation, styling, binding, etc...

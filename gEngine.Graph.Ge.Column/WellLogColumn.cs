@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using static gEngine.Graph.Ge.Column.Enums;
+using gEngine.Graph.Interface;
 
 namespace gEngine.Graph.Ge.Column
 {
@@ -15,6 +16,17 @@ namespace gEngine.Graph.Ge.Column
         public WellLogColumn()
         {
             Values = new ObsDoubles();
+        }
+
+        public override IObject DeepClone()
+        {
+            WellLogColumn wlc = new WellLogColumn();
+            wlc.Name = Name;
+            wlc.Color = Color;
+            wlc.Width = Width;
+            wlc.Values = new Utility.ObsDoubles(Values);
+            wlc.MathType = MathType;
+            return wlc;
         }
 
         public ObsDoubles Values

@@ -31,7 +31,6 @@ namespace gEngine.Graph.Ge
             DependencyProperty.Register("Visible", typeof(bool), typeof(Object), new PropertyMetadata(true));
 
 
-
         public bool Editable
         {
             get { return (bool)GetValue(EditableProperty); }
@@ -67,5 +66,10 @@ namespace gEngine.Graph.Ge
         // Using a DependencyProperty as the backing store for Editable.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IsSelectedProperty =
             DependencyProperty.Register("IsSelected", typeof(bool), typeof(Object), new PropertyMetadata(false));
+
+        public virtual IObject DeepClone()
+        {
+            throw new Exception("No implements");
+        }
     }
 }
