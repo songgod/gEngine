@@ -15,17 +15,21 @@ namespace gEngine.Symbol.gesym
         public Dictionary<string,FillSymbol> DicFillSymbol { get; set; }
         public Dictionary<string,StrokeSymbol> DicStrokeSymbol { get; set; }
         public Dictionary<string, PointSymbol> DicPointSymbol { get; set; }
+        public Dictionary<string, LineSymbol> DicLineSymbol { get; set; }
         public string Url { get; set; }
 
         public List<string> PointSymbolNames { get; set; }
-        
 
+        public List<string> LineSymbolNames { get; set; }
         public GeSymbolFactory()
         {
             PointSymbolNames = new List<string>();
+            LineSymbolNames = new List<string>();
             DicFillSymbol = new Dictionary<string, FillSymbol>();
             DicStrokeSymbol = new Dictionary<string, StrokeSymbol>();
             DicPointSymbol = new Dictionary<string, PointSymbol>();
+            DicLineSymbol = new Dictionary<string, LineSymbol>();
+
             Init();
         }
 
@@ -52,6 +56,15 @@ namespace gEngine.Symbol.gesym
 
             if (DicPointSymbol.ContainsKey(name))
                 return DicPointSymbol[name];
+            return null;
+        }
+        public LineSymbol GetLineSymbol(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+                return null;
+
+            if (DicLineSymbol.ContainsKey(name))
+                return DicLineSymbol[name];
             return null;
         }
 
@@ -81,6 +94,14 @@ namespace gEngine.Symbol.gesym
                         PointSymbol ps = (PointSymbol)(ab.CreateInstance(t.FullName));
                         DicPointSymbol[ps.Name] = ps;
                         PointSymbolNames.Add(ps.Name);
+                    }
+
+                    type = typeof(LineSymbol);
+                    if (type == t.BaseType)
+                    {
+                        LineSymbol ps = (LineSymbol)(ab.CreateInstance(t.FullName));
+                        DicLineSymbol[ps.Name] = ps;
+                        LineSymbolNames.Add(ps.Name);
                     }
                 }
             }

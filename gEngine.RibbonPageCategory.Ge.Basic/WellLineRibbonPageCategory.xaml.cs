@@ -31,13 +31,13 @@ namespace gEngine.RibbonPageCategory.Ge.Basic
         public WellLineRibbonPageCategory()
         {
             InitializeComponent();
-            InitPointStyle();
+            InitLineStyle();
         }
-        private void InitPointStyle()
+        private void InitLineStyle()
         {
             GalleryDropDownPopupMenu menu = new GalleryDropDownPopupMenu();
             Gallery gallery = new Gallery();
-            gallery.ColCount = 4;
+            gallery.ColCount = 1;
             gallery.ItemDescriptionHorizontalAlignment = HorizontalAlignment.Left;
             gallery.IsItemCaptionVisible = true;
             gallery.IsItemDescriptionVisible = true;
@@ -56,10 +56,12 @@ namespace gEngine.RibbonPageCategory.Ge.Basic
             foreach (KeyValuePair<string, ISymbolFactory> kv in gEngine.Symbol.Registry.SymbolFactorys)
             {
                 string key = kv.Key;
-                LineSymbols pss = kv.Value.LineSymbols;
+                
 
-                foreach (LineSymbol symbol in pss.Values)
+                foreach (string symbolName in kv.Value.LineSymbolNames)
                 {
+                    LineSymbol symbol = kv.Value.GetLineSymbol(symbolName);
+
                     Path path = symbol.Create(setting) as Path;
 
                     if (path != null)
@@ -67,7 +69,7 @@ namespace gEngine.RibbonPageCategory.Ge.Basic
                         GalleryItem item = new GalleryItem();
                         item.Caption = path;
                         item.Command = SelectBarCommand;
-                        item.CommandParameter = new string[] { key, symbol.Name };
+                        item.CommandParameter = new string[] { key, symbolName };
                         group.Items.Add(item);
                     }
                 }

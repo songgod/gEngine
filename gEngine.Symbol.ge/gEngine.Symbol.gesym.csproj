@@ -46,6 +46,7 @@
     <Compile Include="GeEllipsePointSymbol.cs" />
     <Compile Include="GeFillSymbol.cs" />
     <Compile Include="GeRectanglePointSymbol.cs" />
+    <Compile Include="GeStoreLineSymbol.cs" />
     <Compile Include="GeSymbolFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GeWavyLineSymbol.cs" />
