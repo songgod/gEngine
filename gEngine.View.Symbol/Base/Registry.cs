@@ -176,14 +176,12 @@ namespace gEngine.Symbol
 
         static private System.Windows.Shapes.Path CreateStrokePath(PathGeometry pg, LineOptionSetting param)
         {
-            Brush stroke = param.GetValue<Brush>("Stroke");
-            if (stroke == null)
-                stroke = new SolidColorBrush(Colors.Black);
+            Color stroke = param.GetValue<Color>("Stroke");
             double strokeThickness = param.GetValue<double>("Width");
             if (strokeThickness <= 0)
                 strokeThickness = 1;
 
-            System.Windows.Shapes.Path res = new System.Windows.Shapes.Path() { Stroke = stroke, StrokeThickness = strokeThickness };
+            System.Windows.Shapes.Path res = new System.Windows.Shapes.Path() { Stroke = new SolidColorBrush(stroke), StrokeThickness = strokeThickness };
             res.Data = pg;
             return res;
         }

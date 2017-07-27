@@ -42,15 +42,15 @@ namespace gEngine.RibbonPageCategory
                 Path dot11line = new Path { Data = pg, Stroke = new SolidColorBrush(Colors.Black), StrokeDashArray = new DoubleCollection() { 1, 1 } };
                 group.Items.Add(new GalleryItem() { Caption = dot11line, Command = null, CommandParameter = new string[] { "Dot", dot11line.StrokeDashArray.ToString() } });
                 Path dot121line = new Path { Data = pg, Stroke = new SolidColorBrush(Colors.Black), StrokeDashArray = new DoubleCollection() { 1, 2, 1 } };
-                group.Items.Add(new GalleryItem() { Caption = dot121line, Command = null, CommandParameter = new string[] { "Dot", dot11line.StrokeDashArray.ToString() } });
+                group.Items.Add(new GalleryItem() { Caption = dot121line, Command = null, CommandParameter = new string[] { "Dot", dot121line.StrokeDashArray.ToString() } });
                 Path dot131line = new Path { Data = pg, Stroke = new SolidColorBrush(Colors.Black), StrokeDashArray = new DoubleCollection() { 1, 3, 1 } };
-                group.Items.Add(new GalleryItem() { Caption = dot131line, Command = null, CommandParameter = new string[] { "Dot", dot11line.StrokeDashArray.ToString() } });
+                group.Items.Add(new GalleryItem() { Caption = dot131line, Command = null, CommandParameter = new string[] { "Dot", dot131line.StrokeDashArray.ToString() } });
                 Path dot141line = new Path { Data = pg, Stroke = new SolidColorBrush(Colors.Black), StrokeDashArray = new DoubleCollection() { 1, 4, 1 } };
-                group.Items.Add(new GalleryItem() { Caption = dot141line, Command = null, CommandParameter = new string[] { "Dot", dot11line.StrokeDashArray.ToString() } });
+                group.Items.Add(new GalleryItem() { Caption = dot141line, Command = null, CommandParameter = new string[] { "Dot", dot141line.StrokeDashArray.ToString() } });
                 Path dot232line = new Path { Data = pg, Stroke = new SolidColorBrush(Colors.Black), StrokeDashArray = new DoubleCollection() { 2, 3, 2 } };
-                group.Items.Add(new GalleryItem() { Caption = dot232line, Command = null, CommandParameter = new string[] { "Dot", dot11line.StrokeDashArray.ToString() } });
+                group.Items.Add(new GalleryItem() { Caption = dot232line, Command = null, CommandParameter = new string[] { "Dot", dot232line.StrokeDashArray.ToString() } });
                 Path dot242line = new Path { Data = pg, Stroke = new SolidColorBrush(Colors.Black), StrokeDashArray = new DoubleCollection() { 2, 4, 2 } };
-                group.Items.Add(new GalleryItem() { Caption = dot242line, Command = null, CommandParameter = new string[] { "Dot", dot11line.StrokeDashArray.ToString() } });
+                group.Items.Add(new GalleryItem() { Caption = dot242line, Command = null, CommandParameter = new string[] { "Dot", dot242line.StrokeDashArray.ToString() } });
                 gallery.Groups.Add(group);
             }
 
