@@ -93,6 +93,50 @@ namespace gEngine.Util.Ge.Section
             return layer;
         }
 
+        public Layer CreateSectionLayer(IDBSource db, Stack<WellLocation> wellLocs, string horizonName, string discreteName, SectionSetEntity sse)
+        {
+            Layer layer = new SectionLayer();
+
+            WellCreator wc = new WellCreator();
+
+            // 井曲线数据
+            int WellLocation = 0;
+            IDBWells wells = new DBWells();
+            foreach (WellLocation wellLoc in wellLocs)
+            {
+                string name = wellLoc.WellNum;
+                IDBWell wl = db.GetWell(name);
+                if (wl == null)
+                    continue;
+                IDBHorizons horizons = db.GetHorizonsByWell(name, horizonName);
+                IDBDiscreteDatas discretes = db.GetDiscretesByWell(name, discreteName);
+                Well well = wc.Create(wl, horizons, discretes);
+                if (well != null)
+                {
+                    well.LongitudinalProportion = sse.SLongitudinalProportion;
+                    well.Location = WellLocation;
+                    foreach (var item in well.LstColumns)
+                    {
+                        WellLocation += item[0].Width;
+                    }
+                    WellLocation += 50;
+
+                    string tplName = sse.SelTplName;
+                    if (string.IsNullOrEmpty(tplName))
+                    {
+                        layer.Objects.Insert(0, well);
+                    }
+                    else
+                    {
+                        IObject WellTpl = gEngine.Graph.Tpl.Ge.Registry.GetTemplate(typeof(Well), tplName);
+                        Well newWell = CreateWellByTpl(WellTpl, well) as Well;
+                        layer.Objects.Insert(0, newWell);
+                    }
+                }
+            }
+            return layer;
+        }
+
         public IObject CreateWellByTpl(IObject tplObject, IObject destObject)
         {
             Well Well = destObject as Well;
@@ -100,7 +144,6 @@ namespace gEngine.Util.Ge.Section
 
             destWell.Name = Well.Name;
             destWell.Location = Well.Location;
-            destWell.LongitudinalProportion = Well.LongitudinalProportion;
             foreach (WellColumns Wellcolumns in destWell.LstColumns)
             {
                 foreach (WellColumn WellColumn in Wellcolumns)

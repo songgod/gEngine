@@ -76,35 +76,6 @@ namespace gEngine.Project.Ge.Section.Commands
             e.Handled = true;
         }
 
-        //private void Mp_OnFinishSelect(Stack<WellLocation> wellLocs)
-        //{
-        //    if (Project == null)
-        //        return;
-
-        //    string horizonName = string.Empty;
-        //    string discreteName = string.Empty;
-        //    IDBSource db = Project.DBSource;
-
-        //    List<string> horizonsNames = Project.DBSource.HorizonsNames;
-        //    List<string> discreteNames = Project.DBSource.DiscreteDataNames;
-        //    if (horizonsNames.Count != 0)
-        //    {
-        //        horizonName = horizonsNames[0];
-        //    }
-        //    if (discreteNames.Count != 0)
-        //    {
-        //        discreteName = discreteNames[0];
-        //    }
-
-        //    SectionLayerCreator sc = new SectionLayerCreator();
-        //    Layer layer = sc.CreateSectionLayer(db, wellLocs, horizonName, discreteName);
-        //    layer.Name = "柱状图Layer图层";
-        //    ILayers layers = new ILayers();
-        //    layers.Add(layer);
-        //    IMap map = Project.NewMap("Ge", "Column", layers);
-        //    //map.Layers.Add(layer);
-        //}
-
         private void Mp_OnFinishSelect(Stack<WellLocation> wellLocs)
         {
             if (Project == null)
@@ -126,16 +97,16 @@ namespace gEngine.Project.Ge.Section.Commands
             }
 
             DXSectionSet SectionSet = new DXSectionSet();
+            SectionSet.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             if (SectionSet.ShowDialog() == true)
             {
-                Well WellTpl = gEngine.Graph.Tpl.Ge.Registry.GetTemplate(typeof(Well), SectionSet.SelTplName) as Well;
-
+                SectionSetEntity sse = SectionSet.DataContext as SectionSetEntity;
                 SectionLayerCreator sc = new SectionLayerCreator();
-                Layer layer = sc.CreateSectionLayer(db, wellLocs, horizonName, discreteName, WellTpl);
+                Layer layer = sc.CreateSectionLayer(db, wellLocs, horizonName, discreteName, sse);
                 layer.Name = "柱状图Layer图层";
                 ILayers layers = new ILayers();
                 layers.Add(layer);
-                IMap map = Project.NewMap("Ge", "Column", layers);
+                IMap map = Project.NewMap("Ge", sse.MapName, layers);
             }
         }
     }

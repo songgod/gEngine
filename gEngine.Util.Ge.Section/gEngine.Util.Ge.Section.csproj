@@ -31,13 +31,18 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DevExpress.Mvvm.v16.1, Version=16.1.2.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Core.v16.1, Version=16.1.2.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="gTopology, Version=1.0.6375.28341, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\3rdlib\gToplogy\x64\gTopology.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,6 +55,7 @@
     <Compile Include="SectionLayerCreator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SectionLayerEdit.cs" />
+    <Compile Include="SectionSetEntity.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\gEngine.Data.Ge.Txt\gEngine.Data.Ge.Txt.csproj">
@@ -83,6 +89,10 @@
     <ProjectReference Include="..\gEngine.Graph.Interface\gEngine.Graph.Interface.csproj">
       <Project>{1C98A821-B030-4FF2-83AE-D49B1B3B8C67}</Project>
       <Name>gEngine.Graph.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.Graph.Tpl.Ge\gEngine.Graph.Tpl.Ge.csproj">
+      <Project>{1c84bf76-326d-48a8-b2d7-eed2e9bdec99}</Project>
+      <Name>gEngine.Graph.Tpl.Ge</Name>
     </ProjectReference>
     <ProjectReference Include="..\gEngine.Util.Ge.Column\gEngine.Util.Ge.Column.csproj">
       <Project>{6209A699-8823-4A0B-8A0C-BDAE9CE52305}</Project>
