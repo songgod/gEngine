@@ -52,7 +52,7 @@ namespace gEngine.Manipulator
             MapControl mc = this.AssociatedObject;
             ClearSelect();
             Point pt = e.GetPosition(mc);
-            VisualTreeHelper.HitTest(mc, null,
+            VisualTreeHelper.HitTest(mc, new HitTestFilterCallback(HitTestFilterCallback),
                 new HitTestResultCallback(MyHitTestResult), new PointHitTestParameters(pt));
         }
 
