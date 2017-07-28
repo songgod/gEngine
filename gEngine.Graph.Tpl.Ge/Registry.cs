@@ -31,6 +31,11 @@ namespace gEngine.Graph.Tpl.Ge
             }
         }
 
+        static public string TplExtName
+        {
+            get { return ".tpl"; }
+        }
+
         static public bool SaveTemplate(Graph.Ge.Object obj, string name)
         {
             if (obj == null || string.IsNullOrEmpty(name) || string.IsNullOrWhiteSpace(name))
@@ -38,9 +43,7 @@ namespace gEngine.Graph.Tpl.Ge
 
             Type type = obj.GetType();
 
-            string directoryname = Path.GetDirectoryName(name);
-            string filename = Path.GetFileName(name);
-            string fulltplname = directoryname + type.Name + "." + filename;
+            string fulltplname = TplsPath + @"\" + type.Name + "." + name + TplExtName;
 
             if (!CheckSave(fulltplname))
                 return false;
@@ -77,7 +80,7 @@ namespace gEngine.Graph.Tpl.Ge
                 return null;
             }
 
-            string tplName = TplsPath + @"\" + name;
+            string tplName = TplsPath + @"\" + type.Name + "." +  name + TplExtName;
 
             XmlDocument xmldoc = new XmlDocument();
 
@@ -106,7 +109,8 @@ namespace gEngine.Graph.Tpl.Ge
             {
                 foreach (string tplName in tpl)
                 {
-                    tplList.Add(tplName);
+                    string validTplNmae = GetValidTplName(tplName);
+                    tplList.Add(validTplNmae);
                 }
             }
             return tplList;
@@ -116,7 +120,7 @@ namespace gEngine.Graph.Tpl.Ge
         {
             DirectoryInfo dirInfo = new DirectoryInfo(TplsPath);
 
-            foreach (FileInfo fileInfo in dirInfo.GetFiles("*.tpl"))
+            foreach (FileInfo fileInfo in dirInfo.GetFiles("*" + TplExtName))
             {
                 Templates.Add(fileInfo.Name);
             }
@@ -126,10 +130,17 @@ namespace gEngine.Graph.Tpl.Ge
         {
             if (File.Exists(url))
             {
-                MessageBox.Show("数据模板目录重复！");
+                MessageBox.Show("数据模板名称已存在，请重新输入！");
                 return false;
             }
             return true;
+        }
+
+        static public string GetValidTplName(string name)
+        {
+            int firstIndex = name.IndexOf(".");
+            int secondIndex = name.IndexOf(TplExtName, firstIndex + 1);
+            return name.Substring(firstIndex + 1, secondIndex - firstIndex - 1);
         }
     }
 }

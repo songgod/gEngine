@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{06A3DC4E-2921-42DD-8AE2-368AFCB1F063}</ProjectGuid>
+    <ProjectGuid>{3CFF3888-7E8C-487E-B2F1-66941E73B2D5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>gEngine.RibbonPageCategory.Ge.Column</RootNamespace>
-    <AssemblyName>gEngine.RibbonPageCategory.Ge.Column</AssemblyName>
+    <RootNamespace>gEngine.Application.Ge.Plane</RootNamespace>
+    <AssemblyName>gEngine.Application.Ge.Plane</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,6 +39,7 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -50,27 +51,52 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WellColumnRibbonPageCategory.xaml.cs">
-      <DependentUpon>WellColumnRibbonPageCategory.xaml</DependentUpon>
+    <Compile Include="WellLocationRibbonPageCategory.xaml.cs">
+      <DependentUpon>WellLocationRibbonPageCategory.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="WellColumnRibbonPageCategory.xaml">
+    <Page Include="WellLocationRibbonPageCategory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\gEngine.Graph.Ge.Column\gEngine.Graph.Ge.Column.csproj">
-      <Project>{95227940-90F7-40B4-9027-3EEECD8ED6DE}</Project>
-      <Name>gEngine.Graph.Ge.Column</Name>
+    <ProjectReference Include="..\gEngine.Commands\gEngine.Commands.csproj">
+      <Project>{BC931BB9-D78C-437D-B5D2-04BE6E318172}</Project>
+      <Name>gEngine.Commands</Name>
     </ProjectReference>
-    <ProjectReference Include="..\gEngine.RibbonPageCategory\gEngine.RibbonPageCategory.csproj">
+    <ProjectReference Include="..\gEngine.Graph.Ge.Plane\gEngine.Graph.Ge.Plane.csproj">
+      <Project>{82739B38-8706-493D-A571-C743AFCEAD12}</Project>
+      <Name>gEngine.Graph.Ge.Plane</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.Graph.Ge\gEngine.Graph.Ge.csproj">
+      <Project>{3bd77e4f-a348-4edb-b60c-68b749249b91}</Project>
+      <Name>gEngine.Graph.Ge</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.Project\gEngine.Project.csproj">
+      <Project>{87AC18CA-2B57-4F9A-A4C2-24C6E296F91B}</Project>
+      <Name>gEngine.Project</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.RibbonPageCategory\gEngine.Application.csproj">
       <Project>{DCE49078-3FAD-4C85-BC8C-713553BFDDD4}</Project>
-      <Name>gEngine.RibbonPageCategory</Name>
+      <Name>gEngine.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.Symbol.ge\gEngine.Symbol.gesym.csproj">
+      <Project>{62359ABC-F12C-4AE1-B40C-B6C5BA008E31}</Project>
+      <Name>gEngine.Symbol.gesym</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.View.Ge\gEngine.View.Ge.csproj">
+      <Project>{BC05DE82-7172-43BC-A025-9827E0275209}</Project>
+      <Name>gEngine.View.Ge</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.View.Symbol\gEngine.Symbol.csproj">
+      <Project>{1600379B-C8B5-4375-A1D5-3B81BD7FCCF7}</Project>
+      <Name>gEngine.Symbol</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.View\gEngine.View.csproj">
+      <Project>{932485EA-2F95-4CAA-8BCD-DF68C496854E}</Project>
+      <Name>gEngine.View</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

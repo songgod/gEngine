@@ -37,12 +37,11 @@ namespace gEngine.Project.Ge.Section.Commands
 
             ObjectControl ObjectControl = e.Parameter as ObjectControl;
             Well Well = ObjectControl.Content as Well;
-            
-            SaveFileDialog SaveFileDialog = new SaveFileDialog();
-            SaveFileDialog.Filter = "数据模板文件|*.tpl";
-            if (SaveFileDialog.ShowDialog() == true)
+
+            string tplName = Microsoft.VisualBasic.Interaction.InputBox("请输入文件名", "数据模板保存");
+
+            if (!string.IsNullOrEmpty(tplName))
             {
-                string tplName = SaveFileDialog.FileName;
                 bool isSave = gEngine.Graph.Tpl.Ge.Registry.SaveTemplate(Well, tplName);
 
                 if (isSave)
@@ -50,7 +49,6 @@ namespace gEngine.Project.Ge.Section.Commands
                 else
                     MessageBox.Show("数据模板保存失败！");
             }
-
             e.Handled = true;
         }
     }

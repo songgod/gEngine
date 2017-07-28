@@ -13,7 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace gEngine.RibbonPageCategory
+namespace gEngine.Application
 {
     public class StrokeSymbolGalleryDropDownPopupMenu : GalleryDropDownPopupMenu
     {

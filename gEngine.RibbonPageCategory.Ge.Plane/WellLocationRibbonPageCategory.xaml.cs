@@ -2,8 +2,6 @@
 using DevExpress.Xpf.Bars;
 using gEngine.Graph.Ge;
 using gEngine.Graph.Ge.Plane;
-using gEngine.RibbonPageCategory;
-using gEngine.RibbonPageCategory.Ge;
 using gEngine.Symbol;
 using gEngine.Symbol.gesym;
 using gEngine.View;
@@ -24,8 +22,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Interactivity;
 using DevExpress.Xpf.Ribbon;
+using gEngine.Application;
 
-namespace gEngine.RibbonPageCategory.Ge.Plane
+namespace gEngine.Application.Ge.Plane
 {
     /// <summary>
     /// WellLocationRibbonPageCategory.xaml 的交互逻辑
