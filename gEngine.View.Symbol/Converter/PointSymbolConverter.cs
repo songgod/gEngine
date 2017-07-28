@@ -10,7 +10,7 @@ namespace gEngine.Symbol
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            OptionSetting option = value as OptionSetting;
+            PointOptionSetting option = value as PointOptionSetting;
             return Registry.CreatePoint(option);
         }
 

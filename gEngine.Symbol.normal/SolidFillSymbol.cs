@@ -5,26 +5,29 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 
-namespace gEngine.Symbol
+namespace gEngine.Symbol.normal
 {
-    public class DefaultFillSymbol : FillSymbol
+    public class SolidFillSymbol : FillSymbol
     {
-        private static readonly string name = "DefaultPointSymbol";
-        public DefaultFillSymbol()
+        public SolidFillSymbol()
         {
         }
+
+        public string SolidSymbolName { get; set; }
 
         public override string Name
         {
             get
             {
-                return name;
+                return SolidSymbolName;
             }
         }
 
+        public Color SolidColor { get; set; }
+
         public override Brush Create(OptionSetting param)
         {
-            return new SolidColorBrush(Colors.LightGray);
+            return new SolidColorBrush(SolidColor);
         }
     }
 }

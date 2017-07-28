@@ -57,11 +57,72 @@ namespace gEngine.Symbol
         }
     }
 
+    public class PointOptionSetting : OptionSetting
+    {
+        public PointOptionSetting()
+        {
+            Properties["Stroke"] = Colors.Black;
+            Properties["Fill"] = new SolidColorBrush(Colors.White);
+            Properties["Width"] = 20.0;
+            Properties["Height"] = 20.0;
+        }
+
+        public Color Stroke
+        {
+            get
+            {
+                return GetValue<Color>("Stroke");
+            }
+            set
+            {
+                Properties["Stroke"] = value;
+            }
+        }
+
+        public Brush Fill
+        {
+            get
+            {
+                return GetValue<Brush>("Fill");
+            }
+            set
+            {
+                Properties["Fill"] = value;
+            }
+        }
+
+        public double Width
+        {
+            get
+            {
+                return GetValue<double>("Width");
+            }
+            set
+            {
+                Properties["Width"] = value;
+            }
+        }
+
+        public double Height
+        {
+            get
+            {
+                return GetValue<double>("Height");
+            }
+            set
+            {
+                Properties["Height"] = value;
+            }
+        }
+    }
+
     public class LineOptionSetting : OptionSetting
     {
         public LineOptionSetting()
         {
             Properties["Path"] = null;
+            Properties["Width"] = 1.0;
+            Properties["Stroke"] = Colors.Black;
         }
 
         public PathGeometry Path
@@ -73,6 +134,30 @@ namespace gEngine.Symbol
             set
             {
                 Properties["Path"] = value;
+            }
+        }
+
+        public double Width
+        {
+            get
+            {
+                return GetValue<double>("Width");
+            }
+            set
+            {
+                Properties["Width"] = value;
+            }
+        }
+
+        public Color Stroke
+        {
+            get
+            {
+                return GetValue<Color>("Stroke");
+            }
+            set
+            {
+                Properties["Stroke"] = value;
             }
         }
     }

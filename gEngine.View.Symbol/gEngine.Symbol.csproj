@@ -44,9 +44,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base\DefaultFillSymbol.cs" />
-    <Compile Include="Base\DefaultPointSymbol.cs" />
-    <Compile Include="Base\DefaultStrokeSymbol.cs" />
     <Compile Include="Base\ISymbolFactory.cs" />
     <Compile Include="Base\ISymbol.cs" />
     <Compile Include="Base\FillSymbol.cs" />

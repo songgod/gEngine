@@ -24,28 +24,26 @@ namespace gEngine.Symbol.gesym
             }
         }
 
-        public override object Create(OptionSetting param)
+        public override object Create(PointOptionSetting param)
         {
             if (param == null)
                 return null;
 
-            double w = param.GetValue<double>("Width");
-            double h = param.GetValue<double>("Height");
+            double w = param.Width;
+            double h = param.Height;
             if (w <= 0)
                 w = 10.0;
             if (h <= 0)
                 h = 10.0;
 
-            Brush stroke = param.GetValue<Brush>("Stroke");
-            if (stroke == null)
-                stroke = new SolidColorBrush(Colors.Black);
+            Color stroke = param.Stroke;
 
-            Brush fill = param.GetValue<Brush>("Fill");
+            Brush fill = param.Fill;
             if (fill == null)
-                fill = new SolidColorBrush(Colors.White);
+                fill = new SolidColorBrush(Colors.LightGray);
 
             //return new Rectangle() { Fill = fill, Stroke = stroke, Width=w,Height=h };
-            return new Path { Fill = fill, Stroke = stroke, Data = new RectangleGeometry() { Rect = new System.Windows.Rect(0, 0, w, h) } };
+            return new Path { Fill = fill, Stroke = new SolidColorBrush(stroke), Data = new RectangleGeometry() { Rect = new System.Windows.Rect(0, 0, w, h) } };
         }
     }
 }

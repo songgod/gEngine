@@ -17,7 +17,7 @@ namespace gEngine.Manipulator.Ge.Basic
     {
         public DrawBezierLineObjectManipulator()
         {
-            LineStyle = new NormalLineStyle();
+            LineStyle = new LineStyle();
         }
         public LineStyle LineStyle { get; set; }
         public double GetTolerance()

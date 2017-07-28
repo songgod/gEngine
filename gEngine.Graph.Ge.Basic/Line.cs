@@ -11,7 +11,7 @@ namespace gEngine.Graph.Ge.Basic
     {
         public Line()
         {
-            LinStyle = new ComplexLineStyle() { SymbolLib = "ge", Symbol = "GeStoreLineSymbol" };
+            LinStyle = new LineStyle() { SymbolLib = "ge", Symbol = "GeStoreLineSymbol" };
         }
         public Point Start
         {

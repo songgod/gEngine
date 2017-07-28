@@ -13,16 +13,31 @@ namespace gEngine.Symbol
     public static class Registry
     {
         static public Dictionary<string, ISymbolFactory> SymbolFactorys { get; set; }
-        static public PointSymbol DefaultPointSymbol { get; set; }
-        static public StrokeSymbol DefaultStrokeSymbol { get; set; }
-        static public FillSymbol DefaultFillSymbol { get; set; }
+        static public PointSymbol DefaultPointSymbol
+        {
+            get
+            {
+                return GetPointSymbol("Normal", "Ellpise");
+            }
+        }
+        static public StrokeSymbol DefaultStrokeSymbol
+        {
+            get
+            {
+                    return GetStrokeSymbol("Normal", "Solid");
+            }
+        }
+        static public FillSymbol DefaultFillSymbol
+        {
+            get
+            {
+                return GetFillSymbol("Normal", "LightGray");
+            }
+        }
 
         static Registry()
         {
             SymbolFactorys = new Dictionary<string, ISymbolFactory>();
-            DefaultPointSymbol = new DefaultPointSymbol();
-            DefaultStrokeSymbol = new DefaultStrokeSymbol();
-            DefaultFillSymbol = new DefaultFillSymbol();
         }
 
         static public ISymbolFactory LoadSymbolFactory(string ext)
@@ -152,7 +167,7 @@ namespace gEngine.Symbol
             return fsym;
         }
 
-        static public object CreatePoint(OptionSetting param)
+        static public object CreatePoint(PointOptionSetting param)
         {
             if (param==null)
                 return DefaultPointSymbol.Create(param);
@@ -174,38 +189,13 @@ namespace gEngine.Symbol
             return res;
         }
 
-        static private System.Windows.Shapes.Path CreateStrokePath(PathGeometry pg, LineOptionSetting param)
-        {
-            Color stroke = param.GetValue<Color>("Stroke");
-            double strokeThickness = param.GetValue<double>("Width");
-            if (strokeThickness <= 0)
-                strokeThickness = 1;
-
-            System.Windows.Shapes.Path res = new System.Windows.Shapes.Path() { Stroke = new SolidColorBrush(stroke), StrokeThickness = strokeThickness };
-            res.Data = pg;
-            return res;
-        }
-
-        static private System.Windows.Shapes.Path CreateDefaultPath(LineOptionSetting param)
-        {
-            if (DefaultStrokeSymbol.GetType() == typeof(DefaultStrokeSymbol))
-            {
-                return CreateStrokePath(param.Path, param);
-            }
-            else
-            {
-                PathGeometry pg = StrokePathUtil.GetAfterConverterGeom(DefaultStrokeSymbol.SymbolGeometry, param.Path);
-                return CreateStrokePath(pg, param);
-            }
-        }
-
         static public object CreateStroke(LineOptionSetting param)
         {
             if (param == null ||
                 string.IsNullOrEmpty(param.Factory) ||
                 string.IsNullOrEmpty(param.Symbol) || param.Path == null)
             {
-                return CreateDefaultPath(param);
+                return DefaultStrokeSymbol.Stroke(param);
             }
 
             string factoryname = param.Factory;
@@ -214,13 +204,13 @@ namespace gEngine.Symbol
             StrokeSymbol ssym = GetStrokeSymbol(factoryname, symbolname);
             
             if (ssym == null)
-                return CreateDefaultPath(param);
+                return DefaultStrokeSymbol.Stroke(param);
 
-            PathGeometry res = StrokePathUtil.GetAfterConverterGeom(ssym.SymbolGeometry,param.Path);
-            if (res == null)
-                return CreateDefaultPath(param);
+            object res =  ssym.Stroke(param);
+            if(res==null)
+                return DefaultStrokeSymbol.Stroke(param);
 
-            return CreateStrokePath(res,param);
+            return res;
         }
 
         static public Brush CreateFillBrush(OptionSetting param)

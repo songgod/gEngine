@@ -14,9 +14,9 @@ namespace gEngine.Graph.Ge.Section
         {
             TopGraph = new gTopology.Graph();
             DicLineStyle = new Dictionary<int, LineStyle>();
-            DicLineStyle[(int)SectionLineType.Fault] = new NormalLineStyle() { Stroke = Colors.Blue, Width = 3.0 };
-            DicLineStyle[(int)SectionLineType.Sand] = new NormalLineStyle() { Stroke = Colors.Red, Width = 1.0 };
-            DicLineStyle[(int)SectionLineType.Stratum] = new NormalLineStyle() { Stroke = Colors.Green, Width = 1.0 };
+            DicLineStyle[(int)SectionLineType.Fault] = new LineStyle() { Stroke = Colors.Blue, Width = 3.0 };
+            DicLineStyle[(int)SectionLineType.Sand] = new LineStyle() { Stroke = Colors.Red, Width = 1.0 };
+            DicLineStyle[(int)SectionLineType.Stratum] = new LineStyle() { Stroke = Colors.Green, Width = 1.0 };
             DicFillStyle = new Dictionary<int, FillStyle>();
             DicFillStyle[(int)SectionLineType.Fault] = new SolidFillStyle() { Color = Colors.Blue };
             DicFillStyle[(int)SectionLineType.Sand] = new SolidFillStyle() { Color = Colors.Red };

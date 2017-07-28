@@ -7,16 +7,16 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace gEngine.Symbol
+namespace gEngine.Symbol.normal
 {
-    public class DefaultPointSymbol : PointSymbol
+    public class EllpisePointSymbol : PointSymbol
     {
-        public DefaultPointSymbol()
+        public EllpisePointSymbol()
         {
 
         }
 
-        private static readonly string name = "DefaultPointSymbol";
+        private static readonly string name = "EllpisePointSymbol";
         public override string Name
         {
             get
@@ -25,7 +25,7 @@ namespace gEngine.Symbol
             }
         }
 
-        public override object Create(OptionSetting param)
+        public override object Create(PointOptionSetting param)
         {
             Path path = new Path() { Fill = new SolidColorBrush(Colors.Red), Stroke = new SolidColorBrush(Colors.Black)};
             path.Data = new EllipseGeometry() { RadiusX = 2, RadiusY = 2 };

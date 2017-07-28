@@ -43,7 +43,7 @@ namespace gEngine.RibbonPageCategory
                     pstyle.SymbolLib = key;
                     pstyle.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFEEECE1"));
                     pstyle.Stroke = Colors.Black;
-                    OptionSetting setting = PointStyle2OptionSettingConverter.CreateFromPointStyle(pstyle);
+                    PointOptionSetting setting = PointStyle2OptionSettingConverter.CreateFromPointStyle(pstyle);
 
                     object obj = gEngine.Symbol.Registry.CreatePoint(setting);
 

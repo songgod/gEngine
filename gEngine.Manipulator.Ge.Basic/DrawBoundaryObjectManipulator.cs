@@ -16,7 +16,7 @@ namespace gEngine.Manipulator.Ge.Basic
 
         public DrawBoundaryObjectManipulator()
         {
-            LineStyle = new NormalLineStyle();
+            LineStyle = new LineStyle();
         }
         public LineStyle LineStyle { get; set; }
 
