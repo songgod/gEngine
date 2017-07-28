@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using DevExpress.Xpf.Ribbon;
 using gEngine.View;
 
-namespace gEngine.RibbonPageCategory
+namespace gEngine.Application
 {
     public  class GeRibbonPageCategory: DevExpress.Xpf.Ribbon.RibbonPageCategory
     {

@@ -7,8 +7,8 @@
     <ProjectGuid>{DCE49078-3FAD-4C85-BC8C-713553BFDDD4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>gEngine.RibbonPageCategory</RootNamespace>
-    <AssemblyName>gEngine.RibbonPageCategory</AssemblyName>
+    <RootNamespace>gEngine.Application</RootNamespace>
+    <AssemblyName>gEngine.Application</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

@@ -1,11 +1,11 @@
 ﻿using DevExpress.Mvvm;
 using DevExpress.Xpf.Grid;
 using DevExpress.Xpf.Ribbon;
+using gEngine.Application;
 using gEngine.Graph.Interface;
 using gEngine.Project;
 using gEngine.Project.Commands;
 using gEngine.Project.Controls;
-using gEngine.RibbonPageCategory;
 using gEngine.View;
 using gSection.CommandBindings;
 using gSection.Commands;
@@ -67,13 +67,13 @@ namespace gSection.View
             this.DataContext = this;
 
 
-            gEngine.RibbonPageCategory.Registry.AddRibbonPageCategory(ribbonControl);
+            gEngine.Application.Registry.AddRibbonPageCategory(ribbonControl);
         }
 
         public void Mpl_OnSelectObject(ObjectControl oc)
         {
             IObject iobject = oc.DataContext as IObject; 
-            GeRibbonPageCategory grpc = gEngine.RibbonPageCategory.Registry.GetRibbonPageCategory(iobject.GetType());
+            GeRibbonPageCategory grpc = gEngine.Application.Registry.GetRibbonPageCategory(iobject.GetType());
             if (grpc != null)
             {
                 BindingExpression exp = grpc.GetBindingExpression(IsVisibleProperty);

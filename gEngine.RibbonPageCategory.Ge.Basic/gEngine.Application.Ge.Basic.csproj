@@ -7,8 +7,8 @@
     <ProjectGuid>{7B008425-79FF-4480-922D-052CC464DF01}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>gEngine.RibbonPageCategory.Ge.Basic</RootNamespace>
-    <AssemblyName>gEngine.RibbonPageCategory.Ge.Basic</AssemblyName>
+    <RootNamespace>gEngine.Application.Ge.Basic</RootNamespace>
+    <AssemblyName>gEngine.Application.Ge.Basic</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -77,9 +77,9 @@
       <Project>{87ac18ca-2b57-4f9a-a4c2-24c6e296f91b}</Project>
       <Name>gEngine.Project</Name>
     </ProjectReference>
-    <ProjectReference Include="..\gEngine.RibbonPageCategory\gEngine.RibbonPageCategory.csproj">
+    <ProjectReference Include="..\gEngine.RibbonPageCategory\gEngine.Application.csproj">
       <Project>{dce49078-3fad-4c85-bc8c-713553bfddd4}</Project>
-      <Name>gEngine.RibbonPageCategory</Name>
+      <Name>gEngine.Application</Name>
     </ProjectReference>
     <ProjectReference Include="..\gEngine.Symbol.ge\gEngine.Symbol.gesym.csproj">
       <Project>{62359abc-f12c-4ae1-b40c-b6c5ba008e31}</Project>

@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace gEngine.RibbonPageCategory
+namespace gEngine.Application
 {
     public static class Registry
     {

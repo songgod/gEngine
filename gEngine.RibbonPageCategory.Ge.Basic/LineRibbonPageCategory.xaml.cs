@@ -1,9 +1,9 @@
 ﻿using DevExpress.Mvvm;
 using DevExpress.Xpf.Bars;
 using DevExpress.Xpf.Ribbon;
+using gEngine.Application;
 using gEngine.Graph.Ge;
 using gEngine.Graph.Ge.Basic;
-using gEngine.RibbonPageCategory;
 using gEngine.Symbol;
 using gEngine.View.Ge;
 using System;
@@ -21,7 +21,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace gEngine.RibbonPageCategory.Ge.Basic
+namespace gEngine.Application.Ge.Basic
 {
     /// <summary>
     /// WellLineRibbonPageCategory.xaml 的交互逻辑
