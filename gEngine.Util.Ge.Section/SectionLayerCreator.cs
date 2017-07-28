@@ -24,85 +24,17 @@ namespace gEngine.Util.Ge.Section
             return layer;
         }
 
-        public Layer CreateSectionLayer(IDBSource db, Stack<WellLocation> wellLocs, string horizonName, string discreteName)
-        {
-            Layer layer = new SectionLayer();
-
-            WellCreator wc = new WellCreator();
-
-            // 井曲线数据
-            int WellLocation = 0;
-            IDBWells wells = new DBWells();
-            foreach (WellLocation wellLoc in wellLocs)
-            {
-                string name = wellLoc.WellNum;
-                IDBWell wl = db.GetWell(name);
-                if (wl == null)
-                    continue;
-                IDBHorizons horizons = db.GetHorizonsByWell(name, horizonName);
-                IDBDiscreteDatas discretes = db.GetDiscretesByWell(name, discreteName);
-                Well well = wc.Create(wl, horizons, discretes);
-                if (well != null)
-                {
-                    well.LongitudinalProportion = 1500;
-                    well.Location = WellLocation;
-                    foreach (var item in well.LstColumns)
-                    {
-                        WellLocation += item[0].Width;
-                    }
-                    WellLocation += 50;
-                    layer.Objects.Insert(0, well);
-                }
-            }
-            return layer;
-        }
-
-        public Layer CreateSectionLayer(IDBSource db, Stack<WellLocation> wellLocs, string horizonName, string discreteName, Well WellTpl)
-        {
-            Layer layer = new SectionLayer();
-
-            WellCreator wc = new WellCreator();
-
-            // 井曲线数据
-            int WellLocation = 0;
-            IDBWells wells = new DBWells();
-            foreach (WellLocation wellLoc in wellLocs)
-            {
-                string name = wellLoc.WellNum;
-                IDBWell wl = db.GetWell(name);
-                if (wl == null)
-                    continue;
-                IDBHorizons horizons = db.GetHorizonsByWell(name, horizonName);
-                IDBDiscreteDatas discretes = db.GetDiscretesByWell(name, discreteName);
-                Well well = wc.Create(wl, horizons, discretes);
-                if (well != null)
-                {
-                    well.LongitudinalProportion = 1500;
-                    well.Location = WellLocation;
-                    foreach (var item in well.LstColumns)
-                    {
-                        WellLocation += item[0].Width;
-                    }
-                    WellLocation += 50;
-
-                    Well newWell = CreateWellByTpl(WellTpl, well) as Well;
-                    //layer.Objects.Insert(0, well);
-                    layer.Objects.Insert(0, newWell);
-                }
-            }
-            return layer;
-        }
-
         public Layer CreateSectionLayer(IDBSource db, Stack<WellLocation> wellLocs, string horizonName, string discreteName, SectionSetEntity sse)
         {
             Layer layer = new SectionLayer();
 
             WellCreator wc = new WellCreator();
 
+            var wlocs = wellLocs.OrderBy(o => o.X);
+
             // 井曲线数据
-            int WellLocation = 0;
             IDBWells wells = new DBWells();
-            foreach (WellLocation wellLoc in wellLocs)
+            foreach (WellLocation wellLoc in wlocs)
             {
                 string name = wellLoc.WellNum;
                 IDBWell wl = db.GetWell(name);
@@ -114,27 +46,44 @@ namespace gEngine.Util.Ge.Section
                 if (well != null)
                 {
                     well.LongitudinalProportion = sse.SLongitudinalProportion;
-                    well.Location = WellLocation;
-                    foreach (var item in well.LstColumns)
-                    {
-                        WellLocation += item[0].Width;
-                    }
-                    WellLocation += 50;
-
+                    well.HorizontalProportion = sse.SHorizontalProportion;
                     string tplName = sse.SelTplName;
                     if (string.IsNullOrEmpty(tplName))
                     {
-                        layer.Objects.Insert(0, well);
+                        layer.Objects.Add(well);
                     }
                     else
                     {
                         IObject WellTpl = gEngine.Graph.Tpl.Ge.Registry.GetTemplate(typeof(Well), tplName);
                         Well newWell = CreateWellByTpl(WellTpl, well) as Well;
-                        layer.Objects.Insert(0, newWell);
+                        layer.Objects.Add(newWell);
                     }
                 }
             }
+
+            SetWellLocation(layer, wlocs);
             return layer;
+        }
+
+        private void SetWellLocation(Layer layer, IOrderedEnumerable<WellLocation> wlocs)
+        {
+            double firstWlLoc = 0;
+            int wellWidth = 0;
+            foreach (Well well in layer.Objects)
+            {
+                var wl = wlocs.Where(x => x.Name.Equals(well.Name));
+                double xAxis = wl.ElementAt(0).X;
+                if (firstWlLoc == 0)
+                {
+                    firstWlLoc = xAxis;
+                    well.Location = (xAxis - firstWlLoc) * Graph.Ge.Column.Enums.PerMilePx / well.HorizontalProportion;
+                }
+                else
+                {
+                    well.Location = (xAxis - firstWlLoc) * Graph.Ge.Column.Enums.PerMilePx / well.HorizontalProportion + wellWidth;
+                }
+                wellWidth += well.LstColumns.Sum(x => x[0].Width);
+            }
         }
 
         public IObject CreateWellByTpl(IObject tplObject, IObject destObject)
@@ -143,7 +92,6 @@ namespace gEngine.Util.Ge.Section
             Well destWell = tplObject.DeepClone() as Well;
 
             destWell.Name = Well.Name;
-            destWell.Location = Well.Location;
             foreach (WellColumns Wellcolumns in destWell.LstColumns)
             {
                 foreach (WellColumn WellColumn in Wellcolumns)

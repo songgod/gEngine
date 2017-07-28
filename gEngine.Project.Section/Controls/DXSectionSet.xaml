@@ -56,7 +56,7 @@
                 </dxdo:LayoutGroup>
                 <dxdo:LayoutGroup x:Uid="dxdo:LayoutGroup_8" >
                     <dxdo:LayoutControlItem x:Uid="dxdo:LayoutControlItem_10" Caption="横向比例">
-                        <dxe:ComboBoxEdit x:Uid="cbHScale" x:Name="cbHScale"></dxe:ComboBoxEdit>
+                        <dxe:ComboBoxEdit x:Uid="cbHScale" x:Name="cbHScale" ItemsSource="{Binding HorizontalProportion}"></dxe:ComboBoxEdit>
                     </dxdo:LayoutControlItem>
                     <dxdo:LayoutControlItem x:Uid="dxdo:LayoutControlItem_11" Caption="纵向比例">
                         <dxe:ComboBoxEdit x:Uid="cbVScale" x:Name="cbVScale" ItemsSource="{Binding LongitudinalProportion}"></dxe:ComboBoxEdit>

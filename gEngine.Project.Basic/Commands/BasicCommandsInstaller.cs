@@ -20,6 +20,7 @@ namespace gEngine.Project.Ge.Basic.Commands
                 return;
             ui.CommandBindings.Add(new NewCommonLayerCommand());
             ui.CommandBindings.Add(new NewLineLayerCommand());
+            ui.CommandBindings.Add(new NewFillLayerCommand());
         }
     }
 }

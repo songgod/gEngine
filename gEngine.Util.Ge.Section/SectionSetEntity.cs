@@ -17,6 +17,7 @@ namespace gEngine.Util.Ge.Section
         {
             BindTemplate();
             BindLongitudinalProportion();
+            BindHorizontalProportion();
         }
 
         #region Property
@@ -34,6 +35,24 @@ namespace gEngine.Util.Ge.Section
         /// 选择的纵向比例
         /// </summary>
         public int SLongitudinalProportion
+        {
+            get;
+            private set;
+        }
+
+        public List<int> HorizontalProportion
+        {
+            get { return (List<int>) GetValue(HorizontalProportionProperty); }
+            set { SetValue(HorizontalProportionProperty, value); }
+        }
+
+        public static readonly DependencyProperty HorizontalProportionProperty =
+            DependencyProperty.Register("HorizontalProportion", typeof(List<int>), typeof(SectionSetEntity));
+
+        /// <summary>
+        /// 选择的横向比例
+        /// </summary>
+        public int SHorizontalProportion
         {
             get;
             private set;
@@ -85,6 +104,19 @@ namespace gEngine.Util.Ge.Section
             LongitudinalProportion.Add(2000);
         }
 
+        private void BindHorizontalProportion()
+        {
+            HorizontalProportion = new List<int>();
+            HorizontalProportion.Add(10);
+            HorizontalProportion.Add(50);
+            HorizontalProportion.Add(100);
+            HorizontalProportion.Add(200);
+            HorizontalProportion.Add(500);
+            HorizontalProportion.Add(1000);
+            HorizontalProportion.Add(2000);
+            HorizontalProportion.Add(3000);
+        }
+
         private bool CheckUI()
         {
             if (string.IsNullOrEmpty(MapName))
@@ -108,6 +140,12 @@ namespace gEngine.Util.Ge.Section
             if (cbVScale != null)
             {
                 SLongitudinalProportion = cbVScale.SelectedItemValue == null ? 1500 : Int32.Parse(cbVScale.SelectedItemValue.ToString());
+            }
+
+            ComboBoxEdit cbHScale = el.FindName("cbHScale") as ComboBoxEdit;
+            if (cbHScale != null)
+            {
+                SHorizontalProportion = cbHScale.SelectedItemValue == null ? 100 : Int32.Parse(cbHScale.SelectedItemValue.ToString());
             }
         }
 
