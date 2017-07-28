@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -21,13 +22,14 @@ namespace gEngine.Application
         {
             Gallery gallery = new Gallery();
             gallery.ColCount = 4;
+            gallery.ItemAutoHeight = true;
             gallery.ItemDescriptionHorizontalAlignment = HorizontalAlignment.Left;
             gallery.IsItemCaptionVisible = true;
             gallery.IsItemDescriptionVisible = true;
 
             PathGeometry pg = new PathGeometry();
             PathFigure pf = new PathFigure() { StartPoint = new Point(0, 0) };
-            LineSegment ls = new LineSegment { Point = new Point(40, 0) };
+            LineSegment ls = new LineSegment { Point = new Point(80, 0) };
             pf.Segments.Add(ls);
             pg.Figures.Add(pf);
 
@@ -43,15 +45,18 @@ namespace gEngine.Application
                     LineStyle cplstyle = new LineStyle();
                     cplstyle.Symbol = symbolName;
                     cplstyle.SymbolLib = key;
-                    cplstyle.Width = 1;
+                    cplstyle.Width = key=="Normal" ? 1 : 10;
                     cplstyle.Stroke = Colors.Black;
                     LineOptionSetting setting = LineStyle2LineOptionSettingConverter.ConvertFromLineStyle(cplstyle, pg);
 
-                    object obj = gEngine.Symbol.Registry.CreateStroke(setting);
-                    if (obj != null)
+                    Path path = gEngine.Symbol.Registry.CreateStroke(setting) as Path;
+                    if (path != null)
                     {
+                        Canvas c = new Canvas() { Width = 80.0, Height = 40.0 };
+                        path.SetValue(Canvas.TopProperty, 20.0);
+                        c.Children.Add(path);
                         GalleryItem item = new GalleryItem();
-                        item.Caption = obj;
+                        item.Caption = c;
                         item.Command = null;
                         item.CommandParameter = new string[] { key, symbolName };
                         group.Items.Add(item);

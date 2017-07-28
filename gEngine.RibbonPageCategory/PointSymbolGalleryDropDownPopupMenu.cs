@@ -37,8 +37,8 @@ namespace gEngine.Application
                 foreach (string symbolName in kv.Value.PointSymbolNames)
                 {
                     PointStyle pstyle = new PointStyle();
-                    pstyle.Height = 20;
-                    pstyle.Width = 20;
+                    pstyle.Height = 40;
+                    pstyle.Width = 40;
                     pstyle.Symbol = symbolName;
                     pstyle.SymbolLib = key;
                     pstyle.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFEEECE1"));

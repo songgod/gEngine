@@ -27,9 +27,23 @@ namespace gEngine.Symbol.normal
 
         public override object Create(PointOptionSetting param)
         {
-            Path path = new Path() { Fill = new SolidColorBrush(Colors.Red), Stroke = new SolidColorBrush(Colors.Black)};
-            path.Data = new EllipseGeometry() { RadiusX = 2, RadiusY = 2 };
-            return path;
+            if (param == null)
+                return null;
+
+            double w = param.Width;
+            double h = param.Height;
+            if (w <= 0)
+                w = 20.0;
+            if (h <= 0)
+                h = 20.0;
+
+            Color stroke = param.Stroke;
+
+            Brush fill = param.Fill;
+            if (fill == null)
+                fill = new SolidColorBrush(Colors.LightGray);
+
+            return new Path() { Fill = fill, Stroke = new SolidColorBrush(stroke), Data = new EllipseGeometry() { RadiusX = w / 2, RadiusY = h / 2 }, Stretch = Stretch.Uniform };
         }
     }
 }
