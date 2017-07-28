@@ -28,7 +28,6 @@
             <gv:MapControl x:Uid="mc" x:Name="mc">
                 <i:Interaction.Behaviors>
                     <em:MapControlZoomPan x:Uid="em:MapControlZoomPan_1"/>
-                    <em:SelectObjectManipulator x:Uid="em:SelectObjectManipulator_1"/>
                 </i:Interaction.Behaviors>
             </gv:MapControl>
         </DataTemplate>

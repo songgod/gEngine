@@ -101,6 +101,7 @@ namespace gEngine.Manipulator.Ge.Plane
 
             SelectWellLocations.Clear();
             base.MouseRightButtonUp(sender, e);
+            ManipulatorSetter.ClearManipulator(this.AssociatedObject);
         }
 
 

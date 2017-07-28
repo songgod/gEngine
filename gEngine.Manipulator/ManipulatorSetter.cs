@@ -55,6 +55,25 @@ namespace gEngine.Manipulator
             return true;
         }
 
+        public static bool RemoveManipulator(Type type, UIElement elm)
+        {
+            if (elm == null)
+                return false;
+
+            BehaviorCollection bc = Interaction.GetBehaviors(elm);
+            foreach (Behavior b in bc)
+            {
+                if(b.GetType()==type)
+                {
+                    bc.Remove(b);
+                    return true;
+                }
+            }
+
+            return false;
+
+        }
+
         public static bool ClearManipulator(UIElement elm)
         {
             if (elm == null)
@@ -63,6 +82,21 @@ namespace gEngine.Manipulator
             BehaviorCollection bc = Interaction.GetBehaviors(elm);
             bc.Clear();
             return true;
+        }
+
+        public static bool IsContainManipulator(Type type, UIElement elm)
+        {
+            if (elm == null)
+                return false;
+            BehaviorCollection bc = Interaction.GetBehaviors(elm);
+            foreach (Behavior b in bc)
+            {
+                if (b.GetType() == type)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public static bool IsContainManipulator(UIElement elm)
