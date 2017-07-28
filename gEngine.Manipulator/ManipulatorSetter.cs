@@ -16,13 +16,24 @@ namespace gEngine.Manipulator
     {
         public static bool SetManipulator(IManipulatorBase mp, UIElement elm)
         {
-            if (mp == null || elm == null || !mp.CanAttach(elm))
+            if (elm == null)
                 return false;
 
-            BehaviorCollection bc = Interaction.GetBehaviors(elm);
-            bc.Clear();
-            bc.Add(mp.AsBehavior());
-            return true;
+            if (mp == null)
+            {
+                BehaviorCollection bc = Interaction.GetBehaviors(elm);
+                bc.Clear();
+                return true;
+            }
+            else if(mp.CanAttach(elm))
+            {
+                BehaviorCollection bc = Interaction.GetBehaviors(elm);
+                bc.Clear();
+                bc.Add(mp.AsBehavior());
+                return true;
+            }
+
+            return false;
         }
 
         public static bool AddManipulator(IManipulatorBase mp, UIElement elm)

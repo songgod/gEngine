@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 namespace gEngine.Manipulator
 {
     public delegate void SelectObjectDel(ObjectControl oc);
-    public class SelectObjectManipulator : LayerManipulator
+    public class SelectObjectManipulator : MapManipulator
     {
         public event SelectObjectDel OnSelectObject;
 
@@ -26,7 +26,7 @@ namespace gEngine.Manipulator
             if (this.AssociatedObject == null)
                 return;
 
-            MapControl mc = this.AssociatedObject.Owner;
+            MapControl mc = this.AssociatedObject;
             if (mc == null)
                 return;
 
@@ -40,7 +40,7 @@ namespace gEngine.Manipulator
             if (this.AssociatedObject == null)
                 return;
 
-            MapControl mc = this.AssociatedObject.Owner;
+            MapControl mc = this.AssociatedObject;
             if (mc == null)
                 return;
 
@@ -49,15 +49,40 @@ namespace gEngine.Manipulator
 
         private void mc_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            MapControl mc = this.AssociatedObject.Owner;
-            LayerControl lc = this.AssociatedObject;
-            ILayer layer = lc.DataContext as ILayer;
-
+            MapControl mc = this.AssociatedObject;
+            ClearSelect();
             Point pt = e.GetPosition(mc);
             VisualTreeHelper.HitTest(mc, null,
                 new HitTestResultCallback(MyHitTestResult), new PointHitTestParameters(pt));
-
         }
+
+        private void ClearSelect()
+        {
+            gEngine.Graph.Interface.Utility.ClearSelect(this.AssociatedObject.MapContext);
+            int lccount = this.AssociatedObject.LayerControlCount;
+            for (int i = 0; i < lccount; i++)
+            {
+                LayerControl lc= this.AssociatedObject.GetLayerControl(i);
+                int obcount = lc.ObjectControlCount;
+                for (int j = 0; j < obcount; j++)
+                {
+                    ObjectControl oc = lc.GetObjectControl(j);
+                    ManipulatorSetter.ClearManipulator(oc);
+                }
+            }
+        }
+
+        private HitTestFilterBehavior HitTestFilterCallback(DependencyObject potentialHitTestTarget)
+        {
+            Canvas editcanvas = potentialHitTestTarget as Canvas;
+            if(editcanvas!=null && editcanvas.Name=="EditCanvas")
+            {
+                return HitTestFilterBehavior.ContinueSkipSelfAndChildren;
+            }
+
+            return HitTestFilterBehavior.Continue;
+        }
+
         private HitTestResultBehavior MyHitTestResult(HitTestResult hr)
         {
             DependencyObject p = hr.VisualHit;
@@ -69,12 +94,9 @@ namespace gEngine.Manipulator
                     IObject obj = oc.DataContext as IObject;
                     if (obj != null)
                     {
-                        obj.IsSelected = !obj.IsSelected;
+                        obj.IsSelected = true;
                         IManipulatorBase mb = gEngine.Manipulator.Registry.CreateManipulator(obj);
-                        if (obj.IsSelected)
-                            ManipulatorSetter.SetManipulator(mb, oc);
-                        else
-                            ManipulatorSetter.ClearManipulator(oc);
+                        ManipulatorSetter.SetManipulator(mb, oc);
 
                         if (OnSelectObject != null)
                         {

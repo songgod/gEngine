@@ -15,7 +15,7 @@
         </ItemsControl.ItemsPanel>
         <ItemsControl.ItemTemplate>
             <DataTemplate>
-                <local:ObjectControl Content="{Binding}"/>
+                <local:ObjectControl x:Name="objectcontrol" Content="{Binding}"/>
             </DataTemplate>
         </ItemsControl.ItemTemplate>
     </ItemsControl>

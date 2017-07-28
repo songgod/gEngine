@@ -34,6 +34,23 @@ namespace gEngine.View
             }
         }
 
+        public int ObjectControlCount
+        {
+            get
+            {
+                return Items.Count;
+            }
+        }
+
+        public ObjectControl GetObjectControl(int index)
+        {
+            if (index < 0)
+                return null;
+            var item = ItemContainerGenerator.ContainerFromIndex(index);
+            ObjectControl oc = FindChild.FindVisualChild<ObjectControl>(item, "objectcontrol");
+            return oc;
+        }
+
         public ILayer LayerContext
         {
             get

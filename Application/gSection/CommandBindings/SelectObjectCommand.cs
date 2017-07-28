@@ -42,36 +42,13 @@ namespace gSection.CommandBindings
             MapsControl tc = pc.MapsControl;
             MapControl mc = tc.ActiveMapControl;
 
-            //mc.EditLayer.Width=0;
-
             if (mc == null)
                 return;
-
-            LayerControl lc = mc.ActiveLayerControl;
-            if (lc == null)
-                return;
-
-            //关联后台数据
-            //ILayer layer = lc.DataContext as ILayer;
-
-            //IEnumerable<ObjectControl> objectControls = FindChild.FindVisualChildren<ObjectControl>(lc);
-            //foreach (ObjectControl objectCtrl in objectControls)
-            //{
-            //    IEnumerable<Path> paths = FindChild.FindVisualChildren<Path>(objectCtrl);
-            //    IObject iobject = objectCtrl.DataContext as IObject;
-            //    foreach (Path path in paths)
-            //    {
-            //        Binding bd = new Binding("IsSelected") { /*Converter = new BooleanToVisibilityConverter(), Mode = BindingMode.TwoWay */};
-            //        bd.Source = iobject;
-            //        bd.Converter = new IsSelectedConverter();
-            //        path.SetBinding(Path.StrokeThicknessProperty, bd);
-            //    }
-            //}
 
             SelectObjectManipulator mpl = gEngine.Manipulator.Registry.CreateManipulator("SelectObjectManipulator") as SelectObjectManipulator;
             if (mpl == null)
                 return;
-            ManipulatorSetter.SetManipulator(mpl, lc);
+            ManipulatorSetter.SetManipulator(mpl, mc);
             mpl.OnSelectObject += mw.Mpl_OnSelectObject;
             e.Handled = true;
         }
