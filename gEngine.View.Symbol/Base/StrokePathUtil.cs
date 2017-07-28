@@ -37,11 +37,21 @@ namespace gEngine.Symbol
 
             {
                 PolyLineSegment pls = s as PolyLineSegment;
-                foreach (var p in pls.Points)
+                if(pls!=null)
                 {
-                    Vector v = p - lstp;
+                    foreach (var p in pls.Points)
+                    {
+                        Vector v = p - lstp;
+                        l += v.Length;
+                        lstp = p;
+                    }
+                }
+                else if(s is LineSegment)
+                {
+                    LineSegment ls = s as LineSegment;
+                    Vector v = ls.Point - lstp;
                     l += v.Length;
-                    lstp = p;
+                    lstp = ls.Point;
                 }
 
             }

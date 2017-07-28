@@ -43,7 +43,7 @@ namespace gEngine.View.Ge
             if(ls.LinType==LineStyle.LineType.NormalLine)
             {
                 NormalLineStyle nls = ls as NormalLineStyle;
-                Path path = new Path() { Data = lc.Data, Stroke = new SolidColorBrush(nls.Color),StrokeThickness=nls.Width, StrokeDashArray=nls.StrokeDashArray };
+                Path path = new Path() { Data = lc.Data, Stroke = new SolidColorBrush(nls.Stroke),StrokeThickness=nls.Width, StrokeDashArray=nls.StrokeDashArray };
                 lc.Content = path;
             }
             else if(ls.LinType==LineStyle.LineType.ComplexLine)
@@ -88,7 +88,7 @@ namespace gEngine.View.Ge
             if (ls.LinType == LineStyle.LineType.NormalLine)
             {
                 NormalLineStyle nls = ls as NormalLineStyle;
-                Path path = new Path() { Data = pg, Stroke = new SolidColorBrush(nls.Color), StrokeThickness = nls.Width, StrokeDashArray = nls.StrokeDashArray };
+                Path path = new Path() { Data = pg, Stroke = new SolidColorBrush(nls.Stroke), StrokeThickness = nls.Width, StrokeDashArray = nls.StrokeDashArray };
                 lc.Content = path;
             }
             else if (ls.LinType == LineStyle.LineType.ComplexLine)

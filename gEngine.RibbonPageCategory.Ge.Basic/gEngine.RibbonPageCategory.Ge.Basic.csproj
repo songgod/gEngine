@@ -50,24 +50,52 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WellLineRibbonPageCategory.xaml.cs">
-      <DependentUpon>WellLineRibbonPageCategory.xaml</DependentUpon>
+    <Compile Include="LineRibbonPageCategory.xaml.cs">
+      <DependentUpon>LineRibbonPageCategory.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="WellLineRibbonPageCategory.xaml">
+    <Page Include="LineRibbonPageCategory.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\gEngine.Commands\gEngine.Commands.csproj">
+      <Project>{bc931bb9-d78c-437d-b5d2-04be6e318172}</Project>
+      <Name>gEngine.Commands</Name>
+    </ProjectReference>
     <ProjectReference Include="..\gEngine.Graph.Ge.Basic\gEngine.Graph.Ge.Basic.csproj">
       <Project>{db606377-aaa0-45bd-a6be-4f4c4cd111af}</Project>
       <Name>gEngine.Graph.Ge.Basic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\gEngine.Graph.Ge\gEngine.Graph.Ge.csproj">
+      <Project>{3bd77e4f-a348-4edb-b60c-68b749249b91}</Project>
+      <Name>gEngine.Graph.Ge</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.Project\gEngine.Project.csproj">
+      <Project>{87ac18ca-2b57-4f9a-a4c2-24c6e296f91b}</Project>
+      <Name>gEngine.Project</Name>
+    </ProjectReference>
     <ProjectReference Include="..\gEngine.RibbonPageCategory\gEngine.RibbonPageCategory.csproj">
       <Project>{dce49078-3fad-4c85-bc8c-713553bfddd4}</Project>
       <Name>gEngine.RibbonPageCategory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.Symbol.ge\gEngine.Symbol.gesym.csproj">
+      <Project>{62359abc-f12c-4ae1-b40c-b6c5ba008e31}</Project>
+      <Name>gEngine.Symbol.gesym</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.View.Ge\gEngine.View.Ge.csproj">
+      <Project>{bc05de82-7172-43bc-a025-9827e0275209}</Project>
+      <Name>gEngine.View.Ge</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.View.Symbol\gEngine.Symbol.csproj">
+      <Project>{1600379b-c8b5-4375-a1d5-3b81bd7fccf7}</Project>
+      <Name>gEngine.Symbol</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.View\gEngine.View.csproj">
+      <Project>{932485ea-2f95-4caa-8bcd-df68c496854e}</Project>
+      <Name>gEngine.View</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

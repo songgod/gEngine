@@ -38,7 +38,8 @@ namespace gEngine.Graph.Rw.Ge.Plane
                 if (childNode.Name.Equals(WellLocation.PointStyle.GetType().Name))
                 {
                     BrushConverter brushConverter = new BrushConverter();
-                    Brush Stroke = (Brush) brushConverter.ConvertFromString(childNode.Attributes["Stroke"].Value);
+                    
+                    Color Stroke = (Color)ColorConverter.ConvertFromString(childNode.Attributes["Stroke"].Value);
                     Brush Fill = (Brush) brushConverter.ConvertFromString(childNode.Attributes["Fill"].Value);
                     WellLocation.PointStyle.Stroke = Stroke;
                     WellLocation.PointStyle.Fill = Fill;

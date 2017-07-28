@@ -15,7 +15,7 @@ namespace gEngine.Util.Ge.Basic
         {
             NormalLineStyle ls = new NormalLineStyle();
             ls.Width = 2;
-            ls.Color = Colors.Red;
+            ls.Stroke = Colors.Red;
             DoubleCollection dc = new DoubleCollection();
             dc.Add(1);
             dc.Add(0);
@@ -31,7 +31,7 @@ namespace gEngine.Util.Ge.Basic
 
             NormalLineStyle ls1 = new NormalLineStyle();
             ls1.Width = 1;
-            ls1.Color = Colors.Black;
+            ls1.Stroke = Colors.Black;
             ls1.StrokeDashArray = dc;
             Line line1 = new Line()
             {
