@@ -15,7 +15,7 @@ namespace gEngine.Manipulator.Ge.Basic
     {
         public DrawLineObjectManipulator()
         {
-            LineStyle = new NormalLineStyle();
+            LineStyle = new LineStyle();
         }
         public LineStyle LineStyle { get; set; }
         protected override void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)

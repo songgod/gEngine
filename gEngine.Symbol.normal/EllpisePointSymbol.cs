@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace gEngine.Symbol.gesym
+namespace gEngine.Symbol.normal
 {
-    public class GeRectanglePointSymbol : PointSymbol
+    public class EllpisePointSymbol : PointSymbol
     {
-        public GeRectanglePointSymbol()
+        public EllpisePointSymbol()
         {
 
         }
 
-        private static readonly string name = "GeRectanglePointSymbol";
+        private static readonly string name = "EllpisePointSymbol";
         public override string Name
         {
             get
@@ -32,9 +33,9 @@ namespace gEngine.Symbol.gesym
             double w = param.Width;
             double h = param.Height;
             if (w <= 0)
-                w = 10.0;
+                w = 20.0;
             if (h <= 0)
-                h = 10.0;
+                h = 20.0;
 
             Color stroke = param.Stroke;
 
@@ -42,8 +43,7 @@ namespace gEngine.Symbol.gesym
             if (fill == null)
                 fill = new SolidColorBrush(Colors.LightGray);
 
-            //return new Rectangle() { Fill = fill, Stroke = stroke, Width=w,Height=h };
-            return new Path { Fill = fill, Stroke = new SolidColorBrush(stroke), Data = new RectangleGeometry() { Rect = new System.Windows.Rect(0, 0, w, h) } };
+            return new Path() { Fill = fill, Stroke = new SolidColorBrush(stroke), Data = new EllipseGeometry() { RadiusX = w / 2, RadiusY = h / 2 }, Stretch = Stretch.Uniform };
         }
     }
 }

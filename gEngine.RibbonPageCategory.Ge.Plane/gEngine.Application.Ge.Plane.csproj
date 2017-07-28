@@ -7,8 +7,8 @@
     <ProjectGuid>{3CFF3888-7E8C-487E-B2F1-66941E73B2D5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>gEngine.RibbonPageCategory.Ge.Plane</RootNamespace>
-    <AssemblyName>gEngine.RibbonPageCategory.Ge.Plane</AssemblyName>
+    <RootNamespace>gEngine.Application.Ge.Plane</RootNamespace>
+    <AssemblyName>gEngine.Application.Ge.Plane</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -50,7 +50,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChangePointSymbolMulitiConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WellLocationRibbonPageCategory.xaml.cs">
       <DependentUpon>WellLocationRibbonPageCategory.xaml</DependentUpon>
@@ -79,9 +78,9 @@
       <Project>{87AC18CA-2B57-4F9A-A4C2-24C6E296F91B}</Project>
       <Name>gEngine.Project</Name>
     </ProjectReference>
-    <ProjectReference Include="..\gEngine.RibbonPageCategory\gEngine.RibbonPageCategory.csproj">
+    <ProjectReference Include="..\gEngine.RibbonPageCategory\gEngine.Application.csproj">
       <Project>{DCE49078-3FAD-4C85-BC8C-713553BFDDD4}</Project>
-      <Name>gEngine.RibbonPageCategory</Name>
+      <Name>gEngine.Application</Name>
     </ProjectReference>
     <ProjectReference Include="..\gEngine.Symbol.ge\gEngine.Symbol.gesym.csproj">
       <Project>{62359ABC-F12C-4AE1-B40C-B6C5BA008E31}</Project>

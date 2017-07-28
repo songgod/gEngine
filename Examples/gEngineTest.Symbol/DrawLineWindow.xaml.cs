@@ -79,7 +79,7 @@ namespace gEngineTest.Symbol
 
         // Using a DependencyProperty as the backing store for PointStyle.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty LineStyleProperty =
-            DependencyProperty.Register("LineStyle", typeof(LineStyle), typeof(DrawLineWindow), new PropertyMetadata(new ComplexLineStyle() { SymbolLib = "ge", Symbol = "WavyLineSymbol" }));
+            DependencyProperty.Register("LineStyle", typeof(LineStyle), typeof(DrawLineWindow), new PropertyMetadata(new LineStyle() { SymbolLib = "ge", Symbol = "WavyLineSymbol" }));
 
         public PathGeometry Data
         {

@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace gEngine.RibbonPageCategory
+namespace gEngine.Application
 {
     public static class Registry
     {
@@ -48,7 +48,7 @@ namespace gEngine.RibbonPageCategory
         static public void LoadLocalElement()
         {
             string dir = Directory.GetCurrentDirectory();
-            string qstr = dir + "\\gEngine.RibbonPageCategory.";
+            string qstr = dir + "\\gEngine.Application.";
             var files = Directory.GetFiles(dir, "*.dll", SearchOption.TopDirectoryOnly).Where(s => s.StartsWith(qstr));
             foreach (var item in files)
             {

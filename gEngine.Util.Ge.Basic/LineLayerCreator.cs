@@ -13,13 +13,12 @@ namespace gEngine.Util.Ge.Basic
     {
         public Layer Create()
         {
-            NormalLineStyle ls = new NormalLineStyle();
+            LineStyle ls = new LineStyle();
             ls.Width = 2;
             ls.Stroke = Colors.Red;
             DoubleCollection dc = new DoubleCollection();
             dc.Add(1);
             dc.Add(0);
-            ls.StrokeDashArray = dc;
             Layer layer = new Layer() { Type = "Line" };
             Line line = new Line()
             {
@@ -29,10 +28,9 @@ namespace gEngine.Util.Ge.Basic
             };
             layer.Objects.Add(line);
 
-            NormalLineStyle ls1 = new NormalLineStyle();
+            LineStyle ls1 = new LineStyle();
             ls1.Width = 1;
             ls1.Stroke = Colors.Black;
-            ls1.StrokeDashArray = dc;
             Line line1 = new Line()
             {
                 Start = new System.Windows.Point(10, 210),

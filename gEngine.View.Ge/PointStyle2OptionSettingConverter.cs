@@ -22,17 +22,17 @@ namespace gEngine.View.Ge
             throw new NotImplementedException();
         }
 
-        public static OptionSetting CreateFromPointStyle(PointStyle style)
+        public static PointOptionSetting CreateFromPointStyle(PointStyle style)
         {
             if (style == null)
                 return null;
-            OptionSetting setting = new OptionSetting();
+            PointOptionSetting setting = new PointOptionSetting();
             setting.Factory = style.SymbolLib;
             setting.Symbol = style.Symbol;
-            setting.Properties["Stroke"] = style.Stroke;
-            setting.Properties["Fill"] = style.Fill;
-            setting.Properties["Width"] = style.Width;
-            setting.Properties["Height"] = style.Height;
+            setting.Stroke = style.Stroke;
+            setting.Fill = style.Fill;
+            setting.Width = style.Width;
+            setting.Height = style.Height;
             return setting;
         }
     }

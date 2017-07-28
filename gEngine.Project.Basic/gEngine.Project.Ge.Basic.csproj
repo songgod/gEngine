@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Commands\BasicCommandsInstaller.cs" />
     <Compile Include="Commands\NewCommonLayerCommand.cs" />
+    <Compile Include="Commands\NewFillLayerCommand.cs" />
     <Compile Include="Commands\NewLineLayerCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

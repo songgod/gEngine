@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DCE49078-3FAD-4C85-BC8C-713553BFDDD4}</ProjectGuid>
+    <ProjectGuid>{30909D5D-47DC-4BFB-862D-0F02F4865F98}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>gEngine.RibbonPageCategory</RootNamespace>
-    <AssemblyName>gEngine.RibbonPageCategory</AssemblyName>
+    <RootNamespace>gEngine.Symbol.normal</RootNamespace>
+    <AssemblyName>gEngine.Symbol.normal</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -24,15 +24,12 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DevExpress.Data.v16.1, Version=16.1.2.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Xpf.Core.v16.1, Version=16.1.2.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Xpf.Ribbon.v16.1, Version=16.1.2.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -47,28 +44,17 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GeRibbonPageCategory.cs" />
-    <Compile Include="PointSymbolGalleryDropDownPopupMenu.cs" />
+    <Compile Include="SolidFillSymbol.cs" />
+    <Compile Include="EllpisePointSymbol.cs" />
+    <Compile Include="DotStrokeSymbol.cs" />
+    <Compile Include="SolidStrokeSymbol.cs" />
+    <Compile Include="NormalSymbolFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Registry.cs" />
-    <Compile Include="StrokeSymbolGalleryDropDownPopupMenu.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\gEngine.Graph.Ge\gEngine.Graph.Ge.csproj">
-      <Project>{3BD77E4F-A348-4EDB-B60C-68B749249B91}</Project>
-      <Name>gEngine.Graph.Ge</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\gEngine.View.Ge\gEngine.View.Ge.csproj">
-      <Project>{BC05DE82-7172-43BC-A025-9827E0275209}</Project>
-      <Name>gEngine.View.Ge</Name>
-    </ProjectReference>
     <ProjectReference Include="..\gEngine.View.Symbol\gEngine.Symbol.csproj">
       <Project>{1600379B-C8B5-4375-A1D5-3B81BD7FCCF7}</Project>
       <Name>gEngine.Symbol</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\gEngine.View\gEngine.View.csproj">
-      <Project>{932485EA-2F95-4CAA-8BCD-DF68C496854E}</Project>
-      <Name>gEngine.View</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

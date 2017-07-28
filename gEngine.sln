@@ -121,13 +121,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gEngine.Symbol.gesym", "gEn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gEngine.View.Ge", "gEngine.View.Ge\gEngine.View.Ge.csproj", "{BC05DE82-7172-43BC-A025-9827E0275209}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PageCategory", "PageCategory", "{5DA24075-76FD-4692-8D34-6ACB37AD65D5}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{5DA24075-76FD-4692-8D34-6ACB37AD65D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gEngine.RibbonPageCategory.Ge.Plane", "gEngine.RibbonPageCategory.Ge.Plane\gEngine.RibbonPageCategory.Ge.Plane.csproj", "{3CFF3888-7E8C-487E-B2F1-66941E73B2D5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gEngine.Application.Ge.Plane", "gEngine.RibbonPageCategory.Ge.Plane\gEngine.Application.Ge.Plane.csproj", "{3CFF3888-7E8C-487E-B2F1-66941E73B2D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gEngine.RibbonPageCategory", "gEngine.RibbonPageCategory\gEngine.RibbonPageCategory.csproj", "{DCE49078-3FAD-4C85-BC8C-713553BFDDD4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gEngine.Application", "gEngine.RibbonPageCategory\gEngine.Application.csproj", "{DCE49078-3FAD-4C85-BC8C-713553BFDDD4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gEngine.RibbonPageCategory.Ge.Column", "gEngine.RibbonPageCategory.Ge.Column\gEngine.RibbonPageCategory.Ge.Column.csproj", "{06A3DC4E-2921-42DD-8AE2-368AFCB1F063}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gEngine.Application.Ge.Column", "gEngine.RibbonPageCategory.Ge.Column\gEngine.Application.Ge.Column.csproj", "{06A3DC4E-2921-42DD-8AE2-368AFCB1F063}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gEngineTest.Manipulator", "Examples\gEngineTest.Manipulator\gEngineTest.Manipulator.csproj", "{DBF578F9-E593-405A-9E6C-9F7AC02F7812}"
 EndProject
@@ -135,7 +135,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Template", "Template", "{82
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gEngine.Graph.Tpl.Ge", "gEngine.Graph.Tpl.Ge\gEngine.Graph.Tpl.Ge.csproj", "{1C84BF76-326D-48A8-B2D7-EED2E9BDEC99}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gEngine.RibbonPageCategory.Ge.Basic", "gEngine.RibbonPageCategory.Ge.Basic\gEngine.RibbonPageCategory.Ge.Basic.csproj", "{7B008425-79FF-4480-922D-052CC464DF01}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gEngine.Application.Ge.Basic", "gEngine.RibbonPageCategory.Ge.Basic\gEngine.Application.Ge.Basic.csproj", "{7B008425-79FF-4480-922D-052CC464DF01}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gEngine.Symbol.normal", "gEngine.Symbol.normal\gEngine.Symbol.normal.csproj", "{30909D5D-47DC-4BFB-862D-0F02F4865F98}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -351,6 +353,10 @@ Global
 		{7B008425-79FF-4480-922D-052CC464DF01}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B008425-79FF-4480-922D-052CC464DF01}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B008425-79FF-4480-922D-052CC464DF01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30909D5D-47DC-4BFB-862D-0F02F4865F98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30909D5D-47DC-4BFB-862D-0F02F4865F98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30909D5D-47DC-4BFB-862D-0F02F4865F98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30909D5D-47DC-4BFB-862D-0F02F4865F98}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -419,5 +425,6 @@ Global
 		{82B30986-BE53-442C-A295-BBC096A33910} = {678B7A78-05D7-4C7A-A02E-B399C3EF5E3A}
 		{1C84BF76-326D-48A8-B2D7-EED2E9BDEC99} = {82B30986-BE53-442C-A295-BBC096A33910}
 		{7B008425-79FF-4480-922D-052CC464DF01} = {5DA24075-76FD-4692-8D34-6ACB37AD65D5}
+		{30909D5D-47DC-4BFB-862D-0F02F4865F98} = {FEB2131F-6079-4129-9659-C09DE8968EA8}
 	EndGlobalSection
 EndGlobal

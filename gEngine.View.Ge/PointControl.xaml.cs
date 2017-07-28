@@ -42,7 +42,7 @@ namespace gEngine.View.Ge
             if (ps == null)
                 pc.Content = null;
 
-            OptionSetting setting = PointStyle2OptionSettingConverter.CreateFromPointStyle(ps);
+            PointOptionSetting setting = PointStyle2OptionSettingConverter.CreateFromPointStyle(ps);
             object point = Registry.CreatePoint(setting);
             pc.Content = point;
         }

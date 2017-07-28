@@ -1,5 +1,5 @@
 ﻿using gEngine.Graph.Ge.Column;
-using gEngine.RibbonPageCategory;
+using gEngine.Application;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace gEngine.RibbonPageCategory.Ge.Column
+namespace gEngine.Application.Ge.Column
 {
     /// <summary>
     /// WellColumnRibbonPageCategory.xaml 的交互逻辑

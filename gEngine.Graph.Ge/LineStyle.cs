@@ -14,16 +14,17 @@ namespace gEngine.Graph.Ge
         {
 
         }
-        public enum LineType
-        {
-            NormalLine=0,
-            ComplexLine,
-            Unkown
-        }
-        public virtual LineType LinType { get { return LineType.Unkown; } }
         protected override Freezable CreateInstanceCore()
         {
             return new LineStyle();
+        }
+
+        public static LineStyle Default
+        {
+            get
+            {
+                return new LineStyle() { Width = 1.0, Stroke = Colors.Black, Symbol = "Solid", SymbolLib = "Normal" };
+            }
         }
 
         public Color Stroke
@@ -47,45 +48,6 @@ namespace gEngine.Graph.Ge
         public static readonly DependencyProperty WidthProperty =
             DependencyProperty.Register("Width", typeof(double), typeof(LineStyle), new PropertyMetadata(2.0));
 
-    }
-
-    public class NormalLineStyle : LineStyle
-    {
-        public NormalLineStyle()
-        {
-        }
-        public override LineType LinType { get { return LineType.NormalLine; } }
-
-        protected override Freezable CreateInstanceCore()
-        {
-            return new NormalLineStyle();
-        }
-        
-        public DoubleCollection StrokeDashArray
-        {
-            get { return (DoubleCollection)GetValue(StrokeDashArrayProperty); }
-            set { SetValue(StrokeDashArrayProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for Width.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty StrokeDashArrayProperty =
-            DependencyProperty.Register("StrokeDashArray", typeof(DoubleCollection), typeof(NormalLineStyle));
-
-    }
-
-    public class ComplexLineStyle : LineStyle
-    {
-        public ComplexLineStyle()
-        {
-            
-        }
-        public override LineType LinType { get { return LineType.ComplexLine; } }
-
-        protected override Freezable CreateInstanceCore()
-        {
-            return new ComplexLineStyle();
-        }
-
         public string Symbol
         {
             get { return (string)GetValue(SymbolProperty); }
@@ -94,8 +56,8 @@ namespace gEngine.Graph.Ge
 
         // Using a DependencyProperty as the backing store for Symbol.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SymbolProperty =
-            DependencyProperty.Register("Symbol", typeof(string), typeof(ComplexLineStyle), new PropertyMetadata(""));
-        
+            DependencyProperty.Register("Symbol", typeof(string), typeof(LineStyle), new PropertyMetadata("Solid"));
+
         public string SymbolLib
         {
             get { return (string)GetValue(SymbolLibProperty); }
@@ -104,8 +66,6 @@ namespace gEngine.Graph.Ge
 
         // Using a DependencyProperty as the backing store for SymbolLib.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SymbolLibProperty =
-            DependencyProperty.Register("SymbolLib", typeof(string), typeof(ComplexLineStyle), new PropertyMetadata(""));
-
-        
+            DependencyProperty.Register("SymbolLib", typeof(string), typeof(LineStyle), new PropertyMetadata("Normal"));
     }
 }
