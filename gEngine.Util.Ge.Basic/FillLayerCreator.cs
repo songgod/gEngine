@@ -13,7 +13,10 @@ namespace gEngine.Util.Ge.Basic
     {
         public Layer Create()
         {
+            FillStyle fs = new FillStyle();
+           
             Layer layer = new Layer() { Type = "Fill" };
+
             PointCollection pc = new PointCollection();
             pc.Add(new System.Windows.Point(10, 10));
             pc.Add(new System.Windows.Point(100, 19));
@@ -21,25 +24,32 @@ namespace gEngine.Util.Ge.Basic
             pc.Add(new System.Windows.Point(40, 200));
             Boundary boun = new Boundary()
             {
-                StrokeThickness = 3,
+                StrokeThickness = 2,
                 Fill = Brushes.Black,
                 Stroke = Brushes.Red,
-                Points = pc
+                Points = pc,
+                
 
             };
             layer.Objects.Add(boun);
 
-            Rect rect = new Rect()
+
+            PointCollection pc1 = new PointCollection();
+            pc1.Add(new System.Windows.Point(100, 100));
+            pc1.Add(new System.Windows.Point(500, 190));
+            pc1.Add(new System.Windows.Point(200, 300));
+            pc1.Add(new System.Windows.Point(90, 300));
+            Boundary boun1 = new Boundary()
             {
-                Top = 0,
-                Left = 150,
-                Width = 100,
-                Height = 100,
-                Fill = Brushes.Black,
-                Stroke = Brushes.Red
+                StrokeThickness = 2,
+                Fill = Brushes.Red,
+                Stroke = Brushes.Black,
+                Points = pc1,
+               
 
             };
-            layer.Objects.Add(rect);
+            layer.Objects.Add(boun1);
+
 
             return layer;
         }

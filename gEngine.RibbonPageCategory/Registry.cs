@@ -11,8 +11,16 @@ namespace gEngine.Application
 {
     public static class Registry
     {
-        private static Dictionary<Type, GeRibbonPageCategory> dicRibbonPage;
-        public static Dictionary<Type, GeRibbonPageCategory> DicRibbonPage
+        private static Dictionary<Type, GeRibbonPageCategory> dicRibbonPageCategory;
+        private static Dictionary<string, RibbonPage> dicRibbonPage;
+        public static Dictionary<Type, GeRibbonPageCategory> DicRibbonPageCategory
+        {
+            get
+            {
+                return dicRibbonPageCategory;
+            }
+        }
+        public static Dictionary<string, RibbonPage> DicRibbonPage
         {
             get
             {
@@ -22,28 +30,50 @@ namespace gEngine.Application
 
         static Registry()
         {
-            dicRibbonPage = new Dictionary<Type, GeRibbonPageCategory>();
+            dicRibbonPageCategory = new Dictionary<Type, GeRibbonPageCategory>();
+            dicRibbonPage = new Dictionary<string, RibbonPage>();
         }
         static public void Regist(Type type, GeRibbonPageCategory grpc)
         {
             if (type == null || grpc == null)
                 return;
 
-            dicRibbonPage[type] = grpc;
+            dicRibbonPageCategory[type] = grpc;
+        }
+        static public void Regist(string name, RibbonPage rp)
+        {
+            if (string.IsNullOrEmpty(name) || rp == null)
+                return;
+
+            dicRibbonPage[name] = rp;
         }
         static public void UnRegist(Type type)
         {
             if (type == null)
                 return;
 
-            dicRibbonPage.Remove(type);
+            dicRibbonPageCategory.Remove(type);
+        }
+        static public void UnRegist(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+                return;
+
+            dicRibbonPage.Remove(name);
         }
         static public GeRibbonPageCategory GetRibbonPageCategory(Type type)
         {
-            if (type == null || !dicRibbonPage.ContainsKey(type))
+            if (type == null || !dicRibbonPageCategory.ContainsKey(type))
                 return null;
 
-            return dicRibbonPage[type];
+            return dicRibbonPageCategory[type];
+        }
+        static public RibbonPage GetRibbonPage(string name)
+        {
+            if (string.IsNullOrEmpty(name) || !dicRibbonPage.ContainsKey(name))
+                return null;
+
+            return dicRibbonPage[name];
         }
         static public void LoadLocalElement()
         {
@@ -56,13 +86,20 @@ namespace gEngine.Application
                 Type[] types = ab.GetTypes();
                 foreach (Type t in types)
                 {
-                    Type ribbonPageType = typeof(GeRibbonPageCategory);
-                    if (ribbonPageType == t.BaseType)
+                    Type ribbonPageCategoryType = typeof(GeRibbonPageCategory);
+                    if (ribbonPageCategoryType == t.BaseType)
                     {
                         GeRibbonPageCategory grpc = (GeRibbonPageCategory)(ab.CreateInstance(t.FullName));
                         PropertyInfo pi = t.GetRuntimeProperty("SupportType");
                         Type key = (Type)pi.GetValue(grpc);
                         Regist(key, grpc);
+                    }
+
+                    Type ribbonPageType = typeof(RibbonPage);
+                    if (ribbonPageType == t.BaseType)
+                    {
+                        RibbonPage rp = (RibbonPage)(ab.CreateInstance(t.FullName));
+                        Regist(rp.Name, rp);
                     }
                 }
             }
@@ -71,10 +108,22 @@ namespace gEngine.Application
         {
             if (ribbonControl == null)
                 return;
-            foreach (var page in dicRibbonPage)
+            foreach (var page in dicRibbonPageCategory)
             {
                 ribbonControl.Categories.Add(page.Value);
             }
+
+            foreach (var category in ribbonControl.Categories)
+            {
+                if (category.IsDefault)
+                {
+                    foreach (var page in dicRibbonPage.Values)
+                    {
+                        category.Pages.Add(page);
+                    }
+                }
+            }
+
         }
     }
 }

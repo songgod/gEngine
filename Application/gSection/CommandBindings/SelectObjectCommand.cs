@@ -45,11 +45,20 @@ namespace gSection.CommandBindings
             if (mc == null)
                 return;
 
-            SelectObjectManipulator mpl = gEngine.Manipulator.Registry.CreateManipulator("SelectObjectManipulator") as SelectObjectManipulator;
-            if (mpl == null)
-                return;
-            ManipulatorSetter.SetManipulator(mpl, mc);
-            mpl.OnSelectObject += mw.Mpl_OnSelectObject;
+
+            if(ManipulatorSetter.IsContainManipulator(typeof(SelectObjectManipulator),mc))
+                ManipulatorSetter.RemoveManipulator(typeof(SelectObjectManipulator), mc);
+            else
+            {
+                SelectObjectManipulator mpl = gEngine.Manipulator.Registry.CreateManipulator("SelectObjectManipulator") as SelectObjectManipulator;
+                if (mpl == null)
+                    return;
+                ManipulatorSetter.AddManipulator(mpl, mc);
+                mpl.OnSelectObject += mw.Mpl_OnSelectObject;
+
+            }
+
+
             e.Handled = true;
         }
     }

@@ -47,6 +47,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FillSymbolGalleryDropDownPopupMenu.cs" />
     <Compile Include="GeRibbonPageCategory.cs" />
     <Compile Include="PointSymbolGalleryDropDownPopupMenu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

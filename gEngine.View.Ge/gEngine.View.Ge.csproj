@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FillStyle2BrushConverter.cs" />
+    <Compile Include="FillStyle2FillOptionSettingConverter.cs" />
     <Compile Include="LineControl.xaml.cs">
       <DependentUpon>LineControl.xaml</DependentUpon>
     </Compile>
