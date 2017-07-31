@@ -161,4 +161,50 @@ namespace gEngine.Symbol
             }
         }
     }
+
+    public class FillOptionSetting : OptionSetting
+    {
+        public FillOptionSetting()
+        {
+            Properties["Path"] = null;
+            Properties["Fill"] = Brushes.Red ;
+            Properties["Stroke"] = Brushes.Black;
+        }
+
+        public PathGeometry Path
+        {
+            get
+            {
+                return GetValue<PathGeometry>("Path");
+            }
+            set
+            {
+                Properties["Path"] = value;
+            }
+        }
+
+        public Brush Fill
+        {
+            get
+            {
+                return GetValue<Brush>("Fill");
+            }
+            set
+            {
+                Properties["Fill"] = value;
+            }
+        }
+
+        public Brush Stroke
+        {
+            get
+            {
+                return GetValue<Brush>("Stroke");
+            }
+            set
+            {
+                Properties["Stroke"] = value;
+            }
+        }
+    }
 }

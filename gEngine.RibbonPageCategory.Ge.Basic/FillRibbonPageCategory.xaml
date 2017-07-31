@@ -17,7 +17,7 @@
     <dxr:RibbonPage x:Uid="dxr:RibbonPage_7" Caption="平面设置">
         <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_24" Caption="直线样式">
             <dxb:BarEditItem x:Uid="dxb:BarEditItem_23" Content="粗细" EditWidth="44"
-                             EditValue="{Binding Path=FillStyle.Width,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                             EditValue="{Binding Path=FillStyle.StrokeThickness,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                 <dxb:BarEditItem.EditSettings>
                     <dxe:TextEditSettings  />
                 </dxb:BarEditItem.EditSettings>
@@ -32,10 +32,10 @@
                     <dxe:PopupColorEditSettings/>
                 </dxb:BarEditItem.EditSettings>
             </dxb:BarEditItem>
-            <dxb:BarSplitButtonItem Content="线风格"  LargeGlyph="{dx:DXImage Image=LineStyle_32x32.png}" x:Name="bsbFillStyle"
+            <dxb:BarSplitButtonItem Content="面风格"  LargeGlyph="{dx:DXImage Image=LineStyle_32x32.png}" x:Name="bsbFillStyle"
                                    Glyph="{dx:DXImage Image=LineStyle_16x16.png}" RibbonStyle="SmallWithText">
                 <dxb:BarSplitButtonItem.PopupControl>
-                    <gerpc:StrokeSymbolGalleryDropDownPopupMenu LineSymbolCommand="{Binding SelectBarCommand,ElementName=RibbonPageCategoryLine}"/>
+                    <gerpc:FillSymbolGalleryDropDownPopupMenu FillSymbolCommand="{Binding SelectBarCommand,ElementName=RibbonPageCategoryFill}"/>
                 </dxb:BarSplitButtonItem.PopupControl>
             </dxb:BarSplitButtonItem>
         </dxr:RibbonPageGroup>
