@@ -32,7 +32,7 @@ namespace gEngine.Graph.Ge.Basic
 
         // Using a DependencyProperty as the backing store for LinStyle.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty LinStyleProperty =
-            DependencyProperty.Register("LinStyle", typeof(LineStyle), typeof(PolyLine), new PropertyMetadata(new NormalLineStyle()));
+            DependencyProperty.Register("LinStyle", typeof(LineStyle), typeof(PolyLine), new PropertyMetadata(new LineStyle()));
 
 
     }

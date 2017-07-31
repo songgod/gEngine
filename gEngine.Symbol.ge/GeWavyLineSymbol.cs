@@ -10,7 +10,7 @@ using System.Windows.Shapes;
 
 namespace gEngine.Symbol.gesym
 {
-    public class GeWavyLineSymbol : StrokeSymbol
+    public class GeWavyLineSymbol : ComplexStrokeSymbol
     {
         private static readonly string name = "WavyLineSymbol";
         public override string Name

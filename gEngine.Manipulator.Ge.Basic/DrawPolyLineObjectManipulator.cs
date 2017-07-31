@@ -16,7 +16,7 @@ namespace gEngine.Manipulator.Ge.Basic
     {
         public DrawPolyLineObjectManipulator()
         {
-            LineStyle = new NormalLineStyle();
+            LineStyle = new LineStyle();
         }
         public LineStyle LineStyle { get; set; }
 

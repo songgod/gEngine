@@ -8,7 +8,7 @@ using System.Windows.Shapes;
 
 namespace gEngine.Symbol.gesym
 {
-    public class GeStoreLineSymbol : StrokeSymbol
+    public class GeStoreLineSymbol : ComplexStrokeSymbol
     {
         public GeStoreLineSymbol()
         {

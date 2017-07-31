@@ -35,6 +35,7 @@ namespace gEngine.Graph.Ge.Column
             well.Name = Name;
             well.Location = Location;
             well.LongitudinalProportion = LongitudinalProportion;
+            well.HorizontalProportion = HorizontalProportion;
             return well;
         }
 
@@ -70,15 +71,15 @@ namespace gEngine.Graph.Ge.Column
         /// <summary>
         /// 每口井位置
         /// </summary>
-        public int Location
+        public double Location
         {
-            get { return (int) GetValue(LocationProperty); }
+            get { return (double) GetValue(LocationProperty); }
             set { SetValue(LocationProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Depths.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty LocationProperty =
-            DependencyProperty.Register("Location", typeof(int), typeof(Well));
+            DependencyProperty.Register("Location", typeof(double), typeof(Well));
 
         public int LongitudinalProportion
         {
@@ -89,5 +90,15 @@ namespace gEngine.Graph.Ge.Column
         // Using a DependencyProperty as the backing store for Depths.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty LongitudinalProportionProperty =
             DependencyProperty.Register("LongitudinalProportion", typeof(int), typeof(Well));
+
+        public int HorizontalProportion
+        {
+            get { return (int) GetValue(HorizontalProportionProperty); }
+            set { SetValue(HorizontalProportionProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Depths.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty HorizontalProportionProperty =
+            DependencyProperty.Register("HorizontalProportion", typeof(int), typeof(Well));
     }
 }

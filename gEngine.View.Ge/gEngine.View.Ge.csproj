@@ -45,10 +45,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FillStyle2BrushConverter.cs" />
+    <Compile Include="FillStyle2FillOptionSettingConverter.cs" />
     <Compile Include="LineControl.xaml.cs">
       <DependentUpon>LineControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ComplexLineStylePath2OptionSettingConverter.cs" />
+    <Compile Include="LineStyle2LineOptionSettingConverter.cs" />
     <Compile Include="PointControl.xaml.cs">
       <DependentUpon>PointControl.xaml</DependentUpon>
     </Compile>

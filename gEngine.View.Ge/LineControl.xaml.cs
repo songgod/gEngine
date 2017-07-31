@@ -38,22 +38,20 @@ namespace gEngine.View.Ge
             LineControl lc = (LineControl)d;
             LineStyle ls = (LineStyle)e.NewValue;
             if (ls == null)
+            {
                 lc.Content = null;
+                return;
+            }
+                
 
-            if(ls.LinType==LineStyle.LineType.NormalLine)
+            LineOptionSetting setting = LineStyle2LineOptionSettingConverter.ConvertFromLineStyle(ls, lc.Data);
+            if (setting == null)
             {
-                NormalLineStyle nls = ls as NormalLineStyle;
-                Path path = new Path() { Data = lc.Data, Stroke = new SolidColorBrush(nls.Stroke),StrokeThickness=nls.Width, StrokeDashArray=nls.StrokeDashArray };
-                lc.Content = path;
+                lc.Content = null;
+                return;
             }
-            else if(ls.LinType==LineStyle.LineType.ComplexLine)
-            {
-                LineOptionSetting setting = ComplexLineStylePath2OptionSettingConverter.ConvertFromLineStyle(ls as ComplexLineStyle, lc.Data);
-                if (setting == null)
-                    lc.Content = null;
-                object stroke = Registry.CreateStroke(setting);
-                lc.Content = stroke;
-            }
+            object stroke = Registry.CreateStroke(setting);
+            lc.Content = stroke;
         }
 
         // Using a DependencyProperty as the backing store for LineStyle.  This enables animation, styling, binding, etc...
@@ -85,20 +83,11 @@ namespace gEngine.View.Ge
                 return;
             }
 
-            if (ls.LinType == LineStyle.LineType.NormalLine)
-            {
-                NormalLineStyle nls = ls as NormalLineStyle;
-                Path path = new Path() { Data = pg, Stroke = new SolidColorBrush(nls.Stroke), StrokeThickness = nls.Width, StrokeDashArray = nls.StrokeDashArray };
-                lc.Content = path;
-            }
-            else if (ls.LinType == LineStyle.LineType.ComplexLine)
-            {
-                LineOptionSetting setting = ComplexLineStylePath2OptionSettingConverter.ConvertFromLineStyle(ls as ComplexLineStyle, pg);
-                if (setting == null)
-                    lc.Content = null;
-                object stroke = Registry.CreateStroke(setting);
-                lc.Content = stroke;
-            }
+            LineOptionSetting setting = LineStyle2LineOptionSettingConverter.ConvertFromLineStyle(ls, pg);
+            if (setting == null)
+                lc.Content = null;
+            object stroke = Registry.CreateStroke(setting);
+            lc.Content = stroke;
         }
 
         // Using a DependencyProperty as the backing store for Data.  This enables animation, styling, binding, etc...

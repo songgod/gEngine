@@ -4,36 +4,37 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B85489F1-D87B-4740-AD9C-77195B8743F3}</ProjectGuid>
+    <ProjectGuid>{30909D5D-47DC-4BFB-862D-0F02F4865F98}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>gEngine.Util.Ge.Basic</RootNamespace>
-    <AssemblyName>gEngine.Util.Ge.Basic</AssemblyName>
+    <RootNamespace>gEngine.Symbol.normal</RootNamespace>
+    <AssemblyName>gEngine.Symbol.normal</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
     <OutputPath>..\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
     <OutputPath>..\bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,27 +44,18 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FillLayerCreator.cs" />
-    <Compile Include="LineLayerCreator.cs" />
+    <Compile Include="GradientFillSymbol.cs" />
+    <Compile Include="SolidFillSymbol.cs" />
+    <Compile Include="EllpisePointSymbol.cs" />
+    <Compile Include="DotStrokeSymbol.cs" />
+    <Compile Include="SolidStrokeSymbol.cs" />
+    <Compile Include="NormalSymbolFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="CommonLayerCreator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\gEngine.Graph.Ge.Basic\gEngine.Graph.Ge.Basic.csproj">
-      <Project>{db606377-aaa0-45bd-a6be-4f4c4cd111af}</Project>
-      <Name>gEngine.Graph.Ge.Basic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\gEngine.Graph.Ge\gEngine.Graph.Ge.csproj">
-      <Project>{3bd77e4f-a348-4edb-b60c-68b749249b91}</Project>
-      <Name>gEngine.Graph.Ge</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\gEngine.Graph.Interface\gEngine.Graph.Interface.csproj">
-      <Project>{1c98a821-b030-4ff2-83ae-d49b1b3b8c67}</Project>
-      <Name>gEngine.Graph.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\gEngine.Util\gEngine.Util.csproj">
-      <Project>{84acb6c4-cf62-4f4b-a7e5-5c642edc041a}</Project>
-      <Name>gEngine.Util</Name>
+    <ProjectReference Include="..\gEngine.View.Symbol\gEngine.Symbol.csproj">
+      <Project>{1600379B-C8B5-4375-A1D5-3B81BD7FCCF7}</Project>
+      <Name>gEngine.Symbol</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

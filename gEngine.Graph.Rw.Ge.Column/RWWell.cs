@@ -28,8 +28,9 @@ namespace gEngine.Graph.Rw.Ge.Column
             Well well = (Well) Object;
 
             well.Name = node.Attributes["Name"].Value;
-            well.Location = Int32.Parse(node.Attributes["Location"].Value);
+            well.Location = double.Parse(node.Attributes["Location"].Value);
             well.LongitudinalProportion = Int32.Parse(node.Attributes["LongitudinalProportion"].Value);
+            well.HorizontalProportion = Int32.Parse(node.Attributes["HorizontalProportion"].Value);
 
             foreach (XmlNode childNode in node.ChildNodes)
             {
@@ -93,6 +94,10 @@ namespace gEngine.Graph.Rw.Ge.Column
             XmlAttribute xmlLongitudinalProportion = doc.CreateAttribute("LongitudinalProportion");
             xmlLongitudinalProportion.Value = string.IsNullOrEmpty(Well.LongitudinalProportion.ToString()) == false ? Well.LongitudinalProportion.ToString() : string.Empty;
             node.Attributes.Append(xmlLongitudinalProportion);
+
+            XmlAttribute xmlHorizontalProportion = doc.CreateAttribute("HorizontalProportion");
+            xmlHorizontalProportion.Value = string.IsNullOrEmpty(Well.HorizontalProportion.ToString()) == false ? Well.HorizontalProportion.ToString() : string.Empty;
+            node.Attributes.Append(xmlHorizontalProportion);
         }
 
         public override IObject CreateObject()

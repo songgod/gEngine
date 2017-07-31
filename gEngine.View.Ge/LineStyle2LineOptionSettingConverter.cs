@@ -11,14 +11,14 @@ using System.Windows.Media;
 
 namespace gEngine.View.Ge
 {
-    public class ComplexLineStylePath2OptionSettingConverter : IMultiValueConverter
+    public class LineStyle2LineOptionSettingConverter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             if (values.Length < 2)
                 return null;
 
-            ComplexLineStyle ls = values[0] as ComplexLineStyle;
+            LineStyle ls = values[0] as LineStyle;
             PathGeometry pg = values[1] as PathGeometry;
             if (ls == null || pg == null)
                 return null;
@@ -31,7 +31,7 @@ namespace gEngine.View.Ge
             throw new NotImplementedException();
         }
 
-        public static LineOptionSetting ConvertFromLineStyle(ComplexLineStyle style, PathGeometry path)
+        public static LineOptionSetting ConvertFromLineStyle(LineStyle style, PathGeometry path)
         {
             if (style == null || path == null)
                 return null;
@@ -39,8 +39,8 @@ namespace gEngine.View.Ge
             LineOptionSetting setting = new LineOptionSetting();
             setting.Factory = style.SymbolLib;
             setting.Symbol = style.Symbol;
-            setting.Properties["Stroke"] = style.Stroke;
-            setting.Properties["Width"] = style.Width;
+            setting.Stroke = style.Stroke;
+            setting.Width = style.Width;
             setting.Path = path;
             return setting;
         }

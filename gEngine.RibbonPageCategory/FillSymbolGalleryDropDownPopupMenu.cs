@@ -16,9 +16,9 @@ using System.Windows.Shapes;
 
 namespace gEngine.Application
 {
-    public class StrokeSymbolGalleryDropDownPopupMenu : GalleryDropDownPopupMenu
+    public class FillSymbolGalleryDropDownPopupMenu: GalleryDropDownPopupMenu
     {
-        public StrokeSymbolGalleryDropDownPopupMenu()
+        public FillSymbolGalleryDropDownPopupMenu()
         {
             Gallery gallery = new Gallery();
             gallery.ColCount = 4;
@@ -27,12 +27,7 @@ namespace gEngine.Application
             gallery.IsItemCaptionVisible = true;
             gallery.IsItemDescriptionVisible = true;
 
-            PathGeometry pg = new PathGeometry();
-            PathFigure pf = new PathFigure() { StartPoint = new Point(0, 0) };
-            LineSegment ls = new LineSegment { Point = new Point(80, 0) };
-            pf.Segments.Add(ls);
-            pg.Figures.Add(pf);
-
+          
             foreach (KeyValuePair<string, ISymbolFactory> kv in gEngine.Symbol.Registry.SymbolFactorys)
             {
                 string key = kv.Key;
@@ -40,21 +35,31 @@ namespace gEngine.Application
                 group.Caption = key;
                 group.IsCaptionVisible = DevExpress.Utils.DefaultBoolean.True;
 
-                foreach (string symbolName in kv.Value.StrokeSymbolNames)
+                foreach (string symbolName in kv.Value.FillSymbolNames)
                 {
-                    LineStyle cplstyle = new LineStyle();
+                    FillStyle cplstyle = new FillStyle();
                     cplstyle.Symbol = symbolName;
                     cplstyle.SymbolLib = key;
-                    cplstyle.Width = key=="Normal" ? 1 : 10;
-                    cplstyle.Stroke = Colors.Black;
-                    LineOptionSetting setting = LineStyle2LineOptionSettingConverter.ConvertFromLineStyle(cplstyle, pg);
+                    //cplstyle.Width = key == "Normal" ? 1 : 10;
+                    //cplstyle.Stroke = Colors.Black;
+                    //Brush setting = FillStyle2BrushConverter.ConverterFromFillStyle(cplstyle);
 
-                    Path path = gEngine.Symbol.Registry.CreateStroke(setting) as Path;
-                    if (path != null)
+                    Brush bru = FillStyle2BrushConverter.ConverterFromFillStyle(cplstyle);
+                    if (bru != null)
                     {
-                        Canvas c = new Canvas() { Width = 80.0, Height = 40.0 };
-                        path.SetValue(Canvas.TopProperty, 20.0);
-                        c.Children.Add(path);
+                        Canvas c = new Canvas() { Width = 40.0, Height = 40.0 };
+                        //Border border = new Border();
+                        //border.BorderBrush = new SolidColorBrush(Colors.Black);
+                        //border.BorderThickness = new Thickness(1);
+                       
+                        //border.Child = c;
+                        //path.SetValue(Canvas.TopProperty, 20.0);
+                        Rectangle rect = new Rectangle();
+                        rect.Fill = bru;
+                        rect.Stroke = Brushes.Black;
+                        rect.Width = c.Width;
+                        rect.Height = c.Height;
+                        c.Children.Add(rect);
                         GalleryItem item = new GalleryItem();
                         item.Caption = c;
                         item.Command = null;
@@ -68,9 +73,9 @@ namespace gEngine.Application
             Gallery = gallery;
         }
 
-        private static void OnLineSymbolCommandChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnFillSymbolCommandChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            StrokeSymbolGalleryDropDownPopupMenu sgdp = (StrokeSymbolGalleryDropDownPopupMenu)d;
+            FillSymbolGalleryDropDownPopupMenu sgdp = (FillSymbolGalleryDropDownPopupMenu)d;
             ICommand cmd = (ICommand)e.NewValue;
             foreach (GalleryItemGroup group in sgdp.Gallery.Groups)
             {
@@ -81,14 +86,14 @@ namespace gEngine.Application
             }
         }
 
-        public ICommand LineSymbolCommand
+        public ICommand FillSymbolCommand
         {
-            get { return (ICommand)GetValue(LineSymbolCommandProperty); }
-            set { SetValue(LineSymbolCommandProperty, value); }
+            get { return (ICommand)GetValue(FillSymbolCommandProperty); }
+            set { SetValue(FillSymbolCommandProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for ItemCommand.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty LineSymbolCommandProperty =
-            DependencyProperty.Register("LineSymbolCommand", typeof(ICommand), typeof(StrokeSymbolGalleryDropDownPopupMenu), new PropertyMetadata(null,new PropertyChangedCallback(OnLineSymbolCommandChanged)));
+        public static readonly DependencyProperty FillSymbolCommandProperty =
+            DependencyProperty.Register("FillSymbolCommand", typeof(ICommand), typeof(FillSymbolGalleryDropDownPopupMenu), new PropertyMetadata(null, new PropertyChangedCallback(OnFillSymbolCommandChanged)));
     }
 }

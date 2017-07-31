@@ -8,76 +8,37 @@ using System.Windows.Media;
 
 namespace gEngine.Graph.Ge
 {
-    public class FillStyle
+    public class FillStyle : Freezable
     {
-        public enum FillType
+
+
+        public string Symbol
         {
-            SolidBrush = 0,
-            GradientBrush,
-            ImageBrush,
-            SymbolBrush,
-            UnKownBrush
+            get { return (string)GetValue(SymbolProperty); }
+            set { SetValue(SymbolProperty, value); }
         }
 
-        public virtual FillType BrushType
-        {
-            get
-            {
-                return FillType.UnKownBrush;
-            }
-        }
-    }
+        // Using a DependencyProperty as the backing store for Symbol.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SymbolProperty =
+            DependencyProperty.Register("Symbol", typeof(string), typeof(FillStyle), new PropertyMetadata("White"));
 
-    public class SymbolFillStyle : FillStyle
-    {
-        public override FillType BrushType
+
+
+        public string SymbolLib
         {
-            get
-            {
-                return FillType.SymbolBrush;
-            }
+            get { return (string)GetValue(SymbolLibProperty); }
+            set { SetValue(SymbolLibProperty, value); }
         }
 
-        public string Symbol { get; set; }
-        public string SymbolLib { get; set; }
-        public Color Color { get; set; }
-    }
+        // Using a DependencyProperty as the backing store for SymbolLib.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SymbolLibProperty =
+            DependencyProperty.Register("SymbolLib", typeof(string), typeof(FillStyle), new PropertyMetadata("Normal"));
 
-    public class SolidFillStyle : FillStyle
-    {
-        public override FillType BrushType
-        {
-            get
-            {
-                return FillType.SolidBrush;
-            }
-        }
-        public Color Color { get; set; }
-    }
 
-    public class GradientFillStyle : FillStyle
-    {
-        public override FillType BrushType
-        {
-            get
-            {
-                return FillType.GradientBrush;
-            }
-        }
-        public Point Start { get; set; }
-        public Point End { get; set; }
-        public GradientStopCollection Stops { get; set; }
-    }
 
-    public class ImageFillStyle : FillStyle
-    {
-        public override FillType BrushType
+        protected override Freezable CreateInstanceCore()
         {
-            get
-            {
-                return FillType.ImageBrush;
-            }
+            return new FillStyle();
         }
-        public string Image { get; set; }
     }
 }

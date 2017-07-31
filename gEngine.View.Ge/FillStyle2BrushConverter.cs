@@ -29,35 +29,11 @@ namespace gEngine.View.Ge
         {
             if (fs == null)
                 return null;
-            if (fs.BrushType == FillStyle.FillType.SolidBrush)
-            {
-                SolidFillStyle sfs = fs as SolidFillStyle;
-                SolidColorBrush sb = new SolidColorBrush() { Color = sfs.Color };
-                return sb;
-            }
-            else if (fs.BrushType == FillStyle.FillType.GradientBrush)
-            {
-                GradientFillStyle gfs = fs as GradientFillStyle;
-                LinearGradientBrush lgb = new LinearGradientBrush() { StartPoint = gfs.Start, EndPoint = gfs.End, GradientStops = gfs.Stops };
-                return lgb;
-            }
-            else if (fs.BrushType == FillStyle.FillType.ImageBrush)
-            {
-                ImageFillStyle ifs = fs as ImageFillStyle;
-                ImageSource imgsrc = new BitmapImage(new Uri(ifs.Image));
-                return new ImageBrush(imgsrc);
-            }
-            else if (fs.BrushType == FillStyle.FillType.SymbolBrush)
-            {
-                SymbolFillStyle sfs = fs as SymbolFillStyle;
-                OptionSetting setting = new OptionSetting();
-                setting.Factory = sfs.SymbolLib;
-                setting.Symbol = sfs.Symbol;
-                setting.Properties["Color"] = sfs.Color;
-                return Registry.CreateFillBrush(setting);
-            }
 
-            return null;
+            OptionSetting setting = new OptionSetting();
+            setting.Factory = fs.SymbolLib;
+            setting.Symbol = fs.Symbol;
+            return Registry.CreateFillBrush(setting);
         } 
     }
 }

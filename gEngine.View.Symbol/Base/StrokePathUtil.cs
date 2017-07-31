@@ -59,7 +59,7 @@ namespace gEngine.Symbol
             return l;
         }
 
-        static Point TransPoint(Point p, Point basep, Point tangent)
+        static Point TransPoint(Point p, Point basep, Point tangent, double ws)
         {
             Matrix rm = new Matrix();
             double ta = Math.Atan2(tangent.Y, tangent.X) * 180 / Math.PI;
@@ -67,13 +67,13 @@ namespace gEngine.Symbol
             rm.Rotate(90);
             Matrix tm = new Matrix();
             tm.Translate(basep.X, basep.Y);
-            Point pw = new Point(p.Y, 0);
+            Point pw = new Point(p.Y * ws, 0);
 
             Point tp = pw * rm * tm;
             return tp;
         }
 
-        public static PathGeometry GetAfterConverterGeom(PathGeometry symbolGeom, PathGeometry tracepg)
+        public static PathGeometry GetAfterConverterGeom(PathGeometry symbolGeom, PathGeometry tracepg, double width)
         {
             if (symbolGeom == null || tracepg == null)
                 return null;
@@ -82,6 +82,8 @@ namespace gEngine.Symbol
 
             double symbolLen = GetSymbolWidth(symbolGeom);
             double symbolWid = GetSymolHeight(symbolGeom);
+
+            double widthscale = width / symbolWid;
             
             foreach (var tracepf in tracepg.Figures)
             {
@@ -98,7 +100,7 @@ namespace gEngine.Symbol
                         Point point, tangent;
                         double progress = (StartPoint.X + n * symbolLen) / traceLen;
                         tracepg.GetPointAtFractionLength(progress, out point, out tangent);
-                        Point cStartPoint = TransPoint(StartPoint, point, tangent);
+                        Point cStartPoint = TransPoint(StartPoint, point, tangent, widthscale);
                         PathFigure cpf = new PathFigure() { StartPoint = cStartPoint };
                         cpg.Figures.Add(cpf);
                         foreach (var s in pf.Segments)
@@ -112,7 +114,7 @@ namespace gEngine.Symbol
                                     progress = (pt.X + n * symbolLen) / traceLen;
                                     Point outpt, outtangent;
                                     tracepg.GetPointAtFractionLength(progress, out outpt, out outtangent);
-                                    Point cpt = TransPoint(pt, outpt, outtangent);
+                                    Point cpt = TransPoint(pt, outpt, outtangent, widthscale);
                                     cpbs.Points.Add(cpt);
                                 }
                                 cpf.Segments.Add(cpbs);
@@ -126,7 +128,7 @@ namespace gEngine.Symbol
                                     progress = (pt.X + n * symbolLen) / traceLen;
                                     Point outpt, outtangent;
                                     tracepg.GetPointAtFractionLength(progress, out outpt, out outtangent);
-                                    Point cpt = TransPoint(pt, outpt, outtangent);
+                                    Point cpt = TransPoint(pt, outpt, outtangent, widthscale);
                                     cpqbs.Points.Add(cpt);
                                 }
                                 cpf.Segments.Add(cpqbs);
@@ -143,7 +145,7 @@ namespace gEngine.Symbol
                                     progress = (pt.X + n * symbolLen) / traceLen;
                                     Point outpt, outtangent;
                                     tracepg.GetPointAtFractionLength(progress, out outpt, out outtangent);
-                                    Point cpt = TransPoint(pt, outpt, outtangent);
+                                    Point cpt = TransPoint(pt, outpt, outtangent, widthscale);
                                     pc.Add(cpt);
                                 }
                                 cbes.Point1 = pc[0];
@@ -163,7 +165,7 @@ namespace gEngine.Symbol
                                     progress = (pt.X + n * symbolLen) / traceLen;
                                     Point outpt, outtangent;
                                     tracepg.GetPointAtFractionLength(progress, out outpt, out outtangent);
-                                    Point cpt = TransPoint(pt, outpt, outtangent);
+                                    Point cpt = TransPoint(pt, outpt, outtangent, widthscale);
                                     pc.Add(cpt);
                                 }
                                 cqbes.Point1 = pc[0];
@@ -177,7 +179,7 @@ namespace gEngine.Symbol
                                 progress = (asm.Point.X + n * symbolLen) / traceLen;
                                 Point outpt, outtangent;
                                 tracepg.GetPointAtFractionLength(progress, out outpt, out outtangent);
-                                Point cpt = TransPoint(asm.Point, outpt, outtangent);
+                                Point cpt = TransPoint(asm.Point, outpt, outtangent, widthscale);
                                 casm.Point = cpt;
                                 cpf.Segments.Add(casm);
                             }
@@ -190,7 +192,7 @@ namespace gEngine.Symbol
                                     progress = (pt.X + n * symbolLen) / traceLen;
                                     Point outpt, outtangent;
                                     tracepg.GetPointAtFractionLength(progress, out outpt, out outtangent);
-                                    Point cpt = TransPoint(pt, outpt, outtangent);
+                                    Point cpt = TransPoint(pt, outpt, outtangent, widthscale);
                                     cpls.Points.Add(cpt);
                                 }
                                 cpf.Segments.Add(cpls);
@@ -202,7 +204,7 @@ namespace gEngine.Symbol
                                 progress = (ls.Point.X + n * symbolLen) / traceLen;
                                 Point outpt, outtangent;
                                 tracepg.GetPointAtFractionLength(progress, out outpt, out outtangent);
-                                Point cpt = TransPoint(ls.Point, outpt, outtangent);
+                                Point cpt = TransPoint(ls.Point, outpt, outtangent, widthscale);
                                 cls.Point = cpt;
                                 cpf.Segments.Add(cls);
                             }

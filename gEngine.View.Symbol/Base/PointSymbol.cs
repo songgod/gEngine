@@ -20,6 +20,6 @@ namespace gEngine.Symbol
         }
 
         public abstract string Name { get; }
-        public abstract object Create(OptionSetting param);
+        public abstract object Create(PointOptionSetting param);
     }
 }
