@@ -1,5 +1,6 @@
 ﻿using gEngine.Project.Commands;
 using gEngine.Project.Ge.Section.Commands.SectionEdit;
+using gEngine.Project.Section.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace gEngine.Project.Ge.Section.Commands
                 return;
             ui.CommandBindings.Add(new NewSectionMapCommand());
             ui.CommandBindings.Add(new SaveTemplateCommand());
+            ui.CommandBindings.Add(new ChangeTemplateCommand());
             ui.CommandBindings.Add(new EditLineCommand());
             ui.CommandBindings.Add(new EraseFaceCommand());
             ui.CommandBindings.Add(new EraseLineCommand());

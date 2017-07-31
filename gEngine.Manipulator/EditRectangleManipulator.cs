@@ -108,9 +108,11 @@ namespace gEngine.Manipulator
                     saveModel.CommandParameter = oc;
                     MenuItem changeModel = new MenuItem();
                     changeModel.Header = "更换模板";
+                    changeModel.Command = SectionCommands.ChangeTemplateCommand;
+                    changeModel.CommandParameter = oc;
 
                     contextMenu.Items.Add(saveModel);
-                    //contextMenu.Items.Add(changeModel);
+                    contextMenu.Items.Add(changeModel);
                     mc.EditLayer.ContextMenu = contextMenu;
                     return HitTestResultBehavior.Stop;
                 }

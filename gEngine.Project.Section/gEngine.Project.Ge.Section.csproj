@@ -54,6 +54,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\ChangeTemplateCommand.cs" />
     <Compile Include="Commands\SaveTemplateCommand.cs" />
     <Compile Include="Commands\SectionEdit\NewLineStratumCommand.cs" />
     <Compile Include="Commands\SectionEdit\NewTrendLineCommand.cs" />
@@ -67,6 +68,9 @@
     <Compile Include="Commands\SectionEdit\NewLineSandCommand.cs" />
     <Compile Include="Commands\SectionCommandsInstaller.cs" />
     <Compile Include="Commands\NewSectionMapCommand.cs" />
+    <Compile Include="Controls\DXChangeTemplate.xaml.cs">
+      <DependentUpon>DXChangeTemplate.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\DXSectionSet.xaml.cs">
       <DependentUpon>DXSectionSet.xaml</DependentUpon>
     </Compile>
@@ -145,6 +149,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\DXChangeTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\DXSectionSet.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
