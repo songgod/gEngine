@@ -150,16 +150,6 @@
                         <dxb:BarCheckItem x:Uid="dxb:BarCheckItem_2" Content="BarCheckItem"/>
                     </dxr:RibbonPageGroup>
                 </dxr:RibbonPage>
-                <dxr:RibbonPage x:Uid="dxr:RibbonPage_1" Caption="剖面管理">
-                    <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_6" Caption="剖面">
-                        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_9" Content="新建剖面图" Command="{x:Static prjcmds:SectionCommands.NewSectionMapCommand}" CommandTarget="{Binding ElementName=prjctrl}" LargeGlyph="{dx:DXImage Image=BOFolder_32x32.png}" Glyph="{dx:DXImage Image=BOFolder_16x16.png}"/>
-                    </dxr:RibbonPageGroup>
-                    <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_7" Caption="新建剖面图">
-                        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_10" Content="BarButtonItem"/>
-                        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_11" Content="BarButtonItem"/>
-                        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_12" Content="BarButtonItem"/>
-                    </dxr:RibbonPageGroup>
-                </dxr:RibbonPage>
                 <dxr:RibbonPage x:Uid="dxr:RibbonPage_2" Caption="手绘剖面">
                     <dxr:RibbonPageGroup x:Uid="新建" x:Name="新建" Caption="新建">
                         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_13" Content="新建 手绘图层" LargeGlyph="pack://application:,,,/gSection;component/Images/GDS/新增1.32.ico"/>
