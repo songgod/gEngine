@@ -1,4 +1,7 @@
-﻿using gEngine.Graph.Interface;
+﻿using DevExpress.Xpf.Ribbon;
+using gEngine.Application;
+using gEngine.Graph.Interface;
+using gEngine.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,6 +63,27 @@ namespace gEngine.Project.Controls
             get
             {
                 return tc;
+            }
+        }
+
+        public void Mpl_OnSelectObject(ObjectControl oc)
+        {
+            IObject iobject = oc.DataContext as IObject;
+            GeRibbonPageCategory grpc = gEngine.Application.Registry.GetRibbonPageCategory(iobject.GetType());
+            if (grpc != null)
+            {
+                BindingExpression exp = grpc.GetBindingExpression(IsVisibleProperty);
+                if (exp == null)
+                {
+                    //绑定1：将iobject的IsSelected属性绑定到ribbon的IsVisibleProperty属性上
+                    Binding bd = new Binding("IsSelected");
+                    bd.Source = iobject;
+                    bd.Mode = BindingMode.OneWay;
+                    grpc.SetBinding(RibbonPageCategory.IsVisibleProperty, bd);
+
+                    //绑定2：将iobject绑定到ribbon的datacontext上
+                    grpc.DataContext = iobject;
+                }
             }
         }
     }

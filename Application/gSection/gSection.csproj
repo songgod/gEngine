@@ -88,9 +88,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="CommandBindings\SelectObjectCommand.cs" />
-    <Compile Include="Commands\RibbonCommandInstaller.cs" />
-    <Compile Include="Commands\RibbonCommands.cs" />
     <Compile Include="Converters\RibPageCategoryVisibleConvert.cs" />
     <Compile Include="Controls\RecentProjectControl.xaml.cs">
       <DependentUpon>RecentProjectControl.xaml</DependentUpon>

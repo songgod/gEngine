@@ -7,8 +7,6 @@ using gEngine.Project;
 using gEngine.Project.Commands;
 using gEngine.Project.Controls;
 using gEngine.View;
-using gSection.CommandBindings;
-using gSection.Commands;
 using gSection.Converters;
 using System;
 using System.Collections.Generic;
@@ -39,8 +37,6 @@ namespace gSection.View
         public MainWindow()
         {
             gEngine.Project.Registry.InstallCommands(this);
-            RibbonCommandInstaller install = new RibbonCommandInstaller();
-            install.Install(this);
 
             Projects = new Project();
 
@@ -68,27 +64,6 @@ namespace gSection.View
 
 
             gEngine.Application.Registry.AddRibbonPageCategory(ribbonControl);
-        }
-
-        public void Mpl_OnSelectObject(ObjectControl oc)
-        {
-            IObject iobject = oc.DataContext as IObject; 
-            GeRibbonPageCategory grpc = gEngine.Application.Registry.GetRibbonPageCategory(iobject.GetType());
-            if (grpc != null)
-            {
-                BindingExpression exp = grpc.GetBindingExpression(IsVisibleProperty);
-                if (exp == null)
-                {
-                    //绑定1：将iobject的IsSelected属性绑定到ribbon的IsVisibleProperty属性上
-                    Binding bd = new Binding("IsSelected");
-                    bd.Source = iobject;
-                    bd.Mode = BindingMode.OneWay;
-                    grpc.SetBinding(RibbonPageCategory.IsVisibleProperty, bd);
-
-                    //绑定2：将iobject绑定到ribbon的datacontext上
-                    grpc.DataContext = iobject;
-                }
-            }
         }
 
         #region Command

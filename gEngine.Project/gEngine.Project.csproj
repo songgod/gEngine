@@ -66,6 +66,7 @@
     <Compile Include="Commands\OpenRecentProjectCommand.cs" />
     <Compile Include="Commands\ProjectCommandsInstaller.cs" />
     <Compile Include="Commands\RedoCommand.cs" />
+    <Compile Include="Commands\SelectObjectCommand.cs" />
     <Compile Include="Commands\SetLayerEditableCommand.cs" />
     <Compile Include="Commands\SaveAsProjectCommand.cs" />
     <Compile Include="Commands\SaveProjectCommand.cs" />
@@ -142,6 +143,10 @@
     <ProjectReference Include="..\gEngine.Manipulator\gEngine.Manipulator.csproj">
       <Project>{b4eedb17-eb3d-4e22-ab7c-d8e366564b8f}</Project>
       <Name>gEngine.Manipulator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.RibbonPageCategory\gEngine.Application.csproj">
+      <Project>{DCE49078-3FAD-4C85-BC8C-713553BFDDD4}</Project>
+      <Name>gEngine.Application</Name>
     </ProjectReference>
     <ProjectReference Include="..\gEngine.Util\gEngine.Util.csproj">
       <Project>{84acb6c4-cf62-4f4b-a7e5-5c642edc041a}</Project>

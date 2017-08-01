@@ -49,6 +49,19 @@ namespace gEngine.Manipulator.Ge.Plane
             mc.KeyDown += _mc_KeyDown;
         }
 
+        protected override void OnDetaching()
+        {
+            base.OnDetaching();
+            if (this.AssociatedObject == null)
+                return;
+
+            MapControl mc = this.AssociatedObject.Owner;
+            if (mc == null)
+                return;
+
+            mc.KeyDown -= _mc_KeyDown;
+        }
+
         private void _mc_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Back)
@@ -56,7 +69,8 @@ namespace gEngine.Manipulator.Ge.Plane
                 if (SelectWellLocations.Count <= 0)
                     return;
                 WellLocation wl = SelectWellLocations.Pop();
-                this.TrackAdorner.Points.Remove(new Point(wl.X, wl.Y));
+                this.TrackAdorner.Points.RemoveAt(this.TrackAdorner.Points.Count - 1);
+                
                 if (this.TrackAdorner.Points.Count == 1)
                     this.TrackAdorner.Points.RemoveAt(this.TrackAdorner.Points.Count - 1);
             }
