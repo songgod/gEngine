@@ -35,6 +35,7 @@ namespace gEngine.Project.Commands
             ui.CommandBindings.Add(new SetLayerOpacityCommand());
             ui.CommandBindings.Add(new OpenRecentProjectCommand());
             ui.CommandBindings.Add(new OpenDBSourceCommand());
+            ui.CommandBindings.Add(new SelectObjectCommand());
         }
     }
 }

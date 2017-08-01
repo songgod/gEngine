@@ -1,0 +1,124 @@
+﻿<dxr:RibbonPage Caption="手绘剖面"
+                 x:Class="gEngine.Application.Ge.Section.HandDrawingSectionRibbonPage"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                 xmlns:local="clr-namespace:gEngine.Application.Ge.Section"
+                 xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                 xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+                 xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+                 xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                 xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                 xmlns:gerpc="clr-namespace:gEngine.Application;assembly=gEngine.Application"   
+                 xmlns:prjcmds="clr-namespace:gEngine.Commands;assembly=gEngine.Commands"
+                 xmlns:prjcontrols="clr-namespace:gEngine.Project.Controls;assembly=gEngine.Project">
+    <dxr:RibbonPageGroup x:Uid="新建" x:Name="新建" Caption="新建">
+        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_13" Content="新建 手绘图层" LargeGlyph="pack://application:,,,/gSection;component/Images/GDS/新增1.32.ico"/>
+        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_14" Content="添加边界" LargeGlyph="pack://application:,,,/gSection;component/Images/GDS/导入边界2.ico"/>
+    </dxr:RibbonPageGroup>
+    <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_8" Caption="趋势线">
+        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_15" Content="插入趋势线" LargeGlyph="{dx:DXImage Image=StackedLineWithoutMarkers_32x32.png}" Glyph="{dx:DXImage Image=StackedLineWithoutMarkers_16x16.png}"/>
+        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_16" Content="手绘趋势线" 
+                           Command="{x:Static prjcmds:SectionEditCommands.NewTrendLineCommand}" 
+                           CommandTarget="{Binding Path=ProjectControl, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow}}"
+                           LargeGlyph="{dx:DXImage Image=StackedLineWithoutMarkers_32x32.png}" 
+                           Glyph="{dx:DXImage Image=StackedLineWithoutMarkers_16x16.png}"/>
+        <dxb:BarSplitCheckItem x:Uid="dxb:BarSplitCheckItem_1" Content="线型" 
+                               Command="{x:Static prjcmds:PlaneCommands.NewPlaneLineCommand}" 
+                               CommandTarget="{Binding Path=ProjectControl, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow}}"
+                               LargeGlyph="{dx:DXImage Image=HorizontalGridlinesMajor_32x32.png}" 
+                               RibbonStyle="SmallWithText"
+                               Glyph="{dx:DXImage Image=HorizontalGridlinesMajor_16x16.png}"/>
+        <dxb:BarEditItem x:Uid="dxb:BarEditItem_1" Content="粗细" EditWidth="44" EditValue="1.0">
+            <dxb:BarEditItem.EditSettings>
+                <dxe:TextEditSettings x:Uid="dxe:TextEditSettings_1"/>
+            </dxb:BarEditItem.EditSettings>
+        </dxb:BarEditItem>
+        <dxb:BarEditItem x:Uid="dxb:BarEditItem_2" Content="颜色">
+            <dxb:BarEditItem.EditSettings>
+                <dxe:PopupColorEditSettings x:Uid="dxe:PopupColorEditSettings_1"/>
+            </dxb:BarEditItem.EditSettings>
+        </dxb:BarEditItem>
+    </dxr:RibbonPageGroup>
+    <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_9" Caption="断层">
+        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_17" Content="添加断层线"  
+                           Command="{x:Static prjcmds:SectionEditCommands.NewCurveFaultCommand}" 
+                           CommandTarget="{Binding Path=ProjectControl, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow}}"
+                           LargeGlyph="{dx:DXImage Image=ScatterWithStraightLines_32x32.png}"
+                           Glyph="{dx:DXImage Image=ScatterWithStraightLines_16x16.png}"/>
+        <dxb:BarSplitCheckItem x:Uid="dxb:BarSplitCheckItem_2" Content="线型"  LargeGlyph="{dx:DXImage Image=HorizontalGridlinesMajor_32x32.png}" RibbonStyle="SmallWithText" Glyph="{dx:DXImage Image=HorizontalGridlinesMajor_16x16.png}"/>
+        <dxb:BarEditItem x:Uid="dxb:BarEditItem_3" Content="粗细" EditWidth="44" EditValue="1.0">
+            <dxb:BarEditItem.EditSettings>
+                <dxe:TextEditSettings x:Uid="dxe:TextEditSettings_2"/>
+            </dxb:BarEditItem.EditSettings>
+        </dxb:BarEditItem>
+        <dxb:BarEditItem x:Uid="dxb:BarEditItem_4" Content="颜色">
+            <dxb:BarEditItem.EditSettings>
+                <dxe:PopupColorEditSettings x:Uid="dxe:PopupColorEditSettings_2"/>
+            </dxb:BarEditItem.EditSettings>
+        </dxb:BarEditItem>
+    </dxr:RibbonPageGroup>
+    <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_10" Caption="地层线">
+        <dxb:BarSplitCheckItem x:Uid="dxb:BarSplitCheckItem_3" Content="添加地层线" 
+                               Command="{x:Static prjcmds:SectionEditCommands.NewCurveStratumCommand}" 
+                               CommandTarget="{Binding Path=ProjectControl, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow}}"
+                               LargeGlyph="{dx:DXImage Image=LineStyle_32x32.png}" 
+                               Glyph="{dx:DXImage Image=LineStyle_16x16.png}"/>
+        <dxb:BarEditItem x:Uid="dxb:BarEditItem_5" Content="粗细" EditWidth="44" EditValue="1.0">
+            <dxb:BarEditItem.EditSettings>
+                <dxe:TextEditSettings x:Uid="dxe:TextEditSettings_3"/>
+            </dxb:BarEditItem.EditSettings>
+        </dxb:BarEditItem>
+        <dxb:BarEditItem x:Uid="dxb:BarEditItem_6" Content="颜色">
+            <dxb:BarEditItem.EditSettings>
+                <dxe:PopupColorEditSettings x:Uid="dxe:PopupColorEditSettings_3"/>
+            </dxb:BarEditItem.EditSettings>
+        </dxb:BarEditItem>
+    </dxr:RibbonPageGroup>
+    <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_11" Caption="砂体线">
+        <dxb:BarSplitCheckItem x:Uid="dxb:BarSplitCheckItem_4" Content="默认形态" LargeGlyph="pack://application:,,,/gSection;component/Images/GDS/歼灭形态.png" Glyph="pack://application:,,,/gSection;component/Images/GDS/歼灭形态.png"/>
+        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_18" Content="半自动" LargeGlyph="{dx:DXImage Image=FullStackedArea_32x32.png}" Glyph="{dx:DXImage Image=Spline_16x16.png}" RibbonStyle="Large"/>
+        <dxb:BarItemSeparator x:Uid="dxb:BarItemSeparator_1"/>
+        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_19" Content="添加直线" 
+                           Command="{x:Static prjcmds:SectionEditCommands.NewLineSandCommand}" 
+                           CommandTarget="{Binding Path=ProjectControl, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow}}"
+                           LargeGlyph="{dx:DXImage Image=ScatterWithStraightLinesAndMarkersX23_32x32.png}" 
+                           Glyph="{dx:DXImage Image=ScatterWithStraightLinesAndMarkersX23_32x32.png}"/>
+        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_20" Content="添加曲线" 
+                           Command="{x:Static prjcmds:SectionEditCommands.NewCurveSandCommand}" 
+                           CommandTarget="{Binding Path=ProjectControl, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow}}"
+                           LargeGlyph="{dx:DXImage Image=Spline_32x32.png}" 
+                           Glyph="{dx:DXImage Image=Spline_16x16.png}" RibbonStyle="Large"/>
+        <dxb:BarItemSeparator x:Uid="dxb:BarItemSeparator_2"/>
+        <dxb:BarSplitCheckItem x:Uid="dxb:BarSplitCheckItem_5" Content="线型" LargeGlyph="{dx:DXImage Image=HorizontalGridlinesMajor_32x32.png}" RibbonStyle="SmallWithText" Glyph="{dx:DXImage Image=HorizontalGridlinesMajor_16x16.png}"/>
+        <dxb:BarEditItem x:Uid="dxb:BarEditItem_7" Content="粗细" EditWidth="44" EditValue="1.0">
+            <dxb:BarEditItem.EditSettings>
+                <dxe:TextEditSettings x:Uid="dxe:TextEditSettings_4"/>
+            </dxb:BarEditItem.EditSettings>
+        </dxb:BarEditItem>
+        <dxb:BarEditItem x:Uid="dxb:BarEditItem_8" Content="颜色">
+            <dxb:BarEditItem.EditSettings>
+                <dxe:PopupColorEditSettings x:Uid="dxe:PopupColorEditSettings_4"/>
+            </dxb:BarEditItem.EditSettings>
+        </dxb:BarEditItem>
+    </dxr:RibbonPageGroup>
+    <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_12" Caption="设置">
+        <dxb:BarEditItem x:Uid="dxb:BarEditItem_9" Content="平滑程度" EditWidth="60" EditValue="10">
+            <dxb:BarEditItem.EditSettings>
+                <dxe:TrackBarEditSettings x:Uid="dxe:TrackBarEditSettings_1"/>
+            </dxb:BarEditItem.EditSettings>
+        </dxb:BarEditItem>
+        <dxb:BarEditItem x:Uid="dxb:BarEditItem_10" Content2="趋势线控制" FrameworkElement.FlowDirection="LeftToRight">
+            <dxb:BarEditItem.EditSettings>
+                <dxe:CheckEditSettings x:Uid="dxe:CheckEditSettings_1"/>
+            </dxb:BarEditItem.EditSettings>
+        </dxb:BarEditItem>
+    </dxr:RibbonPageGroup>
+    <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_13" Caption="编辑">
+        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_21" Content="编辑线" LargeGlyph="{dx:DXImage Image=Spline_32x32.png}" Glyph="{dx:DXImage Image=Spline_16x16.png}" RibbonStyle="Large" Command="{x:Static prjcmds:SectionEditCommands.EditLineCommand}"  CommandTarget="{Binding Path=ProjectControl, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow}}"/>
+        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_22" Content="替换线" LargeGlyph="{dx:DXImage Image=Spline_32x32.png}" Glyph="{dx:DXImage Image=Spline_16x16.png}" RibbonStyle="Large" Command="{x:Static prjcmds:SectionEditCommands.ReplaceLineCommand}"  CommandTarget="{Binding Path=ProjectControl, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow}}"/>
+        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_23" Content="擦除线" LargeGlyph="{dx:DXImage Image=Spline_32x32.png}" Glyph="{dx:DXImage Image=Spline_16x16.png}" RibbonStyle="Large" Command="{x:Static prjcmds:SectionEditCommands.EraseLineCommand}"  CommandTarget="{Binding Path=ProjectControl, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow}}"/>
+        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_24" Content="删除面" LargeGlyph="{dx:DXImage Image=Spline_32x32.png}" Glyph="{dx:DXImage Image=Spline_16x16.png}" RibbonStyle="Large" Command="{x:Static prjcmds:SectionEditCommands.EraseFaceCommand}"  CommandTarget="{Binding Path=ProjectControl, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow}}"/>
+    </dxr:RibbonPageGroup>
+</dxr:RibbonPage>

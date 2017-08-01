@@ -1,41 +1,35 @@
-﻿using gEngine.Graph.Interface;
+﻿using gEngine.Commands;
 using gEngine.Manipulator;
 using gEngine.Project.Controls;
 using gEngine.View;
-using gSection.Commands;
-using gSection.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 
-namespace gSection.CommandBindings
+namespace gEngine.Project.Commands
 {
-    public class SelectObjectCommand : CommandBinding
+    public class SelectObjectCommand:CommandBinding
     {
         public SelectObjectCommand()
         {
-            Command = RibbonCommands.SelectObjectCommand;
+            Command = StartCommands.SelectObjectCommand;
             Executed += SelectObjectCommand_Executed;
             CanExecute += SelectObjectCommand_CanExecute;
         }
 
         private void SelectObjectCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            MainWindow mw = e.OriginalSource as MainWindow;
-            ProjectControl pc = mw.ProjectControl;
+            ProjectControl pc = e.OriginalSource as ProjectControl;
             e.CanExecute = pc != null && pc.MapsControl.ActiveMapControl != null;
             e.Handled = true;
         }
 
         private void SelectObjectCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            MainWindow mw = e.OriginalSource as MainWindow;
-
-            ProjectControl pc = mw.ProjectControl;
+            ProjectControl pc = e.OriginalSource as ProjectControl;
             if (pc == null)
                 return;
 
@@ -46,7 +40,7 @@ namespace gSection.CommandBindings
                 return;
 
 
-            if(ManipulatorSetter.IsContainManipulator(typeof(SelectObjectManipulator),mc))
+            if (ManipulatorSetter.IsContainManipulator(typeof(SelectObjectManipulator), mc))
                 ManipulatorSetter.RemoveManipulator(typeof(SelectObjectManipulator), mc);
             else
             {
@@ -54,7 +48,7 @@ namespace gSection.CommandBindings
                 if (mpl == null)
                     return;
                 ManipulatorSetter.AddManipulator(mpl, mc);
-                mpl.OnSelectObject += mw.Mpl_OnSelectObject;
+                mpl.OnSelectObject += pc.Mpl_OnSelectObject;
 
             }
 
