@@ -16,7 +16,7 @@ namespace gEngine.Project.Commands
     {
         public UndoCommand()
         {
-            Command = UndoRedoCommands.UndoCommand;
+            Command = StartCommands.UndoCommand;
             Executed += UndoCommand_Executed;
             CanExecute += UndoCommand_CanExecute;
         }

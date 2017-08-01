@@ -11,7 +11,6 @@
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:prjcontrols="clr-namespace:gEngine.Project.Controls;assembly=gEngine.Project"
         xmlns:prjcmds="clr-namespace:gEngine.Commands;assembly=gEngine.Commands"
-        xmlns:cmds="clr-namespace:gSection.Commands"
         xmlns:cvt="clr-namespace:gSection.Converters"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="gSection.View.MainWindow"
@@ -49,8 +48,8 @@
         </ResourceDictionary>
     </dxr:DXRibbonWindow.Resources>
     <dxr:DXRibbonWindow.InputBindings>
-        <KeyBinding x:Uid="KeyBinding_1" Gesture="Ctrl+Z" Command="{x:Static prjcmds:UndoRedoCommands.UndoCommand}" CommandTarget="{Binding ElementName=prjctrl}"/>
-        <KeyBinding x:Uid="KeyBinding_2" Gesture="Ctrl+Y" Command="{x:Static prjcmds:UndoRedoCommands.RedoCommand}" CommandTarget="{Binding  ElementName=prjctrl}"/>
+        <KeyBinding x:Uid="KeyBinding_1" Gesture="Ctrl+Z" Command="{x:Static prjcmds:StartCommands.UndoCommand}" CommandTarget="{Binding ElementName=prjctrl}"/>
+        <KeyBinding x:Uid="KeyBinding_2" Gesture="Ctrl+Y" Command="{x:Static prjcmds:StartCommands.RedoCommand}" CommandTarget="{Binding  ElementName=prjctrl}"/>
     </dxr:DXRibbonWindow.InputBindings>
     <Grid x:Uid="Grid_1">
         <Grid.RowDefinitions>
@@ -128,8 +127,8 @@
             <dxr:RibbonDefaultPageCategory x:Uid="dxr:RibbonDefaultPageCategory_1">
                 <dxr:RibbonPage x:Uid="pageStart" x:Name="pageStart" Caption="开始">
                     <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_1" Caption="编辑">
-                        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_2" Content="撤销"  Command="{x:Static prjcmds:UndoRedoCommands.UndoCommand}" CommandTarget="{Binding}" LargeGlyph="{dx:DXImage Image=Undo_32x32.png}" Glyph="{dx:DXImage Image=Undo_16x16.png}"/>
-                        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_3" Content="重做"  Command="{x:Static prjcmds:UndoRedoCommands.RedoCommand}" CommandTarget="{Binding}" LargeGlyph="{dx:DXImage Image=Redo_32x32.png}" Glyph="{dx:DXImage Image=Redo_16x16.png}"/>
+                        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_2" Content="撤销"  Command="{x:Static prjcmds:StartCommands.UndoCommand}" CommandTarget="{Binding}" LargeGlyph="{dx:DXImage Image=Undo_32x32.png}" Glyph="{dx:DXImage Image=Undo_16x16.png}"/>
+                        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_3" Content="重做"  Command="{x:Static prjcmds:StartCommands.RedoCommand}" CommandTarget="{Binding}" LargeGlyph="{dx:DXImage Image=Redo_32x32.png}" Glyph="{dx:DXImage Image=Redo_16x16.png}"/>
                         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_4" Content="删除" LargeGlyph="{dx:DXImage Image=Delete_32x32.png}" Glyph="{dx:DXImage Image=Delete_16x16.png}"/>
                         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_5" Content="清理内存" LargeGlyph="pack://application:,,,/gSection;component/Images/GDS/清理内存.png" Glyph="pack://application:,,,/gSection;component/Images/GDS/清理内存.png"/>
                     </dxr:RibbonPageGroup>
@@ -140,9 +139,8 @@
                     <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_29" Caption="常用功能">
                         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_39" Content="设置数据源" Command="{x:Static prjcmds:ProjectCommands.OpenDBSourceCommand}" CommandTarget="{Binding ElementName=prjctrl}" LargeGlyph="pack://application:,,,/gSection;component/Images/GDS/数据源32.png" Glyph="pack://application:,,,/gSection;component/Images/GDS/数据源16.png"></dxb:BarButtonItem>
                         <dxb:BarButtonItem  x:Uid="dxb:BarButtonItem_42" x:Name="bbiSelect" Content="选择" 
-                                            Command="{x:Static cmds:RibbonCommands.SelectObjectCommand}" CommandTarget="{Binding ElementName=dxrWindow}"
+                                            Command="{x:Static prjcmds:StartCommands.SelectObjectCommand}" CommandTarget="{Binding ElementName=prjctrl}"
                                             LargeGlyph="{dx:DXImage Image=SelectTool_32x32.png}" Glyph="{dx:DXImage Image=SelectTool_16x16.png}" RibbonStyle="Large"/>
-
                     </dxr:RibbonPageGroup>
                 </dxr:RibbonPage>
                 <dxr:RibbonPage x:Uid="pageRef" x:Name="pageRef" Caption="参考">
