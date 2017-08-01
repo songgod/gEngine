@@ -22,6 +22,7 @@ namespace gEngine.Util.Ge.Basic
             pc.Add(new System.Windows.Point(100, 19));
             pc.Add(new System.Windows.Point(20, 30));
             pc.Add(new System.Windows.Point(40, 200));
+
             Boundary boun = new Boundary()
             {
                 StrokeThickness = 2,
