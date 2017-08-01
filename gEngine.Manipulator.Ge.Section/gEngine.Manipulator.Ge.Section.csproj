@@ -51,14 +51,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CalcTolerance.cs" />
-    <Compile Include="DrawCloseCurveManipulator.cs" />
     <Compile Include="DrawCurveManipulator.cs" />
     <Compile Include="DrawCurveFaultManipulator.cs" />
     <Compile Include="DrawCurveSandManipulator.cs" />
-    <Compile Include="DrawLineFaultManipulator.cs" />
-    <Compile Include="DrawLineManipulator.cs" />
-    <Compile Include="DrawLineStratumManipulator.cs" />
-    <Compile Include="DrawLineSandManipulator.cs" />
     <Compile Include="DrawCurveStratumManipulator.cs" />
     <Compile Include="EditCurveManipulator.cs" />
     <Compile Include="EraseLineManipulator.cs" />

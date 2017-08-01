@@ -36,7 +36,7 @@ namespace gEngineTest.Ge.Section
 
         private void AddLine_Click(object sender, RoutedEventArgs e)
         {
-            ManipulatorSetter.SetManipulator(new DrawLineFaultManipulator(), mc.GetLayerControl(0));
+            //ManipulatorSetter.SetManipulator(new DrawLineFaultManipulator(), mc.GetLayerControl(0));
         }
 
         private void EraseLine_Click(object sender, RoutedEventArgs e)
@@ -51,7 +51,7 @@ namespace gEngineTest.Ge.Section
 
         private void AddCloseCurve_Click(object sender, RoutedEventArgs e)
         {
-            ManipulatorSetter.SetManipulator(new DrawCloseCurveManipulator(), mc.GetLayerControl(0));
+            //ManipulatorSetter.SetManipulator(new DrawCloseCurveManipulator(), mc.GetLayerControl(0));
         }
 
         private void ReplaceLine_Click(object sender, RoutedEventArgs e)

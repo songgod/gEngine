@@ -7,28 +7,12 @@
              xmlns:gs="clr-namespace:gEngine.Graph.Ge.Section;assembly=gEngine.Graph.Ge.Section"
              xmlns:gv="clr-namespace:gEngine.View.Ge;assembly=gEngine.View.Ge"
              mc:Ignorable="d">
-    <DataTemplate DataType="{x:Type gs:NodeProxyObject}">
-        <gv:PointControl PointStyle="{Binding SectionInfo.NodeStyle}">
-            <gv:PointControl.RenderTransform>
-                <TransformGroup>
-                    <TranslateTransform X="0" Y="0"/>
-                    <TranslateTransform X="{Binding Node.X}" Y="{Binding Node.Y}"/>
-                </TransformGroup>
-            </gv:PointControl.RenderTransform>
-        </gv:PointControl>
-    </DataTemplate>
     <DataTemplate DataType="{x:Type gs:LineProxyObject}">
-        <gv:LineControl>
+        <gv:LineControl LineStyle="{Binding LineStyle}">
             <gv:LineControl.Resources>
                 <local:Type2LineStyleConverter x:Key="t2s"/>
                 <local:Line2PathDataConverter x:Key="l2p"/>
             </gv:LineControl.Resources>
-            <gv:LineControl.LineStyle>
-                <MultiBinding Converter="{StaticResource t2s}">
-                    <Binding Path="Line.Type"/>
-                    <Binding Path="SectionInfo"/>
-                </MultiBinding>
-            </gv:LineControl.LineStyle>
             <gv:LineControl.Data>
                 <MultiBinding Converter="{StaticResource l2p}">
                     <Binding Path="Line.StartPoint"/>
@@ -42,13 +26,10 @@
             <Path.Resources>
                 <local:Region2PathDataConverter x:Key="f2p"/>
                 <local:Type2FillConverter x:Key="t2f"/>
+                <gv:FillStyle2BrushConverter x:Key="f2b"/>
             </Path.Resources>
             <Path.Fill>
-                <MultiBinding Converter="{StaticResource t2f}">
-                    <Binding Path="Face.Valid"/>
-                    <Binding Path="Face.Type"/>
-                    <Binding Path="SectionInfo"/>
-                </MultiBinding>
+                <Binding Path="FillStyle" Converter="{StaticResource f2b}"/>
             </Path.Fill>
             <Path.Data>
                 <MultiBinding Converter="{StaticResource f2p}">

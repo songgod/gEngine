@@ -14,14 +14,13 @@ namespace gEngine.Graph.Ge.Section
         {
             TopGraph = new gTopology.Graph();
             DicLineStyle = new Dictionary<int, LineStyle>();
-            DicLineStyle[(int)SectionLineType.Fault] = new LineStyle() { Stroke = Colors.Blue, Width = 3.0 };
-            DicLineStyle[(int)SectionLineType.Sand] = new LineStyle() { Stroke = Colors.Red, Width = 1.0 };
-            DicLineStyle[(int)SectionLineType.Stratum] = new LineStyle() { Stroke = Colors.Green, Width = 1.0 };
             DicFillStyle = new Dictionary<int, FillStyle>();
-            DicFillStyle[(int)SectionLineType.Fault] = new FillStyle() { SymbolLib="Normal", Symbol="Blue"};
-            DicFillStyle[(int)SectionLineType.Sand] = new FillStyle() { SymbolLib = "Normal", Symbol = "Red" };
-            DicFillStyle[(int)SectionLineType.Stratum] = new FillStyle() { SymbolLib = "Normal", Symbol = "Green" };
-            NodeStyle = new PointStyle();
+            DefaultFaultLineStyle = LineStyle.Default;
+            DefaultStratumLineStyle = LineStyle.Default;
+            DefaultSandLineStyle = LineStyle.Default;
+
+            DefaultStratumFillStyle = new FillStyle() { Symbol = "Red", SymbolLib = "Normal" };
+            DefaultSandFillStyle = new FillStyle() { Symbol = "Green", SymbolLib = "Normal" };
         }
 
         public gTopology.Graph TopGraph { get; set; }
@@ -30,6 +29,55 @@ namespace gEngine.Graph.Ge.Section
 
         public Dictionary<int, FillStyle> DicFillStyle { get; set; }
 
-        public PointStyle NodeStyle { get; set; }
+        public LineStyle DefaultFaultLineStyle { get; set; }
+        public LineStyle DefaultStratumLineStyle { get; set; }
+        public LineStyle DefaultSandLineStyle { get; set; }
+        public FillStyle DefaultStratumFillStyle { get; set; }
+        public FillStyle DefaultSandFillStyle { get; set; }
+
+        public LineStyle GetFaultLineStyle(int id)
+        {
+            if (DicLineStyle.ContainsKey(id))
+                return DicLineStyle[id];
+            return DefaultFaultLineStyle;
+        }
+
+        public LineStyle GetStratumLineStyle(int id)
+        {
+            if (DicLineStyle.ContainsKey(id))
+                return DicLineStyle[id];
+            return DefaultStratumLineStyle;
+        }
+
+        public LineStyle GetSandLineStyle(int id)
+        {
+            if (DicLineStyle.ContainsKey(id))
+                return DicLineStyle[id];
+            return DefaultSandLineStyle;
+        }
+
+        public void SetLineStyle(int id, LineStyle ls)
+        {
+            DicLineStyle[id] = ls;
+        }
+
+        public FillStyle GetStratumFillStyle(int id)
+        {
+            if (DicFillStyle.ContainsKey(id))
+                return DicFillStyle[id];
+            return DefaultStratumFillStyle;
+        }
+
+        public FillStyle GetSandFillStyle(int id)
+        {
+            if (DicFillStyle.ContainsKey(id))
+                return DicFillStyle[id];
+            return DefaultSandFillStyle;
+        }
+
+        public void SetFillStyle(int id, FillStyle fs)
+        {
+            DicFillStyle[id] = fs;
+        }
     }
 }

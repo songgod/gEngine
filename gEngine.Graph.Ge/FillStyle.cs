@@ -40,5 +40,13 @@ namespace gEngine.Graph.Ge
         {
             return new FillStyle();
         }
+
+        public static FillStyle Default
+        {
+            get
+            {
+                return new FillStyle() { Symbol = "White", SymbolLib = "Normal" };
+            }
+        }
     }
 }
