@@ -55,6 +55,11 @@ namespace gEngine.Application
                         //border.Child = c;
                         //path.SetValue(Canvas.TopProperty, 20.0);
                         Rectangle rect = new Rectangle();
+                        //LinearGradientBrush lin = new LinearGradientBrush() { StartPoint = new Point(0, 0), EndPoint = new Point(0, 1) };
+                        //lin.GradientStops.Add(new GradientStop() { Offset = 0, Color = Colors.Red });
+                        //lin.GradientStops.Add(new GradientStop() { Offset = 0.25, Color = Colors.Blue });
+                        //lin.GradientStops.Add(new GradientStop() { Offset = 0.6, Color = Colors.DarkRed });
+                        //lin.GradientStops.Add(new GradientStop() { Offset = 1, Color = Colors.Aqua });
                         rect.Fill = bru;
                         rect.Stroke = Brushes.Black;
                         rect.Width = c.Width;
