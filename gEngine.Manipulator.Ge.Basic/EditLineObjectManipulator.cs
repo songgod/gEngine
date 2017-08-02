@@ -14,8 +14,12 @@ namespace gEngine.Manipulator.Ge.Basic
 {
     public class EditLineObjectManipulator : ObjectManipulator
     {
+        #region Property
+
         public Rectangle TrackAdorner1 { get; set; }
         public Rectangle TrackAdorner2 { get; set; }
+
+        #endregion
 
         protected override void OnAttached()
         {
@@ -49,67 +53,9 @@ namespace gEngine.Manipulator.Ge.Basic
             mc.EditLayer.Children.Add(TrackAdorner1);
             mc.EditLayer.Children.Add(TrackAdorner2);
 
-            // oc.MouseMove += Oc_MouseMove;
-
-            mc.MouseLeftButtonDown += Oc_MouseLeftButtonDown;
-
+            this.TrackAdorner1.MouseMove += TrackAdo1_MouseMove;
+            this.TrackAdorner2.MouseMove += TrackAdo2_MouseMove;
         }
-
-        private  void Oc_MouseMove(object sender, MouseEventArgs e)
-        {
-            ObjectControl oc = this.AssociatedObject;
-            if (e.LeftButton == System.Windows.Input.MouseButtonState.Pressed)
-            {
-               Point p =  e.GetPosition(oc);
-                //Point p = mc.Dp2LP(e.GetPosition(mc));
-                //this.TrackAdorner.X2 = p.X;
-                //this.TrackAdorner.Y2 = p.Y;
-            }
-        }
-
-
-        private void Oc_MouseLeftButtonDown(object sender, MouseEventArgs e)
-        {
-            if (this.AssociatedObject == null)
-                return;
-            LayerControl lc = this.AssociatedObject.Owner;
-            MapControl mc = lc.Owner;
-
-            Point pt = e.GetPosition(mc);
-            VisualTreeHelper.HitTest(mc, null,
-                            new HitTestResultCallback(MyHitTestResult), new PointHitTestParameters(pt));
-            
-
-            
-
-
-         
-
-
-            
-
-        }
-
-
-        private HitTestResultBehavior MyHitTestResult(HitTestResult hr)
-        {
-            LayerControl lc = this.AssociatedObject.Owner;
-            MapControl mc = lc.Owner;
-            DependencyObject p = hr.VisualHit;
-            while (p != null)
-            {
-                ObjectControl oc = p as ObjectControl;
-                if (oc != null)
-                {
-                    ((gEngine.Graph.Ge.Basic.Line) oc.DataContext).End = new Point(300, 300);
-                    return HitTestResultBehavior.Stop;
-                }
-                p = VisualTreeHelper.GetParent(p);
-            }
-            return HitTestResultBehavior.Continue;
-        }
-
-
 
         protected override void OnDetaching()
         {
@@ -119,8 +65,41 @@ namespace gEngine.Manipulator.Ge.Basic
             if (mc == null)
                 return;
             mc.EditLayer.Children.Clear();
-
         }
+
+        #region Event
+
+        private void TrackAdo1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (this.AssociatedObject == null)
+                return;
+
+            if (e.LeftButton == System.Windows.Input.MouseButtonState.Pressed)
+            {
+                ObjectControl oc = this.AssociatedObject;
+                Point p = e.GetPosition(oc);
+                Canvas.SetLeft(TrackAdorner1, p.X - TrackAdorner1.Width / 2);
+                Canvas.SetTop(TrackAdorner1, p.Y - TrackAdorner1.Height / 2);
+                ((gEngine.Graph.Ge.Basic.Line) oc.DataContext).Start = p;
+            }
+        }
+
+        private void TrackAdo2_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (this.AssociatedObject == null)
+                return;
+
+            if (e.LeftButton == System.Windows.Input.MouseButtonState.Pressed)
+            {
+                ObjectControl oc = this.AssociatedObject;
+                Point p = e.GetPosition(oc);
+                Canvas.SetLeft(TrackAdorner2, p.X - TrackAdorner2.Width / 2);
+                Canvas.SetTop(TrackAdorner2, p.Y - TrackAdorner2.Height / 2);
+                ((gEngine.Graph.Ge.Basic.Line) oc.DataContext).End = p;
+            }
+        }
+
+        #endregion
     }
 
     public class EditLineObjectFactory : IObjectManipulatorFactory
