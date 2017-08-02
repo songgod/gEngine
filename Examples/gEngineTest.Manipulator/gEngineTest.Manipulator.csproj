@@ -113,6 +113,10 @@
       <Project>{84acb6c4-cf62-4f4b-a7e5-5c642edc041a}</Project>
       <Name>gEngine.Util</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\gEngine.View.Symbol\gEngine.Symbol.csproj">
+      <Project>{1600379b-c8b5-4375-a1d5-3b81bd7fccf7}</Project>
+      <Name>gEngine.Symbol</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\gEngine.View\gEngine.View.csproj">
       <Project>{932485ea-2f95-4caa-8bcd-df68c496854e}</Project>
       <Name>gEngine.View</Name>
