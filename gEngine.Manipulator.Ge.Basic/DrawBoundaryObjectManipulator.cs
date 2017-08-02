@@ -32,8 +32,7 @@ namespace gEngine.Manipulator.Ge.Basic
                     Graph.Ge.Basic.Boundary bou = new Graph.Ge.Basic.Boundary()
                     {
                         Points = new PointCollection(ps),
-                        Fill = Brushes.Red,
-                        Stroke = Brushes.Black,
+                        Stroke = Colors.Black,
                         StrokeThickness = 1
                     };
                     this.AssociatedObject.LayerContext.Objects.Add(bou);

@@ -17,17 +17,12 @@
     <dxr:RibbonPage x:Uid="dxr:RibbonPage_7" Caption="平面设置">
         <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_24" Caption="直线样式">
             <dxb:BarEditItem x:Uid="dxb:BarEditItem_23" Content="粗细" EditWidth="44"
-                             EditValue="{Binding Path=FillStyle.StrokeThickness,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                             EditValue="{Binding Path=StrokeThickness,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                 <dxb:BarEditItem.EditSettings>
                     <dxe:TextEditSettings  />
                 </dxb:BarEditItem.EditSettings>
             </dxb:BarEditItem>
-            <dxb:BarEditItem x:Uid="dxb:BarEditItem_24" Content="边框色" EditValue="{Binding Path=FillStyle.Stroke,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
-                <dxb:BarEditItem.EditSettings>
-                    <dxe:PopupColorEditSettings/>
-                </dxb:BarEditItem.EditSettings>
-            </dxb:BarEditItem>
-            <dxb:BarEditItem x:Uid="dxb:BarEditItem_25" Content="填充色" EditValue="{Binding Path=FillStyle.Fill,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+            <dxb:BarEditItem x:Uid="dxb:BarEditItem_24" Content="边框色" EditValue="{Binding Path=Stroke,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                 <dxb:BarEditItem.EditSettings>
                     <dxe:PopupColorEditSettings/>
                 </dxb:BarEditItem.EditSettings>

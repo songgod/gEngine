@@ -15,7 +15,6 @@ namespace gEngine.Util.Ge.Basic
         {
             FillStyle fs = new FillStyle();
             //fs.Stroke = Brushes.Aqua;
-            fs.Fill = Brushes.Aqua;
             //fs.StrokeThickness = 2;
             Layer layer = new Layer() { Type = "Fill" };
 
@@ -27,7 +26,8 @@ namespace gEngine.Util.Ge.Basic
 
             Boundary boun = new Boundary()
             {
-               
+                Stroke = Colors.Black,
+                StrokeThickness=1.0,
                 Points = pc,
                 FillStyle = fs
 
