@@ -64,6 +64,57 @@ namespace gEngine.View.Ge.Basic
         }
     }
 
+    public class Ponits2FillPathGeometryConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            PointCollection points = (PointCollection)value;
+            return ConvertFrom(points);
+        }
+
+        public static PathGeometry ConvertFrom(PointCollection ps)
+        {
+
+            //PathGeometry geom = new PathGeometry();
+
+            //{
+            //    PathFigure figure = new PathFigure() { StartPoint = ps[0], IsClosed = true };
+            //    PointCollection pc = ps;
+            //    PolyBezierSegment pbseg = new PolyBezierSegment() { Points = pc };
+            //    figure.Segments.Add(pbseg);
+            //    geom.Figures.Add(figure);
+            //}
+
+            //if (ps != null)
+            //{
+            //    for (int i = 0; i < ps.Count; i++)
+            //    {
+
+            //        PathFigure figure = new PathFigure() { StartPoint = ps[0], IsClosed = true };
+            //        PointCollection pc = ps;
+            //        PolyBezierSegment pbseg = new PolyBezierSegment() { Points = pc };
+            //        figure.Segments.Add(pbseg);
+            //        geom.Figures.Add(figure);
+            //    }
+            //}
+
+            //return geom;
+            if (ps.Count <= 1)
+                return null;
+            PathGeometry pg = new PathGeometry();
+            PathFigure pf = new PathFigure() { StartPoint = ps[0], IsClosed = true };
+            PolyLineSegment pls = new PolyLineSegment() { Points = new PointCollection(ps.Skip(1).Take(ps.Count - 1).ToList()) };
+            pf.Segments.Add(pls);
+            pg.Figures.Add(pf);
+            return pg;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public class Points2PolyBezierPathGeometryConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
