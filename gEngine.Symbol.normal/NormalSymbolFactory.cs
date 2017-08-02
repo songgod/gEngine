@@ -119,6 +119,20 @@ namespace gEngine.Symbol.normal
             DicFillSymbols["Black"] = new SolidFillSymbol() { SolidSymbolName = "BlackFill", SolidColor = Colors.Black };
             DicFillSymbols["White"] = new SolidFillSymbol() { SolidSymbolName = "WhiteFill", SolidColor = Colors.White };
             DicFillSymbols["LightGray"] = new SolidFillSymbol() { SolidSymbolName = "LightGrayFill", SolidColor = Colors.LightGray };
+
+            GradientStopCollection gsc1 = new GradientStopCollection();
+            gsc1.Add(new GradientStop() { Offset = 0, Color = Colors.Red });
+            gsc1.Add(new GradientStop() { Offset = 0.25, Color = Colors.Blue });
+            gsc1.Add(new GradientStop() { Offset = 0.6, Color = Colors.DarkRed });
+            gsc1.Add(new GradientStop() { Offset = 1, Color = Colors.Aqua });
+            DicFillSymbols["LinearGradient1"] = new GradientFillSymbol() { GradientSymbolName = "LinearGradient1Fill", GradientColor = gsc1 };
+            GradientStopCollection gsc2 = new GradientStopCollection();
+            gsc2.Add(new GradientStop() { Offset = 0, Color = Colors.CadetBlue });
+            gsc2.Add(new GradientStop() { Offset = 0.25, Color = Colors.Red });
+            gsc2.Add(new GradientStop() { Offset = 0.6, Color = Colors.Green });
+            gsc2.Add(new GradientStop() { Offset = 1, Color = Colors.HotPink });
+            DicFillSymbols["LinearGradient2"] = new GradientFillSymbol() { GradientSymbolName = "LinearGradient2Fill", GradientColor = gsc2 };
+
             return true;
         }
     }

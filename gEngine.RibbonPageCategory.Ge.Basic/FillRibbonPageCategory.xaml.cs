@@ -39,26 +39,9 @@ namespace gEngine.Application.Ge.Basic
             {
                 return new DelegateCommand<string[]>((parameter) =>
                 {
-                    //Graph.Ge.Basic.Line line = this.DataContext as Graph.Ge.Basic.Line;
-                    //if (parameter[0] == "Solid")
-                    //{
-                    //    NormalLineStyle nls = new NormalLineStyle() { Stroke = line.LinStyle.Stroke, Width = line.LinStyle.Width };
-                    //    line.LinStyle = nls;
-                    //}
-                    //else if (parameter[0] == "Dot")
-                    //{
-                    //    NormalLineStyle nls = new NormalLineStyle() { Stroke = line.LinStyle.Stroke, Width = line.LinStyle.Width };
-                    //    nls.StrokeDashArray = DoubleCollection.Parse(parameter[1]);
-                    //    line.LinStyle = nls;
-                    //}
-                    //else
-                    //{
-                    //    ComplexLineStyle cpls = new ComplexLineStyle() { Stroke = line.LinStyle.Stroke, Width = line.LinStyle.Width };
-                    //    cpls.SymbolLib = parameter[0] as string;
-                    //    cpls.Symbol = parameter[1] as string;
-                    //    line.LinStyle = cpls;
-                    //}
-
+                    Graph.Ge.Basic.Boundary boun = this.DataContext as Graph.Ge.Basic.Boundary;
+                    boun.FillStyle.SymbolLib = parameter[0] as string;
+                    boun.FillStyle.Symbol = parameter[1] as string;
                 });
             }
         }

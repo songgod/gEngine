@@ -12,5 +12,51 @@ namespace gEngine.Graph.Ge.Section
         public gTopology.Line Line { get; set; }
 
         public SectionInfo SectionInfo { get; set; }
+        public virtual LineStyle LineStyle { get; set; }
+    }
+
+    public class FaultLineProxyObject : LineProxyObject
+    {
+        public override LineStyle LineStyle
+        {
+            get
+            {
+                return SectionInfo.GetFaultLineStyle(Line.Id);
+            }
+            set
+            {
+                SectionInfo.SetLineStyle(Line.Id, value);
+            }
+        }
+    }
+
+    public class StratumLineProxyObject : LineProxyObject
+    {
+        public override LineStyle LineStyle
+        {
+            get
+            {
+                return SectionInfo.GetStratumLineStyle(Line.Id);
+            }
+            set
+            {
+                SectionInfo.SetLineStyle(Line.Id, value);
+            }
+        }
+    }
+
+    public class SandLineProxyObject : LineProxyObject
+    {
+        public override LineStyle LineStyle
+        {
+            get
+            {
+                return SectionInfo.GetSandLineStyle(Line.Id);
+            }
+            set
+            {
+                SectionInfo.SetLineStyle(Line.Id, value);
+            }
+        }
     }
 }

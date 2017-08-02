@@ -15,7 +15,7 @@ namespace gEngine.Project.Commands
     {
         public RedoCommand()
         {
-            Command = UndoRedoCommands.RedoCommand;
+            Command = StartCommands.RedoCommand;
             Executed += RedoCommand_Executed;
             CanExecute += RedoCommand_CanExecute; ;
         }

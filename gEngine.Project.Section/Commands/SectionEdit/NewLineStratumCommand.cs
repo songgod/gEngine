@@ -19,10 +19,10 @@ namespace gEngine.Project.Ge.Section.Commands.SectionEdit
 
         public override void SetManipulator(LayerControl lc, object param)
         {
-            DrawLineStratumManipulator dm = gEngine.Manipulator.Registry.CreateManipulator("DrawLineStratumManipulator", param) as DrawLineStratumManipulator;
-            if (dm == null)
-                return;
-            ManipulatorSetter.SetManipulator(dm, lc);
+            //DrawLineStratumManipulator dm = gEngine.Manipulator.Registry.CreateManipulator("DrawLineStratumManipulator", param) as DrawLineStratumManipulator;
+            //if (dm == null)
+            //    return;
+            //ManipulatorSetter.SetManipulator(dm, lc);
         }
     }
 }

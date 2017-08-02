@@ -25,60 +25,30 @@ namespace gEngine.Util.Ge.Section
             if (SectionLayer == null)
                 return;
 
-            AddCurve(points, tolerance, SectionLineType.Fault);
-        }
-
-        public void AddFault(Point start, Point end, double tolerance)
-        {
-            AddLine(start, end, tolerance, SectionLineType.Fault);
+            TopologySection editor = new TopologySection(SectionLayer.SectionInfo.TopGraph);
+            editor.AddFaultLine(new PointList(points), tolerance);
+            RebuildGraph();
         }
 
         public void AddStratum(List<Point> points, double tolerance)
         {
-            AddCurve(points, tolerance, SectionLineType.Stratum);
-        }
-
-        public void AddStratum(Point start, Point end, double tolerance)
-        {
-            AddLine(start, end, tolerance, SectionLineType.Stratum);
+            TopologySection editor = new TopologySection(SectionLayer.SectionInfo.TopGraph);
+            editor.AddStratumLine(new PointList(points), tolerance);
+            RebuildGraph();
         }
 
         public void AddSand(List<Point> points, double tolerance)
         {
-            AddCurve(points, tolerance, SectionLineType.Sand);
-        }
-
-        public void AddSand(Point start, Point end, double tolerance)
-        {
-            AddLine(start, end, tolerance, SectionLineType.Sand);
-        }
-
-        private void AddCurve(List<Point> points, double tolerance, SectionLineType type)
-        {
-            if (SectionLayer != null)
-            {
-                Topology editor = new Topology(SectionLayer.SectionInfo.TopGraph);
-                editor.LinAddCurve(new PointList(points), tolerance,false, (int)type);
-                RebuildGraph();
-            }
-        }
-
-        private void AddLine(Point start, Point end, double tolerance, SectionLineType type)
-        {
-            if (SectionLayer != null)
-            {
-                Topology editor = new Topology(SectionLayer.SectionInfo.TopGraph);
-                editor.LinAddLine(start, end, tolerance, (int)type);
-                RebuildGraph();
-            }
+            TopologySection editor = new TopologySection(SectionLayer.SectionInfo.TopGraph);
+            editor.AddSandLine(new PointList(points), tolerance);
+            RebuildGraph();
         }
 
         public void ClearGraph()
         {
             for (int i = SectionLayer.Objects.Count - 1; i >= 0; i--)
             {
-                if (SectionLayer.Objects[i].GetType() == typeof(NodeProxyObject) ||
-                    SectionLayer.Objects[i].GetType() == typeof(LineProxyObject) ||
+                if (SectionLayer.Objects[i].GetType() == typeof(LineProxyObject) ||
                     SectionLayer.Objects[i].GetType() == typeof(FaceProxyObject))
                     SectionLayer.Objects.Remove(SectionLayer.Objects[i]);
             }
@@ -90,15 +60,19 @@ namespace gEngine.Util.Ge.Section
             SectionInfo sinfo = SectionLayer.SectionInfo;
             foreach (var item in sinfo.TopGraph.Regions)
             {
-                SectionLayer.Objects.Add(new FaceProxyObject() { Face = item, SectionInfo = sinfo });
+                if(item.Type==(int)SectionLineType.Stratum)
+                    SectionLayer.Objects.Add(new StratumFaceProxyObject() { Face = item, SectionInfo = sinfo });
+                else if(item.Type==(int)SectionLineType.Sand)
+                    SectionLayer.Objects.Add(new SandFaceProxyObject() { Face = item, SectionInfo = sinfo });
             }
             foreach (var item in sinfo.TopGraph.Bounds)
             {
-                SectionLayer.Objects.Add(new LineProxyObject() { Line = item, SectionInfo = sinfo });
-            }
-            foreach (var item in sinfo.TopGraph.Nods)
-            {
-                SectionLayer.Objects.Add(new NodeProxyObject() { Node = item, SectionInfo = sinfo });
+                if (item.Type == (int)SectionLineType.Fault)
+                    SectionLayer.Objects.Add(new FaultLineProxyObject() { Line = item, SectionInfo = sinfo });
+                else if (item.Type == (int)SectionLineType.Stratum)
+                    SectionLayer.Objects.Add(new StratumLineProxyObject() { Line = item, SectionInfo = sinfo });
+                else if (item.Type == (int)SectionLineType.Sand)
+                    SectionLayer.Objects.Add(new SandLineProxyObject() { Line = item, SectionInfo = sinfo });
             }
         }
     }

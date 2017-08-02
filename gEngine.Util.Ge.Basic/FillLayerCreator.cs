@@ -14,7 +14,9 @@ namespace gEngine.Util.Ge.Basic
         public Layer Create()
         {
             FillStyle fs = new FillStyle();
-           
+            //fs.Stroke = Brushes.Aqua;
+            //fs.Fill = Brushes.Aqua;
+            //fs.StrokeThickness = 2;
             Layer layer = new Layer() { Type = "Fill" };
 
             PointCollection pc = new PointCollection();
@@ -22,13 +24,14 @@ namespace gEngine.Util.Ge.Basic
             pc.Add(new System.Windows.Point(100, 19));
             pc.Add(new System.Windows.Point(20, 30));
             pc.Add(new System.Windows.Point(40, 200));
+
             Boundary boun = new Boundary()
             {
                 StrokeThickness = 2,
-                Fill = Brushes.Black,
-                Stroke = Brushes.Red,
+                Fill = Brushes.Aqua,
+                Stroke = Brushes.Aqua,
                 Points = pc,
-                
+                //FillStyle = fs
 
             };
             layer.Objects.Add(boun);

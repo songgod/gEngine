@@ -119,11 +119,11 @@ namespace gEngine.Application
                 {
                     foreach (var page in dicRibbonPage.Values)
                     {
-                        category.Pages.Add(page);
+                        category.Pages.Insert(1,page);
                     }
                 }
             }
-
+            
         }
     }
 }

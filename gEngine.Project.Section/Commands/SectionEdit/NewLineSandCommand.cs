@@ -21,10 +21,10 @@ namespace gEngine.Project.Ge.Section.Commands.SectionEdit
 
         public override void SetManipulator(LayerControl lc, object param)
         {
-            DrawLineSandManipulator dm = gEngine.Manipulator.Registry.CreateManipulator("DrawLineSandManipulator", param) as DrawLineSandManipulator;
-            if (dm == null)
-                return;
-            ManipulatorSetter.SetManipulator(dm, lc);
+            //DrawLineSandManipulator dm = gEngine.Manipulator.Registry.CreateManipulator("DrawLineSandManipulator", param) as DrawLineSandManipulator;
+            //if (dm == null)
+            //    return;
+            //ManipulatorSetter.SetManipulator(dm, lc);
         }
     }
 }
