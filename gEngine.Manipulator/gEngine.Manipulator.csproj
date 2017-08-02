@@ -52,7 +52,6 @@
   <ItemGroup>
     <Compile Include="CurveManipulator.cs" />
     <Compile Include="EditDefaultManipulator.cs" />
-    <Compile Include="EditLineManipulator.cs" />
     <Compile Include="EditRectangleManipulator.cs" />
     <Compile Include="IManipulatorFactory.cs" />
     <Compile Include="Converter\IsSelectedConverter.cs" />
