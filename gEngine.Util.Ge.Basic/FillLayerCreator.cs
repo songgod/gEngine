@@ -15,7 +15,7 @@ namespace gEngine.Util.Ge.Basic
         {
             FillStyle fs = new FillStyle();
             //fs.Stroke = Brushes.Aqua;
-            //fs.Fill = Brushes.Aqua;
+            fs.Fill = Brushes.Aqua;
             //fs.StrokeThickness = 2;
             Layer layer = new Layer() { Type = "Fill" };
 
@@ -27,32 +27,12 @@ namespace gEngine.Util.Ge.Basic
 
             Boundary boun = new Boundary()
             {
-                StrokeThickness = 2,
-                Fill = Brushes.Aqua,
-                Stroke = Brushes.Aqua,
+               
                 Points = pc,
-                //FillStyle = fs
+                FillStyle = fs
 
             };
             layer.Objects.Add(boun);
-
-
-            PointCollection pc1 = new PointCollection();
-            pc1.Add(new System.Windows.Point(100, 100));
-            pc1.Add(new System.Windows.Point(500, 190));
-            pc1.Add(new System.Windows.Point(200, 300));
-            pc1.Add(new System.Windows.Point(90, 300));
-            Boundary boun1 = new Boundary()
-            {
-                StrokeThickness = 2,
-                Fill = Brushes.Red,
-                Stroke = Brushes.Black,
-                Points = pc1,
-               
-
-            };
-            layer.Objects.Add(boun1);
-
 
             return layer;
         }

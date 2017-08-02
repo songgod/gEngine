@@ -44,15 +44,15 @@ namespace gEngine.Graph.Ge
         //public static readonly DependencyProperty StrokeThicknessProperty =
         //    DependencyProperty.Register("StrokeThickness", typeof(double), typeof(FillStyle));
 
-        //public Brush Fill
-        //{
-        //    get { return (Brush)GetValue(FillProperty); }
-        //    set { SetValue(FillProperty, value); }
-        //}
+        public Brush Fill
+        {
+            get { return (Brush)GetValue(FillProperty); }
+            set { SetValue(FillProperty, value); }
+        }
 
-        //// Using a DependencyProperty as the backing store for Depths.  This enables animation, styling, binding, etc...
-        //public static readonly DependencyProperty FillProperty =
-        //    DependencyProperty.Register("Fill", typeof(Brush), typeof(FillStyle));
+        // Using a DependencyProperty as the backing store for Depths.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty FillProperty =
+            DependencyProperty.Register("Fill", typeof(Brush), typeof(FillStyle));
 
         //public Brush Stroke
         //{
