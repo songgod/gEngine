@@ -63,17 +63,6 @@ namespace gEngine.Manipulator
         private void ClearSelect()
         {
             gEngine.Graph.Interface.Utility.ClearSelect(this.AssociatedObject.MapContext);
-            int lccount = this.AssociatedObject.LayerControlCount;
-            for (int i = 0; i < lccount; i++)
-            {
-                LayerControl lc= this.AssociatedObject.GetLayerControl(i);
-                int obcount = lc.ObjectControlCount;
-                for (int j = 0; j < obcount; j++)
-                {
-                    ObjectControl oc = lc.GetObjectControl(j);
-                    ManipulatorSetter.ClearManipulator(oc);
-                }
-            }
         }
 
         private HitTestFilterBehavior HitTestFilterCallback(DependencyObject potentialHitTestTarget)
@@ -100,8 +89,6 @@ namespace gEngine.Manipulator
                     {
                         SelectObjectControl = oc;
                         obj.IsSelected = true;
-                        IManipulatorBase mb = gEngine.Manipulator.Registry.CreateManipulator(obj);
-                        ManipulatorSetter.SetManipulator(mb, oc);
 
                         if (OnSelectObject != null)
                         {
