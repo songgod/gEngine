@@ -18,8 +18,12 @@ namespace gEngine.Manipulator.Ge.Section
 
         protected override void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if (TrackAdorner.Points.Count == 0 || GraphUtil.Graph == null)
+            if (TrackAdorner.Points.Count <= 4 || GraphUtil.Graph == null)
+            {
+                e.Handled = false;
                 return;
+            }
+                
 
             SectionLayerEdit editor = new SectionLayerEdit(GraphUtil.SectionLayer);
             editor.AddSand(TrackAdorner.Points.ToList(), GraphUtil.Tolerance);

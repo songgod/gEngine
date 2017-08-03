@@ -19,6 +19,7 @@ namespace gEngine.Manipulator
     public class SelectObjectManipulator : MapManipulator
     {
         public event SelectObjectDel OnSelectObject;
+        private ObjectControl SelectObjectControl;
 
         protected override void OnAttached()
         {
@@ -30,8 +31,20 @@ namespace gEngine.Manipulator
             if (mc == null)
                 return;
 
+            
+            mc.MouseLeftButtonUp += Mc_MouseLeftButtonUp;
+        }
 
-            mc.MouseLeftButtonDown += mc_MouseLeftButtonDown;
+        private void Mc_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            MapControl mc = this.AssociatedObject;
+            ClearSelect();
+            Point pt = e.GetPosition(mc);
+            SelectObjectControl = null;
+            VisualTreeHelper.HitTest(mc, new HitTestFilterCallback(HitTestFilterCallback),
+                new HitTestResultCallback(MyHitTestResult), new PointHitTestParameters(pt));
+            if (SelectObjectControl == null)
+                e.Handled = false;
         }
 
         protected override void OnDetaching()
@@ -43,17 +56,8 @@ namespace gEngine.Manipulator
             MapControl mc = this.AssociatedObject;
             if (mc == null)
                 return;
-
-            mc.MouseLeftButtonDown -= mc_MouseLeftButtonDown;
-        }
-
-        private void mc_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            MapControl mc = this.AssociatedObject;
-            ClearSelect();
-            Point pt = e.GetPosition(mc);
-            VisualTreeHelper.HitTest(mc, new HitTestFilterCallback(HitTestFilterCallback),
-                new HitTestResultCallback(MyHitTestResult), new PointHitTestParameters(pt));
+            
+            mc.MouseLeftButtonUp -= Mc_MouseLeftButtonUp;
         }
 
         private void ClearSelect()
@@ -94,6 +98,7 @@ namespace gEngine.Manipulator
                     IObject obj = oc.DataContext as IObject;
                     if (obj != null)
                     {
+                        SelectObjectControl = oc;
                         obj.IsSelected = true;
                         IManipulatorBase mb = gEngine.Manipulator.Registry.CreateManipulator(obj);
                         ManipulatorSetter.SetManipulator(mb, oc);
