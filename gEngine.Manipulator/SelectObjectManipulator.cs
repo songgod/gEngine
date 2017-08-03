@@ -15,10 +15,8 @@ using System.Windows.Shapes;
 
 namespace gEngine.Manipulator
 {
-    public delegate void SelectObjectDel(ObjectControl oc);
     public class SelectObjectManipulator : MapManipulator
     {
-        public event SelectObjectDel OnSelectObject;
         private ObjectControl SelectObjectControl;
 
         protected override void OnAttached()
@@ -89,11 +87,6 @@ namespace gEngine.Manipulator
                     {
                         SelectObjectControl = oc;
                         obj.IsSelected = true;
-
-                        if (OnSelectObject != null)
-                        {
-                            OnSelectObject.Invoke(oc);
-                        }
                     }
                     return HitTestResultBehavior.Stop;
                 }
