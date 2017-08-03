@@ -18,22 +18,6 @@ namespace gEngine.Manipulator
         static Registry()
         {
             dicManipulatorFactory = new Dictionary<string, IManipulatorFactory>();
-            ObjectControl.OnObjectControlSelected += ObjectControl_OnObjectControlSelected;
-        }
-
-        private static void ObjectControl_OnObjectControlSelected(ObjectControl oc)
-        {
-            if (oc == null || oc.ObjectContext == null)
-                return;
-            if (oc.IsSelected)
-            {
-                IManipulatorBase mb = gEngine.Manipulator.Registry.CreateManipulator(oc.ObjectContext);
-                ManipulatorSetter.SetManipulator(mb, oc);
-            }
-            else
-            {
-                ManipulatorSetter.ClearManipulator(oc);
-            }
         }
 
         static public void Regist(string name, IManipulatorFactory mpf)

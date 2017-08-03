@@ -27,18 +27,20 @@ namespace gEngine.Manipulator
             if (mc == null)
                 return;
 
-            
-            Style style = new Style();
-            style.Setters.Add(new Setter() { Property = Polyline.StrokeProperty, Value = new SolidColorBrush() { Color = Colors.Red } });
-            style.Setters.Add(new Setter() { Property = Polyline.StrokeThicknessProperty, Value = 1.0 });
-            style.Setters.Add(new Setter() { Property = Polyline.StrokeDashArrayProperty, Value = new DoubleCollection() { 2, 3 } });
-            TrackAdorner = new Polyline() { Style = style };
+           TrackAdorner = new Polyline() {Stroke=new SolidColorBrush() { Color = Colors.Red },StrokeThickness=1.0,StrokeDashArray=new DoubleCollection() { 2, 3 } };
             mc.EditLayer.Children.Add(TrackAdorner);
 
             mc.MouseLeftButtonUp += Mc_MouseLeftButtonUp;
             mc.MouseLeftButtonDown += Mc_MouseLeftButtonDown;
             mc.MouseRightButtonUp += Mc_MouseRightButtonUp;
             mc.MouseMove += Mc_MouseMove;
+        }
+
+        protected void UpdateTrackState()
+        {
+            MapControl mc = this.AssociatedObject.Owner;
+            double l = mc.Dp2LP(1.0);
+            TrackAdorner.StrokeThickness = l;
         }
 
         private void Mc_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -48,7 +50,7 @@ namespace gEngine.Manipulator
 
         protected virtual void MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            
+            UpdateTrackState();
         }
 
         private void Mc_MouseRightButtonUp(object sender, MouseButtonEventArgs e)

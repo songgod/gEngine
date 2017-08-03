@@ -52,6 +52,7 @@
     <Compile Include="PointSymbolGalleryDropDownPopupMenu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registry.cs" />
+    <Compile Include="SelectObjectRibbonPageCategoryCallbackInstaller.cs" />
     <Compile Include="StrokeSymbolGalleryDropDownPopupMenu.cs" />
   </ItemGroup>
   <ItemGroup>

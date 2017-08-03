@@ -64,6 +64,7 @@
     <Compile Include="RectManipulator.cs" />
     <Compile Include="Registry.cs" />
     <Compile Include="SelectObjectManipulator.cs" />
+    <Compile Include="SelectObjectManipulatorCallbackInstaller.cs" />
     <Compile Include="ZoomPan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
