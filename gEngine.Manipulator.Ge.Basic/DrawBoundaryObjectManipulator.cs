@@ -16,9 +16,9 @@ namespace gEngine.Manipulator.Ge.Basic
 
         public DrawBoundaryObjectManipulator()
         {
-            LineStyle = new LineStyle();
+            FillStyle = new FillStyle();
         }
-        public LineStyle LineStyle { get; set; }
+        public FillStyle FillStyle { get; set; }
 
         protected override void MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
@@ -28,12 +28,13 @@ namespace gEngine.Manipulator.Ge.Basic
 
                 if (ps != null && ps.Count > 0)
                 {
-                    
+
                     Graph.Ge.Basic.Boundary bou = new Graph.Ge.Basic.Boundary()
                     {
                         Points = new PointCollection(ps),
                         Stroke = Colors.Black,
-                        StrokeThickness = 1
+                        StrokeThickness = 1,
+                        FillStyle = this.FillStyle
                     };
                     this.AssociatedObject.LayerContext.Objects.Add(bou);
                     
@@ -54,10 +55,10 @@ namespace gEngine.Manipulator.Ge.Basic
 
         public IManipulatorBase CreateManipulator(object param)
         {
-            LineStyle style = param as LineStyle;
+            FillStyle style = param as FillStyle;
 
             DrawBoundaryObjectManipulator dm = new DrawBoundaryObjectManipulator();
-            if (style != null) dm.LineStyle = style;
+            if (style != null) dm.FillStyle = style;
             return dm;
         }
     }

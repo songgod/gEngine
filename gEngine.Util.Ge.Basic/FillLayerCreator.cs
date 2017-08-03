@@ -17,7 +17,7 @@ namespace gEngine.Util.Ge.Basic
             //fs.Stroke = Brushes.Aqua;
             //fs.StrokeThickness = 2;
             Layer layer = new Layer() { Type = "Fill" };
-
+            
             PointCollection pc = new PointCollection();
             pc.Add(new System.Windows.Point(10, 10));
             pc.Add(new System.Windows.Point(100, 19));

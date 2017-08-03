@@ -1,28 +1,25 @@
-﻿using System;
+﻿using gEngine.Commands;
+using gEngine.Manipulator;
+using gEngine.Project.Ge.Section.Commands.SectionEdit;
+using gEngine.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
-using gEngine.Manipulator;
-using gEngine.Manipulator.Ge.Section;
-using gEngine.View;
-using gEngine.Commands;
-using gEngine.Graph.Ge.Section;
 
 namespace gEngine.Project.Ge.Section.Commands.SectionEdit
 {
-    public class NewLineSandCommand : SectionCommandBase
+    public class NewBoundaryCommand : SectionCommandBase
     {
-        public NewLineSandCommand()
+        public NewBoundaryCommand()
         {
-            Command = SectionEditCommands.NewLineSandCommand;
+            Command = SectionEditCommands.NewBoundaryCommand;
         }
-
         public override void SetManipulator(LayerControl lc, object param)
         {
             //DrawLineObjectManipulator dm = gEngine.Manipulator.Registry.CreateManipulator("DrawLineObjectManipulator", param) as DrawLineObjectManipulator;
-            IManipulatorBase mp = gEngine.Manipulator.Registry.CreateManipulator("DrawLineObjectManipulator");
+            IManipulatorBase mp = gEngine.Manipulator.Registry.CreateManipulator("DrawBoundaryObjectManipulator");
             if (mp == null)
                 return;
             ManipulatorSetter.SetManipulator(mp, lc);

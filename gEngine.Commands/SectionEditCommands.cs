@@ -22,6 +22,7 @@ namespace gEngine.Commands
             NewLineStratumCommand = new RoutedUICommand("NewLineStratumCommand", "NewLineStratumCommand", typeof(SectionEditCommands));
             ReplaceLineCommand = new RoutedUICommand("ReplaceLineCommand", "ReplaceLineCommand", typeof(SectionEditCommands));
             NewTrendLineCommand = new RoutedUICommand("NewTrendLineCommand", "NewTrendLineCommand", typeof(SectionEditCommands));
+            NewBoundaryCommand = new RoutedUICommand("NewBoundaryCommand", "NewBoundaryCommand", typeof(SectionEditCommands));
         }
 
         public static RoutedCommand EditLineCommand { get; set; }
@@ -35,6 +36,7 @@ namespace gEngine.Commands
         public static RoutedCommand NewLineStratumCommand { get; set; }
         public static RoutedCommand ReplaceLineCommand { get; set; }
         public static RoutedCommand NewTrendLineCommand { get; set; }
+        public static RoutedCommand NewBoundaryCommand { get; set; }
 
     }
 }
