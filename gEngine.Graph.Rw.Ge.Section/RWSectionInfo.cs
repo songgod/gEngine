@@ -191,13 +191,6 @@ namespace gEngine.Graph.Rw.Ge.Section
                 fstyle.SymbolLib = node.Attributes["SymbolLib"].Value;
             }
 
-            if (!string.IsNullOrEmpty(node.Attributes["Fill"].Value))
-            {
-                BrushConverter brushConverter = new BrushConverter();
-                Brush brush = (Brush) brushConverter.ConvertFromString(node.Attributes["Fill"].Value);
-                fstyle.Fill = brush;
-            }
-
             return fstyle;
         }
 
@@ -343,7 +336,6 @@ namespace gEngine.Graph.Rw.Ge.Section
             XmlElement xmlElement = p_element.OwnerDocument.CreateElement(name);
             xmlElement.SetAttribute("Symbol", string.IsNullOrEmpty(fstyle.Symbol) == false ? fstyle.Symbol : string.Empty);
             xmlElement.SetAttribute("SymbolLib", string.IsNullOrEmpty(fstyle.SymbolLib) == false ? fstyle.SymbolLib : string.Empty);
-            xmlElement.SetAttribute("Fill", fstyle.Fill != null ? fstyle.Fill.ToString() : string.Empty);
             return xmlElement;
         }
 
