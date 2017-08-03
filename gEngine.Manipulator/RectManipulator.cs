@@ -50,7 +50,7 @@ namespace gEngine.Manipulator
         protected virtual void MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             MapControl mc = this.AssociatedObject.Owner;
-            this.location = e.GetPosition(mc);
+            this.location = mc.Dp2LP(e.GetPosition(mc));
             //this.TrackAdorner = null;
         }
 
