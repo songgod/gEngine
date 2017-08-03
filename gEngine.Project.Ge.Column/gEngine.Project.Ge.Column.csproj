@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4499429F-F89F-4214-80B5-1F1FC8A02571}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>gEngine.Project.Ge.Column</RootNamespace>
+    <AssemblyName>gEngine.Project.Ge.Column</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Xpf.Core.v16.1, Version=16.1.2.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Commands\ChangeTemplateCommand.cs" />
+    <Compile Include="Commands\ColumnCommandsInstaller.cs" />
+    <Compile Include="Commands\SaveTemplateCommand.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\gEngine.Commands\gEngine.Commands.csproj">
+      <Project>{BC931BB9-D78C-437D-B5D2-04BE6E318172}</Project>
+      <Name>gEngine.Commands</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.Graph.Ge.Column\gEngine.Graph.Ge.Column.csproj">
+      <Project>{95227940-90F7-40B4-9027-3EEECD8ED6DE}</Project>
+      <Name>gEngine.Graph.Ge.Column</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.Graph.Ge\gEngine.Graph.Ge.csproj">
+      <Project>{3bd77e4f-a348-4edb-b60c-68b749249b91}</Project>
+      <Name>gEngine.Graph.Ge</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.Graph.Interface\gEngine.Graph.Interface.csproj">
+      <Project>{1C98A821-B030-4FF2-83AE-D49B1B3B8C67}</Project>
+      <Name>gEngine.Graph.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.Graph.Tpl.Ge\gEngine.Graph.Tpl.Ge.csproj">
+      <Project>{1c84bf76-326d-48a8-b2d7-eed2e9bdec99}</Project>
+      <Name>gEngine.Graph.Tpl.Ge</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.Project.Section\gEngine.Project.Ge.Section.csproj">
+      <Project>{3B16524E-7054-493C-BEB8-8FBA7EEE8A6D}</Project>
+      <Name>gEngine.Project.Ge.Section</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.Project\gEngine.Project.csproj">
+      <Project>{87AC18CA-2B57-4F9A-A4C2-24C6E296F91B}</Project>
+      <Name>gEngine.Project</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.Util.Ge.Section\gEngine.Util.Ge.Section.csproj">
+      <Project>{B3D6B10A-4C31-4981-97FA-3437CB583729}</Project>
+      <Name>gEngine.Util.Ge.Section</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.View\gEngine.View.csproj">
+      <Project>{932485EA-2F95-4CAA-8BCD-DF68C496854E}</Project>
+      <Name>gEngine.View</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>$(MSBUILD) /t:updateuid $(ProjectPath)</PreBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -36,6 +36,7 @@
       <HintPath>..\3rdlib\gToplogy\x64\gTopology.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -68,6 +69,10 @@
     <ProjectReference Include="..\gEngine.Graph.Rw.Ge\gEngine.Graph.Rw.Ge.csproj">
       <Project>{22b205af-0d40-4854-bde8-65961840db5d}</Project>
       <Name>gEngine.Graph.Rw.Ge</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.Util.Ge.Section\gEngine.Util.Ge.Section.csproj">
+      <Project>{b3d6b10a-4c31-4981-97fa-3437cb583729}</Project>
+      <Name>gEngine.Util.Ge.Section</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

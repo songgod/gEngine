@@ -53,8 +53,12 @@ namespace gEngine.Manipulator.Ge.Basic
             mc.EditLayer.Children.Add(TrackAdorner1);
             mc.EditLayer.Children.Add(TrackAdorner2);
 
-            this.TrackAdorner1.MouseMove += TrackAdo1_MouseMove;
-            this.TrackAdorner2.MouseMove += TrackAdo2_MouseMove;
+            //this.TrackAdorner1.MouseMove += TrackAdo1_MouseMove;
+            //this.TrackAdorner2.MouseMove += TrackAdo2_MouseMove;
+
+            mc.MouseMove += Mc_MouseMove;
+            mc.MouseLeftButtonDown += Mc_MouseLeftButtonDown;
+            mc.MouseLeftButtonUp += Mc_MouseLeftButtonUp;
         }
 
         protected override void OnDetaching()
@@ -68,6 +72,21 @@ namespace gEngine.Manipulator.Ge.Basic
         }
 
         #region Event
+
+        private void Mc_MouseMove(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void Mc_MouseLeftButtonDown(object sender, MouseEventArgs e)
+        {
+            ObjectControl oc = this.AssociatedObject;
+        }
+
+        private void Mc_MouseLeftButtonUp(object sender, MouseEventArgs e)
+        {
+
+        }
 
         private void TrackAdo1_MouseMove(object sender, MouseEventArgs e)
         {

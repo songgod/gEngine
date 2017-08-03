@@ -104,11 +104,11 @@ namespace gEngine.Manipulator
                     ContextMenu contextMenu = new ContextMenu();
                     MenuItem saveModel = new MenuItem();
                     saveModel.Header = "保存模板";
-                    saveModel.Command = SectionCommands.SaveTemplateCommand;
+                    saveModel.Command = ColumnCommands.SaveTemplateCommand;
                     saveModel.CommandParameter = oc;
                     MenuItem changeModel = new MenuItem();
                     changeModel.Header = "更换模板";
-                    changeModel.Command = SectionCommands.ChangeTemplateCommand;
+                    changeModel.Command = ColumnCommands.ChangeTemplateCommand;
                     changeModel.CommandParameter = oc;
 
                     contextMenu.Items.Add(saveModel);
@@ -128,9 +128,11 @@ namespace gEngine.Manipulator
             ContextMenu contextMenu = new ContextMenu();
             MenuItem saveModel = new MenuItem();
             saveModel.Header = "保存模板";
-            saveModel.Command = SectionCommands.SaveTemplateCommand;
+            saveModel.Command = ColumnCommands.SaveTemplateCommand;
             saveModel.CommandParameter = oc;
             MenuItem changeModel = new MenuItem();
+            changeModel.Command = ColumnCommands.ChangeTemplateCommand;
+            changeModel.CommandParameter = oc;
             changeModel.Header = "更换模板";
 
             contextMenu.Items.Add(saveModel);
