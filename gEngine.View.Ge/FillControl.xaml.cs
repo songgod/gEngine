@@ -41,22 +41,22 @@ namespace gEngine.View.Ge
                 lc.Content = null;
                 return;
             }
-
-
-            Brush bru  = FillStyle2BrushConverter.ConverterFromFillStyle(ls);
-            if (bru == null)
+            Brush setting = FillStyle2BrushConverter.ConverterFromFillStyle(ls);
+            if (setting == null)
             {
                 lc.Content = null;
                 return;
             }
-            
-            lc.Content = bru;
+        
+            Path p = new Path();
+            p.Fill = setting;
+            p.Data = lc.Data;
+            lc.Content = p;
         }
 
         // Using a DependencyProperty as the backing store for LineStyle.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty FillStyleProperty =
-            DependencyProperty.Register("FillStyle", typeof(FillStyle), typeof(FillControl),
-                new PropertyMetadata(null, new PropertyChangedCallback(FillControl.OnFillStyleChanged)));
+            DependencyProperty.Register("FillStyle", typeof(FillStyle), typeof(FillControl), new PropertyMetadata(null, new PropertyChangedCallback(FillControl.OnFillStyleChanged)));
 
 
         public PathGeometry Data
@@ -68,8 +68,8 @@ namespace gEngine.View.Ge
         private static void OnFillDataChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             FillControl lc = (FillControl)d;
-            PathGeometry pg = (PathGeometry)e.NewValue;
-            if (pg == null)
+            PathGeometry pg1 = (PathGeometry)e.NewValue;
+            if (pg1 == null)
             {
                 lc.Content = null;
                 return;
@@ -82,15 +82,20 @@ namespace gEngine.View.Ge
                 return;
             }
 
-            Brush bru = FillStyle2BrushConverter.ConverterFromFillStyle(ls);
-            if (bru == null)
+            Brush setting = FillStyle2BrushConverter.ConverterFromFillStyle(ls);
+            if (setting == null)
                 lc.Content = null;
            
-            lc.Content = bru;
+            Path p = new Path();
+            p.Data = lc.Data;
+           
+            lc.Content = p;
         }
 
         // Using a DependencyProperty as the backing store for Data.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty DataProperty =
             DependencyProperty.Register("Data", typeof(PathGeometry), typeof(FillControl), new PropertyMetadata(null, new PropertyChangedCallback(FillControl.OnFillDataChanged)));
+
+
     }
 }

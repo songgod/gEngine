@@ -27,7 +27,7 @@ namespace gEngine.Manipulator.Ge.Basic
                 LinStyle = this.LineStyle
             };
             this.AssociatedObject.LayerContext.Objects.Add(line);
-           
+            ManipulatorSetter.RemoveManipulator(this, this.AssociatedObject);
             base.MouseLeftButtonUp(sender, e);
         }
     }

@@ -5,9 +5,19 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:gb="clr-namespace:gEngine.Graph.Ge.Basic;assembly=gEngine.Graph.Ge.Basic"
              xmlns:local="clr-namespace:gEngine.View.Ge.Basic"
+             xmlns:gv="clr-namespace:gEngine.View.Ge;assembly=gEngine.View.Ge"
              mc:Ignorable="d">
     <DataTemplate DataType="{x:Type gb:Boundary}">
-        <Polygon Points="{Binding Points}" StrokeThickness="{Binding StrokeThickness}" Stroke="{Binding Stroke}" Fill="{Binding Fill}">
+        <Polygon Points="{Binding Points}" StrokeThickness="{Binding StrokeThickness}">
+            <Polygon.Resources>
+                <gv:FillStyle2BrushConverter x:Key="f2b"/>
+            </Polygon.Resources>
+            <Polygon.Fill>
+                <Binding Path="FillStyle" Converter="{StaticResource f2b}"/>
+            </Polygon.Fill>
+            <Polygon.Stroke>
+                <SolidColorBrush Color="{Binding Stroke}"/>
+            </Polygon.Stroke>
         </Polygon>
     </DataTemplate>
 </ResourceDictionary>

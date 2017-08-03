@@ -33,9 +33,6 @@ namespace gEngine.Project.Ge.Section.Commands
             ui.CommandBindings.Add(new NewCurveFaultCommand());
             ui.CommandBindings.Add(new NewCurveStratumCommand());
             ui.CommandBindings.Add(new NewCurveSandCommand());
-            ui.CommandBindings.Add(new NewLineFaultCommand());
-            ui.CommandBindings.Add(new NewLineStratumCommand());
-            ui.CommandBindings.Add(new NewLineSandCommand());
             ui.CommandBindings.Add(new ReplaceLineCommand());
             ui.CommandBindings.Add(new NewTrendLineCommand());
         }

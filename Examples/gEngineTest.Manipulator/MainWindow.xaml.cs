@@ -28,6 +28,9 @@ namespace gEngineTest.Manipulator
             MapContext = new Map();
             MapContext.Layers.Add(new Layer());
             this.DataContext = this;
+
+            gEngine.Symbol.Registry.LoadLocalSymbols();
+
         }
 
         public Map MapContext { get; set; }
