@@ -17,9 +17,6 @@ namespace gEngine.Commands
             NewCurveFaultCommand = new RoutedUICommand("NewCurveFaultCommand", "NewCurveFaultCommand", typeof(SectionEditCommands));
             NewCurveSandCommand = new RoutedUICommand("NewCurveSandCommand", "NewCurveSandCommand", typeof(SectionEditCommands));
             NewCurveStratumCommand = new RoutedUICommand("NewCurveStratumCommand", "NewCurveStratumCommand", typeof(SectionEditCommands));
-            NewLineFaultCommand = new RoutedUICommand("NewLineFaultCommand", "NewLineFaultCommand", typeof(SectionEditCommands));
-            NewLineSandCommand = new RoutedUICommand("NewLineSandCommand", "NewLineSandCommand", typeof(SectionEditCommands));
-            NewLineStratumCommand = new RoutedUICommand("NewLineStratumCommand", "NewLineStratumCommand", typeof(SectionEditCommands));
             ReplaceLineCommand = new RoutedUICommand("ReplaceLineCommand", "ReplaceLineCommand", typeof(SectionEditCommands));
             NewTrendLineCommand = new RoutedUICommand("NewTrendLineCommand", "NewTrendLineCommand", typeof(SectionEditCommands));
         }
@@ -30,11 +27,7 @@ namespace gEngine.Commands
         public static RoutedCommand NewCurveFaultCommand { get; set; }
         public static RoutedCommand NewCurveSandCommand { get; set; }
         public static RoutedCommand NewCurveStratumCommand { get; set; }
-        public static RoutedCommand NewLineFaultCommand { get; set; }
-        public static RoutedCommand NewLineSandCommand { get; set; }
-        public static RoutedCommand NewLineStratumCommand { get; set; }
         public static RoutedCommand ReplaceLineCommand { get; set; }
         public static RoutedCommand NewTrendLineCommand { get; set; }
-
     }
 }

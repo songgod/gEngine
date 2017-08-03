@@ -62,8 +62,6 @@
     <Compile Include="Commands\SectionEdit\NewCurveFaultCommand.cs" />
     <Compile Include="Commands\SectionEdit\NewCurveSandCommand.cs" />
     <Compile Include="Commands\SectionEdit\NewCurveStratumCommand.cs" />
-    <Compile Include="Commands\SectionEdit\NewLineFaultCommand.cs" />
-    <Compile Include="Commands\SectionEdit\NewLineSandCommand.cs" />
     <Compile Include="Commands\SectionCommandsInstaller.cs" />
     <Compile Include="Commands\NewSectionMapCommand.cs" />
     <Compile Include="Controls\DXChangeTemplate.xaml.cs">

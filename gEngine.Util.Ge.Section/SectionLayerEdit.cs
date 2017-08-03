@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace gEngine.Util.Ge.Section
 {
@@ -48,8 +49,11 @@ namespace gEngine.Util.Ge.Section
         {
             for (int i = SectionLayer.Objects.Count - 1; i >= 0; i--)
             {
-                if (SectionLayer.Objects[i].GetType() == typeof(LineProxyObject) ||
-                    SectionLayer.Objects[i].GetType() == typeof(FaceProxyObject))
+                if (SectionLayer.Objects[i].GetType() == typeof(StratumFaceProxyObject) ||
+                    SectionLayer.Objects[i].GetType() == typeof(SandFaceProxyObject) ||
+                    SectionLayer.Objects[i].GetType() == typeof(FaultLineProxyObject) ||
+                    SectionLayer.Objects[i].GetType() == typeof(StratumLineProxyObject) ||
+                    SectionLayer.Objects[i].GetType() == typeof(SandLineProxyObject))
                     SectionLayer.Objects.Remove(SectionLayer.Objects[i]);
             }
         }
@@ -61,18 +65,43 @@ namespace gEngine.Util.Ge.Section
             foreach (var item in sinfo.TopGraph.Regions)
             {
                 if(item.Type==(int)SectionLineType.Stratum)
-                    SectionLayer.Objects.Add(new StratumFaceProxyObject() { Face = item, SectionInfo = sinfo });
+                {
+                    StratumFaceProxyObject obj = new StratumFaceProxyObject() { Face = item, SectionInfo = sinfo };
+                    if (sinfo.DicFillStyle.ContainsKey(item.InsideID) == false)
+                        obj.FillStyle = new Graph.Ge.FillStyle() { SymbolLib = "Normal", Symbol = "Red" };
+                    SectionLayer.Objects.Add(obj);
+                }
                 else if(item.Type==(int)SectionLineType.Sand)
-                    SectionLayer.Objects.Add(new SandFaceProxyObject() { Face = item, SectionInfo = sinfo });
+                {
+                    SandFaceProxyObject obj = new SandFaceProxyObject() { Face = item, SectionInfo = sinfo };
+                    if (sinfo.DicFillStyle.ContainsKey(item.InsideID) == false)
+                        obj.FillStyle = new Graph.Ge.FillStyle() { SymbolLib = "Normal", Symbol = "Green" };
+                    SectionLayer.Objects.Add(obj);
+                }
             }
             foreach (var item in sinfo.TopGraph.Bounds)
             {
                 if (item.Type == (int)SectionLineType.Fault)
-                    SectionLayer.Objects.Add(new FaultLineProxyObject() { Line = item, SectionInfo = sinfo });
+                {
+                    FaultLineProxyObject obj = new FaultLineProxyObject() { Line = item, SectionInfo = sinfo };
+                    if (sinfo.DicLineStyle.ContainsKey(item.Id) == false)
+                        obj.LineStyle = new Graph.Ge.LineStyle() { SymbolLib = "Normal", Symbol = "Solid", Stroke=Colors.Black,Width=1.0 };
+                    SectionLayer.Objects.Add(obj);
+                }  
                 else if (item.Type == (int)SectionLineType.Stratum)
-                    SectionLayer.Objects.Add(new StratumLineProxyObject() { Line = item, SectionInfo = sinfo });
+                {
+                    StratumLineProxyObject obj = new StratumLineProxyObject() { Line = item, SectionInfo = sinfo };
+                    if (sinfo.DicLineStyle.ContainsKey(item.Id) == false)
+                        obj.LineStyle = new Graph.Ge.LineStyle() { SymbolLib = "Normal", Symbol = "Solid", Stroke = Colors.Black, Width = 1.0 };
+                    SectionLayer.Objects.Add(obj);
+                }
                 else if (item.Type == (int)SectionLineType.Sand)
-                    SectionLayer.Objects.Add(new SandLineProxyObject() { Line = item, SectionInfo = sinfo });
+                {
+                    SandLineProxyObject obj = new SandLineProxyObject() { Line = item, SectionInfo = sinfo };
+                    if (sinfo.DicLineStyle.ContainsKey(item.Id) == false)
+                        obj.LineStyle = new Graph.Ge.LineStyle() { SymbolLib = "Normal", Symbol = "Solid", Stroke = Colors.Black, Width = 1.0 };
+                    SectionLayer.Objects.Add(obj);
+                }
             }
         }
     }

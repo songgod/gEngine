@@ -39,8 +39,7 @@ namespace gEngine.Manipulator.Ge.Basic
             {
                 this.TrackAdorner.Points.RemoveAt(this.TrackAdorner.Points.Count - 1);
                 BoundaryObj.Points = new PointCollection(this.TrackAdorner.Points);
-                BoundaryObj.Stroke = new SolidColorBrush(Colors.Black);
-                BoundaryObj.Fill = new SolidColorBrush(Colors.Transparent);
+                BoundaryObj.Stroke = Colors.Black;
                 BoundaryObj.StrokeThickness = 1.0;
                 if (OnFinishDrawBoundary != null )
                 {

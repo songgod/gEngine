@@ -87,7 +87,6 @@ namespace gEngine.View.Ge
                 lc.Content = null;
            
             Path p = new Path();
-            p.Fill = ls.Fill;
             p.Data = lc.Data;
            
             lc.Content = p;

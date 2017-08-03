@@ -8,17 +8,16 @@
              xmlns:gv="clr-namespace:gEngine.View.Ge;assembly=gEngine.View.Ge"
              mc:Ignorable="d">
     <DataTemplate DataType="{x:Type gb:Boundary}">
-        <!--<Polygon Points="{Binding Points}" StrokeThickness="{Binding StrokeThickness}" Stroke="{Binding Stroke}" Fill="{Binding Fill}">
-        </Polygon>-->
-      
-        <gv:FillControl  FillStyle="{Binding FillStyle}">
-            <gv:FillControl.Resources>
-                <local:Ponits2FillPathGeometryConverter x:Key="p2plpgc"/>
+        <Polygon Points="{Binding Points}" StrokeThickness="{Binding StrokeThickness}">
+            <Polygon.Resources>
                 <gv:FillStyle2BrushConverter x:Key="f2b"/>
-            </gv:FillControl.Resources>
-            <gv:FillControl.Data>
-                <Binding Path="Points" Converter="{StaticResource p2plpgc}"/>
-            </gv:FillControl.Data>
-        </gv:FillControl>
+            </Polygon.Resources>
+            <Polygon.Fill>
+                <Binding Path="FillStyle" Converter="{StaticResource f2b}"/>
+            </Polygon.Fill>
+            <Polygon.Stroke>
+                <SolidColorBrush Color="{Binding Stroke}"/>
+            </Polygon.Stroke>
+        </Polygon>
     </DataTemplate>
 </ResourceDictionary>

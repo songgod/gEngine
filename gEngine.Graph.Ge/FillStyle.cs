@@ -34,35 +34,6 @@ namespace gEngine.Graph.Ge
         public static readonly DependencyProperty SymbolLibProperty =
             DependencyProperty.Register("SymbolLib", typeof(string), typeof(FillStyle), new PropertyMetadata("Normal"));
 
-        //public double StrokeThickness
-        //{
-        //    get { return (double)GetValue(StrokeThicknessProperty); }
-        //    set { SetValue(StrokeThicknessProperty, value); }
-        //}
-
-        //// Using a DependencyProperty as the backing store for Top.  This enables animation, styling, binding, etc...
-        //public static readonly DependencyProperty StrokeThicknessProperty =
-        //    DependencyProperty.Register("StrokeThickness", typeof(double), typeof(FillStyle));
-
-        public Brush Fill
-        {
-            get { return (Brush)GetValue(FillProperty); }
-            set { SetValue(FillProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for Depths.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty FillProperty =
-            DependencyProperty.Register("Fill", typeof(Brush), typeof(FillStyle));
-
-        //public Brush Stroke
-        //{
-        //    get { return (Brush)GetValue(StrokeProperty); }
-        //    set { SetValue(StrokeProperty, value); }
-        //}
-
-        //// Using a DependencyProperty as the backing store for Depths.  This enables animation, styling, binding, etc...
-        //public static readonly DependencyProperty StrokeProperty =
-        //    DependencyProperty.Register("Stroke", typeof(Brush), typeof(FillStyle));
 
         protected override Freezable CreateInstanceCore()
         {

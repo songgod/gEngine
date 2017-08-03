@@ -81,7 +81,7 @@
         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_18" Content="半自动" LargeGlyph="{dx:DXImage Image=FullStackedArea_32x32.png}" Glyph="{dx:DXImage Image=Spline_16x16.png}" RibbonStyle="Large"/>
         <dxb:BarItemSeparator x:Uid="dxb:BarItemSeparator_1"/>
         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_19" Content="添加直线" 
-                           Command="{x:Static prjcmds:SectionEditCommands.NewLineSandCommand}" 
+                           Command="{x:Static prjcmds:SectionEditCommands.NewCurveSandCommand}" 
                            CommandTarget="{Binding Path=ProjectControl, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow}}"
                            LargeGlyph="{dx:DXImage Image=ScatterWithStraightLinesAndMarkersX23_32x32.png}" 
                            Glyph="{dx:DXImage Image=ScatterWithStraightLinesAndMarkersX23_32x32.png}"/>
