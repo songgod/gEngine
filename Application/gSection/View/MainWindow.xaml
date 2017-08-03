@@ -189,6 +189,8 @@
                            CommandTarget="{Binding Path=ProjectControl, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow}}"/>
                         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_30" Content="添加面"  Command="{x:Static prjcmds:BasicCommands.NewBoundaryCommand}" 
                            CommandTarget="{Binding Path=ProjectControl, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow}}"/>
+                        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_45" Content="添加矩形"  Command="{x:Static prjcmds:BasicCommands.NewRectCommand}" 
+                           CommandTarget="{Binding Path=ProjectControl, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow}}"/>
                     </dxr:RibbonPageGroup>
                 </dxr:RibbonPage>
                 <dxr:RibbonPage x:Uid="dxr:RibbonPage_5" Caption="视图">

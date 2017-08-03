@@ -71,5 +71,15 @@ namespace gEngine.Graph.Ge.Basic
         // Using a DependencyProperty as the backing store for Depths.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty StrokeProperty =
             DependencyProperty.Register("Stroke", typeof(Brush), typeof(Rect));
+
+        public FillStyle FillStyle
+        {
+            get { return (FillStyle)GetValue(FillStyleProperty); }
+            set { SetValue(FillStyleProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for LinStyle.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty FillStyleProperty =
+            DependencyProperty.Register("FillStyle", typeof(FillStyle), typeof(Rect));
     }
 }
