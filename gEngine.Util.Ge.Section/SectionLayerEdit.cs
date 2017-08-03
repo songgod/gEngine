@@ -48,8 +48,11 @@ namespace gEngine.Util.Ge.Section
         {
             for (int i = SectionLayer.Objects.Count - 1; i >= 0; i--)
             {
-                if (SectionLayer.Objects[i].GetType() == typeof(LineProxyObject) ||
-                    SectionLayer.Objects[i].GetType() == typeof(FaceProxyObject))
+                if (SectionLayer.Objects[i].GetType() == typeof(StratumFaceProxyObject) ||
+                    SectionLayer.Objects[i].GetType() == typeof(SandFaceProxyObject) ||
+                    SectionLayer.Objects[i].GetType() == typeof(FaultLineProxyObject) ||
+                    SectionLayer.Objects[i].GetType() == typeof(StratumLineProxyObject) ||
+                    SectionLayer.Objects[i].GetType() == typeof(SandLineProxyObject))
                     SectionLayer.Objects.Remove(SectionLayer.Objects[i]);
             }
         }
