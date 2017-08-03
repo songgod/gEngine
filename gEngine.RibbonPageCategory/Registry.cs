@@ -67,7 +67,15 @@ namespace gEngine.Application
                 return null;
 
             return dicRibbonPageCategory[type];
+            //if (type == null) return null;
+            //while (!dicRibbonPageCategory.ContainsKey(type))
+            //{
+            //    Type baseType = type.BaseType;
+            //    GetRibbonPageCategory(baseType);
+            //}
+            //return dicRibbonPageCategory[type];
         }
+
         static public RibbonPage GetRibbonPage(string name)
         {
             if (string.IsNullOrEmpty(name) || !dicRibbonPage.ContainsKey(name))
