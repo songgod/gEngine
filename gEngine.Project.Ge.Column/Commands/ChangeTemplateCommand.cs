@@ -1,24 +1,24 @@
 ﻿using gEngine.Commands;
 using gEngine.Graph.Ge.Column;
+using gEngine.Graph.Interface;
+using gEngine.Project.Section.Controls;
+using gEngine.Util.Ge.Section;
+using gEngine.View;
 using System;
 using System.Collections.Generic;
-using gEngine.View;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
-using gEngine.Project.Section.Controls;
-using gEngine.Util.Ge.Section;
-using gEngine.Graph.Interface;
 using System.Windows;
+using System.Windows.Input;
 
-namespace gEngine.Project.Section.Commands
+namespace gEngine.Project.Ge.Column.Commands
 {
     public class ChangeTemplateCommand : CommandBinding
     {
         public ChangeTemplateCommand()
         {
-            Command = SectionCommands.ChangeTemplateCommand;
+            Command = ColumnCommands.ChangeTemplateCommand;
             CanExecute += ChangeTemplateCommand_CanExecute;
             Executed += ChangeTemplateCommand_Executed;
         }
@@ -33,7 +33,6 @@ namespace gEngine.Project.Section.Commands
         {
             if (e.Parameter == null)
                 return;
-
             ObjectControl ObjectControl = e.Parameter as ObjectControl;
             Well sourceWell = ObjectControl.Content as Well;
 

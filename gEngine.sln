@@ -141,6 +141,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gEngine.Application.Ge.Sect
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gEngine.Symbol.normal", "gEngine.Symbol.normal\gEngine.Symbol.normal.csproj", "{30909D5D-47DC-4BFB-862D-0F02F4865F98}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gEngine.Project.Ge.Column", "gEngine.Project.Ge.Column\gEngine.Project.Ge.Column.csproj", "{4499429F-F89F-4214-80B5-1F1FC8A02571}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -363,6 +365,10 @@ Global
 		{30909D5D-47DC-4BFB-862D-0F02F4865F98}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30909D5D-47DC-4BFB-862D-0F02F4865F98}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30909D5D-47DC-4BFB-862D-0F02F4865F98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4499429F-F89F-4214-80B5-1F1FC8A02571}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4499429F-F89F-4214-80B5-1F1FC8A02571}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4499429F-F89F-4214-80B5-1F1FC8A02571}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4499429F-F89F-4214-80B5-1F1FC8A02571}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -433,5 +439,6 @@ Global
 		{7B008425-79FF-4480-922D-052CC464DF01} = {5DA24075-76FD-4692-8D34-6ACB37AD65D5}
 		{82829975-F982-429C-A7C0-D71F3BC49D83} = {5DA24075-76FD-4692-8D34-6ACB37AD65D5}
 		{30909D5D-47DC-4BFB-862D-0F02F4865F98} = {FEB2131F-6079-4129-9659-C09DE8968EA8}
+		{4499429F-F89F-4214-80B5-1F1FC8A02571} = {589C1B5C-77EE-46C7-A150-63B48DF1EAFB}
 	EndGlobalSection
 EndGlobal

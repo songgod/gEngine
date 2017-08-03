@@ -1,5 +1,6 @@
 ﻿using gEngine.Graph.Ge.Section;
 using gEngine.Graph.Interface;
+using gEngine.Util.Ge.Section;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,10 @@ namespace gEngine.Graph.Rw.Ge.Section
             RWSectionInfo rwinfo = new RWSectionInfo();
             SectionLayer sectionlayer = Ilayer as SectionLayer;
             rwinfo.Read(sectionlayer.SectionInfo, node);
+            SectionLayerEdit sectionLayerEdit = new SectionLayerEdit();
+            sectionLayerEdit.SectionLayer = sectionlayer;
+            sectionLayerEdit.RebuildGraph();
+            
         }
 
         public override void WriteLayer(XmlNode node, ILayer layer)

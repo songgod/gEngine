@@ -1,25 +1,21 @@
 ﻿using gEngine.Commands;
-using gEngine.Graph.Ge.Column;
-using gEngine.Graph.Interface;
-using gEngine.Graph.Rw.Ge;
-using gEngine.Graph.Rw.Ge.Column;
-using gEngine.View;
-using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
+using gEngine.View;
+using System.Windows;
+using gEngine.Graph.Ge.Column;
 
-namespace gEngine.Project.Ge.Section.Commands
+namespace gEngine.Project.Ge.Column.Commands
 {
     class SaveTemplateCommand : CommandBinding
     {
         public SaveTemplateCommand()
         {
-            Command = SectionCommands.SaveTemplateCommand;
+            Command =ColumnCommands.SaveTemplateCommand;
             CanExecute += SaveTemplateCommand_CanExecute;
             Executed += SaveTemplateCommand_Executed;
         }
