@@ -19,8 +19,8 @@ namespace gEngine.Project.Ge.Basic.Commands
             if (ui == null)
                 return;
             ui.CommandBindings.Add(new NewCommonLayerCommand());
-            ui.CommandBindings.Add(new NewLineLayerCommand());
-            ui.CommandBindings.Add(new NewFillLayerCommand());
+            ui.CommandBindings.Add(new NewLineCommand());
+            ui.CommandBindings.Add(new NewBoundaryCommand());
         }
     }
 }

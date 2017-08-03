@@ -56,8 +56,6 @@
   <ItemGroup>
     <Compile Include="Commands\ChangeTemplateCommand.cs" />
     <Compile Include="Commands\SaveTemplateCommand.cs" />
-    <Compile Include="Commands\SectionEdit\NewBoundaryCommand.cs" />
-    <Compile Include="Commands\SectionEdit\NewLineStratumCommand.cs" />
     <Compile Include="Commands\SectionEdit\NewTrendLineCommand.cs" />
     <Compile Include="Commands\SectionEdit\EditLineCommand.cs" />
     <Compile Include="Commands\SectionEdit\EraseFaceCommand.cs" />
@@ -65,8 +63,6 @@
     <Compile Include="Commands\SectionEdit\NewCurveFaultCommand.cs" />
     <Compile Include="Commands\SectionEdit\NewCurveSandCommand.cs" />
     <Compile Include="Commands\SectionEdit\NewCurveStratumCommand.cs" />
-    <Compile Include="Commands\SectionEdit\NewLineFaultCommand.cs" />
-    <Compile Include="Commands\SectionEdit\NewLineSandCommand.cs" />
     <Compile Include="Commands\SectionCommandsInstaller.cs" />
     <Compile Include="Commands\NewSectionMapCommand.cs" />
     <Compile Include="Controls\DXChangeTemplate.xaml.cs">

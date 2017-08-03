@@ -185,9 +185,9 @@
                 <dxr:RibbonPage x:Uid="dxr:RibbonPage_4" Caption="修饰">
                     <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_17" Caption="通用图层">
                         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_27" Content="比例尺" Command="{x:Static prjcmds:BasicCommands.NewCommonLayerCommand}" CommandTarget="{Binding ElementName=prjctrl}"/>
-                        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_29" Content="添加直线"  Command="{x:Static prjcmds:SectionEditCommands.NewLineSandCommand}" 
+                        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_29" Content="添加直线"  Command="{x:Static prjcmds:BasicCommands.NewLineCommand}" 
                            CommandTarget="{Binding Path=ProjectControl, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow}}"/>
-                        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_30" Content="添加面"  Command="{x:Static prjcmds:SectionEditCommands.NewBoundaryCommand}" 
+                        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_30" Content="添加面"  Command="{x:Static prjcmds:BasicCommands.NewBoundaryCommand}" 
                            CommandTarget="{Binding Path=ProjectControl, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow}}"/>
                     </dxr:RibbonPageGroup>
                 </dxr:RibbonPage>

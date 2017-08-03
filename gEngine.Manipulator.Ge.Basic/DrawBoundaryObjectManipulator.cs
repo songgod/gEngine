@@ -37,7 +37,7 @@ namespace gEngine.Manipulator.Ge.Basic
                         FillStyle = this.FillStyle
                     };
                     this.AssociatedObject.LayerContext.Objects.Add(bou);
-                    
+                    ManipulatorSetter.RemoveManipulator(this, this.AssociatedObject);
                 }
             }
             base.MouseRightButtonUp(sender, e);

@@ -12,13 +12,13 @@ namespace gEngine.Commands
         static BasicCommands()
         {
             NewCommonLayerCommand = new RoutedUICommand("NewCommonLayerCommand", "NewCommonLayerCommand", typeof(BasicCommands));
-            NewLineLayerCommand = new RoutedUICommand("NewLineLayerCommand", "NewLineLayerCommand", typeof(BasicCommands));
-            NewFillLayerCommand = new RoutedUICommand("NewFillLayerCommand", "NewFillLayerCommand", typeof(BasicCommands));
+            NewLineCommand = new RoutedUICommand("NewLineCommand", "NewLineCommand", typeof(BasicCommands));
+            NewBoundaryCommand = new RoutedUICommand("NewFillLayerCommand", "NewFillLayerCommand", typeof(BasicCommands));
         }
         public static RoutedCommand NewCommonLayerCommand { get; set; }
 
-        public static RoutedCommand NewLineLayerCommand { get; set; }
+        public static RoutedCommand NewLineCommand { get; set; }
 
-        public static RoutedCommand NewFillLayerCommand { get; set; }
+        public static RoutedCommand NewBoundaryCommand { get; set; }
     }
 }
