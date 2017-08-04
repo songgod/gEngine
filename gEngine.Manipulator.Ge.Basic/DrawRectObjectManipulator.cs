@@ -22,13 +22,15 @@ namespace gEngine.Manipulator.Ge.Basic
         public FillStyle FillStyle { get; set; }
         protected override void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            if (this.TrackAdorner == null)
+                return;
             Graph.Ge.Basic.Rect rect = new Graph.Ge.Basic.Rect()
             {
                 Width = this.TrackAdorner.Width,
                 Height = this.TrackAdorner.Height,
                 Top = Canvas.GetTop(this.TrackAdorner),
                 Left = Canvas.GetLeft(this.TrackAdorner),
-                Fill = null,
+                Fill = Brushes.Transparent,
                 Stroke = Brushes.Black,
                 FillStyle = FillStyle
             };
