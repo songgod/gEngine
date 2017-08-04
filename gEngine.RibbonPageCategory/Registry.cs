@@ -76,6 +76,8 @@ namespace gEngine.Application
             while (!dicRibbonPageCategory.ContainsKey(type))
             {
                 type = type.BaseType;
+                if (type == typeof(object))
+                    break;
             }
             if (!dicRibbonPageCategory.ContainsKey(type))
                 return null;
