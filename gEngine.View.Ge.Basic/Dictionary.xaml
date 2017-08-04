@@ -5,12 +5,20 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:gb="clr-namespace:gEngine.Graph.Ge.Basic;assembly=gEngine.Graph.Ge.Basic"
              xmlns:local="clr-namespace:gEngine.View.Ge.Basic"
+             xmlns:gv="clr-namespace:gEngine.View.Ge;assembly=gEngine.View.Ge"
              mc:Ignorable="d">
     <DataTemplate DataType="{x:Type gb:Rect}">
-        <Rectangle Width="{Binding Width}" Height="{Binding Height}" Fill="{Binding Fill}" Stroke="{Binding Stroke}" >
+        <Rectangle Width="{Binding Width}" Height="{Binding Height}" Stroke="{Binding Stroke}"  StrokeThickness="{Binding StrokeThickness}">
+            <Rectangle.Resources>
+                <gv:FillStyle2BrushConverter x:Key="f2b"/>
+            </Rectangle.Resources>
             <Rectangle.RenderTransform>
                 <TranslateTransform Y="{Binding Top}" X="{Binding Left}"/>
             </Rectangle.RenderTransform>
+
+            <Rectangle.Fill>
+                <Binding Path="FillStyle" Converter="{StaticResource f2b}"/>
+            </Rectangle.Fill>
         </Rectangle>
     </DataTemplate>
 </ResourceDictionary>
