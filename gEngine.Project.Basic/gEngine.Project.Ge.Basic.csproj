@@ -51,6 +51,7 @@
     <Compile Include="Commands\NewCommonLayerCommand.cs" />
     <Compile Include="Commands\NewBoundaryCommand.cs" />
     <Compile Include="Commands\NewLineCommand.cs" />
+    <Compile Include="Commands\NewRectCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

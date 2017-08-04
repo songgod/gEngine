@@ -134,6 +134,14 @@ namespace gEngine.View
             return p1 - p0;
         }
 
+        public double Dp2LP(double v)
+        {
+            Point p0 = new Point(0, 0);
+            Point p1 = new Point(v, 0);
+            p0 = TranslatePoint(p0, root);
+            p1 = TranslatePoint(p1, root);
+            return (p1-p0).Length;
+        }
         public Point Lp2Dp(Point p)
         {
             return root.TranslatePoint(p, this);
@@ -144,6 +152,15 @@ namespace gEngine.View
             Point p0 = root.TranslatePoint(new Point(0, 0), this);
             Point p1 = root.TranslatePoint(new Point(v.X, v.Y), this);
             return p1 - p0;
+        }
+
+        public double Lp2DP(double v)
+        {
+            Point p0 = new Point(0, 0);
+            Point p1 = new Point(v, 0);
+            p0 = root.TranslatePoint(p0, this);
+            p1 = root.TranslatePoint(p1, this);
+            return (p1 - p0).Length;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)

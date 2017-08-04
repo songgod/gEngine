@@ -1,4 +1,5 @@
-﻿using System;
+﻿using gEngine.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,14 +11,10 @@ namespace gEngine.Manipulator.Ge.Section
 {
     public static class CalcTolerance
     {
-        public static double GetTolerance(UIElement elm, int pixelsize=5)
+        public static double GetTolerance(MapControl mc, int pixelsize=5)
         {
-            Vector v = new Vector(pixelsize, pixelsize);
-            Transform tf = elm.RenderTransform;
-            Matrix m = Matrix.Multiply(tf.Value, Matrix.Identity);
-            m.Invert();
-            Vector tv = m.Transform(v);
-            double t = Math.Max(2.0, Math.Max(tv.X, tv.Y));
+            double x = mc.Dp2LP(pixelsize);
+            double t = Math.Max(2.0, x);
             return t;
         }
     }

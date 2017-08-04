@@ -1,5 +1,6 @@
 ﻿using gEngine.Graph.Interface;
 using gEngine.Util;
+using gEngine.View;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,10 +14,12 @@ namespace gEngine.Manipulator
     static public class Registry
     {
         static private Dictionary<string, IManipulatorFactory> dicManipulatorFactory;
+        static private SelectObjectManipulatorCallbackInstaller somcinstall;
 
         static Registry()
         {
             dicManipulatorFactory = new Dictionary<string, IManipulatorFactory>();
+            somcinstall = new SelectObjectManipulatorCallbackInstaller();
         }
 
         static public void Regist(string name, IManipulatorFactory mpf)

@@ -60,6 +60,7 @@
     <Compile Include="DrawRectObjectManipulator.cs" />
     <Compile Include="DrawScaleRuleObjectManipulator.cs" />
     <Compile Include="EditLineObjectManipulator.cs" />
+    <Compile Include="EditRectObjectManipulator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

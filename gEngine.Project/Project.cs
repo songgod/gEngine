@@ -197,6 +197,18 @@ namespace gEngine.Project
             return map;
         }
 
+        public void ActiveMap(IMap map)
+        {
+            for (int i = 0; i < OpenMaps.Count; i++)
+            {
+                if(OpenMaps[i]==map)
+                {
+                    OpenMaps.CurrentIndex = i;
+                    break;
+                }
+            }
+        }
+
         public bool SaveMap(string url)
         {
             if (string.IsNullOrEmpty(url))

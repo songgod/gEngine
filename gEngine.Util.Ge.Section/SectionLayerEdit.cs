@@ -85,21 +85,21 @@ namespace gEngine.Util.Ge.Section
                 {
                     FaultLineProxyObject obj = new FaultLineProxyObject() { Line = item, SectionInfo = sinfo };
                     if (sinfo.DicLineStyle.ContainsKey(item.Id) == false)
-                        obj.LineStyle = new Graph.Ge.LineStyle() { SymbolLib = "Normal", Symbol = "Solid", Stroke=Colors.Black,Width=1.0 };
+                        obj.LineStyle = new Graph.Ge.LineStyle() { SymbolLib = "Normal", Symbol = "Solid", Stroke=Colors.Black,Width=20.0 };
                     SectionLayer.Objects.Add(obj);
                 }  
                 else if (item.Type == (int)SectionLineType.Stratum)
                 {
                     StratumLineProxyObject obj = new StratumLineProxyObject() { Line = item, SectionInfo = sinfo };
                     if (sinfo.DicLineStyle.ContainsKey(item.Id) == false)
-                        obj.LineStyle = new Graph.Ge.LineStyle() { SymbolLib = "Normal", Symbol = "Solid", Stroke = Colors.Black, Width = 1.0 };
+                        obj.LineStyle = new Graph.Ge.LineStyle() { SymbolLib = "Normal", Symbol = "Solid", Stroke = Colors.Black, Width = 20.0 };
                     SectionLayer.Objects.Add(obj);
                 }
                 else if (item.Type == (int)SectionLineType.Sand)
                 {
                     SandLineProxyObject obj = new SandLineProxyObject() { Line = item, SectionInfo = sinfo };
                     if (sinfo.DicLineStyle.ContainsKey(item.Id) == false)
-                        obj.LineStyle = new Graph.Ge.LineStyle() { SymbolLib = "Normal", Symbol = "Solid", Stroke = Colors.Black, Width = 1.0 };
+                        obj.LineStyle = new Graph.Ge.LineStyle() { SymbolLib = "Normal", Symbol = "Solid", Stroke = Colors.Black, Width = 20.0 };
                     SectionLayer.Objects.Add(obj);
                 }
             }

@@ -48,10 +48,8 @@ namespace gEngine.Project.Commands
                 if (mpl == null)
                     return;
                 ManipulatorSetter.AddManipulator(mpl, mc);
-                mpl.OnSelectObject += pc.Mpl_OnSelectObject;
 
             }
-
 
             e.Handled = true;
         }

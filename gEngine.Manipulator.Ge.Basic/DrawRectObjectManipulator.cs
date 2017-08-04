@@ -17,19 +17,22 @@ namespace gEngine.Manipulator.Ge.Basic
     {
         public DrawRectObjectManipulator()
         {
-            rectStyle = new LineStyle();
+            FillStyle = new FillStyle();
         }
-        public LineStyle rectStyle { get; set; }
+        public FillStyle FillStyle { get; set; }
         protected override void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            if (this.TrackAdorner == null)
+                return;
             Graph.Ge.Basic.Rect rect = new Graph.Ge.Basic.Rect()
             {
                 Width = this.TrackAdorner.Width,
                 Height = this.TrackAdorner.Height,
                 Top = Canvas.GetTop(this.TrackAdorner),
                 Left = Canvas.GetLeft(this.TrackAdorner),
-                Fill = null,
-                Stroke = Brushes.Black
+                Fill = Brushes.Transparent,
+                Stroke = Brushes.Black,
+                FillStyle = FillStyle
             };
             this.AssociatedObject.LayerContext.Objects.Add(rect);
             base.MouseLeftButtonUp(sender, e);
@@ -48,10 +51,10 @@ namespace gEngine.Manipulator.Ge.Basic
 
         public IManipulatorBase CreateManipulator(object param)
         {
-            LineStyle style = param as LineStyle;
+            FillStyle style = param as FillStyle;
 
             DrawRectObjectManipulator dm = new DrawRectObjectManipulator();
-            if (style != null) dm.rectStyle = style;
+            if (style != null) dm.FillStyle = style;
             return dm;
         }
     }

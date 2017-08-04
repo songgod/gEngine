@@ -15,6 +15,7 @@ namespace gEngine.Manipulator
         }
         protected override void MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            base.MouseLeftButtonDown(sender,e);
             this.TrackAdorner.Points.Clear();
             MapControl mc = this.AssociatedObject.Owner;
             Point p = mc.Dp2LP(e.GetPosition(mc));

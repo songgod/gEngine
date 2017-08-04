@@ -107,6 +107,7 @@ namespace gEngine.Project.Ge.Section.Commands
                 ILayers layers = new ILayers();
                 layers.Add(layer);
                 IMap map = Project.NewMap("Ge", sse.MapName, layers);
+                Project.ActiveMap(map);
             }
         }
     }

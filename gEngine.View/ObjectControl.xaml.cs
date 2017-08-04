@@ -1,4 +1,5 @@
 ﻿using gEngine.Graph.Interface;
+using System;
 using System.IO;
 using System.Reflection;
 using System.Windows;
@@ -7,6 +8,7 @@ using System.Windows.Data;
 
 namespace gEngine.View
 {
+    public delegate void SelectObjectControl(ObjectControl oc);
     /// <summary>
     /// ObjectControl.xaml 的交互逻辑
     /// </summary>
@@ -17,7 +19,7 @@ namespace gEngine.View
             InitializeComponent();
             Binding bd = new Binding("Visible") { Converter = new BooleanToVisibilityConverter(), Mode = BindingMode.TwoWay };
             BindingOperations.SetBinding(this, VisibilityProperty, bd);
-            Binding bdselect = new Binding("IsSeclected") { Mode = BindingMode.TwoWay };
+            Binding bdselect = new Binding("IsSelected") { Mode = BindingMode.TwoWay };
             BindingOperations.SetBinding(this, IsSelectedProperty, bdselect);
         }
 
@@ -43,21 +45,14 @@ namespace gEngine.View
             set { SetValue(IsSelectedProperty, value); }
         }
 
+        
+        public static event SelectObjectControl OnObjectControlSelected;
+
         static void IsSelectedPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs arg)
         {
-            //ObjectControl oc = (ObjectControl)obj;
-            //bool isSelected = (bool)arg.NewValue;
-            //if(isSelected)
-            //{
-            //    string dir = Directory.GetCurrentDirectory();
-            //    string qstr = dir + "\\gEngine.Manipulator.dll";
-            //    Assembly ass = Assembly.Load(qstr);
-
-            //}
-            //else
-            //{
-
-            //}
+            ObjectControl oc = (ObjectControl)obj;
+            if (OnObjectControlSelected != null)
+                OnObjectControlSelected.Invoke(oc);
         }
 
         // Using a DependencyProperty as the backing store for IsSelected.  This enables animation, styling, binding, etc...
