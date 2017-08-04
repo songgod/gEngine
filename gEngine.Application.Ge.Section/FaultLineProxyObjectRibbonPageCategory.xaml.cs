@@ -17,11 +17,11 @@ using System.Windows.Shapes;
 namespace gEngine.Application.Ge.Section
 {
     /// <summary>
-    /// LineProxyObjectRibbonPageCategory.xaml 的交互逻辑
+    /// FaultLineProxyObjectRibbonPageCategory.xaml 的交互逻辑
     /// </summary>
-    public partial class LineProxyObjectRibbonPageCategory : GeRibbonPageCategory
+    public partial class FaultLineProxyObjectRibbonPageCategory : GeRibbonPageCategory
     {
-        public LineProxyObjectRibbonPageCategory()
+        public FaultLineProxyObjectRibbonPageCategory()
         {
             InitializeComponent();
         }
@@ -30,7 +30,7 @@ namespace gEngine.Application.Ge.Section
         {
             get
             {
-                return typeof(Graph.Ge.Section.LineProxyObject);
+                return typeof(Graph.Ge.Section.FaultLineProxyObject);
             }
         }
 
@@ -40,7 +40,7 @@ namespace gEngine.Application.Ge.Section
             {
                 return new DelegateCommand<string[]>((parameter) =>
                 {
-                    Graph.Ge.Section.LineProxyObject line = this.DataContext as Graph.Ge.Section.LineProxyObject;
+                    Graph.Ge.Section.FaultLineProxyObject line = this.DataContext as Graph.Ge.Section.FaultLineProxyObject;
                     line.LineStyle.SymbolLib = parameter[0] as string;
                     line.LineStyle.Symbol = parameter[1] as string;
                 });
