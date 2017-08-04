@@ -22,21 +22,13 @@ namespace gEngine.Application
         {
             IObject iobject = oc.DataContext as IObject;
             GeRibbonPageCategory grpc = Registry.GetRibbonPageCategory(iobject.GetType());
+
             if (grpc != null)
             {
-                BindingExpression exp = grpc.GetBindingExpression(GeRibbonPageCategory.IsVisibleProperty);
-                if (exp == null)
-                {
-                    //绑定1：将iobject的IsSelected属性绑定到ribbon的IsVisibleProperty属性上
-                    Binding bd = new Binding("IsSelected");
-                    bd.Source = iobject;
-                    bd.Mode = BindingMode.OneWay;
-                    grpc.SetBinding(RibbonPageCategory.IsVisibleProperty, bd);
-
-                    //绑定2：将iobject绑定到ribbon的datacontext上
-                    grpc.DataContext = iobject;
-                }
+                grpc.IsVisible = iobject.IsSelected;
+                grpc.DataContext = iobject;
             }
+
         }
     }
 }
