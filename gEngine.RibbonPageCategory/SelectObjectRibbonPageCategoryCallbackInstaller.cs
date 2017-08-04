@@ -10,15 +10,15 @@ using System.Windows.Data;
 
 namespace gEngine.Application
 {
-    static class SelectObjectRibbonPageCategoryCallbackInstaller
+    class SelectObjectRibbonPageCategoryCallbackInstaller
     {
-        static SelectObjectRibbonPageCategoryCallbackInstaller()
+        public SelectObjectRibbonPageCategoryCallbackInstaller()
         {
 
             ObjectControl.OnObjectControlSelected += ObjectControl_OnObjectControlSelected;
         }
 
-        private static void ObjectControl_OnObjectControlSelected(ObjectControl oc)
+        private void ObjectControl_OnObjectControlSelected(ObjectControl oc)
         {
             IObject iobject = oc.DataContext as IObject;
             GeRibbonPageCategory grpc = Registry.GetRibbonPageCategory(iobject.GetType());

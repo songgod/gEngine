@@ -16,6 +16,7 @@ namespace gEngine.Application
     {
         private static Dictionary<Type, GeRibbonPageCategory> dicRibbonPageCategory;
         private static Dictionary<string, RibbonPage> dicRibbonPage;
+        private static SelectObjectRibbonPageCategoryCallbackInstaller sorpcinstaller;
         public static Dictionary<Type, GeRibbonPageCategory> DicRibbonPageCategory
         {
             get
@@ -35,6 +36,7 @@ namespace gEngine.Application
         {
             dicRibbonPageCategory = new Dictionary<Type, GeRibbonPageCategory>();
             dicRibbonPage = new Dictionary<string, RibbonPage>();
+            sorpcinstaller = new SelectObjectRibbonPageCategoryCallbackInstaller();
         }
 
 

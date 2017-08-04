@@ -7,15 +7,15 @@ using gEngine.View;
 
 namespace gEngine.Manipulator
 {
-    static class SelectObjectManipulatorCallbackInstaller
+    class SelectObjectManipulatorCallbackInstaller
     {
-        static SelectObjectManipulatorCallbackInstaller()
+        public SelectObjectManipulatorCallbackInstaller()
         {
 
             ObjectControl.OnObjectControlSelected += ObjectControl_OnObjectControlSelected;
         }
 
-        private static void ObjectControl_OnObjectControlSelected(ObjectControl oc)
+        private void ObjectControl_OnObjectControlSelected(ObjectControl oc)
         {
             if (oc == null || oc.ObjectContext == null)
                 return;
