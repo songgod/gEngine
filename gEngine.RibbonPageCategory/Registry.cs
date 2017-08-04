@@ -71,17 +71,15 @@ namespace gEngine.Application
         }
         static public GeRibbonPageCategory GetRibbonPageCategory(Type type)
         {
-            if (type == null || !dicRibbonPageCategory.ContainsKey(type))
+            if (type == null)
                 return null;
-
+            while (!dicRibbonPageCategory.ContainsKey(type))
+            {
+                type = type.BaseType;
+            }
+            if (!dicRibbonPageCategory.ContainsKey(type))
+                return null;
             return dicRibbonPageCategory[type];
-            //if (type == null) return null;
-            //while (!dicRibbonPageCategory.ContainsKey(type))
-            //{
-            //    Type baseType = type.BaseType;
-            //    GetRibbonPageCategory(baseType);
-            //}
-            //return dicRibbonPageCategory[type];
         }
 
         static public RibbonPage GetRibbonPage(string name)

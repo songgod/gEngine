@@ -30,7 +30,7 @@ namespace gEngine.Application.Ge.Section
         {
             get
             {
-                return typeof(Graph.Ge.Section.StratumLineProxyObject);
+                return typeof(Graph.Ge.Section.LineProxyObject);
             }
         }
 

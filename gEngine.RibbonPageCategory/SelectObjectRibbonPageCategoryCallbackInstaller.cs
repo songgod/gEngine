@@ -23,8 +23,12 @@ namespace gEngine.Application
             IObject iobject = oc.DataContext as IObject;
             GeRibbonPageCategory grpc = Registry.GetRibbonPageCategory(iobject.GetType());
 
-            grpc.IsVisible = iobject.IsSelected;
-            grpc.DataContext = iobject;
+            if (grpc != null)
+            {
+                grpc.IsVisible = iobject.IsSelected;
+                grpc.DataContext = iobject;
+            }
+
         }
     }
 }
