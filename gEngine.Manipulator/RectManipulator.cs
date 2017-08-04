@@ -71,6 +71,7 @@ namespace gEngine.Manipulator
 
         protected virtual void MouseMove(object sender, MouseEventArgs e)
         {
+            if (this.TrackAdorner == null) return;
             MapControl mc = this.AssociatedObject.Owner;
             if (e.LeftButton == System.Windows.Input.MouseButtonState.Pressed)
             {
