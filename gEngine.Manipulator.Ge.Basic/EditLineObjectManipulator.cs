@@ -19,8 +19,6 @@ namespace gEngine.Manipulator.Ge.Basic
         public Rectangle TrackAdorner1 { get; set; }
         public Rectangle TrackAdorner2 { get; set; }
 
-        public Rectangle _hitElement { get; private set; }
-
         #endregion
 
         protected override void OnAttached()
@@ -28,7 +26,6 @@ namespace gEngine.Manipulator.Ge.Basic
             base.OnAttached();
             if (this.AssociatedObject == null)
                 return;
-
             ObjectControl oc = this.AssociatedObject;
             LayerControl lc = oc.Owner;
             MapControl mc = lc.Owner;
@@ -45,8 +42,8 @@ namespace gEngine.Manipulator.Ge.Basic
             style.Setters.Add(new Setter() { Property = Rectangle.WidthProperty, Value = 5.0 });
             style.Setters.Add(new Setter() { Property = Rectangle.HeightProperty, Value = 5.0 });
 
-            TrackAdorner1 = new Rectangle() { Name = "Start", Style = style };
-            TrackAdorner2 = new Rectangle() { Name = "End", Style = style };
+            TrackAdorner1 = new Rectangle() { Style = style };
+            TrackAdorner2 = new Rectangle() { Style = style };
 
             Canvas.SetLeft(TrackAdorner1, p1.X - TrackAdorner1.Width / 2);
             Canvas.SetTop(TrackAdorner1, p1.Y - TrackAdorner1.Height / 2);
@@ -56,26 +53,31 @@ namespace gEngine.Manipulator.Ge.Basic
             mc.EditLayer.Children.Add(TrackAdorner1);
             mc.EditLayer.Children.Add(TrackAdorner2);
 
-            mc.MouseMove += Mc_MouseMove;
-            mc.MouseLeftButtonDown += Mc_MouseLeftButtonDown;
-            mc.MouseLeftButtonUp += Mc_MouseLeftButtonUp;
+            this.TrackAdorner1.MouseMove += TrackAdo1_MouseMove;
+            this.TrackAdorner2.MouseMove += TrackAdo2_MouseMove;
+            this.TrackAdorner1.MouseLeftButtonUp += TrackAdo1_MouseLeftButtonUp;
+
+            this.TrackAdorner2.MouseLeftButtonUp += TrackAdo2_MouseLeftButtonUp;
+
         }
 
         protected override void OnDetaching()
         {
+            base.OnDetaching();
             LayerControl lc = this.AssociatedObject.Owner;
             MapControl mc = lc.Owner;
             if (mc == null)
                 return;
             mc.EditLayer.Children.Clear();
-            mc.MouseMove -= Mc_MouseMove;
-            mc.MouseLeftButtonDown -= Mc_MouseLeftButtonDown;
-            mc.MouseLeftButtonUp -= Mc_MouseLeftButtonUp;
+            this.TrackAdorner1.MouseMove -= TrackAdo1_MouseMove;
+            this.TrackAdorner1.MouseLeftButtonUp -= TrackAdo1_MouseLeftButtonUp;
+            this.TrackAdorner2.MouseMove -= TrackAdo2_MouseMove;
+            this.TrackAdorner2.MouseLeftButtonUp -= TrackAdo2_MouseLeftButtonUp;
         }
 
         #region Event
 
-        private void Mc_MouseMove(object sender, MouseEventArgs e)
+        private void TrackAdo1_MouseMove(object sender, MouseEventArgs e)
         {
             if (this.AssociatedObject == null)
                 return;
@@ -86,26 +88,15 @@ namespace gEngine.Manipulator.Ge.Basic
 
             if (e.LeftButton == System.Windows.Input.MouseButtonState.Pressed)
             {
-                if (_hitElement!=null)
-                {
-                    Point p = mc.Dp2LP(e.GetPosition(mc));
-                    if (_hitElement.Name.Equals("Start"))
-                    {
-                        Canvas.SetLeft(TrackAdorner1, p.X - TrackAdorner1.Width / 2);
-                        Canvas.SetTop(TrackAdorner1, p.Y - TrackAdorner1.Height / 2);
-                        ((gEngine.Graph.Ge.Basic.Line) oc.DataContext).Start = p;
-                    }
-                    if (_hitElement.Name.Equals("End"))
-                    {
-                        Canvas.SetLeft(TrackAdorner2, p.X - TrackAdorner2.Width / 2);
-                        Canvas.SetTop(TrackAdorner2, p.Y - TrackAdorner2.Height / 2);
-                        ((gEngine.Graph.Ge.Basic.Line) oc.DataContext).End = p;
-                    }
-                }
+                this.TrackAdorner1.CaptureMouse();
+                Point p = mc.Dp2LP(e.GetPosition(mc));
+                Canvas.SetLeft(TrackAdorner1, p.X - TrackAdorner1.Width / 2);
+                Canvas.SetTop(TrackAdorner1, p.Y - TrackAdorner1.Height / 2);
+                ((gEngine.Graph.Ge.Basic.Line) oc.DataContext).Start = p;
             }
         }
 
-        private void Mc_MouseLeftButtonDown(object sender, MouseEventArgs e)
+        private void TrackAdo2_MouseMove(object sender, MouseEventArgs e)
         {
             if (this.AssociatedObject == null)
                 return;
@@ -114,31 +105,24 @@ namespace gEngine.Manipulator.Ge.Basic
             LayerControl lc = oc.Owner;
             MapControl mc = lc.Owner;
 
-            Point pt = e.GetPosition(mc);
-
-            VisualTreeHelper.HitTest(mc, null, new HitTestResultCallback(MyHitTestResult),
-                new PointHitTestParameters(pt));
-        }
-
-        private HitTestResultBehavior MyHitTestResult(HitTestResult hr)
-        {
-            DependencyObject p = hr.VisualHit;
-            while (p != null)
+            if (e.LeftButton == System.Windows.Input.MouseButtonState.Pressed)
             {
-                Rectangle rect = p as Rectangle;
-                if (rect != null)
-                {
-                    _hitElement = rect;
-                    return HitTestResultBehavior.Stop;
-                }
-                p = VisualTreeHelper.GetParent(p);
+                this.TrackAdorner2.CaptureMouse();
+                Point p = mc.Dp2LP(e.GetPosition(mc));
+                Canvas.SetLeft(TrackAdorner2, p.X - TrackAdorner2.Width / 2);
+                Canvas.SetTop(TrackAdorner2, p.Y - TrackAdorner2.Height / 2);
+                ((gEngine.Graph.Ge.Basic.Line) oc.DataContext).End = p;
             }
-            return HitTestResultBehavior.Continue;
         }
 
-        private void Mc_MouseLeftButtonUp(object sender, MouseEventArgs e)
+        private void TrackAdo1_MouseLeftButtonUp(object sender, MouseEventArgs e)
         {
-            _hitElement = null;
+            this.TrackAdorner1.ReleaseMouseCapture();
+        }
+
+        private void TrackAdo2_MouseLeftButtonUp(object sender, MouseEventArgs e)
+        {
+            this.TrackAdorner2.ReleaseMouseCapture();
         }
 
         #endregion
