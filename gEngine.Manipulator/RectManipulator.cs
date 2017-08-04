@@ -90,10 +90,9 @@ namespace gEngine.Manipulator
 
         protected virtual void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-
-            //this.TrackAdorner = null;
-           
-
+            MapControl mc = this.AssociatedObject.Owner;
+            mc.EditLayer.Children.Remove(TrackAdorner);
+            this.TrackAdorner = null;
         }
 
         protected override void OnDetaching()
