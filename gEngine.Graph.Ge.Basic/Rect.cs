@@ -72,6 +72,16 @@ namespace gEngine.Graph.Ge.Basic
         public static readonly DependencyProperty StrokeProperty =
             DependencyProperty.Register("Stroke", typeof(Brush), typeof(Rect));
 
+        public double StrokeThickness
+        {
+            get { return (double)GetValue(StrokeThicknessProperty); }
+            set { SetValue(StrokeThicknessProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Top.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty StrokeThicknessProperty =
+            DependencyProperty.Register("StrokeThickness", typeof(double), typeof(Rect), new PropertyMetadata(1.0));
+
         public FillStyle FillStyle
         {
             get { return (FillStyle)GetValue(FillStyleProperty); }

@@ -30,8 +30,9 @@ namespace gEngine.Manipulator.Ge.Basic
                 Height = this.TrackAdorner.Height,
                 Top = Canvas.GetTop(this.TrackAdorner),
                 Left = Canvas.GetLeft(this.TrackAdorner),
-                Fill = Brushes.Transparent,
-                Stroke = Brushes.Black,
+                Fill = Brushes.White,
+                Stroke = Brushes.Red,
+                StrokeThickness = 1.0,
                 FillStyle = FillStyle
             };
             this.AssociatedObject.LayerContext.Objects.Add(rect);

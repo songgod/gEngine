@@ -14,35 +14,33 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace gEngine.Application.Ge.Section
+namespace gEngine.Application.Ge.Basic
 {
     /// <summary>
-    /// LineProxyObjectRibbonPageCategory.xaml 的交互逻辑
+    /// RectRibbonPageCategory.xaml 的交互逻辑
     /// </summary>
-    public partial class LineProxyObjectRibbonPageCategory : GeRibbonPageCategory
+    public partial class RectRibbonPageCategory : GeRibbonPageCategory
     {
-        public LineProxyObjectRibbonPageCategory()
+        public RectRibbonPageCategory()
         {
             InitializeComponent();
         }
-
         public override Type SupportType
         {
             get
             {
-                return typeof(Graph.Ge.Section.LineProxyObject);
+                return typeof(Graph.Ge.Basic.Rect);
             }
         }
-
         public ICommand SelectBarCommand
         {
             get
             {
                 return new DelegateCommand<string[]>((parameter) =>
                 {
-                    Graph.Ge.Section.LineProxyObject line = this.DataContext as Graph.Ge.Section.LineProxyObject;
-                    line.LineStyle.SymbolLib = parameter[0] as string;
-                    line.LineStyle.Symbol = parameter[1] as string;
+                    Graph.Ge.Basic.Rect boun = this.DataContext as Graph.Ge.Basic.Rect;
+                    boun.FillStyle.SymbolLib = parameter[0] as string;
+                    boun.FillStyle.Symbol = parameter[1] as string;
                 });
             }
         }
