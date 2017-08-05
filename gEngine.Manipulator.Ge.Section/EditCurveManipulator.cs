@@ -11,18 +11,38 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using gEngine.Graph.Interface;
+using gEngine.Util.Ge.Section;
 
 namespace gEngine.Manipulator.Ge.Section
 {
+    public delegate void LineChanged(gTopology.Line newLine);
     public class EditCurveAdorner : Canvas
     {
+        public event LineChanged OnLineChanged;
+
         private int NodeCount { get; set; }
 
-        private UIElement RaiseElement { get; set; }
+        public GraphUtil GraphUtil { get; set; }
 
-        public EditCurveAdorner(UIElement re)
+        private gTopology.Line Line { get; set;}
+
+        public EditCurveAdorner() { }
+
+        public void Select(gTopology.Line obj)
         {
-            RaiseElement = re;
+            Clear();
+
+            if (obj == null || obj.Points.Count == 0)
+                return;
+
+            Line = obj;
+
+            PointCollection ps = new PointCollection(obj.Points);
+
+            NodeCount = ps.Count;
+            Path Track = CreateTrack(ps);
+            CreateConnects(Track);
+            CreateNodes(Track);
         }
 
         private void Clear()
@@ -33,7 +53,7 @@ namespace gEngine.Manipulator.Ge.Section
 
         private Path CreateTrack(PointCollection ps)
         {
-            Path Track = new Path() { Stroke = new SolidColorBrush() { Color = Colors.LightGray }, StrokeThickness = 1.0, StrokeDashArray = new DoubleCollection() { 2, 3 } };
+            Path Track = new Path() { Stroke = new SolidColorBrush() { Color = Colors.LightGray }, StrokeThickness = 10.0, StrokeDashArray = new DoubleCollection() { 2, 3 } };
             Track.MouseLeftButtonDown += Track_MouseLeftButtonDown;
             PathGeometry pgTrack = new PathGeometry();
             PathFigure pfTrack = new PathFigure() { StartPoint = ps[0] };
@@ -43,11 +63,6 @@ namespace gEngine.Manipulator.Ge.Section
             Track.Data = pgTrack;
             Children.Add(Track);
             return Track;
-        }
-
-        private void Track_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            this.RaiseElement.RaiseEvent(e);
         }
 
         private void CreateConnects(Path track)
@@ -61,7 +76,7 @@ namespace gEngine.Manipulator.Ge.Section
                 if (i % 3 == 0)
                     continue;
 
-                System.Windows.Shapes.Line l = new System.Windows.Shapes.Line() { Stroke = new SolidColorBrush() { Color = Colors.LightGray }, StrokeThickness = 0.5, StrokeDashArray = new DoubleCollection() { 1, 1 } };
+                System.Windows.Shapes.Line l = new System.Windows.Shapes.Line() { Stroke = new SolidColorBrush() { Color = Colors.LightGray }, StrokeThickness = 5, StrokeDashArray = new DoubleCollection() { 1, 1 } };
                 if (i % 3 == 1)
                 {
                     PropertyPath ppx1 = new PropertyPath(string.Format("Points.[{0:G}].X", i - 1));
@@ -123,7 +138,7 @@ namespace gEngine.Manipulator.Ge.Section
                     control.MouseLeftButtonUp += Control_MouseLeftButtonUp;
                     control.MouseRightButtonUp += Control_MouseRightButtonUp;
                     control.MouseLeftButtonDown += Control_MouseLeftButtonDown;
-                    EllipseGeometry eg = new EllipseGeometry() { RadiusX = 10, RadiusY = 10 };
+                    EllipseGeometry eg = new EllipseGeometry() { RadiusX = 50, RadiusY = 50 };
                     if (i == 0)
                     {
 
@@ -146,9 +161,8 @@ namespace gEngine.Manipulator.Ge.Section
                     ear.Name = string.Format("A{0:G}", i);
                     ear.MouseMove += Ear_MouseMove;
                     ear.MouseLeftButtonUp += Ear_MouseLeftButtonUp;
-                    ear.MouseRightButtonUp += Ear_MouseRightButtonUp;
                     ear.MouseLeftButtonDown += Ear_MouseLeftButtonDown;
-                    EllipseGeometry eg = new EllipseGeometry() { RadiusX = 5, RadiusY = 5 };
+                    EllipseGeometry eg = new EllipseGeometry() { RadiusX = 25, RadiusY = 25 };
                     PropertyPath ppcenter = new PropertyPath(string.Format("Points.[{0:G}]", i - 1));
                     Binding bding = new Binding() { Path = ppcenter, Source = psTrack, Mode = BindingMode.TwoWay };
                     BindingOperations.SetBinding(eg, EllipseGeometry.CenterProperty, bding);
@@ -158,34 +172,141 @@ namespace gEngine.Manipulator.Ge.Section
             }
         }
 
-        private void Ear_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void Track_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            this.RaiseElement.RaiseEvent(e);
+            Topology editer = new Topology(GraphUtil.Graph);
+            Point p = e.GetPosition(this);
+            gTopology.Line newline = editer.LinAddPoint(Line,p, GraphUtil.Tolerance);
+            if (OnLineChanged != null)
+                OnLineChanged.Invoke(newline);
+            e.Handled = true;
         }
 
         private void Control_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            this.RaiseElement.RaiseEvent(e);
-        }
-
-        private void Ear_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            this.RaiseElement.RaiseEvent(e);
-        }
-
-        private void Control_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            this.RaiseElement.RaiseEvent(e);
-        }
-
-        private void Ear_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            this.RaiseElement.RaiseEvent(e);
+            Path path = sender as Path;
+            if (path != null)
+                path.CaptureMouse();
+            e.Handled = true;
         }
 
         private void Control_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            this.RaiseElement.RaiseEvent(e);
+            Path path = sender as Path;
+            if (path != null)
+                path.ReleaseMouseCapture();
+
+            int index = GetNodeID(path);
+            Point p = GetNodePos(index);
+
+            Topology editer = new Topology(GraphUtil.Graph);
+
+            gTopology.Line newline = editer.LinMoveControlPoint(Line, index, p);
+
+            if (OnLineChanged != null)
+                OnLineChanged.Invoke(newline);
+            e.Handled = true;
+        }
+
+        private void Control_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            Path path = sender as Path;
+            if (path != null)
+                path.ReleaseMouseCapture();
+
+            int index = GetNodeID(path);
+            Point p = GetNodePos(index);
+
+            Topology editer = new Topology(GraphUtil.Graph);
+            gTopology.Line newline = editer.LinRemovePoint(Line, index);
+            if (OnLineChanged != null)
+                OnLineChanged.Invoke(newline);
+            e.Handled = true;
+        }
+
+
+
+        private void Control_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == System.Windows.Input.MouseButtonState.Pressed)
+            {
+                Path path = sender as Path;
+                Point p = e.GetPosition(this);
+                Vector offset = p - GetNodePos(path);
+                int id = GetNodeID(path);
+                SetNodePos(id, p);
+                SetNodePos(id - 1, GetNodePos(id - 1) + offset);
+                SetNodePos(id + 1, GetNodePos(id + 1) + offset);
+                e.Handled = true;
+            }
+
+        }
+
+        private void Ear_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Path path = sender as Path;
+            if (path != null)
+                path.CaptureMouse();
+            e.Handled = true;
+        }
+
+        private void Ear_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            Path path = sender as Path;
+            if (path != null)
+                path.ReleaseMouseCapture();
+
+            int index = GetNodeID(path);
+            Point p = GetNodePos(index);
+
+            Topology editer = new Topology(GraphUtil.Graph);
+
+            bool bSyn = false;
+            if ((Keyboard.Modifiers & ModifierKeys.Control) != ModifierKeys.Control)
+                bSyn = true;
+
+            gTopology.Line newline = editer.LinMoveEarPoint(Line, index, p, bSyn);
+
+            if (OnLineChanged != null)
+                OnLineChanged.Invoke(newline);
+            e.Handled = true;
+        }
+
+        private void Ear_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == System.Windows.Input.MouseButtonState.Pressed)
+            {
+                Path ear = sender as Path;
+                Point p = e.GetPosition(this);
+                SetNodePos(ear, p);
+
+                if ((Keyboard.Modifiers & ModifierKeys.Control) != ModifierKeys.Control)
+                {
+                    int id = GetNodeID(ear);
+                    Path ctrl = null;
+                    Path pairear = null;
+                    if (IsFirstEar(id))
+                    {
+                        ctrl = GetNode(id + 1);
+                        pairear = GetNode(id + 2);
+                    }
+                    else
+                    {
+                        ctrl = GetNode(id - 1);
+                        pairear = GetNode(id - 2);
+                    }
+
+                    if (pairear != null)
+                    {
+                        Vector v = GetNodePos(ear) - GetNodePos(ctrl);
+                        v.Normalize();
+                        double dis = (GetNodePos(pairear) - GetNodePos(ctrl)).Length;
+                        Vector vp = v * dis * -1;
+                        SetNodePos(pairear, vp + GetNodePos(ctrl));
+                    }
+                }
+                e.Handled = true;
+            }
         }
 
         private Path GetNode(int index)
@@ -278,74 +399,10 @@ namespace gEngine.Manipulator.Ge.Section
                 return true;
             return false;
         }
-
-        public void Select(PointCollection ps)
-        {
-            Clear();
-
-            if (ps==null || ps.Count == 0)
-                return;
-
-            NodeCount = ps.Count;
-            Path Track = CreateTrack(ps);
-            CreateConnects(Track);
-            CreateNodes(Track);
-        }
-
-        private void Ear_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (e.LeftButton == System.Windows.Input.MouseButtonState.Pressed)
-            {
-                Path ear = sender as Path;
-                Point p = e.GetPosition(this);
-                SetNodePos(ear, p);
-
-                if ((Keyboard.Modifiers & ModifierKeys.Control) != ModifierKeys.Control)
-                {
-                    int id = GetNodeID(ear);
-                    Path ctrl = null;
-                    Path pairear = null;
-                    if (IsFirstEar(id))
-                    {
-                        ctrl = GetNode(id + 1);
-                        pairear = GetNode(id + 2);
-                    }
-                    else
-                    {
-                        ctrl = GetNode(id - 1);
-                        pairear = GetNode(id - 2);
-                    }
-
-                    if (pairear != null)
-                    {
-                        Vector v = GetNodePos(ear) - GetNodePos(ctrl);
-                        v.Normalize();
-                        double dis = (GetNodePos(pairear) - GetNodePos(ctrl)).Length;
-                        Vector vp = v * dis * -1;
-                        SetNodePos(pairear, vp + GetNodePos(ctrl));
-                    }
-                }
-            }
-        }
-
-        private void Control_MouseMove(object sender, MouseEventArgs e)
-        {
-            if(e.LeftButton == System.Windows.Input.MouseButtonState.Pressed)
-            {
-                Path path = sender as Path;
-                Point p = e.GetPosition(this);
-                Vector offset = p - GetNodePos(path);
-                SetNodePos(path, p);
-                int id = GetNodeID(path);
-                SetNodePos(id - 1, GetNodePos(id - 1) + offset);
-                SetNodePos(id + 1, GetNodePos(id + 1) + offset);
-            }
-        }
     }
 
     public class EditCurveManipulator : ObjectManipulator
     {
-        private gTopology.Line SelectLine { get; set; }
         protected EditCurveAdorner EditAdorner { get; private set; }
 
         protected override void OnAttached()
@@ -360,16 +417,20 @@ namespace gEngine.Manipulator.Ge.Section
 
             GraphUtil = new GraphUtil(this.AssociatedObject.Owner);
 
-            EditAdorner = new EditCurveAdorner(mc);
+            EditAdorner = new EditCurveAdorner();
+            EditAdorner.GraphUtil = GraphUtil;
             mc.EditLayer.Children.Add(EditAdorner);
+            EditAdorner.OnLineChanged += EditAdorner_OnLineChanged;
 
             LineProxyObject lpo = this.AssociatedObject.ObjectContext as LineProxyObject;
+            EditAdorner.Select(lpo.Line); 
+        }
 
-            SelectLine = lpo.Line;
-            EditAdorner.Select(TransPoints(SelectLine));
-            
-            mc.MouseRightButtonUp += Mc_MouseRightButtonUp;
-            mc.MouseLeftButtonUp += Mc_MouseLeftButtonUp; 
+        private void EditAdorner_OnLineChanged(gTopology.Line newLine)
+        {
+            LineProxyObject lpo = this.AssociatedObject.ObjectContext as LineProxyObject;
+            lpo.Line = newLine;
+            EditAdorner.Select(lpo.Line);
         }
 
         protected override void OnDetaching()
@@ -377,84 +438,33 @@ namespace gEngine.Manipulator.Ge.Section
             base.OnDetaching();
             MapControl mc = this.AssociatedObject.Owner.Owner;
             mc.EditLayer.Children.Remove(EditAdorner);
-            mc.MouseRightButtonUp -= Mc_MouseRightButtonUp;
-            mc.MouseLeftButtonUp -= Mc_MouseLeftButtonUp;
         }
 
         public GraphUtil GraphUtil { get; set; }
-
-        private void Mc_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            gTopology.Graph graph = GraphUtil.Graph;
-            if (graph == null)
-                return;
-
-            if (SelectLine == null)
-                return;
-
-            Topology editer = new Topology(graph);
-
-            Path node = e.OriginalSource as Path;
-            if (node != null && EditAdorner.IsNode(node))
-            {
-                int id = EditAdorner.GetNodeID(node);
-                if (EditAdorner.IsControl(id))
-                {
-                    SelectLine = editer.LinMoveControlPoint(SelectLine, id, EditAdorner.GetNodePos(node));
-                    EditAdorner.Select(TransPoints(SelectLine));
-                }
-                else
-                {
-                    if ((Keyboard.Modifiers & ModifierKeys.Control) != ModifierKeys.Control)
-                    {
-                        SelectLine = editer.LinMoveEarPoint(SelectLine, id, EditAdorner.GetNodePos(node), true);
-                        EditAdorner.Select(TransPoints(SelectLine));
-                    }
-                    else
-                    {
-                        SelectLine = editer.LinMoveEarPoint(SelectLine, id, EditAdorner.GetNodePos(node), false);
-                        EditAdorner.Select(TransPoints(SelectLine));
-                    }
-                }
-            }
-        }
-
-        private void Mc_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            gTopology.Graph graph = GraphUtil.Graph;
-            if (graph == null)
-                return;
-
-            if (SelectLine == null)
-                return;
-
-            Topology editer = new Topology(graph);
-
-            Path node = e.OriginalSource as Path;
-            if (node != null && EditAdorner.IsNode(node))
-            {
-                int id = EditAdorner.GetNodeID(node);
-                if (EditAdorner.IsControl(id))
-                {
-                    SelectLine = editer.LinRemovePoint(SelectLine, id);
-                    EditAdorner.Select(TransPoints(SelectLine));
-                }
-            }
-        }
-
-        private PointCollection TransPoints(gTopology.Line line)
-        {
-            return new PointCollection(line.Points);
-        }
     }
 
-    public class EDCFactory : IObjectManipulatorFactory
+    public class EditFaultCurveManipulator: EditCurveManipulator
+    {
+
+    }
+
+    public class EditSandCurveManipulator : EditCurveManipulator
+    {
+
+    }
+
+    public class EditStratumCurveManipulator : EditCurveManipulator
+    {
+
+    }
+
+    public class EDFaultCFactory : IObjectManipulatorFactory
     {
         public string Name
         {
             get
             {
-                return "EditCurveManipulator";
+                return "EditFaultCurveManipulator";
             }
         }
 
@@ -462,13 +472,61 @@ namespace gEngine.Manipulator.Ge.Section
         {
             get
             {
-                return typeof(LineProxyObject);
+                return typeof(FaultLineProxyObject);
             }
         }
 
         public IManipulatorBase CreateManipulator(object param)
         {
-            return new EditCurveManipulator();
+            return new EditFaultCurveManipulator();
+        }
+    }
+
+    public class EDSandCFactory : IObjectManipulatorFactory
+    {
+        public string Name
+        {
+            get
+            {
+                return "EditSandCurveManipulator";
+            }
+        }
+
+        public Type SupportIObjectType
+        {
+            get
+            {
+                return typeof(SandLineProxyObject);
+            }
+        }
+
+        public IManipulatorBase CreateManipulator(object param)
+        {
+            return new EditSandCurveManipulator();
+        }
+    }
+
+    public class EDStratumCFactory : IObjectManipulatorFactory
+    {
+        public string Name
+        {
+            get
+            {
+                return "EditStratumCurveManipulator";
+            }
+        }
+
+        public Type SupportIObjectType
+        {
+            get
+            {
+                return typeof(StratumLineProxyObject);
+            }
+        }
+
+        public IManipulatorBase CreateManipulator(object param)
+        {
+            return new EditStratumCurveManipulator();
         }
     }
 }

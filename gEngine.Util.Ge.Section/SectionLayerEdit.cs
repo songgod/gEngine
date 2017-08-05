@@ -45,6 +45,19 @@ namespace gEngine.Util.Ge.Section
             RebuildGraph();
         }
 
+        public LineProxyObject GetLineProxyObject(Line line)
+        {
+            for (int i = SectionLayer.Objects.Count - 1; i >= 0; i--)
+            {
+                LineProxyObject res = SectionLayer.Objects[i] as LineProxyObject;
+                if(res!=null && res.Line==line)
+                {
+                    return res;
+                }
+            }
+            return null;
+        }
+
         public void ClearGraph()
         {
             for (int i = SectionLayer.Objects.Count - 1; i >= 0; i--)
