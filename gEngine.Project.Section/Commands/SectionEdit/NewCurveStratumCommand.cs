@@ -19,10 +19,15 @@ namespace gEngine.Project.Ge.Section.Commands.SectionEdit
 
         public override void SetManipulator(LayerControl lc, object param)
         {
-            DrawCurveStratumManipulator dm = gEngine.Manipulator.Registry.CreateManipulator("DrawCurveStratumManipulator", param) as DrawCurveStratumManipulator;
-            if (dm == null)
-                return;
-            ManipulatorSetter.SetManipulator(dm, lc);
+            if (ManipulatorSetter.IsContainManipulator("DrawCurveStratumManipulator", lc))
+                ManipulatorSetter.ClearManipulator(lc);
+            else
+            {
+                DrawCurveStratumManipulator dm = gEngine.Manipulator.Registry.CreateManipulator("DrawCurveStratumManipulator", param) as DrawCurveStratumManipulator;
+                if (dm == null)
+                    return;
+                ManipulatorSetter.SetManipulator(dm, lc);
+            }
         }
     }
 }

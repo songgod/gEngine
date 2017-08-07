@@ -14,6 +14,108 @@ namespace gEngine.Manipulator
 {
     public static class ManipulatorSetter
     {
+        public static IManipulators GetMapManipulators(DependencyObject obj)
+        {
+            IManipulators mps =  (IManipulators)obj.GetValue(ManipulatorsProperty);
+            if (mps == null)
+            {
+                mps = new IManipulators();
+                obj.SetValue(ManipulatorsProperty, mps);
+            }
+            return mps;
+        }
+
+        public static void SetManipulators(DependencyObject obj, IManipulators value)
+        {
+            obj.SetValue(ManipulatorsProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for MapManipulator.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ManipulatorsProperty =
+            DependencyProperty.RegisterAttached("Manipulators", typeof(IManipulators), typeof(ManipulatorSetter), new PropertyMetadata(null));
+
+        public static bool AddManipulator(IManipulatorBase mp, UIElement elm)
+        {
+            if (elm == null || mp==null)
+                return false;
+            
+            if (mp.CanAttach(elm))
+            {
+                BehaviorCollection bc = Interaction.GetBehaviors(elm);
+                bc.Add(mp.AsBehavior());
+                IManipulators ms = GetManipulators(elm);
+                ms.Add(mp);
+                return true;
+            }
+
+            return false;
+        }
+
+        public static bool RemoveManipulator(IManipulatorBase mp, UIElement elm)
+        {
+            if (elm == null || mp == null)
+                return false;
+
+            IManipulators ms = GetManipulators(elm);
+            BehaviorCollection bs = Interaction.GetBehaviors(elm);
+            foreach (IManipulatorBase m in ms)
+            {
+                if (m == mp)
+                {
+                    if(bs.Contains(m.AsBehavior()))
+                        bs.Remove(m.AsBehavior());
+                    ms.Remove(m);
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public static bool RemoveManipulator(Type mptype, UIElement elm)
+        {
+            if (elm == null)
+                return false;
+
+
+            IManipulators ms = GetManipulators(elm);
+            BehaviorCollection bs = Interaction.GetBehaviors(elm);
+            foreach (IManipulatorBase m in ms)
+            {
+                if (m.GetType() == mptype)
+                {
+                    if (bs.Contains(m.AsBehavior()))
+                        bs.Remove(m.AsBehavior());
+                    ms.Remove(m);
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public static bool RemoveManipulator(string mptype, UIElement elm)
+        {
+            if (elm == null)
+                return false;
+
+
+            IManipulators ms = GetManipulators(elm);
+            BehaviorCollection bs = Interaction.GetBehaviors(elm);
+            foreach (IManipulatorBase m in ms)
+            {
+                if (m.GetType().Name == mptype)
+                {
+                    if (bs.Contains(m.AsBehavior()))
+                        bs.Remove(m.AsBehavior());
+                    ms.Remove(m);
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public static bool SetManipulator(IManipulatorBase mp, UIElement elm)
         {
             if (elm == null)
@@ -21,57 +123,34 @@ namespace gEngine.Manipulator
 
             if (mp == null)
             {
-                BehaviorCollection bc = Interaction.GetBehaviors(elm);
-                bc.Clear();
+                ClearManipulator(elm);
                 return true;
             }
-            else if(mp.CanAttach(elm))
+            else if (mp.CanAttach(elm))
             {
                 BehaviorCollection bc = Interaction.GetBehaviors(elm);
                 bc.Clear();
                 bc.Add(mp.AsBehavior());
+                IManipulators ms = GetManipulators(elm);
+                ms.Add(mp);
                 return true;
             }
 
             return false;
         }
 
-        public static bool AddManipulator(IManipulatorBase mp, UIElement elm)
-        {
-            if (mp == null || elm == null)
-                return false;
-
-            BehaviorCollection bc = Interaction.GetBehaviors(elm);
-            bc.Add(mp.AsBehavior());
-            return true;
-        }
-
-        public static bool RemoveManipulator(IManipulatorBase mp, UIElement elm)
-        {
-            if (mp == null || elm == null)
-                return false;
-            BehaviorCollection bc = Interaction.GetBehaviors(elm);
-            bc.Remove(mp.AsBehavior());
-            return true;
-        }
-
-        public static bool RemoveManipulator(Type type, UIElement elm)
+        public static IManipulators GetManipulators(UIElement elm)
         {
             if (elm == null)
-                return false;
+                return null;
 
-            BehaviorCollection bc = Interaction.GetBehaviors(elm);
-            foreach (Behavior b in bc)
+            IManipulators mps = elm.GetValue(ManipulatorsProperty) as IManipulators;
+            if(mps==null)
             {
-                if(b.GetType()==type)
-                {
-                    bc.Remove(b);
-                    return true;
-                }
+                mps = new IManipulators();
+                elm.SetValue(ManipulatorsProperty, mps);
             }
-
-            return false;
-
+            return mps;
         }
 
         public static bool ClearManipulator(UIElement elm)
@@ -81,21 +160,38 @@ namespace gEngine.Manipulator
 
             BehaviorCollection bc = Interaction.GetBehaviors(elm);
             bc.Clear();
+            IManipulators ms = GetManipulators(elm);
+            ms.Clear();
             return true;
+        }
+
+        public static bool IsContainManipulator(string type, UIElement elm)
+        {
+            if (elm == null)
+                return false;
+
+            IManipulators ms = GetManipulators(elm);
+            foreach (IManipulatorBase m in ms)
+            {
+                if (m.GetType().Name == type)
+                    return true;
+            }
+
+            return false;
         }
 
         public static bool IsContainManipulator(Type type, UIElement elm)
         {
             if (elm == null)
                 return false;
-            BehaviorCollection bc = Interaction.GetBehaviors(elm);
-            foreach (Behavior b in bc)
+
+            IManipulators ms = GetManipulators(elm);
+            foreach (IManipulatorBase m in ms)
             {
-                if (b.GetType() == type)
-                {
+                if (m.GetType() == type)
                     return true;
-                }
             }
+
             return false;
         }
 
@@ -103,15 +199,15 @@ namespace gEngine.Manipulator
         {
             if (elm == null)
                 return false;
-            BehaviorCollection bc = Interaction.GetBehaviors(elm);
-            if (bc.Count > 0)
+            IManipulators ms = GetManipulators(elm);
+            if(ms.Count>0)
                 return true;
             return false;
         }
 
         public static bool CanAttachManipulator(IManipulatorBase mp, UIElement elm)
         {
-            if (mp == null || elm == null)
+            if (mp == null || mp == null)
                 return false;
 
             return mp.CanAttach(elm);
