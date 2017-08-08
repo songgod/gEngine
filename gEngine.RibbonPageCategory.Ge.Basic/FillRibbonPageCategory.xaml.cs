@@ -25,6 +25,7 @@ namespace gEngine.Application.Ge.Basic
         public FillRibbonPageCategory()
         {
             InitializeComponent();
+            this.DataContext = new Graph.Ge.Basic.Boundary();
         }
         public override Type SupportType
         {

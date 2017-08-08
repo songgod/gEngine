@@ -24,6 +24,7 @@ namespace gEngine.Application.Ge.Section
         public FaultLineProxyObjectRibbonPageCategory()
         {
             InitializeComponent();
+            this.DataContext = new Graph.Ge.Section.LineProxyObject();
         }
 
         public override Type SupportType
