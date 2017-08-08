@@ -130,7 +130,7 @@
                         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_2" Content="撤销"  Command="{x:Static prjcmds:StartCommands.UndoCommand}" CommandTarget="{Binding}" LargeGlyph="{dx:DXImage Image=Undo_32x32.png}" Glyph="{dx:DXImage Image=Undo_16x16.png}"/>
                         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_3" Content="重做"  Command="{x:Static prjcmds:StartCommands.RedoCommand}" CommandTarget="{Binding}" LargeGlyph="{dx:DXImage Image=Redo_32x32.png}" Glyph="{dx:DXImage Image=Redo_16x16.png}"/>
                         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_4" Content="删除" LargeGlyph="{dx:DXImage Image=Delete_32x32.png}" Glyph="{dx:DXImage Image=Delete_16x16.png}"/>
-                        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_5" Content="清理内存" LargeGlyph="pack://application:,,,/gSection;component/Images/GDS/清理内存.png" Glyph="pack://application:,,,/gSection;component/Images/GDS/清理内存.png"/>
+                        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_5" Content="清理内存" LargeGlyph="/gSection;component/Images/GDS/清理内存.png" Glyph="/gSection;component/Images/GDS/清理内存.png"/>
                     </dxr:RibbonPageGroup>
                     <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_2" Caption="打印">
                         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_6" Content="打印" LargeGlyph="{dx:DXImage Image=Printer_32x32.png}" Glyph="{dx:DXImage Image=Printer_16x16.png}"/>

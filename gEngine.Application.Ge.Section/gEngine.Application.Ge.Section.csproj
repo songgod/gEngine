@@ -24,7 +24,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -124,6 +124,15 @@
       <Project>{932485EA-2F95-4CAA-8BCD-DF68C496854E}</Project>
       <Name>gEngine.View</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\新增1.32.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\导入边界2.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\歼灭形态.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
