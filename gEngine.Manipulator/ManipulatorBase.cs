@@ -1,4 +1,5 @@
-﻿using gEngine.View;
+﻿using gEngine.Utility;
+using gEngine.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,8 @@ namespace gEngine.Manipulator
 
         Behavior AsBehavior();
     }
+
+    public class IManipulators : ObservedCollection<IManipulatorBase> { }
 
     public class ManipulatorBase<T> : Behavior<T> where T : DependencyObject
     {
@@ -64,6 +67,7 @@ namespace gEngine.Manipulator
             }
         }
     }
+    
 
     public class ObjectManipulator : ManipulatorBase<ObjectControl>, IManipulatorBase
     {
@@ -75,4 +79,5 @@ namespace gEngine.Manipulator
             }
         }
     }
+    
 }

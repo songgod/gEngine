@@ -122,6 +122,10 @@
       <Project>{3bd77e4f-a348-4edb-b60c-68b749249b91}</Project>
       <Name>gEngine.Graph.Ge</Name>
     </ProjectReference>
+    <ProjectReference Include="..\gEngine.Manipulator\gEngine.Manipulator.csproj">
+      <Project>{B4EEDB17-EB3D-4E22-AB7C-D8E366564B8F}</Project>
+      <Name>gEngine.Manipulator</Name>
+    </ProjectReference>
     <ProjectReference Include="..\gEngine.Project\gEngine.Project.csproj">
       <Project>{87ac18ca-2b57-4f9a-a4c2-24c6e296f91b}</Project>
       <Name>gEngine.Project</Name>
@@ -129,6 +133,10 @@
     <ProjectReference Include="..\gEngine.RibbonPageCategory\gEngine.Application.csproj">
       <Project>{DCE49078-3FAD-4C85-BC8C-713553BFDDD4}</Project>
       <Name>gEngine.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.View\gEngine.View.csproj">
+      <Project>{932485EA-2F95-4CAA-8BCD-DF68C496854E}</Project>
+      <Name>gEngine.View</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

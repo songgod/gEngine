@@ -66,13 +66,17 @@ namespace gEngine.Project.Ge.Section.Commands
             if (lc == null)
                 return;
 
-            WellLocationsConnectManipulator mp = gEngine.Manipulator.Registry.CreateManipulator("WellLocationsConnectManipulator", mc) as WellLocationsConnectManipulator;
-            if (mp == null)
-                return;
-            Project = pc.Project;
-            mp.OnFinishSelect += Mp_OnFinishSelect;
-            ManipulatorSetter.SetManipulator(mp, lc);
-
+            if (ManipulatorSetter.IsContainManipulator("WellLocationsConnectManipulator", lc))
+                ManipulatorSetter.ClearManipulator(lc);
+            else
+            {
+                WellLocationsConnectManipulator mp = gEngine.Manipulator.Registry.CreateManipulator("WellLocationsConnectManipulator", mc) as WellLocationsConnectManipulator;
+                if (mp == null)
+                    return;
+                Project = pc.Project;
+                mp.OnFinishSelect += Mp_OnFinishSelect;
+                ManipulatorSetter.SetManipulator(mp, lc);
+            }
             e.Handled = true;
         }
 
