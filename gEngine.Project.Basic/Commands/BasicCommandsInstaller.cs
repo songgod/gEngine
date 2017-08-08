@@ -23,6 +23,7 @@ namespace gEngine.Project.Ge.Basic.Commands
             ui.CommandBindings.Add(new NewBoundaryCommand());
             ui.CommandBindings.Add(new NewRectCommand());
             ui.CommandBindings.Add(new NewScaleRuleCommand());
+            ui.CommandBindings.Add(new PrintPngCommand());
         }
     }
 }
