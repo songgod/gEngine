@@ -24,6 +24,7 @@ namespace gEngine.Application.Ge.Section
         public SandFaceProxyObjectRibbonPageCategory()
         {
             InitializeComponent();
+            this.DataContext = new Graph.Ge.Section.FaceProxyObject();
         }
         public override Type SupportType
         {

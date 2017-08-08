@@ -34,6 +34,7 @@ namespace gEngine.Application.Ge.Plane
         public WellLocationRibbonPageCategory()
         {
             InitializeComponent();
+            this.DataContext = new Graph.Ge.Plane.WellLocation();
         }
 
         public override Type SupportType

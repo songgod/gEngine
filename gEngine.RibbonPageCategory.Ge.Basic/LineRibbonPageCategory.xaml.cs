@@ -31,16 +31,9 @@ namespace gEngine.Application.Ge.Basic
         public LineRibbonPageCategory()
         {
             InitializeComponent();
+            this.DataContext = new Graph.Ge.Basic.Line();
         }
 
-        private void Path_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            //Path path = e.OriginalSource as Path;
-            //PointSymbol symbol = path.Tag as PointSymbol;
-            //WellLocation wl = this.DataContext as WellLocation;
-            //wl.PointStyle.Symbol = symbol.Name;
-
-        }
         public override Type SupportType
         {
             get
