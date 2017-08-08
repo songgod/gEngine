@@ -58,6 +58,12 @@
     <Compile Include="HandDrawingSectionRibbonPage.xaml.cs">
       <DependentUpon>HandDrawingSectionRibbonPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SandFaceProxyObjectRibbonPageCategory.xaml.cs">
+      <DependentUpon>SandFaceProxyObjectRibbonPageCategory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StratumFaceProxyObjectRibbonPageCategory.xaml.cs">
+      <DependentUpon>StratumFaceProxyObjectRibbonPageCategory.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StratumLineProxyObjectRibbonPageCategory.xaml.cs">
       <DependentUpon>StratumLineProxyObjectRibbonPageCategory.xaml</DependentUpon>
     </Compile>
@@ -79,6 +85,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="HandDrawingSectionRibbonPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SandFaceProxyObjectRibbonPageCategory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StratumFaceProxyObjectRibbonPageCategory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
