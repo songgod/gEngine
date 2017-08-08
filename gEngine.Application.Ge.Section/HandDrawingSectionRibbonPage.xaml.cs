@@ -1,4 +1,5 @@
 ﻿using DevExpress.Xpf.Ribbon;
+using gEngine.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace gEngine.Application.Ge.Section
     /// <summary>
     /// HandDrawingSectionRibbonPage.xaml 的交互逻辑
     /// </summary>
-    public partial class HandDrawingSectionRibbonPage : RibbonPage
+    public partial class HandDrawingSectionRibbonPage : GeRibbonPage
     {
         public HandDrawingSectionRibbonPage()
         {

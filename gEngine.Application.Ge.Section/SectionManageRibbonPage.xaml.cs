@@ -1,5 +1,7 @@
-﻿using DevExpress.Xpf.Ribbon;
+﻿using DevExpress.Xpf.Bars;
+using DevExpress.Xpf.Ribbon;
 using gEngine.Application;
+using gEngine.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +22,7 @@ namespace gEngine.Application.Ge.Section
     /// <summary>
     /// SectionManageRibbonPage.xaml 的交互逻辑
     /// </summary>
-    public partial class SectionManageRibbonPage : RibbonPage
+    public partial class SectionManageRibbonPage : GeRibbonPage
     {
         public SectionManageRibbonPage()
         {

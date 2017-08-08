@@ -429,6 +429,8 @@ namespace gEngine.Manipulator.Ge.Section
         private void EditAdorner_OnLineChanged(gTopology.Line newLine)
         {
             LineProxyObject lpo = this.AssociatedObject.ObjectContext as LineProxyObject;
+            SectionLayerEdit editor = new SectionLayerEdit(this.AssociatedObject.Owner.LayerContext as SectionLayer);
+            editor.ResetGraph();
             lpo.Line = newLine;
             EditAdorner.Select(lpo.Line);
         }
