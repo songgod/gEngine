@@ -1,4 +1,5 @@
 ﻿using gEngine.Graph.Ge;
+using gEngine.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,8 @@ namespace gEngine.Manipulator.Ge.Basic
         public LineStyle rectStyle { get; set; }
         protected override void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            if (this.TrackAdorner == null)
+                return;
             Graph.Ge.Basic.ScaleRule sca = new Graph.Ge.Basic.ScaleRule()
             {
                 Unit = "米",
@@ -30,12 +33,8 @@ namespace gEngine.Manipulator.Ge.Basic
             };
             this.AssociatedObject.LayerContext.Objects.Add(sca);
             base.MouseLeftButtonUp(sender, e);
-            //Width = this.TrackAdorner.Width,
-            //Height = this.TrackAdorner.Height,
         }
-        protected override void MouseMove(object sender, MouseEventArgs e)
-        {
-        }
+      
     }
     public class DSMFactory : IManipulatorFactory
     {
