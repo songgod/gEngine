@@ -62,6 +62,7 @@
     <Compile Include="EditBoundaryObjectManipulator.cs" />
     <Compile Include="EditLineObjectManipulator.cs" />
     <Compile Include="EditRectObjectManipulator.cs" />
+    <Compile Include="EditScaleRuleObjectManipulator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
