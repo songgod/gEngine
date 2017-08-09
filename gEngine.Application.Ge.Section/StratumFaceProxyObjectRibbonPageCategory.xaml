@@ -15,8 +15,8 @@
              IsVisible="False">
     <dxr:RibbonPage Caption="地层面设置">
         <dxr:RibbonPageGroup Caption="地层面">
-            <dxb:BarSplitButtonItem Content="选择面风格"  LargeGlyph="{dx:DXImage Image=LineStyle_32x32.png}" x:Name="bsbStratumFaceProxy"
-                                   Glyph="{dx:DXImage Image=LineStyle_16x16.png}" RibbonStyle="SmallWithText">
+            <dxb:BarSplitButtonItem Content="选择面风格"  LargeGlyph="{dx:DXImage Image=DefaultMap_32x32.png}" x:Name="bsbStratumFaceProxy"
+                                   Glyph="{dx:DXImage Image=DefaultMap_16x16.png}" RibbonStyle="SmallWithText">
                 <dxb:BarSplitButtonItem.PopupControl>
                     <gerpc:FillSymbolGalleryDropDownPopupMenu FillSymbolCommand="{Binding SelectBarCommand,ElementName=rpcStratumFaceProxy}"/>
                 </dxb:BarSplitButtonItem.PopupControl>

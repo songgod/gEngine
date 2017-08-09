@@ -15,8 +15,8 @@
              IsVisible="False">
     <dxr:RibbonPage Caption="砂体面设置">
         <dxr:RibbonPageGroup Caption="砂体面">
-            <dxb:BarSplitButtonItem Content="选择面风格"  LargeGlyph="{dx:DXImage Image=LineStyle_32x32.png}" x:Name="bsbSandFaceProxy"
-                                   Glyph="{dx:DXImage Image=LineStyle_16x16.png}" RibbonStyle="SmallWithText">
+            <dxb:BarSplitButtonItem Content="选择面风格"  LargeGlyph="{dx:DXImage Image=DefaultMap_32x32.png}" x:Name="bsbSandFaceProxy"
+                                   Glyph="{dx:DXImage Image=DefaultMap_16x16.png}" RibbonStyle="SmallWithText">
                 <dxb:BarSplitButtonItem.PopupControl>
                     <gerpc:FillSymbolGalleryDropDownPopupMenu FillSymbolCommand="{Binding SelectBarCommand,ElementName=rpcSandFaceProxy}"/>
                 </dxb:BarSplitButtonItem.PopupControl>
