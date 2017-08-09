@@ -24,6 +24,7 @@ namespace gEngine.Application.Ge.Basic
         public ScaleRuleRibbonPageCategory()
         {
             InitializeComponent();
+            this.DataContext = new Graph.Ge.Basic.ScaleRule();
         }
         public override Type SupportType
         {

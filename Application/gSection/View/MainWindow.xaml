@@ -141,6 +141,9 @@
                         <dxb:BarButtonItem  x:Uid="dxb:BarButtonItem_42" x:Name="bbiSelect" Content="选择" 
                                             Command="{x:Static prjcmds:StartCommands.SelectObjectCommand}" CommandTarget="{Binding ElementName=prjctrl}"
                                             LargeGlyph="{dx:DXImage Image=SelectTool_32x32.png}" Glyph="{dx:DXImage Image=SelectTool_16x16.png}" RibbonStyle="Large"/>
+                        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_46" Content="输出PNG"  Command="{x:Static prjcmds:BasicCommands.PrintPngCommand}" 
+                          CommandTarget="{Binding ElementName=prjctrl}"
+                                          LargeGlyph="pack://application:,,,/gSection;component/Images/Clipart/caNetCard.png" Glyph="pack://application:,,,/gSection;component/Images/Clipart/caNetCard.png" RibbonStyle="Large"/>
                     </dxr:RibbonPageGroup>
                 </dxr:RibbonPage>
                 <dxr:RibbonPage x:Uid="pageRef" x:Name="pageRef" Caption="参考">
@@ -192,6 +195,7 @@
                            CommandTarget="{Binding Path=ProjectControl, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow}}"/>
                         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_45" Content="添加矩形"  Command="{x:Static prjcmds:BasicCommands.NewRectCommand}" 
                            CommandTarget="{Binding Path=ProjectControl, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow}}"/>
+                       
                     </dxr:RibbonPageGroup>
                 </dxr:RibbonPage>
                 <dxr:RibbonPage x:Uid="dxr:RibbonPage_5" Caption="视图">

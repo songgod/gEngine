@@ -16,6 +16,8 @@ namespace gEngine.Commands
             NewBoundaryCommand = new RoutedUICommand("NewFillLayerCommand", "NewFillLayerCommand", typeof(BasicCommands));
             NewRectCommand = new RoutedUICommand("NewRectCommand", "NewRectCommand", typeof(BasicCommands));
             NewScaleRuleCommand = new RoutedUICommand("NewScaleRuleCommand", "NewScaleRuleCommand", typeof(BasicCommands));
+
+            PrintPngCommand = new RoutedUICommand("PrintPngCommand", "PrintPngCommand", typeof(BasicCommands));
         }
         public static RoutedCommand NewCommonLayerCommand { get; set; }
 
@@ -25,5 +27,6 @@ namespace gEngine.Commands
 
         public static RoutedCommand NewRectCommand { get; set; }
         public static RoutedCommand NewScaleRuleCommand { get; set; }
+        public static RoutedCommand PrintPngCommand { get; set; }
     }
 }
