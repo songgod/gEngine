@@ -64,6 +64,7 @@
     <Compile Include="Commands\OpenMapsSelectCommand.cs" />
     <Compile Include="Commands\OpenProjectCommand.cs" />
     <Compile Include="Commands\OpenRecentProjectCommand.cs" />
+    <Compile Include="Commands\PrintPngCommand.cs" />
     <Compile Include="Commands\ProjectCommandsInstaller.cs" />
     <Compile Include="Commands\RedoCommand.cs" />
     <Compile Include="Commands\SelectObjectCommand.cs" />

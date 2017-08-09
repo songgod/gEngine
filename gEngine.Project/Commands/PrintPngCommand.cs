@@ -13,7 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace gEngine.Project.Ge.Basic.Commands
+namespace gEngine.Project.Commands
 {
     class PrintPngCommand : CommandBinding
     {
@@ -76,7 +76,7 @@ namespace gEngine.Project.Ge.Basic.Commands
             Transform transform = surface.LayoutTransform;
             surface.LayoutTransform = null;
 
-            Size size = new Size(surface.ActualWidth, surface.ActualWidth);
+            Size size = new Size(surface.ActualWidth, surface.ActualHeight);
             surface.Measure(size);
             surface.Arrange(new System.Windows.Rect(size));
 
