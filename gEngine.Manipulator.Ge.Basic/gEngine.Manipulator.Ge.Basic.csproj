@@ -51,7 +51,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BoundaryManipulator.cs" />
     <Compile Include="DrawBezierLineObjectManipulator.cs" />
     <Compile Include="DrawBoundaryObjectManipulator.cs" />
     <Compile Include="DrawCompressObjectManipulator.cs" />

@@ -9,7 +9,7 @@ using System.Windows.Shapes;
 
 namespace gEngine.Manipulator.Ge.Section
 {
-    public class EraseLineManipulator : CurveManipulator
+    public class EraseLineManipulator : DrawCurveManipulatorBase
     {
         private gTopology.Line SelectLine { get; set; }
         private Style OldTrackStyle { get; set; }

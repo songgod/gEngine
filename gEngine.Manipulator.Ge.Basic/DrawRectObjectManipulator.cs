@@ -16,7 +16,7 @@ using System.Windows.Media.Imaging;
 
 namespace gEngine.Manipulator.Ge.Basic
 {
-    public class DrawRectObjectManipulator: RectManipulator
+    public class DrawRectObjectManipulator: DrawRectManipulatorBase
     {
         public DrawRectObjectManipulator()
         {

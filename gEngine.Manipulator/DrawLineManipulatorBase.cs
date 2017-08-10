@@ -12,7 +12,7 @@ using System.Windows.Shapes;
 
 namespace gEngine.Manipulator
 {
-    public class LineManipulator : LayerManipulator
+    public class DrawLineManipulatorBase : LayerManipulator
     {
         protected Line TrackAdorner { get; private set; }
         protected override void OnAttached()

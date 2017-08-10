@@ -11,7 +11,7 @@ using System.Windows.Media;
 
 namespace gEngine.Manipulator.Ge.Basic
 {
-    public class DrawBoundaryObjectManipulator: PolyLineManipulator
+    public class DrawBoundaryObjectManipulator: DrawPolyLineManipulatorBase
     {
 
         public DrawBoundaryObjectManipulator()

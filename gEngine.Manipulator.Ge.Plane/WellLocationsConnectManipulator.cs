@@ -20,7 +20,7 @@ namespace gEngine.Manipulator.Ge.Plane
 {
     public delegate void FinishSelectWellLocations(Stack<WellLocation> wellLocs);
 
-    public class WellLocationsConnectManipulator : PolyLineManipulator
+    public class WellLocationsConnectManipulator : DrawPolyLineManipulatorBase
     {
 
         #region 属性
