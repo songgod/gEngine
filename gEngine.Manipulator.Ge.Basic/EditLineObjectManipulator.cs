@@ -56,9 +56,7 @@ namespace gEngine.Manipulator.Ge.Basic
             this.TrackAdorner1.MouseMove += TrackAdo1_MouseMove;
             this.TrackAdorner2.MouseMove += TrackAdo2_MouseMove;
             this.TrackAdorner1.MouseLeftButtonUp += TrackAdo1_MouseLeftButtonUp;
-
             this.TrackAdorner2.MouseLeftButtonUp += TrackAdo2_MouseLeftButtonUp;
-
         }
 
         protected override void OnDetaching()
@@ -148,8 +146,8 @@ namespace gEngine.Manipulator.Ge.Basic
 
         public IManipulatorBase CreateManipulator(object param)
         {
-            EditLineObjectManipulator dm = new EditLineObjectManipulator();
-            return dm;
+            EditLineObjectManipulator em = new EditLineObjectManipulator();
+            return em;
         }
     }
 }
