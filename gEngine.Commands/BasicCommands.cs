@@ -15,6 +15,9 @@ namespace gEngine.Commands
             NewLineCommand = new RoutedUICommand("NewLineCommand", "NewLineCommand", typeof(BasicCommands));
             NewBoundaryCommand = new RoutedUICommand("NewFillLayerCommand", "NewFillLayerCommand", typeof(BasicCommands));
             NewRectCommand = new RoutedUICommand("NewRectCommand", "NewRectCommand", typeof(BasicCommands));
+            NewPolyLineCommand = new RoutedUICommand("新建折线", "NewPolyLineCommand", typeof(BasicCommands));
+            NewBezierLineCommand = new RoutedUICommand("新建曲线", "NewBezierLineCommand", typeof(BasicCommands));
+            NewCompressCommand = new RoutedUICommand("新建指北针", "NewCompressCommand", typeof(BasicCommands));
             NewScaleRuleCommand = new RoutedUICommand("NewScaleRuleCommand", "NewScaleRuleCommand", typeof(BasicCommands));
 
             PrintPngCommand = new RoutedUICommand("PrintPngCommand", "PrintPngCommand", typeof(BasicCommands));
@@ -26,7 +29,5 @@ namespace gEngine.Commands
         public static RoutedCommand NewBoundaryCommand { get; set; }
 
         public static RoutedCommand NewRectCommand { get; set; }
-        public static RoutedCommand NewScaleRuleCommand { get; set; }
-        public static RoutedCommand PrintPngCommand { get; set; }
     }
 }

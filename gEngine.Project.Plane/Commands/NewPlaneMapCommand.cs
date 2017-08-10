@@ -50,9 +50,6 @@ namespace gEngine.Project.Ge.Plane.Commands
 
             //弹出对话框，选择信息？
             SelectWellLocationDocu msg = new SelectWellLocationDocu(names);
-            msg.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            msg.Title = "井数据";
-
             if (msg.ShowDialog() == true)
             {
                 IDBWellLocations wls = pctrl.Project.DBSource.GetWellLocations(msg.FileName);
@@ -66,6 +63,7 @@ namespace gEngine.Project.Ge.Plane.Commands
                 ILayers layers = new ILayers();
                 layers.Add(layer);
                 IMap map = pctrl.Project.NewMap("Ge", msg.MapName, layers);
+                pctrl.Project.ActiveMap(map);
             }
             e.Handled = true;
         }

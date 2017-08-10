@@ -11,7 +11,7 @@ using System.Windows.Media;
 
 namespace gEngine.Manipulator.Ge.Basic
 {
-    public class DrawScaleRuleObjectManipulator: RectManipulator
+    public class DrawScaleRuleObjectManipulator: DrawRectManipulatorBase
     {
         public DrawScaleRuleObjectManipulator()
         {

@@ -31,12 +31,14 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GraphAlgo, Version=1.0.6429.26990, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\HalfEdge\GraphAlgo\x64\GraphAlgo.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="RevertColorEffect">
-      <HintPath>F:\WORK\GDS\学习及搭建环境\WPF\MyWPFDemo\RevertColorEffect\RevertColorEffect\bin\Debug\RevertColorEffect.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -50,18 +52,18 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CurveManipulator.cs" />
+    <Compile Include="DrawBezierManipulatorBase.cs" />
+    <Compile Include="DrawCurveManipulatorBase.cs" />
     <Compile Include="EditDefaultManipulator.cs" />
-    <Compile Include="EditRectangleManipulator.cs" />
     <Compile Include="IManipulatorFactory.cs" />
     <Compile Include="Converter\IsSelectedConverter.cs" />
     <Compile Include="IObjectManipulatorFactory.cs" />
-    <Compile Include="LineManipulator.cs" />
+    <Compile Include="DrawLineManipulatorBase.cs" />
     <Compile Include="ManipulatorBase.cs" />
     <Compile Include="ManipulatorSetter.cs" />
     <Compile Include="MapControlZoomPan.cs" />
-    <Compile Include="PolyLineManipulator.cs" />
-    <Compile Include="RectManipulator.cs" />
+    <Compile Include="DrawPolyLineManipulatorBase.cs" />
+    <Compile Include="DrawRectManipulatorBase.cs" />
     <Compile Include="Registry.cs" />
     <Compile Include="SelectObjectManipulator.cs" />
     <Compile Include="SelectObjectManipulatorCallbackInstaller.cs" />
@@ -72,18 +74,6 @@
     <ProjectReference Include="..\gEngine.Commands\gEngine.Commands.csproj">
       <Project>{bc931bb9-d78c-437d-b5d2-04be6e318172}</Project>
       <Name>gEngine.Commands</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\gEngine.Graph.Ge.Basic\gEngine.Graph.Ge.Basic.csproj">
-      <Project>{db606377-aaa0-45bd-a6be-4f4c4cd111af}</Project>
-      <Name>gEngine.Graph.Ge.Basic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\gEngine.Graph.Ge.Column\gEngine.Graph.Ge.Column.csproj">
-      <Project>{95227940-90F7-40B4-9027-3EEECD8ED6DE}</Project>
-      <Name>gEngine.Graph.Ge.Column</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\gEngine.Graph.Ge.Plane\gEngine.Graph.Ge.Plane.csproj">
-      <Project>{82739B38-8706-493D-A571-C743AFCEAD12}</Project>
-      <Name>gEngine.Graph.Ge.Plane</Name>
     </ProjectReference>
     <ProjectReference Include="..\gEngine.Graph.Interface\gEngine.Graph.Interface.csproj">
       <Project>{1C98A821-B030-4FF2-83AE-D49B1B3B8C67}</Project>

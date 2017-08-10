@@ -1,4 +1,5 @@
 ﻿using gEngine.Commands;
+using gEngine.Graph.Ge.Column;
 using gEngine.View;
 using System;
 using System.Collections.Generic;
@@ -11,9 +12,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace gEngine.Manipulator
+namespace gEngine.Manipulator.Ge.Column
 {
-    public class EditRectangleManipulator : ObjectManipulator
+    public class EditWellManipulator : ObjectManipulator
     {
         public Rectangle TrackAdorner { get; set; }
         public Rectangle TrackAdorner1 { get; set; }
@@ -149,6 +150,30 @@ namespace gEngine.Manipulator
                 return;
             mc.EditLayer.Children.Clear();
 
+        }
+    }
+
+    public class EditWellManipulatorFactory : IObjectManipulatorFactory
+    {
+        public string Name
+        {
+            get
+            {
+                return "EditWellManipulator";
+            }
+        }
+
+        public Type SupportIObjectType
+        {
+            get
+            {
+                return typeof(Well);
+            }
+        }
+
+        public IManipulatorBase CreateManipulator(object param)
+        {
+            return new EditWellManipulator();
         }
     }
 }

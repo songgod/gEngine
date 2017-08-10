@@ -12,7 +12,7 @@ using GraphAlgo;
 
 namespace gEngine.Manipulator.Ge.Basic
 {
-    public class DrawPolyLineObjectManipulator : PolyLineManipulator
+    public class DrawPolyLineObjectManipulator : DrawPolyLineManipulatorBase
     {
         public DrawPolyLineObjectManipulator()
         {

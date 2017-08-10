@@ -1,6 +1,7 @@
 ﻿using gEngine.Graph.Ge;
 using gEngine.Graph.Ge.Basic;
 using gEngine.Util;
+using gEngine.View;
 using GraphAlgo;
 using System;
 using System.Collections.Generic;
@@ -13,40 +14,22 @@ using System.Windows.Media;
 
 namespace gEngine.Manipulator.Ge.Basic
 {
-    public class DrawBezierLineObjectManipulator : CurveManipulator
+    public class DrawBezierLineObjectManipulator : DrawBezierManipulatorBase
     {
         public DrawBezierLineObjectManipulator()
         {
             LineStyle = new LineStyle();
         }
         public LineStyle LineStyle { get; set; }
-        public double GetTolerance()
+
+        public override void ProcessBeizer(PointCollection ps)
         {
-            int pixelsize = 5;
-            Vector v = new Vector(pixelsize, pixelsize);
-            Transform tf = this.AssociatedObject.RenderTransform;
-            Matrix m = Matrix.Multiply(tf.Value, Matrix.Identity);
-            m.Invert();
-            Vector tv = m.Transform(v);
-            double t = Math.Max(2.0, Math.Max(tv.X, tv.Y));
-            return t;
-        }
-        protected override void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            if (this.TrackAdorner.Points.Count>0)
+            BeizerLine beizerline = new BeizerLine()
             {
-                PointCollection ps = BezierFitCubic.FitCubic(this.TrackAdorner.Points, GetTolerance());
-                if (ps!=null && ps.Count>0)
-                {
-                    BeizerLine beizerline = new BeizerLine()
-                    {
-                        Points = new PointCollection(ps),
-                        LinStyle = this.LineStyle
-                    };
-                    this.AssociatedObject.LayerContext.Objects.Add(beizerline);
-                }
-            }
-            base.MouseLeftButtonUp(sender, e);
+                Points = new PointCollection(ps),
+                LinStyle = this.LineStyle
+            };
+            this.AssociatedObject.LayerContext.Objects.Add(beizerline);
         }
     }
 

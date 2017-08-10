@@ -28,6 +28,7 @@
         <DataTemplate x:Uid="DataTemplate_2">
             <gv:MapControl x:Uid="mc" x:Name="mc">
                 <i:Interaction.Behaviors>
+                    <!--<em:SelectObjectManipulator x:Uid="em:SelectObjectManipulator_1"/>-->
                     <em:MapControlZoomPan x:Uid="em:MapControlZoomPan_1"/>
                 </i:Interaction.Behaviors>
             </gv:MapControl>

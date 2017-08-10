@@ -24,7 +24,7 @@ namespace gEngineTest.Ge.WellLocation
     /// </summary>
     public partial class MainWindow : Window
     {
-        PolyLineManipulator dm;
+        DrawPolyLineManipulatorBase dm;
         public MainWindow()
         {
             InitializeComponent();
@@ -32,7 +32,7 @@ namespace gEngineTest.Ge.WellLocation
 
             //dm = (WellLocationsConnectManipulator)(gEngine.Manipulator.Registry.CreateManipulator("WellLocationsConnectManipulator",mc));
             //dm.OnFinishSelect += Dm_OnFinishSelect;
-            dm = (PolyLineManipulator)(gEngine.Manipulator.Registry.CreateManipulator("WellLocationsConnectManipulator", mc));
+            dm = (DrawPolyLineManipulatorBase)(gEngine.Manipulator.Registry.CreateManipulator("WellLocationsConnectManipulator", mc));
         }
 
         private void Dm_OnFinishSelect(System.Collections.Generic.HashSet<string> names)
