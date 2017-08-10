@@ -1,5 +1,6 @@
 ﻿using DevExpress.Xpf.Ribbon;
 using gEngine.Graph.Interface;
+using gEngine.Project.Controls;
 using gEngine.View;
 using System;
 using System.Collections.Generic;
@@ -39,6 +40,7 @@ namespace gEngine.Application
             sorpcinstaller = new SelectObjectRibbonPageCategoryCallbackInstaller();
         }
 
+        static public ProjectControl ProjectControl { get; set; }
 
 
         static public void Regist(Type type, GeRibbonPageCategory grpc)
@@ -111,10 +113,11 @@ namespace gEngine.Application
                         Regist(key, grpc);
                     }
 
-                    Type ribbonPageType = typeof(RibbonPage);
+                    Type ribbonPageType = typeof(GeRibbonPage);
                     if (ribbonPageType == t.BaseType)
                     {
-                        RibbonPage rp = (RibbonPage)(ab.CreateInstance(t.FullName));
+                        GeRibbonPage rp = (GeRibbonPage)(ab.CreateInstance(t.FullName));
+                        rp.ProjectControl = ProjectControl;
                         Regist(rp.Name, rp);
                     }
                 }

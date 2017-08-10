@@ -47,8 +47,8 @@
                     <dxe:PopupColorEditSettings x:Uid="dxe:PopupColorEditSettings_12" />
                 </dxb:BarEditItem.EditSettings>
             </dxb:BarEditItem>
-            <dxb:BarSplitButtonItem Content="点风格"  LargeGlyph="{dx:DXImage Image=LineStyle_32x32.png}" x:Name="bsbPointStyle"
-                                   Glyph="{dx:DXImage Image=LineStyle_16x16.png}" RibbonStyle="SmallWithText">
+            <dxb:BarSplitButtonItem Content="点风格"  LargeGlyph="{dx:DXImage Image=Record_32x32.png}" x:Name="bsbPointStyle"
+                                   Glyph="{dx:DXImage Image=Record_16x16.png}" RibbonStyle="SmallWithText">
                 <dxb:BarSplitButtonItem.PopupControl>
                     <gerpc:PointSymbolGalleryDropDownPopupMenu PointSymbolCommand="{Binding SelectBarCommand,ElementName=RibbonPageCategoryWellLocation}"/>
                 </dxb:BarSplitButtonItem.PopupControl>

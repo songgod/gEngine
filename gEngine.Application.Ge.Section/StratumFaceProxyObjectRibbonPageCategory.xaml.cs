@@ -1,5 +1,4 @@
 ﻿using DevExpress.Mvvm;
-using gEngine.Graph.Ge;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,34 +14,36 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace gEngine.Application.Ge.Basic
+namespace gEngine.Application.Ge.Section
 {
     /// <summary>
-    /// FillRibbonPageCategory.xaml 的交互逻辑
+    /// StratumFaceProxyObjectRibbonPageCategory.xaml 的交互逻辑
     /// </summary>
-    public partial class FillRibbonPageCategory : GeRibbonPageCategory
+    public partial class StratumFaceProxyObjectRibbonPageCategory : GeRibbonPageCategory
     {
-        public FillRibbonPageCategory()
+        public StratumFaceProxyObjectRibbonPageCategory()
         {
             InitializeComponent();
-            this.DataContext = new Graph.Ge.Basic.Boundary();
+            this.DataContext = new Graph.Ge.Section.FaceProxyObject();
         }
+
         public override Type SupportType
         {
             get
             {
-                return typeof(Graph.Ge.Basic.Boundary);
+                return typeof(Graph.Ge.Section.StratumFaceProxyObject);
             }
         }
+
         public ICommand SelectBarCommand
         {
             get
             {
                 return new DelegateCommand<string[]>((parameter) =>
                 {
-                    Graph.Ge.Basic.Boundary boun = this.DataContext as Graph.Ge.Basic.Boundary;
-                    boun.FillStyle.SymbolLib = parameter[0] as string;
-                    boun.FillStyle.Symbol = parameter[1] as string;
+                    Graph.Ge.Section.StratumFaceProxyObject sfpo = this.DataContext as Graph.Ge.Section.StratumFaceProxyObject;
+                    sfpo.FillStyle.SymbolLib = parameter[0] as string;
+                    sfpo.FillStyle.Symbol = parameter[1] as string;
                 });
             }
         }

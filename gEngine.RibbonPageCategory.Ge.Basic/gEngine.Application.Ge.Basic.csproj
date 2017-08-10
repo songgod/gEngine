@@ -60,6 +60,9 @@
       <DependentUpon>RectRibbonPageCategory.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ScaleRuleRibbonPageCategory.xaml.cs">
+      <DependentUpon>ScaleRuleRibbonPageCategory.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Include="FillRibbonPageCategory.xaml">
@@ -71,6 +74,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="RectRibbonPageCategory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ScaleRuleRibbonPageCategory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

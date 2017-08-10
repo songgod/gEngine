@@ -11,7 +11,7 @@ using System.Windows.Media;
 
 namespace gEngine.Manipulator.Ge.Basic
 {
-    public class DrawLineObjectManipulator : LineManipulator
+    public class DrawLineObjectManipulator : DrawLineManipulatorBase
     {
         public DrawLineObjectManipulator()
         {

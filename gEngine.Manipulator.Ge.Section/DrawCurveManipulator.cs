@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace gEngine.Manipulator.Ge.Section
 {
-    public class DrawCurveManipulator : CurveManipulator
+    public class DrawCurveManipulator : DrawCurveManipulatorBase
     {
         protected override void OnAttached()
         {

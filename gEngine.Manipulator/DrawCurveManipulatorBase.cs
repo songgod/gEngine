@@ -7,7 +7,7 @@ using System.Windows.Shapes;
 
 namespace gEngine.Manipulator
 {
-    public class CurveManipulator : PolyLineManipulator
+    public class DrawCurveManipulatorBase : DrawPolyLineManipulatorBase
     {
         protected override void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {

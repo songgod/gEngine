@@ -1,8 +1,10 @@
 ﻿using gEngine.Graph.Ge;
 using gEngine.Graph.Ge.Basic;
 using gEngine.View;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,10 +12,11 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace gEngine.Manipulator.Ge.Basic
 {
-    public class DrawRectObjectManipulator: RectManipulator
+    public class DrawRectObjectManipulator: DrawRectManipulatorBase
     {
         public DrawRectObjectManipulator()
         {
@@ -38,7 +41,7 @@ namespace gEngine.Manipulator.Ge.Basic
             this.AssociatedObject.LayerContext.Objects.Add(rect);
             base.MouseLeftButtonUp(sender, e);
         }
-
+      
     }
     public class DRMFactory : IManipulatorFactory
     {

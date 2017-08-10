@@ -1,5 +1,4 @@
 ﻿using DevExpress.Mvvm;
-using gEngine.Graph.Ge;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,20 +17,20 @@ using System.Windows.Shapes;
 namespace gEngine.Application.Ge.Basic
 {
     /// <summary>
-    /// FillRibbonPageCategory.xaml 的交互逻辑
+    /// ScaleRuleRibbonPageCategory.xaml 的交互逻辑
     /// </summary>
-    public partial class FillRibbonPageCategory : GeRibbonPageCategory
+    public partial class ScaleRuleRibbonPageCategory : GeRibbonPageCategory
     {
-        public FillRibbonPageCategory()
+        public ScaleRuleRibbonPageCategory()
         {
             InitializeComponent();
-            this.DataContext = new Graph.Ge.Basic.Boundary();
+            this.DataContext = new Graph.Ge.Basic.ScaleRule();
         }
         public override Type SupportType
         {
             get
             {
-                return typeof(Graph.Ge.Basic.Boundary);
+                return typeof(Graph.Ge.Basic.ScaleRule);
             }
         }
         public ICommand SelectBarCommand
@@ -40,9 +39,9 @@ namespace gEngine.Application.Ge.Basic
             {
                 return new DelegateCommand<string[]>((parameter) =>
                 {
-                    Graph.Ge.Basic.Boundary boun = this.DataContext as Graph.Ge.Basic.Boundary;
-                    boun.FillStyle.SymbolLib = parameter[0] as string;
-                    boun.FillStyle.Symbol = parameter[1] as string;
+                    //Graph.Ge.Basic.ScaleRule boun = this.DataContext as Graph.Ge.Basic.ScaleRule;
+                    //boun.FillStyle.SymbolLib = parameter[0] as string;
+                    //boun.FillStyle.Symbol = parameter[1] as string;
                 });
             }
         }

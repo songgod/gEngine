@@ -25,6 +25,8 @@ namespace gEngine.Project.Ge.Basic.Commands
             ui.CommandBindings.Add(new NewPolyLineCommand());
             ui.CommandBindings.Add(new NewBezierLineCommand());
             ui.CommandBindings.Add(new NewCompressCommand());
+            ui.CommandBindings.Add(new NewScaleRuleCommand());
+            
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DevExpress.Xpf.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +19,7 @@ namespace gEngine.Project.Ge.Plane.Controls
     /// <summary>
     /// SelectWellLocationDocu.xaml 的交互逻辑
     /// </summary>
-    public partial class SelectWellLocationDocu : Window
+    public partial class SelectWellLocationDocu : DXWindow
     {
         public string FileName
         {

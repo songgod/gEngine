@@ -24,6 +24,7 @@ namespace gEngine.Application.Ge.Basic
         public RectRibbonPageCategory()
         {
             InitializeComponent();
+            this.DataContext = new Graph.Ge.Basic.Rect();
         }
         public override Type SupportType
         {

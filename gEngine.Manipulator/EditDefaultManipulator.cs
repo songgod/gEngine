@@ -1,5 +1,4 @@
-﻿using gEngine.Graph.Ge.Plane;
-using gEngine.Graph.Interface;
+﻿using gEngine.Graph.Interface;
 using gEngine.View;
 using System;
 using System.Collections.Generic;

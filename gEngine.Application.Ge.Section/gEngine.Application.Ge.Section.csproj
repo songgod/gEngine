@@ -24,7 +24,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -58,6 +58,12 @@
     <Compile Include="HandDrawingSectionRibbonPage.xaml.cs">
       <DependentUpon>HandDrawingSectionRibbonPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SandFaceProxyObjectRibbonPageCategory.xaml.cs">
+      <DependentUpon>SandFaceProxyObjectRibbonPageCategory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StratumFaceProxyObjectRibbonPageCategory.xaml.cs">
+      <DependentUpon>StratumFaceProxyObjectRibbonPageCategory.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StratumLineProxyObjectRibbonPageCategory.xaml.cs">
       <DependentUpon>StratumLineProxyObjectRibbonPageCategory.xaml</DependentUpon>
     </Compile>
@@ -79,6 +85,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="HandDrawingSectionRibbonPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SandFaceProxyObjectRibbonPageCategory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StratumFaceProxyObjectRibbonPageCategory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -108,6 +122,10 @@
       <Project>{3bd77e4f-a348-4edb-b60c-68b749249b91}</Project>
       <Name>gEngine.Graph.Ge</Name>
     </ProjectReference>
+    <ProjectReference Include="..\gEngine.Manipulator\gEngine.Manipulator.csproj">
+      <Project>{B4EEDB17-EB3D-4E22-AB7C-D8E366564B8F}</Project>
+      <Name>gEngine.Manipulator</Name>
+    </ProjectReference>
     <ProjectReference Include="..\gEngine.Project\gEngine.Project.csproj">
       <Project>{87ac18ca-2b57-4f9a-a4c2-24c6e296f91b}</Project>
       <Name>gEngine.Project</Name>
@@ -116,6 +134,19 @@
       <Project>{DCE49078-3FAD-4C85-BC8C-713553BFDDD4}</Project>
       <Name>gEngine.Application</Name>
     </ProjectReference>
+    <ProjectReference Include="..\gEngine.View\gEngine.View.csproj">
+      <Project>{932485EA-2F95-4CAA-8BCD-DF68C496854E}</Project>
+      <Name>gEngine.View</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\新增1.32.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\导入边界2.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\歼灭形态.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

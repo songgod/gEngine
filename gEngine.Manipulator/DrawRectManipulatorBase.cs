@@ -5,17 +5,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Documents;
+using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Interactivity;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
 namespace gEngine.Manipulator
 {
-    public class PolyLineManipulator : LayerManipulator
+    public class DrawRectManipulatorBase: LayerManipulator
     {
-        public Polyline TrackAdorner { get; set; }
+        public Rectangle TrackAdorner { get; set; }
+        public Point location;
 
         protected override void OnAttached()
         {
@@ -27,20 +27,19 @@ namespace gEngine.Manipulator
             if (mc == null)
                 return;
 
-           TrackAdorner = new Polyline() {Stroke=new SolidColorBrush() { Color = Colors.Red },StrokeThickness=1.0,StrokeDashArray=new DoubleCollection() { 2, 3 } };
+
+            Style style = new Style();
+            style.Setters.Add(new Setter() { Property = Rectangle.StrokeProperty, Value = new SolidColorBrush() { Color = Colors.Red } });
+            style.Setters.Add(new Setter() { Property = Rectangle.StrokeThicknessProperty, Value = 1.0 });
+            style.Setters.Add(new Setter() { Property = Rectangle.StrokeDashArrayProperty, Value = new DoubleCollection() { 2, 3 } });
+            TrackAdorner = new Rectangle() { Style = style };
+            //TrackAdorner = new Rectangle { Stroke = new SolidColorBrush(Colors.Black), StrokeThickness = 1, StrokeDashArray = new DoubleCollection() { 2, 3 } };
             mc.EditLayer.Children.Add(TrackAdorner);
 
             mc.MouseLeftButtonUp += Mc_MouseLeftButtonUp;
             mc.MouseLeftButtonDown += Mc_MouseLeftButtonDown;
             mc.MouseRightButtonUp += Mc_MouseRightButtonUp;
             mc.MouseMove += Mc_MouseMove;
-        }
-
-        protected void UpdateTrackState()
-        {
-            MapControl mc = this.AssociatedObject.Owner;
-            double l = mc.Dp2LP(1.0);
-            TrackAdorner.StrokeThickness = l;
         }
 
         private void Mc_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -50,7 +49,9 @@ namespace gEngine.Manipulator
 
         protected virtual void MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            UpdateTrackState();
+            MapControl mc = this.AssociatedObject.Owner;
+            this.location = mc.Dp2LP(e.GetPosition(mc));
+            //this.TrackAdorner = null;
         }
 
         private void Mc_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
@@ -60,7 +61,7 @@ namespace gEngine.Manipulator
 
         protected virtual void MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
-            this.TrackAdorner.Points.Clear();
+            this.TrackAdorner = null;
         }
 
         private void Mc_MouseMove(object sender, MouseEventArgs e)
@@ -70,12 +71,15 @@ namespace gEngine.Manipulator
 
         protected virtual void MouseMove(object sender, MouseEventArgs e)
         {
+            if (this.TrackAdorner == null) return;
             MapControl mc = this.AssociatedObject.Owner;
-            int count = this.TrackAdorner.Points.Count;
-            if ( count > 1)
+            if (e.LeftButton == System.Windows.Input.MouseButtonState.Pressed)
             {
                 Point p = mc.Dp2LP(e.GetPosition(mc));
-                this.TrackAdorner.Points[count - 1] = p;
+                this.TrackAdorner.Width = Math.Abs(p.X - location.X);
+                this.TrackAdorner.Height = Math.Abs(p.Y - location.Y);
+                Canvas.SetLeft(this.TrackAdorner, Math.Min(p.X, location.X));
+                Canvas.SetTop(this.TrackAdorner, Math.Min(p.Y, location.Y));
             }
         }
 
@@ -87,14 +91,8 @@ namespace gEngine.Manipulator
         protected virtual void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             MapControl mc = this.AssociatedObject.Owner;
-
-            if (this.TrackAdorner.Points.Count>1)
-            {
-                this.TrackAdorner.Points.RemoveAt(this.TrackAdorner.Points.Count - 1);
-            }
-            Point p = mc.Dp2LP(e.GetPosition(mc));
-            this.TrackAdorner.Points.Add(p);
-            this.TrackAdorner.Points.Add(p);
+            mc.EditLayer.Children.Remove(TrackAdorner);
+            this.TrackAdorner = null;
         }
 
         protected override void OnDetaching()

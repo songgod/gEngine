@@ -1,4 +1,5 @@
 ﻿using gEngine.Graph.Ge.Section;
+using gEngine.Graph.Interface;
 using gTopology;
 using System;
 using System.Collections.Generic;
@@ -68,6 +69,34 @@ namespace gEngine.Util.Ge.Section
                     SectionLayer.Objects[i].GetType() == typeof(StratumLineProxyObject) ||
                     SectionLayer.Objects[i].GetType() == typeof(SandLineProxyObject))
                     SectionLayer.Objects.Remove(SectionLayer.Objects[i]);
+            }
+        }
+
+        public void ResetGraph()
+        {
+            SectionInfo sinfo = SectionLayer.SectionInfo;
+            List<FaceProxyObject> ListFaces = new List<FaceProxyObject>();
+            List<LineProxyObject> ListLines = new List<LineProxyObject>();
+            foreach (var item in SectionLayer.Objects)
+            {
+                if(item is FaceProxyObject)
+                {
+                    ListFaces.Add(item as FaceProxyObject);
+                }
+                else if(item is LineProxyObject)
+                {
+                    ListLines.Add(item as LineProxyObject);
+                }
+            }
+            int findex = 0;
+            foreach (var item in sinfo.TopGraph.Regions)
+            {
+                ListFaces[findex++].Face = item;
+            }
+            int lindex = 0;
+            foreach (var item in sinfo.TopGraph.Bounds)
+            {
+                ListLines[lindex++].Line = item;
             }
         }
 

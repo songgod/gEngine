@@ -55,6 +55,7 @@
     <Compile Include="Commands\NewLineCommand.cs" />
     <Compile Include="Commands\NewPolyLineCommand.cs" />
     <Compile Include="Commands\NewRectCommand.cs" />
+    <Compile Include="Commands\NewScaleRuleCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

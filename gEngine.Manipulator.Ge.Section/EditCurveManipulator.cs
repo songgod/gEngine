@@ -174,7 +174,7 @@ namespace gEngine.Manipulator.Ge.Section
 
         private void Track_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Topology editer = new Topology(GraphUtil.Graph);
+            TopologySection editer = new TopologySection(GraphUtil.Graph);
             Point p = e.GetPosition(this);
             gTopology.Line newline = editer.LinAddPoint(Line,p, GraphUtil.Tolerance);
             if (OnLineChanged != null)
@@ -199,7 +199,7 @@ namespace gEngine.Manipulator.Ge.Section
             int index = GetNodeID(path);
             Point p = GetNodePos(index);
 
-            Topology editer = new Topology(GraphUtil.Graph);
+            TopologySection editer = new TopologySection(GraphUtil.Graph);
 
             gTopology.Line newline = editer.LinMoveControlPoint(Line, index, p);
 
@@ -217,7 +217,7 @@ namespace gEngine.Manipulator.Ge.Section
             int index = GetNodeID(path);
             Point p = GetNodePos(index);
 
-            Topology editer = new Topology(GraphUtil.Graph);
+            TopologySection editer = new TopologySection(GraphUtil.Graph);
             gTopology.Line newline = editer.LinRemovePoint(Line, index);
             if (OnLineChanged != null)
                 OnLineChanged.Invoke(newline);
@@ -259,7 +259,7 @@ namespace gEngine.Manipulator.Ge.Section
             int index = GetNodeID(path);
             Point p = GetNodePos(index);
 
-            Topology editer = new Topology(GraphUtil.Graph);
+            TopologySection editer = new TopologySection(GraphUtil.Graph);
 
             bool bSyn = false;
             if ((Keyboard.Modifiers & ModifierKeys.Control) != ModifierKeys.Control)
@@ -429,6 +429,8 @@ namespace gEngine.Manipulator.Ge.Section
         private void EditAdorner_OnLineChanged(gTopology.Line newLine)
         {
             LineProxyObject lpo = this.AssociatedObject.ObjectContext as LineProxyObject;
+            SectionLayerEdit editor = new SectionLayerEdit(this.AssociatedObject.Owner.LayerContext as SectionLayer);
+            editor.ResetGraph();
             lpo.Line = newLine;
             EditAdorner.Select(lpo.Line);
         }
