@@ -47,7 +47,7 @@ namespace gEngine.Manipulator.Ge.Basic
 
             if (pc == null || pc.Count == 0)
                 return;
-           
+
             Path Track = CreateRect(pc);
             CreateNodes(Track);
         }
@@ -62,19 +62,14 @@ namespace gEngine.Manipulator.Ge.Basic
         {
             Path Track = new Path() { Stroke = new SolidColorBrush() { Color = Colors.Black }, StrokeThickness = 1 };
 
-            Track = new Path() { Stroke = new SolidColorBrush() { Color = Colors.Black }, StrokeThickness = 1 };
-
             double minX = ps.OrderBy(p => p.X).ElementAt(0).X;
             double minY = ps.OrderBy(p => p.Y).ElementAt(0).Y;
 
             double maxX = ps.OrderByDescending(p => p.X).ElementAt(0).X;
             double maxY = ps.OrderByDescending(p => p.Y).ElementAt(0).Y;
 
-            double width = maxX - minX;
-            double height = maxY - minY;
-
             PathGeometry pgTrack = new PathGeometry();
-            RectangleGeometry rg = new RectangleGeometry() { Rect = new Rect(minX, minY, width, height) };
+            RectangleGeometry rg = new RectangleGeometry() { Rect = new Rect(new Point(minX, minY), new Point(maxX, maxY)) };
             Track.Data = rg;
             Children.Add(Track);
             return Track;
@@ -84,22 +79,27 @@ namespace gEngine.Manipulator.Ge.Basic
         {
             RectangleGeometry rgTrack = track.Data as RectangleGeometry;
 
-            List<Point> DragPts = new List<Point>();
-            DragPts.Add(new Point(rgTrack.Rect.X, rgTrack.Rect.Y));
-            DragPts.Add(new Point(rgTrack.Rect.X, rgTrack.Rect.Y + rgTrack.Rect.Height));
-            DragPts.Add(new Point(rgTrack.Rect.X + rgTrack.Rect.Width, rgTrack.Rect.Y));
-            DragPts.Add(new Point(rgTrack.Rect.X + rgTrack.Rect.Width, rgTrack.Rect.Y + rgTrack.Rect.Height));
+            List<Tuple<Point, Tuple<VerticalAlignment, HorizontalAlignment>>> DragPts = new List<Tuple<Point, Tuple<VerticalAlignment, HorizontalAlignment>>>();
+
+            DragPts.Add(new Tuple<Point, Tuple<VerticalAlignment, HorizontalAlignment>>
+                ((new Point(rgTrack.Rect.X, rgTrack.Rect.Y)), new Tuple<VerticalAlignment, HorizontalAlignment>(VerticalAlignment.Top, HorizontalAlignment.Left)));
+            DragPts.Add(new Tuple<Point, Tuple<VerticalAlignment, HorizontalAlignment>>
+                ((new Point(rgTrack.Rect.X, rgTrack.Rect.Y + rgTrack.Rect.Height)), new Tuple<VerticalAlignment, HorizontalAlignment>(VerticalAlignment.Bottom, HorizontalAlignment.Left)));
+            DragPts.Add(new Tuple<Point, Tuple<VerticalAlignment, HorizontalAlignment>>
+                ((new Point(rgTrack.Rect.X + rgTrack.Rect.Width, rgTrack.Rect.Y)), new Tuple<VerticalAlignment, HorizontalAlignment>(VerticalAlignment.Top, HorizontalAlignment.Right)));
+            DragPts.Add(new Tuple<Point, Tuple<VerticalAlignment, HorizontalAlignment>>
+                ((new Point(rgTrack.Rect.X + rgTrack.Rect.Width, rgTrack.Rect.Y + rgTrack.Rect.Height)), new Tuple<VerticalAlignment, HorizontalAlignment>(VerticalAlignment.Bottom, HorizontalAlignment.Right)));
 
             NodeCount = DragPts.Count;
 
             for (int i = 0; i < DragPts.Count; ++i)
             {
-                Path control = new Path() { VerticalAlignment = VerticalAlignment.Top, Stroke = new SolidColorBrush() { Color = Colors.Black }, StrokeThickness = 1.0, Fill = new SolidColorBrush() { Color = Colors.PaleVioletRed } };
+                Path control = new Path() { VerticalAlignment = DragPts[i].Item2.Item1, HorizontalAlignment = DragPts[i].Item2.Item2, Stroke = new SolidColorBrush() { Color = Colors.Black }, StrokeThickness = 1.0, Fill = new SolidColorBrush() { Color = Colors.PaleVioletRed } };
                 control.Name = string.Format("C{0:G}", i);
                 control.MouseLeftButtonDown += Control_MouseLeftButtonDown;
                 control.MouseMove += Control_MouseMove;
                 control.MouseLeftButtonUp += Control_MouseLeftButtonUp;
-                EllipseGeometry eg = new EllipseGeometry() { RadiusX = 2, RadiusY = 2, Center = DragPts[i] };
+                EllipseGeometry eg = new EllipseGeometry() { RadiusX = 2, RadiusY = 2, Center = DragPts[i].Item1 };
                 control.Data = eg;
                 Children.Add(control);
             }
@@ -179,72 +179,34 @@ namespace gEngine.Manipulator.Ge.Basic
                 SetNodePos(id, mouse_pt);
 
                 double nW = -1, nH = -1, nTop = -1, nLeft = -1;
-                if (id == 0 || id == 1)
+
+                switch (path.VerticalAlignment)
                 {
-                    if (offset.X > 0)
-                    {
-                        nW = W - offset.X;
-                        nLeft = Left + offset.X;
-                    }
-                    else
-                    {
-                        nW = W + Math.Abs(offset.X);
-                        nLeft = Left - Math.Abs(offset.X);
-                    }
-
-                    if (id == 0)
-                    {
-                        if (offset.Y > 0)
-                        {
-                            nH = H - offset.Y;
-                            nTop = Top + offset.Y;
-                        }
-                        else
-                        {
-                            nH = H + Math.Abs(offset.Y);
-                            nTop = Top - Math.Abs(offset.Y);
-                        }
-                    }
-                    else
-                    {
-                        if (offset.Y > 0)
-                        {
-                            nH = H + offset.Y;
-                        }
-                        else
-                        {
-                            nH = H - Math.Abs(offset.Y);
-                        }
-                        nTop = Top;
-                    }
-                }
-
-                if (id == 2 || id == 3)
-                {
-                    nW = W + offset.X;
-                    nLeft = Left;
-
-                    if (id == 2)
-                    {
-                        if (offset.Y > 0)
-                        {
-                            nH = H - offset.Y;
-                            nTop = Top + offset.Y;
-                        }
-                        else
-                        {
-                            nH = H + Math.Abs(offset.Y);
-                            nTop = Top - Math.Abs(offset.Y);
-                        }
-                    }
-                    else
-                    {
+                    case VerticalAlignment.Bottom:
                         nH = H + offset.Y;
                         nTop = Top;
-                    }
+                        break;
+                    case VerticalAlignment.Top:
+                        nH = H + (offset.Y * -1);
+                        nTop = Top + offset.Y;
+                        break;
+                    default:
+                        break;
                 }
 
-                Point pt = new Point(nW, nH);
+                switch (path.HorizontalAlignment)
+                {
+                    case HorizontalAlignment.Left:
+                        nW = W + (offset.X * -1);
+                        nLeft = Left + offset.X;
+                        break;
+                    case HorizontalAlignment.Right:
+                        nW = W + offset.X;
+                        nLeft = Left;
+                        break;
+                    default:
+                        break;
+                }
 
                 if (OnCompressChanged != null)
                     OnCompressChanged.Invoke(nLeft, nTop, nW, nH);
@@ -266,10 +228,24 @@ namespace gEngine.Manipulator.Ge.Basic
 
     public class EditCompressObjectManipulator : ObjectManipulator
     {
+        #region Property
+
+        private RectToCompassConverter _instance;
+        public RectToCompassConverter RectToCompassConverter
+        {
+            get
+            {
+                _instance = RectToCompassConverter.CreateInstance();
+                return _instance;
+            }
+        }
+
         public EditCompressAdoner EditCompressAdoner
         {
             get; private set;
         }
+
+        #endregion
 
         protected override void OnAttached()
         {
@@ -290,9 +266,9 @@ namespace gEngine.Manipulator.Ge.Basic
             EditCompressAdoner.H = ((gEngine.Graph.Ge.Basic.Comprass) oc.DataContext).Height;
 
             object[] values = new object[] { EditCompressAdoner.Left, EditCompressAdoner.Top, EditCompressAdoner.W, EditCompressAdoner.H };
-            RectToCompassConverter comConverter = new RectToCompassConverter();
+
             EditCompressAdoner.OnCompressChanged += EditCompressAdoner_OnCompressChanged;
-            EditCompressAdoner.pc = (PointCollection) comConverter.Convert(values, null, null, null);
+            EditCompressAdoner.pc = (PointCollection) RectToCompassConverter.Convert(values, null, null, null);
             EditCompressAdoner.Select(EditCompressAdoner.pc);
         }
 
@@ -328,8 +304,7 @@ namespace gEngine.Manipulator.Ge.Basic
 
             object[] values = new object[] { left, top, w, h };
 
-            RectToCompassConverter comConverter = new RectToCompassConverter();
-            EditCompressAdoner.pc = (PointCollection) comConverter.Convert(values, null, null, null);
+            EditCompressAdoner.pc = (PointCollection) RectToCompassConverter.Convert(values, null, null, null);
             EditCompressAdoner.Select(EditCompressAdoner.pc);
         }
 

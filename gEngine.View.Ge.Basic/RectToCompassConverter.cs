@@ -42,5 +42,24 @@ namespace gEngine.View.Ge.Basic
         {
             throw new NotImplementedException();
         }
+
+        #region CreateInstance
+
+        private volatile static RectToCompassConverter _instance = null;
+        private static readonly object lockHelper = new object();
+        public static RectToCompassConverter CreateInstance()
+        {
+            if (_instance == null)
+            {
+                lock (lockHelper)
+                {
+                    if (_instance == null)
+                        _instance = new RectToCompassConverter();
+                }
+            }
+            return _instance;
+        }
+
+        #endregion
     }
 }
