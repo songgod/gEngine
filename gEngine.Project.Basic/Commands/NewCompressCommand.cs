@@ -27,16 +27,16 @@ namespace gEngine.Project.Ge.Basic.Commands
             if (pc == null || pc.MapsControl == null)
                 return;
 
-            //if (pc.MapsControl.ActiveMapControl == null)
-            //    return;
+            if (pc.MapsControl.ActiveMapControl == null)
+                return;
 
-            //MapControl mc = pc.MapsControl.ActiveMapControl;
-            //if (mc == null)
-            //    return;
+            MapControl mc = pc.MapsControl.ActiveMapControl;
+            if (mc == null)
+                return;
 
-            //LayerControl layer = mc.ActiveLayerControl;
-            //if (layer == null)
-            //    return;
+            LayerControl layer = mc.ActiveLayerControl;
+            if (layer == null)
+                return;
 
             e.CanExecute = true;
             e.Handled = true;
@@ -48,53 +48,21 @@ namespace gEngine.Project.Ge.Basic.Commands
             if (pc == null || pc.MapsControl == null)
                 return;
 
-            //if (pc.MapsControl.ActiveMapControl == null)
-            //    return;
+            if (pc.MapsControl.ActiveMapControl == null)
+                return;
 
-            //MapControl mc = pc.MapsControl.ActiveMapControl;
-            //if (mc == null)
-            //    return;
+            MapControl mc = pc.MapsControl.ActiveMapControl;
+            if (mc == null)
+                return;
 
-            //LayerControl lc = mc.ActiveLayerControl;
-            //if (lc == null)
-            //    return;
+            LayerControl lc = mc.ActiveLayerControl;
+            if (lc == null)
+                return;
 
-            //DrawCompressObjectManipulator dm = gEngine.Manipulator.Registry.CreateManipulator("DrawCompressObjectManipulator") as DrawCompressObjectManipulator;
-            //if (dm == null)
-            //    return;
-            //ManipulatorSetter.SetManipulator(dm, lc);
-
-            Graph.Interface.IMap map = pc.Project.NewMap("Ge", "Commpress");
-
-
-            //Graph.Ge.FillStyle fl = new Graph.Ge.FillStyle();
-
-
-
-
-
-           Graph.Ge.Layer layer = new Graph.Ge.Layer() { Type = "Commpress" };
-
-
-           gEngine.Graph.Ge.Basic.Comprass com = new Graph.Ge.Basic.Comprass()
-            {
-                Width = 40,
-                Height = 50,
-                Top = 70,
-                Left = 80,
-                Fill = System.Windows.Media.Brushes.Red,
-                Stroke = System.Windows.Media.Brushes.Black,
-                StrokeThickness = 0,
-                RotateAngle = 0
-            };
-
-
-            layer.Objects.Add(com);
-
-
-
-
-          map.Layers.Add(layer);
+            DrawCompressObjectManipulator dm = gEngine.Manipulator.Registry.CreateManipulator("DrawCompressObjectManipulator") as DrawCompressObjectManipulator;
+            if (dm == null)
+                return;
+            ManipulatorSetter.SetManipulator(dm, lc);
         }
     }
 }

@@ -74,6 +74,9 @@
     <Compile Include="SectionManageRibbonPage.xaml.cs">
       <DependentUpon>SectionManageRibbonPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TrendLineRibbonPageCategory.xaml.cs">
+      <DependentUpon>TrendLineRibbonPageCategory.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Include="FaultLineProxyObjectRibbonPageCategory.xaml">
@@ -105,6 +108,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SectionManageRibbonPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TrendLineRibbonPageCategory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

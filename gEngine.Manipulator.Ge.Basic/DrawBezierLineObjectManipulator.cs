@@ -27,7 +27,7 @@ namespace gEngine.Manipulator.Ge.Basic
             BeizerLine beizerline = new BeizerLine()
             {
                 Points = new PointCollection(ps),
-                LinStyle = this.LineStyle
+                LinStyle = this.LineStyle.DeepClone()
             };
             this.AssociatedObject.LayerContext.Objects.Add(beizerline);
         }

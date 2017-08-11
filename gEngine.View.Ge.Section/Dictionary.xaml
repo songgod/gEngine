@@ -39,4 +39,14 @@
             </Path.Data>
         </Path>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type gs:TrendLine}">
+        <gv:LineControl LineStyle="{Binding LinStyle}">
+            <gv:LineControl.Resources>
+                <local:Points2PathDataConverter x:Key="p2pbpgc"/>
+            </gv:LineControl.Resources>
+            <gv:LineControl.Data>
+                <Binding Path="Points" Converter="{StaticResource p2pbpgc}"/>
+            </gv:LineControl.Data>
+        </gv:LineControl>
+    </DataTemplate>
 </ResourceDictionary>

@@ -31,6 +31,10 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GraphAlgo, Version=1.0.6429.26970, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\bin\Debug\GraphAlgo.dll</HintPath>
+    </Reference>
     <Reference Include="gTopology">
       <HintPath>..\3rdlib\gToplogy\x64\gTopology.dll</HintPath>
       <Private>False</Private>
@@ -55,7 +59,9 @@
     <Compile Include="DrawCurveFaultManipulator.cs" />
     <Compile Include="DrawCurveSandManipulator.cs" />
     <Compile Include="DrawCurveStratumManipulator.cs" />
+    <Compile Include="DrawTrendLineManipulator.cs" />
     <Compile Include="EditCurveManipulator.cs" />
+    <Compile Include="EditTrendLineManipulator.cs" />
     <Compile Include="EraseLineManipulator.cs" />
     <Compile Include="GraphUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -86,6 +92,10 @@
     <ProjectReference Include="..\gEngine.Util.Ge.Section\gEngine.Util.Ge.Section.csproj">
       <Project>{B3D6B10A-4C31-4981-97FA-3437CB583729}</Project>
       <Name>gEngine.Util.Ge.Section</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.Util\gEngine.Util.csproj">
+      <Project>{84acb6c4-cf62-4f4b-a7e5-5c642edc041a}</Project>
+      <Name>gEngine.Util</Name>
     </ProjectReference>
     <ProjectReference Include="..\gEngine.View.Ge.Section\gEngine.View.Ge.Section.csproj">
       <Project>{94FB234D-24AD-4FD9-BC79-0257073BC3EB}</Project>
