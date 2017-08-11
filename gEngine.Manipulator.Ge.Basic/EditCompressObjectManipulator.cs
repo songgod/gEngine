@@ -140,19 +140,16 @@ namespace gEngine.Manipulator.Ge.Basic
             return GetNodePos(node);
         }
 
-        private void SetNodePos(Path node, Point p)
+        private EllipseGeometry SetNodePos(int index, Point p)
         {
+            Path node = GetNode(index);
+
             if (node == null)
-                return;
+                return null;
 
             EllipseGeometry eg = node.Data as EllipseGeometry;
             eg.Center = p;
-        }
-
-        private void SetNodePos(int index, Point p)
-        {
-            Path node = GetNode(index);
-            SetNodePos(node, p);
+            return eg;
         }
 
         #endregion
@@ -176,7 +173,9 @@ namespace gEngine.Manipulator.Ge.Basic
                 Point clicked_pt = GetNodePos(path);
                 Vector offset = mouse_pt - clicked_pt;
                 int id = GetNodeID(path);
-                SetNodePos(id, mouse_pt);
+                EllipseGeometry eg = SetNodePos(id, mouse_pt);
+                path.Data = eg;
+                path.CaptureMouse();
 
                 double nW = -1, nH = -1, nTop = -1, nLeft = -1;
 
