@@ -1390,6 +1390,12 @@
   <ItemGroup>
     <Resource Include="Images\Small\delete_32x32.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Small\delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Small\newlayer.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>$(MSBUILD) /t:updateuid $(ProjectPath)</PreBuildEvent>
