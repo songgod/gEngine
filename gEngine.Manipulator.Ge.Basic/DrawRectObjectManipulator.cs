@@ -34,7 +34,7 @@ namespace gEngine.Manipulator.Ge.Basic
                 Top = Canvas.GetTop(this.TrackAdorner),
                 Left = Canvas.GetLeft(this.TrackAdorner),
                 Fill = Brushes.White,
-                Stroke = Brushes.Red,
+                Stroke = new SolidColorBrush(Colors.Red),
                 StrokeThickness = 1.0,
                 FillStyle = FillStyle
             };
