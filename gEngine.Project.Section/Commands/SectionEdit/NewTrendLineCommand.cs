@@ -19,10 +19,15 @@ namespace gEngine.Project.Ge.Section.Commands.SectionEdit
 
         public override void SetManipulator(LayerControl lc, object param)
         {
-            IManipulatorBase dm = gEngine.Manipulator.Registry.CreateManipulator("DrawBezierLineObjectManipulator",param);
-            if (dm == null)
-                return;
-            ManipulatorSetter.SetManipulator(dm, lc);
+            if (ManipulatorSetter.IsContainManipulator("DrawTrendLineManipulator", lc))
+                ManipulatorSetter.ClearManipulator(lc);
+            else
+            {
+                IManipulatorBase dm = gEngine.Manipulator.Registry.CreateManipulator("DrawTrendLineManipulator", param);
+                if (dm == null)
+                    return;
+                ManipulatorSetter.SetManipulator(dm, lc);
+            }
         }
     }
 }

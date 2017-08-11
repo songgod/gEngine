@@ -67,5 +67,17 @@ namespace gEngine.Graph.Ge
         // Using a DependencyProperty as the backing store for SymbolLib.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SymbolLibProperty =
             DependencyProperty.Register("SymbolLib", typeof(string), typeof(LineStyle), new PropertyMetadata("Normal"));
+
+        public virtual LineStyle DeepClone()
+        {
+            LineStyle lineStyle = new LineStyle();
+            lineStyle.Stroke = this.Stroke;
+            lineStyle.Width = this.Width;
+            lineStyle.Symbol = this.Symbol;
+            lineStyle.SymbolLib = this.SymbolLib;
+
+            return lineStyle;
+
+        }
     }
 }
