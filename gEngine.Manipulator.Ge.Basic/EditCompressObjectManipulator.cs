@@ -35,6 +35,10 @@ namespace gEngine.Manipulator.Ge.Basic
 
         public double H { get; set; }
 
+        public double MinW { get; set; }
+
+        public double MinH { get; set; }
+
         public EditCompressAdoner() { }
 
         #endregion
@@ -173,9 +177,6 @@ namespace gEngine.Manipulator.Ge.Basic
                 Point clicked_pt = GetNodePos(path);
                 Vector offset = mouse_pt - clicked_pt;
                 int id = GetNodeID(path);
-                EllipseGeometry eg = SetNodePos(id, mouse_pt);
-                path.Data = eg;
-                path.CaptureMouse();
 
                 double nW = -1, nH = -1, nTop = -1, nLeft = -1;
 
@@ -183,10 +184,14 @@ namespace gEngine.Manipulator.Ge.Basic
                 {
                     case VerticalAlignment.Bottom:
                         nH = H + offset.Y;
+                        if (nH < MinH)
+                            return;
                         nTop = Top;
                         break;
                     case VerticalAlignment.Top:
                         nH = H + (offset.Y * -1);
+                        if (nH < MinH)
+                            return;
                         nTop = Top + offset.Y;
                         break;
                     default:
@@ -197,15 +202,23 @@ namespace gEngine.Manipulator.Ge.Basic
                 {
                     case HorizontalAlignment.Left:
                         nW = W + (offset.X * -1);
+                        if (nW < MinW)
+                            return;
                         nLeft = Left + offset.X;
                         break;
                     case HorizontalAlignment.Right:
                         nW = W + offset.X;
+                        if (nW < MinW)
+                            return;
                         nLeft = Left;
                         break;
                     default:
                         break;
                 }
+
+                EllipseGeometry eg = SetNodePos(id, mouse_pt);
+                path.Data = eg;
+                path.CaptureMouse();
 
                 if (OnCompressChanged != null)
                     OnCompressChanged.Invoke(nLeft, nTop, nW, nH);
@@ -263,6 +276,8 @@ namespace gEngine.Manipulator.Ge.Basic
             EditCompressAdoner.Top = ((gEngine.Graph.Ge.Basic.Comprass) oc.DataContext).Top;
             EditCompressAdoner.W = ((gEngine.Graph.Ge.Basic.Comprass) oc.DataContext).Width;
             EditCompressAdoner.H = ((gEngine.Graph.Ge.Basic.Comprass) oc.DataContext).Height;
+            EditCompressAdoner.MinW = EditCompressAdoner.W / 5;
+            EditCompressAdoner.MinH = EditCompressAdoner.H / 5;
 
             object[] values = new object[] { EditCompressAdoner.Left, EditCompressAdoner.Top, EditCompressAdoner.W, EditCompressAdoner.H };
 
