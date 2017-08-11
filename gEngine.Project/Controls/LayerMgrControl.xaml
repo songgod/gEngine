@@ -43,6 +43,36 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Image>
+                <TextBlock x:Uid="TextBlock_5" Margin="5 0 0 0" Text="|" Foreground="LightGray"/>
+                <Image x:Uid="newUniversallyLayerImage" x:Name="newUniversallyLayerImage" Source="{Binding NewUniversallyLayerImageName,Converter={StaticResource ResourceKey=imageConvert}}"
+                       Opacity="{ Binding EditImageOpacity}"  Margin="5 0 0 0">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger x:Uid="i:EventTrigger_5" EventName="MouseLeftButtonDown">
+                            <i:InvokeCommandAction  x:Uid="i:InvokeCommandAction_5"  CommandParameter="{ Binding ElementName=NewUniversallyLayerImage}" >
+                            </i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Image>
+                <TextBlock x:Uid="TextBlock_6" Margin="5 0 0 0" Text="|" Foreground="LightGray"/>
+                <Image x:Uid="newWellLocationLayerImage" x:Name="newWellLocationLayerImage" Source="{Binding NewWellLocationLayerImageName,Converter={StaticResource ResourceKey=imageConvert}}"
+                       Opacity="{ Binding EditImageOpacity}"  Margin="5 0 0 0">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger x:Uid="i:EventTrigger_6" EventName="MouseLeftButtonDown">
+                            <i:InvokeCommandAction  x:Uid="i:InvokeCommandAction_6"  CommandParameter="{ Binding ElementName=NewWellLocationLayerImage}" >
+                            </i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Image>
+                <TextBlock x:Uid="TextBlock_7" Margin="5 0 0 0" Text="|" Foreground="LightGray"/>
+                <Image x:Uid="newSectionMapLayerImage" x:Name="newSectionMapLayerImage" Source="{Binding NewSectionMapLayerImageName,Converter={StaticResource ResourceKey=imageConvert}}"
+                       Opacity="{ Binding EditImageOpacity}"  Margin="5 0 0 0">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger x:Uid="i:EventTrigger_7" EventName="MouseLeftButtonDown">
+                            <i:InvokeCommandAction  x:Uid="i:InvokeCommandAction_7"  CommandParameter="{ Binding ElementName=NewSectionMapLayerImage}" >
+                            </i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Image>
                 <TextBlock x:Uid="TextBlock_3" Margin="5 0 0 0" Text="|" Foreground="LightGray"/>
                 <Image x:Uid="deleteImage" x:Name="deleteImage" Source="{Binding DeleteImageName,Converter={StaticResource ResourceKey=imageConvert}}"
                        Opacity="{ Binding EditImageOpacity}"  Margin="5 0 0 0">
@@ -53,7 +83,17 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Image>
-              
+                <TextBlock x:Uid="TextBlock_8" Margin="5 0 0 0" Text="|" Foreground="LightGray"/>
+                <Image x:Uid="emptyLayerImage" x:Name="emptyLayerImage" Source="{Binding EmptyLayerImageName,Converter={StaticResource ResourceKey=imageConvert}}"
+                       Opacity="{ Binding EditImageOpacity}"  Margin="5 0 0 0">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger x:Uid="i:EventTrigger_8" EventName="MouseLeftButtonDown">
+                            <i:InvokeCommandAction  x:Uid="i:InvokeCommandAction_8" CommandParameter="{ Binding ElementName=emptyLayerImage}" >
+                            </i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Image>
+
                 <TextBlock x:Uid="TextBlock_1" Margin="5 0 0 0" Text="|" Foreground="LightGray"/>
                 <TextBlock x:Uid="tbName" x:Name="tbName" Text="{ Binding Name}"  Margin="5 0 0 0 "/>
             </StackPanel>

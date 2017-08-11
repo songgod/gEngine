@@ -49,6 +49,44 @@ namespace gEngine.Graph.Ge
         public static readonly DependencyProperty NewLayerProperty =
             DependencyProperty.Register("NewLayer", typeof(bool), typeof(Layer), new PropertyMetadata(true));
 
+        public bool NewUniversallyLayer
+        {
+            get { return (bool)GetValue(NewUniversallyLayerProperty); }
+            set { SetValue(NewUniversallyLayerProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Visible.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty NewUniversallyLayerProperty =
+            DependencyProperty.Register("NewUniversallyLayer", typeof(bool), typeof(Layer), new PropertyMetadata(true));
+
+        public bool NewWellLocationLayer
+        {
+            get { return (bool)GetValue(NewWellLocationLayerProperty); }
+            set { SetValue(NewWellLocationLayerProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Visible.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty NewWellLocationLayerProperty =
+            DependencyProperty.Register("NewWellLocationLayer", typeof(bool), typeof(Layer), new PropertyMetadata(true));
+
+        public bool NewSectionMapLayer
+        {
+            get { return (bool)GetValue(NewSectionMapLayerProperty); }
+            set { SetValue(NewSectionMapLayerProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Visible.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty NewSectionMapLayerProperty =
+            DependencyProperty.Register("NewSectionMapLayer", typeof(bool), typeof(Layer), new PropertyMetadata(true));
+        public bool EmptyLayer
+        {
+            get { return (bool)GetValue(EmptyLayerProperty); }
+            set { SetValue(EmptyLayerProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Visible.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty EmptyLayerProperty =
+            DependencyProperty.Register("EmptyLayer", typeof(bool), typeof(Layer), new PropertyMetadata(true));
         public bool Visible
         {
             get { return (bool)GetValue(VisibleProperty); }

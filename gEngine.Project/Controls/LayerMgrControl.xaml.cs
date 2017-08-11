@@ -41,6 +41,17 @@ namespace gEngine.Project.Controls
                 lco.Name = layer.Name;
                 lco.NewLayerImageName = "Small/newlayer.png";
                 lco.NewLayerImageOpacity = layer.NewLayer ? 1.0 : 0.2;
+
+                lco.NewUniversallyLayerImageName = "Small/NewUniversallyLayer.png";
+                lco.NewUniversallyLayerImageOpacity = layer.NewLayer ? 1.0 : 0.2;
+                lco.NewWellLocationLayerImageName = "Small/NewWellLocationLayer.png";
+                lco.NewWellLocationLayerImageOpacity = layer.NewLayer ? 1.0 : 0.2;
+                lco.NewSectionMapLayerImageName = "Small/NewSectionMapLayer.png";
+                lco.NewSectionMapLayerImageOpacity = layer.NewLayer ? 1.0 : 0.2;
+                lco.EmptyLayerImageName = "Small/emptylayer.png";
+                lco.EmptyLayerImageOpacity = layer.NewLayer ? 1.0 : 0.2;
+
+
                 lco.VisibalityImageName = "Small/eye.png";
                 lco.VisibalityImageOpacity = layer.Visible ? 1.0 : 0.2;
                 lco.EditImageName= "Small/Pencil.png";
@@ -108,6 +119,52 @@ namespace gEngine.Project.Controls
         public static readonly DependencyProperty NewLayerImageOpacityProperty =
             DependencyProperty.Register("NewLayerImageOpacity", typeof(double), typeof(LayerCtrlObject));
 
+
+        public string NewUniversallyLayerImageName { get; set; }
+        public double NewUniversallyLayerImageOpacity
+        {
+            get
+            {
+                return (double)GetValue(NewUniversallyLayerImageOpacityProperty);
+            }
+            set
+            {
+                SetValue(NewUniversallyLayerImageOpacityProperty, value);
+            }
+        }
+        public static readonly DependencyProperty NewUniversallyLayerImageOpacityProperty =
+            DependencyProperty.Register("NewUniversallyLayerImageOpacity", typeof(double), typeof(LayerCtrlObject));
+
+        public string NewWellLocationLayerImageName { get; set; }
+        public double NewWellLocationLayerImageOpacity
+        {
+            get
+            {
+                return (double)GetValue(NewWellLocationLayerImageOpacityProperty);
+            }
+            set
+            {
+                SetValue(NewWellLocationLayerImageOpacityProperty, value);
+            }
+        }
+        public static readonly DependencyProperty NewWellLocationLayerImageOpacityProperty =
+            DependencyProperty.Register("NewWellLocationLayerImageOpacity", typeof(double), typeof(LayerCtrlObject));
+
+        public string NewSectionMapLayerImageName { get; set; }
+        public double NewSectionMapLayerImageOpacity
+        {
+            get
+            {
+                return (double)GetValue(NewSectionMapLayerImageOpacityProperty);
+            }
+            set
+            {
+                SetValue(NewSectionMapLayerImageOpacityProperty, value);
+            }
+        }
+        public static readonly DependencyProperty NewSectionMapLayerImageOpacityProperty =
+            DependencyProperty.Register("NewSectionMapLayerImageOpacity", typeof(double), typeof(LayerCtrlObject));
+
         public string VisibalityImageName { get; set; }
 
         public double VisibalityImageOpacity
@@ -157,6 +214,23 @@ namespace gEngine.Project.Controls
 
         public static readonly DependencyProperty DeleteImageOpacityProperty =
             DependencyProperty.Register("DeleteImageOpacity", typeof(double), typeof(LayerCtrlObject));
+
+        public string EmptyLayerImageName { get; set; }
+
+        public double EmptyLayerImageOpacity
+        {
+            get
+            {
+                return (double)GetValue(EmptyLayerImageOpacityProperty);
+            }
+            set
+            {
+                SetValue(EmptyLayerImageOpacityProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty EmptyLayerImageOpacityProperty =
+            DependencyProperty.Register("EmptyLayerImageOpacity", typeof(double), typeof(LayerCtrlObject));
 
         public double LayerOpacity
         {

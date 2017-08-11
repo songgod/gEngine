@@ -63,7 +63,7 @@ namespace gEngine.Project.Ge.Plane.Commands
                 gEngine.Graph.Ge.Layer layer = pc.CreateWellLocationLayer(wls);
 
                 //先增加layer，再创建IMap
-                layer.Name = "平面图Layer图层2";
+                layer.Name = "平面图Layer图层";
                 layer.Visible = true;
                 layer.Editable = true;
                 ILayers layers = new ILayers();
