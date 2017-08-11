@@ -39,11 +39,15 @@ namespace gEngine.Project.Controls
             {
                 LayerCtrlObject lco = new LayerCtrlObject();
                 lco.Name = layer.Name;
+                lco.NewLayerImageName = "Small/newlayer.png";
+                lco.NewLayerImageOpacity = layer.NewLayer ? 1.0 : 0.2;
                 lco.VisibalityImageName = "Small/eye.png";
                 lco.VisibalityImageOpacity = layer.Visible ? 1.0 : 0.2;
                 lco.EditImageName= "Small/Pencil.png";
                 lco.EditImageOpacity = layer.Editable ? 1.0 : 0.2;
                 lco.LayerOpacity = layer.Opacity;
+                lco.DeleteImageName = "Small/delete.png";
+                lco.DeleteImageOpacity = layer.Delete ? 1.0 : 0.2;
                 soureList.Add(lco);
 
                 //foreach (IObject obj in layer.Objects)
@@ -89,6 +93,20 @@ namespace gEngine.Project.Controls
     public class LayerCtrlObject : DependencyObject
     {
         public string Name { get; set; }
+        public string NewLayerImageName { get; set; }
+        public double NewLayerImageOpacity
+        {
+            get
+            {
+                return (double)GetValue(NewLayerImageOpacityProperty);
+            }
+            set
+            {
+                SetValue(NewLayerImageOpacityProperty, value);
+            }
+        }
+        public static readonly DependencyProperty NewLayerImageOpacityProperty =
+            DependencyProperty.Register("NewLayerImageOpacity", typeof(double), typeof(LayerCtrlObject));
 
         public string VisibalityImageName { get; set; }
 
@@ -122,6 +140,24 @@ namespace gEngine.Project.Controls
         public static readonly DependencyProperty EditImageOpacityProperty =
             DependencyProperty.Register("EditImageOpacity", typeof(double), typeof(LayerCtrlObject));
 
+
+        public string DeleteImageName { get; set; }
+
+        public double DeleteImageOpacity
+        {
+            get
+            {
+                return (double)GetValue(DeleteImageOpacityProperty);
+            }
+            set
+            {
+                SetValue(DeleteImageOpacityProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty DeleteImageOpacityProperty =
+            DependencyProperty.Register("DeleteImageOpacity", typeof(double), typeof(LayerCtrlObject));
+
         public double LayerOpacity
         {
             get
@@ -136,6 +172,8 @@ namespace gEngine.Project.Controls
 
         public static readonly DependencyProperty LayerOpacityProperty =
             DependencyProperty.Register("LayerOpacity", typeof(double), typeof(LayerCtrlObject));
+
+       
 
     }
 

@@ -33,6 +33,27 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Image>
+                <TextBlock x:Uid="TextBlock_4" Margin="5 0 0 0" Text="|" Foreground="LightGray"/>
+                <Image x:Uid="newLayerImage" x:Name="newLayerImage" Source="{Binding NewLayerImageName,Converter={StaticResource ResourceKey=imageConvert}}"
+                       Opacity="{ Binding EditImageOpacity}"  Margin="5 0 0 0">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger x:Uid="i:EventTrigger_4" EventName="MouseLeftButtonDown">
+                            <i:InvokeCommandAction  x:Uid="i:InvokeCommandAction_4" Command="{x:Static prjcmds:OperateViewCommands.SetLayerEditableCommand}"  CommandParameter="{ Binding ElementName=newLayerImage}" >
+                            </i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Image>
+                <TextBlock x:Uid="TextBlock_3" Margin="5 0 0 0" Text="|" Foreground="LightGray"/>
+                <Image x:Uid="deleteImage" x:Name="deleteImage" Source="{Binding DeleteImageName,Converter={StaticResource ResourceKey=imageConvert}}"
+                       Opacity="{ Binding EditImageOpacity}"  Margin="5 0 0 0">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger x:Uid="i:EventTrigger_3" EventName="MouseLeftButtonDown">
+                            <i:InvokeCommandAction  x:Uid="i:InvokeCommandAction_3" Command="{x:Static prjcmds:OperateViewCommands.SetLayerDeleteCommand}" CommandParameter="{ Binding ElementName=deleteImage}" >
+                            </i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Image>
+              
                 <TextBlock x:Uid="TextBlock_1" Margin="5 0 0 0" Text="|" Foreground="LightGray"/>
                 <TextBlock x:Uid="tbName" x:Name="tbName" Text="{ Binding Name}"  Margin="5 0 0 0 "/>
             </StackPanel>

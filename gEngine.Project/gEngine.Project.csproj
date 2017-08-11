@@ -68,6 +68,7 @@
     <Compile Include="Commands\ProjectCommandsInstaller.cs" />
     <Compile Include="Commands\RedoCommand.cs" />
     <Compile Include="Commands\SelectObjectCommand.cs" />
+    <Compile Include="Commands\SetLayerDeleteCommand.cs" />
     <Compile Include="Commands\SetLayerEditableCommand.cs" />
     <Compile Include="Commands\SaveAsProjectCommand.cs" />
     <Compile Include="Commands\SaveProjectCommand.cs" />

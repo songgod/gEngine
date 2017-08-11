@@ -39,7 +39,15 @@ namespace gEngine.Graph.Ge
             DependencyProperty.Register("Type", typeof(string), typeof(Layer));
 
 
+        public bool NewLayer
+        {
+            get { return (bool)GetValue(NewLayerProperty); }
+            set { SetValue(NewLayerProperty, value); }
+        }
 
+        // Using a DependencyProperty as the backing store for Visible.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty NewLayerProperty =
+            DependencyProperty.Register("NewLayer", typeof(bool), typeof(Layer), new PropertyMetadata(true));
 
         public bool Visible
         {
@@ -63,6 +71,17 @@ namespace gEngine.Graph.Ge
         // Using a DependencyProperty as the backing store for Editable.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty EditableProperty =
             DependencyProperty.Register("Editable", typeof(bool), typeof(Layer), new PropertyMetadata(true));
+
+        public bool Delete
+        {
+            get { return (bool)GetValue(DeleteProperty); }
+            set { SetValue(DeleteProperty, value); }
+        }
+
+
+        // Using a DependencyProperty as the backing store for Editable.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DeleteProperty =
+            DependencyProperty.Register("Delete", typeof(bool), typeof(Layer), new PropertyMetadata(true));
 
         public double Opacity
         {

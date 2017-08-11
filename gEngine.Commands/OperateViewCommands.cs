@@ -15,6 +15,7 @@ namespace gEngine.Commands
             FullViewCommand = new RoutedUICommand("FullViewCommand", "FullViewCommand",typeof(OperateViewCommands));
             SetLayerVisibleCommand = new RoutedUICommand("SetLayerVisibleCommand", "SetLayerVisibleCommand", typeof(OperateViewCommands));
             SetLayerEditableCommand = new RoutedUICommand("SetLayerEditableCommand", "SetLayerEditableCommand", typeof(OperateViewCommands));
+            SetLayerDeleteCommand = new RoutedUICommand("SetLayerDeleteCommand", "SetLayerDeleteCommand", typeof(OperateViewCommands));
             OpenMapsSelectCommand = new RoutedUICommand("OpenMapsSelectCommand", "OpenMapsSelectCommand", typeof(OperateViewCommands));
             SetLayerOpacityCommand = new RoutedUICommand("SetLayerOpacityCommand", "SetLayerOpacityCommand", typeof(OperateViewCommands));
             HideTabCommand = new RoutedUICommand("HideTabCommand", "HideTabCommand", typeof(OperateViewCommands));
@@ -23,6 +24,8 @@ namespace gEngine.Commands
         public static RoutedCommand FullViewCommand { get; set; }
         public static RoutedCommand SetLayerVisibleCommand { get; set; }
         public static RoutedCommand SetLayerEditableCommand { get; set; }
+
+        public static RoutedCommand SetLayerDeleteCommand { get; set; }
         /// <summary>
         /// 切换Map命令
         /// </summary>
