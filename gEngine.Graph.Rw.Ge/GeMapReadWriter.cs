@@ -100,24 +100,5 @@ namespace gEngine.Graph.Rw.Ge
             xmldoc.Save(url);
             return true;
         }
-
-        public bool DeleteMap(string projectUrl, string mapUrl)
-        {
-            if (mapUrl.Contains('\\') || mapUrl.Contains('/'))
-            {
-                //
-            }
-            else
-            {
-                string fullMapUrl = projectUrl.Substring(0, projectUrl.LastIndexOf(@"\")) + @"\Maps" + @"\" + mapUrl;
-                File.Delete(fullMapUrl);
-            }
-
-            XElement rootNode = XElement.Load(projectUrl);
-            IEnumerable<XElement> targetNodes = from target in rootNode.Descendants("Map") where target.Attribute("Url").Value.Equals(mapUrl) select target;
-            targetNodes.Remove();
-            rootNode.Save(projectUrl);
-            return true;
-        }
     }
 }

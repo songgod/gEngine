@@ -251,9 +251,10 @@ namespace gEngine.Project
                 return false;
 
             Maps.Remove(targetMap.ElementAt(0));
-
-            bool IsSuccess = gEngine.Graph.Interface.Registry.DeleteMap(Url, url);
-            return IsSuccess;
+            string fullurl = GetMapFullPath(url);
+            File.Delete(fullurl);
+            Write();
+            return true;
         }
 
         private string GetMapFullPath(string url)
