@@ -195,7 +195,7 @@
                            CommandTarget="{Binding Path=ProjectControl, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow}}"/>
                         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_45" Content="添加矩形"  Command="{x:Static prjcmds:BasicCommands.NewRectCommand}" 
                            CommandTarget="{Binding Path=ProjectControl, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow}}"/>
-                        <dxb:BarButtonItem  x:Uid="dxb:BarButtonItem_46" Content="添加折线"  Command="{x:Static prjcmds:BasicCommands.NewPolyLineCommand}" 
+                        <dxb:BarButtonItem  x:Uid="dxb:BarButtonItem_49" Content="添加折线"  Command="{x:Static prjcmds:BasicCommands.NewPolyLineCommand}" 
                            CommandTarget="{Binding Path=ProjectControl, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow}}"/>
                         <dxb:BarButtonItem  x:Uid="dxb:BarButtonItem_47" Content="添加曲线"  Command="{x:Static prjcmds:BasicCommands.NewBezierLineCommand}" 
                            CommandTarget="{Binding Path=ProjectControl, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow}}"/>
