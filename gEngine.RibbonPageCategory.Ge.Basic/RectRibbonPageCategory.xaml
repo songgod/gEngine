@@ -21,7 +21,7 @@
                     <dxe:TextEditSettings  />
                 </dxb:BarEditItem.EditSettings>
             </dxb:BarEditItem>
-            <dxb:BarEditItem x:Uid="dxb:BarEditItem_24" Content="边框色" EditValue="{Binding Path=Stroke,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+            <dxb:BarEditItem x:Uid="dxb:BarEditItem_24" Content="边框色" EditValue="{Binding Path=Stroke.Color,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                 <dxb:BarEditItem.EditSettings>
                     <dxe:PopupColorEditSettings/>
                 </dxb:BarEditItem.EditSettings>
