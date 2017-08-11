@@ -53,6 +53,7 @@
     <Compile Include="SectionLayer.cs" />
     <Compile Include="SectionInfo.cs" />
     <Compile Include="SectionLineType.cs" />
+    <Compile Include="TrendLine.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\gEngine.Graph.Ge\gEngine.Graph.Ge.csproj">

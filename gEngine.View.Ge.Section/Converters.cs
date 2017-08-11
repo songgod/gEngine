@@ -127,4 +127,30 @@ namespace gEngine.View.Ge.Section
             throw new NotImplementedException();
         }
     }
+
+    public class Points2PathDataConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            PointCollection points = (PointCollection)value;
+            return ConvertFrom(points);
+        }
+
+        public static PathGeometry ConvertFrom(PointCollection ps)
+        {
+            if (ps.Count <= 1)
+                return null;
+            PathGeometry pg = new PathGeometry();
+            PathFigure pf = new PathFigure() { StartPoint = ps[0] };
+            PolyBezierSegment pls = new PolyBezierSegment() { Points = new PointCollection(ps.Skip(1).Take(ps.Count - 1).ToList()) };
+            pf.Segments.Add(pls);
+            pg.Figures.Add(pf);
+            return pg;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
