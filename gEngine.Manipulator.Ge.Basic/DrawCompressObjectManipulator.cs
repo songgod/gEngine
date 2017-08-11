@@ -19,6 +19,10 @@ namespace gEngine.Manipulator.Ge.Basic
         public LineStyle rectStyle { get; set; }
         protected override void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            if (this.AssociatedObject == null)
+                return;
+            if (this.TrackAdorner == null)
+                return;
             Graph.Ge.Basic.Comprass com = new Graph.Ge.Basic.Comprass()
             {
                 Width = this.TrackAdorner.Width,
@@ -28,7 +32,7 @@ namespace gEngine.Manipulator.Ge.Basic
                 Fill = Brushes.Red,
                 Stroke = Brushes.Black,
                 StrokeThickness = 0,
-                RotateAngle=0
+                RotateAngle = 0
             };
             this.AssociatedObject.LayerContext.Objects.Add(com);
             base.MouseLeftButtonUp(sender, e);

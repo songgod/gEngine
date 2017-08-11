@@ -36,6 +36,11 @@
       <HintPath>..\3rdlib\GraphAlgo\x64\GraphAlgo.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="gTopology, Version=1.0.6425.21109, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\3rdlib\gToplogy\x64\gTopology.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -58,8 +63,11 @@
     <Compile Include="DrawPolyLineObjectManipulator.cs" />
     <Compile Include="DrawRectObjectManipulator.cs" />
     <Compile Include="DrawScaleRuleObjectManipulator.cs" />
+    <Compile Include="EditBezierLineObjectManipulator.cs" />
+    <Compile Include="EditCompressObjectManipulator.cs" />
     <Compile Include="EditBoundaryObjectManipulator.cs" />
     <Compile Include="EditLineObjectManipulator.cs" />
+    <Compile Include="EditPolyLineObjectManipulator.cs" />
     <Compile Include="EditRectObjectManipulator.cs" />
     <Compile Include="EditScaleRuleObjectManipulator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -88,6 +96,10 @@
     <ProjectReference Include="..\gEngine.Util\gEngine.Util.csproj">
       <Project>{84acb6c4-cf62-4f4b-a7e5-5c642edc041a}</Project>
       <Name>gEngine.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.View.Ge.Basic\gEngine.View.Ge.Basic.csproj">
+      <Project>{68766B32-0E50-4B96-987B-A8CB20535573}</Project>
+      <Name>gEngine.View.Ge.Basic</Name>
     </ProjectReference>
     <ProjectReference Include="..\gEngine.View\gEngine.View.csproj">
       <Project>{932485ea-2f95-4caa-8bcd-df68c496854e}</Project>

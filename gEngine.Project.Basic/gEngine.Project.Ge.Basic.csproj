@@ -48,9 +48,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\BasicCommandsInstaller.cs" />
+    <Compile Include="Commands\NewBezierLineCommand.cs" />
     <Compile Include="Commands\NewCommonLayerCommand.cs" />
     <Compile Include="Commands\NewBoundaryCommand.cs" />
+    <Compile Include="Commands\NewCompressCommand.cs" />
     <Compile Include="Commands\NewLineCommand.cs" />
+    <Compile Include="Commands\NewPolyLineCommand.cs" />
     <Compile Include="Commands\NewRectCommand.cs" />
     <Compile Include="Commands\NewScaleRuleCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -62,6 +65,10 @@
     <ProjectReference Include="..\gEngine.Commands\gEngine.Commands.csproj">
       <Project>{BC931BB9-D78C-437D-B5D2-04BE6E318172}</Project>
       <Name>gEngine.Commands</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.Graph.Ge.Basic\gEngine.Graph.Ge.Basic.csproj">
+      <Project>{db606377-aaa0-45bd-a6be-4f4c4cd111af}</Project>
+      <Name>gEngine.Graph.Ge.Basic</Name>
     </ProjectReference>
     <ProjectReference Include="..\gEngine.Graph.Ge\gEngine.Graph.Ge.csproj">
       <Project>{3BD77E4F-A348-4EDB-B60C-68B749249B91}</Project>
