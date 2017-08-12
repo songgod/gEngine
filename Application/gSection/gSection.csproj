@@ -1396,14 +1396,6 @@
   <ItemGroup>
     <Resource Include="Images\Small\newlayer.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Small\emptylayer.png" />
-    <Resource Include="Images\Small\NewUniversallyLayer.png" />
-    <Resource Include="Images\Small\NewWellLocationLayer.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Small\NewSectionMapLayer.png" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>$(MSBUILD) /t:updateuid $(ProjectPath)</PreBuildEvent>
