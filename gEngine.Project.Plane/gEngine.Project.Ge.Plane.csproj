@@ -53,12 +53,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\NewPlaneLineCommand.cs" />
     <Compile Include="Commands\PlaneCommandsInstaller.cs" />
     <Compile Include="Commands\NewPlaneMapCommand.cs" />
-    <Compile Include="Controls\SelectLineStyleLocationDocu.xaml.cs">
-      <DependentUpon>SelectLineStyleLocationDocu.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\SelectWellLocationDocu.xaml.cs">
       <DependentUpon>SelectWellLocationDocu.xaml</DependentUpon>
     </Compile>
@@ -72,6 +68,10 @@
     <ProjectReference Include="..\gEngine.Data.Interface\gEngine.Data.Interface.csproj">
       <Project>{B1C2609B-A3ED-43E0-9DA2-DF27029D44FC}</Project>
       <Name>gEngine.Data.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.Graph.Ge.Plane\gEngine.Graph.Ge.Plane.csproj">
+      <Project>{82739b38-8706-493d-a571-c743afcead12}</Project>
+      <Name>gEngine.Graph.Ge.Plane</Name>
     </ProjectReference>
     <ProjectReference Include="..\gEngine.Graph.Ge\gEngine.Graph.Ge.csproj">
       <Project>{3BD77E4F-A348-4EDB-B60C-68B749249B91}</Project>
@@ -95,10 +95,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Controls\SelectLineStyleLocationDocu.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\SelectWellLocationDocu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

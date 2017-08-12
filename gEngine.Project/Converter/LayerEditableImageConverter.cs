@@ -1,28 +1,38 @@
-﻿using System;
+﻿using gEngine.Project.Controls;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Data;
+using System.Windows.Media.Imaging;
 
 namespace gEngine.Project.Converter
 {
-    public class VisibilityConverter : IValueConverter
+    public class LayerEditableImageConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             bool b = (bool)value;
-            if (b)
-                return Visibility.Visible;
+            if(b)
+            {
+                return ImageHelper.EditableIcon;
+            }
             else
-                return Visibility.Hidden;
+            {
+                return ImageHelper.UnEditableIcon;
+            }
+
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            BitmapImage bmp = (BitmapImage)value;
+            if (bmp == ImageHelper.EditableIcon)
+                return true;
+            else
+                return false;
         }
     }
 }

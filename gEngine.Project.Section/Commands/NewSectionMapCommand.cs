@@ -47,7 +47,7 @@ namespace gEngine.Project.Ge.Section.Commands
             if (layer == null)
                 return;
 
-            e.CanExecute = layer.Type == "WellPlane";
+            e.CanExecute = layer.Type == "WellLocation";
             e.Handled = true;
         }
 
@@ -107,7 +107,7 @@ namespace gEngine.Project.Ge.Section.Commands
                 SectionSetEntity sse = SectionSet.DataContext as SectionSetEntity;
                 SectionLayerCreator sc = new SectionLayerCreator();
                 Layer layer = sc.CreateSectionLayer(db, wellLocs, horizonName, discreteName, sse);
-                layer.Name = "柱状图Layer图层";
+                layer.Name = "剖面图";
                 ILayers layers = new ILayers();
                 layers.Add(layer);
                 IMap map = Project.NewMap("Ge", sse.MapName, layers);

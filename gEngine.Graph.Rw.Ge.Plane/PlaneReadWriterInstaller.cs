@@ -10,6 +10,7 @@ namespace gEngine.Graph.Rw.Ge.Plane
     {
         public void InstallLayerReadWriter()
         {
+            Registry.RegistLayerRW(new RWWellLocationLayer());
         }
 
         public void InstallObjectReadWriter()

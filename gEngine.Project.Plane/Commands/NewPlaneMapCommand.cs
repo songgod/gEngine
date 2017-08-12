@@ -53,11 +53,11 @@ namespace gEngine.Project.Ge.Plane.Commands
             if (msg.ShowDialog() == true)
             {
                 IDBWellLocations wls = pctrl.Project.DBSource.GetWellLocations(msg.FileName);
-                PlaneLayerCreator pc = new PlaneLayerCreator();
+                WellLocationLayerCreator pc = new WellLocationLayerCreator();
                 gEngine.Graph.Ge.Layer layer = pc.CreateWellLocationLayer(wls);
 
                 //先增加layer，再创建IMap
-                layer.Name = "平面图Layer图层1";
+                layer.Name = "井位图";
                 layer.Visible = true;
                 layer.Editable = true;
                 ILayers layers = new ILayers();

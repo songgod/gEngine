@@ -6,8 +6,14 @@
              xmlns:local="clr-namespace:gEngine.View"
              mc:Ignorable="d"
               ItemsSource="{Binding Objects}"
-              Opacity="{Binding Opacity}"
+              Opacity="{Binding Opacity, Mode=TwoWay}"
              d:DesignHeight="300" d:DesignWidth="300">
+    <ItemsControl.Resources>
+        <local:BoolVisibilityConverter x:Key="bvc"/>
+    </ItemsControl.Resources>
+    <ItemsControl.Visibility>
+        <Binding Path="Visible" Converter="{StaticResource bvc}" Mode="TwoWay"/>
+    </ItemsControl.Visibility>
     <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
                 <Canvas x:Name="layerpanel"/>

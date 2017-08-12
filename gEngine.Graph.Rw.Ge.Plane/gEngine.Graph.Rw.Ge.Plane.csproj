@@ -46,6 +46,7 @@
     <Compile Include="PlaneReadWriterInstaller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RWWellLocation.cs" />
+    <Compile Include="RWWellLocationLayer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\gEngine.Graph.Ge.Plane\gEngine.Graph.Ge.Plane.csproj">

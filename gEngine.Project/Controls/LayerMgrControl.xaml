@@ -10,80 +10,33 @@
              xmlns:prjcmds="clr-namespace:gEngine.Commands;assembly=gEngine.Commands"
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
-        <cvt:ImagePathConverter x:Uid="cvt:ImagePathConverter_1" x:Key="imageConvert"/>
-        <cvt:VisibilityConverter  x:Uid="cvt:VisibilityConverter_1" x:Key="visibConvert"/>
+        <cvt:LayerEditableImageConverter x:Uid="cvt:ImagePathConverter_1" x:Key="editimageConvert"/>
+        <cvt:LayerVisibleImageConverter  x:Uid="cvt:VisibilityConverter_1" x:Key="visibleimageConvert"/>
         <DataTemplate x:Uid="DataTemplate_1" x:Key="listBoxTemplate">
             <StackPanel x:Uid="StackPanel_1" Orientation="Horizontal" Height="18">
-                <Image x:Uid="eyeImage" x:Name="eyeImage" Source="{Binding VisibalityImageName,Converter={StaticResource ResourceKey=imageConvert}}"
-                       Opacity="{ Binding VisibalityImageOpacity}">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger x:Uid="i:EventTrigger_1" EventName="MouseLeftButtonDown">
-                            <i:InvokeCommandAction  x:Uid="i:InvokeCommandAction_1" Command="{x:Static prjcmds:OperateViewCommands.SetLayerVisibleCommand}" CommandParameter="{ Binding ElementName=eyeImage}" >
-                            </i:InvokeCommandAction>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Image>
-                <TextBlock x:Uid="TextBlock_2" Margin="5 0 0 0" Text="|" Foreground="LightGray"/>
-                <Image x:Uid="editImage" x:Name="editImage" Source="{Binding EditImageName,Converter={StaticResource ResourceKey=imageConvert}}"
-                       Opacity="{ Binding EditImageOpacity}"  Margin="5 0 0 0">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger x:Uid="i:EventTrigger_2" EventName="MouseLeftButtonDown">
-                            <i:InvokeCommandAction  x:Uid="i:InvokeCommandAction_2" Command="{x:Static prjcmds:OperateViewCommands.SetLayerEditableCommand}" CommandParameter="{ Binding ElementName=editImage}" >
-                            </i:InvokeCommandAction>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Image>
-                <TextBlock x:Uid="TextBlock_4" Margin="5 0 0 0" Text="|" Foreground="LightGray"/>
-                <Image x:Uid="newLayerImage" x:Name="newLayerImage" Source="{Binding NewLayerImageName,Converter={StaticResource ResourceKey=imageConvert}}"
-                       Opacity="{ Binding EditImageOpacity}"  Margin="5 0 0 0">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger x:Uid="i:EventTrigger_4" EventName="MouseLeftButtonDown">
-                            <i:InvokeCommandAction  x:Uid="i:InvokeCommandAction_4" Command="{x:Static prjcmds:OperateViewCommands.SetLayerEditableCommand}"  CommandParameter="{ Binding ElementName=newLayerImage}" >
-                            </i:InvokeCommandAction>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Image>
-                <TextBlock x:Uid="TextBlock_3" Margin="5 0 0 0" Text="|" Foreground="LightGray"/>
-                <Image x:Uid="deleteImage" x:Name="deleteImage" Source="{Binding DeleteImageName,Converter={StaticResource ResourceKey=imageConvert}}"
-                       Opacity="{ Binding EditImageOpacity}"  Margin="5 0 0 0">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger x:Uid="i:EventTrigger_3" EventName="MouseLeftButtonDown">
-                            <i:InvokeCommandAction  x:Uid="i:InvokeCommandAction_3" Command="{x:Static prjcmds:OperateViewCommands.SetLayerDeleteCommand}" CommandParameter="{ Binding ElementName=deleteImage}" >
-                            </i:InvokeCommandAction>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Image>
-              
-                <TextBlock x:Uid="TextBlock_1" Margin="5 0 0 0" Text="|" Foreground="LightGray"/>
                 <TextBlock x:Uid="tbName" x:Name="tbName" Text="{ Binding Name}"  Margin="5 0 0 0 "/>
+                <TextBlock x:Uid="TextBlock_1" Margin="5 0 0 0" Text="|" Foreground="LightGray"/>
+                <Image x:Uid="eyeImage" x:Name="eyeImage" Source="{Binding Visible,Converter={StaticResource ResourceKey=visibleimageConvert},Mode=TwoWay}" Margin="5 0 0 0" MouseLeftButtonUp="eyeImage_MouseLeftButtonUp"/>
+                <TextBlock x:Uid="TextBlock_2" Margin="5 0 0 0" Text="|" Foreground="LightGray"/>
+                <Image x:Uid="editImage" x:Name="editImage" Source="{Binding Editable,Converter={StaticResource ResourceKey=editimageConvert},Mode=TwoWay}" Margin="5 0 0 0" MouseLeftButtonUp="editImage_MouseLeftButtonUp"/>
+                <TextBlock x:Uid="TextBlock_3" Margin="5 0 0 0" Text="|" Foreground="LightGray"/>
+                <Slider x:Uid="Slider_1" Margin="5,0,0,0" Value="{Binding Opacity, Mode=TwoWay}" Minimum="0.0" Maximum="1.0"/>
             </StackPanel>
         </DataTemplate>
     </UserControl.Resources>
     <Grid x:Uid="Grid_1">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition x:Uid="ColumnDefinition_1" Width="60"/>
-            <ColumnDefinition x:Uid="ColumnDefinition_2" Width="*"/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <!--<RowDefinition x:Uid="RowDefinition_1" Height="30" />-->
-            <RowDefinition x:Uid="RowDefinition_2" Height="*" />
+            <RowDefinition x:Uid="RowDefinition_3" Height="30"/>
+            <RowDefinition x:Uid="RowDefinition_2" Height="*"/>
         </Grid.RowDefinitions>
-        <!--<TextBlock x:Uid="TextBlock_3" Text="不透明度:" Grid.Column="0" Grid.Row="0" />
-        <ComboBox x:Uid="ComboBox_1" DataContext="{Binding SelectedItem,ElementName=lbLayers}" x:Name="cbOpacity" ScrollViewer.PanningMode="None" IsEditable="True" Grid.Column="1" Grid.Row="0" Text="{Binding SelectedItem.LayerOpacity,ElementName=lbLayers}">
-            <ComboBoxItem x:Uid="ComboBoxItem_1">
-                <Slider x:Uid="Slider_1" Width="220" SmallChange="0.01" LargeChange="0.05" Maximum="1" Minimum="0" 
-                        Value="{Binding SelectedItem.LayerOpacity,ElementName=lbLayers}"
-                        IsSnapToTickEnabled="True" TickFrequency="0.01" >
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger x:Uid="i:EventTrigger_3" EventName="ValueChanged">
-                            <i:InvokeCommandAction  x:Uid="i:InvokeCommandAction_3" Command="{x:Static prjcmds:OperateViewCommands.SetLayerOpacityCommand}" CommandParameter="{Binding ElementName=cbOpacity}">
-                            </i:InvokeCommandAction>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Slider>
-            </ComboBoxItem>
-        </ComboBox>--> 
-        <ListBox x:Uid="lbLayers" x:Name="lbLayers" ItemTemplate="{ StaticResource listBoxTemplate}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <StackPanel x:Uid="StackPanel_2" Orientation="Horizontal">
+            <Button x:Uid="Button_1" Content="新建"/>
+            <Button x:Uid="Button_2" Content="删除"/>
+            <Button x:Uid="Button_3" Content="可见性"/>
+            <Button x:Uid="Button_4" Content="编辑性"/>
+            <Button x:Uid="Button_5" Content="清空"/>
+        </StackPanel>
+        <ListBox x:Uid="lbLayers" x:Name="lbLayers" ItemsSource="{Binding MapSource.Layers}" ItemTemplate="{ StaticResource listBoxTemplate}" Grid.Row="1"/>
     </Grid>
             
 

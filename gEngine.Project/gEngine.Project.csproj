@@ -68,12 +68,8 @@
     <Compile Include="Commands\ProjectCommandsInstaller.cs" />
     <Compile Include="Commands\RedoCommand.cs" />
     <Compile Include="Commands\SelectObjectCommand.cs" />
-    <Compile Include="Commands\SetLayerDeleteCommand.cs" />
-    <Compile Include="Commands\SetLayerEditableCommand.cs" />
     <Compile Include="Commands\SaveAsProjectCommand.cs" />
     <Compile Include="Commands\SaveProjectCommand.cs" />
-    <Compile Include="Commands\SetLayerOpacityCommand.cs" />
-    <Compile Include="Commands\SetLayerVisibleCommand.cs" />
     <Compile Include="Commands\UndoCommand.cs" />
     <Compile Include="Controls\LayerMgrControl.xaml.cs">
       <DependentUpon>LayerMgrControl.xaml</DependentUpon>
@@ -87,10 +83,11 @@
     <Compile Include="Controls\ProjectControl.xaml.cs">
       <DependentUpon>ProjectControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converter\ImagePathConverter.cs" />
+    <Compile Include="Converter\LayerEditableImageConverter.cs" />
     <Compile Include="Converter\MapIndexConverter.cs" />
     <Compile Include="Converter\MultiCommandParaConverter.cs" />
-    <Compile Include="Converter\VisibilityConverter.cs" />
+    <Compile Include="Converter\LayerVisibleImageConverter.cs" />
+    <Compile Include="ImageHelper.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controls\ToolsControl.xaml.cs">
@@ -151,7 +148,12 @@
       <Name>gEngine.View</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\edit.png" />
+    <Resource Include="Images\Invisible.png" />
+    <Resource Include="Images\unedit.png" />
+    <Resource Include="Images\Visible.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>$(MSBUILD) /t:updateuid $(ProjectPath)</PreBuildEvent>

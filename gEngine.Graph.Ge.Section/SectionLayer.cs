@@ -11,8 +11,15 @@ namespace gEngine.Graph.Ge.Section
     {
         public SectionLayer()
         {
-            Type = "Section";
             SectionInfo = new SectionInfo();
+        }
+
+        public override string Type
+        {
+            get
+            {
+                return "Section";
+            }
         }
 
         public SectionInfo SectionInfo { get; private set; }

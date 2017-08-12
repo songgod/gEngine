@@ -23,7 +23,6 @@ namespace gEngine.Project.Ge.Plane.Commands
             if (ui == null)
                 return;
             ui.CommandBindings.Add(new NewPlaneMapCommand());
-            ui.CommandBindings.Add(new NewPlaneLineCommand());
         }
     }
 }

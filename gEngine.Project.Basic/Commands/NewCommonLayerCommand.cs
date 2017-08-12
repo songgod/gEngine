@@ -1,8 +1,9 @@
 ﻿using gEngine.Commands;
 using gEngine.Graph.Ge;
+using gEngine.Graph.Ge.Basic;
 using gEngine.Graph.Interface;
 using gEngine.Project.Controls;
-using gEngine.Util.Ge.Basic;
+using gEngine.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,9 @@ namespace gEngine.Project.Ge.Basic.Commands
             if (pc == null || pc.MapsControl==null)
                 return;
 
+            if (pc.MapsControl.ActiveMapControl == null)
+                return;
+
             e.CanExecute = true;
             e.Handled = true;
         }
@@ -36,12 +40,12 @@ namespace gEngine.Project.Ge.Basic.Commands
             ProjectControl pc = e.OriginalSource as ProjectControl;
             if (pc == null || pc.MapsControl == null)
                 return;
+            MapControl mc = pc.MapsControl.ActiveMapControl;
+            if (mc == null || mc.MapContext==null)
+                return;
 
-            IMap map = pc.Project.NewMap("Ge", "Common");
-
-            CommonLayerCreator sc = new CommonLayerCreator();
-            Layer layer = sc.Create();
-            map.Layers.Add(layer);
+            BasicLayer layer = new BasicLayer();
+            mc.MapContext.Layers.Add(layer);
         }
     }
 }

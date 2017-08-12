@@ -12,7 +12,7 @@ namespace gEngine.Graph.Rw.Ge.Section
 {
     class RWSectionLayer : RWLayerBase
     {
-        public override string SupportType { get { return "SectionLayer"; } }
+        public override string SupportType { get { return "Section"; } }
 
         public override void ReadLayer(ILayer Ilayer, XmlNode node)
         {

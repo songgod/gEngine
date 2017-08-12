@@ -15,7 +15,13 @@ namespace gEngine.Graph.Ge
             Layers = new ILayers();
         }
 
-
+        public string Type
+        {
+            get
+            {
+                return "Ge";
+            }
+        }
 
         public ILayers Layers
         {

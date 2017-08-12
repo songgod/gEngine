@@ -1,5 +1,6 @@
 ﻿using gEngine.Data.Interface;
 using gEngine.Graph.Ge;
+using gEngine.Graph.Ge.Plane;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace gEngine.Util.Ge.Plane
 {
-    public class PlaneLayerCreator
+    public class WellLocationLayerCreator
     {
-        public Layer CreateWellLocationLayer()
+        public WellLocationLayer CreateWellLocationLayer()
         {
-            return new Layer() { Type = "WellPlane" };
+            return new WellLocationLayer();
         }
 
-        public Layer CreateWellLocationLayer(IDBWellLocations dbwl)
+        public WellLocationLayer CreateWellLocationLayer(IDBWellLocations dbwl)
         {
-            Layer layer = new Layer() { Name = dbwl.Name, Type = "WellPlane" };
+            WellLocationLayer layer = new WellLocationLayer() { Name = dbwl.Name };
             WellLocationsCreator c = new WellLocationsCreator();
             layer.Objects = c.Create(dbwl);
             return layer;

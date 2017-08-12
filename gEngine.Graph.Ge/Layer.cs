@@ -15,6 +15,14 @@ namespace gEngine.Graph.Ge
             Objects = new IObjects();
         }
 
+        virtual public string Type
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
 
         public IObjects Objects
         {
@@ -25,29 +33,6 @@ namespace gEngine.Graph.Ge
         // Using a DependencyProperty as the backing store for Objects.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ObjectsProperty =
             DependencyProperty.Register("Objects", typeof(IObjects), typeof(Layer));
-
-
-
-        public string Type
-        {
-            get { return (string)GetValue(TypeProperty); }
-            set { SetValue(TypeProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for Type.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty TypeProperty =
-            DependencyProperty.Register("Type", typeof(string), typeof(Layer));
-
-
-        public bool NewLayer
-        {
-            get { return (bool)GetValue(NewLayerProperty); }
-            set { SetValue(NewLayerProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for Visible.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty NewLayerProperty =
-            DependencyProperty.Register("NewLayer", typeof(bool), typeof(Layer), new PropertyMetadata(true));
 
         public bool Visible
         {
@@ -72,33 +57,13 @@ namespace gEngine.Graph.Ge
         public static readonly DependencyProperty EditableProperty =
             DependencyProperty.Register("Editable", typeof(bool), typeof(Layer), new PropertyMetadata(true));
 
-        public bool Delete
-        {
-            get { return (bool)GetValue(DeleteProperty); }
-            set { SetValue(DeleteProperty, value); }
-        }
-
-
-        // Using a DependencyProperty as the backing store for Editable.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty DeleteProperty =
-            DependencyProperty.Register("Delete", typeof(bool), typeof(Layer), new PropertyMetadata(true));
-
         public double Opacity
         {
-            get
-            {
-                return (double)GetValue(OpacityProperty);
-            }
-
-            set
-            {
-                SetValue(OpacityProperty, value);
-            }
+            get { return (double)GetValue(OpacityProperty); }
+            set { SetValue(OpacityProperty, value); }
         }
 
         public static readonly DependencyProperty OpacityProperty =
             DependencyProperty.Register("Opacity", typeof(double), typeof(Layer), new PropertyMetadata(1.0));
-
-
     }
 }

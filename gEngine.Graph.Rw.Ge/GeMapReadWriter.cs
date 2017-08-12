@@ -57,7 +57,6 @@ namespace gEngine.Graph.Rw.Ge
                     if (layer == null)
                         continue;
                     layer.Name = node.Attributes["Name"].Value;
-                    layer.Type = node.Attributes["Type"].Value;
                     map.Layers.Add(layer);
                 }
                 reader.Close();

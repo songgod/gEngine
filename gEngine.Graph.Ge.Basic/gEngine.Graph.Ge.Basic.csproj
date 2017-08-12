@@ -44,6 +44,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BasicLayer.cs" />
     <Compile Include="BeizerLine.cs" />
     <Compile Include="Boundary.cs" />
     <Compile Include="Compress.cs" />

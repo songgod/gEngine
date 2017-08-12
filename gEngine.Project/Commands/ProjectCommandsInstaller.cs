@@ -23,8 +23,6 @@ namespace gEngine.Project.Commands
                 return;
 
             ui.CommandBindings.Add(new FullViewCommand());
-            ui.CommandBindings.Add(new SetLayerVisibleCommand());
-            ui.CommandBindings.Add(new SetLayerEditableCommand());
             ui.CommandBindings.Add(new OpenMapsSelectCommand());
             ui.CommandBindings.Add(new HideTabCommand());
             ui.CommandBindings.Add(new OpenProjectCommand());
@@ -32,12 +30,10 @@ namespace gEngine.Project.Commands
             ui.CommandBindings.Add(new SaveAsProjectCommand());
             ui.CommandBindings.Add(new OpenMapCommand());
             ui.CommandBindings.Add(new DeleteMapCommand());
-            ui.CommandBindings.Add(new SetLayerOpacityCommand());
             ui.CommandBindings.Add(new OpenRecentProjectCommand());
             ui.CommandBindings.Add(new OpenDBSourceCommand());
             ui.CommandBindings.Add(new SelectObjectCommand());
             ui.CommandBindings.Add(new PrintPngCommand());
-            ui.CommandBindings.Add(new SetLayerDeleteCommand());
         }
     }
 }

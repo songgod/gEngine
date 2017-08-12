@@ -4,7 +4,6 @@ using gEngine.Graph.Interface;
 using gEngine.Manipulator;
 using gEngine.Manipulator.Ge.Basic;
 using gEngine.Project.Controls;
-using gEngine.Util.Ge.Basic;
 using gEngine.View;
 using System;
 using System.Collections.Generic;

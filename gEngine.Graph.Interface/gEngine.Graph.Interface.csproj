@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ILayerCreator.cs" />
     <Compile Include="IMapReadWriter.cs" />
     <Compile Include="ILayer.cs" />
     <Compile Include="IMap.cs" />

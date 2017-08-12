@@ -39,7 +39,6 @@ namespace gEngine.Project.Commands
             if (p == null)
                 return;
             p.OpenMaps.CurrentIndex = pc.MapsControl.SelectedIndex;
-            pc.layermgr.BuildListViewSource();
 
             e.Handled = true;
         }

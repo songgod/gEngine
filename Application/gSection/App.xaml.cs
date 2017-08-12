@@ -16,7 +16,8 @@ namespace gSection
         {
             base.OnStartup(e);
             gEngine.Data.Interface.Register.LoadDBFactorys();
-            gEngine.Graph.Interface.Registry.LoadReadWriter();
+            gEngine.Graph.Interface.Registry.LoadMapReadWriter();
+            gEngine.Graph.Interface.Registry.LoadLayerCreator();
             gEngine.Manipulator.Registry.LoadManipulators();
             gEngine.View.Registry.LoadLocalElement();
             gEngine.Project.Registry.LoadLocalElement();

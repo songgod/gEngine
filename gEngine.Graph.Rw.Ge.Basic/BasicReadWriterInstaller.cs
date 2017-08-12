@@ -4,17 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace gEngine.Graph.Rw.Ge
+namespace gEngine.Graph.Rw.Ge.Basic
 {
-    public class ReadWriterInstaller : IGeReadWriterInstaller
+    public class BasicReadWriterInstaller : IGeReadWriterInstaller
     {
         public void InstallLayerReadWriter()
         {
-            Registry.RegistLayerRW(new RWLayerBase());
+            Registry.RegistLayerRW(new RWBasicLayer());
         }
 
         public void InstallObjectReadWriter()
         {
+            
         }
     }
 }

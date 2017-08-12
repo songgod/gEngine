@@ -10,15 +10,11 @@ namespace gEngine.Graph.Interface
     {
         string Name { get; set; }
 
-        string Type { get; set; }
-        bool NewLayer { get; set; }
-
+        string Type { get; }
 
         bool Visible { get; set; }
 
         bool Editable { get; set; }
-
-        bool Delete { get; set; }
 
         double Opacity { get; set; }
 

@@ -8,6 +8,8 @@ namespace gEngine.Graph.Interface
     {
         string Name { get; set; }
 
+        string Type { get; }
+
         ILayers Layers { get; set; }
     }
 
