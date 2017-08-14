@@ -144,11 +144,16 @@
                         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_46" Content="输出PNG"  Command="{x:Static prjcmds:BasicCommands.PrintPngCommand}" 
                           CommandTarget="{Binding ElementName=prjctrl}"
                                           LargeGlyph="pack://application:,,,/gSection;component/Images/Clipart/caNetCard.png" Glyph="pack://application:,,,/gSection;component/Images/Clipart/caNetCard.png" RibbonStyle="Large"/>
+                        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_50" Content="打开平面图" Command="{x:Static prjcmds:PlaneCommands.NewPlaneMapCommand}"
+                                           CommandTarget="{Binding ElementName=prjctrl}" Glyph="{dx:DXImage Image=Open2_16x16.png}" LargeGlyph="{dx:DXImage Image=Open2_32x32.png}"/>
+                        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_51" Content="新建剖面图" Command="{x:Static prjcmds:SectionCommands.NewSectionMapCommand}"
+                            CommandTarget="{Binding ElementName=prjctrl }"
+                            LargeGlyph="{dx:DXImage Image=BOFolder_32x32.png}" Glyph="{dx:DXImage Image=BOFolder_16x16.png}"/>
                     </dxr:RibbonPageGroup>
                 </dxr:RibbonPage>
                 <dxr:RibbonPage x:Uid="pageRef" x:Name="pageRef" Caption="参考">
                     <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_4" Caption="平面信息">
-                        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_8" Content="打开平面图" Command="{x:Static prjcmds:PlaneCommands.NewPlaneMapCommand}" CommandTarget="{Binding ElementName=prjctrl}"/>
+                        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_8" Content="打开平面图" Command="{x:Static prjcmds:PlaneCommands.NewPlaneMapCommand}" CommandTarget="{Binding ElementName=prjctrl}" Glyph="{dx:DXImage Image=Open2_16x16.png}" LargeGlyph="{dx:DXImage Image=Open2_32x32.png}"/>
                     </dxr:RibbonPageGroup>
                     <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_5" Caption="地震信息">
                         <dxb:BarCheckItem x:Uid="dxb:BarCheckItem_1" Content="BarCheckItem"/>

@@ -21,7 +21,7 @@ namespace gEngine.View
                 return;
 
             int xr = elm.RenderTransform.Value.M11 < 0 ? -1 : 1;
-            int yr = elm.RenderTransform.Value.M22 < 0 ? -1 : 1;
+            int yr = -1;// elm.RenderTransform.Value.M22 < 0 ? -1 : 1;
 
             Matrix mscale = new Matrix();
             double sx = width / rect.Width;
