@@ -44,6 +44,16 @@ namespace gEngine.Graph.Ge
         public static readonly DependencyProperty VisibleProperty =
             DependencyProperty.Register("Visible", typeof(bool), typeof(Layer), new PropertyMetadata(true));
 
+        public bool Del
+        {
+            get { return (bool)GetValue(DelProperty); }
+            set { SetValue(DelProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Visible.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DelProperty =
+            DependencyProperty.Register("Del", typeof(bool), typeof(Layer), new PropertyMetadata(true));
+
 
 
         public bool Editable

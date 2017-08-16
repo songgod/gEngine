@@ -25,7 +25,10 @@ namespace gEngine.Project.Controls
         {
             InitializeComponent();
             this.DataContext = this;
+          
         }
+
+       
 
         public IMap MapSource
         {
@@ -60,6 +63,11 @@ namespace gEngine.Project.Controls
                 image.Source = ImageHelper.UnEditableIcon;
             else
                 image.Source = ImageHelper.EditableIcon;
+        }
+
+        private void delImage_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+             MapSource.Layers.RemoveAt(lbLayers.SelectedIndex);
         }
     }
 }

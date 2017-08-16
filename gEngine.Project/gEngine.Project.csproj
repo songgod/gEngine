@@ -83,6 +83,7 @@
     <Compile Include="Controls\ProjectControl.xaml.cs">
       <DependentUpon>ProjectControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converter\LayerDelImageConverter.cs" />
     <Compile Include="Converter\LayerEditableImageConverter.cs" />
     <Compile Include="Converter\MapIndexConverter.cs" />
     <Compile Include="Converter\MultiCommandParaConverter.cs" />
@@ -153,6 +154,9 @@
     <Resource Include="Images\Invisible.png" />
     <Resource Include="Images\unedit.png" />
     <Resource Include="Images\Visible.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\del.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

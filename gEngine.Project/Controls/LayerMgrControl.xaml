@@ -12,6 +12,7 @@
     <UserControl.Resources>
         <cvt:LayerEditableImageConverter x:Uid="cvt:ImagePathConverter_1" x:Key="editimageConvert"/>
         <cvt:LayerVisibleImageConverter  x:Uid="cvt:VisibilityConverter_1" x:Key="visibleimageConvert"/>
+        <cvt:LayerDelImageConverter  x:Uid="cvt:DelConverter_1" x:Key="delimageConvert"/>
         <DataTemplate x:Uid="DataTemplate_1" x:Key="listBoxTemplate">
             <StackPanel x:Uid="StackPanel_1" Orientation="Horizontal" Height="18">
                 <TextBlock x:Uid="tbName" x:Name="tbName" Text="{ Binding Name}"  Margin="5 0 0 0 "/>
@@ -20,6 +21,8 @@
                 <TextBlock x:Uid="TextBlock_2" Margin="5 0 0 0" Text="|" Foreground="LightGray"/>
                 <Image x:Uid="editImage" x:Name="editImage" Source="{Binding Editable,Converter={StaticResource ResourceKey=editimageConvert},Mode=TwoWay}" Margin="5 0 0 0" MouseLeftButtonUp="editImage_MouseLeftButtonUp"/>
                 <TextBlock x:Uid="TextBlock_3" Margin="5 0 0 0" Text="|" Foreground="LightGray"/>
+                <Image x:Uid="delImage" x:Name="delImage" Source="{Binding Del,Converter={StaticResource ResourceKey=delimageConvert},Mode=TwoWay}" Margin="5 0 0 0" MouseLeftButtonUp="delImage_MouseLeftButtonUp"/>
+                <TextBlock x:Uid="TextBlock_4" Margin="5 0 0 0" Text="|" Foreground="LightGray"/>
                 <Slider x:Uid="Slider_1" Margin="5,0,0,0" Value="{Binding Opacity, Mode=TwoWay}" Minimum="0.0" Maximum="1.0"/>
             </StackPanel>
         </DataTemplate>
