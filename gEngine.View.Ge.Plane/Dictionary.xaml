@@ -31,8 +31,10 @@
             <TextBlock Text="{Binding WellNum}" />
             <StackPanel.RenderTransform>
                 <TransformGroup><!--,Converter={StaticResource wellPositionConverter},ConverterParameter={x:Reference Name=gvpc}-->
+                    <ScaleTransform ScaleY="-1"/>
                     <TranslateTransform X="{Binding X}"
                                         Y="{Binding Y}" />
+                    
                 </TransformGroup>
             </StackPanel.RenderTransform>
         </StackPanel>
