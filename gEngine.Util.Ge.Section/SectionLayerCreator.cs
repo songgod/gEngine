@@ -103,12 +103,13 @@ namespace gEngine.Util.Ge.Section
                 if (firstWlLoc == 0)
                 {
                     firstWlLoc = xAxis;
-                    well.Location = (xAxis - firstWlLoc) * Graph.Ge.Column.Enums.PerMilePx / well.HorizontalProportion;
+                    well.Location = 0;
                 }
                 else
                 {
                     well.Location = (xAxis - firstWlLoc) * Graph.Ge.Column.Enums.PerMilePx / well.HorizontalProportion + wellWidth;
                 }
+
                 wellWidth += well.LstColumns.Sum(x => x[0].Width);
             }
         }

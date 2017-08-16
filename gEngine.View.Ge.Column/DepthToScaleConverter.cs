@@ -59,10 +59,12 @@ namespace gEngine.View.Ge.Column
             double FirstScale = top - mindepth == 0 ? 10 : top - mindepth;//第一个刻度点
             int LongitudinalProportion = owner.LongitudinalProportion; //纵向比例
 
+            System.Drawing.Font font = new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+
             PathGeometry geom = new PathGeometry();
             for (double i = FirstScale; i <= depth; i = i + DepthToScaleConverter.MainScaleInterval)
             {
-                PathGeometry path = GetTextPath((i + mindepth).ToString(), "微软雅黑", 12, (i - 3) * Enums.PerMilePx / LongitudinalProportion);
+                PathGeometry path = GetTextPath((i + mindepth).ToString(), "微软雅黑", 12, i * Enums.PerMilePx / LongitudinalProportion - font.Height / 2);
                 geom.AddGeometry(path);
             }
             return geom;
