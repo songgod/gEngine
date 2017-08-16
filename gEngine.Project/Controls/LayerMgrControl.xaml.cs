@@ -65,9 +65,15 @@ namespace gEngine.Project.Controls
                 image.Source = ImageHelper.EditableIcon;
         }
 
-        private void delImage_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void btnDel_Click(object sender, RoutedEventArgs e)
         {
-             MapSource.Layers.RemoveAt(lbLayers.SelectedIndex);
+            if(lbLayers.SelectedIndex>-1)
+                MapSource.Layers.RemoveAt(lbLayers.SelectedIndex);
+        }
+
+        private void btnEmpty_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

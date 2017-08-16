@@ -12,7 +12,7 @@
     <UserControl.Resources>
         <cvt:LayerEditableImageConverter x:Uid="cvt:ImagePathConverter_1" x:Key="editimageConvert"/>
         <cvt:LayerVisibleImageConverter  x:Uid="cvt:VisibilityConverter_1" x:Key="visibleimageConvert"/>
-        <cvt:LayerDelImageConverter  x:Uid="cvt:DelConverter_1" x:Key="delimageConvert"/>
+      
         <DataTemplate x:Uid="DataTemplate_1" x:Key="listBoxTemplate">
             <StackPanel x:Uid="StackPanel_1" Orientation="Horizontal" Height="18">
                 <TextBlock x:Uid="tbName" x:Name="tbName" Text="{ Binding Name}"  Margin="5 0 0 0 "/>
@@ -21,8 +21,6 @@
                 <TextBlock x:Uid="TextBlock_2" Margin="5 0 0 0" Text="|" Foreground="LightGray"/>
                 <Image x:Uid="editImage" x:Name="editImage" Source="{Binding Editable,Converter={StaticResource ResourceKey=editimageConvert},Mode=TwoWay}" Margin="5 0 0 0" MouseLeftButtonUp="editImage_MouseLeftButtonUp"/>
                 <TextBlock x:Uid="TextBlock_3" Margin="5 0 0 0" Text="|" Foreground="LightGray"/>
-                <Image x:Uid="delImage" x:Name="delImage" Source="{Binding Del,Converter={StaticResource ResourceKey=delimageConvert},Mode=TwoWay}" Margin="5 0 0 0" MouseLeftButtonUp="delImage_MouseLeftButtonUp"/>
-                <TextBlock x:Uid="TextBlock_4" Margin="5 0 0 0" Text="|" Foreground="LightGray"/>
                 <Slider x:Uid="Slider_1" Margin="5,0,0,0" Value="{Binding Opacity, Mode=TwoWay}" Minimum="0.0" Maximum="1.0"/>
             </StackPanel>
         </DataTemplate>
@@ -34,10 +32,10 @@
         </Grid.RowDefinitions>
         <StackPanel x:Uid="StackPanel_2" Orientation="Horizontal">
             <Button x:Uid="Button_1" Content="新建"/>
-            <Button x:Uid="Button_2" Content="删除"/>
+            <Button x:Uid="btnDel" Content="删除" Click="btnDel_Click"/>
             <Button x:Uid="Button_3" Content="可见性"/>
             <Button x:Uid="Button_4" Content="编辑性"/>
-            <Button x:Uid="Button_5" Content="清空"/>
+            <Button x:Uid="btnEmpty" Content="清空" Click="btnEmpty_Click"/>
         </StackPanel>
         <ListBox x:Uid="lbLayers" x:Name="lbLayers" ItemsSource="{Binding MapSource.Layers}" ItemTemplate="{ StaticResource listBoxTemplate}" Grid.Row="1"/>
     </Grid>
