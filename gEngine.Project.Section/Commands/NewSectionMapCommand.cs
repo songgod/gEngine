@@ -102,9 +102,10 @@ namespace gEngine.Project.Ge.Section.Commands
 
             DXSectionSet SectionSet = new DXSectionSet();
             SectionSet.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            SectionSetEntity sse = SectionSet.DataContext as SectionSetEntity;
+            sse.BindTopAndBottomCw(db, horizonName, wellLocs);
             if (SectionSet.ShowDialog() == true)
             {
-                SectionSetEntity sse = SectionSet.DataContext as SectionSetEntity;
                 SectionLayerCreator sc = new SectionLayerCreator();
                 Layer layer = sc.CreateSectionLayer(db, wellLocs, horizonName, discreteName, sse);
                 layer.Name = "剖面图";

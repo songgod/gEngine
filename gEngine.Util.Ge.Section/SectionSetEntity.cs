@@ -1,9 +1,12 @@
 ﻿using DevExpress.Mvvm;
 using DevExpress.Xpf.Core;
 using DevExpress.Xpf.Editors;
+using gEngine.Data.Interface;
 using gEngine.Graph.Ge.Column;
+using gEngine.Graph.Ge.Plane;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -84,6 +87,58 @@ namespace gEngine.Util.Ge.Section
         public static readonly DependencyProperty MapNameProperty =
             DependencyProperty.Register("MapName", typeof(string), typeof(SectionSetEntity));
 
+        public double TopYs
+        {
+            get { return (double) GetValue(TopYsProperty); }
+            set { SetValue(TopYsProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MapName.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TopYsProperty =
+            DependencyProperty.Register("TopYs", typeof(double), typeof(SectionSetEntity));
+
+        public double BottomYs
+        {
+            get { return (double) GetValue(BottomYsProperty); }
+            set { SetValue(BottomYsProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MapName.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty BottomYsProperty =
+            DependencyProperty.Register("BottomYs", typeof(double), typeof(SectionSetEntity));
+
+        public ObservableCollection<string> TopCw
+        {
+            get { return (ObservableCollection<string>) GetValue(TopCwProperty); }
+            set { SetValue(TopCwProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MapName.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TopCwProperty =
+            DependencyProperty.Register("TopCw", typeof(ObservableCollection<string>), typeof(SectionSetEntity));
+
+        public string SelTopCw
+        {
+            get;
+            private set;
+        }
+
+        public ObservableCollection<string> BottomCw
+        {
+            get { return (ObservableCollection<string>) GetValue(BottomCwProperty); }
+            set { SetValue(BottomCwProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MapName.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty BottomCwProperty =
+            DependencyProperty.Register("BottomCw", typeof(ObservableCollection<string>), typeof(SectionSetEntity));
+
+        public string SelBottomCw
+        {
+            get;
+            private set;
+        }
+
         #endregion
 
         #region Method
@@ -117,11 +172,79 @@ namespace gEngine.Util.Ge.Section
             HorizontalProportion.Add(3000);
         }
 
-        private bool CheckUI()
+        public void BindTopAndBottomCw(IDBSource db, string horizonName, Stack<WellLocation> wellLocs)
         {
+            List<string> lsLayerNums = new List<string>();
+            foreach (WellLocation wl in wellLocs)
+            {
+                IDBHorizons horizons = db.GetHorizonsByWell(wl.Name, horizonName);
+                for (int i = 0; i < horizons.Horizons.Count; i++)
+                {
+                    if (string.IsNullOrEmpty(horizons.Horizons[i].LayerNumber))
+                        continue;
+                    lsLayerNums.Add(horizons.Horizons[i].LayerNumber);
+                }
+            }
+
+            lsLayerNums = lsLayerNums.GroupBy(t => t).Select(t => t.First()).ToList();
+
+            TopCw = new ObservableCollection<string>(lsLayerNums);
+            BottomCw = new ObservableCollection<string>(lsLayerNums);
+        }
+
+        private bool CheckUI(FrameworkElement el)
+        {
+
             if (string.IsNullOrEmpty(MapName))
             {
                 MessageBox.Show("图件名不允许为空！");
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(TopYs.ToString()))
+            {
+                MessageBox.Show("顶部延伸不允许为空！");
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(BottomYs.ToString()))
+            {
+                MessageBox.Show("底部延伸不允许为空！");
+                return false;
+            }
+
+            ComboBoxEdit cbTopCw = el.FindName("cbTopCw") as ComboBoxEdit;
+            if (cbTopCw == null)
+            {
+                MessageBox.Show("未找到顶部层位！");
+                return false;
+            }
+
+            ComboBoxEdit cbBottomCw = el.FindName("cbBottomCw") as ComboBoxEdit;
+            if (cbBottomCw == null)
+            {
+                MessageBox.Show("未找到底部层位！");
+                return false;
+            }
+
+            if (cbTopCw.SelectedItemValue == null)
+            {
+                MessageBox.Show("顶部层位不允许为空！");
+                return false;
+            }
+
+            if (cbBottomCw.SelectedItemValue == null)
+            {
+                MessageBox.Show("底部层位不允许为空！");
+                return false;
+            }
+
+            int idxTopCw = cbTopCw.SelectedIndex;
+            int idxBottomCw = cbBottomCw.SelectedIndex;
+
+            if (idxTopCw > idxBottomCw)
+            {
+                MessageBox.Show("顶部层位大于底部层位，请重新选择！");
                 return false;
             }
 
@@ -147,6 +270,12 @@ namespace gEngine.Util.Ge.Section
             {
                 SHorizontalProportion = cbHScale.SelectedItemValue == null ? 100 : Int32.Parse(cbHScale.SelectedItemValue.ToString());
             }
+
+            ComboBoxEdit cbTopCw = el.FindName("cbTopCw") as ComboBoxEdit;
+            ComboBoxEdit cbBottomCw = el.FindName("cbBottomCw") as ComboBoxEdit;
+
+            SelTopCw = cbTopCw.SelectedItemValue.ToString();
+            SelBottomCw = cbBottomCw.SelectedItemValue.ToString();
         }
 
         /// <summary>
@@ -157,11 +286,11 @@ namespace gEngine.Util.Ge.Section
         {
             try
             {
-                if (CheckUI())
+                Window w = Window.GetWindow(el);
+                if (w == null)
+                    return;
+                if (CheckUI(w))
                 {
-                    Window w = Window.GetWindow(el);
-                    if (w == null)
-                        return;
                     GetSelectedData(w);
                     w.DialogResult = true;
                 }

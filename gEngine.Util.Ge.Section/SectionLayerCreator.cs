@@ -47,6 +47,33 @@ namespace gEngine.Util.Ge.Section
                 {
                     well.LongitudinalProportion = sse.SLongitudinalProportion;
                     well.HorizontalProportion = sse.SHorizontalProportion;
+
+                    #region 计算起-止深度
+
+                    var tempTop_Horizon = horizons.Horizons.Where(x => x.LayerNumber.Equals(sse.SelTopCw));
+                    var tempBottom_Horizon = horizons.Horizons.Where(x => x.LayerNumber.Equals(sse.SelBottomCw));
+
+                    if (tempTop_Horizon.Count().Equals(0) || tempTop_Horizon.ElementAt(0).Top_MeasuredDepth < 0)
+                    {
+                        tempTop_Horizon = horizons.Horizons.OrderBy(x => x.Top_MeasuredDepth).Where(x => !string.IsNullOrEmpty( x.LayerNumber) && x.Top_MeasuredDepth > 0);
+                    }
+                    
+                    if (tempBottom_Horizon.Count().Equals(0) || tempBottom_Horizon.ElementAt(0).Top_MeasuredDepth < 0)
+                    {
+                        tempBottom_Horizon = horizons.Horizons.OrderByDescending(x => x.Top_MeasuredDepth).Where(x => !string.IsNullOrEmpty(x.LayerNumber) && x.Top_MeasuredDepth > 0);
+                    }
+
+                    if (tempTop_Horizon.Count().Equals(0) || tempBottom_Horizon.Count().Equals(0))
+                        continue;
+
+                    IDBHorizon Top_Horizon = tempTop_Horizon.ElementAt(0);
+                    IDBHorizon Bottom_Horizon = tempBottom_Horizon.ElementAt(0);
+
+                    well.TopDepth = Top_Horizon.Top_MeasuredDepth - sse.TopYs;
+                    well.BottomDepth = Bottom_Horizon.Top_MeasuredDepth + Bottom_Horizon.MeasuredThickness + sse.BottomYs;
+
+                    #endregion
+
                     string tplName = sse.SelTplName;
                     if (string.IsNullOrEmpty(tplName))
                     {
@@ -76,12 +103,13 @@ namespace gEngine.Util.Ge.Section
                 if (firstWlLoc == 0)
                 {
                     firstWlLoc = xAxis;
-                    well.Location = (xAxis - firstWlLoc) * Graph.Ge.Column.Enums.PerMilePx / well.HorizontalProportion;
+                    well.Location = 0;
                 }
                 else
                 {
                     well.Location = (xAxis - firstWlLoc) * Graph.Ge.Column.Enums.PerMilePx / well.HorizontalProportion + wellWidth;
                 }
+
                 wellWidth += well.LstColumns.Sum(x => x[0].Width);
             }
         }
@@ -92,6 +120,8 @@ namespace gEngine.Util.Ge.Section
             Well destWell = tplObject.DeepClone() as Well;
 
             destWell.Name = Well.Name;
+            destWell.TopDepth = Well.TopDepth;
+            destWell.BottomDepth = Well.BottomDepth;
             foreach (WellColumns Wellcolumns in destWell.LstColumns)
             {
                 foreach (WellColumn WellColumn in Wellcolumns)

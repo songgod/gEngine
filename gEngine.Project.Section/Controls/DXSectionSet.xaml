@@ -27,18 +27,18 @@
                 </dxdo:LayoutGroup>
                 <dxdo:LayoutGroup x:Uid="dxdo:LayoutGroup_4" >
                     <dxdo:LayoutControlItem x:Uid="dxdo:LayoutControlItem_3" Caption="顶部层位">
-                        <dxe:ComboBoxEdit x:Uid="cbTopcw" x:Name="cbTopcw"></dxe:ComboBoxEdit>
+                        <dxe:ComboBoxEdit x:Uid="cbTopcw" x:Name="cbTopCw" ItemsSource="{Binding TopCw}"></dxe:ComboBoxEdit>
                     </dxdo:LayoutControlItem>
                     <dxdo:LayoutControlItem x:Uid="dxdo:LayoutControlItem_4" Caption="底部层位">
-                        <dxe:ComboBoxEdit x:Uid="cbBottomcw" x:Name="cbBottomcw"></dxe:ComboBoxEdit>
+                        <dxe:ComboBoxEdit x:Uid="cbBottomcw" x:Name="cbBottomCw" ItemsSource="{Binding BottomCw}"></dxe:ComboBoxEdit>
                     </dxdo:LayoutControlItem>
                 </dxdo:LayoutGroup>
                 <dxdo:LayoutGroup x:Uid="dxdo:LayoutGroup_5" >
                     <dxdo:LayoutControlItem x:Uid="dxdo:LayoutControlItem_5" Caption="顶部延伸">
-                        <dxe:ComboBoxEdit x:Uid="cbTopYs" x:Name="cbTopYs"></dxe:ComboBoxEdit>
+                        <dxe:TextEdit x:Uid="txtTopYs" x:Name="txtTopYs" Text="{Binding TopYs}" MaskType="RegEx" Mask="[0-9]*"></dxe:TextEdit>
                     </dxdo:LayoutControlItem>
                     <dxdo:LayoutControlItem x:Uid="dxdo:LayoutControlItem_6" Caption="底部延伸">
-                        <dxe:ComboBoxEdit x:Uid="cbBottomYs" x:Name="cbBottomYs"></dxe:ComboBoxEdit>
+                        <dxe:TextEdit x:Uid="txtBottomYs" x:Name="txtBottomYs" Text="{Binding BottomYs}" MaskType="RegEx"  Mask="[0-9]*"></dxe:TextEdit>
                     </dxdo:LayoutControlItem>
                 </dxdo:LayoutGroup>
                 <dxdo:LayoutGroup x:Uid="dxdo:LayoutGroup_6">

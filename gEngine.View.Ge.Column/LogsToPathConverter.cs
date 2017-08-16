@@ -43,29 +43,44 @@ namespace gEngine.View.Ge.Column
             if (vls.Count <= 1)
                 return null;
 
-            double mindepth = owner.Depths[0];
+            double mindepth = owner.TopDepth; //顶部层位-顶部延伸 深度
+            double maxdepth = owner.BottomDepth; //底部层位+底部延伸 深度
 
-            double[] validValueList = vls.Select(s => s).Where(s => (s != InvalidValue)).ToArray();//从曲线数组中去除无效值，形成有效值数组
-            double xMin = validValueList.Min();
-            double xMax = validValueList.Max();
+            if (mindepth < 0)
+                mindepth = owner.Depths[0];//如果顶部深度小于0，那么从数据深度起始点开始
+            if (maxdepth > owner.Depths[owner.Depths.Count - 1])
+                maxdepth = owner.Depths[owner.Depths.Count - 1];//如果底部深度大于数据深度，那么从数据深度终止点结束
 
-            MathType mathType = (MathType)values[2];
+            var start = owner.Depths.Where(x => x >= mindepth).First();//找出大于等于顶部深度的第一个数值
+            var end = owner.Depths.Where(x => x >= maxdepth).First();//找出大于等于底部深度的第一个数值
+
+            int idxMin = owner.Depths.IndexOf(start);//起始点位置
+            int idxMax = owner.Depths.IndexOf(end);//终止点位置
+
+            ObsDoubles Rvls = new ObsDoubles(vls.Where((item, index) => (index >= idxMin && index <= idxMax)).ToArray());//从曲线中提取出指定区间段的曲线数据
+            double[] validVls = Rvls.Where(item => item != InvalidValue).ToArray();//从指定区间段的曲线数组中去除无效值，形成有效值数组
+
+            double xMin = validVls.Min();
+            double xMax = validVls.Max();
+
+            MathType mathType = (MathType) values[2];
             if (mathType == MathType.DEFAULT)
             {
                 //if (xMax - xMin > 60)
                 //    mathType = MathType.ARITHM;
                 //else
-                    mathType = MathType.LINER;
+                mathType = MathType.LINER;
             }
 
             PathGeometry geom = new PathGeometry();
-            double StartY = (owner.Depths[vls.ToList().IndexOf(validValueList[0])] - mindepth) * Enums.PerMilePx / owner.LongitudinalProportion;// 计算StartPoint的Y值，Y值为第一个有效值的深度，X值为最小值，保证闭合时连线为直线
-            double EndY = (owner.Depths[vls.ToList().LastIndexOf(validValueList[validValueList.Length - 1])] - mindepth) * Enums.PerMilePx / owner.LongitudinalProportion;// 增加一个结束点，Y值为最后一个有效值的深度，X值为最小值，保证闭合时连线为直线
+
+            double StartY = (owner.Depths[idxMin + Rvls.ToList().IndexOf(validVls[0])] - mindepth) * Enums.PerMilePx / owner.LongitudinalProportion;// 计算StartPoint的Y值，Y值为第一个有效值的深度，X值为最小值，保证闭合时连线为直线
+            double EndY = (owner.Depths[idxMin + Rvls.ToList().LastIndexOf(validVls[validVls.Length - 1])] - mindepth) * Enums.PerMilePx / owner.LongitudinalProportion; // 增加一个结束点，Y值为最后一个有效值的深度，X值为最小值，保证闭合时连线为直线
 
             PointCollection pointlist = new PointCollection();
             pointlist.Add(new Point() { X = 0, Y = StartY });
 
-            for (int i = 0; i < vls.Count; ++i)
+            for (int i = idxMin; i <= idxMax; ++i)
             {
                 if (vls[i] == InvalidValue)
                 {
@@ -86,7 +101,6 @@ namespace gEngine.View.Ge.Column
             pointlist.Add(new Point() { X = 0, Y = EndY });
 
             PointCollection plist = GraphAlgo.SimpleLine.Simplifier(pointlist, 1);
-
             //PathFigure figure = new PathFigure() { StartPoint = plist[0], IsClosed = true };
             PathFigure figure = new PathFigure() { StartPoint = plist[0], IsClosed = false };
             PointCollection pc = new PointCollection(plist.ToList().GetRange(1, plist.Count - 1));
@@ -123,11 +137,11 @@ namespace gEngine.View.Ge.Column
             if (string.IsNullOrEmpty(values[1].ToString()))
                 return null;
 
-            string dataStr = values[1].ToString().Substring(1, values[1].ToString().Count() - 2).Replace("L"," ");
+            string dataStr = values[1].ToString().Substring(1, values[1].ToString().Count() - 2).Replace("L", " ");
 
             PointCollectionConverter pcconverter = new PointCollectionConverter();
             PointCollection pc = new PointCollection();
-            pc = (PointCollection)pcconverter.ConvertFromString(dataStr);
+            pc = (PointCollection) pcconverter.ConvertFromString(dataStr);
             List<Point> pointList = pc.ToList();
 
             double xMin_color = 0; // 色标最小值
@@ -176,13 +190,13 @@ namespace gEngine.View.Ge.Column
                 Color d_color = colors[int.Parse(colorStrs[1])];
 
                 Color vColor = GetGradientColor(s_color, d_color, xPoint, double.Parse(keyStrs[0]), double.Parse(keyStrs[1]));
-                lineGradientBrush.GradientStops.Add(new GradientStop(vColor, (double)i / pointList.Count));
+                lineGradientBrush.GradientStops.Add(new GradientStop(vColor, (double) i / pointList.Count));
             }
 
             lineGradientBrush.GradientStops.Add(new GradientStop() { Color = Colors.White, Offset = 1 });
             return lineGradientBrush;
         }
-        
+
         private Color GetGradientColor(Color sourceColor, Color destColor, double xValue, double xMin, double xMax)
         {
             int redSpace = destColor.R - sourceColor.R;
@@ -190,9 +204,9 @@ namespace gEngine.View.Ge.Column
             int blueSpace = destColor.B - sourceColor.B;
 
             Color vColor = Color.FromRgb(
-                                            (byte)(sourceColor.R + ((xValue - xMin) / (xMax - xMin) * redSpace)),
-                                            (byte)(sourceColor.G + ((xValue - xMin) / (xMax - xMin) * greenSpace)),
-                                            (byte)(sourceColor.B + ((xValue - xMin) / (xMax - xMin) * blueSpace))
+                                            (byte) (sourceColor.R + ((xValue - xMin) / (xMax - xMin) * redSpace)),
+                                            (byte) (sourceColor.G + ((xValue - xMin) / (xMax - xMin) * greenSpace)),
+                                            (byte) (sourceColor.B + ((xValue - xMin) / (xMax - xMin) * blueSpace))
                                         );
 
             return vColor;
