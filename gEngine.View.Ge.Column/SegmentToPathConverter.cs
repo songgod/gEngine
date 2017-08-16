@@ -36,22 +36,33 @@ namespace gEngine.View.Ge.Column
             if (owner == null)
                 return null;
 
-            double mindepth = owner.Depths[0];
+            double mindepth = owner.TopDepth; //顶部层位-顶部延伸 深度
+            double maxdepth = owner.BottomDepth; //底部层位+底部延伸 深度
+
+            if (mindepth < 0)
+                mindepth = owner.Depths[0];//如果顶部深度小于0，那么从数据深度起始点开始
+            if (maxdepth > owner.Depths[owner.Depths.Count - 1])
+                maxdepth = owner.Depths[owner.Depths.Count - 1];//如果底部深度大于数据深度，那么从数据深度终止点结束
+
             PathGeometry geom = new PathGeometry();
             foreach (var item in Segment)
             {
                 double bottomDepth = item.Top + item.Bottom;
-                double yTop = (item.Top - mindepth) * Enums.PerMilePx / owner.LongitudinalProportion;//根据纵向比例，计算出Y值
-                double yBottom = (bottomDepth - mindepth) * Enums.PerMilePx / owner.LongitudinalProportion;//根据纵向比例，计算出Y值
-                PathFigure fg_1 = new PathFigure();
-                fg_1.StartPoint = new Point() { X = 0, Y = yTop };
-                PolyLineSegment ply = new PolyLineSegment();
-                ply.Points.Add(new Point() { X = Width, Y = yTop });
-                ply.Points.Add(new Point() { X = Width, Y = yBottom });
-                ply.Points.Add(new Point() { X = 0, Y = yBottom });
-                fg_1.Segments.Add(ply);
-                fg_1.IsClosed = true;
-                geom.Figures.Add(fg_1);
+
+                if (item.Top >= mindepth && bottomDepth <= maxdepth)
+                {
+                    double yTop = (item.Top - mindepth) * Enums.PerMilePx / owner.LongitudinalProportion;//根据纵向比例，计算出Y值
+                    double yBottom = (bottomDepth - mindepth) * Enums.PerMilePx / owner.LongitudinalProportion;//根据纵向比例，计算出Y值
+                    PathFigure fg_1 = new PathFigure();
+                    fg_1.StartPoint = new Point() { X = 0, Y = yTop };
+                    PolyLineSegment ply = new PolyLineSegment();
+                    ply.Points.Add(new Point() { X = Width, Y = yTop });
+                    ply.Points.Add(new Point() { X = Width, Y = yBottom });
+                    ply.Points.Add(new Point() { X = 0, Y = yBottom });
+                    fg_1.Segments.Add(ply);
+                    fg_1.IsClosed = true;
+                    geom.Figures.Add(fg_1);
+                }
             }
             return geom;
         }
@@ -126,19 +137,30 @@ namespace gEngine.View.Ge.Column
                 return null;
             if (owner == null)
                 return null;
-            double mindepth = owner.Depths[0];
+
+            double mindepth = owner.TopDepth; //顶部层位-顶部延伸 深度
+            double maxdepth = owner.BottomDepth; //底部层位+底部延伸 深度
+
+            if (mindepth < 0)
+                mindepth = owner.Depths[0];//如果顶部深度小于0，那么从数据深度起始点开始
+            if (maxdepth > owner.Depths[owner.Depths.Count - 1])
+                maxdepth = owner.Depths[owner.Depths.Count - 1];//如果底部深度大于数据深度，那么从数据深度终止点结束
+
             PathGeometry geom = new PathGeometry();
             System.Drawing.Font font = new System.Drawing.Font("微软雅黑", 12, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             foreach (var item in Segment)
             {
-                if (string.IsNullOrEmpty(item.Name))
-                    continue;
                 double bottomDepth = item.Top + item.Bottom;
-                double yTop = (item.Top - mindepth) * Enums.PerMilePx / owner.LongitudinalProportion;//根据纵向比例，计算出Y值
-                double yBottom = (bottomDepth - mindepth) * Enums.PerMilePx / owner.LongitudinalProportion;//根据纵向比例，计算出Y值
-                double middle = yTop + ((yBottom - yTop - font.Height) / 2 < 0 ? 0 : (yBottom - yTop - font.Height) / 2);
-                PathGeometry path = GetTextPath(item.Name, "微软雅黑", 12, middle);
-                geom.AddGeometry(path);
+                if (item.Top >= mindepth && bottomDepth <= maxdepth)
+                {
+                    if (string.IsNullOrEmpty(item.Name))
+                        continue;
+                    double yTop = (item.Top - mindepth) * Enums.PerMilePx / owner.LongitudinalProportion;//根据纵向比例，计算出Y值
+                    double yBottom = (bottomDepth - mindepth) * Enums.PerMilePx / owner.LongitudinalProportion;//根据纵向比例，计算出Y值
+                    double middle = yTop + ((yBottom - yTop - font.Height) / 2 < 0 ? 0 : (yBottom - yTop - font.Height) / 2);
+                    PathGeometry path = GetTextPath(item.Name, "微软雅黑", 12, middle);
+                    geom.AddGeometry(path);
+                }
             }
             return geom;
         }

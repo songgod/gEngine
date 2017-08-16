@@ -31,6 +31,8 @@ namespace gEngine.Graph.Rw.Ge.Column
             well.Location = double.Parse(node.Attributes["Location"].Value);
             well.LongitudinalProportion = Int32.Parse(node.Attributes["LongitudinalProportion"].Value);
             well.HorizontalProportion = Int32.Parse(node.Attributes["HorizontalProportion"].Value);
+            well.TopDepth = double.Parse(node.Attributes["TopDepth"].Value);
+            well.BottomDepth = double.Parse(node.Attributes["BottomDepth"].Value);
 
             foreach (XmlNode childNode in node.ChildNodes)
             {
@@ -98,6 +100,14 @@ namespace gEngine.Graph.Rw.Ge.Column
             XmlAttribute xmlHorizontalProportion = doc.CreateAttribute("HorizontalProportion");
             xmlHorizontalProportion.Value = string.IsNullOrEmpty(Well.HorizontalProportion.ToString()) == false ? Well.HorizontalProportion.ToString() : string.Empty;
             node.Attributes.Append(xmlHorizontalProportion);
+
+            XmlAttribute xmlTopDepth = doc.CreateAttribute("TopDepth");
+            xmlTopDepth.Value = string.IsNullOrEmpty(Well.TopDepth.ToString()) == false ? Well.TopDepth.ToString() : string.Empty;
+            node.Attributes.Append(xmlTopDepth);
+
+            XmlAttribute xmlBottomDepth = doc.CreateAttribute("BottomDepth");
+            xmlBottomDepth.Value = string.IsNullOrEmpty(Well.BottomDepth.ToString()) == false ? Well.BottomDepth.ToString() : string.Empty;
+            node.Attributes.Append(xmlBottomDepth);
         }
 
         public override IObject CreateObject()

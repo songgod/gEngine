@@ -29,6 +29,14 @@ namespace gEngine.View.Ge.Column
             set;
         }
 
+        /// <summary>
+        /// 加纵向比例
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="targetType"></param>
+        /// <param name="parameter"></param>
+        /// <param name="culture"></param>
+        /// <returns></returns>
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             ObsDoubles dbs = values[0] as ObsDoubles;
@@ -38,10 +46,16 @@ namespace gEngine.View.Ge.Column
             if (owner == null)
                 return null;
 
-            double mindepth = dbs[0];//顶深
-            double maxdepth = dbs[dbs.Count - 1];//底深
+            double mindepth = owner.TopDepth; //顶部层位-顶部延伸 深度
+            double maxdepth = owner.BottomDepth; //底部层位+底部延伸 深度
+
+            if (mindepth < 0)
+                mindepth = owner.Depths[0];//如果顶部深度小于0，那么从数据深度起始点开始
+            if (maxdepth > owner.Depths[owner.Depths.Count - 1])
+                maxdepth = owner.Depths[owner.Depths.Count - 1];//如果底部深度大于数据深度，那么从数据深度终止点结束
+
             double depth = Math.Ceiling((maxdepth - mindepth) / 10) * 10;//取底深减顶深差值，向上取整
-            double top = Math.Ceiling(dbs[0] / 10) * 10;//顶深向上取整
+            double top = Math.Ceiling(mindepth / 10) * 10;//顶深向上取整
             double FirstScale = top - mindepth == 0 ? 10 : top - mindepth;//第一个刻度点
             int LongitudinalProportion = owner.LongitudinalProportion; //纵向比例
 

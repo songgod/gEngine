@@ -20,6 +20,7 @@ namespace gEngine.View.Ge.Column
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             LstWellColumns lstWellColumns = values[0] as LstWellColumns;
+           
             if (lstWellColumns == null)
                 return null;
 
@@ -28,18 +29,23 @@ namespace gEngine.View.Ge.Column
             if (depths == null || depths.Count <= 1)
                 return null;
 
-            double mindepth = depths[0];//顶深
-            double maxdepth = depths[depths.Count - 1];//底深
+            double mindepth = ((WellColumns) lstWellColumns[0])[0].Owner.TopDepth;//顶部层位-顶部延伸 深度
+            double maxdepth = ((WellColumns) lstWellColumns[0])[0].Owner.BottomDepth;//底部层位+底部延伸 深度
+            if (mindepth < 0)
+                mindepth = depths[0]; //如果顶部深度小于0，那么从数据深度起始点开始
+            if (maxdepth > depths[depths.Count - 1])
+                maxdepth = depths[depths.Count - 1];//如果底部深度大于数据深度，那么从数据深度终止点结束
+
             double depth = Math.Ceiling((maxdepth - mindepth) / 10) * 10;//取底深减顶深差值，向上取整
-            double top = Math.Ceiling(depths[0] / 10) * 10;//顶深向上取整
+            double top = Math.Ceiling(mindepth / 10) * 10;//顶深向上取整
             double firstScale = top - mindepth == 0 ? 10 : top - mindepth;//第一个刻度点
             int LongitudinalProportion = ((WellColumns) lstWellColumns[0])[0].Owner.LongitudinalProportion; //纵向比例
             int WellWidth = 0; //每口井宽度
 
             PathGeometry geom = new PathGeometry();
 
-            // 画各曲线道边框竖线，由于曲线名称占60高度，需增加
-            //int i = 0;
+            //画各曲线道边框竖线，由于曲线名称占60高度，需增加
+            int i = 0;
             foreach (var item in lstWellColumns)
             {
                 WellWidth += item[0].Width;
@@ -57,7 +63,7 @@ namespace gEngine.View.Ge.Column
             //fg2.Segments.Add(ls2);
             //geom.Figures.Add(fg2);
 
-            // 画曲线名称上下边框线，曲线名称定义的高度是50
+            //画曲线名称上下边框线，曲线名称定义的高度是50
             //for (double y = 0; y <= 50; y = y + 50)
             for (double y = 50; y <= 50; y = y + 50)
             {
@@ -68,7 +74,7 @@ namespace gEngine.View.Ge.Column
                 geom.Figures.Add(fg);
             }
 
-            // 画曲线底边框线
+            //画曲线底边框线
             PathFigure fg1 = new PathFigure();
             fg1.StartPoint = new Point() { X = 0, Y = 60 + depth * Enums.PerMilePx / LongitudinalProportion };
             LineSegment ls1 = new LineSegment() { Point = new Point() { X = WellWidth, Y = 60 + depth * Enums.PerMilePx / LongitudinalProportion } };
