@@ -73,7 +73,9 @@ namespace gEngine.Project.Controls
 
         private void btnEmpty_Click(object sender, RoutedEventArgs e)
         {
-            
+            if (MapSource == null)
+                return;
+            MapSource.Layers.Clear();
         }
     }
 }
