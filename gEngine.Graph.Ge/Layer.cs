@@ -44,7 +44,7 @@ namespace gEngine.Graph.Ge
         public static readonly DependencyProperty VisibleProperty =
             DependencyProperty.Register("Visible", typeof(bool), typeof(Layer), new PropertyMetadata(true));
 
-
+      
 
         public bool Editable
         {

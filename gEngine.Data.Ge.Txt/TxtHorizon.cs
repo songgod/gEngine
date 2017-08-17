@@ -55,7 +55,7 @@ namespace gEngine.Data.Ge.Txt
                         {
                             IDBHorizon Horizon = new DBHorizon();
                             Horizon.Name = StringUtil.ValidString(strColumns[0], defaultstring);
-                            Horizon.LayerNumber = StringUtil.ValidString(strColumns[1], defaultstring);
+                            Horizon.LayerNumber = !string.IsNullOrEmpty(strColumns[1]) ? strColumns[1] : string.Empty;
                             Horizon.Top_MeasuredDepth = NumUtil.ToDouble(strColumns[2], true, deaultvalue);
                             Horizon.MeasuredThickness = NumUtil.ToDouble(strColumns[3], true, deaultvalue);
 
