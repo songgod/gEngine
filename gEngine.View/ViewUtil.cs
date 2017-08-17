@@ -92,8 +92,7 @@ namespace gEngine.View
             if (t != null)
             {
                 Rect rect2 = VisualTreeHelper.GetDescendantBounds(t);
-                //if (rect2.Width <= 0.0 || rect2.Height <= 0.0)
-                if (rect2.X <= 0.0 || rect2.Y <= 0.0)
+                if (rect2.Width <= 0.0 || rect2.Height <= 0.0)
                 {
                     rect2 = Rect.Empty;
                 }
