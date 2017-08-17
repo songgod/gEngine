@@ -34,6 +34,7 @@
     <Reference Include="DevExpress.Images.v16.1, Version=16.1.2.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Mvvm.v16.1, Version=16.1.2.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.Core.v16.1, Version=16.1.2.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Docking.v16.1, Version=16.1.2.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.Ribbon.v16.1, Version=16.1.2.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -140,6 +141,10 @@
     <ProjectReference Include="..\gEngine.RibbonPageCategory\gEngine.Application.csproj">
       <Project>{DCE49078-3FAD-4C85-BC8C-713553BFDDD4}</Project>
       <Name>gEngine.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.Util\gEngine.Util.csproj">
+      <Project>{84ACB6C4-CF62-4F4B-A7E5-5C642EDC041A}</Project>
+      <Name>gEngine.Util</Name>
     </ProjectReference>
     <ProjectReference Include="..\gEngine.View\gEngine.View.csproj">
       <Project>{932485EA-2F95-4CAA-8BCD-DF68C496854E}</Project>

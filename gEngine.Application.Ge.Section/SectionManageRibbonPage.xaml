@@ -9,6 +9,7 @@
              xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
              xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
              xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking"
              xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
              xmlns:gerpc="clr-namespace:gEngine.Application;assembly=gEngine.Application"   
                 xmlns:prjcmds="clr-namespace:gEngine.Commands;assembly=gEngine.Commands"
@@ -19,9 +20,17 @@
                             CommandTarget="{Binding Path=ProjectControl, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow} }"
                             LargeGlyph="{dx:DXImage Image=BOFolder_32x32.png}" Glyph="{dx:DXImage Image=BOFolder_16x16.png}"/>
     </dxr:RibbonPageGroup>
-    <dxr:RibbonPageGroup Caption="新建剖面图">
-        <dxb:BarButtonItem Content="BarButtonItem"/>
-        <dxb:BarButtonItem Content="BarButtonItem"/>
-        <dxb:BarButtonItem Content="BarButtonItem"/>
+    <dxr:RibbonPageGroup Caption="属性设置">
+
+
+        <dxb:BarEditItem Name="eFontSize" RibbonStyle="SmallWithoutText" EditWidth="90"
+                 Content="Font Size:">
+           
+            <dxb:BarEditItem.EditSettings>
+                <dxe:ComboBoxEditSettings PopupMaxHeight="250" IsTextEditable="False" ItemsSource="{Binding LongitudinalProportion}">
+                </dxe:ComboBoxEditSettings>
+            </dxb:BarEditItem.EditSettings>
+        </dxb:BarEditItem>
+
     </dxr:RibbonPageGroup>
 </gerpc:GeRibbonPage>
