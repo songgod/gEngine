@@ -12,6 +12,7 @@
     <UserControl.Resources>
         <cvt:LayerEditableImageConverter x:Uid="cvt:ImagePathConverter_1" x:Key="editimageConvert"/>
         <cvt:LayerVisibleImageConverter  x:Uid="cvt:VisibilityConverter_1" x:Key="visibleimageConvert"/>
+      
         <DataTemplate x:Uid="DataTemplate_1" x:Key="listBoxTemplate">
             <StackPanel x:Uid="StackPanel_1" Orientation="Horizontal" Height="18">
                 <TextBlock x:Uid="tbName" x:Name="tbName" Text="{ Binding Name}"  Margin="5 0 0 0 "/>
@@ -31,10 +32,10 @@
         </Grid.RowDefinitions>
         <StackPanel x:Uid="StackPanel_2" Orientation="Horizontal">
             <Button x:Uid="Button_1" Content="新建"/>
-            <Button x:Uid="Button_2" Content="删除"/>
+            <Button x:Uid="btnDel" Content="删除" Click="btnDel_Click"/>
             <Button x:Uid="Button_3" Content="可见性"/>
             <Button x:Uid="Button_4" Content="编辑性"/>
-            <Button x:Uid="Button_5" Content="清空"/>
+            <Button x:Uid="btnEmpty" Content="清空" Click="btnEmpty_Click"/>
         </StackPanel>
         <ListBox x:Uid="lbLayers" x:Name="lbLayers" ItemsSource="{Binding MapSource.Layers}" ItemTemplate="{ StaticResource listBoxTemplate}" Grid.Row="1"/>
     </Grid>

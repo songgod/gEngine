@@ -15,11 +15,16 @@ namespace gEngine.Project
             UnEditableIcon = new BitmapImage(new Uri(@"..\Images\unedit.png", UriKind.Relative));
             VisibleIcon = new BitmapImage(new Uri(@"..\Images\Visible.png", UriKind.Relative));
             InVisibleIcon = new BitmapImage(new Uri(@"..\Images\Invisible.png", UriKind.Relative));
+            DelIcon = new BitmapImage(new Uri(@"..\Images\del.png", UriKind.Relative));
+            EmptyIcon = new BitmapImage(new Uri(@"..\Images\del.png", UriKind.Relative));
         }
 
         public static BitmapImage EditableIcon { set; get; }
         public static BitmapImage UnEditableIcon { set; get; }
         public static BitmapImage VisibleIcon { set; get; }
         public static BitmapImage InVisibleIcon { set; get; }
+
+        public static BitmapImage DelIcon { get; set; }
+        public static BitmapImage EmptyIcon { get; set; }
     }
 }
