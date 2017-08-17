@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+                xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
              xmlns:local="clr-namespace:gEngine.Project"
              mc:Ignorable="d" 
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"  
@@ -27,15 +29,27 @@
     </UserControl.Resources>
     <Grid x:Uid="Grid_1">
         <Grid.RowDefinitions>
-            <RowDefinition x:Uid="RowDefinition_3" Height="30"/>
+            <RowDefinition x:Uid="RowDefinition_3" Height="40"/>
             <RowDefinition x:Uid="RowDefinition_2" Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel x:Uid="StackPanel_2" Orientation="Horizontal">
-            <Button x:Uid="Button_1" Content="新建"/>
-            <Button x:Uid="btnDel" Content="删除" Click="btnDel_Click"/>
+            <dxb:ToolBarControl x:Uid="dxb:ToolBarControl_1" Caption="ButtonsBar" AllowQuickCustomization="False" AllowCustomizationMenu="False" DockPanel.Dock="Top">
+
+                <dxb:BarSubItem x:Uid="barSubItem" Name="barSubItem" Content="新建" Glyph="{dx:DXImage Image=New_16x16.png}" LargeGlyph="{dx:DXImage Image=New_32x32.png}">
+                </dxb:BarSubItem>
+                <dxb:BarButtonItem x:Uid="barButtonItem1" Name="barButtonItem1" ItemClick="btnDel_Click" Content="删除" Glyph="{dx:DXImage Image=Delete_16x16.png}" LargeGlyph="{dx:DXImage Image=Delete_32x32.png}"/>
+                <dxb:BarButtonItem x:Uid="barButtonItem2" Name="barButtonItem2" ItemClick="btnEye_Click" Content="可见性" Glyph="{dx:DXImage Image=Show_16x16.png}" LargeGlyph="{dx:DXImage Image=Show_32x32.png}"/>
+                <dxb:BarButtonItem x:Uid="barButtonItem3" Name="barButtonItem3" ItemClick="btnEdit_Click" Content="编辑性" Glyph="{dx:DXImage Image=Edit_16x16.png}" LargeGlyph="{dx:DXImage Image=Edit_32x32.png}"/>
+                <dxb:BarButtonItem x:Uid="barButtonItem4" Name="barButtonItem4" ItemClick="btnEmpty_Click" Content="清空" Glyph="{dx:DXImage Image=Trash_16x16.png}" LargeGlyph="{dx:DXImage Image=Trash_32x32.png}"/>
+            </dxb:ToolBarControl>
+           
+            <!--<Button x:Uid="btnDel" Content="删除" Click="btnDel_Click">
+              
+            </Button>
             <Button x:Uid="Button_3" Content="可见性"/>
             <Button x:Uid="Button_4" Content="编辑性"/>
-            <Button x:Uid="btnEmpty" Content="清空" Click="btnEmpty_Click"/>
+            <Button x:Uid="btnEmpty" Content="清空"  Click="btnEmpty_Click" >
+            </Button>-->
         </StackPanel>
         <ListBox x:Uid="lbLayers" x:Name="lbLayers" ItemsSource="{Binding MapSource.Layers}" ItemTemplate="{ StaticResource listBoxTemplate}" Grid.Row="1"/>
     </Grid>

@@ -1,4 +1,5 @@
-﻿using gEngine.Graph.Interface;
+﻿using DevExpress.Xpf.Bars;
+using gEngine.Graph.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,10 +26,25 @@ namespace gEngine.Project.Controls
         {
             InitializeComponent();
             this.DataContext = this;
-          
+            List<string> ls = gEngine.Graph.Interface.Registry.GetLayerTypes("Ge");
+            foreach (string str in ls)
+            {
+                BarButtonItem btn = new BarButtonItem();
+                btn.Content = str;
+                btn.ItemClick += Btn_ItemClick;
+                barSubItem.Items.Add(btn);
+            }
+           
         }
 
-       
+        private void Btn_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (MapSource == null) return;
+            BarButtonItem btn = (BarButtonItem)sender;
+            ILayer layer = gEngine.Graph.Interface.Registry.CreateLayer("Ge", btn.Content.ToString());
+            layer.Name = btn.Content.ToString();
+            MapSource.Layers.Add(layer);
+        }
 
         public IMap MapSource
         {
@@ -65,18 +81,41 @@ namespace gEngine.Project.Controls
                 image.Source = ImageHelper.EditableIcon;
         }
 
-        private void btnDel_Click(object sender, RoutedEventArgs e)
+        private void btnDel_Click(object sender, ItemClickEventArgs e)
         {
             if(lbLayers.SelectedIndex>-1)
                 MapSource.Layers.RemoveAt(lbLayers.SelectedIndex);
         }
 
-        private void btnEmpty_Click(object sender, RoutedEventArgs e)
+        private void btnEmpty_Click(object sender, ItemClickEventArgs e)
         {
-            if (MapSource == null)
-                return;
-            MapSource.Layers.Clear();
+            if (lbLayers.SelectedIndex > -1)
+            {
+                MapSource.Layers[lbLayers.SelectedIndex].Objects.Clear();
+            }
+               
         }
+
+        private void btnEye_Click(object sender, ItemClickEventArgs e)
+        {
+            if (MapSource == null) return;
+            foreach (ILayer layer in MapSource.Layers)
+            {
+                layer.Visible = false;
+            }
+                
+        }
+
+        private void btnEdit_Click(object sender, ItemClickEventArgs e)
+        {
+            if (MapSource == null) return;
+            foreach (ILayer layer in MapSource.Layers)
+            {
+                layer.Editable = false;
+            }
+        }
+
+
     }
 }
 
