@@ -36,7 +36,8 @@ namespace gEngine.Project.Controls
             }
            
         }
-
+        public bool isEye = false;
+        public bool isEdit = false;
         private void Btn_ItemClick(object sender, ItemClickEventArgs e)
         {
             if (MapSource == null) return;
@@ -101,8 +102,9 @@ namespace gEngine.Project.Controls
             if (MapSource == null) return;
             foreach (ILayer layer in MapSource.Layers)
             {
-                layer.Visible = false;
+                layer.Visible = isEye;
             }
+            isEye = !isEye;
                 
         }
 
@@ -111,8 +113,9 @@ namespace gEngine.Project.Controls
             if (MapSource == null) return;
             foreach (ILayer layer in MapSource.Layers)
             {
-                layer.Editable = false;
+                layer.Editable = isEdit;
             }
+            isEdit = !isEdit;
         }
 
 
