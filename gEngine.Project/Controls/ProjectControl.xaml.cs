@@ -28,8 +28,6 @@ namespace gEngine.Project.Controls
             InitializeComponent();
         }
 
-
-
         public Project Project
         {
             get { return (Project)GetValue(ProjectProperty); }

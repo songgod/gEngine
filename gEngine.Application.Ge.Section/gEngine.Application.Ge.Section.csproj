@@ -122,6 +122,10 @@
       <Project>{bc931bb9-d78c-437d-b5d2-04be6e318172}</Project>
       <Name>gEngine.Commands</Name>
     </ProjectReference>
+    <ProjectReference Include="..\gEngine.Graph.Ge.Column\gEngine.Graph.Ge.Column.csproj">
+      <Project>{95227940-90F7-40B4-9027-3EEECD8ED6DE}</Project>
+      <Name>gEngine.Graph.Ge.Column</Name>
+    </ProjectReference>
     <ProjectReference Include="..\gEngine.Graph.Ge.Section\gEngine.Graph.Ge.Section.csproj">
       <Project>{53d7a20d-84b5-499f-b183-d440854b7c8c}</Project>
       <Name>gEngine.Graph.Ge.Section</Name>
@@ -129,6 +133,10 @@
     <ProjectReference Include="..\gEngine.Graph.Ge\gEngine.Graph.Ge.csproj">
       <Project>{3bd77e4f-a348-4edb-b60c-68b749249b91}</Project>
       <Name>gEngine.Graph.Ge</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.Graph.Interface\gEngine.Graph.Interface.csproj">
+      <Project>{1C98A821-B030-4FF2-83AE-D49B1B3B8C67}</Project>
+      <Name>gEngine.Graph.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\gEngine.Manipulator\gEngine.Manipulator.csproj">
       <Project>{B4EEDB17-EB3D-4E22-AB7C-D8E366564B8F}</Project>
@@ -141,6 +149,14 @@
     <ProjectReference Include="..\gEngine.RibbonPageCategory\gEngine.Application.csproj">
       <Project>{DCE49078-3FAD-4C85-BC8C-713553BFDDD4}</Project>
       <Name>gEngine.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.Util.Ge.Section\gEngine.Util.Ge.Section.csproj">
+      <Project>{B3D6B10A-4C31-4981-97FA-3437CB583729}</Project>
+      <Name>gEngine.Util.Ge.Section</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gEngine.Util\gEngine.Util.csproj">
+      <Project>{84acb6c4-cf62-4f4b-a7e5-5c642edc041a}</Project>
+      <Name>gEngine.Util</Name>
     </ProjectReference>
     <ProjectReference Include="..\gEngine.View\gEngine.View.csproj">
       <Project>{932485EA-2F95-4CAA-8BCD-DF68C496854E}</Project>

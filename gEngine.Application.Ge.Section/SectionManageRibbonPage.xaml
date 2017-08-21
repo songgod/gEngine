@@ -15,22 +15,18 @@
                 xmlns:prjcmds="clr-namespace:gEngine.Commands;assembly=gEngine.Commands"
                 xmlns:mp="clr-namespace:gEngine.Manipulator;assembly=gEngine.Manipulator"
                 xmlns:prjcontrols="clr-namespace:gEngine.Project.Controls;assembly=gEngine.Project">
+    
     <dxr:RibbonPageGroup  Caption="剖面">
         <dxb:BarButtonItem x:Name="newsection"  Content="新建剖面图" Command="{x:Static prjcmds:SectionCommands.NewSectionMapCommand}"
                             CommandTarget="{Binding Path=ProjectControl, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow} }"
                             LargeGlyph="{dx:DXImage Image=BOFolder_32x32.png}" Glyph="{dx:DXImage Image=BOFolder_16x16.png}"/>
     </dxr:RibbonPageGroup>
     <dxr:RibbonPageGroup Caption="属性设置">
-
-
-        <dxb:BarEditItem Name="eFontSize" RibbonStyle="SmallWithoutText" EditWidth="90"
-                 Content="Font Size:">
-           
+        <dxb:BarEditItem Name="eLongitudinalProportion" RibbonStyle="SmallWithText" EditWidth="90"  Content="纵向比例" EditValueChanged="eLongitudinalProportion_EditValueChanged">
             <dxb:BarEditItem.EditSettings>
-                <dxe:ComboBoxEditSettings PopupMaxHeight="250" IsTextEditable="False" ItemsSource="{Binding LongitudinalProportion}">
+                <dxe:ComboBoxEditSettings x:Name="cbScale" PopupMaxHeight="250" IsTextEditable="False" ItemsSource="{Binding LongitudinalProportion,Mode=TwoWay}">
                 </dxe:ComboBoxEditSettings>
             </dxb:BarEditItem.EditSettings>
         </dxb:BarEditItem>
-
     </dxr:RibbonPageGroup>
 </gerpc:GeRibbonPage>

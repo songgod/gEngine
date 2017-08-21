@@ -62,7 +62,8 @@ namespace gSection.View
              };
             this.DataContext = this;
 
-
+            gEngine.Application.Registry.ProjectControl = ProjectControl;
+            gEngine.Application.Registry.LoadLocalElement();
             gEngine.Application.Registry.AddRibbonPageCategory(ribbonControl);
         }
 

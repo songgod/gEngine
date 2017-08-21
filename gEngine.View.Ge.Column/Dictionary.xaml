@@ -44,6 +44,7 @@
                     <Path.Data>
                         <MultiBinding Converter="{StaticResource WellModel}">
                             <Binding Path="LstColumns"/>
+                            <Binding Path="LongitudinalProportion"></Binding>
                         </MultiBinding>
                     </Path.Data>
                 </Path>
@@ -88,6 +89,7 @@
                             <Binding Path="Values"/>
                             <Binding Path="Owner"/>
                             <Binding Path="MathType"/>
+                            <Binding Path="Owner.LongitudinalProportion"></Binding>
                         </MultiBinding>
                     </Path.Data>
                     <Path.Stroke>
@@ -128,6 +130,7 @@
                             <Binding Path="Segments"/>
                             <Binding Path="Owner"/>
                             <Binding Path="Width"/>
+                            <Binding Path="Owner.LongitudinalProportion"></Binding>
                         </MultiBinding>
                     </Path.Data>
                     <Path.Stroke>
@@ -144,6 +147,7 @@
                         <MultiBinding Converter="{StaticResource s2n}">
                             <Binding Path="Segments"/>
                             <Binding Path="Owner"/>
+                            <Binding Path="Owner.LongitudinalProportion"></Binding>
                         </MultiBinding>
                     </Path.Data>
                 </Path>
@@ -173,6 +177,7 @@
                         <MultiBinding Converter="{StaticResource d2p}">
                             <Binding Path="Depths"/>
                             <Binding Path="Owner"/>
+                            <Binding Path="Owner.LongitudinalProportion"></Binding>
                         </MultiBinding>
                     </Path.Data>
                     <Path.Stroke>
@@ -184,6 +189,7 @@
                         <MultiBinding Converter="{StaticResource d2c}">
                             <Binding Path="Depths"/>
                             <Binding Path="Owner"/>
+                            <Binding Path="Owner.LongitudinalProportion"></Binding>
                         </MultiBinding>
                     </Path.Data>
                 </Path>
