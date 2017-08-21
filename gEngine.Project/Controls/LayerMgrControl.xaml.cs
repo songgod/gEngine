@@ -137,33 +137,8 @@ namespace gEngine.Project.Controls
 
         private void tbName_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Binding bd = new Binding("SelectedIndex");
-            bd.Source = this.lbLayers;
-            bd.Converter = new ActiveLayerIndexConverter();
-            bd.ConverterParameter = mc;
-            bd.Mode = BindingMode.OneWay;
-            mc.ActiveMapControl.ActiveLayerControl.SetBinding(LayerControl.ItemsSourceProperty,bd);
+            mc.ActiveMapControl.ActiveLayerControlIndex = this.lbLayers.SelectedIndex;
         }
-    }
-
-    public class ActiveLayerIndexConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            int index = (int) value;
-            if (index < 0)
-                return null;
-            ((MapsControl) parameter).ActiveMapControl.ActiveLayerControlIndex = index;
-            LayerControl lc = ((MapsControl) parameter).ActiveMapControl.ActiveLayerControl;
-            return lc.LayerContext;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-
-
     }
 }
 
