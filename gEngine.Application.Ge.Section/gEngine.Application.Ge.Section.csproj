@@ -158,6 +158,10 @@
       <Project>{84acb6c4-cf62-4f4b-a7e5-5c642edc041a}</Project>
       <Name>gEngine.Util</Name>
     </ProjectReference>
+    <ProjectReference Include="..\gEngine.Util\gEngine.Util.csproj">
+      <Project>{84ACB6C4-CF62-4F4B-A7E5-5C642EDC041A}</Project>
+      <Name>gEngine.Util</Name>
+    </ProjectReference>
     <ProjectReference Include="..\gEngine.View\gEngine.View.csproj">
       <Project>{932485EA-2F95-4CAA-8BCD-DF68C496854E}</Project>
       <Name>gEngine.View</Name>

@@ -10,6 +10,7 @@
         <Grid x:Name="gridWell" Margin="30,0,0,0">
             <Grid.RenderTransform>
                 <TransformGroup>
+                    <ScaleTransform ScaleY="-1" ></ScaleTransform>
                     <TranslateTransform X="{Binding Location}"></TranslateTransform>
                 </TransformGroup>
             </Grid.RenderTransform>

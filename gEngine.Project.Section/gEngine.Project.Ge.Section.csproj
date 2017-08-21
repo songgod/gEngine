@@ -69,6 +69,7 @@
     <Compile Include="Controls\DXSectionSet.xaml.cs">
       <DependentUpon>DXSectionSet.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\IsCheckedConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Commands\SectionEdit\ReplaceLineCommand.cs" />
     <Compile Include="Commands\SectionEdit\SectionCommandBase.cs" />

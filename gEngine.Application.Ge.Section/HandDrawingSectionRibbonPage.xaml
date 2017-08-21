@@ -12,16 +12,18 @@
                  xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
                  xmlns:gerpc="clr-namespace:gEngine.Application;assembly=gEngine.Application"   
                  xmlns:prjcmds="clr-namespace:gEngine.Commands;assembly=gEngine.Commands"
-                 xmlns:prjcontrols="clr-namespace:gEngine.Project.Controls;assembly=gEngine.Project">
+                 xmlns:prjcontrols="clr-namespace:gEngine.Project.Controls;assembly=gEngine.Project"
+                 xmlns:mpl="clr-namespace:gEngine.Manipulator;assembly=gEngine.Manipulator">
     <dxr:RibbonPageGroup x:Uid="新建" x:Name="新建" Caption="新建">
         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_13" Content="新建 手绘图层" LargeGlyph="Images/新增1.32.ico"/>
         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_14" Content="添加边界" LargeGlyph="Images/导入边界2.ico"/>
     </dxr:RibbonPageGroup>
     <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_8" Caption="趋势线">
         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_15" Content="插入趋势线" LargeGlyph="{dx:DXImage Image=StackedLineWithoutMarkers_32x32.png}" Glyph="{dx:DXImage Image=StackedLineWithoutMarkers_16x16.png}"/>
-        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_16" Content="手绘趋势线" 
+        <dxb:BarCheckItem x:Uid="dxb:BarButtonItem_16" Content="手绘趋势线"  
                            Command="{x:Static prjcmds:SectionEditCommands.NewTrendLineCommand}" 
                            CommandTarget="{Binding Path=ProjectControl, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow}}"
+                          CommandParameter="{Binding RelativeSource={ RelativeSource Self}}"
                            LargeGlyph="{dx:DXImage Image=StackedLineWithoutMarkers_32x32.png}" 
                            Glyph="{dx:DXImage Image=StackedLineWithoutMarkers_16x16.png}"/>
         <dxb:BarSplitCheckItem x:Uid="dxb:BarSplitCheckItem_1" Content="线型" 
@@ -42,7 +44,7 @@
         </dxb:BarEditItem>
     </dxr:RibbonPageGroup>
     <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_9" Caption="断层">
-        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_17" Content="添加断层线" 
+        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_17" Content="添加断层线"
                            Command="{x:Static prjcmds:SectionEditCommands.NewCurveFaultCommand}" 
                            CommandTarget="{Binding Path=ProjectControl, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow}}"
                            LargeGlyph="{dx:DXImage Image=ScatterWithStraightLines_32x32.png}"
@@ -61,9 +63,10 @@
         </dxb:BarEditItem>
     </dxr:RibbonPageGroup>
     <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_10" Caption="地层线">
-        <dxb:BarButtonItem x:Uid="dxb:BarSplitCheckItem_3" Content="添加地层线" 
+        <dxb:BarCheckItem x:Uid="dxb:BarSplitCheckItem_3" Content="添加地层线" 
                                Command="{x:Static prjcmds:SectionEditCommands.NewCurveStratumCommand}" 
                                CommandTarget="{Binding Path=ProjectControl, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow}}"
+                          CommandParameter="{Binding RelativeSource={ RelativeSource Self}}"
                                LargeGlyph="{dx:DXImage Image=LineStyle_32x32.png}" 
                                Glyph="{dx:DXImage Image=LineStyle_16x16.png}"/>
         <dxb:BarEditItem x:Uid="dxb:BarEditItem_5" Content="粗细" EditWidth="44" EditValue="1.0">
