@@ -19,7 +19,6 @@ namespace gEngine.Project.Controls
             InitializeComponent();
             this.View.HideButtonShowMode = HideButtonShowMode.InAllTabs;
             this.View.RemoveTabItemsOnHiding = true;
-            this.DataContext = this;
         }
 
         public IMaps MapsSource
@@ -33,8 +32,21 @@ namespace gEngine.Project.Controls
             DependencyProperty.Register("MapsSource", typeof(IMaps), typeof(MapsControl));
 
 
-        public int MapControlCount { get { return Items.Count; } }
-        public MapControl ActiveMapControl { get { return GetMapControl(SelectedIndex); } }
+        public int MapControlCount
+        {
+            get
+            {
+                return Items.Count;
+            }
+        }
+        public MapControl ActiveMapControl
+        {
+            get
+            {
+                return GetMapControl(SelectedIndex);
+            }
+        }
+
         public MapControl GetMapControl(int i)
         {
             if (i < 0 || i >= MapControlCount)

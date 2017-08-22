@@ -111,24 +111,4 @@ namespace gEngine.Manipulator
             return new SelectObjectManipulator();
         }
     }
-
-    public class OutlineAdorner : Adorner
-    {
-        public OutlineAdorner(UIElement adornedElement) : base(adornedElement)
-        {
-        }
-
-        protected override void OnRender(System.Windows.Media.DrawingContext drawingContext)
-        {
-            Rect adornedElementRect = new Rect(this.AdornedElement.DesiredSize);
-            Pen renderPen = new Pen(new SolidColorBrush(Colors.Red), 3.0);
-            renderPen.DashStyle = new DashStyle(new DoubleCollection() { 2, 2 }, 0);
-
-            drawingContext.DrawRectangle(null, renderPen, adornedElementRect);
-
-        }
-    }
-
-
-
 }

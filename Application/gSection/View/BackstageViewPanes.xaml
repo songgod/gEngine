@@ -112,7 +112,7 @@
             <ContentControl  x:Uid="ContentControl_5"  Grid.Column="1" Template="{StaticResource VerticalSeparatorTemplate}"></ContentControl>
             <StackPanel x:Uid="StackPanel_9" Grid.Column="2" Margin="10 0 0 0">
                 <StackPanel.Resources>
-                    <prjcvts:MultiCommandParaConverter x:Uid="prjcvts:MultiCommandParaConverter_2" x:Key="c2l"></prjcvts:MultiCommandParaConverter>
+                    <prjcvts:MultiValue2ListConverter x:Uid="prjcvts:MultiCommandParaConverter_2" x:Key="c2l"></prjcvts:MultiValue2ListConverter>
                 </StackPanel.Resources>
                 <ContentControl  x:Uid="ContentControl_6" Content="所有图件" SnapsToDevicePixels="True" Template="{StaticResource HeaderTemplate}"/>
                 <Grid x:Uid="Grid_12">

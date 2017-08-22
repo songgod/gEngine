@@ -9,7 +9,7 @@ using System.Windows.Data;
 
 namespace gEngine.Project.Converter
 {
-    public class MultiCommandParaConverter : IMultiValueConverter
+    public class MultiValue2ListConverter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {

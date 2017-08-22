@@ -23,6 +23,18 @@ namespace gEngine.View
             get;set;
         }
 
+        public IMap MapContext
+        {
+            get { return (IMap)GetValue(MapContextProperty); }
+            set { SetValue(MapContextProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MapContext.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MapContextProperty =
+            DependencyProperty.Register("MapContext", typeof(IMap), typeof(MapControl), new PropertyMetadata(null));
+
+
+
         public int LayerControlCount
         {
             get
@@ -57,14 +69,6 @@ namespace gEngine.View
             get
             {
                 return GetLayerControl(ActiveLayerControlIndex);
-            }
-        }
-
-        public IMap MapContext
-        {
-            get
-            {
-                return FindContext.Find<IMap>(this);
             }
         }
 

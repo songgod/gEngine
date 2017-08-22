@@ -52,7 +52,7 @@ namespace gEngine.Manipulator
             return dicManipulatorFactory[name];
         }
 
-        static public IManipulatorFactory GetManipulatorFactory(IObject iobject)
+        static public IObjectManipulatorFactory GetObjectManipulatorFactory(IObject iobject)
         {
             foreach (IManipulatorFactory mpf in dicManipulatorFactory.Values)
             {
@@ -68,13 +68,15 @@ namespace gEngine.Manipulator
             return new EditDefaultManipulatorFactory();
         }
 
-        static public IManipulatorBase CreateManipulator(IObject iobject, object param = null)
+        static public IManipulatorBase CreateObjectManipulator(IObject iobject, object param = null)
         {
-            IManipulatorFactory mpf = GetManipulatorFactory(iobject);
+            IObjectManipulatorFactory mpf = GetObjectManipulatorFactory(iobject);
             if (mpf == null)
                 return null;
 
-            return mpf.CreateManipulator(param);
+            IManipulatorBase mp = mpf.CreateManipulator(param);
+            ObjectManipulator omp = mp as ObjectManipulator;
+            return omp;
         }
 
         static public IManipulatorBase CreateManipulator(string name, object param=null)

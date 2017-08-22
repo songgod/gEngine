@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:gEngine.Project.Controls"
              xmlns:cvt="clr-namespace:gEngine.Project.Converter"
-             x:Name="UserControl_Project"
+             x:Name="projectcontrol"
              mc:Ignorable="d" 
              xmlns:prjcmds="clr-namespace:gEngine.Commands;assembly=gEngine.Commands"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
@@ -18,22 +18,8 @@
             <ColumnDefinition x:Uid="ColumnDefinition_1" Width="5*"/>
             <ColumnDefinition x:Uid="ColumnDefinition_2" Width="1*"/>
         </Grid.ColumnDefinitions>
-        <local:MapsControl x:Uid="tc" MapsSource="{Binding Path=Project.OpenMaps, Mode=TwoWay, ElementName=UserControl_Project}" Grid.Column="0" x:Name="tc">
-            <i:Interaction.Triggers>
-                <i:EventTrigger x:Uid="i:EventTrigger_1" EventName="SelectionChanged">
-                    <i:InvokeCommandAction x:Uid="i:InvokeCommandAction_1" Command="{x:Static prjcmds:OperateViewCommands.OpenMapsSelectCommand}" CommandParameter="{Binding ElementName=UserControl_Project}"/>
-                </i:EventTrigger>
-                <!--<i:EventTrigger x:Uid="i:EventTrigger_2" EventName="TabHidden">
-                <i:InvokeCommandAction x:Uid="i:InvokeCommandAction_2" Command="{x:Static prjcmds:OperateViewCommands.HideTabCommand}" CommandParameter="{Binding ElementName=UserControl_Project}"/>
-                </i:EventTrigger>-->
-            </i:Interaction.Triggers>
+        <local:MapsControl x:Uid="tc" Grid.Column="0" x:Name="tc" MapsSource="{Binding Path=Project.OpenMaps, Mode=TwoWay, ElementName=projectcontrol}">
         </local:MapsControl>
-        <Grid x:Uid="Grid_2" Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition x:Uid="RowDefinition_1" Height="1*"/>
-                <!--<RowDefinition x:Uid="RowDefinition_2" Height="1*"/>-->
-            </Grid.RowDefinitions>
-            <local:LayerMgrControl x:Uid="layermgr" x:Name="layermgr" mc="{Binding Path= MapsControl ,  ElementName=UserControl_Project}"   Grid.Row="0" MapSource="{Binding Path=Project.OpenMaps.CurrentIndex, ElementName=UserControl_Project, Converter={StaticResource micvt},ConverterParameter={x:Reference Name=tc},Mode=OneWay}"/>
-        </Grid>
+        <local:LayerMgrControl x:Uid="layermgr" Grid.Column="1" x:Name="layermgr" Grid.Row="0" MapSource="{Binding Path=Project.OpenMaps.CurrentIndex, ElementName=UserControl_Project, Converter={StaticResource micvt},ConverterParameter={x:Reference Name=tc},Mode=OneWay}"/>
     </Grid>
 </UserControl>

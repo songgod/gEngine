@@ -43,15 +43,8 @@ namespace gEngine.Graph.Ge
 
         public double Opacity
         {
-            get
-            {
-                return (double)GetValue(OpacityProperty);
-            }
-
-            set
-            {
-                SetValue(OpacityProperty, value);
-            }
+            get{ return (double)GetValue(OpacityProperty); }
+            set{ SetValue(OpacityProperty, value); }
         }
 
         public static readonly DependencyProperty OpacityProperty =

@@ -61,10 +61,8 @@
     <Compile Include="CommandInstaller.cs" />
     <Compile Include="Commands\DeleteMapCommand.cs" />
     <Compile Include="Commands\FullViewCommand.cs" />
-    <Compile Include="Commands\HideTabCommand.cs" />
     <Compile Include="Commands\OpenDBSourceCommand.cs" />
     <Compile Include="Commands\OpenMapCommand.cs" />
-    <Compile Include="Commands\OpenMapsSelectCommand.cs" />
     <Compile Include="Commands\OpenProjectCommand.cs" />
     <Compile Include="Commands\OpenRecentProjectCommand.cs" />
     <Compile Include="Commands\PrintPngCommand.cs" />
@@ -88,7 +86,7 @@
     </Compile>
     <Compile Include="Converter\LayerEditableImageConverter.cs" />
     <Compile Include="Converter\MapIndexConverter.cs" />
-    <Compile Include="Converter\MultiCommandParaConverter.cs" />
+    <Compile Include="Converter\MultiValue2ListConverter.cs" />
     <Compile Include="Converter\LayerVisibleImageConverter.cs" />
     <Compile Include="ImageHelper.cs" />
     <Compile Include="Project.cs" />

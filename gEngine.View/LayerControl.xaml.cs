@@ -14,9 +14,23 @@ namespace gEngine.View
         public LayerControl()
         {
             InitializeComponent();
-            Binding bd = new Binding("Visible") { Converter = new BooleanToVisibilityConverter(), Mode=BindingMode.TwoWay };
+            Binding bd = new Binding("LayerContext.Visible") { Converter = new BooleanToVisibilityConverter(), Mode=BindingMode.TwoWay, Source=this };
             BindingOperations.SetBinding(this, VisibilityProperty, bd);
         }
+
+
+
+        public ILayer LayerContext
+        {
+            get { return (ILayer)GetValue(LayerContextProperty); }
+            set { SetValue(LayerContextProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for LayerContext.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty LayerContextProperty =
+            DependencyProperty.Register("LayerContext", typeof(ILayer), typeof(LayerControl), new PropertyMetadata(null));
+
+
 
         public Canvas Root
         {
@@ -49,14 +63,6 @@ namespace gEngine.View
             var item = ItemContainerGenerator.ContainerFromIndex(index);
             ObjectControl oc = FindChild.FindVisualChild<ObjectControl>(item, "objectcontrol");
             return oc;
-        }
-
-        public ILayer LayerContext
-        {
-            get
-            {
-                return FindContext.Find<ILayer>(this);
-            }
         }
 
         public Rect GetRect()

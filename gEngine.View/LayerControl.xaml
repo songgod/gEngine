@@ -7,7 +7,8 @@
              mc:Ignorable="d"
               ItemsSource="{Binding Objects}"
               IsEnabled="False"
-              Opacity="{Binding Opacity, Mode=TwoWay}"
+              Name="layercontrol"
+              Opacity="{Binding LayerContext.Opacity, Mode=TwoWay, ElementName=layercontrol}"
              d:DesignHeight="300" d:DesignWidth="300">
     <ItemsControl.Resources>
         <local:BoolVisibilityConverter x:Key="bvc"/>
@@ -23,7 +24,7 @@
         </ItemsControl.ItemsPanel>
         <ItemsControl.ItemTemplate>
             <DataTemplate>
-                <local:ObjectControl x:Name="objectcontrol" Content="{Binding}"/>
+            <local:ObjectControl Content="{Binding}"/>
             </DataTemplate>
         </ItemsControl.ItemTemplate>
     </ItemsControl>

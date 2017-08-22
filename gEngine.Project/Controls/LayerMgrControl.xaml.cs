@@ -35,7 +35,6 @@ namespace gEngine.Project.Controls
                 btn.ItemClick += Btn_ItemClick;
                 barSubItem.Items.Add(btn);
             }
-           
         }
         public bool isEye = false;
         public bool isEdit = false;
@@ -64,22 +63,6 @@ namespace gEngine.Project.Controls
         // Using a DependencyProperty as the backing store for MapSource.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MapSourceProperty =
             DependencyProperty.Register("MapSource", typeof(IMap), typeof(LayerMgrControl));
-
-        public MapsControl mc
-        {
-            get
-            {
-                return (MapsControl) GetValue(mcProperty);
-            }
-            set
-            {
-                SetValue(mcProperty, value);
-            }
-        }
-
-        // Using a DependencyProperty as the backing store for MapSource.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty mcProperty =
-            DependencyProperty.Register("mc", typeof(MapsControl), typeof(LayerMgrControl));
 
         private void eyeImage_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
@@ -133,11 +116,6 @@ namespace gEngine.Project.Controls
                 layer.Editable = isEdit;
             }
             isEdit = !isEdit;
-        }
-
-        private void tbName_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            mc.ActiveMapControl.ActiveLayerControlIndex = this.lbLayers.SelectedIndex;
         }
     }
 }

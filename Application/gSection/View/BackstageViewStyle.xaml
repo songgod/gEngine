@@ -77,7 +77,7 @@
                 <ColumnDefinition x:Uid="ColumnDefinition_2" Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.Resources>
-                <prjcvts:MultiCommandParaConverter x:Uid="prjcvts:MultiCommandParaConverter_2" x:Key="c2l"></prjcvts:MultiCommandParaConverter>
+                <prjcvts:MultiValue2ListConverter x:Uid="prjcvts:MultiCommandParaConverter_2" x:Key="c2l"></prjcvts:MultiValue2ListConverter>
             </Grid.Resources>
             <i:Interaction.Triggers>
                 <i:EventTrigger x:Uid="i:EventTrigger_4" EventName="MouseLeftButtonDown">

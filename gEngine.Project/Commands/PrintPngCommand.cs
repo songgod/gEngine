@@ -37,12 +37,6 @@ namespace gEngine.Project.Commands
             if (mc == null)
                 return;
 
-            LayerControl layer = mc.ActiveLayerControl;
-            if (layer == null)
-                return;
-
-            // 这里需要判断一下是不是装饰图层
-
             e.CanExecute = true;
             e.Handled = true;
         }
@@ -59,20 +53,10 @@ namespace gEngine.Project.Commands
             MapControl mc = pc.MapsControl.ActiveMapControl;
             if (mc == null)
                 return;
-
-            LayerControl lc = mc.ActiveLayerControl;
-            if (lc == null)
-                return;
             ExportToPng(mc);
-            //DrawRectObjectManipulator dm = gEngine.Manipulator.Registry.CreateManipulator("DrawRectObjectManipulator") as DrawRectObjectManipulator;
-            //if (dm == null)
-            //    return;
-            //ManipulatorSetter.SetManipulator(dm, lc);
         }
         public void ExportToPng(MapControl surface)
         {
-            //if (path == null) return;
-
             Transform transform = surface.LayoutTransform;
             surface.LayoutTransform = null;
 

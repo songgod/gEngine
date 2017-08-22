@@ -23,8 +23,6 @@ namespace gEngine.Project.Commands
                 return;
 
             ui.CommandBindings.Add(new FullViewCommand());
-            ui.CommandBindings.Add(new OpenMapsSelectCommand());
-            ui.CommandBindings.Add(new HideTabCommand());
             ui.CommandBindings.Add(new OpenProjectCommand());
             ui.CommandBindings.Add(new SaveProjectCommand());
             ui.CommandBindings.Add(new SaveAsProjectCommand());

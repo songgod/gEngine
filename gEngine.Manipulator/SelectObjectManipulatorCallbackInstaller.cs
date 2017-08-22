@@ -21,7 +21,7 @@ namespace gEngine.Manipulator
                 return;
             if (oc.IsSelected)
             {
-                IManipulatorBase mb = gEngine.Manipulator.Registry.CreateManipulator(oc.ObjectContext);
+                IManipulatorBase mb = gEngine.Manipulator.Registry.CreateObjectManipulator(oc.ObjectContext);
                 ManipulatorSetter.SetManipulator(mb, oc);
             }
             else

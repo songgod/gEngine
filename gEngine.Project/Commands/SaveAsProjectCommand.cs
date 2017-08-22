@@ -42,13 +42,18 @@ namespace gEngine.Project.Commands
             if (pc.Project.Maps.Count == 0 || pc.Project.DBSource == null)
                 return;
 
-            if (pc.Project.SaveAs())
+            SaveFileDialog SaveFileDialog = new SaveFileDialog();
+            SaveFileDialog.Filter = "工程文件|*.Gepro";
+            if (SaveFileDialog.ShowDialog() == true)
             {
-                MessageBox.Show("保存成功！");
-            }
-            else
-            {
-                MessageBox.Show("保存失败！");
+                if (pc.Project.SaveAs(SaveFileDialog.FileName))
+                {
+                    MessageBox.Show("保存成功！");
+                }
+                else
+                {
+                    MessageBox.Show("保存失败！");
+                }
             }
 
             e.Handled = true;
