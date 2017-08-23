@@ -1,8 +1,7 @@
-﻿using DevExpress.Xpf.Bars;
+﻿using DevExpress.Mvvm;
+using DevExpress.Xpf.Bars;
 using DevExpress.Xpf.Ribbon;
-using gEngine.Graph.Ge;
 using gEngine.Symbol;
-using gEngine.View.Ge;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,14 +35,13 @@ namespace gEngine.Application
 
                 foreach (string symbolName in kv.Value.PointSymbolNames)
                 {
-                    PointStyle pstyle = new PointStyle();
-                    pstyle.Height = 40;
-                    pstyle.Width = 40;
-                    pstyle.Symbol = symbolName;
-                    pstyle.SymbolLib = key;
-                    pstyle.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFEEECE1"));
-                    pstyle.Stroke = Colors.Black;
-                    PointOptionSetting setting = PointStyle2OptionSettingConverter.CreateFromPointStyle(pstyle);
+                    PointOptionSetting setting = new PointOptionSetting();
+                    setting.Height = 40;
+                    setting.Width = 40;
+                    setting.Symbol = symbolName;
+                    setting.Factory = key;
+                    setting.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFEEECE1"));
+                    setting.Stroke = Colors.Black;
 
                     object obj = gEngine.Symbol.Registry.CreatePoint(setting);
 
@@ -51,7 +49,7 @@ namespace gEngine.Application
                     {
                         GalleryItem item = new GalleryItem();
                         item.Caption = obj;
-                        item.Command = null;
+                        item.Command = SelectCommand;
                         item.CommandParameter = new string[] { key, symbolName };
                         group.Items.Add(item);
                     }
@@ -64,27 +62,43 @@ namespace gEngine.Application
             Gallery = gallery;
         }
 
-        private static void OnPointSymbolCommandChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+
+
+        public string SymbolLib
         {
-            PointSymbolGalleryDropDownPopupMenu pgdp = (PointSymbolGalleryDropDownPopupMenu)d;
-            ICommand cmd = (ICommand)e.NewValue;
-            foreach (GalleryItemGroup group in pgdp.Gallery.Groups)
+            get { return (string)GetValue(SymbolLibProperty); }
+            set { SetValue(SymbolLibProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for SymbolLib.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SymbolLibProperty =
+            DependencyProperty.Register("SymbolLib", typeof(string), typeof(PointSymbolGalleryDropDownPopupMenu), new PropertyMetadata(""));
+
+
+
+
+        public string Symbol
+        {
+            get { return (string)GetValue(SymbolProperty); }
+            set { SetValue(SymbolProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Symbol.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SymbolProperty =
+            DependencyProperty.Register("Symbol", typeof(string), typeof(PointSymbolGalleryDropDownPopupMenu), new PropertyMetadata(""));
+
+
+
+        public ICommand SelectCommand
+        {
+            get
             {
-                foreach (GalleryItem item in group.Items)
+                return new DelegateCommand<string[]>((parameter) =>
                 {
-                    item.Command = cmd;
-                }
+                    SymbolLib = parameter[0] as string;
+                    Symbol = parameter[1] as string;
+                });
             }
         }
-
-        public ICommand PointSymbolCommand
-        {
-            get { return (ICommand)GetValue(PointSymbolCommandProperty); }
-            set { SetValue(PointSymbolCommandProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for ItemCommand.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty PointSymbolCommandProperty =
-            DependencyProperty.Register("PointSymbolCommand", typeof(ICommand), typeof(PointSymbolGalleryDropDownPopupMenu), new PropertyMetadata(null, new PropertyChangedCallback(OnPointSymbolCommandChanged)));
     }
 }

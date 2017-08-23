@@ -33,17 +33,5 @@ namespace gEngine.Application.Ge.Section
                 return typeof(Graph.Ge.Section.SandFaceProxyObject);
             }
         }
-        public ICommand SelectBarCommand
-        {
-            get
-            {
-                return new DelegateCommand<string[]>((parameter) =>
-                {
-                    Graph.Ge.Section.SandFaceProxyObject sfpo = this.DataContext as Graph.Ge.Section.SandFaceProxyObject;
-                    sfpo.FillStyle.SymbolLib = parameter[0] as string;
-                    sfpo.FillStyle.Symbol = parameter[1] as string;
-                });
-            }
-        }
     }
 }

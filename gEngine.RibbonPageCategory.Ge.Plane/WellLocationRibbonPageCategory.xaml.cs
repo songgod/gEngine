@@ -44,18 +44,5 @@ namespace gEngine.Application.Ge.Plane
                 return typeof(WellLocation);
             }
         }
-
-        public ICommand SelectBarCommand
-        {
-            get
-            {
-                return new DelegateCommand<string[]>((parameter) =>
-                {
-                    WellLocation wl = this.DataContext as WellLocation;
-                    wl.PointStyle.SymbolLib = parameter[0] as string;
-                    wl.PointStyle.Symbol = parameter[1] as string;
-                });
-            }
-        }
     }
 }

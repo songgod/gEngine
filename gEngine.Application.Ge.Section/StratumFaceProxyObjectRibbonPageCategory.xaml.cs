@@ -34,18 +34,5 @@ namespace gEngine.Application.Ge.Section
                 return typeof(Graph.Ge.Section.StratumFaceProxyObject);
             }
         }
-
-        public ICommand SelectBarCommand
-        {
-            get
-            {
-                return new DelegateCommand<string[]>((parameter) =>
-                {
-                    Graph.Ge.Section.StratumFaceProxyObject sfpo = this.DataContext as Graph.Ge.Section.StratumFaceProxyObject;
-                    sfpo.FillStyle.SymbolLib = parameter[0] as string;
-                    sfpo.FillStyle.Symbol = parameter[1] as string;
-                });
-            }
-        }
     }
 }

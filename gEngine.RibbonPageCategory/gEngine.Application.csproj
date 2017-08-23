@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.Data.v16.1, Version=16.1.2.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Mvvm.v16.1, Version=16.1.2.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.Core.v16.1, Version=16.1.2.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Xpf.Ribbon.v16.1, Version=16.1.2.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="PresentationCore" />
@@ -57,10 +58,6 @@
     <Compile Include="StrokeSymbolGalleryDropDownPopupMenu.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\gEngine.Graph.Ge\gEngine.Graph.Ge.csproj">
-      <Project>{3BD77E4F-A348-4EDB-B60C-68B749249B91}</Project>
-      <Name>gEngine.Graph.Ge</Name>
-    </ProjectReference>
     <ProjectReference Include="..\gEngine.Graph.Interface\gEngine.Graph.Interface.csproj">
       <Project>{1C98A821-B030-4FF2-83AE-D49B1B3B8C67}</Project>
       <Name>gEngine.Graph.Interface</Name>
@@ -76,10 +73,6 @@
     <ProjectReference Include="..\gEngine.Util\gEngine.Util.csproj">
       <Project>{84ACB6C4-CF62-4F4B-A7E5-5C642EDC041A}</Project>
       <Name>gEngine.Util</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\gEngine.View.Ge\gEngine.View.Ge.csproj">
-      <Project>{BC05DE82-7172-43BC-A025-9827E0275209}</Project>
-      <Name>gEngine.View.Ge</Name>
     </ProjectReference>
     <ProjectReference Include="..\gEngine.View.Symbol\gEngine.Symbol.csproj">
       <Project>{1600379B-C8B5-4375-A1D5-3B81BD7FCCF7}</Project>

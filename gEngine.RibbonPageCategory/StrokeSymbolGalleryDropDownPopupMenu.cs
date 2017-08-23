@@ -1,8 +1,7 @@
-﻿using DevExpress.Xpf.Bars;
+﻿using DevExpress.Mvvm;
+using DevExpress.Xpf.Bars;
 using DevExpress.Xpf.Ribbon;
-using gEngine.Graph.Ge;
 using gEngine.Symbol;
-using gEngine.View.Ge;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,12 +41,12 @@ namespace gEngine.Application
 
                 foreach (string symbolName in kv.Value.StrokeSymbolNames)
                 {
-                    LineStyle cplstyle = new LineStyle();
-                    cplstyle.Symbol = symbolName;
-                    cplstyle.SymbolLib = key;
-                    cplstyle.Width = key=="Normal" ? 1 : 10;
-                    cplstyle.Stroke = Colors.Black;
-                    LineOptionSetting setting = LineStyle2LineOptionSettingConverter.ConvertFromLineStyle(cplstyle, pg);
+                    LineOptionSetting setting = new LineOptionSetting();
+                    setting.Symbol = symbolName;
+                    setting.Factory = key;
+                    setting.Width = key == "Normal" ? 1 : 10;
+                    setting.Stroke = Colors.Black;
+                    setting.Path = pg;
 
                     Path path = gEngine.Symbol.Registry.CreateStroke(setting) as Path;
                     if (path != null)
@@ -57,7 +56,7 @@ namespace gEngine.Application
                         c.Children.Add(path);
                         GalleryItem item = new GalleryItem();
                         item.Caption = c;
-                        item.Command = null;
+                        item.Command = SelectCommand;
                         item.CommandParameter = new string[] { key, symbolName };
                         group.Items.Add(item);
                     }
@@ -68,27 +67,44 @@ namespace gEngine.Application
             Gallery = gallery;
         }
 
-        private static void OnLineSymbolCommandChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+
+
+        public string SymbolLib
         {
-            StrokeSymbolGalleryDropDownPopupMenu sgdp = (StrokeSymbolGalleryDropDownPopupMenu)d;
-            ICommand cmd = (ICommand)e.NewValue;
-            foreach (GalleryItemGroup group in sgdp.Gallery.Groups)
+            get { return (string)GetValue(SymbolLibProperty); }
+            set { SetValue(SymbolLibProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for SymbolLib.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SymbolLibProperty =
+            DependencyProperty.Register("SymbolLib", typeof(string), typeof(StrokeSymbolGalleryDropDownPopupMenu), new PropertyMetadata(""));
+
+
+
+        public string Symbol
+        {
+            get { return (string)GetValue(SymbolProperty); }
+            set { SetValue(SymbolProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Symbol.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SymbolProperty =
+            DependencyProperty.Register("Symbol", typeof(string), typeof(StrokeSymbolGalleryDropDownPopupMenu), new PropertyMetadata(""));
+
+
+
+
+
+        public ICommand SelectCommand
+        {
+            get
             {
-                foreach (GalleryItem item in group.Items)
+                return new DelegateCommand<string[]>((parameter) =>
                 {
-                    item.Command = cmd;
-                }
+                    SymbolLib = parameter[0] as string;
+                    Symbol = parameter[1] as string;
+                });
             }
         }
-
-        public ICommand LineSymbolCommand
-        {
-            get { return (ICommand)GetValue(LineSymbolCommandProperty); }
-            set { SetValue(LineSymbolCommandProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for ItemCommand.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty LineSymbolCommandProperty =
-            DependencyProperty.Register("LineSymbolCommand", typeof(ICommand), typeof(StrokeSymbolGalleryDropDownPopupMenu), new PropertyMetadata(null,new PropertyChangedCallback(OnLineSymbolCommandChanged)));
     }
 }

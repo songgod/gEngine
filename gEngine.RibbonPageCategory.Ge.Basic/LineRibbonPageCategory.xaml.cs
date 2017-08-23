@@ -41,17 +41,5 @@ namespace gEngine.Application.Ge.Basic
                 return typeof(Graph.Ge.Basic.Line);
             }
         }
-        public ICommand SelectBarCommand
-        {
-            get
-            {
-                return new DelegateCommand<string[]>((parameter) =>
-                {
-                    Graph.Ge.Basic.Line line = this.DataContext as Graph.Ge.Basic.Line;
-                    line.LinStyle.SymbolLib = parameter[0] as string;
-                    line.LinStyle.Symbol = parameter[1] as string;
-                });
-            }
-        }
     }
 }

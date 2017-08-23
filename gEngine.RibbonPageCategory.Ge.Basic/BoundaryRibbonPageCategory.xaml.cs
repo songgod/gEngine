@@ -20,9 +20,9 @@ namespace gEngine.Application.Ge.Basic
     /// <summary>
     /// FillRibbonPageCategory.xaml 的交互逻辑
     /// </summary>
-    public partial class FillRibbonPageCategory : GeRibbonPageCategory
+    public partial class BoundaryRibbonPageCategory : GeRibbonPageCategory
     {
-        public FillRibbonPageCategory()
+        public BoundaryRibbonPageCategory()
         {
             InitializeComponent();
             this.DataContext = new Graph.Ge.Basic.Boundary();
@@ -32,18 +32,6 @@ namespace gEngine.Application.Ge.Basic
             get
             {
                 return typeof(Graph.Ge.Basic.Boundary);
-            }
-        }
-        public ICommand SelectBarCommand
-        {
-            get
-            {
-                return new DelegateCommand<string[]>((parameter) =>
-                {
-                    Graph.Ge.Basic.Boundary boun = this.DataContext as Graph.Ge.Basic.Boundary;
-                    boun.FillStyle.SymbolLib = parameter[0] as string;
-                    boun.FillStyle.Symbol = parameter[1] as string;
-                });
             }
         }
     }

@@ -33,17 +33,5 @@ namespace gEngine.Application.Ge.Basic
                 return typeof(Graph.Ge.Basic.Rect);
             }
         }
-        public ICommand SelectBarCommand
-        {
-            get
-            {
-                return new DelegateCommand<string[]>((parameter) =>
-                {
-                    Graph.Ge.Basic.Rect boun = this.DataContext as Graph.Ge.Basic.Rect;
-                    boun.FillStyle.SymbolLib = parameter[0] as string;
-                    boun.FillStyle.Symbol = parameter[1] as string;
-                });
-            }
-        }
     }
 }

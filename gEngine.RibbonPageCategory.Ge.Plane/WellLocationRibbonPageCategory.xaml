@@ -50,7 +50,7 @@
             <dxb:BarSplitButtonItem Content="点风格"  LargeGlyph="{dx:DXImage Image=Record_32x32.png}" x:Name="bsbPointStyle"
                                    Glyph="{dx:DXImage Image=Record_16x16.png}" RibbonStyle="SmallWithText">
                 <dxb:BarSplitButtonItem.PopupControl>
-                    <gerpc:PointSymbolGalleryDropDownPopupMenu PointSymbolCommand="{Binding SelectBarCommand,ElementName=RibbonPageCategoryWellLocation}"/>
+                    <gerpc:PointSymbolGalleryDropDownPopupMenu SymbolLib="{Binding PointStyle.SymbolLib, Mode=TwoWay}" Symbol="{Binding PointStyle.Symbol, Mode=TwoWay}"/>
                 </dxb:BarSplitButtonItem.PopupControl>
             </dxb:BarSplitButtonItem>
         </dxr:RibbonPageGroup>

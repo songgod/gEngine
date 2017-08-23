@@ -33,18 +33,5 @@ namespace gEngine.Application.Ge.Section
                 return typeof(Graph.Ge.Section.TrendLine);
             }
         }
-
-        public ICommand SelectBarCommand
-        {
-            get
-            {
-                return new DelegateCommand<string[]>((parameter) =>
-                {
-                    Graph.Ge.Section.TrendLine line = this.DataContext as Graph.Ge.Section.TrendLine;
-                    line.LineStyle.SymbolLib = parameter[0] as string;
-                    line.LineStyle.Symbol = parameter[1] as string;
-                });
-            }
-        }
     }
 }

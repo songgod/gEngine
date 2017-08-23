@@ -34,18 +34,5 @@ namespace gEngine.Application.Ge.Section
                 return typeof(Graph.Ge.Section.FaultLineProxyObject);
             }
         }
-
-        public ICommand SelectBarCommand
-        {
-            get
-            {
-                return new DelegateCommand<string[]>((parameter) =>
-                {
-                    Graph.Ge.Section.FaultLineProxyObject line = this.DataContext as Graph.Ge.Section.FaultLineProxyObject;
-                    line.LineStyle.SymbolLib = parameter[0] as string;
-                    line.LineStyle.Symbol = parameter[1] as string;
-                });
-            }
-        }
     }
 }

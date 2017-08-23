@@ -30,7 +30,7 @@
             <dxb:BarSplitButtonItem Content="线风格"  LargeGlyph="{dx:DXImage Image=LineStyle_32x32.png}"
                                    Glyph="{dx:DXImage Image=LineStyle_16x16.png}" RibbonStyle="SmallWithText">
                 <dxb:BarSplitButtonItem.PopupControl>
-                    <gerpc:StrokeSymbolGalleryDropDownPopupMenu LineSymbolCommand="{Binding SelectBarCommand,ElementName=rpcTrendLine}"/>
+                    <gerpc:StrokeSymbolGalleryDropDownPopupMenu SymbolLib="{Binding LineStyle.SymbolLib, Mode=TwoWay}" Symbol="{Binding LineStyle.Symbol, Mode=TwoWay}"/>
                 </dxb:BarSplitButtonItem.PopupControl>
             </dxb:BarSplitButtonItem>
         </dxr:RibbonPageGroup>
