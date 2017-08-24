@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:gEngine.Project.Controls"
              xmlns:cvt="clr-namespace:gEngine.Project.Converter"
-             x:Name="projectcontrol"
              mc:Ignorable="d" 
              xmlns:prjcmds="clr-namespace:gEngine.Commands;assembly=gEngine.Commands"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
@@ -18,8 +17,8 @@
             <ColumnDefinition x:Uid="ColumnDefinition_1" Width="5*"/>
             <ColumnDefinition x:Uid="ColumnDefinition_2" Width="1*"/>
         </Grid.ColumnDefinitions>
-        <local:MapsControl x:Uid="tc" Grid.Column="0" x:Name="tc" MapsSource="{Binding Path=Project.OpenMaps, Mode=TwoWay, ElementName=projectcontrol}">
-        </local:MapsControl>
-        <local:LayerMgrControl x:Uid="local:LayerMgrControl_1" Grid.Column="1" MapSource="{Binding Path=Project.OpenMaps.CurrentIndex, ElementName=projectcontrol, Converter={StaticResource micvt},ConverterParameter={x:Reference Name=tc},Mode=OneWay}"/>
+        <local:MapsControl x:Uid="tc" Grid.Column="0" x:Name="tc" MapsSource="{Binding Path=Project.OpenMaps, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=local:ProjectControl}}"/>
+        <local:LayerMgrControl x:Uid="layermgrcontrol" Grid.Column="1" x:Name="layermgrcontrol"
+                               MapSource="{Binding Path=Project.OpenMaps.CurrentIndex, RelativeSource={RelativeSource AncestorType=local:ProjectControl}, Converter={StaticResource micvt},ConverterParameter={x:Reference Name=tc},Mode=OneWay}"/>
     </Grid>
 </UserControl>

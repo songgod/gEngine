@@ -5,18 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:gEngine.View"
              mc:Ignorable="d"
-              ItemsSource="{Binding Objects}"
+              ItemsSource="{Binding LayerContext.Objects,Mode=TwoWay, RelativeSource={RelativeSource Self}}"
               IsEnabled="False"
-              Name="layercontrol"
-              Opacity="{Binding LayerContext.Opacity, Mode=TwoWay, ElementName=layercontrol}"
+              Opacity="{Binding LayerContext.Opacity, Mode=TwoWay, RelativeSource={RelativeSource Self}}"
              d:DesignHeight="300" d:DesignWidth="300">
-    <ItemsControl.Resources>
-        <local:BoolVisibilityConverter x:Key="bvc"/>
-    </ItemsControl.Resources>
-    <ItemsControl.Visibility>
-        <Binding Path="Visible" Converter="{StaticResource bvc}" Mode="TwoWay"/>
-    </ItemsControl.Visibility>
-   
     <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
                 <Canvas x:Name="layerpanel"/>

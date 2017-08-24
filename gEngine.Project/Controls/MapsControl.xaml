@@ -16,9 +16,8 @@
              d:DesignHeight="300" d:DesignWidth="300"
                  DestroyContentOnTabSwitching="False"
                  TabContentCacheMode="CacheAllTabs"
-                 Name="mapscontrol"
-                 ItemsSource="{Binding MapsSource, Mode=TwoWay, ElementName=mapscontrol}"
-                 SelectedIndex="{Binding MapsSource.CurrentIndex, Mode=TwoWay, ElementName=mapscontrol}"
+                 ItemsSource="{Binding MapsSource, Mode=TwoWay, RelativeSource={RelativeSource Self}}"
+                 SelectedIndex="{Binding MapsSource.CurrentIndex, Mode=TwoWay, RelativeSource={RelativeSource Self}}"
                  >
     <dx:DXTabControl.ItemHeaderTemplate>
         <DataTemplate x:Uid="DataTemplate_1">

@@ -6,11 +6,11 @@
              xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
                 xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
              xmlns:local="clr-namespace:gEngine.Project"
+             xmlns:ctrl="clr-namespace:gEngine.Project.Controls"
              mc:Ignorable="d" 
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"  
              xmlns:cvt="clr-namespace:gEngine.Project.Converter"
              xmlns:prjcmds="clr-namespace:gEngine.Commands;assembly=gEngine.Commands"
-             Name="layermgrcontrol"
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <cvt:LayerEditableImageConverter x:Uid="cvt:ImagePathConverter_1" x:Key="editimageConvert"/>
@@ -40,6 +40,6 @@
             <dxb:BarButtonItem x:Uid="barButtonItem3" Name="barButtonItem3" ItemClick="btnEdit_Click" Content="编辑性" Glyph="{dx:DXImage Image=Edit_16x16.png}" LargeGlyph="{dx:DXImage Image=Edit_32x32.png}"/>
             <dxb:BarButtonItem x:Uid="barButtonItem4" Name="barButtonItem4" ItemClick="btnEmpty_Click" Content="清空" Glyph="{dx:DXImage Image=Trash_16x16.png}" LargeGlyph="{dx:DXImage Image=Trash_32x32.png}"/>
         </dxb:ToolBarControl>
-        <ListBox x:Uid="lbLayers" x:Name="lbLayers"  SelectedIndex="{Binding MapSource.Layers.CurrentIndex, Mode=TwoWay, ElementName=layermgrcontrol}"  ItemsSource="{Binding MapSource.Layers, Mode=TwoWay, ElementName=layermgrcontrol}" ItemTemplate="{ StaticResource listBoxTemplate}" Grid.Row="1"/>
+        <ListBox x:Uid="lbLayers" x:Name="lbLayers"  SelectedIndex="{Binding MapSource.Layers.CurrentIndex, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=ctrl:LayerMgrControl}}"  ItemsSource="{Binding MapSource.Layers, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=ctrl:LayerMgrControl}}" ItemTemplate="{ StaticResource listBoxTemplate}" Grid.Row="1"/>
     </Grid>
 </UserControl>

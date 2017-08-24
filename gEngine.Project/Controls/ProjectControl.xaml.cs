@@ -43,7 +43,7 @@ namespace gEngine.Project.Controls
         {
             get
             {
-                return FindChild.FindVisualChild<LayerMgrControl>(this, "layermgrcontrol");
+                return layermgrcontrol;
             }
         }
 
