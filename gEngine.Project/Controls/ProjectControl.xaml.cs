@@ -53,6 +53,10 @@ namespace gEngine.Project.Controls
             {
                 return tc;
             }
+            set
+            {
+                throw new Exception("Can not set mapscontrol");
+            }
         }
     }
 }

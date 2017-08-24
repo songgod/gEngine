@@ -2,6 +2,7 @@
 using gEngine.Util;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Media;
 
@@ -16,6 +17,8 @@ namespace gEngine.View
         {
             InitializeComponent();
             UndoRedoCommandManager = new UndoRedoCommandManager();
+            Binding bd = new Binding("MapContext.Layers.CurrentIndex") {  Mode = BindingMode.TwoWay, Source = this };
+            BindingOperations.SetBinding(this, SelectIndexProperty, bd);
         }
 
         public UndoRedoCommandManager UndoRedoCommandManager
@@ -35,6 +38,38 @@ namespace gEngine.View
 
 
 
+        public int SelectIndex
+        {
+            get { return (int)GetValue(SelectIndexProperty); }
+            set { SetValue(SelectIndexProperty, value); }
+        }
+
+        static void OnSelectIndexChangedCallback(DependencyObject obj, DependencyPropertyChangedEventArgs arg)
+        {
+            MapControl mc = (MapControl)obj;
+            int pos = (int)arg.NewValue;
+
+            mc.ActiveLayerControl = mc.GetLayerControl(pos);
+        }
+
+        // Using a DependencyProperty as the backing store for SelectIndex.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectIndexProperty =
+            DependencyProperty.Register("SelectIndex", typeof(int), typeof(MapControl), new PropertyMetadata(-1, new PropertyChangedCallback(OnSelectIndexChangedCallback)));
+
+
+
+        public LayerControl ActiveLayerControl
+        {
+            get { return (LayerControl)GetValue(ActiveLayerControlProperty); }
+            private set { SetValue(ActiveLayerControlProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ActiveLayerControl.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ActiveLayerControlProperty =
+            DependencyProperty.Register("ActiveLayerControl", typeof(LayerControl), typeof(MapControl), new PropertyMetadata(null));
+
+
+
         public int LayerControlCount
         {
             get
@@ -50,26 +85,6 @@ namespace gEngine.View
             var item = layeritemscontrol.ItemContainerGenerator.ContainerFromIndex(index);
             LayerControl lc = FindChild.FindVisualChild<LayerControl>(item, "layercontrol");
             return lc;
-        }
-
-        public int ActiveLayerControlIndex
-        {
-            get
-            {
-                return layeritemscontrol.Items.CurrentPosition;
-            }
-            set
-            {
-                layeritemscontrol.Items.MoveCurrentToPosition(value);
-            }
-        }
-
-        public LayerControl ActiveLayerControl
-        {
-            get
-            {
-                return GetLayerControl(ActiveLayerControlIndex);
-            }
         }
 
         public Canvas EditLayer
