@@ -23,27 +23,10 @@ namespace gEngine.Project.Ge.Section.Commands.SectionEdit
 
         public override void SetManipulator(LayerControl lc, object param)
         {
-            if (ManipulatorSetter.IsContainManipulator("DrawTrendLineManipulator", lc))
-                ManipulatorSetter.ClearManipulator(lc);
+            if (lc.Manipulator == "DrawTrendLineManipulator")
+                lc.Manipulator = "";
             else
-            {
-                IManipulatorBase dm = gEngine.Manipulator.Registry.CreateManipulator("DrawTrendLineManipulator", param);
-                if (dm == null)
-                    return;
-                ManipulatorSetter.SetManipulator(dm, lc);
-            }
-
-            BarCheckItem bar = param as BarCheckItem;
-            if (bar != null && lc != null)
-            {
-                Binding bd = new Binding();
-                bd.Source = lc;
-                bd.Path = new PropertyPath("(0)", ManipulatorSetter.ManipulatorsProperty);
-                bd.Converter = new IsCheckedConverter();
-                bd.ConverterParameter = "DrawTrendLineManipulator";
-                bd.Mode = BindingMode.TwoWay;
-                bar.SetBinding(BarCheckItem.IsCheckedProperty, bd);
-            }
+                lc.Manipulator = "DrawTrendLineManipulator";
         }
     }
 }

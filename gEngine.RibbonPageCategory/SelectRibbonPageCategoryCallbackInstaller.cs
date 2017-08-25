@@ -10,16 +10,35 @@ using System.Windows.Data;
 
 namespace gEngine.Application
 {
-    class SelectObjectRibbonPageCategoryCallbackInstaller
+    class SelectRibbonPageCategoryCallbackInstaller
     {
-        public SelectObjectRibbonPageCategoryCallbackInstaller()
+        public SelectRibbonPageCategoryCallbackInstaller()
         {
-
+            MapControl.OnLayerControlSelected += MapControl_OnLayerControlSelected;
             ObjectControl.OnObjectControlSelected += ObjectControl_OnObjectControlSelected;
+        }
+
+        private void MapControl_OnLayerControlSelected(LayerControl oc)
+        {
+            Registry.HideAllPageCategory();
+            if (oc == null)
+                return;
+            
+            GeRibbonPageCategory grpc = Registry.GetRibbonPageCategory(oc.LayerContext.GetType());
+
+            if (grpc != null)
+            {
+                grpc.IsVisible = true;
+                grpc.DataContext = oc.LayerContext;
+            }
         }
 
         private void ObjectControl_OnObjectControlSelected(ObjectControl oc)
         {
+            Registry.HideAllPageCategory();
+            if (oc == null)
+                return;
+
             IObject iobject = oc.DataContext as IObject;
             GeRibbonPageCategory grpc = Registry.GetRibbonPageCategory(iobject.GetType());
 

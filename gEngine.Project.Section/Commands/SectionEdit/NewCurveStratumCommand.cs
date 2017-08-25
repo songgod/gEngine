@@ -32,18 +32,6 @@ namespace gEngine.Project.Ge.Section.Commands.SectionEdit
                     return;
                 ManipulatorSetter.SetManipulator(dm, lc);
             }
-
-            BarCheckItem bar = param as BarCheckItem;
-            if (bar != null && lc != null)
-            {
-                Binding bd = new Binding();
-                bd.Source = lc;
-                bd.Path = new PropertyPath("(0)", ManipulatorSetter.ManipulatorsProperty);
-                bd.Converter = new IsCheckedConverter();
-                bd.ConverterParameter = "DrawCurveStratumManipulator";
-                bd.Mode = BindingMode.TwoWay;
-                bar.SetBinding(BarCheckItem.IsCheckedProperty, bd);
-            }
         }
     }
 }

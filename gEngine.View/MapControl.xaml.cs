@@ -8,6 +8,7 @@ using System.Windows.Media;
 
 namespace gEngine.View
 {
+    public delegate void SelectLayerControl(LayerControl oc);
     /// <summary>
     /// MapControl.xaml 的交互逻辑
     /// </summary>
@@ -36,7 +37,7 @@ namespace gEngine.View
         public static readonly DependencyProperty MapContextProperty =
             DependencyProperty.Register("MapContext", typeof(IMap), typeof(MapControl), new PropertyMetadata(null));
 
-
+        
 
         public int SelectIndex
         {
@@ -44,12 +45,16 @@ namespace gEngine.View
             set { SetValue(SelectIndexProperty, value); }
         }
 
+        public static event SelectLayerControl OnLayerControlSelected;
+
         static void OnSelectIndexChangedCallback(DependencyObject obj, DependencyPropertyChangedEventArgs arg)
         {
             MapControl mc = (MapControl)obj;
             int pos = (int)arg.NewValue;
 
             mc.ActiveLayerControl = mc.GetLayerControl(pos);
+            if (OnLayerControlSelected != null)
+                OnLayerControlSelected.Invoke(mc.ActiveLayerControl);
         }
 
         // Using a DependencyProperty as the backing store for SelectIndex.  This enables animation, styling, binding, etc...

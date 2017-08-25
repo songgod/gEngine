@@ -21,14 +21,11 @@ namespace gEngine.Project.Ge.Section.Commands.SectionEdit
 
         public override void SetManipulator(LayerControl lc, object param)
         {
-            if (ManipulatorSetter.IsContainManipulator("DrawCurveFaultManipulator", lc))
-                ManipulatorSetter.ClearManipulator(lc);
+            if (lc.Manipulator == "DrawCurveFaultManipulator")
+                lc.Manipulator = "";
             else
             {
-                DrawCurveFaultManipulator dm = gEngine.Manipulator.Registry.CreateManipulator("DrawCurveFaultManipulator", param) as DrawCurveFaultManipulator;
-                if (dm == null)
-                    return;
-                ManipulatorSetter.SetManipulator(dm, lc);
+                lc.Manipulator = "DrawCurveFaultManipulator";
             }
         }
     }

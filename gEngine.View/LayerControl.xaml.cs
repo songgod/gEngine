@@ -6,6 +6,7 @@ using System.Windows.Media;
 
 namespace gEngine.View
 {
+    public delegate void ManipulatorChanged(LayerControl oc, string manipulator);
     /// <summary>
     /// LayerControl.xaml 的交互逻辑
     /// </summary>
@@ -29,6 +30,28 @@ namespace gEngine.View
         // Using a DependencyProperty as the backing store for LayerContext.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty LayerContextProperty =
             DependencyProperty.Register("LayerContext", typeof(ILayer), typeof(LayerControl), new PropertyMetadata(null));
+
+
+
+        public string Manipulator
+        {
+            get { return (string)GetValue(MainpulatorProperty); }
+            set { SetValue(MainpulatorProperty, value); }
+        }
+
+        public static event ManipulatorChanged OnManipulatorChanged;
+
+        static void OnManipulatorChangedCallback(DependencyObject obj, DependencyPropertyChangedEventArgs arg)
+        {
+            LayerControl lc = (LayerControl)obj;
+            string manipulator = (string)arg.NewValue;
+            
+            if (OnManipulatorChanged != null)
+                OnManipulatorChanged.Invoke(lc, manipulator);
+        }
+        // Using a DependencyProperty as the backing store for Mainpulator.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MainpulatorProperty =
+            DependencyProperty.Register("Mainpulator", typeof(string), typeof(LayerControl), new PropertyMetadata("", new PropertyChangedCallback(OnManipulatorChangedCallback)));
 
 
 

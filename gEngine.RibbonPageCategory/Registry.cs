@@ -17,7 +17,7 @@ namespace gEngine.Application
     {
         private static Dictionary<Type, GeRibbonPageCategory> dicRibbonPageCategory;
         private static Dictionary<string, RibbonPage> dicRibbonPage;
-        private static SelectObjectRibbonPageCategoryCallbackInstaller sorpcinstaller;
+        private static SelectRibbonPageCategoryCallbackInstaller sorpcinstaller;
         public static Dictionary<Type, GeRibbonPageCategory> DicRibbonPageCategory
         {
             get
@@ -37,7 +37,7 @@ namespace gEngine.Application
         {
             dicRibbonPageCategory = new Dictionary<Type, GeRibbonPageCategory>();
             dicRibbonPage = new Dictionary<string, RibbonPage>();
-            sorpcinstaller = new SelectObjectRibbonPageCategoryCallbackInstaller();
+            sorpcinstaller = new SelectRibbonPageCategoryCallbackInstaller();
         }
 
         static public ProjectControl ProjectControl { get; set; }
@@ -75,15 +75,17 @@ namespace gEngine.Application
         {
             if (type == null)
                 return null;
-            while (!dicRibbonPageCategory.ContainsKey(type))
-            {
-                type = type.BaseType;
-                if (type == typeof(object))
-                    break;
-            }
             if (!dicRibbonPageCategory.ContainsKey(type))
                 return null;
             return dicRibbonPageCategory[type];
+        }
+
+        static public void HideAllPageCategory()
+        {
+            foreach (var item in dicRibbonPageCategory)
+            {
+                item.Value.IsVisible = false;
+            }
         }
 
         static public RibbonPage GetRibbonPage(string name)

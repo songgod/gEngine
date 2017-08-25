@@ -14,12 +14,12 @@ namespace gEngine.Manipulator
     static public class Registry
     {
         static private Dictionary<string, IManipulatorFactory> dicManipulatorFactory;
-        static private SelectObjectManipulatorCallbackInstaller somcinstall;
+        static private ManipulatorCallbackInstaller somcinstall;
 
         static Registry()
         {
             dicManipulatorFactory = new Dictionary<string, IManipulatorFactory>();
-            somcinstall = new SelectObjectManipulatorCallbackInstaller();
+            somcinstall = new ManipulatorCallbackInstaller();
         }
 
         static public void Regist(string name, IManipulatorFactory mpf)

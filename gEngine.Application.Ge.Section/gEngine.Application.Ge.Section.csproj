@@ -59,8 +59,12 @@
     <Compile Include="HandDrawingSectionRibbonPage.xaml.cs">
       <DependentUpon>HandDrawingSectionRibbonPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="IsEqueStringConverter.cs" />
     <Compile Include="SandFaceProxyObjectRibbonPageCategory.xaml.cs">
       <DependentUpon>SandFaceProxyObjectRibbonPageCategory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SectionLayerRibbonPageCategory.xaml.cs">
+      <DependentUpon>SectionLayerRibbonPageCategory.xaml</DependentUpon>
     </Compile>
     <Compile Include="StratumFaceProxyObjectRibbonPageCategory.xaml.cs">
       <DependentUpon>StratumFaceProxyObjectRibbonPageCategory.xaml</DependentUpon>
@@ -93,6 +97,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SandFaceProxyObjectRibbonPageCategory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SectionLayerRibbonPageCategory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

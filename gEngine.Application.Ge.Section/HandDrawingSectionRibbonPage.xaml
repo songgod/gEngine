@@ -14,6 +14,9 @@
                  xmlns:prjcmds="clr-namespace:gEngine.Commands;assembly=gEngine.Commands"
                  xmlns:prjcontrols="clr-namespace:gEngine.Project.Controls;assembly=gEngine.Project"
                  xmlns:mpl="clr-namespace:gEngine.Manipulator;assembly=gEngine.Manipulator">
+    <gerpc:GeRibbonPage.Resources>
+        <local:IsEqueStringConverter x:Key="eqstrcvt"/>
+    </gerpc:GeRibbonPage.Resources>
     <dxr:RibbonPageGroup x:Uid="新建" x:Name="新建" Caption="新建">
         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_13" Content="新建 手绘图层" LargeGlyph="Images/新增1.32.ico"/>
         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_14" Content="添加边界" LargeGlyph="Images/导入边界2.ico"/>
@@ -25,7 +28,8 @@
                            CommandTarget="{Binding Path=ProjectControl, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow}}"
                           CommandParameter="{Binding RelativeSource={ RelativeSource Self}}"
                            LargeGlyph="{dx:DXImage Image=StackedLineWithoutMarkers_32x32.png}" 
-                           Glyph="{dx:DXImage Image=StackedLineWithoutMarkers_16x16.png}"/>
+                           Glyph="{dx:DXImage Image=StackedLineWithoutMarkers_16x16.png}"
+                          IsChecked="{Binding Path=ProjectControl.MapsControl.ActiveMapControl.ActiveLayerControl.Manipulator, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow}, Converter={StaticResource eqstrcvt}, ConverterParameter=DrawTrendLineManipulator, Mode=OneWay}"/>
         <dxb:BarSplitCheckItem x:Uid="dxb:BarSplitCheckItem_1" Content="线型" 
                                Command="{x:Static prjcmds:PlaneCommands.NewPlaneLineCommand}" 
                                CommandTarget="{Binding Path=ProjectControl, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow}}"
@@ -44,12 +48,13 @@
         </dxb:BarEditItem>
     </dxr:RibbonPageGroup>
     <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_9" Caption="断层">
-        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_17" Content="添加断层线"
+        <dxb:BarCheckItem x:Uid="dxb:BarButtonItem_17" Content="添加断层线"
                            Command="{x:Static prjcmds:SectionEditCommands.NewCurveFaultCommand}" 
                            CommandTarget="{Binding Path=ProjectControl, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow}}"
                            LargeGlyph="{dx:DXImage Image=ScatterWithStraightLines_32x32.png}"
-                           Glyph="{dx:DXImage Image=ScatterWithStraightLines_16x16.png}">
-        </dxb:BarButtonItem>
+                           Glyph="{dx:DXImage Image=ScatterWithStraightLines_16x16.png}"
+                           IsChecked="{Binding Path=ProjectControl.MapsControl.ActiveMapControl.ActiveLayerControl.Manipulator, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow}, Converter={StaticResource eqstrcvt}, ConverterParameter=DrawCurveFaultManipulator, Mode=OneWay}">
+        </dxb:BarCheckItem>
         <dxb:BarSplitCheckItem x:Uid="dxb:BarSplitCheckItem_2" Content="线型"  LargeGlyph="{dx:DXImage Image=HorizontalGridlinesMajor_32x32.png}" RibbonStyle="SmallWithText" Glyph="{dx:DXImage Image=HorizontalGridlinesMajor_16x16.png}"/>
         <dxb:BarEditItem x:Uid="dxb:BarEditItem_3" Content="粗细" EditWidth="44" EditValue="1.0">
             <dxb:BarEditItem.EditSettings>

@@ -54,7 +54,7 @@
     <Compile Include="PointSymbolGalleryDropDownPopupMenu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registry.cs" />
-    <Compile Include="SelectObjectRibbonPageCategoryCallbackInstaller.cs" />
+    <Compile Include="SelectRibbonPageCategoryCallbackInstaller.cs" />
     <Compile Include="StrokeSymbolGalleryDropDownPopupMenu.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -82,6 +82,9 @@
       <Project>{932485EA-2F95-4CAA-8BCD-DF68C496854E}</Project>
       <Name>gEngine.View</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Converter\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
