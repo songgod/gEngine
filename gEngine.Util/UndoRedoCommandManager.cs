@@ -42,6 +42,11 @@ namespace gEngine.Util
             }
         }
 
+        public bool CanRedo()
+        {
+            return RedoCommands.Count > 0;
+        }
+
         public void Redo()
         {
             if (RedoCommands.Count > 0)
@@ -50,6 +55,11 @@ namespace gEngine.Util
                 command.Redo();
                 UndoCommands.Push(command);
             }
+        }
+
+        public bool CanUndo()
+        {
+            return UndoCommands.Count > 0;
         }
 
         public void Clear()

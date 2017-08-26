@@ -11,19 +11,19 @@
              IsManipulationEnabled="True" Focusable="True"
              Loaded="UserControl_Loaded">
     <Grid x:Name="root">
-            <Canvas x:Name="BackGroundCanvas" Background="Transparent"/>
+            <Canvas x:Name="PART_BackGroundCanvas" Background="Transparent"/>
             <ItemsControl x:Name="layeritemscontrol" ItemsSource="{Binding MapContext.Layers, RelativeSource={RelativeSource AncestorType=local:MapControl}}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <Canvas x:Name="mappanel"/>
+                        <Canvas x:Name="PART_MapPanel"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <local:LayerControl x:Name="layercontrol" LayerContext="{Binding}"/>
+                        <local:LayerControl x:Name="PART_Layercontrol" LayerContext="{Binding}"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-            <Canvas x:Name="EditCanvas" Background="Transparent" IsHitTestVisible="True" />
+        <Canvas x:Name="PART_EditCanvas" Background="Transparent" IsHitTestVisible="True" />
         </Grid>
 </UserControl>

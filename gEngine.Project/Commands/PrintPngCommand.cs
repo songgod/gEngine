@@ -1,4 +1,5 @@
 ﻿using gEngine.Commands;
+using gEngine.Graph.Interface;
 using gEngine.Project.Controls;
 using gEngine.View;
 using Microsoft.Win32;
@@ -27,30 +28,15 @@ namespace gEngine.Project.Commands
         private void PrintPngCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             ProjectControl pc = e.OriginalSource as ProjectControl;
-            if (pc == null || pc.MapsControl == null)
-                return;
-
-            if (pc.MapsControl.ActiveMapControl == null)
-                return;
-
-            MapControl mc = pc.MapsControl.ActiveMapControl;
-            if (mc == null)
-                return;
-
-            e.CanExecute = true;
+            e.CanExecute = pc!=null && pc.Project!=null && pc.Project.GetActiveMap()!=null;
             e.Handled = true;
         }
 
         private void PrintPngCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             ProjectControl pc = e.OriginalSource as ProjectControl;
-            if (pc == null || pc.MapsControl == null)
-                return;
-
-            if (pc.MapsControl.ActiveMapControl == null)
-                return;
-
-            MapControl mc = pc.MapsControl.ActiveMapControl;
+            IMap map = pc.Project.GetActiveMap();
+            MapControl mc = FindMap.Find(pc,map);
             if (mc == null)
                 return;
             ExportToPng(mc);

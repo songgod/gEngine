@@ -23,44 +23,22 @@ namespace gEngine.Project.Ge.Section.Commands.SectionEdit
         private void SectionCommandBase_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             ProjectControl pc = e.OriginalSource as ProjectControl;
-            if (pc == null)
-                return;
 
-            MapsControl tc = pc.MapsControl;
-            MapControl mc = tc.ActiveMapControl;
-            if (mc == null)
-                return;
-
-            LayerControl lc = mc.ActiveLayerControl;
-            if (lc == null)
-                return;
-
-            ILayer layer = lc.LayerContext;
-            if (layer == null)
-                return;
-
-            e.CanExecute = layer.Type == "Section";
+            e.CanExecute = pc!=null &&
+                pc.Project.GetActiveMap()!=null &&
+                pc.Project.GetActiveMap().Layers.CurrentLayer!=null &&
+                pc.Project.GetActiveMap().Layers.CurrentLayer.Type=="Section";
             e.Handled = true;
         }
 
         private void SectionCommandBase_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             ProjectControl pc = e.OriginalSource as ProjectControl;
-            if (pc == null)
-                return;
-
-            MapsControl tc = pc.MapsControl;
-            MapControl mc = tc.ActiveMapControl;
-            if (mc == null)
-                return;
-
-            LayerControl lc = mc.ActiveLayerControl;
-            if (lc == null)
-                return;
-            SetManipulator(lc,e.Parameter);
+            ILayer layer = pc.Project.GetActiveMap().Layers.CurrentLayer;
+            SetManipulator(layer, e.Parameter);
             e.Handled = true;
         }
 
-        public abstract void SetManipulator(LayerControl lc, object param);
+        public abstract void SetManipulator(ILayer lyr, object param);
     }
 }

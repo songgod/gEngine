@@ -1,6 +1,7 @@
 ﻿using DevExpress.Xpf.Grid;
 using DevExpress.Xpf.Ribbon;
 using gEngine.Commands;
+using gEngine.Graph.Interface;
 using gEngine.Project.Controls;
 using gEngine.Util;
 using gEngine.View;
@@ -46,13 +47,14 @@ namespace gEngine.Project.Commands
 
                 int[] selectedRowHandles = gc.GetSelectedRowHandles();
 
+                IMap map = null;
                 foreach (int i in selectedRowHandles)
                 {
                     object MapFileName = gc.GetCellValue(i, "Item1");
-                    pc.Project.OpenMap(MapFileName.ToString());
+                    map = pc.Project.OpenMap(MapFileName.ToString());
                 }
 
-                pc.MapsControl.SelectLast();
+                pc.Project.ActiveMap(map);
                 e.Handled = true;
             }
         }

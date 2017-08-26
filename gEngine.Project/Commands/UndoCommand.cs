@@ -24,15 +24,10 @@ namespace gEngine.Project.Commands
         private void UndoCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             ProjectControl pc = e.OriginalSource as ProjectControl;
-            if (pc == null)
-                return;
-
-            MapsControl tc = pc.MapsControl;
-            MapControl mc = tc.ActiveMapControl;
-            if (mc == null)
-                return;
-
-            e.CanExecute = mc.UndoRedoCommandManager.UndoCommands.Count > 0;
+            e.CanExecute = pc != null &&
+                pc.Project != null &&
+                pc.Project.GetActiveMap() != null &&
+                pc.Project.GetActiveMap().UndoRedoCmdMgr.CanUndo();
             e.Handled = true;
         }
 
@@ -41,13 +36,7 @@ namespace gEngine.Project.Commands
             ProjectControl pc = e.OriginalSource as ProjectControl;
             if (pc == null)
                 return;
-
-            MapsControl tc = pc.MapsControl;
-            MapControl mc = tc.ActiveMapControl;
-            if (mc == null)
-                return;
-
-            mc.UndoRedoCommandManager.Undo();
+            pc.Project.GetActiveMap().UndoRedoCmdMgr.Undo();
             e.Handled = true;
         }
     }

@@ -29,7 +29,7 @@
                           CommandParameter="{Binding RelativeSource={ RelativeSource Self}}"
                            LargeGlyph="{dx:DXImage Image=StackedLineWithoutMarkers_32x32.png}" 
                            Glyph="{dx:DXImage Image=StackedLineWithoutMarkers_16x16.png}"
-                          IsChecked="{Binding Path=ProjectControl.MapsControl.ActiveMapControl.ActiveLayerControl.Manipulator, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow}, Converter={StaticResource eqstrcvt}, ConverterParameter=DrawTrendLineManipulator, Mode=OneWay}"/>
+                          IsChecked="{Binding Path=ProjectControl.Project.OpenMaps.CurrentMap.Layers.CurrentLayer.Manipulator, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow}, Converter={StaticResource eqstrcvt}, ConverterParameter=DrawTrendLineManipulator, Mode=OneWay}"/>
         <dxb:BarSplitCheckItem x:Uid="dxb:BarSplitCheckItem_1" Content="线型" 
                                Command="{x:Static prjcmds:PlaneCommands.NewPlaneLineCommand}" 
                                CommandTarget="{Binding Path=ProjectControl, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow}}"
@@ -53,7 +53,7 @@
                            CommandTarget="{Binding Path=ProjectControl, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow}}"
                            LargeGlyph="{dx:DXImage Image=ScatterWithStraightLines_32x32.png}"
                            Glyph="{dx:DXImage Image=ScatterWithStraightLines_16x16.png}"
-                           IsChecked="{Binding Path=ProjectControl.MapsControl.ActiveMapControl.ActiveLayerControl.Manipulator, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow}, Converter={StaticResource eqstrcvt}, ConverterParameter=DrawCurveFaultManipulator, Mode=OneWay}">
+                           IsChecked="{Binding Path=ProjectControl.Project.OpenMaps.CurrentMap.Layers.CurrentLayer.Manipulator, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow}, Converter={StaticResource eqstrcvt}, ConverterParameter=DrawCurveFaultManipulator, Mode=OneWay}">
         </dxb:BarCheckItem>
         <dxb:BarSplitCheckItem x:Uid="dxb:BarSplitCheckItem_2" Content="线型"  LargeGlyph="{dx:DXImage Image=HorizontalGridlinesMajor_32x32.png}" RibbonStyle="SmallWithText" Glyph="{dx:DXImage Image=HorizontalGridlinesMajor_16x16.png}"/>
         <dxb:BarEditItem x:Uid="dxb:BarEditItem_3" Content="粗细" EditWidth="44" EditValue="1.0">

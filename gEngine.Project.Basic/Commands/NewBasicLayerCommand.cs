@@ -13,11 +13,11 @@ using System.Windows.Input;
 
 namespace gEngine.Project.Ge.Basic.Commands
 {
-    public class NewCommonLayerCommand : CommandBinding
+    public class NewBasicLayerCommand : CommandBinding
     {
-        public NewCommonLayerCommand()
+        public NewBasicLayerCommand()
         {
-            Command = BasicCommands.NewCommonLayerCommand;
+            Command = BasicCommands.NewBasicLayerCommand;
             Executed += NewCommonLayerCommand_Executed;
             CanExecute += NewCommonLayerCommand_CanExecute;
         }
@@ -25,27 +25,17 @@ namespace gEngine.Project.Ge.Basic.Commands
         private void NewCommonLayerCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             ProjectControl pc = e.OriginalSource as ProjectControl;
-            if (pc == null || pc.MapsControl==null)
-                return;
-
-            if (pc.MapsControl.ActiveMapControl == null)
-                return;
-
-            e.CanExecute = true;
+            e.CanExecute = pc!=null && pc.Project.GetActiveMap()!=null;
             e.Handled = true;
         }
 
         private void NewCommonLayerCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             ProjectControl pc = e.OriginalSource as ProjectControl;
-            if (pc == null || pc.MapsControl == null)
-                return;
-            MapControl mc = pc.MapsControl.ActiveMapControl;
-            if (mc == null || mc.MapContext==null)
-                return;
+            IMap map = pc.Project.GetActiveMap();
 
             BasicLayer layer = new BasicLayer();
-            mc.MapContext.Layers.Add(layer);
+            map.Layers.Add(layer);
         }
     }
 }

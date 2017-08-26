@@ -11,8 +11,24 @@ namespace gEngine.Manipulator
     {
         public ManipulatorCallbackInstaller()
         {
+            MapControl.OnManipulatorChanged += MapControl_OnManipulatorChanged;
             LayerControl.OnManipulatorChanged += LayerControl_OnManipulatorChanged;
             ObjectControl.OnObjectControlSelected += ObjectControl_OnObjectControlSelected;
+        }
+
+        private void MapControl_OnManipulatorChanged(MapControl oc, string manipulator)
+        {
+            if (oc == null)
+                return;
+            if (String.IsNullOrWhiteSpace(manipulator))
+            {
+                ManipulatorSetter.ClearManipulator(oc);
+            }
+            else
+            {
+                IManipulatorBase mb = gEngine.Manipulator.Registry.CreateManipulator(manipulator);
+                ManipulatorSetter.SetManipulator(mb, oc);
+            }
         }
 
         private void LayerControl_OnManipulatorChanged(LayerControl oc, string manipulator)

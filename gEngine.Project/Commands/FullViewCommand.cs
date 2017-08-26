@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace gEngine.Project.Commands
 {
@@ -22,17 +23,15 @@ namespace gEngine.Project.Commands
         private void FullViewCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             ProjectControl pc = e.OriginalSource as ProjectControl;
-            e.CanExecute = pc!=null && pc.MapsControl.ActiveMapControl!=null;
+            e.CanExecute = pc != null &&
+                pc.Project != null && pc.Project.GetActiveMap() != null;
             e.Handled = true;
         }
 
         private void FullViewCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             ProjectControl pc = e.OriginalSource as ProjectControl;
-            if (pc != null && pc.MapsControl.ActiveMapControl!=null)
-            {
-                pc.MapsControl.ActiveMapControl.FullView();
-            }
+            pc.Project.GetActiveMap().ViewMatrix = Matrix.Identity;
             e.Handled = true;
         }
     }

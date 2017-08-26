@@ -11,12 +11,12 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
-                <Canvas x:Name="layerpanel"/>
+                <Canvas x:Name="PART_LayerPanel"/>
             </ItemsPanelTemplate>
         </ItemsControl.ItemsPanel>
         <ItemsControl.ItemTemplate>
             <DataTemplate>
-            <local:ObjectControl Content="{Binding}"/>
+            <local:ObjectControl x:Name="PART_ObjectControl" Content="{Binding}"/>
             </DataTemplate>
         </ItemsControl.ItemTemplate>
     </ItemsControl>

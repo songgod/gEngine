@@ -8,6 +8,7 @@ using gEngine.Manipulator;
 using gEngine.Manipulator.Ge.Section;
 using gEngine.View;
 using gEngine.Commands;
+using gEngine.Graph.Interface;
 
 namespace gEngine.Project.Ge.Section.Commands.SectionEdit
 {
@@ -18,12 +19,12 @@ namespace gEngine.Project.Ge.Section.Commands.SectionEdit
             Command = SectionEditCommands.EraseLineCommand;
         }
 
-        public override void SetManipulator(LayerControl lc, object param)
+        public override void SetManipulator(ILayer layer, object param)
         {
-            EraseLineManipulator dm = gEngine.Manipulator.Registry.CreateManipulator("EraseLineManipulator",param) as EraseLineManipulator;
-            if (dm == null)
-                return;
-            ManipulatorSetter.SetManipulator(dm, lc);
+            if (layer.Manipulator == "EraseLineManipulator")
+                layer.Manipulator = "";
+            else
+                layer.Manipulator = "EraseLineManipulator";
         }
     }
 }

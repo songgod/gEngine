@@ -1,4 +1,5 @@
 ﻿using gEngine.Commands;
+using gEngine.Graph.Interface;
 using gEngine.Manipulator;
 using gEngine.Manipulator.Ge.Section;
 using gEngine.View;
@@ -17,16 +18,13 @@ namespace gEngine.Project.Ge.Section.Commands.SectionEdit
             Command = SectionEditCommands.NewCurveSandCommand;
         }
 
-        public override void SetManipulator(LayerControl lc, object param)
+        public override void SetManipulator(ILayer layer, object param)
         {
-            if (ManipulatorSetter.IsContainManipulator("DrawCurveSandManipulator", lc))
-                ManipulatorSetter.ClearManipulator(lc);
+            if (layer.Manipulator == "DrawCurveSandManipulator")
+                layer.Manipulator = "";
             else
             {
-                DrawCurveSandManipulator dm = gEngine.Manipulator.Registry.CreateManipulator("DrawCurveSandManipulator", param) as DrawCurveSandManipulator;
-                if (dm == null)
-                    return;
-                ManipulatorSetter.SetManipulator(dm, lc);
+                layer.Manipulator = "DrawCurveSandManipulator";
             }
         }
     }

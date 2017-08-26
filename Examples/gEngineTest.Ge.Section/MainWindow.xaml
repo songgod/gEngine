@@ -16,7 +16,7 @@
         </Grid.RowDefinitions>
         <gv:MapControl x:Name="mc">
             <i:Interaction.Behaviors>
-                <em:MapControlZoomPan/>
+                <em:MapControlZoomPanSelect/>
             </i:Interaction.Behaviors>
         </gv:MapControl>
         <StackPanel Orientation="Horizontal" Grid.Row="1">

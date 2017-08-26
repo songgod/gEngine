@@ -51,6 +51,8 @@
     <Compile Include="BoolVisibilityConverter.cs" />
     <Compile Include="DataTemplateChooser.cs" />
     <Compile Include="FindChild.cs" />
+    <Compile Include="FindLayer.cs" />
+    <Compile Include="FindMap.cs" />
     <Compile Include="FindContext.cs" />
     <Compile Include="FindParent.cs" />
     <Compile Include="LayerControl.xaml.cs">

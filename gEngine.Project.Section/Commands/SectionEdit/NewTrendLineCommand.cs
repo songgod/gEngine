@@ -1,5 +1,6 @@
 ﻿using DevExpress.Xpf.Bars;
 using gEngine.Commands;
+using gEngine.Graph.Interface;
 using gEngine.Manipulator;
 using gEngine.Project.Ge.Section.Commands.SectionEdit;
 using gEngine.Project.Section.Converters;
@@ -21,12 +22,12 @@ namespace gEngine.Project.Ge.Section.Commands.SectionEdit
             Command = SectionEditCommands.NewTrendLineCommand;
         }
 
-        public override void SetManipulator(LayerControl lc, object param)
+        public override void SetManipulator(ILayer layer, object param)
         {
-            if (lc.Manipulator == "DrawTrendLineManipulator")
-                lc.Manipulator = "";
+            if (layer.Manipulator == "DrawTrendLineManipulator")
+                layer.Manipulator = "";
             else
-                lc.Manipulator = "DrawTrendLineManipulator";
+                layer.Manipulator = "DrawTrendLineManipulator";
         }
     }
 }

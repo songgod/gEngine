@@ -14,22 +14,31 @@ namespace gEngine.Application
     {
         public SelectRibbonPageCategoryCallbackInstaller()
         {
-            MapControl.OnLayerControlSelected += MapControl_OnLayerControlSelected;
+            MapControl.OnSelectLayerChanged += MapControl_OnSelectLayerChanged; ;
             ObjectControl.OnObjectControlSelected += ObjectControl_OnObjectControlSelected;
         }
 
-        private void MapControl_OnLayerControlSelected(LayerControl oc)
+        private void MapControl_OnSelectLayerChanged(MapControl mc, int index)
         {
             Registry.HideAllPageCategory();
-            if (oc == null)
+            if (mc == null)
                 return;
-            
-            GeRibbonPageCategory grpc = Registry.GetRibbonPageCategory(oc.LayerContext.GetType());
+
+            IMap map = mc.MapContext;
+            if (map == null)
+                return;
+
+            if (index < 0 || index >= map.Layers.Count)
+                return;
+
+            ILayer layer = map.Layers[index];
+
+            GeRibbonPageCategory grpc = Registry.GetRibbonPageCategory(layer.GetType());
 
             if (grpc != null)
             {
                 grpc.IsVisible = true;
-                grpc.DataContext = oc.LayerContext;
+                grpc.DataContext = layer;
             }
         }
 

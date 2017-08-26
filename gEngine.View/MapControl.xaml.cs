@@ -8,23 +8,25 @@ using System.Windows.Media;
 
 namespace gEngine.View
 {
-    public delegate void SelectLayerControl(LayerControl oc);
+    public delegate void SelectLayerChanged(MapControl mc, int index);
+    public delegate void MapManipulatorChanged(MapControl mc, string manipulator);
     /// <summary>
     /// MapControl.xaml 的交互逻辑
     /// </summary>
     public partial class MapControl : UserControl
     {
+        const string BackGroundCanvasName = "PART_BackGroundCanvas";
+        const string EditCanvasName = "PART_EditCanvas";
+        const string MapPanelName = "PART_MapPanel";
+        const string LayerControlName = "PART_Layercontrol";
+
         public MapControl()
         {
             InitializeComponent();
-            UndoRedoCommandManager = new UndoRedoCommandManager();
-            Binding bd = new Binding("MapContext.Layers.CurrentIndex") {  Mode = BindingMode.TwoWay, Source = this };
-            BindingOperations.SetBinding(this, SelectIndexProperty, bd);
-        }
-
-        public UndoRedoCommandManager UndoRedoCommandManager
-        {
-            get;set;
+            Binding bdviewmatrix = new Binding("MapContext.ViewMatrix") { Source = this,Mode=BindingMode.TwoWay };
+            BindingOperations.SetBinding(this, ViewMatrixProperty, bdviewmatrix);
+            Binding bdsellyrindex = new Binding("MapContext.Layers.CurrentIndex") { Source = this, Mode = BindingMode.TwoWay };
+            BindingOperations.SetBinding(this, SelectLayerIndexProperty, bdsellyrindex);
         }
 
         public IMap MapContext
@@ -37,66 +39,82 @@ namespace gEngine.View
         public static readonly DependencyProperty MapContextProperty =
             DependencyProperty.Register("MapContext", typeof(IMap), typeof(MapControl), new PropertyMetadata(null));
 
-        
 
-        public int SelectIndex
+
+        public string Manipulator
         {
-            get { return (int)GetValue(SelectIndexProperty); }
-            set { SetValue(SelectIndexProperty, value); }
+            get { return (string)GetValue(ManipulatorProperty); }
+            set { SetValue(ManipulatorProperty, value); }
         }
 
-        public static event SelectLayerControl OnLayerControlSelected;
-
-        static void OnSelectIndexChangedCallback(DependencyObject obj, DependencyPropertyChangedEventArgs arg)
+        public static event MapManipulatorChanged OnManipulatorChanged;
+        static void OnManipulatorChangedCallback(DependencyObject obj, DependencyPropertyChangedEventArgs arg)
         {
             MapControl mc = (MapControl)obj;
-            int pos = (int)arg.NewValue;
+            string manipulator = (string)arg.NewValue;
 
-            mc.ActiveLayerControl = mc.GetLayerControl(pos);
-            if (OnLayerControlSelected != null)
-                OnLayerControlSelected.Invoke(mc.ActiveLayerControl);
+            if (OnManipulatorChanged != null)
+                OnManipulatorChanged.Invoke(mc, manipulator);
         }
 
-        // Using a DependencyProperty as the backing store for SelectIndex.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty SelectIndexProperty =
-            DependencyProperty.Register("SelectIndex", typeof(int), typeof(MapControl), new PropertyMetadata(-1, new PropertyChangedCallback(OnSelectIndexChangedCallback)));
+        // Using a DependencyProperty as the backing store for Manipulator.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ManipulatorProperty =
+            DependencyProperty.Register("Manipulator", typeof(string), typeof(MapControl), new PropertyMetadata("",new PropertyChangedCallback(OnManipulatorChangedCallback)));
 
 
-
-        public LayerControl ActiveLayerControl
+        public int SelectLayerIndex
         {
-            get { return (LayerControl)GetValue(ActiveLayerControlProperty); }
-            private set { SetValue(ActiveLayerControlProperty, value); }
+            get { return (int)GetValue(SelectLayerIndexProperty); }
+            set { SetValue(SelectLayerIndexProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for ActiveLayerControl.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ActiveLayerControlProperty =
-            DependencyProperty.Register("ActiveLayerControl", typeof(LayerControl), typeof(MapControl), new PropertyMetadata(null));
-
-
-
-        public int LayerControlCount
+        public static event SelectLayerChanged OnSelectLayerChanged;
+        static void OnSelectLayerChangedCallback(DependencyObject obj, DependencyPropertyChangedEventArgs arg)
         {
-            get
+            MapControl mc = (MapControl)obj;
+            int index = (int)arg.NewValue;
+
+            if (OnSelectLayerChanged != null)
+                OnSelectLayerChanged.Invoke(mc, index);
+        }
+
+        // Using a DependencyProperty as the backing store for SelectLayerIndex.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectLayerIndexProperty =
+            DependencyProperty.Register("SelectLayerIndex", typeof(int), typeof(MapControl), new PropertyMetadata(-1, new PropertyChangedCallback(OnSelectLayerChangedCallback)));
+
+
+
+
+        public Matrix ViewMatrix
+        {
+            get { return (Matrix)GetValue(ViewMatrixProperty); }
+            set { SetValue(ViewMatrixProperty, value); }
+        }
+
+        static void ViewMatrixPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs arg)
+        {
+            MapControl mc = (MapControl)obj;
+            Matrix m = (Matrix)arg.NewValue;
+            if (m.IsIdentity)
+                mc.FullView();
+            else
             {
-                return layeritemscontrol.Items.Count;
+                MatrixTransform ft = new MatrixTransform(m);
+                mc.root.RenderTransform = ft;
             }
         }
 
-        public LayerControl GetLayerControl(int index)
-        {
-            if (index < 0)
-                return null;
-            var item = layeritemscontrol.ItemContainerGenerator.ContainerFromIndex(index);
-            LayerControl lc = FindChild.FindVisualChild<LayerControl>(item, "layercontrol");
-            return lc;
-        }
+        // Using a DependencyProperty as the backing store for ViewMatrix.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ViewMatrixProperty =
+            DependencyProperty.Register("ViewMatrix", typeof(Matrix), typeof(MapControl), new PropertyMetadata(Matrix.Identity, new PropertyChangedCallback(ViewMatrixPropertyChanged)));
+
+
 
         public Canvas EditLayer
         {
             get
             {
-                return EditCanvas;
+                return PART_BackGroundCanvas;
             }
         }
 
@@ -104,19 +122,13 @@ namespace gEngine.View
         {
             get
             {
-                return BackGroundCanvas;
+                return PART_EditCanvas;
             }
         }
 
         public void FullView()
         {
-            Rect r = Rect.Empty;
-            for (int i = 0; i < layeritemscontrol.Items.Count; i++)
-            {
-                LayerControl lc = GetLayerControl(i);
-                Rect rect = lc.GetRect();
-                r.Union(rect);
-            }
+            Rect r = ViewUtil.GetTypeRect<ObjectControl>(root);
             if (r.IsEmpty)
                 return;
 

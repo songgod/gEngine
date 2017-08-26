@@ -1,4 +1,5 @@
 ﻿using gEngine.Commands;
+using gEngine.Graph.Interface;
 using gEngine.Manipulator;
 using gEngine.Manipulator.Ge.Section;
 using gEngine.Project.Controls;
@@ -19,12 +20,12 @@ namespace gEngine.Project.Ge.Section.Commands.SectionEdit
             Command = SectionEditCommands.EditLineCommand;
         }
 
-        public override void SetManipulator(LayerControl lc, object param)
+        public override void SetManipulator(ILayer lyr, object param)
         {
-            EditCurveManipulator dm = gEngine.Manipulator.Registry.CreateManipulator("EditCurveManipulator",param) as EditCurveManipulator;
-            if (dm == null)
-                return;
-            ManipulatorSetter.SetManipulator(dm, lc);
+            if (lyr.Manipulator == "EditCurveManipulator")
+                lyr.Manipulator = "";
+            else
+                lyr.Manipulator = "EditCurveManipulator";
         }
     }
 }

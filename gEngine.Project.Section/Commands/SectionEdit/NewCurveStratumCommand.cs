@@ -1,5 +1,6 @@
 ﻿using DevExpress.Xpf.Bars;
 using gEngine.Commands;
+using gEngine.Graph.Interface;
 using gEngine.Manipulator;
 using gEngine.Manipulator.Ge.Section;
 using gEngine.Project.Section.Converters;
@@ -21,16 +22,13 @@ namespace gEngine.Project.Ge.Section.Commands.SectionEdit
             Command = SectionEditCommands.NewCurveStratumCommand;
         }
 
-        public override void SetManipulator(LayerControl lc, object param)
+        public override void SetManipulator(ILayer layer, object param)
         {
-            if (ManipulatorSetter.IsContainManipulator("DrawCurveStratumManipulator", lc))
-                ManipulatorSetter.ClearManipulator(lc);
+            if (layer.Manipulator == "DrawCurveStratumManipulator")
+                layer.Manipulator = "";
             else
             {
-                DrawCurveStratumManipulator dm = gEngine.Manipulator.Registry.CreateManipulator("DrawCurveStratumManipulator", param) as DrawCurveStratumManipulator;
-                if (dm == null)
-                    return;
-                ManipulatorSetter.SetManipulator(dm, lc);
+                layer.Manipulator = "DrawCurveStratumManipulator";
             }
         }
     }

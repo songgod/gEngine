@@ -12,7 +12,7 @@
              Loaded="UserControl_Loaded">
     <gv:MapControl x:Name="mc">
         <i:Interaction.Behaviors>
-            <em:MapControlZoomPan/>
+            <em:MapControlZoomPanSelect/>
         </i:Interaction.Behaviors>
     </gv:MapControl>
 </UserControl>

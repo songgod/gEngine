@@ -23,30 +23,18 @@ namespace gEngine.Project.Commands
         private void RedoCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             ProjectControl pc = e.OriginalSource as ProjectControl;
-            if (pc == null)
-                return;
 
-            MapsControl tc = pc.MapsControl;
-            MapControl mc = tc.ActiveMapControl;
-            if (mc == null)
-                return;
-
-            e.CanExecute = mc.UndoRedoCommandManager.RedoCommands.Count > 0;
+            e.CanExecute = pc!=null &&
+                pc.Project!=null &&
+                pc.Project.GetActiveMap()!=null &&
+                pc.Project.GetActiveMap().UndoRedoCmdMgr.CanRedo();
             e.Handled = true;
         }
 
         private void RedoCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             ProjectControl pc = e.OriginalSource as ProjectControl;
-            if (pc == null)
-                return;
-
-            MapsControl tc = pc.MapsControl;
-            MapControl mc = tc.ActiveMapControl;
-            if (mc == null)
-                return;
-
-            mc.UndoRedoCommandManager.Redo();
+            pc.Project.GetActiveMap().UndoRedoCmdMgr.Redo();
             e.Handled = true;
         }
     }

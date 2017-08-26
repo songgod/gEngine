@@ -30,7 +30,6 @@ namespace gEngine.Project.Commands
             ui.CommandBindings.Add(new DeleteMapCommand());
             ui.CommandBindings.Add(new OpenRecentProjectCommand());
             ui.CommandBindings.Add(new OpenDBSourceCommand());
-            ui.CommandBindings.Add(new SelectObjectCommand());
             ui.CommandBindings.Add(new PrintPngCommand());
         }
     }

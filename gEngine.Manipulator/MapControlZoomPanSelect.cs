@@ -1,20 +1,23 @@
-﻿using gEngine.View;
+﻿using gEngine.Graph.Interface;
+using gEngine.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interactivity;
 using System.Windows.Media;
 
 namespace gEngine.Manipulator
 {
-    public class MapControlZoomPan : MapManipulator
+    public class MapControlZoomPanSelect : MapManipulator
     {
         private Point mousedown;
         private Point center;
+        private ObjectControl SelectObjectControl;
 
         protected override void OnAttached()
         {
@@ -27,8 +30,58 @@ namespace gEngine.Manipulator
             this.AssociatedObject.MouseWheel += AssociatedObject_MouseWheel;
             this.AssociatedObject.ManipulationStarting += AssociatedObject_ManipulationStarting;
             this.AssociatedObject.ManipulationDelta += AssociatedObject_ManipulationDelta;
+            this.AssociatedObject.MouseLeftButtonUp += AssociatedObject_MouseLeftButtonUp;
 
             mousedown = new Point(0, 0);
+        }
+
+        private void AssociatedObject_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            MapControl mc = this.AssociatedObject;
+            ClearSelect();
+            Point pt = e.GetPosition(mc);
+            SelectObjectControl = null;
+            VisualTreeHelper.HitTest(mc, new HitTestFilterCallback(HitTestFilterCallback),
+                new HitTestResultCallback(MyHitTestResult), new PointHitTestParameters(pt));
+            if (SelectObjectControl == null)
+                e.Handled = false;
+        }
+
+        private void ClearSelect()
+        {
+            gEngine.Graph.Interface.Utility.ClearSelect(this.AssociatedObject.MapContext);
+        }
+
+        private HitTestFilterBehavior HitTestFilterCallback(DependencyObject potentialHitTestTarget)
+        {
+            Canvas editcanvas = potentialHitTestTarget as Canvas;
+            if (editcanvas != null && editcanvas.Name == "EditCanvas")
+            {
+                return HitTestFilterBehavior.ContinueSkipSelfAndChildren;
+            }
+
+            return HitTestFilterBehavior.Continue;
+        }
+
+        private HitTestResultBehavior MyHitTestResult(HitTestResult hr)
+        {
+            DependencyObject p = hr.VisualHit;
+            while (p != null)
+            {
+                ObjectControl oc = p as ObjectControl;
+                if (oc != null)
+                {
+                    IObject obj = oc.DataContext as IObject;
+                    if (obj != null)
+                    {
+                        SelectObjectControl = oc;
+                        obj.IsSelected = true;
+                    }
+                    return HitTestResultBehavior.Stop;
+                }
+                p = VisualTreeHelper.GetParent(p);
+            }
+            return HitTestResultBehavior.Continue;
         }
 
         private void AssociatedObject_ManipulationDelta(object sender, System.Windows.Input.ManipulationDeltaEventArgs e)
@@ -111,6 +164,24 @@ namespace gEngine.Manipulator
             this.AssociatedObject.MouseWheel -= AssociatedObject_MouseWheel;
             this.AssociatedObject.ManipulationStarting -= AssociatedObject_ManipulationStarting;
             this.AssociatedObject.ManipulationDelta -= AssociatedObject_ManipulationDelta;
+            this.AssociatedObject.MouseLeftButtonUp -= AssociatedObject_MouseLeftButtonUp;
+        }
+    }
+
+    public class MCZPSMFactory : IManipulatorFactory
+    {
+        public string Name
+        {
+            get
+            {
+                return "MapControlZoomPanSelect";
+            }
+        }
+
+        public IManipulatorBase CreateManipulator(object param)
+        {
+            MapControlZoomPanSelect m = new MapControlZoomPanSelect();
+            return m;
         }
     }
 }

@@ -21,7 +21,7 @@
         <Border Background="White" BorderBrush="Black" BorderThickness="2" Grid.Row="2" >
             <gv:MapControl x:Name="mc" >
                 <i:Interaction.Behaviors>
-                    <em:MapControlZoomPan/>
+                    <em:MapControlZoomPanSelect/>
                 </i:Interaction.Behaviors>
             </gv:MapControl>
         </Border>

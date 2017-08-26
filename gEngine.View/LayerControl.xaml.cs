@@ -6,20 +6,22 @@ using System.Windows.Media;
 
 namespace gEngine.View
 {
-    public delegate void ManipulatorChanged(LayerControl oc, string manipulator);
+    public delegate void LayerManipulatorChanged(LayerControl oc, string manipulator);
     /// <summary>
     /// LayerControl.xaml 的交互逻辑
     /// </summary>
     public partial class LayerControl : ItemsControl
     {
+        const string LayerPanelName = "PART_LayerPanel";
+        const string ObjectControlName = "PART_ObjectControl";
         public LayerControl()
         {
             InitializeComponent();
-            Binding bd = new Binding("LayerContext.Visible") { Converter = new BooleanToVisibilityConverter(), Mode=BindingMode.TwoWay, Source=this };
-            BindingOperations.SetBinding(this, VisibilityProperty, bd);
+            Binding bdvisible = new Binding("LayerContext.Visible") { Converter = new BooleanToVisibilityConverter(), Mode=BindingMode.TwoWay, Source=this };
+            BindingOperations.SetBinding(this, VisibilityProperty, bdvisible);
+            Binding bdmanipulator = new Binding("LayerContext.Manipulator") { Mode = BindingMode.TwoWay, Source = this };
+            BindingOperations.SetBinding(this, MainpulatorProperty, bdmanipulator);
         }
-
-
 
         public ILayer LayerContext
         {
@@ -39,7 +41,7 @@ namespace gEngine.View
             set { SetValue(MainpulatorProperty, value); }
         }
 
-        public static event ManipulatorChanged OnManipulatorChanged;
+        public static event LayerManipulatorChanged OnManipulatorChanged;
 
         static void OnManipulatorChangedCallback(DependencyObject obj, DependencyPropertyChangedEventArgs arg)
         {
@@ -53,16 +55,6 @@ namespace gEngine.View
         public static readonly DependencyProperty MainpulatorProperty =
             DependencyProperty.Register("Mainpulator", typeof(string), typeof(LayerControl), new PropertyMetadata("", new PropertyChangedCallback(OnManipulatorChangedCallback)));
 
-
-
-        public Canvas Root
-        {
-            get
-            {
-                return FindChild.FindVisualChild<Canvas>(this, "layerpanel");
-            }
-        }
-
         public MapControl Owner
         {
             get
@@ -70,28 +62,5 @@ namespace gEngine.View
                 return FindParent.FindVisualParent<MapControl>(this);
             }
         }
-
-        public int ObjectControlCount
-        {
-            get
-            {
-                return Items.Count;
-            }
-        }
-
-        public ObjectControl GetObjectControl(int index)
-        {
-            if (index < 0)
-                return null;
-            var item = ItemContainerGenerator.ContainerFromIndex(index);
-            ObjectControl oc = FindChild.FindVisualChild<ObjectControl>(item, "objectcontrol");
-            return oc;
-        }
-
-        public Rect GetRect()
-        {
-            return ViewUtil.GetTypeRect<ObjectControl>(Root);
-        }
-
     }
 }

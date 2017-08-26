@@ -18,12 +18,15 @@ namespace gEngine.Graph.Interface
 
         double Opacity { get; set; }
 
+        string Manipulator { get; set; }
+
         IObjects Objects { get; set; }
     }
 
     public class ILayers : ObservedCollection<ILayer>
     {
         private int currentindex=-1;
+        private ILayer currentlayer = null;
 
         public int CurrentIndex
         {
@@ -32,6 +35,33 @@ namespace gEngine.Graph.Interface
             {
                 currentindex = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("CurrentIndex"));
+                if (currentindex >= 0 && currentindex < Count)
+                {
+                    currentlayer = this[currentindex];
+                    OnPropertyChanged(new PropertyChangedEventArgs("CurrentLayer"));
+                }
+            }
+        }
+
+        public ILayer CurrentLayer
+        {
+            get
+            {
+                return currentlayer;
+            }
+            set
+            {
+                currentlayer = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("CurrentLayer"));
+                for (int i = 0; i < Count; i++)
+                {
+                    if (this[i] == value)
+                    {
+                        currentindex = i;
+                        OnPropertyChanged(new PropertyChangedEventArgs("CurrentIndex"));
+                        break;
+                    }
+                }
             }
         }
     }

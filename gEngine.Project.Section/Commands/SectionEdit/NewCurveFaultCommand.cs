@@ -9,6 +9,7 @@ using gEngine.Manipulator.Ge.Section;
 using gEngine.View;
 using gEngine.Commands;
 using gEngine.Graph.Ge.Section;
+using gEngine.Graph.Interface;
 
 namespace gEngine.Project.Ge.Section.Commands.SectionEdit
 {
@@ -19,13 +20,13 @@ namespace gEngine.Project.Ge.Section.Commands.SectionEdit
             Command = SectionEditCommands.NewCurveFaultCommand;
         }
 
-        public override void SetManipulator(LayerControl lc, object param)
+        public override void SetManipulator(ILayer layer, object param)
         {
-            if (lc.Manipulator == "DrawCurveFaultManipulator")
-                lc.Manipulator = "";
+            if (layer.Manipulator == "DrawCurveFaultManipulator")
+                layer.Manipulator = "";
             else
             {
-                lc.Manipulator = "DrawCurveFaultManipulator";
+                layer.Manipulator = "DrawCurveFaultManipulator";
             }
         }
     }

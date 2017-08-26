@@ -8,6 +8,7 @@ using gEngine.Manipulator;
 using gEngine.Manipulator.Ge.Section;
 using gEngine.View;
 using gEngine.Commands;
+using gEngine.Graph.Interface;
 
 namespace gEngine.Project.Ge.Section.Commands.SectionEdit
 {
@@ -18,12 +19,14 @@ namespace gEngine.Project.Ge.Section.Commands.SectionEdit
             Command = SectionEditCommands.ReplaceLineCommand;
         }
 
-        public override void SetManipulator(LayerControl lc, object param)
+        public override void SetManipulator(ILayer layer, object param)
         {
-            ReplaceLineManipulator dm = gEngine.Manipulator.Registry.CreateManipulator("ReplaceLineManipulator",param) as ReplaceLineManipulator;
-            if (dm == null)
-                return;
-            ManipulatorSetter.SetManipulator(dm, lc);
+            if (layer.Manipulator == "ReplaceLineManipulator")
+                layer.Manipulator = "";
+            else
+            {
+                layer.Manipulator = "ReplaceLineManipulator";
+            }
         }
     }
 }

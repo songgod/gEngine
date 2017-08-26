@@ -41,12 +41,12 @@ namespace gEngineTest.Ge.Section
 
         private void EraseLine_Click(object sender, RoutedEventArgs e)
         {
-            ManipulatorSetter.SetManipulator(new EraseLineManipulator(), mc.GetLayerControl(0));
+            mc.MapContext.Layers[0].Manipulator = "EraseLineManipulator";
         }
 
         private void AddCurve_Click(object sender, RoutedEventArgs e)
         {
-            ManipulatorSetter.SetManipulator(new DrawCurveFaultManipulator(), mc.GetLayerControl(0));
+            mc.MapContext.Layers[0].Manipulator = "DrawCurveFaultManipulator";
         }
 
         private void AddCloseCurve_Click(object sender, RoutedEventArgs e)
@@ -56,17 +56,17 @@ namespace gEngineTest.Ge.Section
 
         private void ReplaceLine_Click(object sender, RoutedEventArgs e)
         {
-            ManipulatorSetter.SetManipulator(new ReplaceLineManipulator(), mc.GetLayerControl(0));
+            mc.MapContext.Layers[0].Manipulator = "ReplaceLineManipulator";
         }
 
         private void RemoveFace_Click(object sender, RoutedEventArgs e)
         {
-            ManipulatorSetter.SetManipulator(new SetFaceTypeManipulator() { InvalidFace = true }, mc.GetLayerControl(0));
+            mc.MapContext.Layers[0].Manipulator = "SetFaceTypeManipulator";
         }
 
         private void EditLine_Click(object sender, RoutedEventArgs e)
         {
-            ManipulatorSetter.SetManipulator(new EditCurveManipulator(), mc.GetLayerControl(0));
+            mc.MapContext.Layers[0].Manipulator = "EditCurveManipulator";
         }
     }
 }

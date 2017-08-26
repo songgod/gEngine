@@ -65,5 +65,19 @@ namespace gEngine.Graph.Ge
 
         public static readonly DependencyProperty OpacityProperty =
             DependencyProperty.Register("Opacity", typeof(double), typeof(Layer), new PropertyMetadata(1.0));
+
+
+
+        public string Manipulator
+        {
+            get { return (string)GetValue(ManipulatorProperty); }
+            set { SetValue(ManipulatorProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Manipulator.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ManipulatorProperty =
+            DependencyProperty.Register("Manipulator", typeof(string), typeof(Layer), new PropertyMetadata(""));
+
+
     }
 }

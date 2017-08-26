@@ -23,6 +23,8 @@ namespace gEngine.Project.Controls
     /// </summary>
     public partial class ProjectControl : UserControl
     {
+        const string MapsControlName = "PART_MapsControl";
+        const string LayerMgrControlName = "PART_LayerMgrControl";
         public ProjectControl()
         {
             InitializeComponent();
@@ -37,26 +39,5 @@ namespace gEngine.Project.Controls
         // Using a DependencyProperty as the backing store for Project.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ProjectProperty =
             DependencyProperty.Register("Project", typeof(Project), typeof(ProjectControl));
-
-
-        public LayerMgrControl LayerMgrControl
-        {
-            get
-            {
-                return layermgrcontrol;
-            }
-        }
-
-        public MapsControl MapsControl
-        {
-            get
-            {
-                return tc;
-            }
-            set
-            {
-                throw new Exception("Can not set mapscontrol");
-            }
-        }
     }
 }

@@ -26,47 +26,21 @@ namespace gEngine.Project.Ge.Basic.Commands
         private void NewLineCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             ProjectControl pc = e.OriginalSource as ProjectControl;
-            if (pc == null || pc.MapsControl == null)
-                return;
-
-            if (pc.MapsControl.ActiveMapControl == null)
-                return;
-
-            MapControl mc = pc.MapsControl.ActiveMapControl;
-            if (mc == null)
-                return;
-
-            LayerControl layer = mc.ActiveLayerControl;
-            if (layer == null)
-                return;
-
-            // 这里需要判断一下是不是装饰图层
-
-            e.CanExecute = true;
+            e.CanExecute = pc != null &&
+                pc.Project.GetActiveMap() != null &&
+                pc.Project.GetActiveMap().Layers.CurrentLayer != null &&
+                pc.Project.GetActiveMap().Layers.CurrentLayer.Type == "Basic";
             e.Handled = true;
         }
 
         private void NewLineCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             ProjectControl pc = e.OriginalSource as ProjectControl;
-            if (pc == null || pc.MapsControl == null)
-                return;
-
-            if (pc.MapsControl.ActiveMapControl == null)
-                return;
-
-            MapControl mc = pc.MapsControl.ActiveMapControl;
-            if (mc == null)
-                return;
-
-            LayerControl lc = mc.ActiveLayerControl;
-            if (lc == null)
-                return;
-
-            DrawLineObjectManipulator dm = gEngine.Manipulator.Registry.CreateManipulator("DrawLineObjectManipulator") as DrawLineObjectManipulator;
-            if (dm == null)
-                return;
-            ManipulatorSetter.SetManipulator(dm, lc);
+            ILayer layer = pc.Project.GetActiveMap().Layers.CurrentLayer;
+            if (layer.Manipulator == "DrawLineObjectManipulator")
+                layer.Manipulator = null;
+            else
+                layer.Manipulator = "DrawLineObjectManipulator";
         }
     }
 }

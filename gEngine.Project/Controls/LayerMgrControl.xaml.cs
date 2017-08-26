@@ -26,7 +26,6 @@ namespace gEngine.Project.Controls
         public LayerMgrControl()
         {
             InitializeComponent();
-            this.DataContext = this;
             List<string> ls = gEngine.Graph.Interface.Registry.GetLayerTypes("Ge");
             foreach (string str in ls)
             {

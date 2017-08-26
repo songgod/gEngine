@@ -70,7 +70,7 @@ namespace gEngine.Manipulator.Ge.Plane
                     return;
                 WellLocation wl = SelectWellLocations.Pop();
                 this.TrackAdorner.Points.RemoveAt(this.TrackAdorner.Points.Count - 1);
-                
+
                 if (this.TrackAdorner.Points.Count == 1)
                     this.TrackAdorner.Points.RemoveAt(this.TrackAdorner.Points.Count - 1);
             }

@@ -62,11 +62,10 @@
     <Compile Include="DrawLineManipulatorBase.cs" />
     <Compile Include="ManipulatorBase.cs" />
     <Compile Include="ManipulatorSetter.cs" />
-    <Compile Include="MapControlZoomPan.cs" />
+    <Compile Include="MapControlZoomPanSelect.cs" />
     <Compile Include="DrawPolyLineManipulatorBase.cs" />
     <Compile Include="DrawRectManipulatorBase.cs" />
     <Compile Include="Registry.cs" />
-    <Compile Include="SelectObjectManipulator.cs" />
     <Compile Include="ManipulatorCallbackInstaller.cs" />
     <Compile Include="ZoomPan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

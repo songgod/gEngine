@@ -14,7 +14,7 @@ namespace gEngine.Manipulator
 {
     public static class ManipulatorSetter
     {
-        public static IManipulators GetMapManipulators(DependencyObject obj)
+        public static IManipulators GetManipulators(DependencyObject obj)
         {
             IManipulators mps =  (IManipulators)obj.GetValue(ManipulatorsProperty);
             if (mps == null)

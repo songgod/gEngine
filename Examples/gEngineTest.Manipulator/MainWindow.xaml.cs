@@ -37,49 +37,41 @@ namespace gEngineTest.Manipulator
 
         private void Drawline_Click(object sender, RoutedEventArgs e)
         {
-            IManipulatorBase mp = Registry.CreateManipulator("DrawLineObjectManipulator");
-            ManipulatorSetter.SetManipulator(mp, mc.GetLayerControl(0));
+            mc.MapContext.Layers[0].Manipulator = "DrawLineObjectManipulator";
         }
 
         private void DrawBezier_Click(object sender, RoutedEventArgs e)
         {
-            IManipulatorBase mp = Registry.CreateManipulator("DrawBezierLineObjectManipulator");
-            ManipulatorSetter.SetManipulator(mp, mc.GetLayerControl(0));
+            mc.MapContext.Layers[0].Manipulator = "DrawBezierLineObjectManipulator";
         }
 
         private void DrawPolyline_Click(object sender, RoutedEventArgs e)
         {
-            IManipulatorBase mp = Registry.CreateManipulator("DrawPolyLineObjectManipulator");
-            ManipulatorSetter.SetManipulator(mp, mc.GetLayerControl(0));
+            mc.MapContext.Layers[0].Manipulator = "DrawPolyLineObjectManipulator";
         }
         private void DrawRect_Click(object sender, RoutedEventArgs e)
         {
-            IManipulatorBase mp = Registry.CreateManipulator("DrawRectObjectManipulator");
-            ManipulatorSetter.SetManipulator(mp, mc.GetLayerControl(0));
+            mc.MapContext.Layers[0].Manipulator = "DrawRectObjectManipulator";
         }
 
         private void DrawCompress_Click(object sender, RoutedEventArgs e)
         {
-            IManipulatorBase mp = Registry.CreateManipulator("DrawCompressObjectManipulator");
-            ManipulatorSetter.SetManipulator(mp, mc.GetLayerControl(0));
+            mc.MapContext.Layers[0].Manipulator = "DrawCompressObjectManipulator";
         }
 
         private void DrawBoundary_Click(object sender, RoutedEventArgs e)
         {
-            IManipulatorBase mp = Registry.CreateManipulator("DrawBoundaryObjectManipulator");
-            ManipulatorSetter.SetManipulator(mp, mc.GetLayerControl(0));
+            mc.MapContext.Layers[0].Manipulator = "DrawBoundaryObjectManipulator";
         }
 
         private void ScaleRule_Click(object sender, RoutedEventArgs e)
         {
-            IManipulatorBase mp = Registry.CreateManipulator("DrawScaleRuleObjectManipulator");
-            ManipulatorSetter.SetManipulator(mp, mc.GetLayerControl(0));
+            mc.MapContext.Layers[0].Manipulator = "DrawScaleRuleObjectManipulator";
         }
 
         private void EditLine_Click(object sender, RoutedEventArgs e)
         {
-            IManipulatorBase mp = Registry.CreateManipulator("EditLineManipulator");
-            ManipulatorSetter.SetManipulator(mp, mc.GetLayerControl(0));
+            mc.MapContext.Layers[0].Manipulator = "EditLineManipulator";
         }
     }
 }

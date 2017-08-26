@@ -79,7 +79,7 @@ namespace gEngineTest.Ge.WellLocation
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            ManipulatorSetter.SetManipulator(dm, mc.GetLayerControl(0));
+            //ManipulatorSetter.SetManipulator(dm, mc.GetLayerControl(0));
 
             //dm.IsStopMove = false;
             //dm.SelectWellLocations.Clear();

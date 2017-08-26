@@ -49,7 +49,7 @@
   <ItemGroup>
     <Compile Include="Commands\BasicCommandsInstaller.cs" />
     <Compile Include="Commands\NewBezierLineCommand.cs" />
-    <Compile Include="Commands\NewCommonLayerCommand.cs" />
+    <Compile Include="Commands\NewBasicLayerCommand.cs" />
     <Compile Include="Commands\NewBoundaryCommand.cs" />
     <Compile Include="Commands\NewCompressCommand.cs" />
     <Compile Include="Commands\NewLineCommand.cs" />

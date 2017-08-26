@@ -1,4 +1,5 @@
 ﻿using gEngine.Commands;
+using gEngine.Graph.Interface;
 using gEngine.Manipulator;
 using gEngine.Manipulator.Ge.Section;
 using gEngine.Project.Controls;
@@ -20,13 +21,12 @@ namespace gEngine.Project.Ge.Section.Commands.SectionEdit
             Command = SectionEditCommands.EraseFaceCommand;
         }
 
-        public override void SetManipulator(LayerControl lc, object param)
+        public override void SetManipulator(ILayer layer, object param)
         {
-            SetFaceTypeManipulator dm = gEngine.Manipulator.Registry.CreateManipulator("SetFaceTypeManipulator",param) as SetFaceTypeManipulator;
-            if (dm == null)
-                return;
-            dm.FaceType = -1;
-            ManipulatorSetter.SetManipulator(dm, lc);
+            if (layer.Manipulator == "SetFaceTypeManipulator")
+                layer.Manipulator = "";
+            else
+                layer.Manipulator = "SetFaceTypeManipulator";
         }
     }
 }

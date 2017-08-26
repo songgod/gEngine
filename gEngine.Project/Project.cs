@@ -207,6 +207,17 @@ namespace gEngine.Project
             }
         }
 
+        public IMap GetMap(int i)
+        {
+            return OpenMaps.CurrentMap;
+        }
+
+        public IMap GetActiveMap()
+        {
+            int active = OpenMaps.CurrentIndex;
+            return GetMap(active);
+        }
+
         public bool SaveMap(string url)
         {
             if (string.IsNullOrEmpty(url))
