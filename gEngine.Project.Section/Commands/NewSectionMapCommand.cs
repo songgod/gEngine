@@ -98,9 +98,9 @@ namespace gEngine.Project.Ge.Section.Commands
                 layer.Name = "剖面图";
                 ILayers layers = new ILayers();
                 layers.Add(layer);
-                IMap map = ProjectCtrl.Project.NewMap("Ge", sse.MapName, layers);
+                IMap map = ProjectCtrl.Project.NewMap("Ge", sse.MapName);
+                map.Layers = layers;
                 ProjectCtrl.Project.ActiveMap(map);
-                map.Layers.CurrentIndex = 0;
             }
         }
     }

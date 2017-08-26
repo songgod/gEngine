@@ -167,34 +167,6 @@ namespace gEngine.Project
             return map;
         }
 
-        public IMap NewMap(string type, string name, ILayers layers)
-        {
-            if (String.IsNullOrEmpty(type) || String.IsNullOrEmpty(name))
-                return null;
-
-            string url = name + "." + type;
-            var res = Maps.Where(item => item.Item1 == url);
-            if (res.Count() != 0)
-            {
-                MessageBox.Show("存在同名图件");
-                return null;
-            }
-
-            IMap map = gEngine.Graph.Interface.Registry.CreateMap(type);
-            if (map == null)
-                return null;
-            map.Name = name;
-            Maps.Add(new Tuple<string, IMap>(url, map));
-
-            foreach (var layer in layers)
-            {
-                map.Layers.Add(layer);
-            }
-
-            OpenMaps.Add(map);
-            return map;
-        }
-
         public void ActiveMap(IMap map)
         {
             for (int i = 0; i < OpenMaps.Count; i++)

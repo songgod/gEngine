@@ -62,11 +62,9 @@ namespace gEngine.Project.Ge.Plane.Commands
                 layer.Editable = true;
                 ILayers layers = new ILayers();
                 layers.Add(layer);
-                
-                IMap map = pctrl.Project.NewMap("Ge", msg.MapName, layers);
-                
+                IMap map = pctrl.Project.NewMap("Ge", msg.MapName);
+                map.Layers = layers;
                 pctrl.Project.ActiveMap(map);
-                map.Layers.CurrentIndex = 0;
             }
             e.Handled = true;
         }

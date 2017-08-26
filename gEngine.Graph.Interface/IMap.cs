@@ -25,6 +25,16 @@ namespace gEngine.Graph.Interface
     {
         private int currentindex = -1;
         private IMap currentmap = null;
+        public IMaps()
+        {
+            this.CollectionChanged += IMaps_CollectionChanged;
+        }
+
+        private void IMaps_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            this.CurrentIndex = e.NewStartingIndex;
+        }
+
         public int CurrentIndex
         {
             get { return currentindex; }

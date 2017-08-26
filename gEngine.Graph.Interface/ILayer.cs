@@ -28,6 +28,16 @@ namespace gEngine.Graph.Interface
         private int currentindex=-1;
         private ILayer currentlayer = null;
 
+        public ILayers()
+        {
+            this.CollectionChanged += ILayers_CollectionChanged;
+        }
+
+        private void ILayers_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            CurrentIndex = e.NewStartingIndex;
+        }
+
         public int CurrentIndex
         {
             get { return currentindex; }
