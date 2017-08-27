@@ -13,13 +13,18 @@
              xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking"
              xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
              xmlns:gerpc="clr-namespace:gEngine.Application;assembly=gEngine.Application"   
+                    xmlns:cvt="clr-namespace:gEngine.Application.Converter;assembly=gEngine.Application"
                 xmlns:prjcmds="clr-namespace:gEngine.Commands;assembly=gEngine.Commands"
                 xmlns:mp="clr-namespace:gEngine.Manipulator;assembly=gEngine.Manipulator"
                 xmlns:prjcontrols="clr-namespace:gEngine.Project.Controls;assembly=gEngine.Project"
                     x:Name="sectionmanageribbonpage">
+    <gerpc:GeRibbonPage.Resources>
+        <cvt:IsEqueStringConverter x:Key="eqstrcvt"/>
+    </gerpc:GeRibbonPage.Resources>
     <dxr:RibbonPageGroup  Caption="剖面">
-        <dxb:BarButtonItem x:Name="newsection"  Content="新建剖面图" Command="{x:Static prjcmds:SectionCommands.NewSectionMapCommand}"
+        <dxb:BarCheckItem x:Name="newsection"  Content="新建剖面图" Command="{x:Static prjcmds:SectionCommands.NewSectionMapCommand}"
                             CommandTarget="{Binding Path=ProjectControl, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow} }"
-                            LargeGlyph="{dx:DXImage Image=BOFolder_32x32.png}" Glyph="{dx:DXImage Image=BOFolder_16x16.png}"/>
+                            LargeGlyph="{dx:DXImage Image=BOFolder_32x32.png}" Glyph="{dx:DXImage Image=BOFolder_16x16.png}"
+                           IsChecked="{Binding Path=ProjectControl.Project.OpenMaps.CurrentMap.Layers.CurrentLayer.Manipulator, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow}, Converter={StaticResource eqstrcvt}, ConverterParameter=WellLocationsConnectManipulator, Mode=OneWay}"/>
     </dxr:RibbonPageGroup>
 </gerpc:GeRibbonPage>

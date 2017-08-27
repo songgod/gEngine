@@ -26,14 +26,6 @@ namespace gEngine.Project.Controls
         public LayerMgrControl()
         {
             InitializeComponent();
-            List<string> ls = gEngine.Graph.Interface.Registry.GetLayerTypes("Ge");
-            foreach (string str in ls)
-            {
-                BarButtonItem btn = new BarButtonItem();
-                btn.Content = str;
-                btn.ItemClick += Btn_ItemClick;
-                barSubItem.Items.Add(btn);
-            }
         }
         public bool isEye = false;
         public bool isEdit = false;
@@ -48,20 +40,13 @@ namespace gEngine.Project.Controls
 
         public IMap MapSource
         {
-            get
-            {
-                return (IMap) GetValue(MapSourceProperty);
-            }
-            set
-            {
-
-                SetValue(MapSourceProperty, value);
-            }
+            get{ return (IMap) GetValue(MapSourceProperty);}
+            set{ SetValue(MapSourceProperty, value);}
         }
 
         // Using a DependencyProperty as the backing store for MapSource.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MapSourceProperty =
-            DependencyProperty.Register("MapSource", typeof(IMap), typeof(LayerMgrControl));
+            DependencyProperty.Register("MapSource", typeof(IMap), typeof(LayerMgrControl), new PropertyMetadata(null));
 
         private void eyeImage_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
@@ -115,6 +100,18 @@ namespace gEngine.Project.Controls
                 layer.Editable = isEdit;
             }
             isEdit = !isEdit;
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<string> ls = gEngine.Graph.Interface.Registry.GetLayerTypes("Ge");
+            foreach (string str in ls)
+            {
+                BarButtonItem btn = new BarButtonItem();
+                btn.Content = str;
+                btn.ItemClick += Btn_ItemClick;
+                barSubItem.Items.Add(btn);
+            }
         }
     }
 }

@@ -11,11 +11,12 @@
                  xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
                  xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
                  xmlns:gerpc="clr-namespace:gEngine.Application;assembly=gEngine.Application"   
+                 xmlns:cvt="clr-namespace:gEngine.Application.Converter;assembly=gEngine.Application"
                  xmlns:prjcmds="clr-namespace:gEngine.Commands;assembly=gEngine.Commands"
                  xmlns:prjcontrols="clr-namespace:gEngine.Project.Controls;assembly=gEngine.Project"
                  xmlns:mpl="clr-namespace:gEngine.Manipulator;assembly=gEngine.Manipulator">
     <gerpc:GeRibbonPage.Resources>
-        <local:IsEqueStringConverter x:Key="eqstrcvt"/>
+        <cvt:IsEqueStringConverter x:Key="eqstrcvt"/>
     </gerpc:GeRibbonPage.Resources>
     <dxr:RibbonPageGroup x:Uid="新建" x:Name="新建" Caption="新建">
         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_13" Content="新建 手绘图层" LargeGlyph="Images/新增1.32.ico"/>

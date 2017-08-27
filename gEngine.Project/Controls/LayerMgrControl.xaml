@@ -11,6 +11,7 @@
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"  
              xmlns:cvt="clr-namespace:gEngine.Project.Converter"
              xmlns:prjcmds="clr-namespace:gEngine.Commands;assembly=gEngine.Commands"
+             Loaded="UserControl_Loaded"
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <cvt:LayerEditableImageConverter x:Uid="cvt:ImagePathConverter_1" x:Key="editimageConvert"/>

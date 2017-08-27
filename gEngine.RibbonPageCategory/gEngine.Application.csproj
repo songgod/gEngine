@@ -48,6 +48,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converter\IsEqueStringConverter.cs" />
     <Compile Include="FillSymbolGalleryDropDownPopupMenu.cs" />
     <Compile Include="GeRibbonPage.cs" />
     <Compile Include="GeRibbonPageCategory.cs" />
@@ -83,9 +84,7 @@
       <Name>gEngine.View</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Converter\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

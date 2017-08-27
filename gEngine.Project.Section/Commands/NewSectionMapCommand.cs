@@ -26,7 +26,8 @@ namespace gEngine.Project.Ge.Section.Commands
             CanExecute += NewSectionMapCommand_CanExecute;
         }
 
-        public ProjectControl ProjectCtrl { get; set; }
+        private ProjectControl ProjectCtrl { get; set; }
+        private ILayer ilayer { get; set; }
 
         private void NewSectionMapCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -58,6 +59,7 @@ namespace gEngine.Project.Ge.Section.Commands
                 {
                     if(mp is WellLocationsConnectManipulator)
                     {
+                        ilayer = layer;
                         ProjectCtrl = pc;
                         ((WellLocationsConnectManipulator)mp).OnFinishSelect += Mp_OnFinishSelect;
                     }
@@ -102,6 +104,8 @@ namespace gEngine.Project.Ge.Section.Commands
                 map.Layers = layers;
                 ProjectCtrl.Project.ActiveMap(map);
             }
+
+            ilayer.Manipulator = "";
         }
     }
 }

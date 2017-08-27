@@ -59,7 +59,6 @@
     <Compile Include="HandDrawingSectionRibbonPage.xaml.cs">
       <DependentUpon>HandDrawingSectionRibbonPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="IsEqueStringConverter.cs" />
     <Compile Include="SandFaceProxyObjectRibbonPageCategory.xaml.cs">
       <DependentUpon>SandFaceProxyObjectRibbonPageCategory.xaml</DependentUpon>
     </Compile>

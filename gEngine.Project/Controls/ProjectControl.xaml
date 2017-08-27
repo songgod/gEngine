@@ -19,9 +19,6 @@
         </Grid.ColumnDefinitions>
         <local:MapsControl x:Uid="PART_MapsControl" Grid.Column="0" x:Name="PART_MapsControl" MapsSource="{Binding Path=Project.OpenMaps, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=local:ProjectControl}}"/>
         <local:LayerMgrControl x:Uid="PART_LayerMgrControl" Grid.Column="1" x:Name="PART_LayerMgrControl"
-                               MapSource="{Binding Path=Project.OpenMaps.CurrentIndex, 
-                                                    RelativeSource={RelativeSource AncestorType=local:ProjectControl}, 
-                                                    Converter={StaticResource micvt},
-                                                    ConverterParameter={x:Reference Name=PART_MapsControl},Mode=OneWay}"/>
+                               MapSource="{Binding Path=Project.OpenMaps.CurrentMap, RelativeSource={RelativeSource AncestorType=local:ProjectControl},Mode=OneWay}"/>
     </Grid>
 </UserControl>

@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace gEngine.Application.Ge.Section
+namespace gEngine.Application.Converter
 {
     public class IsEqueStringConverter : IValueConverter
     {

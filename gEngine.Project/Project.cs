@@ -181,7 +181,9 @@ namespace gEngine.Project
 
         public IMap GetMap(int i)
         {
-            return OpenMaps.CurrentMap;
+            if (i < 0 || i >= OpenMaps.Count)
+                return null;
+            return OpenMaps[i];
         }
 
         public IMap GetActiveMap()

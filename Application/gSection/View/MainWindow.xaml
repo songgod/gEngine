@@ -12,12 +12,14 @@
         xmlns:prjcontrols="clr-namespace:gEngine.Project.Controls;assembly=gEngine.Project"
         xmlns:prjcmds="clr-namespace:gEngine.Commands;assembly=gEngine.Commands"
         xmlns:cvt="clr-namespace:gSection.Converters"
+        xmlns:acvt="clr-namespace:gEngine.Application.Converter;assembly=gEngine.Application"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="gSection.View.MainWindow"
         Title="MainWindow" Height="725" Width="1452"
     x:Name="dxrWindow">
     <dxr:DXRibbonWindow.Resources>
         <ResourceDictionary x:Uid="ResourceDictionary_1">
+            <acvt:IsEqueStringConverter x:Uid="acvt:IsEqueStringConverter_1" x:Key="eqstrcvt"/>
             <cvt:ObjectsEqualityConverter x:Uid="cvt:ObjectsEqualityConverter_1" x:Key="objectsEqualityConverter"/>
             <x:Array x:Uid="x:Array_1" x:Key="gallerypic" Type="{x:Type sys:String}">
                 <sys:String x:Uid="sys:String_1">/Images/Clipart/caCompClient.png</sys:String>
@@ -45,7 +47,9 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary x:Uid="ResourceDictionary_2" Source="/gSection;component/View/BackstageViewPanes.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            
         </ResourceDictionary>
+        
     </dxr:DXRibbonWindow.Resources>
     <dxr:DXRibbonWindow.InputBindings>
         <KeyBinding x:Uid="KeyBinding_1" Gesture="Ctrl+Z" Command="{x:Static prjcmds:StartCommands.UndoCommand}" CommandTarget="{Binding ElementName=prjctrl}"/>
@@ -146,9 +150,10 @@
                                           LargeGlyph="pack://application:,,,/gSection;component/Images/Clipart/caNetCard.png" Glyph="pack://application:,,,/gSection;component/Images/Clipart/caNetCard.png" RibbonStyle="Large"/>
                         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_50" Content="打开平面图" Command="{x:Static prjcmds:PlaneCommands.NewPlaneMapCommand}"
                                            CommandTarget="{Binding ElementName=prjctrl}" Glyph="{dx:DXImage Image=Open2_16x16.png}" LargeGlyph="{dx:DXImage Image=Open2_32x32.png}"/>
-                        <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_51" Content="新建剖面图" Command="{x:Static prjcmds:SectionCommands.NewSectionMapCommand}"
+                        <dxb:BarCheckItem x:Uid="dxb:BarButtonItem_51" Content="新建剖面图" Command="{x:Static prjcmds:SectionCommands.NewSectionMapCommand}"
                             CommandTarget="{Binding ElementName=prjctrl }"
-                            LargeGlyph="{dx:DXImage Image=BOFolder_32x32.png}" Glyph="{dx:DXImage Image=BOFolder_16x16.png}"/>
+                            LargeGlyph="{dx:DXImage Image=BOFolder_32x32.png}" Glyph="{dx:DXImage Image=BOFolder_16x16.png}"
+                            IsChecked="{Binding Path=ProjectControl.Project.OpenMaps.CurrentMap.Layers.CurrentLayer.Manipulator, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow}, Converter={StaticResource eqstrcvt}, ConverterParameter=WellLocationsConnectManipulator, Mode=OneWay}"/>
                     </dxr:RibbonPageGroup>
                 </dxr:RibbonPage>
                 <dxr:RibbonPage x:Uid="pageRef" x:Name="pageRef" Caption="参考">
