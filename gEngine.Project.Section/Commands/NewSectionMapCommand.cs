@@ -101,8 +101,11 @@ namespace gEngine.Project.Ge.Section.Commands
                 ILayers layers = new ILayers();
                 layers.Add(layer);
                 IMap map = ProjectCtrl.Project.NewMap("Ge", sse.MapName);
-                map.Layers = layers;
-                ProjectCtrl.Project.ActiveMap(map);
+                if(map!=null)
+                {
+                    map.Layers = layers;
+                    ProjectCtrl.Project.ActiveMap(map);
+                }
             }
 
             ilayer.Manipulator = "";

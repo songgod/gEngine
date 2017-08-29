@@ -27,6 +27,8 @@ namespace gEngine.View
             BindingOperations.SetBinding(this, ViewMatrixProperty, bdviewmatrix);
             Binding bdsellyrindex = new Binding("MapContext.Layers.CurrentIndex") { Source = this, Mode = BindingMode.TwoWay };
             BindingOperations.SetBinding(this, SelectLayerIndexProperty, bdsellyrindex);
+            Binding bdmanipulator = new Binding("MapContext.Manipulator") { Source = this, Mode = BindingMode.TwoWay };
+            BindingOperations.SetBinding(this, ManipulatorProperty, bdmanipulator);
         }
 
         public IMap MapContext

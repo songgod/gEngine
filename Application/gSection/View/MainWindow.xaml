@@ -142,18 +142,16 @@
                     </dxr:RibbonPageGroup>
                     <dxr:RibbonPageGroup x:Uid="dxr:RibbonPageGroup_29" Caption="常用功能">
                         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_39" Content="设置数据源" Command="{x:Static prjcmds:ProjectCommands.OpenDBSourceCommand}" CommandTarget="{Binding ElementName=prjctrl}" LargeGlyph="pack://application:,,,/gSection;component/Images/GDS/数据源32.png" Glyph="pack://application:,,,/gSection;component/Images/GDS/数据源16.png"></dxb:BarButtonItem>
-                        <dxb:BarButtonItem  x:Uid="dxb:BarButtonItem_42" x:Name="bbiSelect" Content="选择" 
-                                            Command="{x:Static prjcmds:StartCommands.SelectObjectCommand}" CommandTarget="{Binding ElementName=prjctrl}"
-                                            LargeGlyph="{dx:DXImage Image=SelectTool_32x32.png}" Glyph="{dx:DXImage Image=SelectTool_16x16.png}" RibbonStyle="Large"/>
+                        <dxb:BarCheckItem  x:Uid="dxb:BarButtonItem_42" x:Name="bbiSelect" Content="选择" 
+                                            Command="{x:Static prjcmds:OperateViewCommands.SelectObjectCommand}" CommandTarget="{Binding ElementName=prjctrl}"
+                                            LargeGlyph="{dx:DXImage Image=SelectTool_32x32.png}" Glyph="{dx:DXImage Image=SelectTool_16x16.png}" RibbonStyle="Large"
+                                           IsChecked="{Binding Path=Project.OpenMaps.CurrentMap.Manipulator, ElementName=prjctrl, Converter={StaticResource eqstrcvt}, ConverterParameter=MapControlZoomPanSelect, Mode=OneWay}"/>
                         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_46" Content="输出PNG"  Command="{x:Static prjcmds:BasicCommands.PrintPngCommand}" 
                           CommandTarget="{Binding ElementName=prjctrl}"
                                           LargeGlyph="pack://application:,,,/gSection;component/Images/Clipart/caNetCard.png" Glyph="pack://application:,,,/gSection;component/Images/Clipart/caNetCard.png" RibbonStyle="Large"/>
                         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_50" Content="打开平面图" Command="{x:Static prjcmds:PlaneCommands.NewPlaneMapCommand}"
                                            CommandTarget="{Binding ElementName=prjctrl}" Glyph="{dx:DXImage Image=Open2_16x16.png}" LargeGlyph="{dx:DXImage Image=Open2_32x32.png}"/>
-                        <dxb:BarCheckItem x:Uid="dxb:BarButtonItem_51" Content="新建剖面图" Command="{x:Static prjcmds:SectionCommands.NewSectionMapCommand}"
-                            CommandTarget="{Binding ElementName=prjctrl }"
-                            LargeGlyph="{dx:DXImage Image=BOFolder_32x32.png}" Glyph="{dx:DXImage Image=BOFolder_16x16.png}"
-                            IsChecked="{Binding Path=ProjectControl.Project.OpenMaps.CurrentMap.Layers.CurrentLayer.Manipulator, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow}, Converter={StaticResource eqstrcvt}, ConverterParameter=WellLocationsConnectManipulator, Mode=OneWay}"/>
+                        <dxb:BarItemLink x:Uid="dxb:BarItemLink_2" BarItemName="newsection"/>
                     </dxr:RibbonPageGroup>
                 </dxr:RibbonPage>
                 <dxr:RibbonPage x:Uid="pageRef" x:Name="pageRef" Caption="参考">

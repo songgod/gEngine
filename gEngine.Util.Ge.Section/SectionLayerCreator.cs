@@ -30,11 +30,9 @@ namespace gEngine.Util.Ge.Section
 
             WellCreator wc = new WellCreator();
 
-            var wlocs = wellLocs.OrderBy(o => o.X);
-
             // 井曲线数据
             IDBWells wells = new DBWells();
-            foreach (WellLocation wellLoc in wlocs)
+            foreach (WellLocation wellLoc in wellLocs)
             {
                 string name = wellLoc.WellNum;
                 IDBWell wl = db.GetWell(name);
@@ -88,11 +86,11 @@ namespace gEngine.Util.Ge.Section
                 }
             }
 
-            SetWellLocation(layer, wlocs);
+            SetWellLocation(layer, wellLocs);
             return layer;
         }
 
-        private void SetWellLocation(Layer layer, IOrderedEnumerable<WellLocation> wlocs)
+        private void SetWellLocation(Layer layer, Stack<WellLocation> wlocs)
         {
             double firstWlLoc = 0;
             int wellWidth = 0;

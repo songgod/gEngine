@@ -10,15 +10,13 @@ using System.Windows.Media;
 
 namespace gEngine.Manipulator.Ge.Section
 {
-    public class SetFaceTypeManipulator : LayerManipulator
+    public class EraseFaceManipulator : LayerManipulator
     {
         
-        public SetFaceTypeManipulator()
+        public EraseFaceManipulator()
         {
-            FaceType = -1;
+            
         }
-
-        public int FaceType { get; set; }
 
         public GraphUtil GraphUtil { get; set; }
 
@@ -56,24 +54,24 @@ namespace gEngine.Manipulator.Ge.Section
             Face face = editer.HitFace(pos, GraphUtil.Tolerance);
             if (face != null)
             {
-                editer.SetFaceType(face, FaceType);
+               editer.SetFaceInvalid(face);
             }
         }
     }
 
-    public class SFTFactory : IManipulatorFactory
+    public class EraseFaceFactory : IManipulatorFactory
     {
         public string Name
         {
             get
             {
-                return "SetFaceTypeManipulator";
+                return "EraseFaceManipulator";
             }
         }
 
         public IManipulatorBase CreateManipulator(object param)
         {
-            return new SetFaceTypeManipulator();
+            return new EraseFaceManipulator();
         }
     }
 }

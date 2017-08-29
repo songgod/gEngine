@@ -119,6 +119,7 @@ namespace gEngine.Symbol.normal
             DicFillSymbols["Black"] = new SolidFillSymbol() { SolidSymbolName = "BlackFill", SolidColor = Colors.Black };
             DicFillSymbols["White"] = new SolidFillSymbol() { SolidSymbolName = "WhiteFill", SolidColor = Colors.White };
             DicFillSymbols["LightGray"] = new SolidFillSymbol() { SolidSymbolName = "LightGrayFill", SolidColor = Colors.LightGray };
+            DicFillSymbols["Gray"] = new SolidFillSymbol() { SolidSymbolName = "GrayFill", SolidColor = Colors.Gray };
 
             GradientStopCollection gsc1 = new GradientStopCollection();
             gsc1.Add(new GradientStop() { Offset = 0, Color = Colors.Red });

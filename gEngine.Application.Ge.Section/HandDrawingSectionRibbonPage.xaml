@@ -18,6 +18,9 @@
     <gerpc:GeRibbonPage.Resources>
         <cvt:IsEqueStringConverter x:Key="eqstrcvt"/>
     </gerpc:GeRibbonPage.Resources>
+    <dxr:RibbonPageGroup Caption="选择">
+        <dxb:BarItemLink BarItemName="bbiSelect"/>
+    </dxr:RibbonPageGroup>
     <dxr:RibbonPageGroup x:Uid="新建" x:Name="新建" Caption="新建">
         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_13" Content="新建 手绘图层" LargeGlyph="Images/新增1.32.ico"/>
         <dxb:BarButtonItem x:Uid="dxb:BarButtonItem_14" Content="添加边界" LargeGlyph="Images/导入边界2.ico"/>
@@ -154,6 +157,6 @@
                            Command="{x:Static prjcmds:SectionEditCommands.EraseFaceCommand}"
                            CommandTarget="{Binding Path=ProjectControl, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow}}"
                            CommandParameter="{Binding RelativeSource={ RelativeSource Self}}"
-                           IsChecked="{Binding Path=ProjectControl.Project.OpenMaps.CurrentMap.Layers.CurrentLayer.Manipulator, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow}, Converter={StaticResource eqstrcvt}, ConverterParameter=SetFaceTypeManipulator, Mode=OneWay}"/>
+                           IsChecked="{Binding Path=ProjectControl.Project.OpenMaps.CurrentMap.Layers.CurrentLayer.Manipulator, RelativeSource={RelativeSource AncestorType=dxr:DXRibbonWindow}, Converter={StaticResource eqstrcvt}, ConverterParameter=EraseFaceManipulator, Mode=OneWay}"/>
     </dxr:RibbonPageGroup>
 </gerpc:GeRibbonPage>

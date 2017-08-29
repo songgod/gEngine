@@ -1,4 +1,5 @@
 ﻿using gEngine.Graph.Ge.Section;
+using gEngine.Util.Ge.Section;
 using gEngine.View;
 using gTopology;
 using System.Linq;
@@ -7,14 +8,12 @@ using System.Windows.Input;
 
 namespace gEngine.Manipulator.Ge.Section
 {
-    public class ReplaceLineManipulator : DrawCurveManipulatorBase
+    public class ReplaceLineManipulator : DrawCurveManipulator
     {
         protected override void OnAttached()
         {
             base.OnAttached();
-            GraphUtil = new GraphUtil(this.AssociatedObject);
         }
-        public GraphUtil GraphUtil { get; set; }
 
         private gTopology.Line SelectLine { get; set; }
         protected override void MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -23,10 +22,10 @@ namespace gEngine.Manipulator.Ge.Section
             if (graph == null)
                 return;
 
-            Topology editor = new Topology(graph);
+            SectionLayerEdit editor = new SectionLayerEdit(GraphUtil.SectionLayer);
             MapControl mc = this.AssociatedObject.Owner;
             Point pos = mc.Dp2LP(e.GetPosition(mc));
-            gTopology.Line line = editor.LinHit(pos, GraphUtil.Tolerance);
+            gTopology.Line line = editor.HitLine(pos, GraphUtil.Tolerance);
             if (line != null)
             {
                 SelectLine = line;
@@ -37,8 +36,8 @@ namespace gEngine.Manipulator.Ge.Section
         {
             if(SelectLine!=null)
             {
-                Topology editor = new Topology(GraphUtil.Graph);
-                editor.LinReplaceSubLine(SelectLine, new PointList(this.TrackAdorner.Points.ToList()), GraphUtil.Tolerance);
+                SectionLayerEdit editor = new SectionLayerEdit(GraphUtil.SectionLayer);
+                editor.ReplaceLine(SelectLine, new PointList(this.TrackAdorner.Points.ToList()), GraphUtil.Tolerance);
             }
             base.MouseLeftButtonUp(sender, e);
         }

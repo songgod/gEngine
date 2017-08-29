@@ -26,10 +26,14 @@
             <Path.Resources>
                 <local:Region2PathDataConverter x:Key="f2p"/>
                 <local:Type2FillConverter x:Key="t2f"/>
+                <local:TypeStyle2FillConverter x:Key="ts2f"/>
                 <gv:FillStyle2BrushConverter x:Key="f2b"/>
             </Path.Resources>
             <Path.Fill>
-                <Binding Path="FillStyle" Converter="{StaticResource f2b}"/>
+                <MultiBinding Converter="{StaticResource ts2f}">
+                    <Binding Path="Face.Valid"/>
+                    <Binding Path="FillStyle"/>
+                </MultiBinding>
             </Path.Fill>
             <Path.Data>
                 <MultiBinding Converter="{StaticResource f2p}">

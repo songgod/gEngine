@@ -23,10 +23,13 @@ namespace gEngine.Project.Ge.Section.Commands.SectionEdit
 
         public override void SetManipulator(ILayer layer, object param)
         {
-            if (layer.Manipulator == "SetFaceTypeManipulator")
+            if (layer.Manipulator == "EraseFaceManipulator")
                 layer.Manipulator = "";
             else
-                layer.Manipulator = "SetFaceTypeManipulator";
+            {
+                layer.Manipulator = "EraseFaceManipulator";
+            }
+                
         }
     }
 }

@@ -14,6 +14,28 @@ using System.Windows.Media;
 
 namespace gEngine.View.Ge.Section
 {
+    public class TypeStyle2FillConverter : IMultiValueConverter
+    {
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        {
+            bool valid = (bool)values[0];
+            if (valid == false)
+                return null;
+            FillStyle style = (FillStyle)values[1];
+            if (style == null)
+                return null;
+
+            OptionSetting setting = new OptionSetting();
+            setting.Factory = style.SymbolLib;
+            setting.Symbol = style.Symbol;
+            return Registry.CreateFillBrush(setting);
+        }
+
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
     public class Type2FillConverter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)

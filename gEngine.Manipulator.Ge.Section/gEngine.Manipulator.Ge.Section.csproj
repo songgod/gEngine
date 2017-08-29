@@ -66,6 +66,7 @@
     <Compile Include="GraphUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReplaceLineManipulator.cs" />
+    <Compile Include="EraseFaceManipulator.cs" />
     <Compile Include="SetFaceTypeManipulator.cs" />
   </ItemGroup>
   <ItemGroup>

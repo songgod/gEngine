@@ -138,7 +138,7 @@ namespace gEngine.Manipulator.Ge.Section
                     control.MouseLeftButtonUp += Control_MouseLeftButtonUp;
                     control.MouseRightButtonUp += Control_MouseRightButtonUp;
                     control.MouseLeftButtonDown += Control_MouseLeftButtonDown;
-                    EllipseGeometry eg = new EllipseGeometry() { RadiusX = 50, RadiusY = 50 };
+                    EllipseGeometry eg = new EllipseGeometry() { RadiusX = 17, RadiusY = 17 };
                     if (i == 0)
                     {
 
@@ -162,7 +162,7 @@ namespace gEngine.Manipulator.Ge.Section
                     ear.MouseMove += Ear_MouseMove;
                     ear.MouseLeftButtonUp += Ear_MouseLeftButtonUp;
                     ear.MouseLeftButtonDown += Ear_MouseLeftButtonDown;
-                    EllipseGeometry eg = new EllipseGeometry() { RadiusX = 25, RadiusY = 25 };
+                    EllipseGeometry eg = new EllipseGeometry() { RadiusX = 9, RadiusY = 9 };
                     PropertyPath ppcenter = new PropertyPath(string.Format("Points.[{0:G}]", i - 1));
                     Binding bding = new Binding() { Path = ppcenter, Source = psTrack, Mode = BindingMode.TwoWay };
                     BindingOperations.SetBinding(eg, EllipseGeometry.CenterProperty, bding);

@@ -15,12 +15,12 @@ namespace gEngine.Graph.Ge.Section
             TopGraph = new gTopology.Graph();
             DicLineStyle = new Dictionary<int, LineStyle>();
             DicFillStyle = new Dictionary<int, FillStyle>();
-            DefaultFaultLineStyle = LineStyle.Default;
-            DefaultStratumLineStyle = LineStyle.Default;
-            DefaultSandLineStyle = LineStyle.Default;
+            DefaultFaultLineStyle = new LineStyle() { Symbol = "Solid", SymbolLib = "Normal", Width = 10, Stroke = Colors.Black };
+            DefaultStratumLineStyle = new LineStyle() { Symbol = "Solid", SymbolLib = "Normal", Width = 5, Stroke = Colors.Black };
+            DefaultSandLineStyle = new LineStyle() { Symbol = "Solid", SymbolLib = "Normal", Width = 2, Stroke = Colors.Black };
 
-            DefaultStratumFillStyle = new FillStyle() { Symbol = "Red", SymbolLib = "Normal" };
-            DefaultSandFillStyle = new FillStyle() { Symbol = "Green", SymbolLib = "Normal" };
+            DefaultStratumFillStyle = new FillStyle() { Symbol = "Gray", SymbolLib = "Normal" };
+            DefaultSandFillStyle = new FillStyle() { Symbol = "Yellow", SymbolLib = "Normal" };
         }
 
         public gTopology.Graph TopGraph { get; set; }
